@@ -1,0 +1,172 @@
+td, tr {
+    border:1px solid black;
+}
+.fc-daygrid-day-top{
+  display: block;
+}
+.fc-daygrid-day-top a {
+  text-decoration: none;
+  color: black;
+  text-align: left;
+  display: block;
+}
+.fc-scrollgrid-sync-inner a {
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
+.fc-event-title-container{
+	height:0.8vw;
+}
+.fc-event-title{
+	font-size: 80%;
+}
+
+:root {
+	--fc-small-font-size: .85em;
+	--fc-page-bg-color: #fff;
+	--fc-neutral-bg-color: rgba(208, 208, 208, 0.3);
+	--fc-neutral-text-color: #808080;
+	--fc-border-color: #ddd;
+	
+	/*버튼 색*/			
+	--fc-button-text-color: #6a53fb;
+	--fc-button-bg-color: none;
+	--fc-button-border-color: none;
+	--fc-button-hover-bg-color: none;
+	--fc-button-hover-border-color: none;
+	--fc-button-active-bg-color: none;
+	--fc-button-active-border-color: none;
+	
+	/*이벤트별로 다른 컬러로 표기될 수 있게 함*/
+	--fc-event-1-bg-color: #6a53fb;
+	--fc-event-1-border-color: #6a53fb;
+	--fc-event-1-text-color: #fff;
+	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+	--fc-event-1-bg-color: #3498db;
+	--fc-event-1-border-color: #3498db;
+	--fc-event-1-text-color: #fff;
+	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+	--fc-event-1-bg-color: #e74c3c;
+	--fc-event-1-border-color: #e74c3c;
+	--fc-event-1-text-color: #fff;
+	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+	--fc-event-1-bg-color: #2ecc71;
+	--fc-event-1-border-color: #2ecc71;
+	--fc-event-1-text-color: #fff;
+	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
+	
+	--fc-more-link-bg-color: #d0d0d0;
+	--fc-more-link-text-color: inherit;
+	
+	--fc-event-resizer-thickness: 8px;
+	--fc-event-resizer-dot-total-width: 8px;
+	--fc-event-resizer-dot-border-width: 1px;
+	
+	--fc-non-business-color: rgba(215, 215, 215, 0.3);
+	--fc-bg-event-color: rgb(143, 223, 130);
+	--fc-bg-event-opacity: 0.3;
+	--fc-highlight-color: #f8f7fc;
+	--fc-today-bg-color: #f8f7fc;
+	--fc-now-indicator-color: red;
+}
+.forCalendar{
+    background-color: #fff;
+    width: 100%; height: 100%; padding: 2%;
+}
+/*캘린더 큰 레이아웃*/
+#calendar {
+	/*min-height: 750px !important;*/
+	/*height: auto !important;*/
+	/* margin: 0 auto; */
+    width: 100%;
+    height: 100%;
+	background-color: white;
+	/* border: 0.3px solid #dee2e6; */
+	border-radius: 5px;
+    top: 90px;
+    margin-right: 24px;
+    /*width: auto;*/
+}
+/*선택자*/
+.calendar-array{
+    margin-left: auto;
+
+}
+.calendar-array select{
+    width:100px;
+    text-align:center;
+    background-color:rgba(215, 215, 215, 0.3);
+    border-radius: 5%;
+    height:2vw;
+    width:8vw;
+    font-size:1.2em;
+}
+
+/*요일*/
+.fc-col-header-cell-cushion {
+	text-decoration: none;
+	color: #000;
+}
+.fc-col-header-cell-cushion:hover {
+	text-decoration: none;
+	color:#000;
+}
+/*일자*/
+.fc-daygrid-day-number,
+.fc-daygrid-day-number:hover {
+	color: #000;
+	font-size:1em;
+	text-decoration: none;
+}
+/*일정시간*/
+.fc-daygrid-event > .fc-event-time{
+	color:#000;
+}
+/*시간제목*/
+.fc-daygrid-dot-event > .fc-event-title{
+	color:#000 !important;
+}
+/* 일요일 날짜색 */
+.fc-day-sun a,
+.fc-day-sun a:hover {
+	color: #ff3535;
+	text-decoration: none;
+}
+
+/* 토요일 날짜색 */
+.fc-day-sat a,
+.fc-day-sat a:hover {
+	color: #0d54fb;
+	text-decoration: none;
+}
+
+.fc-daygrid-day-frame {
+	padding: 3px;
+}
+
+/* 이전, 다음 버튼 */
+.fc-button {
+	border: 0px !important;
+	box-shadow: none !important;
+}
+
+/* 달력 제목 */
+.fc-toolbar-title {
+	font-size: 1.3em !important;
+	font-weight: bold !important;
+}
+
+/*오늘*/
+.fc .fc-button-primary{
+    color: black;
+}
+.fc .fc-button-primary{
+    color:black;
+}
+.fc .fc-button-primary:disabled {
+    color:black;
+}

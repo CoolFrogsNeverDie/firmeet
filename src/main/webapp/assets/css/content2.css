@@ -1,0 +1,63 @@
+@charset "UTF-8";/* 콘텐츠 안에 들어갈 것*/
+
+/* 왼쪽 */
+.content-left {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #eeeeee;
+}
+
+.border-write{
+  width: 60%;
+  height: 5%;
+  margin: 0 auto;  
+  text-align: center;
+  margin-top:10px;
+  margin-bottom:15px;
+}
+.border-write h3{
+
+  font-weight: 600;
+}
+
+.border-write textarea{
+  width: 100%;
+  height: 100%;
+}
+
+.picture{
+  width: 150px;
+  float: left;
+  background-color: black;
+  color: white;
+  margin-top: 10px;
+}
+
+.registration{
+  height: 30px;
+  width: 110px;
+  background-color: rgb(28, 88, 251);
+  color: white;
+  margin-top: 10px;
+  border-radius: 5%;
+}
+.calendar-area{
+  height: 90%;
+}
+.calendar-table{
+  width:100%;
+  margin: 0 auto ;
+  height: 100%;
+  
+}
+.calendar-table th{
+  text-align: center;
+  height: 10%;
+}
+#calendar{
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+}
