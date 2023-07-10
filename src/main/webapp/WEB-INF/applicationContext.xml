@@ -17,7 +17,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
     <context:annotation-config />
 
-    <context:component-scan base-package="com.javaex">
+    <context:component-scan base-package="com.firmeet">
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />

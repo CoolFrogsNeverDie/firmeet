@@ -3,18 +3,13 @@
 
 <configuration>
 
+	<typeAliases>
+	<typeAlias type="com.firmeet.vo.NoticeBoardVO" alias="noticeboard"/>
+	</typeAliases>
 
-	<!-- 
-				Mapper에서 주고 받을 객체에 별명 지어주는~
-		<typeAliases>
-		<typeAlias alias="ProductVO" type="com.shopping.vo.ProductVO" />
-		</typeAliases>
-	 -->
-
-
-    <mappers>
-        <mapper resource="mybatis/mappers/test.xml" />
-        <mapper resource="mybatis/mappers/member.xml" />
+	<mappers>
+	
+	<mapper resource="mybatis/mappers/noticeboard.xml" />
 
     </mappers>
     
