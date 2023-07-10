@@ -91,6 +91,16 @@
 
 
 
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>mysite-himedia</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>mysite3</groupId>
+			<artifactId>mysite3</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 

@@ -19,4 +19,23 @@ public class MemberService {
 		
 	}
 	
+	public MemberVo login(MemberVo memberVo) {
+		System.out.println("MemberService.login()");
+		System.out.println(memberVo);
+		MemberVo member = memberDao.selectMem(memberVo);
+		return member;
+		
+	}
+	
+	public boolean idcheck(String id) {
+		System.out.println("MemberService.idcheck()");
+		MemberVo memberVo = memberDao.selectMem(id);
+		
+		if(memberVo == null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }

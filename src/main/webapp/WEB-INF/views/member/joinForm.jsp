@@ -55,17 +55,18 @@
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>아이디</h6></td>
 	                                    <td>
-	                                        <input class="form-control" type="text" id="" name="" maxlength="20" required="required" placeholder="아이디를 입력해주세요.">
+	                                        <input class="form-control" type="text" id="" name="memberId" maxlength="20" required="required" placeholder="아이디를 입력해주세요.">
 	                                    </td>
 	                                    <td style="width: 110px;">
-	                                        <button class="btn btn-primary" onclick="" type="button">중복체크
+	                                        <button class="btn btn-primary" id="btnIdCheck" onclick="" type="button">중복체크
 	                                        </button>
+	                                        <span id="idcheckMsg"></span>
 	                                    </td>
 	                                </tr>
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>핸드폰 번호</h6>
 	                                    <td>
-	                                        <input class="form-control" type="tel" id="" name="" pattern="(010)-\d{4}-\d{4}" placeholder="01X-XXXX-XXXX">
+	                                        <input class="form-control" type="tel" id="" name="memberPhone" pattern="(010)-\d{4}-\d{4}" placeholder="01X-XXXX-XXXX">
 	                                    </td>
 	                                    <td style="width: 130px;">
 	                                        <button class="btn btn-primary" onclick="" type="button">핸드폰 인증
@@ -75,13 +76,13 @@
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>이름</h6>
 	                                    <td colspan="2">
-	                                    <input class="form-control" type="text" id="" name="" maxlength="20" required="required" placeholder="이름을 입력해주세요.">
+	                                    <input class="form-control" type="text" id="" name="memberName" maxlength="20" required="required" placeholder="이름을 입력해주세요.">
 	                                    </td>
 	                                </tr>
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>비밀번호</h6>
 	                                    <td colspan="2">
-	                                        <input class="form-control" type="password" onkeyup=""; id="" name="" maxlength="20" required="required" placeholder="비밀번호를 입력해주세요.">
+	                                        <input class="form-control" type="password" onkeyup=""; id="" name="memberPw" maxlength="20" required="required" placeholder="비밀번호를 입력해주세요.">
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -94,16 +95,16 @@
 	                                    <td style="width: 110px;"><h6>관심사</h6>
 	                                    <td colspan="2">
 	                                        <div class="form-group" style="text-align: center; margin: 0 auto;">
-	                                            <input type="radio" name="" value="해당 없음" checked>해당 없음 &nbsp;
-	                                            <input type="radio" name="" value="운동/액티비티" >운동/액티비티 &nbsp;
-	                                            <input type="radio" name="" value="스터디">스터디 &nbsp;<br>
-	                                            <input type="radio" name="" value="친목">친목 &nbsp;
-	                                            <input type="radio" name="" value="건강/음식">건강/음식 &nbsp;
-	                                            <input type="radio" name="" value="언어/문화">언어/문화 &nbsp;
-	                                            <input type="radio" name="" value="종교">종교<br> 
-	                                            <input type="radio" name="" value="교육/학습">교육/학습 &nbsp;
-	                                            <input type="radio" name="" value="음악/예술">음악/예술 &nbsp;
-	                                            <input type="radio" name="" value="여행">여행
+	                                            <input type="radio" name="memberPri" value="해당 없음" checked>해당 없음 &nbsp;
+	                                            <input type="radio" name="memberPri" value="운동/액티비티" >운동/액티비티 &nbsp;
+	                                            <input type="radio" name="memberPri" value="스터디">스터디 &nbsp;<br>
+	                                            <input type="radio" name="memberPri" value="친목">친목 &nbsp;
+	                                            <input type="radio" name="memberPri" value="건강/음식">건강/음식 &nbsp;
+	                                            <input type="radio" name="memberPri" value="언어/문화">언어/문화 &nbsp;
+	                                            <input type="radio" name="memberPri" value="종교">종교<br> 
+	                                            <input type="radio" name="memberPri" value="교육/학습">교육/학습 &nbsp;
+	                                            <input type="radio" name="memberPri" value="음악/예술">음악/예술 &nbsp;
+	                                            <input type="radio" name="memberPri" value="여행">여행
 	                                        </div>
 	                                    </td>
 	                                </tr>
@@ -111,21 +112,19 @@
 	                                    <td style="width: 110px;"><h6>선호태그</h6>
 	                                    <td colspan="2">
 	                                        <div>
-	                                            <table>
-	                                                <button class="tagbtn">#운동광</button>
-	                                                <button class="tagbtn">#수다왕</button>
-	                                                <button class="tagbtn">#INTP</button><br>
-	                                                <button class="tagbtn">#갓생러</button>
-	                                                <button class="tagbtn">#여유로운</button>
-	                                                <button class="tagbtn">#핫한</button><br>
-	                                                <button class="tagbtn">#로맨틱</button>
-	                                                <button class="tagbtn">#핵인싸</button>
-	                                                <button class="tagbtn">#소통왕</button>
-	                                                <div style="margin-top: 10px;">
-	                                                    <input type="text" name="keyword" class="searchtext" />
-	    ​​​​​​​                                                <button type="submit" class="search">검색</button>
-	                                                </div>
-	                                            </table>
+                                                <button class="tagbtn">#운동광</button>
+                                                <button class="tagbtn">#수다왕</button>
+                                                <button class="tagbtn">#INTP</button><br>
+                                                <button class="tagbtn">#갓생러</button>
+                                                <button class="tagbtn">#여유로운</button>
+                                                <button class="tagbtn">#핫한</button><br>
+                                                <button class="tagbtn">#로맨틱</button>
+                                                <button class="tagbtn">#핵인싸</button>
+                                                <button class="tagbtn">#소통왕</button>
+                                                <div style="margin-top: 10px;">
+                                                    <input type="text" name="keyword" class="searchtext" />
+    ​​​​​​​                                                <button type="submit" class="search">검색</button>
+                                                </div>
 	                                        </div>
 	                                    </td>
 	                                </tr>
@@ -140,6 +139,54 @@
 	                    </form>
 	                </div>
 	            </div>
-	      
+
 </body>
+<script type="text/javascript">
+
+	//아이디 체크 버튼 클릭했을때
+	$("#btnIdCheck").on("click", function(){
+		console.log("버튼 클릭");
+		
+		//id 추출
+		var id = $("[name=memberId]").val();
+		
+		console.log(id);
+		
+		//통신  id////////////////////////////////////////////
+		$.ajax({
+			url : "firmeet/member/idcheck",		
+			type : "post",
+			/* contentType : "application/json", */
+			data : {memberId : id},
+	
+			dataType : "json",
+			success : function(jsonResult){
+				console.log(jsonResult);
+				
+				if(jsonResult.result == 'success'){ //처리성공
+					//사용가능한지 불가능 한지 표현한다
+					if(jsonResult.data == true){
+						//사용가능
+						$("#idcheckMsg").html( id+ "는 사용가능 합니다.");    
+					}else {
+						//사용불가
+						$("#idcheckMsg").html( id+ "는 사용중입니다.");    
+					}
+					
+				}else {
+					//메세지 출력
+					var msg = jsonResult.failMsg;
+					alert(msg);
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		
+	});
+
+</script>
+
+
 </html>
