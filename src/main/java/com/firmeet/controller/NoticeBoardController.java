@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.firmeet.service.NoticeBoardService;
+import com.firmeet.vo.NoticeGeneralVoteVO;
 
 
 @Controller
