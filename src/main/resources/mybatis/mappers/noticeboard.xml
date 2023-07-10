@@ -9,6 +9,10 @@
 	<select id="noticelist" resultType="noticeboard">
 		select * from aboard
 	</select>
-
+	
+	<insert id="editwrite" parameterType="noticeboard">
+		insert into aVote (voteNo, aboardNo, voteTitle, vote1, vote2, vote3, vote4, vote5, totalNum, finDate)
+		values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate})
+	</insert>
 
 </mapper>
