@@ -2,6 +2,7 @@ package com.firmeet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,11 +40,13 @@ public class MemberController {
 		return "member/joinForm";
 	}
 	
-	@RequestMapping(value="/join", method= {RequestMethod.GET , RequestMethod.POST})
+	@RequestMapping(value="/join", method= { RequestMethod.POST})
 	public String join(@ModelAttribute MemberVo memberVo) {
 		System.out.println("MemberController.join()");
-		
+		System.out.println(memberVo);
 		memberService.join(memberVo);
+		
+		
 		return "member/join";
 	}
 }
