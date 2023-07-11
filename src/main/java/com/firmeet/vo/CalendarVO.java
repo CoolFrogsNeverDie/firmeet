@@ -4,6 +4,7 @@ public class CalendarVO {
 
 	private int clubId;
 	private int viewOption;
+	private int years;
 	private int month;
 	
 	
@@ -11,6 +12,15 @@ public class CalendarVO {
 	public CalendarVO() {
 		super();
 	}
+	
+	public int getYears() {
+		return years;
+	}
+
+	public void setYears(int years) {
+		this.years = years;
+	}
+
 	public int getClubId() {
 		return clubId;
 	}
@@ -29,9 +39,11 @@ public class CalendarVO {
 	public void setMonth(int month) {
 		this.month = month;
 	}
+
 	@Override
 	public String toString() {
-		return "CalendarVO [clubId=" + clubId + ", viewOption=" + viewOption + ", month=" + month + "]";
+		return "CalendarVO [clubId=" + clubId + ", viewOption=" + viewOption + ", years=" + years + ", month=" + month
+				+ "]";
 	}
 	
 	

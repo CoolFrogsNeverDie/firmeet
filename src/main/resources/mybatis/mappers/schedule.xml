@@ -18,19 +18,7 @@
         		,a.endDate as endDate
 			from meet_name a join aboard b on a.meetNo = b.meetNo
 			where a.clubID = #{clubId} and b.aboardVal in (2,3)
-
-			union 
-
-			select 
-				aboardNo as boardNo
-    			,aboardval as meetCate
-    			,clubId
-   				,'[일반공지]' as foront_title
-    			,  title
-    			, aboardDate as startDate
-   				, aboardDate as endDate
-    		from aboard
-    		where clubId = #{clubId} and aboardVal = 1
+		   	and meetyear in #{years} and meetmon = #{month}
 		]]>
 	</select>	
 	

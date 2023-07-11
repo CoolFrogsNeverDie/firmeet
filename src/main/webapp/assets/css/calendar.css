@@ -38,27 +38,11 @@ td, tr {
 	--fc-button-active-bg-color: none;
 	--fc-button-active-border-color: none;
 	
-	/*이벤트별로 다른 컬러로 표기될 수 있게 함*/
-	--fc-event-1-bg-color: #6a53fb;
-	--fc-event-1-border-color: #6a53fb;
-	--fc-event-1-text-color: #fff;
-	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
+	--fc-event-bg-color:  #6a53fb;
+	--fc-event-border-color: #white;
+	--fc-event-text-color: #fff;
+	--fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
 
-	--fc-event-1-bg-color: #3498db;
-	--fc-event-1-border-color: #3498db;
-	--fc-event-1-text-color: #fff;
-	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
-
-	--fc-event-1-bg-color: #e74c3c;
-	--fc-event-1-border-color: #e74c3c;
-	--fc-event-1-text-color: #fff;
-	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
-
-	--fc-event-1-bg-color: #2ecc71;
-	--fc-event-1-border-color: #2ecc71;
-	--fc-event-1-text-color: #fff;
-	--fc-event-1-selected-overlay-color: rgba(0, 0, 0, 0.25);
-	
 	--fc-more-link-bg-color: #d0d0d0;
 	--fc-more-link-text-color: inherit;
 	

@@ -268,26 +268,32 @@ $(document).ready(function() {
 </body>
 <script>
 
-
 $(document).ready(function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth'
-    });
-    
-    
-    calendar.render();
-    
+
+	
+	
+	
+});
+
+//정렬 선택 했을때
+$('#select-array').on("change", function(){
+	getdata();
+	console.log('test');
+});
+
+
+//캘린더 이전 버튼 클릭 했을때
+$('.forCalendar').on("click",'button.fc-prev-button', function(){
+	getdata();
+});
+$('.forCalendar').on("click",'button.fc-next-button', function(){
+	console.log('test');
+});
 
 
 
-    
-  });
-
-
-
-	//스케줄 정보를 받아와서 render()에 넘겨주는 function
-	function getdata(){
+	/*스케줄 정보를 받아와서 render()에 넘겨주는 function*/
+	function getdata(n){
 		
 	var date = new Date();
 	var clubId =  ${clubId};
@@ -322,12 +328,17 @@ $(document).ready(function() {
         success : function(jsonResult){
        	 	
         	var data = jsonResult.data;
-		
-			calendar.addEvent({
-    			id: 'a',
-    			title: 'my event',
-    			start: '2023-07-01'
-  			});
+			
+ //       	render(data);
+//			console.log(data)
+			data.forEach(function(item) {
+		    calendar.addEvent({
+		      'title': item.title,
+		      'start': item.startDate,
+		      'end': item.endDate,
+			  'url': 'https://google.com/'
+		    });
+
         },
         error : function(XHR, status, error) {
         console.error(status + " : " + error);
@@ -340,6 +351,28 @@ $(document).ready(function() {
 
 	/*받아온 스케줄 정보를 사용해서 calender를 그림*/
 
+	function render() {
+		  var calendarEl = document.getElementById('calendar');
+		  var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth',
+		    droppable: true,
+		    locale: 'ko',
+		    timeZone: 'en',
+		    events: [], // 빈 배열로 초기화
+		  });
+
+/*		  data.forEach(function(item) {
+		    calendar.addEvent({
+		      'title': item.title,
+		      'start': item.startDate,
+		      'end': item.endDate,
+			  'url': 'https://google.com/'
+		    });
+		  });
+*/			
+
+		  calendar.render();
+		}
 
 </script>
 </html>
