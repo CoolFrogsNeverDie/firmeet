@@ -24,30 +24,140 @@
   <script>
   /*객체 배열로 가져와서*/
 
+  /*
+  
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale : 'ko',
+  	      timeZone: 'ko',
+  	   	 events: [
+  	      {
+  	        title: 'render schedule',
+  	        start: '2023-07-20',
+  	        end: '2023-07-23'
+  	      },
+  	      {
+  	    	  title: '멋쟁이',
+  	    	  start: 2023-07-01,
+  	    	  end: 2023-07-05
+  	      }
+  	    ],
+        });
+        calendar.render();
+      });
+  */
+  
+  
+  /*
+      document.addEventListener('DOMContentLoaded', function() {
 
+      });
     $(document).ready(function() {
 	  schedule_Render('render schedule', '2023-07-20', '2023-07-23');
-	});
 
 
 	function schedule_Render(title, start, end) {
 	  var calendarThe = $('#calendar')[0];
 	  var calendar = new FullCalendar.Calendar(calendarThe, {
-	    timeZone: 'UTC',
+        locale : 'ko',
+	    timeZone: 'ko',
 	    initialView: 'dayGridMonth',
 	    events: [
 	      {
-	        title: title,
-	        start: start,
-	        end: end
+	        title: 'render schedule',
+	        start: '2023-07-20',
+	        end: '2023-07-23'
+	      },
+	      {
+	    	  title: '멋쟁이',
+	    	  start: 2023-07-01,
+	    	  end: 2023-07-05
 	      }
 	    ],
 	    editable: true
 	  });
 	  calendar.render();
 	}
-  
-  
+    });
+	
+    
+    */
+/*  
+$(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      locale: 'zh-cn',
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay'
+      },
+      defaultDate: '2018-03-12',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2018-03-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2018-03-07',
+          end: '2018-03-10'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-09T16:00:00'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2018-03-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2018-03-11',
+          end: '2018-03-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T10:30:00',
+          end: '2018-03-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2018-03-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2018-03-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2018-03-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2018-03-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2018-03-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2018-03-28'
+        }
+      ]
+    });
+
+  });
+  */
   </script>
   <!--모달-->
   <style>
@@ -58,7 +168,6 @@
 </head>
 
 <body>
-<div id = "Pageinfo" data-clubid = "${calendarInfo.clubId}"  data-viewoption = "${calendarInfo.viewOption}" data-month = "${calendarInfo.month}"></div>
   <!----------------------------------------- top Navigation ----------------------------------------->
   <nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
     <div class="container">
@@ -159,6 +268,14 @@
 </body>
 <script>
 
+$(document).ready(function() {
+	
+	render();
+	
+});
+
+
+
 $(window).on("load",function() {
 	
 	var clubId = ${clubId};
@@ -200,6 +317,40 @@ $(window).on("load",function() {
 });//document ready event end
 
 
+
+function render(){
+	
+	   var calendarEl = document.getElementById('calendar');
+	    var calendar = new FullCalendar.Calendar(calendarEl, {
+	      initialView: 'dayGridMonth',
+	      locale : 'ko',
+		      timeZone: 'ko',
+		   	 events: [
+		      {
+		        title: 'render schedule',
+		        start: '2023-07-20',
+		        end: '2023-07-23'
+		      },
+		      {
+		        title: 'render schedule',
+		        start: '2023-07-20',
+		        end: '2023-07-23'
+		      },
+		      {
+		        title: 'render schedule',
+		        start: '2023-07-20',
+		        end: '2023-07-23'
+		      },
+		      {
+		    	  title: '멋쟁이',
+		    	  start: '2023-07-01',
+		    	  end: '2023-07-05'
+		      }
+		    ],
+	    });
+	    calendar.render();
+	
+}
 
 </script>
 </html>

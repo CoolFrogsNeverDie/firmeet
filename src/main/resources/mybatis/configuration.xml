@@ -5,11 +5,13 @@
 
 	<typeAliases>
 	<typeAlias type="com.firmeet.vo.NoticeBoardVO" alias="noticeboard"/>
+	<typeAlias type="com.firmeet.vo.ScheduleVO" alias="Schedule"/>
 	</typeAliases>
 
 	<mappers>
 	<mapper resource="mybatis/mappers/member.xml" />
 	<mapper resource="mybatis/mappers/noticeboard.xml" />
+	<mapper resource="mybatis/mappers/schedule.xml" />
 
     </mappers>
     

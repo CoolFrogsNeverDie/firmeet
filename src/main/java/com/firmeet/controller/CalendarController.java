@@ -1,6 +1,7 @@
 package com.firmeet.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
+import com.firmeet.service.CalendarService;
 import com.firmeet.vo.CalendarVO;
 
 @RequestMapping("/calendar")
 @Controller
 public class CalendarController {
 		
+	@Autowired
+	CalendarService calendarService;
 	
 	@RequestMapping(value ="/club", method = {RequestMethod.POST,RequestMethod.GET})
 	public String clubCalendar(@ModelAttribute CalendarVO calendarVO
@@ -33,6 +37,8 @@ public class CalendarController {
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
 		
 		System.out.println("AJAX로 넘어온 객체 정보 확인 : " + calendarVO);
+		calendarService.getClubSche(calendarVO);
+		
 		
 		return null;
 	}
