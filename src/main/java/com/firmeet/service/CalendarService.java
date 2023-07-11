@@ -18,9 +18,9 @@ public class CalendarService {
 	public List<ScheduleVO> getClubSche(CalendarVO calendarVO){
 		
 		System.out.println("Service까지 오는지 확인  : " + calendarVO);
-		scheduleDAO.getClubSche(calendarVO);
+		List<ScheduleVO> list = scheduleDAO.getClubSche(calendarVO);
 		
-		return null;
+		return list;
 	}
 
 }

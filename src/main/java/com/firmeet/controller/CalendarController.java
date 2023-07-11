@@ -1,6 +1,8 @@
 package com.firmeet.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.CalendarService;
 import com.firmeet.vo.CalendarVO;
+import com.firmeet.vo.ScheduleVO;
 
 @RequestMapping("/calendar")
 @Controller
@@ -35,12 +38,12 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value = "/getSchedule", method= RequestMethod.POST)
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
-		
+		JsonResult jsonResult = new JsonResult();
 		System.out.println("AJAX로 넘어온 객체 정보 확인 : " + calendarVO);
-		calendarService.getClubSche(calendarVO);
+		List<ScheduleVO> list = calendarService.getClubSche(calendarVO);
+		jsonResult.success(list);
 		
-		
-		return null;
+		return jsonResult;
 	}
 	
 }

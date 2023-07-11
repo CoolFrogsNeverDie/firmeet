@@ -2,6 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="schedule">
+	
+	<select id ="getClubSchedule" parameterType ="calendar" resultType ="schedule">
+		<![CDATA[
+			select
+       			 b.aboardNo as boardNo
+        		,b.aboardval as meetCate
+        		,a.clubId as clubId
+        		, case 
+               		when aboardval = 2 then '[모임결제]'
+               		when aboardval = 3 then '[모임일정]'
+			        end as foront_title
+        		,b.title as title
+        		,a.startDate as startDate
+        		,a.endDate as endDate
+			from meet_name a join aboard b on a.meetNo = b.meetNo
+			where a.clubID = #{clubId} and b.aboardVal in (2,3)
 
+			union 
 
+			select 
+				aboardNo as boardNo
+    			,aboardval as meetCate
+    			,clubId
+   				,'[일반공지]' as foront_title
+    			,  title
+    			, aboardDate as startDate
+   				, aboardDate as endDate
+    		from aboard
+    		where clubId = #{clubId} and aboardVal = 1
+		]]>
+	</select>	
+	
 </mapper>

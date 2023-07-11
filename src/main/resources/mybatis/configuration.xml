@@ -5,7 +5,8 @@
 
 	<typeAliases>
 	<typeAlias type="com.firmeet.vo.NoticeBoardVO" alias="noticeboard"/>
-	<typeAlias type="com.firmeet.vo.ScheduleVO" alias="Schedule"/>
+	<typeAlias type="com.firmeet.vo.ScheduleVO" alias="schedule"/>
+	<typeAlias type="com.firmeet.vo.CalendarVO" alias="calendar"/>
 	</typeAliases>
 
 	<mappers>

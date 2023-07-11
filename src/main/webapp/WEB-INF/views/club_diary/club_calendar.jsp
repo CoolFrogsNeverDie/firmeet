@@ -287,7 +287,7 @@ $(window).on("load",function() {
 			  viewOption: viewOption,
 			  month: month
 			}
-	
+
 	 console.log('AJAX로 넘기려는 객체  : ' + CalendarVO)
 	 console.log('AJAX로 넘기려는 객체  : ' + clubId)
 	 console.log('AJAX로 넘기려는 객체  : ' + viewOption)
@@ -304,8 +304,16 @@ $(window).on("load",function() {
         //응답 세팅
         dataType : "json",
         success : function(jsonResult){
-       	 
+       	 	
+        	var data = jsonResult.data;
 
+            data.forEach(function(item) {
+					console.log(item.startDate);
+					console.log(item.endDate);
+
+					 calendar.addEvent( {'title':item.title, 'start' : item.startDate, 'end':item.endDate});
+					
+              });
         },
         error : function(XHR, status, error) {
         console.error(status + " : " + error);
@@ -327,24 +335,9 @@ function render(){
 		      timeZone: 'ko',
 		   	 events: [
 		      {
-		        title: 'render schedule',
-		        start: '2023-07-20',
-		        end: '2023-07-23'
-		      },
-		      {
-		        title: 'render schedule',
-		        start: '2023-07-20',
-		        end: '2023-07-23'
-		      },
-		      {
-		        title: 'render schedule',
-		        start: '2023-07-20',
-		        end: '2023-07-23'
-		      },
-		      {
-		    	  title: '멋쟁이',
-		    	  start: '2023-07-01',
-		    	  end: '2023-07-05'
+		        title: data.title,
+		        start: data.startDate,
+		        end: data.endDate
 		      }
 		    ],
 	    });
