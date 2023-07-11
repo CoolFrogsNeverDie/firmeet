@@ -2,19 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	
-	<!-- 쿼리문 작성 -->   
+	  
 	<insert id="insertMem" parameterType="com.firmeet.vo.MemberVo">
 		<![CDATA[
-		<!– 쿼리문 -->
-			insert into member
-			values(
-				#{memberId},
-				#{memberPhone},
-				#{memberName},
-				#{memberPw},
-				#{memberPri}		
-				)
+			insert into member(memberId, memberPhone, memberName, memberPw, memberPri)
+			values(#{memberId}, #{memberPhone}, #{memberName}, #{memberPw}, #{memberPri})
 	        ]]>
 		
 	</insert>
@@ -34,7 +26,7 @@
 		<![CDATA[
 			select memberId
 			from member
-				where memberId=#{memberId}
+			where memberId=#{memberId}
 			
 	        ]]>
 	

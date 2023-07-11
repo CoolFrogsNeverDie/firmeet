@@ -25,6 +25,7 @@
             }
     .modal-title{
     	width:300px;
+    	text-align:center;
     	display:block;
         margin:auto;
             }
@@ -41,24 +42,30 @@
     	width:70vw;
     	margin:auto;
         }   
-
+    #hobby{
+    	text-align:center;
+    }
+	#hobby input[type=radio]{
+			margin-top:10px;
+	}
 </style>
 </head>
 <body>
 	<h4 class="modal-title">회원가입</h4>
 	<div class="modal-body">
 	                <div class="container">
-	                    <form method="post" action="/firmeet/member/join">
+	                    <form method="post" action="http://localhost:8000/firmeet/member/join">
 	                   
 	                        <table class="table" style="text-align: center; border: 1px solid #dddddd">
 	                            <tbody>
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>아이디</h6></td>
 	                                    <td>
-	                                        <input class="form-control" type="text" id="" name="memberId" maxlength="20" required="required" placeholder="아이디를 입력해주세요.">
+	                                        <input class="form-control" type="text" id="" name="memberId"  value="" maxlength="20" required="required" placeholder="아이디를 입력해주세요.">
 	                                    </td>
 	                                    <td style="width: 110px;">
-	                                        <button class="btn btn-primary" id="btnIdCheck" onclick="" type="button">중복체크
+	                                        <button class="btn btn-primary" id="btnIdCheck" onclick="" type="button" 
+	                                        action="/firmeet/member/idcheck">중복체크
 	                                        </button>
 	                                        <span id="idcheckMsg"></span>
 	                                    </td>
@@ -66,7 +73,7 @@
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>핸드폰 번호</h6>
 	                                    <td>
-	                                        <input class="form-control" type="tel" id="" name="memberPhone" pattern="(010)-\d{4}-\d{4}" placeholder="01X-XXXX-XXXX">
+	                                        <input class="form-control" type="tel" id="" name="memberPhone" value="" pattern="(010)-\d{4}-\d{4}" placeholder="01X-XXXX-XXXX">
 	                                    </td>
 	                                    <td style="width: 130px;">
 	                                        <button class="btn btn-primary" onclick="" type="button">핸드폰 인증
@@ -76,13 +83,13 @@
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>이름</h6>
 	                                    <td colspan="2">
-	                                    <input class="form-control" type="text" id="" name="memberName" maxlength="20" required="required" placeholder="이름을 입력해주세요.">
+	                                    <input class="form-control" type="text" id="" name="memberName"  value="" maxlength="20" required="required" placeholder="이름을 입력해주세요.">
 	                                    </td>
 	                                </tr>
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>비밀번호</h6>
 	                                    <td colspan="2">
-	                                        <input class="form-control" type="password" onkeyup=""; id="" name="memberPw" maxlength="20" required="required" placeholder="비밀번호를 입력해주세요.">
+	                                        <input class="form-control" type="password" onkeyup=""; id="" name="memberPw" value="" maxlength="20" required="required" placeholder="비밀번호를 입력해주세요.">
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -91,20 +98,27 @@
 	                                        <input class="form-control" type="password" onkeyup="passwordCheckFunction()"; id="" name="" maxlength="20" required="required" placeholder="비밀번호 확인을 입력해주세요.">
 	                                    </td>
 	                                </tr>
+	                                 <tr id="hobby">
+	                                    <td style="width: 120px;"><h6>관심사 공개</h6>
+	                                    <td colspan="2">
+	                                       <input type="radio" name ="memberPri" value="0">공개 &nbsp;
+	                                       <input type="radio" name ="memberPri" value="99">비공개 &nbsp;
+	                                    </td>
+	                                </tr>
 	                                <tr>
 	                                    <td style="width: 110px;"><h6>관심사</h6>
 	                                    <td colspan="2">
 	                                        <div class="form-group" style="text-align: center; margin: 0 auto;">
-	                                            <input type="radio" name="memberPri" value="해당 없음" checked>해당 없음 &nbsp;
-	                                            <input type="radio" name="memberPri" value="운동/액티비티" >운동/액티비티 &nbsp;
-	                                            <input type="radio" name="memberPri" value="스터디">스터디 &nbsp;<br>
-	                                            <input type="radio" name="memberPri" value="친목">친목 &nbsp;
-	                                            <input type="radio" name="memberPri" value="건강/음식">건강/음식 &nbsp;
-	                                            <input type="radio" name="memberPri" value="언어/문화">언어/문화 &nbsp;
-	                                            <input type="radio" name="memberPri" value="종교">종교<br> 
-	                                            <input type="radio" name="memberPri" value="교육/학습">교육/학습 &nbsp;
-	                                            <input type="radio" name="memberPri" value="음악/예술">음악/예술 &nbsp;
-	                                            <input type="radio" name="memberPri" value="여행">여행
+	                                            <input type="radio" name="" value="0" checked>없음 &nbsp;
+	                                            <input type="radio" name="" value="1" >운동/액티비티 &nbsp;
+	                                            <input type="radio" name="" value="2">스터디 &nbsp;<br>
+	                                            <input type="radio" name="" value="3">친목 &nbsp;
+	                                            <input type="radio" name="" value="4">건강/음식 &nbsp;
+	                                            <input type="radio" name="" value="5">언어/문화 &nbsp;
+	                                            <input type="radio" name="" value="6">종교<br> 
+	                                            <input type="radio" name="" value="7">교육/학습 &nbsp;
+	                                            <input type="radio" name="" value="8">음악/예술 &nbsp;
+	                                            <input type="radio" name="" value="9">여행
 	                                        </div>
 	                                    </td>
 	                                </tr>
@@ -141,7 +155,8 @@
 	            </div>
 
 </body>
-<script type="text/javascript">
+
+ <script type="text/javascript">
 
 	//아이디 체크 버튼 클릭했을때
 	$("#btnIdCheck").on("click", function(){
@@ -152,12 +167,17 @@
 		
 		console.log(id);
 		
+		memberVO ={
+				memberId : id
+		}
+		
+		
 		//통신  id////////////////////////////////////////////
 		$.ajax({
-			url : "firmeet/member/idcheck",		
+			url : "${pageContext.request.contextPath}/member/idcheck",		
 			type : "post",
 			/* contentType : "application/json", */
-			data : {memberId : id},
+			data : memberVO,
 	
 			dataType : "json",
 			success : function(jsonResult){
@@ -167,10 +187,10 @@
 					//사용가능한지 불가능 한지 표현한다
 					if(jsonResult.data == true){
 						//사용가능
-						$("#idcheckMsg").html( id+ "는 사용가능 합니다.");    
+						alert("사용 가능한 아이디 입니다.")   
 					}else {
 						//사용불가
-						$("#idcheckMsg").html( id+ "는 사용중입니다.");    
+						alert("사용 불가능한 아이디 입니다.")   
 					}
 					
 				}else {
