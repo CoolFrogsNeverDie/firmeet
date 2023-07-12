@@ -16,7 +16,7 @@
     />
     
     <link href="${pageContext.request.contextPath }/assets/css/imgSlider.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath }/assets/css/main.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath }/assets/css/content.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

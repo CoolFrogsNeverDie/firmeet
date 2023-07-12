@@ -16,9 +16,26 @@ public class NoticeBoardVO {
 	private int maxPerson;
 	private int price;
 	
+	public NoticeBoardVO() {
+		
+	}
+	
+	public NoticeBoardVO(int aboardNo, int clubId, String memberId, int aboardVal, String title, String aboardDate,
+			String boardContent) {
+		super();
+		this.aboardNo = aboardNo;
+		this.clubId = clubId;
+		this.memberId = memberId;
+		this.aboardVal = aboardVal;
+		this.title = title;
+		this.aboardDate = aboardDate;
+		this.boardContent = boardContent;
+	}
+
 	public NoticeBoardVO(int aboardNo, int clubId, String memberId, int meetNo, int aboardVal, String title,
 			String aboardDate, int likeCnt, String boardContent, String voteEnd, int minPerson, int maxPerson,
 			int price) {
+		super();
 		this.aboardNo = aboardNo;
 		this.clubId = clubId;
 		this.memberId = memberId;
