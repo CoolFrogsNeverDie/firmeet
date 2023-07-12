@@ -12,14 +12,23 @@
         		, case 
                		when aboardval = 2 then '[모임결제]'
                		when aboardval = 3 then '[모임일정]'
-			        end as foront_title
+			        end as frontTitle
         		,b.title as title
         		,a.startDate as startDate
         		,a.endDate as endDate
 			from meet_name a join aboard b on a.meetNo = b.meetNo
-			where a.clubID = #{clubId} and b.aboardVal in (2,3)
-		   	and meetyear in #{years} and meetmon = #{month}
+			where a.clubID = #{clubId} 	and meetyear in #{years}
+			and meetmon = #{month}
 		]]>
+		<if test ="viewOption==2">
+			and b.aboardVal  = 2
+		</if>			
+		<if test ="viewOption==99">
+			and b.aboardVal in (2,3)
+		</if>			
+		<if test ="viewOption==3">
+			and b.aboardVal = 3
+		</if>			
 	</select>	
 	
 </mapper>

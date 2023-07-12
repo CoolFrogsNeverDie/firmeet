@@ -33,7 +33,7 @@
 
 <body>
   <!----------------------------------------- top Navigation ----------------------------------------->
-  
+
   <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
   <!-- 페이지 콘텐츠 -->
 
@@ -169,7 +169,7 @@ $('.forCalendar').on("click",'button', function(){
 	 $.ajax({
         
         //요청 세팅
-        url : "${pageContext.request.contextPath}/calendar/club/getSchedule",      
+        url : "${pageContext.request.contextPath}/calendar/getSchedule",      
         type : "post",
         data : CalendarVO,
         
