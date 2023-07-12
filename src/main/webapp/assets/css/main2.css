@@ -94,9 +94,10 @@ nav  img{
 
 /* menu-bar */
 .menu-bar {
-  float: right;
-  width: 16%;
+  float: left;
+  width: 13%;
   height: 60%;
+  margin-left: 40px;
 }
 
 /* group-profile */
@@ -106,10 +107,7 @@ nav  img{
   margin: auto;
 }
 
-
-
 .group-profile-img-area {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
@@ -117,7 +115,6 @@ nav  img{
   border-radius: 100%;
   overflow: hidden;
   margin: 10%;
-  border: 1px solid black;
 }
 
 .group-profile-img {
@@ -129,10 +126,10 @@ nav  img{
 /* menu-nav */
 .side-nav {
   width: 100%;
-  height: 40%;
+  height: 46%;
   text-align: center;
   padding: 0;
-  font-size: 15px;
+  font-size: 18px;
 }
 .side-nav li {
   list-style: none;
@@ -156,8 +153,3 @@ nav  img{
   width: 100%;
   height: 82%;
 }
-
-
-
-
-
