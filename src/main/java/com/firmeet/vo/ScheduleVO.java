@@ -9,6 +9,7 @@ public class ScheduleVO {
 	private int meetCate;
 	private int clubId;
 	private String title;
+	private String frontTitle;
 	private Date startDate;
 	private Date endDate;
 	public ScheduleVO() {
@@ -47,6 +48,15 @@ public class ScheduleVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getFrontTitle() {
+		return frontTitle;
+	}
+
+	public void setFrontTitle(String frontTitle) {
+		this.frontTitle = frontTitle;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -63,9 +73,11 @@ public class ScheduleVO {
 	@Override
 	public String toString() {
 		return "ScheduleVO [boardNo=" + boardNo + ", meetNo=" + meetNo + ", meetCate=" + meetCate + ", clubId=" + clubId
-				+ ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ ", title=" + title + ", frontTitle=" + frontTitle + ", startDate=" + startDate + ", endDate="
+				+ endDate + "]";
 	}
 
+	
 	
 	
 	
