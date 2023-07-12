@@ -43,12 +43,13 @@ public class MemberController {
 		  if(member !=null){
 			  System.out.println("로그인 성공");
 			  session.setAttribute("member", member);
-			  return "";
+			  return "main/mainList";
 		  }else {
 			  System.out.println("로그인 실패");
+			  return "member/loginForm";
 		  }
 		 
-		return "";
+		
 		
 	}
 	

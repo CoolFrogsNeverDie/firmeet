@@ -77,7 +77,7 @@
         <!-- 로그인 페이지 타이틀 -->
         <div id="loginBoxTitle"> Login</div>
         <!-- 아이디, 비번, 버튼 박스 -->
-        <form action="/firmeet/member/login">
+        <form action="http://localhost:8000/firmeet/member/login">
 	        <div id="inputBox">
 	          <div class="input-form-box">
 	          	<span>아이디 </span>

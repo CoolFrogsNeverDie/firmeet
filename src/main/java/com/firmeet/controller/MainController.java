@@ -12,4 +12,10 @@ public class MainController {
 		
 		return"/main/index";
 	}
+	
+	@RequestMapping(value="/mainList",method= {RequestMethod.GET, RequestMethod.POST})
+	public String mainList() {
+		
+		return"/main/mainList";
+	}
 }
