@@ -31,7 +31,7 @@
               </div>
               <div class="noticeprofil">
                   <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
-                  <span class="username" id="" name="" value="">홍순이</span>
+                  <span class="username" id="" name="" value="">${memberId }</span>
                   <span class="userlevel" id="" name="" value="">매니저</span><br>
                   <div class="userp">
                       <span class="userdate">작성일</span>
@@ -44,16 +44,16 @@
       
               <div>
                   <div>
-                      <input class="noticecontent" type="text" id="" value="" maxlength="50">
+                      <p class="noticecontent" type="text" id=""> ${vo.title }</p>
                   </div>
                   <div class="noticegroupauto">
                       <div class="noticegrouplist">
-                          <p class="noticegroupname">ex([7월 1일 투표 마감])</p>
-                          <p class="noticegroupname1">ex(7월 정모 가능한 날짜를 알려주세요)</p>
+                          <p class="noticegroupname">${vo.title }</p>
+                          <%-- <p class="noticegroupname1">${editlist.title }</p> --%>
                       </div>
                       <div class="noticegrouplist1">
-                          <p class="noticegroupname">ex(2023-06-28 ~ 2023-06-28)</p>
-                          <p class="noticegroupname1">ex(강동구 천호동 틈새라면)</p>
+                          <p class="noticegroupname">${vo.boardContent }</p>
+                          <%-- <p class="noticegroupname1">${vo.boardContent }</p> --%>
                       </div>
                   </div>
                   <div>

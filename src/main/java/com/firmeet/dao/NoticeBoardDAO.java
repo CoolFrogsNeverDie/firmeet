@@ -25,9 +25,11 @@ public class NoticeBoardDAO {
 		System.out.println("dao 넘어오는 값 확인 : " + vo);
 	}
 
-	public List<NoticeBoardVO> editlist() {
+	public NoticeBoardVO editlist(int aboardNo) {
 		System.out.println("notice editlist dao 확인");
-		return sql.selectList("noticeboard.editlist");
+		System.out.println("notice editlist dao 확인"+aboardNo);
+		
+		return sql.selectOne("noticeboard.editlist", aboardNo);
 	}
 
 	

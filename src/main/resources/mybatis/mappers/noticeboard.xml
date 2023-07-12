@@ -15,4 +15,10 @@
 		values(seq_aboardNo.nextval, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
 
+	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, a.aboardDate, a.boardContent
+		from aboard a, club c, member m
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = #{aboardNo}
+	</select>
+
 </mapper>

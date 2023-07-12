@@ -48,11 +48,10 @@ public class NoticeBoardService {
 		
 	}
 
-	public List<NoticeBoardVO> editlist() {
+	public NoticeBoardVO editlist(int aboardNo) {
 		System.out.println("notice editlist 확인");
-		return dao.editlist();
+		return dao.editlist(aboardNo);
 	}
-
 
 
 }
