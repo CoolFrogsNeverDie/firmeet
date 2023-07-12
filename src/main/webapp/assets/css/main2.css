@@ -18,10 +18,6 @@ nav {
 }
 
 /*내가 추가한 로고 이미지 css*/
-nav  img{
-  margin-left: -180px;
-}
-
 
 .content-menu,
 .content-main {
@@ -96,8 +92,9 @@ nav  img{
 .menu-bar {
   float: left;
   width: 13%;
-  height: 60%;
+  height: 66.5%;
   margin-left: 40px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 /* group-profile */
@@ -134,9 +131,10 @@ nav  img{
 .side-nav li {
   list-style: none;
   width: 100%;
-  height: 20%;
+  height: 42px;
   display: inline-block;
   padding-top: 6px;
+  margin-top : 7px;
 }
 .side-nav li:hover{
   background-color: #b2a4ff;

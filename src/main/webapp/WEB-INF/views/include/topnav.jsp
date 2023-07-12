@@ -62,7 +62,7 @@
       <div class="container">
         <a class="navbar-brand" href="#">
           <img
-            src="https://placeholder.pics/svg/150x50/888888/EEE/Logo"
+            src="${pageContext.request.contextPath }/assets/images/logo/logo_b.png"
             alt="..."
             height="36"
           />

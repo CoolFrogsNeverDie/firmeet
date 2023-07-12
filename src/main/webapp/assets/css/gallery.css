@@ -37,6 +37,11 @@ dd {
   display: none;
 }
 
+dd:hover{
+  background-color: black;
+  color:white;
+}
+
 /* 오른쪽 */
 .content-right {
   width: 74%;

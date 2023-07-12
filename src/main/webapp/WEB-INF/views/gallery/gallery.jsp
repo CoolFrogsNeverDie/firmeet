@@ -35,7 +35,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
 		<div class="container">
 			<a class="navbar-brand" href="#"> <img
-				src="https://placeholder.pics/svg/150x50/888888/EEE/Logo" alt="..."
+				src="${pageContext.request.contextPath }/assets/images/logo/logo_b.png" alt="..."
 				height="36" />
 			</a>
 			<button class="navbar-toggler" type="button"

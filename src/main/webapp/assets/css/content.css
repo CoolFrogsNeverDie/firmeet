@@ -1,23 +1,22 @@
 /* 콘텐츠 안에 들어갈 것*/
 
-/* 왼쪽 */
 .content-left {
-    width: 59%;
+    width: 55%;
     height: 90%;
     display: inline-block;
     margin-top: 10px;
   }
   
-  
-  /* 오른쪽 */
-  .content-right{
+  .content-right {
     width: 40%;
-    height: 90%;
-    border: 1px solid black;
+    height: 97%;
     display: inline-block;
     margin-top: 10px;
+    float: right;
     box-sizing: border-box;
+    background-color: aquamarine;
   }
+  
   
   /*공지사항*/
   .announcement{
