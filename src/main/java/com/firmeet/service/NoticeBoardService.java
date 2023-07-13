@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.NoticeGeneralVoteVO;
 
 @Service
 public class NoticeBoardService {
@@ -51,6 +52,28 @@ public class NoticeBoardService {
 	public NoticeBoardVO editlist(int aboardNo) {
 		System.out.println("notice editlist 확인");
 		return dao.editlist(aboardNo);
+	}
+
+	public void voteinsert(NoticeGeneralVoteVO vo) {
+		System.out.println("notice voteinsert 확인");
+		
+		String voteTitle = vo.getVoteTitle();
+		String vote1 = vo.getVote1();
+		String vote2 = vo.getVote2();
+		String vote3 = vo.getVote3();
+		String vote4 = vo.getVote4();
+		String vote5 = vo.getVote5();
+		int totalNum = vo.getTotalNum();
+		
+		vo.setVoteTitle(voteTitle);
+		vo.setVote1(vote1);
+		vo.setVote2(vote2);
+		vo.setVote3(vote3);
+		vo.setVote4(vote4);
+		vo.setVote5(vote5);
+		vo.setTotalNum(totalNum);
+		
+		dao.voteinsert(vo);
 	}
 
 

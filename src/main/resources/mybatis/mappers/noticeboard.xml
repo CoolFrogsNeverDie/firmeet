@@ -20,5 +20,12 @@
 		from aboard a, club c, member m
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = #{aboardNo}
 	</select>
+	
+	<insert id="voteinsert" parameterType="noticegeneral">
+	<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
+	select seq_aboardNo.nextval from dual
+	</selectKey>
+	insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, totalNum, finDate)values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{totalNum}, #{finDate}) 
+	</insert>
 
 </mapper>

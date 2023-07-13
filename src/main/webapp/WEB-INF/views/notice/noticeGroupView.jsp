@@ -4,7 +4,7 @@
     <!----------------------------------------- // top navbar //----------------------------------------->
     <!-- Page Content -->
 
-    <div class="wrap">
+<div class="wrap">
       <div class="diary-area">
         <div class="diary-topbar">
           <img
@@ -23,7 +23,7 @@
            
             <form class="noticeform" action="">
               <div>
-                  <input class="noticetitle" type="text" id="" value="">
+                  <p class="noticetitle" id="">${vo.title }</p>
                   <div class="noticebtn">
                     <button type="button" class="btn btn-warning">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
@@ -31,34 +31,41 @@
               </div>
               <div class="noticeprofil">
                   <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
-                  <span class="username" id="" name="" value="">${memberId }</span>
-                  <span class="userlevel" id="" name="" value="">매니저</span><br>
+                  <span class="username">${vo.memberId }</span>
+                  <span class="userlevel">매니저</span><br>
                   <div class="userp">
-                      <span class="userdate">작성일</span>
-                      <input class="usertext" type="text" id="" value="">
-                      <span class="usercount">조회수</span>
-                      <input class="usertext" type="text" id="" value="">
+                      <span class="userdate">작성일 : </span>
+                      <span class="usertext">${vo.aboardDate}</span>
+                      <span class="usercount">조회수 : </span>
+                      <span class="usertext"></span>
                   </div>
               </div>
               <hr class="line">
       
               <div class="noticecontentbox">
                   <div>
-                      <p class="noticecontent" type="text" id=""> ${vo.title }</p>
+                      <p class="noticecontent" id=""> ${vo.boardContent}</p>
                   </div>
-                  <div class="noticegroupauto">
-                      <div class="noticegrouplist">
-                          <p class="noticegroupname">${vo.title }</p>
-                          <%-- <p class="noticegroupname1">${editlist.title }</p> --%>
-                      </div>
-                      <div class="noticegrouplist1">
-                          <p class="noticegroupname">${vo.boardContent }</p>
-                          <%-- <p class="noticegroupname1">${vo.boardContent }</p> --%>
-                      </div>
-                  </div>
-                  <div>
-                      <!-- 지도 -->
-                  </div>
+                  <table id="dataTable" style="display: none;">
+					<thead>
+						<tr>
+	                      <th class="noticegrouplist">
+	                          <p class="noticegroupname" id="voteTitle1"></p>
+	                      </th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                      <td class="noticegrouplist1">
+	                          <p class="noticegroupname" id="vote1"></p>
+	                          <p class="noticegroupname" id="vote2"></p>
+	                          <p class="noticegroupname" id="vote3"></p>
+	                          <p class="noticegroupname" id="totalNum"></p>
+	                          <p class="noticegroupname" id="finDate"></p>
+	                      </td>
+	                  </tr>
+	                </tbody>
+              	 </table>
               </div>
       
               <div>

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.NoticeGeneralVoteVO;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -29,23 +30,23 @@ public class NoticeBoardController {
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
-	@RequestMapping("/noticelist")
-	public String noticelist(Model model) {
+//	@RequestMapping("/noticelist")
+//	public String noticelist(Model model) {
 		
-		System.out.println("noticelist 확인");
+//		System.out.println("noticelist 확인");
 		
-		model.addAttribute("nlist",noticeBoardService.noticeList());
+//		model.addAttribute("nlist",noticeBoardService.noticeList());
 		
-		return "notice/noticeList";
-	}
-	
-//	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
-//	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId) {
-		
-//		System.out.println("notice확인");
-		
-//		return "notice/noticeEdit";
+//		return "notice/noticeList";
 //	}
+	
+	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
+	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId) {
+		
+		System.out.println("notice확인");
+		
+		return "notice/noticeEdit";
+	}
 	
 	@RequestMapping("/noticeEdit")
 	public String noticeEdit() {
@@ -69,6 +70,18 @@ public class NoticeBoardController {
 		noticeBoardService.editwrite(vo);
 		
 		return "notice/noticeGroupView";
+	}
+	
+	@RequestMapping("/noticeEdit/noticeVote")
+	public String voteinsert(@ModelAttribute NoticeGeneralVoteVO vo) {
+		
+		System.out.println("notice voteinsert 확인 ");
+		
+		System.out.println(vo);
+		
+		noticeBoardService.voteinsert(vo);
+		
+		return "notice/noticeEdit";
 	}
 	
 	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}")

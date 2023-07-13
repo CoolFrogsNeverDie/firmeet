@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<mapper namespace="noticegeneral">
+
+	<!-- 쿼리문 작성 -->
+	
+	<insert id="voteinsert" parameterType="noticegeneral">
+	<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
+	select seq_aboardNo.nextval from dual
+	</selectKey>
+	insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, totalNum, finDate)values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{totalNum}, #{finDate}) 
+	</insert>
+
+</mapper>
