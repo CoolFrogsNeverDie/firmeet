@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.CalendarService;
 import com.firmeet.vo.CalendarVO;
+import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.ScheduleVO;
 
 @RequestMapping("/calendar")
@@ -22,7 +24,7 @@ import com.firmeet.vo.ScheduleVO;
 public class CalendarController {
 		
 	@Autowired
-	CalendarService calendarService;
+	private CalendarService calendarService;
 	
 	
 	/*클럽 캘린더*/
@@ -41,12 +43,33 @@ public class CalendarController {
 	@RequestMapping(value = "/club/getSchedule", method= RequestMethod.POST)
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("AJAX로 넘어온 객체 정보 확인 : " + calendarVO);
 		List<ScheduleVO> list = calendarService.getClubSche(calendarVO);
 		jsonResult.success(list);
 		
 		return jsonResult;
 	}
 	
+	
+	@RequestMapping(value ="/member")
+	public String memCalendar(@ModelAttribute MemberVo memberVO
+							,Model model) {
+		
+		List<ClubVo> joinList = calendarService.setCalOption(memberVO);
+		model.addAttribute("memberId", memberVO.getMemberId());
+		model.addAttribute("joinClubList", joinList);
+		
+		
+		return "member_diary/member_calendar";
+	}
 
+	@ResponseBody
+	@RequestMapping(value ="/member/getSchedule", method = RequestMethod.POST)
+	public JsonResult getMemSchedule(@ModelAttribute CalendarVO calendarVO) {
+		
+		System.out.println("AJAX로 넘어온 정보 " + calendarVO);
+		
+		return null;
+	}
+	
+	
 }	

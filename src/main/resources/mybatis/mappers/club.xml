@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="club">
+
+ <select id = "getMemClub" parameterType ="member" resultType ="club">
+ 	<![CDATA[
+		  	select 
+                a.clubName
+                ,a.clubId
+                from club a join club_member b on a.clubId = b.clubId
+            where b.memberId = #{memberId}	
+ 	]]>
+ </select>
+
+</mapper>
