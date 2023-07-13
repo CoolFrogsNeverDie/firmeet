@@ -50,7 +50,7 @@
         </div>
         <div class="calendar-array">
           <select id = "select-array">
-            <option value ="99">전체</option>
+            <option value ="-99">전체</option>
             <option value = "2">결제공지</option>
             <option value ="3">일정</option>
           </select>
@@ -103,24 +103,24 @@ let calendar;
 //document ready
 $(document).ready(function() {
 	render();
-    getdata();
+	getData();
 	
   });
   
 //정렬 선택 했을때
 $('#select-array').on("change", function(){
-	getdata();
+	getData();
 });
 
 
 //캘린더 이전 버튼 클릭 했을때
 $('.forCalendar').on("click",'button.fc-prev-button', function(){
-	getdata();
+	getData();
 	console.log('test1');
 });
 //캘린더 이후 버튼 선택했을 때
 $('.forCalendar').on("click",'button.fc-next-button', function(){
-	getdata();
+	getData();
 	console.log('test2');
 });
 $('.forCalendar').on("click",'button', function(){
@@ -149,18 +149,18 @@ $('.forCalendar').on("click",'button', function(){
 
 
 	//스케줄 정보를 받아와서 render()에 넘겨주는 function
-	function getdata(){
+	function getData(){
 	
-	var test = $("#fc-dom-1").text();
-	var years = test.substring(0,4);
-	var month = test.substring(test.length-2,test.length-1);
+	var title = $("#fc-dom-1").text();
+	var years = title.substring(0,4);
+	var month = title.substring(title.length-2,title.length-1);
 	var clubId =  ${clubId};
- 	var viewOption =  $('#select-array').val(); 
+ 	var viewOption1 =  $('#select-array').val(); 
 	
 
 	CalendarVO = {
 			  clubId: clubId,
-			  viewOption: viewOption,
+			  viewOption1 : viewOption1,
 			  month: month,
 			  years:years
 			}

@@ -64,10 +64,9 @@ td, tr {
     width: 100%; height: 100%; padding: 2%;
 }
 /*캘린더 큰 레이아웃*/
-#calendar {
+.forCalendar #calendar {
     width: 100%;
     height: 100%;
-	background-color: white;
 	border-radius: 5px;
     top: 90px;
     margin-right: 24px;
@@ -75,19 +74,30 @@ td, tr {
 /*정렬 옵션 선택자*/
 .calendar-array{
     margin-left: auto;
-
+	width:40%;
+	height:32px;
 }
-
-.calendar-array select{
-
-    width:100px;
+/*가입한 클럽 정렬*/
+.calendar-array #select-club{
+	width:65%;
     text-align:center;
-    background-color:	#f8f8f8;
+    background-color:#f8f8f8;
     border-radius: 5%;
     height:2vw;
-    width:8vw;
     font-size:1.2em;
 }
+
+.calendar-array #select-array{
+    width:30%;
+    text-align:center;
+    float: right;
+    background-color:#f8f8f8;
+    border-radius: 5%;
+    height:2vw;
+    font-size:1.2em;
+}
+
+
 
 /*요일*/
 .fc-col-header-cell-cushion {

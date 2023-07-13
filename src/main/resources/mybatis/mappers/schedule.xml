@@ -20,13 +20,13 @@
 			where a.clubID = #{clubId} 	and meetyear in #{years}
 			and meetmon = #{month}
 		]]>
-		<if test ="viewOption==2">
+		<if test ="viewOption1 ==2">
 			and b.aboardVal  = 2
 		</if>			
-		<if test ="viewOption==99">
+		<if test ="viewOption1 ==-99">
 			and b.aboardVal in (2,3)
 		</if>			
-		<if test ="viewOption==3">
+		<if test ="viewOption1 ==3">
 			and b.aboardVal = 3
 		</if>			
 	</select>	
