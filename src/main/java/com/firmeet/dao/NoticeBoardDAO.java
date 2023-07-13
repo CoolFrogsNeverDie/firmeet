@@ -19,11 +19,11 @@ public class NoticeBoardDAO {
 		return sql.selectList("noticeboard.noticelist");
 	}
 
-	public int editwrite(NoticeBoardVO vo) {
+	public void editwrite(NoticeBoardVO vo) {
 		System.out.println("notice editwrite dao 확인");
-		int count = sql.insert("noticeboard.editwrite", vo);
+//		int count = sql.insert("noticeboard.editwrite", vo);
 		System.out.println("dao 넘어오는 값 확인 : " + vo);
-		return count;
+//		return count;
 	}
 
 	public NoticeBoardVO editlist(int aboardNo) {

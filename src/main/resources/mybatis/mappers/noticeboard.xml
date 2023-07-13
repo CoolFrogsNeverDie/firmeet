@@ -11,9 +11,9 @@
 	</select>
 	
 	<insert id="editwrite" parameterType="noticeboard">
-		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
+<!-- 		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
 			select seq_aboardNo.nextval from dual
-		</selectKey>
+		</selectKey> -->
 		insert into aboard(aboardNo, clubId, memberId, aboardVal, title, aboardDate, boardContent )
 		values(#{aboardNo}, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
