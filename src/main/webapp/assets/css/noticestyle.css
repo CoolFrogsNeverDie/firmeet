@@ -155,25 +155,24 @@
     height: 200px;
     margin-bottom: 20px;
     background-color: gray;
+    color: #fff;
 }
 .noticegrouplist{
-    width: 300px;
+    width: 400px;
     height: 100px;
+    background-color: gray;
+}
+.noticegrouplist1{
+    width: 400px;
+    height: 200px;
     background-color: rgb(214, 212, 212);
 }
 .noticegroupname{
     font-weight: bold;
     font-size: 15px;
     height: 10px;
-    padding-top: 25px;
-    padding-left: 20px;
-}
-.noticegroupname1{
-    font-weight: bold;
-    font-size: 15px;
-    height: 10px;
-    padding-left: 20px;
     padding-top: 10px;
+    padding-left: 20px;
 }
 .btn-success{
     background-color: #b2a4ff;
