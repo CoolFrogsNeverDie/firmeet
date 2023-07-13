@@ -12,5 +12,16 @@
             where b.memberId = #{memberId}	
  	]]>
  </select>
+ 
+      <insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
+        <![CDATA[
+           insert into club(clubId,clubName,cre_date,max,preNum,intro1,intro2,address1,
+                        address2,detailT,detailL,detailP,detailE,detailW)
+                    values(seq_clubId.nextval, #{clubName}, sysdate, #{max}, 1,
+                          #{intro1}, #{intro2}, #{address1}, #{address2},
+                          #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW})
+       ]]>
+     </insert>
+   
 
 </mapper>

@@ -63,12 +63,18 @@ public class CalendarController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value ="/member/getSchedule", method = RequestMethod.POST)
+	@RequestMapping(value ="/member/getSchedule", method= RequestMethod.POST)
 	public JsonResult getMemSchedule(@ModelAttribute CalendarVO calendarVO) {
+		System.out.println("getMemSchedule");
 		
+		
+		JsonResult jsonResult = new JsonResult();
 		System.out.println("AJAX로 넘어온 정보 " + calendarVO);
 		
-		return null;
+		
+		jsonResult.success(null);
+		
+		return jsonResult;
 	}
 	
 	

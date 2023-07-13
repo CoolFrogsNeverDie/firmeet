@@ -166,54 +166,28 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 		
 	
 		CalendarVO = {
-	 		  memberId: memberId,
-			  viewOption2: viewOption1,
-			  viewOption2 : viewOption2,			  	  
-			  month: month,
-			  years:years
+	 		memberId: memberId,
+	 		viewOption1: viewOption1,
+	 		viewOption2 : viewOption2,			  	  
+			month: month,
+			years:years
 		}
 	
 		
 	 	console.log(CalendarVO);
 	
+	 	
 	 	 $.ajax({
 	         
-	         //요청 세팅
-	         url : "${pageContext.request.contextPath}/member/getSchedule",      
-	         type : "post",
+	         //요청 세팅/calendar/member/getSchedule
+	         url : "${pageContext.request.contextPath}/calendar/member/getSchedule",      
+	         type : "POST",
 	         data : CalendarVO,
 	         
 	         //응답 세팅
 	         dataType : "json",
 	         success : function(jsonResult){
-	        	 /*
-	         	var data = jsonResult.data;
-	 			console.log(data)
-
-	 			calendar.removeAllEvents();
-	 			
-	 			if(data.length != 0){
-	 				for(var i = 0; i<data.length; i++){
-	 					if(data[i].meetCate == "3"){
-	 					    calendar.addEvent({
-	 							title: data[i].frontTitle +' '+ data[i].title,
-	 							start: data[i].startDate,
-	 							end:data[i].endDate,
-	 							url:'https://www.naver.com',
-	 							backgroundColor : '#FF6A00'
-	 						}); //eddEvent end
-	 					}else{
-	 					    calendar.addEvent({
-	 							title:  data[i].frontTitle +' '+ data[i].title,
-	 							start: data[i].startDate,
-	 							end:data[i].endDate,
-	 							url:'https://www.naver.com',
-	 							backgroundColor : '#66008c'
-	 						}); //eddEvent end
-	 					}
-	 				}
-	 			}
-	 			*/
+	   
 	         }, //success end
 	         error : function(XHR, status, error) {
 	         console.error(status + " : " + error);
@@ -221,7 +195,7 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	 				            
 	      });//ajax end
 	 	
-	 	
+
 	
 	}
 	

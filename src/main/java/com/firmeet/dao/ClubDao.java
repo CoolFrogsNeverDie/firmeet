@@ -22,4 +22,10 @@ public class ClubDao {
 		return memClubList;
 	}
 	
+	  public void insertClub(ClubVo clubVo){
+	      System.out.println("ClubDao.insertClub()");
+	      System.out.println(clubVo);
+	      session.insert("club.insertClub",clubVo);
+	   }
+	
 }

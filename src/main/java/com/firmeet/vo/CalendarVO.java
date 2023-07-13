@@ -3,7 +3,7 @@ package com.firmeet.vo;
 public class CalendarVO {
 
 	private int clubId;
-	private int memberId;	
+	private String memberId;	
 	private int viewOption1;
 	private int viewOption2;
 	private int years;
@@ -25,12 +25,12 @@ public class CalendarVO {
 	}
 
 
-	public int getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 
