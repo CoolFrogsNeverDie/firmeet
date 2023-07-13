@@ -18,8 +18,14 @@
             font-weight: bold;
             margin-bottom: 30px;
         }
+        
+        #cm_body{
+        		width:40vw;
+        		margin:auto;
+        
+        }
         .box{
-            width: 60%;
+            width: 70%;
             border-radius: 7px 7px 7px 7px;
             border: 1px solid rgb(221, 219, 219);
             margin-left: 80px;
@@ -78,8 +84,39 @@
         .TEXT1{
             width: 20vw;
         }
-        .address{display:flex; width:60vw;}
-        .address>select {width:25vw;}
+        
+        .address{
+        	width:70vw;
+        	height:100px;
+        	position: relative;
+        }
+        
+        .form-select{
+        	display:block;
+        	height:35px;
+        	
+        	
+        }
+        #addressSi{
+        	margin: -25px 0px -35px 138px;
+        	left:145px;
+        	
+        }
+        #addressSiGUnGu{
+       		
+        	margin-left:345px;
+        	
+        }
+        
+        .info{
+        	display:block;
+        	margin-top:-50px;        	
+        }
+        .info>textarea{
+        	margin-top:-20px;
+        }
+        
+        
     </style>
   </head>
 <body>
@@ -88,8 +125,8 @@
     <div class="py-5 text-center">
       <h2>퍼밋 동호회 등록</h2>
     </div>
-    <div>
-        <form>
+    <div id="cm_body">
+        <form action="${pageContext.request.contextPath }/club/making">
           <div class="row g-3">
             <div>
                 <label for="firstName">모임명</label>
@@ -130,32 +167,32 @@
                 <input type="text" class="box box5 TEXT" id="" placeholder="" name="intro1" value="" required>
                 <span style="color:#6b6969; font-size: 13px;" id="counter">(0 / 100)</span>
             </div>
-            <div class="col-sm-12" class="address">
+            <div class="col-sm-12, address">
                 <label for="firstName">주소</label>
-                <select class="form-select " aria-label="Default select example" id="addressSi" name="address1"> </select>
-            	<select class="form-select " aria-label="Default select example" id="addressSiGUnGu" name="address2"> </select>
+                <select class="form-select w-25 " aria-label="Default select example" id="addressSi" name="address1"> </select>
+            	<select class="form-select w-25 " aria-label="Default select example" id="addressSiGUnGu" name="address2"> </select>
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12, info" >
                 <label for="firstName">모임 소개</label></br>
-                <textarea name="" class="box box6" id="" name="intro2" cols="30" rows="10"></textarea>
+                <textarea name="intro2" class="box box6" id=""  cols="30" rows="10"></textarea>
             </div>
             <div class="col-sm-12">
                 <label for="firstName">상세 정보</label>
                 <p class="boxtext">우리의 모임의 만나는 시간대, 장소, 단체카톡방 여부, 회식 여부, 날씨 영향 등에 대한 정보를 입력해보세요!</p>
                 <div class="box7">
                     <img src="${pageContext.request.contextPath }/assets/images/icon/clock.png" width="30px" height="30px">
-                    <input type="text" class="box box8" id="" placeholder="" name="detailT" value="" required>
-                    <img src="${pageContext.request.contextPath }/assets/images/icon/vodka.png" width="30px" height="30px">
-                    <input type="text" class="box box8" id="" placeholder="" name="detailL" value="" required>
-                </br>
-                <img src="${pageContext.request.contextPath }/assets/images/icon/place.png" width="30px" height="30px">
-                <input type="text" class="box box8" id="" placeholder="" name="detailP" value="" required>
-                <img src="${pageContext.request.contextPath }/assets/images/icon/cloud.png" width="30px" height="30px">
-                <input type="text" class="box box8" id="" placeholder="" naem="detailE" value=""  required>
+                    <input type="text" class="box box8" id="" placeholder="시간" name="detailT" value="" required>
+                    <img src="${pageContext.request.contextPath }/assets/images/icon/place.png" width="30px" height="30px">
+                    <input type="text" class="box box8" id="" placeholder="위치" name="detailL" value="" required>
                 </br>
                 <img src="${pageContext.request.contextPath }/assets/images/icon/message.png" width="30px" height="30px">
-                <input type="text" class="box box8" id="" placeholder="" name="detailW" value="" required>
+                <input type="text" class="box box8" id="" placeholder="연락처" name="detailP" value="" required>
+                <img src="${pageContext.request.contextPath }/assets/images/icon/vodka.png" width="30px" height="30px">
+                <input type="text" class="box box8" id="" placeholder="회식" name="detailE" value=""  required>
+                </br>
+                <img src="${pageContext.request.contextPath }/assets/images/icon/cloud.png" width="30px" height="30px">
+                <input type="text" class="box box8" id="" placeholder="날씨" name="detailW" value="" required>
                 </div>
             </div>
 
@@ -176,17 +213,16 @@
                 </div>
             </div>
           </div>
-        </table>
           <hr class="my-8">
           <div style="text-align: center;">
-            <button class="w-10 btn btn-primary btn-sm" type="submit" style="margin-right: 20px;">동호회 등록</button>
-            <button class="w-10 btn btn-secondary btn-sm" type="submit">미리보기</button>
+            <button class="w-10 btn btn-primary btn-sm" type="submit"  style="margin-right: 20px;">동호회 등록</button>
+            <button class="w-10 btn btn-secondary btn-sm" type="button">미리보기</button>
           </div>
         </br>
         </form>
       </div>
     </div>
-</div>
+
 </body>
 <script>
     $('.TEXT').keyup(function (e){

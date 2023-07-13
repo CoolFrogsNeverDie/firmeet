@@ -9,12 +9,15 @@ import com.firmeet.vo.ClubVo;
 @Service
 public class ClubService {
 
-	
+	@Autowired
 	private ClubDao clubDao;	
 	
 	public void make(ClubVo clubVo) {
 		System.out.println("ClubService.make()");
 		System.out.println(clubVo);
+		
+		clubDao.insertClub(clubVo);
 			
+	
 		}
 }

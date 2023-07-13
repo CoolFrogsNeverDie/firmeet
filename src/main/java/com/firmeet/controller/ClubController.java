@@ -23,6 +23,9 @@ public class ClubController {
 		return "/club/makingForm";
 	} 
 	
+	
+	/* 클럽 만들기 */
+	
 	@RequestMapping(value="/making", method= {RequestMethod.GET , RequestMethod.POST})
 	public String clubMake(@ModelAttribute ClubVo clubVo){
 		System.out.println("ClubController.clubMaking()");

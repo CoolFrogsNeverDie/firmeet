@@ -53,6 +53,12 @@ public class MemberController {
 		
 	}
 	
+	/* 로그아웃 */
+	
+	public String logout() {
+		return"";
+	}
+	
 	/* 회원가입 */
 	@RequestMapping(value="/joinForm", method= {RequestMethod.GET,RequestMethod.POST})
 	public String joinForm() {

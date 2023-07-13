@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -215,7 +214,7 @@
 </head>
 <body>
    <!--  상단 nav바 -->
-   <%-- <c:import url="WEB-INF/views/include/topnav.jsp"></c:import> --%>
+   <c:import url="../include/topnav.jsp"></c:import> 
     
 
     <input id="main_search" type="search">
