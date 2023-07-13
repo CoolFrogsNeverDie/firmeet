@@ -39,8 +39,16 @@ public class NoticeBoardController {
 		return "notice/noticeList";
 	}
 	
-	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
-	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId) {
+//	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
+//	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId) {
+		
+//		System.out.println("notice확인");
+		
+//		return "notice/noticeEdit";
+//	}
+	
+	@RequestMapping("/noticeEdit")
+	public String noticeEdit() {
 		
 		System.out.println("notice확인");
 		

@@ -49,6 +49,7 @@
 }
 .noticecontent{
     width: 600px;
+    height : 20px;
     font-size: 15px;
     margin-bottom: 10px;
 }
@@ -149,6 +150,9 @@
 .noticegroupmaxmin{
     text-align: right;
     margin-right: 20px;
+}
+.noticecontentbox{
+	height: 400px;
 }
 .noticegroupauto{
     width: 300px;

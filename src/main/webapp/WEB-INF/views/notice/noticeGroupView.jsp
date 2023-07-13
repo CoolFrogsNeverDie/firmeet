@@ -42,7 +42,7 @@
               </div>
               <hr class="line">
       
-              <div>
+              <div class="noticecontentbox">
                   <div>
                       <p class="noticecontent" type="text" id=""> ${vo.title }</p>
                   </div>

@@ -198,11 +198,11 @@
 	                <tbody>
 	                    <tr>
 	                      <td class="noticegrouplist1">
-	                          <p class="noticegroupname" id="vote1">${vo.vote1 }</p>
-	                          <p class="noticegroupname" id="vote2">${vo.vote2 }</p>
-	                          <p class="noticegroupname" id="vote3">${vo.vote3 }</p>
-	                          <p class="noticegroupname" id="totalNum">${vo.totalNum }</p>
-	                          <p class="noticegroupname" id="finDate">${vo.finDate }</p>
+	                          <p class="noticegroupname" id="vote11">${vo.vote1 }</p>
+	                          <p class="noticegroupname" id="vote22">${vo.vote2 }</p>
+	                          <p class="noticegroupname" id="vote33">${vo.vote3 }</p>
+	                          <p class="noticegroupname" id="totalNum11">${vo.totalNum }</p>
+	                          <p class="noticegroupname" id="finDate11">${vo.finDate }</p>
 	                      </td>
 	                  </tr>
 	                </tbody>
@@ -279,8 +279,6 @@
 		    	    $("#vote11").append("투표1 : "+vote1);
 		    	    $("#vote22").append("투표2 : "+vote2);
 		    	    $("#vote33").append("투표3 : "+vote3);
-		    	    $("#vote44").append("투표4 : "+vote4);
-		    	    $("#vote55").append("투표5 : "+vote5);
 		    	    $("#totalNum11").append("최소인원 : "+totalNum);
 		    	    $("#finDate11").append("투표종료일 : "+finDate);
 		   	 });
