@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.NoticeGeneralVoteVO;
 
 @Service
 public class NoticeBoardService {
@@ -25,27 +24,16 @@ public class NoticeBoardService {
 		System.out.println("notice write 확인");
 		String Title = vo.getTitle();
 		String boardContent = vo.getBoardContent();
-	/*
-		String voteTitle = vo.getVoteTitle();
-		String vote1 = vo.getVote1();
-		String vote2 = vo.getVote2();
-		String vote3 = vo.getVote3();
-		String vote4 = vo.getVote4();
-		String vote5 = vo.getVote5();
-		int totalNum = vo.getTotalNum();
-		
-		vo.setVoteTitle(voteTitle);
-		vo.setVote1(vote1);
-		vo.setVote2(vote2);
-		vo.setVote3(vote3);
-		vo.setVote4(vote4);
-		vo.setVote5(vote5);
-		vo.setTotalNum(totalNum);
-	*/
 		vo.setTitle(Title);
 		vo.setBoardContent(boardContent);
 		
-		dao.editwrite(vo);
+		int aboardNo = vo.getAboardNo();
+		
+		System.out.println("넘어온 no 확인"+vo.getAboardNo());
+		System.out.println("투표인서트확인"+aboardNo);
+		System.out.println("투표인서트확인"+vo);
+		
+		//dao.editwrite(vo);
 		
 	}
 
@@ -54,26 +42,14 @@ public class NoticeBoardService {
 		return dao.editlist(aboardNo);
 	}
 
-	public void voteinsert(NoticeGeneralVoteVO vo) {
-		System.out.println("notice voteinsert 확인");
-		
-		String voteTitle = vo.getVoteTitle();
-		String vote1 = vo.getVote1();
-		String vote2 = vo.getVote2();
-		String vote3 = vo.getVote3();
-		String vote4 = vo.getVote4();
-		String vote5 = vo.getVote5();
-		int totalNum = vo.getTotalNum();
-		
-		vo.setVoteTitle(voteTitle);
-		vo.setVote1(vote1);
-		vo.setVote2(vote2);
-		vo.setVote3(vote3);
-		vo.setVote4(vote4);
-		vo.setVote5(vote5);
-		vo.setTotalNum(totalNum);
-		
+	public NoticeBoardVO voteinsert(NoticeBoardVO vo) {
+		System.out.println("service voteinsert 확인"+vo);
 		dao.voteinsert(vo);
+		System.out.println("service voteinsert 확인"+vo.getAboardNo());
+		int aboardNo = vo.getAboardNo();
+		System.out.println("service voteinsert 리스트 확인"+vo);
+		NoticeBoardVO votevo = dao.votelist(aboardNo);
+		return votevo;
 	}
 
 

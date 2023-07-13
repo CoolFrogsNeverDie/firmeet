@@ -12,6 +12,38 @@ public class NoticeGeneralVoteVO {
 	private String vote5;
 	private int totalNum;
 	private String finDate;
+	
+	public NoticeGeneralVoteVO() {
+
+	}
+	
+	public NoticeGeneralVoteVO(int voteNo, int aboardNo, String voteTitle, String vote1, String vote2, String vote3,
+			int totalNum, String finDate) {
+		super();
+		this.voteNo = voteNo;
+		this.aboardNo = aboardNo;
+		this.voteTitle = voteTitle;
+		this.vote1 = vote1;
+		this.vote2 = vote2;
+		this.vote3 = vote3;
+		this.totalNum = totalNum;
+		this.finDate = finDate;
+	}
+
+	public NoticeGeneralVoteVO(int voteNo, int aboardNo, String voteTitle, String vote1, String vote2, String vote3,
+			String vote4, String vote5, int totalNum, String finDate) {
+		super();
+		this.voteNo = voteNo;
+		this.aboardNo = aboardNo;
+		this.voteTitle = voteTitle;
+		this.vote1 = vote1;
+		this.vote2 = vote2;
+		this.vote3 = vote3;
+		this.vote4 = vote4;
+		this.vote5 = vote5;
+		this.totalNum = totalNum;
+		this.finDate = finDate;
+	}
 
 	public int getVoteNo() {
 		return voteNo;

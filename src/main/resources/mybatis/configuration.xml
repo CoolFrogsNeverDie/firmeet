@@ -5,7 +5,6 @@
 
 	<typeAliases>
 	<typeAlias type="com.firmeet.vo.NoticeBoardVO" alias="noticeboard"/>
-	<typeAlias type="com.firmeet.vo.NoticeGeneralVoteVO" alias="noticegeneral"/>
 	<typeAlias type="com.firmeet.vo.ScheduleVO" alias="schedule"/>
 	<typeAlias type="com.firmeet.vo.CalendarVO" alias="calendar"/>
 	<typeAlias type="com.firmeet.vo.ClubVo" alias="club"/>
@@ -17,7 +16,6 @@
 	<mapper resource="mybatis/mappers/noticeboard.xml" />
 	<mapper resource="mybatis/mappers/schedule.xml" />
 	<mapper resource="mybatis/mappers/club.xml" />
-	<mapper resource="mybatis/mappers/noticevote.xml" />
 
     </mappers>
     

@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.NoticeGeneralVoteVO;
 import com.google.gson.JsonObject;
 
 @Controller
@@ -64,25 +63,13 @@ public class NoticeBoardController {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println(clubId);
 		System.out.println(memberId);
-		
-		System.out.println(vo);
-		
-		noticeBoardService.editwrite(vo);
-		
-		return "notice/noticeGroupView";
-	}
-	
-	@RequestMapping("/noticeEdit/noticeVote")
-	public String voteinsert(@ModelAttribute NoticeGeneralVoteVO vo) {
-		
-		System.out.println("notice voteinsert 확인 ");
-		
 		System.out.println(vo);
 		
 		noticeBoardService.voteinsert(vo);
 		
-		return "notice/noticeEdit";
+		return "notice/noticeGroupView";
 	}
+	
 	
 	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}")
 	public String editlist(@PathVariable("aboardNo") int aboardNo, Model model) {

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.NoticeGeneralVoteVO;
 
 @Repository
 public class NoticeBoardDAO {
@@ -20,10 +19,11 @@ public class NoticeBoardDAO {
 		return sql.selectList("noticeboard.noticelist");
 	}
 
-	public void editwrite(NoticeBoardVO vo) {
+	public int editwrite(NoticeBoardVO vo) {
 		System.out.println("notice editwrite dao 확인");
-		sql.insert("noticeboard.editwrite", vo);
+		int count = sql.insert("noticeboard.editwrite", vo);
 		System.out.println("dao 넘어오는 값 확인 : " + vo);
+		return count;
 	}
 
 	public NoticeBoardVO editlist(int aboardNo) {
@@ -33,10 +33,14 @@ public class NoticeBoardDAO {
 		return sql.selectOne("noticeboard.editlist", aboardNo);
 	}
 
-	public void voteinsert(NoticeGeneralVoteVO vo) {
-		System.out.println("notice voteinsert dao 확인");
-		sql.insert("noticegeneral.voteinsert", vo);
-		System.out.println("dao 넘어오는 값 확인 : " + vo);
+	public void voteinsert(NoticeBoardVO vo) {
+		System.out.println("dao voteinsert"+vo);
+		sql.insert("NoticeBoardVO.voteinsert", vo);
+	}
+
+	public NoticeBoardVO votelist(int aboardNo) {
+		System.out.println("NoticeBoardVO 넘어오는 값 확인 : " + aboardNo);
+		return sql.selectOne("NoticeBoardVO.votelist",aboardNo);
 	}
 
 	

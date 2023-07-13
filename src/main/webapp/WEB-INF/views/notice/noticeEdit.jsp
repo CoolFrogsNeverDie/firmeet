@@ -287,6 +287,40 @@ $(document).ready(function() {
         $("#totalNum11").text("최소인원 : " + totalNum);
         $("#finDate11").text("투표종료일 : " + finDate);
     });
+    
+/*     $("#saveButton").click(function() {
+    
+    var inputData = {
+    	data1: $('#voteTitle').val(),
+    	data2: $('#vote1').val(),
+    	data3: $('#vote2').val(),
+    	data4: $('#vote3').val(),
+    	data7: $('#totalNum').val(),
+    	data8: $('#finDate').val(),
+    };
+    
+    $.ajax({
+        url: '${pageContext.request.contextPath}/notice/noticeEdit/noticeVote', // 데이터를 전송할 URL
+        type: 'POST',
+        data: JSON.stringify(inputData), // JSON 형태로 데이터 변환
+        contentType: 'application/json',
+        success: function(response) {
+			console.log(jsonResult);
+			if(jsonResult.result == 'success'){ //처리성공
+          // 서버에서 데이터 저장 및 처리 성공 후에 실행할 코드
+          		$('#general').modal('hide'); // 모달 창 숨기기
+			}else {
+				//메세지 출력
+				var msg = jsonResult.failMsg;
+				alert(msg);
+			}
+        },
+        error: function(xhr) {
+        	console.error(status + " : " + error);
+        }
+      });
+    }); */
+    
 });
 
 
