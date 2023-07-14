@@ -130,7 +130,7 @@ $('.forCalendar').on("click",'button', function(){
 
 	//캘린더 그리는 메서드
 	function render(){
-	    var calendarEl = document.getElementById('calendar');
+	    calendarEl = $('#calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
 	             left: '',
@@ -140,6 +140,9 @@ $('.forCalendar').on("click",'button', function(){
 		    locale: 'ko',
 	    	initialView: 'dayGridMonth',
 	    	selectable: true
+	    	
+	    	
+	    	
 	    });
 
 	    calendar.render();

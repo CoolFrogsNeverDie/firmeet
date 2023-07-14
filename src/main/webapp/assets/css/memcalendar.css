@@ -31,7 +31,7 @@ td, tr {
 
 
 	/*버튼 컬러 지정*/			
-	--fc-button-text-color: #670fdf;
+	--fc-button-text-color: #808080;
 	--fc-button-bg-color: none;
 	--fc-button-border-color: none;
 	--fc-button-hover-bg-color: none;
@@ -60,19 +60,28 @@ td, tr {
 	--fc-now-indicator-color: red;
 }
 
-
+/*-------------------------수정하는 부분 *---------------------------*/
 .forCalendar{
     background-color: #fff;
-    width: 100%; height: 100%; padding: 2%;
+    width: 100%; height: 100%; padding: 0%; 
 }
 /*캘린더 큰 레이아웃*/
 .forCalendar #calendar {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 98%;
 	border-radius: 5px;
     top: 90px;
     margin-right: 24px;
 }
+.fc-daygrid-day-frame {
+    padding: 1px;
+}
+
+.fc .fc-daygrid-day-frame {
+    height: 50px;
+}
+
+/*----------------*수정하는 부분*---------------*/
 /*정렬 옵션 선택자*/
 .calendar-array{
     margin-left: auto;

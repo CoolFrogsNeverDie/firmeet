@@ -17,14 +17,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
   <!--CSS-->
-  <link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css" />
+  <link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/content2.css" type="text/css" />
   <!--풀 캘린더 CSS-->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/memcalendar.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/popup.css" type="text/css" />
   <!--풀 캘린더 JS-->
   <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
-  
-  
+  <!-- 카카오 map  -->
+  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6f59970276341196f41538265d29af72&libraries=services"></script>
+
   <style>
     .fc .fc-daygrid-day-top {
       display: block;
@@ -33,6 +35,7 @@
 </head>
 
 <body>
+
   <!----------------------------------------- top Navigation ----------------------------------------->
 
   <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
@@ -102,7 +105,104 @@
     <!--/menu-bar-->
   </div>
   <!--/wrap-->
+  
+  <!--모달창-->
+<div class="container" >
+
+  <div class="popup-wrap" id="popup">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+          <div class="body-titlebox">
+            <h4><strong>일정등록</strong></h4>
+            
+          </div>
+       <form action="*" method = "">
+          <div class="body-contentbox">
+            <table id = "schedule-table">
+              <tr>
+                <th>일정</th>
+                <td><input type="text" placeholder="일정명을 입력하세요." name = "title"> </td>
+              </tr>
+              <tr>
+                <th rowspan="2">일정</th>
+                <td rowspan="2"><input type="date" id = "startD" name = "startDate">&nbsp; ~&nbsp; 
+                <input type="date" id = "endD" name ="endDate" ></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <th>장소</th>
+                <td><input text="" name ="place"><button type= "button" class="map-btn">위치검색</button></td>
+              </tr>
+              <tr class="content-area">
+                <th>내용</th>
+                <td><textarea name = "content"></textarea></td>
+              </tr>
+            </table>
+            
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">등록</button>
+            <button type ="button">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--모달창-->
+
+  <!--모달창-->
+<div class="container" >
+
+  <div class="popup-wrap2" id="popup">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+       <form action="http://localhost:8000/link/search/" method = "get">
+          <div class="body-titlebox">
+            <input type="text" name = "keyword">
+            <h4><strong>일정등록</strong></h4>
+          </div>
+          <div class="body-contentbox">
+            <div id="map" style="width:300px;height:300px;"></div>
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">검색</button>
+            <button type ="button">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--모달창-->
+
+  
+  
 </body>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+</script>
+
 <script>
 
 //calendar 객체 전역변수 설정
@@ -142,20 +242,39 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	console.log('test2');
 });
 
+
+	  $(".popup-close-btn").click(function(){
+	      modalClose();
+	  });
+	  function modalClose(){
+	    $("#popup").fadeOut();
+	  }
+
+
 	//캘린더 그리는 메서드
 	function render(){
-	    var calendarEl = document.getElementById('calendar');
+	    calendarEl = $('#calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
 	             left: '',
 	             center: 'title',
 	             right: 'prev,next'
 	           },
+
 		    locale: 'ko',
 	    	initialView: 'dayGridMonth',
-	    	selectable: true
-
-	    	
+	    	selectable: true,
+	    	//드래그 이벤트처리
+	    	dateClick: function(info) {
+		        $("#popup").css('display','flex').hide().fadeIn()
+		        $('#startD').val(info.dateStr);
+		        $('#endD').val(info.dateStr);
+	          },
+	        select: function(info) {
+	        	$("#popup").css('display','flex').hide().fadeIn()
+		        $('#startD').val(info.startStr);
+		        $('#endD').val(info.endStr);
+	        },
 	    });
 
 	    calendar.render();
