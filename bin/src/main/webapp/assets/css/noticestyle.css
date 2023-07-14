@@ -1,0 +1,189 @@
+.noticeform{
+    width: 800px;
+}
+.noticetitle{
+    width: 500px;
+    height: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    border: 1px solid #c0c0c0;
+    border-radius: 10px 10px 10px 10px;
+}
+.profileimg{
+    border-radius: 50px 50px 50px 50px;
+    width: 70px;
+    height: 70px;
+}
+.username{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;;
+}
+.userlevel{
+    font-size: 14px;
+}
+.userdate{
+    font-size: 12px;
+}
+.usercount{
+    font-size: 12px;
+    margin-left: 20px;
+}
+.userp{
+    font-size: 12px;
+    margin-left: 80px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+.usertext{
+    font-size: 12px;
+    width: 100px;
+    height: 20px;
+}
+.noticeprofil{
+    margin-left: 20px;
+}
+.line{
+    border: 1px solid gray;
+}
+.noticecontent{
+    width: 600px;
+    height : 20px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.noticevotebox{
+    border-radius: 7px 7px 7px 7px;
+    border: 1px solid rgb(202, 200, 200);
+    width: 350px;
+    height: 200px;
+    margin-bottom: 30px;
+}
+.noticevotetitle{
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: rgb(218, 216, 216);
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 1px;
+    padding-left: 10px;
+}
+.noticevotetitle1{
+    margin-top: 10px;
+    font-size: 12px;
+    height: 5px;
+}
+.noticevotecontent{
+    margin-left: 60px;
+}
+.noticevotecontent li{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.noticevotecontent li::marker{
+    content: '● ';
+    color: gray;
+}
+.likecolor{
+    color: red;
+    margin-right: 10px;
+}
+.likecount{
+    margin-left: 10px;
+}
+.noticereply{
+    width: 300px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.noticereplytitle{
+    margin-bottom: 10px;
+}
+.noticebtn{
+    text-align: right;
+    margin-top: -40px;
+}
+.noticegroupbox{
+    border-radius: 7px 7px 7px 7px;
+    background-color: rgb(218, 216, 216);
+    width: 370px;
+    height: 330px;
+    margin-bottom: 20px;
+}
+.noticegrouptitle{
+    width: 200px;
+    background-color: antiquewhite;
+    border: none;
+    margin-top: 10px;
+    margin-left: 20%;
+}
+.noticegroupcontent{
+    margin-top: 10px;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.noticegrouptext{
+    width: 150px;
+    height: 25px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+.noticegrouptext1{
+    width: 150px;
+    height: 25px;
+    margin-left: 25px;  
+    margin-bottom: 10px;
+}
+.noticegrouptext2{
+    width: 150px;
+    height: 25px;
+    margin-left: 2px;  
+    margin-bottom: 10px;
+}
+.noticegrouptext3{
+    width: 50px;
+    height: 25px;
+    margin-bottom: 10px;
+}
+.noticegroupmaxmin{
+    text-align: right;
+    margin-right: 20px;
+}
+.noticecontentbox{
+	height: 400px;
+}
+.noticegroupauto{
+    width: 300px;
+    height: 200px;
+    margin-bottom: 20px;
+    background-color: gray;
+    color: #fff;
+}
+.noticegrouplist{
+    width: 400px;
+    height: 100px;
+    background-color: gray;
+}
+.noticegrouplist1{
+    width: 400px;
+    height: 200px;
+    background-color: rgb(214, 212, 212);
+}
+.noticegroupname{
+    font-weight: bold;
+    font-size: 15px;
+    height: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.btn-success{
+    background-color: #b2a4ff;
+    border: none;
+}
+.btn-warning{
+    background-color: rgb(253, 207, 151);
+    border: none;
+    color: rgb(255, 255, 255);
+}

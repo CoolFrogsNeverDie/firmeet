@@ -21,7 +21,6 @@ td, tr {
 .fc-event-title{
 	font-size: 80%;
 }
-
 :root {
 	--fc-small-font-size: .85em;
 	--fc-page-bg-color: #fff;
@@ -40,8 +39,8 @@ td, tr {
 	--fc-button-active-border-color: none;
 	
 	/*이벤트 추가 기본 디자인 세팅*/
-	--fc-event-bg-color:  #e74c3c;
-	--fc-event-border-color: #white;
+	--fc-event-bg-color: #f5a7a7;
+	--fc-event-border-color: #f5a7a7;
 	--fc-event-text-color: #fff;
 	--fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
 	
@@ -77,7 +76,14 @@ td, tr {
     margin-left: auto;
 
 }
-
+/*이벤트에 시간 기재되는 부분 삭제*/
+.fc-h-event .fc-event-time {
+    display:none;
+}
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    margin-right: 3px;
+    display: none;
+}
 .calendar-array select{
 
     width:100px;
@@ -105,7 +111,6 @@ td, tr {
 	font-size:1em;
 	text-decoration: none;
 }
-
 /* 일요일 날짜색 */
 .fc-day-sun a,
 .fc-day-sun a:hover {
@@ -129,7 +134,6 @@ td, tr {
 	border: 0px !important;
 	box-shadow: none !important;
 }
-
 /* 달력 제목 */
 .fc-toolbar-title {
 	font-size: 1.3em !important;

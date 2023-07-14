@@ -24,4 +24,18 @@ public class ScheduleDAO {
 		return list;
 	}
 	
+	public List<ScheduleVO> getMemClubSche(CalendarVO calendarVO){
+		System.out.println("DAO까지 오는지 확인 club  : " + calendarVO);
+		List<ScheduleVO> clubScheList = session.selectList("schedule.getMemClubSche", calendarVO);
+		System.out.println("불러온 club Sche " + clubScheList);
+		return clubScheList;
+	}
+
+	public List<ScheduleVO> getMemPerSche(CalendarVO calendarVO){
+		System.out.println("DAO까지 오는지 확인 per : " + calendarVO);
+		List<ScheduleVO> perScheList = session.selectList("schedule.getMemPerSche", calendarVO);
+		System.out.println("불러온 per sche" + perScheList);
+		return perScheList;
+	}
+	
 }

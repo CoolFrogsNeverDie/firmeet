@@ -2,6 +2,7 @@ package com.firmeet.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,10 +71,10 @@ public class CalendarController {
 		
 		JsonResult jsonResult = new JsonResult();
 		System.out.println("AJAX로 넘어온 정보 " + calendarVO);
+		Map<String, Object> list = calendarService.getMemSche(calendarVO);
 		
-		
-		jsonResult.success(null);
-		
+		jsonResult.success(list);
+		System.out.println("넘어갈 정보 확인 " + list);
 		return jsonResult;
 	}
 	

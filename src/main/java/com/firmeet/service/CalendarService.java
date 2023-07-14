@@ -1,6 +1,8 @@
 package com.firmeet.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,20 @@ public class CalendarService {
 		List<ClubVo> joinList = clubDAO.getMemClub(memberVO);
 		
 		return joinList;
+	}
+	
+	public Map<String, Object> getMemSche(CalendarVO calendarVO){
+		Map<String, Object> scheList = new HashMap<>();
+		
+		if(calendarVO.getViewOption2() != -88) {
+			List<ScheduleVO> clubSche = scheduleDAO.getMemClubSche(calendarVO);
+			scheList.put("clubSche", clubSche);
+		}if(calendarVO.getViewOption2() == -99 || calendarVO.getViewOption2() == -88) {
+			List<ScheduleVO> perSche = scheduleDAO.getMemPerSche(calendarVO);
+			scheList.put("perSche", perSche);
+		}
+		
+		return scheList;
 	}
 	
 }

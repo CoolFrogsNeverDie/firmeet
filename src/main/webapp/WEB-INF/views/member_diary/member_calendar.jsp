@@ -53,6 +53,7 @@
         <div class="calendar-array">
 			<select id ="select-club">
 				<option value="-99">전체</option>
+				<option value ="-88">나의 일정</option>
 				<c:forEach items ="${joinClubList}" var ="club">
 					<option value ="${club.clubId}">${club.clubName}</option>
 				</c:forEach>
@@ -119,7 +120,15 @@ $('#select-array').on("change", function(){
 	getData();
 });
 $('#select-club').on("change", function(){
+	
+	if( $(this).val() == '-88'){
+		$('#select-array').val("-99");
+		$('#select-array').attr("disabled", true);
+	}else{
+		$('#select-array').attr("disabled", false);
+	}
 	getData();
+	
 });
 
 
@@ -146,6 +155,7 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	    	initialView: 'dayGridMonth',
 	    	selectable: true
 
+	    	
 	    });
 
 	    calendar.render();
@@ -187,7 +197,51 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	         //응답 세팅
 	         dataType : "json",
 	         success : function(jsonResult){
-	   
+	   			
+	        	 var data = jsonResult.data;
+	        	 var club = data.clubSche;
+	        	 var per = data.perSche;
+	        	 console.log(club);
+	        	 console.log(per);
+	        	 
+	 			calendar.removeAllEvents();
+	        	 
+	        	 if(club != null ){
+		 				for(var i = 0; i<club.length; i++){
+		 					if(club[i].meetCate =="3"){
+		 						calendar.addEvent({
+		 							title: '[' + club[i].clubName + ']' + club[i].title + club[i].frontTitle,
+		 							start: club[i].startDate,
+		 							end: club[i].endDate + ' 24:00',
+		 							url: 'http://www.naver.com',
+		 							backgroundColor: '#FF6A00',
+		 							borderColor:  '#FF6A00'
+		 						});//addEvent end
+		 					}else{
+		 						calendar.addEvent({
+		 							title: '[' + club[i].clubName + ']' + club[i].title + club[i].frontTitle,
+		 							start: club[i].startDate,
+		 							end: club[i].endDate + ' 24:00',
+		 							url: 'http://www.naver.com',
+		 							backgroundColor: '#66008c',
+		 							borderColor:  '#66008c'
+		 						});//addEvent end
+		 					}//if end
+		 				}//for end
+	        	 } //club.length check
+	        	 
+	        	 if(per != null){
+	        		 for(var i =0; i<per.length; i++){
+	        			 calendar.addEvent({
+	 							title: per[i].title ,
+	 							start: per[i].startDate,
+	 							end: per[i].endDate + ' 24:00',
+	 							url: 'http://www.naver.com',
+	 							backgroundColor: '#0C70F2',
+	 							borderColor:  '#0C70F2'
+	 						});//addEvent end
+	        		 }
+	        	 }//if end
 	         }, //success end
 	         error : function(XHR, status, error) {
 	         console.error(status + " : " + error);

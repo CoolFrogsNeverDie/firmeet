@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	  
+	<insert id="insertMem" parameterType="com.firmeet.vo.MemberVo">
+		<![CDATA[
+			insert into member(memberId, memberPhone, memberName, memberPw, memberPri)
+			values(#{memberId}, #{memberPhone}, #{memberName}, #{memberPw}, #{memberPri})
+	        ]]>
+		
+	</insert>
+	
+	<select id="selectMem" parameterType="com.firmeet.vo.MemberVo" resultType="com.firmeet.vo.MemberVo">
+		<![CDATA[
+			select memberId, memberName 
+			from member
+				where memberId=#{memberId} and
+						memberPw=#{memberPw}
+			
+	        ]]>
+	
+	</select>
+	
+	<select id="selectMemId" parameterType="String" resultType="com.firmeet.vo.MemberVo">
+		<![CDATA[
+			select memberId
+			from member
+			where memberId=#{memberId}
+			
+	        ]]>
+	
+	</select>
+
+
+
+</mapper>

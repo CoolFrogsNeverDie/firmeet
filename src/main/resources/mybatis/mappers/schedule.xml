@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="schedule">
-	
-	<select id ="getClubSchedule" parameterType ="calendar" resultType ="schedule">
+
+	<select id="getClubSchedule" parameterType="calendar"
+		resultType="schedule">
 		<![CDATA[
 			select
        			 b.aboardNo as boardNo
         		,b.aboardval as meetCate
         		,a.clubId as clubId
         		, case 
-               		when aboardval = 2 then '[모임결제]'
-               		when aboardval = 3 then '[모임일정]'
+               		when aboardval = 2 then '[결제]'
+               		when aboardval = 3 then '[일정]'
 			        end as frontTitle
         		,b.title as title
         		,a.startDate as startDate
@@ -20,15 +21,74 @@
 			where a.clubID = #{clubId} 	and meetyear in #{years}
 			and meetmon = #{month}
 		]]>
-		<if test ="viewOption1 ==2">
-			and b.aboardVal  = 2
-		</if>			
-		<if test ="viewOption1 ==-99">
+		<if test="viewOption1 ==2">
+			and b.aboardVal = 2
+		</if>
+		<if test="viewOption1 ==-99">
 			and b.aboardVal in (2,3)
-		</if>			
-		<if test ="viewOption1 ==3">
+		</if>
+		<if test="viewOption1 ==3">
 			and b.aboardVal = 3
-		</if>			
-	</select>	
-	
+		</if>
+	</select>
+
+
+	<select id="getMemClubSche" parameterType="calendar"
+		resultType="schedule">
+		<![CDATA[
+			select
+       			 b.aboardNo as boardNo
+        		,b.aboardval as meetCate
+        		,a.clubId as clubId
+                ,c.clubName as clubName
+        		, case 
+               		when aboardval = 2 then '(결제)'
+               		when aboardval = 3 then '(모임)'
+			        end as frontTitle
+        		,b.title as title
+        		,a.startDate as startDate
+        		,a.endDate as endDate
+                from meet_name a join  aboard b on a.meetNo = b.meetNo
+                join club c on c.clubId = b.clubId
+                join club_member d on c.clubId = d.clubId 
+                where d.memberId = #{memberId} and meetyear in #{years}
+                and meetmon= #{month}
+		]]>
+		<if test="viewOption1 ==2">
+			and b.aboardVal = 2
+		</if>
+		<if test="viewOption1 ==-99">
+			and b.aboardVal in (2,3)
+		</if>
+		<if test="viewOption1 ==3">
+			and b.aboardVal = 3
+		</if>
+		<if test="viewOption2 !=-99">
+			and c.clubId = #{viewOption2}
+		</if>
+	</select>
+
+	<select id="getMemPerSche" parameterType="calendar"
+		resultType="schedule">
+		<![CDATA[
+			SELECT 
+                myScheduleNo AS perScheduleNo
+                ,schetitle AS title
+                ,scheContent AS content
+                ,startDate
+                ,endDate
+                ,schePlace AS place
+                ,address1
+                ,address2
+            FROM
+                my_schedule
+            WHERE
+            memberId = #{memberId}
+            AND (EXTRACT(MONTH FROM startDate) = #{month}
+            and extract(year from startDate) = #{years})
+            or (extract(month from endDate) = #{month}
+            and extract (year from endDate) = #{years})
+		]]>
+	</select>
+
 </mapper>

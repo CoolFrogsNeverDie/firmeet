@@ -140,7 +140,6 @@ $('.forCalendar').on("click",'button', function(){
 		    locale: 'ko',
 	    	initialView: 'dayGridMonth',
 	    	selectable: true
-
 	    });
 
 	    calendar.render();
@@ -187,17 +186,19 @@ $('.forCalendar').on("click",'button', function(){
 					    calendar.addEvent({
 							title: data[i].frontTitle +' '+ data[i].title,
 							start: data[i].startDate,
-							end:data[i].endDate,
+							end:data[i].endDate + ' 24:00',
 							url:'https://www.naver.com',
-							backgroundColor : '#FF6A00'
+							backgroundColor : '#FF6A00',
+ 							borderColor:  '#FF6A00'
 						}); //eddEvent end
 					}else{
 					    calendar.addEvent({
 							title:  data[i].frontTitle +' '+ data[i].title,
 							start: data[i].startDate,
-							end:data[i].endDate,
+							end:data[i].endDate + ' 24:00',
 							url:'https://www.naver.com',
-							backgroundColor : '#66008c'
+							backgroundColor : '#66008c',
+ 							borderColor:  '#66008c'
 						}); //eddEvent end
 					}
 				}

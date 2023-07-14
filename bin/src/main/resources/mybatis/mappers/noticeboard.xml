@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
+<mapper namespace="noticeboard">
+
+	<!-- 쿼리문 작성 -->
+	<select id="noticelist" resultType="noticeboard">
+		select * from aboard
+	</select>
+	
+	<insert id="editwrite" parameterType="noticeboard">
+		insert into aboard(aboardNo, clubId, memberId, aboardVal, title, aboardDate, boardContent )
+		values(seq_aboardNo.nextval, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
+	</insert>
+
+	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, a.aboardDate, a.boardContent
+		from aboard a, club c, member m
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = #{aboardNo}
+	</select>
+
+</mapper>
