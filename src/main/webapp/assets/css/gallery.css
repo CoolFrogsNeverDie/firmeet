@@ -3,10 +3,10 @@
 /* 왼쪽 */
 .content-left {
   width: 25%;
-  height: 582px;
-  display: inline-block;
-  margin-top: 10px;
-  overflow:auto;
+    height: 566px;
+    display: inline-block;
+    margin-bottom: 10px;
+    overflow: auto;
 }
 
 .content-left::-webkit-scrollbar {

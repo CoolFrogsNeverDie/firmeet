@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="accountbook">
+
+<select id="accountList" parameterType="int" resultType="com.firmeet.vo.AccountBookVo">
+SELECT
+  ID
+  , CLUBID
+  , MEETNO
+  , MEMBERID
+  , AMOUNT
+  , TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
+  , CATEGORY
+  , PURPOSE
+  , INCOME_EXPENSE AS incomeExpense
+  , RECEIPT
+  , PAYMENT
+FROM ACCOUNT_BOOK
+WHERE CLUBID = #{clubId}
+</select>
+</mapper>
