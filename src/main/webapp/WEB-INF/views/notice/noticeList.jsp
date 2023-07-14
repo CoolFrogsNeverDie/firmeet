@@ -22,7 +22,7 @@
           <div class="content-left">
 	<!-- 여기부터 -->
 	
-	<table border="1" width="700px">
+	<table border="1" width="1000px">
 		<tr>
 			<th>번호</th>
 			<th>작성자</th>
@@ -33,9 +33,9 @@
 		<c:forEach var="row" items="${nlist }">
 		<tr>
 			<td>${row.aboardNo }</td>
-			<td><a href="/main/upmemberForm.do?userId=${row.userId }">${row.memberId }</a></td>
+			<td>${row.memberId }</td>
 			<td>${row.title }</td>
-			<td><fmt:formatDate value="${row.aboardDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			<td>${row.aboardDate }</td>
 			<td>${row.likeCnt }</td>
 		</tr>
 		</c:forEach>

@@ -7,28 +7,27 @@
 
 	<!-- 쿼리문 작성 -->
 	<select id="noticelist" resultType="noticeboard">
-		select * from aboard
+		select aboardNo, memberId, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,likeCnt from aboard
 	</select>
 	
 	<insert id="editwrite" parameterType="noticeboard">
-<!-- 		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
+ 		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
 			select seq_aboardNo.nextval from dual
-		</selectKey> -->
+		</selectKey>
 		insert into aboard(aboardNo, clubId, memberId, aboardVal, title, aboardDate, boardContent )
 		values(#{aboardNo}, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
 
 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
-		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, a.aboardDate, a.boardContent
-		from aboard a, club c, member m
-		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = #{aboardNo}
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent,
+		v.aboardNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+		from aboard a, club c, member m, avote v
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
 	
-	<insert id="voteinsert" parameterType="noticeboard">
-		<![CDATA[	
-			insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, vote4, vote5, totalNum, finDate)
-			values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate}) 
-		]]>
+	<insert id="editwritevote" parameterType="noticeboard">
+		insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, vote4, vote5, totalNum, finDate)
+		values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate}) 
 	</insert>
 	
 	<select id="votelist" parameterType="noticeboard" resultType="noticeboard">
@@ -36,5 +35,10 @@
 			select voteNo, aboardNo, voteTitle, vote1, vote2, vote3, totalNum, finDate from aVote where aboardNo = #{aboardNo}
 		]]>
 	</select>
+	
+	<insert id="voteinsert" parameterType="noticeboard">
+		insert into voteResult(voteResult, voteNo, memberId, choice, voteDate)
+		values(seq_voteResultNo.nextval, #{voteNo}, #{memberId}, #{choice}, SYSDATE)
+	</insert>
 
 </mapper>

@@ -21,9 +21,9 @@
 
             <!-- 여기부터 작성 -->
            
-            <form class="noticeform" action="">
+            <div class="noticeform">
               <div>
-                  <p class="noticetitle" id="">${vo.title }</p>
+                  <p class="noticetitle">${vo.title }</p>
                   <div class="noticebtn">
                     <button type="button" class="btn btn-warning">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
@@ -40,57 +40,81 @@
                       <span class="usertext"></span>
                   </div>
               </div>
-              <hr class="line">
-      
-              <div class="noticecontentbox">
-                  <div>
-                      <p class="noticecontent" id=""> ${vo.boardContent}</p>
-                  </div>
-                  <table id="dataTable" style="display: none;">
+              <hr>
+              <div>
+                  <p class="noticecontent"> ${vo.boardContent}</p>
+              </div>
+                <table id="dataTable" data-bs-toggle="modal" data-bs-target="#vote">
 					<thead>
-						<tr>
-	                      <th class="noticegrouplist">
-	                          <p class="noticegroupname" id="voteTitle1"></p>
-	                      </th>
-	                    </tr>
-	                </thead>
-	                <tbody>
-	                    <tr>
-	                      <td class="noticegrouplist1">
-	                          <p class="noticegroupname" id="vote1"></p>
-	                          <p class="noticegroupname" id="vote2"></p>
-	                          <p class="noticegroupname" id="vote3"></p>
-	                          <p class="noticegroupname" id="totalNum"></p>
-	                          <p class="noticegroupname" id="finDate"></p>
-	                      </td>
-	                  </tr>
-	                </tbody>
-              	 </table>
-              </div>
+					<tr>
+	                     <th class="noticegrouplist">
+	                         <p class="noticegroupname"><span>투표 제목 : </span>${vo.voteTitle}</p>
+	                     </th>
+	                   </tr>
+	               </thead>
+	               <tbody>
+	                   <tr>
+	                     <td class="noticegrouplist1">
+	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}</p>
+	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}</p>
+	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}</p>
+	                         <p class="noticegroupname"><span>투표4 : </span>${vo.vote4}</p>
+	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}</p>
+	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
+	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
+	                     </td>
+	                 </tr>
+	               </tbody>
+               </table>
       
-              <div>
-                  <span class="likecolor">♡</span><span>좋아요</span><span class="likecount" id="" value="">0</span>
+              <div class="like">
+                  <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
               </div>
-              <hr class="line">
-              <div>
-                  <h4 class="noticereplytitle">댓글</h4>
-                  <div>
-                      <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt=""> 
-                      <span class="username" id="" name="" value="">홍순이</span>
-                      <input class="noticereply" type="text" id="" value="">
-                      <span class="userdate">작성일 : </span>
-                      <input class="usertext" type="text" id="" value="">
+              
+        <div class="modal" id="vote">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
+                  <div class="modal-body">
+                  	<form action="${pageContext.request.contextPath }/notice/${clubId}/${memberId}/${voteNo }/vote" method="get">
+						${vo.voteTitle}
+                        <div class="voteleft">
+                            <input type="radio" name="choice" id="vote1" value="vote1"><span class="votespan">${vo.vote1}</span><br>
+                            <input type="radio" name="choice" id="vote2" value="vote2"><span class="votespan">${vo.vote2}</span><br>
+                           	<input type="radio" name="choice" id="vote3" value="vote3"><span class="votespan">${vo.vote3}</span><br>
+                           	<span id="option1Count">0</span>
+							<span id="option2Count">0</span>
+                        </div>
+                        <div style="text-align: center; font-weight: bold;">
+                			<button type="submit" class="btn btn-success btn-sm">투표완료</button>
+                        </div>
+                    </form>
+                   </div>
               </div>
-          </form>
-            
-          <!-- 여기까지 -->
-
-            </div>
-          <!--/content-left-->
-        </div>
-        <!--/content-area-->
+          </div>
       </div>
+              
+   </div>
+          <!-- 여기까지 -->
+      <!-- -------------------------------------------------일반투표-------------------------------------------------------->
+  </div>
+          <!--/content-left-->
+</div>
+        <!--/content-area-->
+    <div class="noticereply">
+       <h4 class="noticereplytitle">댓글</h4>
+       <div>
+           <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt=""> 
+           <span class="username">홍순이</span>
+           <p class="noticereplytext"></p>
+           <span class="userdate">작성일 : </span>
+           <p class="usertext"></p>
+       </div>
+   </div>
+        
+</div>
       <!--/diary-area-->
       <div class="menu-bar" >
         <div class="group-profile">
@@ -119,4 +143,9 @@
     <!--/wrap-->
   </body>
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
+  <script>
+		$(document).ready(function() {
+			
+		});
+  </script>
 </html>

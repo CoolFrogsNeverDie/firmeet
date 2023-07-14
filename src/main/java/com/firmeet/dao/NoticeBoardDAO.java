@@ -19,28 +19,31 @@ public class NoticeBoardDAO {
 		return sql.selectList("noticeboard.noticelist");
 	}
 
-	public void editwrite(NoticeBoardVO vo) {
+	public int editwrite(NoticeBoardVO vo) {
 		System.out.println("notice editwrite dao 확인");
-//		int count = sql.insert("noticeboard.editwrite", vo);
-		System.out.println("dao 넘어오는 값 확인 : " + vo);
-//		return count;
+		int aboardNo = sql.insert("noticeboard.editwrite", vo);
+		System.out.println("dao editwrite 넘어오는 값 확인 : " + vo);
+		System.out.println("dao editwrite 넘어오는 no 확인 : " + vo.getAboardNo());
+		return aboardNo;
+	}
+
+	public void editwritevote(NoticeBoardVO vo) {
+		System.out.println("dao editwritevote"+vo);
+		//여기서 안들어감
+		sql.insert("noticeboard.editwritevote", vo);
+		System.out.println("dao editwritevote 넘어오는 값 확인 : " + vo);
+		System.out.println("dao editwritevote 넘어오는 값 확인 : " + vo.getAboardNo());
 	}
 
 	public NoticeBoardVO editlist(int aboardNo) {
 		System.out.println("notice editlist dao 확인");
 		System.out.println("notice editlist dao 확인"+aboardNo);
-		
 		return sql.selectOne("noticeboard.editlist", aboardNo);
 	}
 
 	public void voteinsert(NoticeBoardVO vo) {
-		System.out.println("dao voteinsert"+vo);
-		sql.insert("NoticeBoardVO.voteinsert", vo);
-	}
-
-	public NoticeBoardVO votelist(int aboardNo) {
-		System.out.println("NoticeBoardVO 넘어오는 값 확인 : " + aboardNo);
-		return sql.selectOne("NoticeBoardVO.votelist",aboardNo);
+		System.out.println("notice voteinsert dao 확인"+vo);
+		sql.insert("noticeboard.voteinsert",vo);
 	}
 
 	

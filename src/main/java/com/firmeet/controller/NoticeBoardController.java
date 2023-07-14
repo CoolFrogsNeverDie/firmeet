@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,51 +30,44 @@ public class NoticeBoardController {
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
-//	@RequestMapping("/noticelist")
-//	public String noticelist(Model model) {
+	@RequestMapping("/noticelist")
+	public String noticelist(Model model) {
 		
-//		System.out.println("noticelist 확인");
+		System.out.println("noticelist 확인");
 		
-//		model.addAttribute("nlist",noticeBoardService.noticeList());
+		model.addAttribute("nlist",noticeBoardService.noticeList());
 		
-//		return "notice/noticeList";
-//	}
-	
-	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
-	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId) {
-		
-		System.out.println("notice확인");
-		
-		return "notice/noticeEdit";
+		return "notice/noticeList";
 	}
 	
-	@RequestMapping("/noticeEdit")
-	public String noticeEdit() {
+	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
+	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
 		
 		System.out.println("notice확인");
+		
+		System.out.println("controller memberId"+memberId);
 		
 		return "notice/noticeEdit";
 	}
 	
 	@RequestMapping("/{clubId}/{memberId}/editwrite")
-	public String editwrite(@PathVariable("clubId") int clubId, 
-			@PathVariable("memberId") String memberId,
-			@ModelAttribute NoticeBoardVO vo) {
+	public String editwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		
 		System.out.println("notice editwrite 확인 ");
-		System.out.println(clubId);
-		System.out.println(memberId);
-		System.out.println(vo);
+//		System.out.println("controller clubId"+clubId);
+		System.out.println("controller vo"+vo);
+//		System.out.println("controller memberId"+memberId);
 		
-		noticeBoardService.voteinsert(vo);
+		noticeBoardService.editwrite(vo);
 		
-		return "notice/noticeGroupView";
+		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
 	}
 	
 	
-	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}")
-	public String editlist(@PathVariable("aboardNo") int aboardNo, Model model) {
+	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}/{voteNo}")
+	public String editlist(@PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
+		
 		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
 		
 		return "notice/noticeGroupView";
@@ -86,6 +80,22 @@ public class NoticeBoardController {
 		
 		return "notice/noticeEditView";
 	}
+	
+	@RequestMapping("/{clubId}/{memberId}/{voteNo}/vote")
+	public String vote(@PathVariable("voteNo") int voteNo, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		
+		System.out.println("vote확인");
+		
+//		System.out.println("controller clubId"+clubId);
+		System.out.println("controller vo"+vo);
+//		System.out.println("controller memberId"+memberId);
+		System.out.println("controller voteNo"+voteNo);
+		
+		noticeBoardService.voteinsert(vo);
+		
+		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
+	}
+	
 	
 	
 	@RequestMapping(value="/upload", produces = "application/json; charset=utf8")

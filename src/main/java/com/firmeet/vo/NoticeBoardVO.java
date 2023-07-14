@@ -17,13 +17,16 @@ public class NoticeBoardVO {
 	private int price;
 	private int voteNo;
 	private String voteTitle;
-	private String vote1;
-	private String vote2;
-	private String vote3;
-	private String vote4;
-	private String vote5;
+	private String vote1 = "";
+	private String vote2 = "";
+	private String vote3 = "";
+	private String vote4 = "";
+	private String vote5 = "";
 	private int totalNum;
 	private String finDate;
+	private int voteResult;
+	private String choice;
+	private String voteDate;
 	
 	public NoticeBoardVO() {
 		
@@ -77,6 +80,31 @@ public class NoticeBoardVO {
 		this.vote5 = vote5;
 		this.totalNum = totalNum;
 		this.finDate = finDate;
+	}
+	
+	public NoticeBoardVO(int voteNo, int aboardNo,
+			String voteTitle, String vote1, String vote2, String vote3, String vote4, String vote5, int totalNum,
+			String finDate) {
+		super();
+		this.voteNo = voteNo;
+		this.aboardNo = aboardNo;
+		this.voteTitle = voteTitle;
+		this.vote1 = vote1;
+		this.vote2 = vote2;
+		this.vote3 = vote3;
+		this.vote4 = vote4;
+		this.vote5 = vote5;
+		this.totalNum = totalNum;
+		this.finDate = finDate;
+	}
+	
+	public NoticeBoardVO(String memberId, int voteNo, int voteResult, String choice, String voteDate) {
+		super();
+		this.memberId = memberId;
+		this.voteNo = voteNo;
+		this.voteResult = voteResult;
+		this.choice = choice;
+		this.voteDate = voteDate;
 	}
 
 	public int getAboardNo() {
@@ -255,6 +283,30 @@ public class NoticeBoardVO {
 		this.finDate = finDate;
 	}
 
+	public int getVoteResult() {
+		return voteResult;
+	}
+
+	public void setVoteResult(int voteResult) {
+		this.voteResult = voteResult;
+	}
+
+	public String getChoice() {
+		return choice;
+	}
+
+	public void setChoice(String choice) {
+		this.choice = choice;
+	}
+
+	public String getVoteDate() {
+		return voteDate;
+	}
+
+	public void setVoteDate(String voteDate) {
+		this.voteDate = voteDate;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -262,7 +314,8 @@ public class NoticeBoardVO {
 				+ likeCnt + ", boardContent=" + boardContent + ", voteEnd=" + voteEnd + ", minPerson=" + minPerson
 				+ ", maxPerson=" + maxPerson + ", price=" + price + ", voteNo=" + voteNo + ", voteTitle=" + voteTitle
 				+ ", vote1=" + vote1 + ", vote2=" + vote2 + ", vote3=" + vote3 + ", vote4=" + vote4 + ", vote5=" + vote5
-				+ ", totalNum=" + totalNum + ", finDate=" + finDate + "]";
+				+ ", totalNum=" + totalNum + ", finDate=" + finDate + ", voteResult=" + voteResult + ", choice="
+				+ choice + ", voteDate=" + voteDate + "]";
 	}
 
 }
