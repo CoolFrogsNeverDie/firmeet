@@ -3,6 +3,7 @@ package com.firmeet.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,16 +61,35 @@ public class NoticeBoardController {
 		
 		noticeBoardService.editwrite(vo);
 		
+		System.out.println("번호확인"+vo.getVoteNo());
+		
 		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
 	}
 	
+//	@RequestMapping("/{clubId}/{memberId}/editgroupwrite")
+//	public String editgroupwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		
+//		System.out.println("notice editgroupwrite 확인 ");
+//		System.out.println("controller clubId"+clubId);
+//		System.out.println("controller vo"+vo);
+//		System.out.println("controller memberId"+memberId);
+		
+//		noticeBoardService.editgroupwrite(vo);
+		
+//		System.out.println("번호확인"+vo.getVoteNo());
+		
+//		return "notice/noticeVoteView";
+//	}
+	
 	
 	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}/{voteNo}")
-	public String editlist(@PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
+	public String editlist(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
+		System.out.println("controller aboardNo 확인"+aboardNo);
 		
 		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
 		
+		System.out.println("controller voteNo 확인"+vo.getVoteNo());
 		return "notice/noticeGroupView";
 	}
 	
@@ -81,20 +101,27 @@ public class NoticeBoardController {
 		return "notice/noticeEditView";
 	}
 	
-	@RequestMapping("/{clubId}/{memberId}/{voteNo}/vote")
-	public String vote(@PathVariable("voteNo") int voteNo, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	@RequestMapping("/{memberId}/{voteNo}/vote")
+	public String vote(@PathVariable("memberId") String memberId, @PathVariable("voteNo") int voteNo, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		
 		System.out.println("vote확인");
-		
-//		System.out.println("controller clubId"+clubId);
 		System.out.println("controller vo"+vo);
-//		System.out.println("controller memberId"+memberId);
+		System.out.println("controller memberId"+memberId);
 		System.out.println("controller voteNo"+voteNo);
 		
 		noticeBoardService.voteinsert(vo);
 		
-		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
+		return "redirect:/notice/voteresult";
 	}
+	
+//	@RequestMapping("/voteresult")
+//	public String voteresult(Model model) {
+		
+//		List<NoticeBoardVO> votelist = noticeBoardService.votecount();
+//		model.addAttribute("votelist", votelist);
+		
+//		return"notice/noticeGroupViewResult";
+//	}
 	
 	
 	

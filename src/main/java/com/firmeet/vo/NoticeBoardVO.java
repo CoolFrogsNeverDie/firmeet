@@ -27,6 +27,15 @@ public class NoticeBoardVO {
 	private int voteResult;
 	private String choice;
 	private String voteDate;
+	private int meetYear;
+	private int meetMon;
+	private String meetName;
+	private String startDate;
+	private String endDate;
+	private String meetTime;
+	private String meetPlace;
+	private int address1=0;
+	private int address2=0;
 	
 	public NoticeBoardVO() {
 		
@@ -105,6 +114,22 @@ public class NoticeBoardVO {
 		this.voteResult = voteResult;
 		this.choice = choice;
 		this.voteDate = voteDate;
+	}
+	
+	public NoticeBoardVO(int clubId, int meetNo, int meetYear, int meetMon, String meetName, String startDate,
+			String endDate, String meetTime, String meetPlace, int address1, int address2) {
+		super();
+		this.clubId = clubId;
+		this.meetNo = meetNo;
+		this.meetYear = meetYear;
+		this.meetMon = meetMon;
+		this.meetName = meetName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.meetTime = meetTime;
+		this.meetPlace = meetPlace;
+		this.address1 = address1;
+		this.address2 = address2;
 	}
 
 	public int getAboardNo() {
@@ -307,6 +332,78 @@ public class NoticeBoardVO {
 		this.voteDate = voteDate;
 	}
 
+	public int getMeetYear() {
+		return meetYear;
+	}
+
+	public void setMeetYear(int meetYear) {
+		this.meetYear = meetYear;
+	}
+
+	public int getMeetMon() {
+		return meetMon;
+	}
+
+	public void setMeetMon(int meetMon) {
+		this.meetMon = meetMon;
+	}
+
+	public String getMeetName() {
+		return meetName;
+	}
+
+	public void setMeetName(String meetName) {
+		this.meetName = meetName;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getMeetTime() {
+		return meetTime;
+	}
+
+	public void setMeetTime(String meetTime) {
+		this.meetTime = meetTime;
+	}
+
+	public String getMeetPlace() {
+		return meetPlace;
+	}
+
+	public void setMeetPlace(String meetPlace) {
+		this.meetPlace = meetPlace;
+	}
+
+	public int getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(int address1) {
+		this.address1 = address1;
+	}
+
+	public int getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(int address2) {
+		this.address2 = address2;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -315,7 +412,9 @@ public class NoticeBoardVO {
 				+ ", maxPerson=" + maxPerson + ", price=" + price + ", voteNo=" + voteNo + ", voteTitle=" + voteTitle
 				+ ", vote1=" + vote1 + ", vote2=" + vote2 + ", vote3=" + vote3 + ", vote4=" + vote4 + ", vote5=" + vote5
 				+ ", totalNum=" + totalNum + ", finDate=" + finDate + ", voteResult=" + voteResult + ", choice="
-				+ choice + ", voteDate=" + voteDate + "]";
+				+ choice + ", voteDate=" + voteDate + ", meetYear=" + meetYear + ", meetMon=" + meetMon + ", meetName="
+				+ meetName + ", startDate=" + startDate + ", endDate=" + endDate + ", meetTime=" + meetTime
+				+ ", meetPlace=" + meetPlace + ", address1=" + address1 + ", address2=" + address2 + "]";
 	}
 
 }

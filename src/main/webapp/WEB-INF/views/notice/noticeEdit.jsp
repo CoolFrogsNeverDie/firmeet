@@ -28,25 +28,39 @@
                             <option value="notice">공지게시판</option>
                         </select>
                         <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal"
-                            style="margin-left: 20px;">모임
-
-                        <select name="monthbox" id="monthbox" class="monthbox" onchange="handleOnChange1(this)">
-                            <option value="1월">1월</option>
-                            <option value="2월">2월</option>
-                            <option value="3월">3월</option>
-                            <option value="4월">4월</option>
-                            <option value="5월">5월</option>
-                            <option value="6월">6월</option>
-                            <option value="7월">7월</option>
-                            <option value="8월">8월</option>
-                            <option value="9월">9월</option>
-                            <option value="10월">10월</option>
-                            <option value="11월">11월</option>
-                            <option value="12월">12월</option>
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임
+                            
+                       <select name="meetYear" id="meetYear" class="meetYear">
+                            <option value="2023">2023년</option>
+                            <option value="2024">2024년</option>
+                            <option value="2025">2025년</option>
+                            <option value="2026">2026년</option>
+                            <option value="2027">2027년</option>
+                            <option value="2028">2028년</option>
+                            <option value="2029">2029년</option>
+                            <option value="2030">2030년</option>
+                            <option value="2031">2031년</option>
+                            <option value="2032">2032년</option>
+                            <option value="2033">2033년</option>
+                            <option value="2034">2034년</option>
+                        </select>
+                            
+                        <select name="meetMon" id="meetMon" class="meetMon">
+                            <option value="1">1월</option>
+                            <option value="2">2월</option>
+                            <option value="3">3월</option>
+                            <option value="4">4월</option>
+                            <option value="5">5월</option>
+                            <option value="6">6월</option>
+                            <option value="7">7월</option>
+                            <option value="8">8월</option>
+                            <option value="9">9월</option>
+                            <option value="10">10월</option>
+                            <option value="11">11월</option>
+                            <option value="12">12월</option>
                         </select>
 
-                        <select id="groupbox" class="groupbox" onchange="handleOnChange2(this)">
+                        <select id="meetName" name="meetName" class="meetName">
                             <option value="정기모임">정기모임</option>
                             <option value="깜짝모임">깜짝모임</option>
                             <option value="번개모임">번개모임</option>
@@ -99,8 +113,7 @@
                                    </div>
                                    <div style="text-align: center; font-weight: bold;">
                                        <button type="reset" class="btn btn-warning btn-sm">작성 취소</button>
-                                       <button type="button" class="btn btn-success btn-sm" id="saveButton"
-                                           style="margin-left: 10px;">작성 완료</button>
+                                       <button type="button" class="btn btn-success btn-sm" id="saveButton1" style="margin-left: 10px;">작성 완료</button>
                                    </div>
 	                            </div>
 	                        </div>
@@ -108,59 +121,57 @@
 	                </div>
 	      <!-- -------------------------------------------------결제투표-------------------------------------------------------->
 	                 
-	             <div class="modal" id="group">
+<!-- 	             <div class="modal" id="group">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
-                            <!-- Modal Header -->
+                            Modal Header
                             <div class="modal-header">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <!-- Modal body -->
+                            Modal body
                             <div class="modal-body">
-                                 <div class="grouptitle"><span id='result1'></span><span id='result2'></span></div>
+                                 <div class="grouptitle" id='result'></div>
                                  <div class="groupschedule">
                                      <input type="radio" name="groupschedule" value="" checked>결제 &nbsp;
-                                     <input type="radio" name="groupschedule" value=""
-                                         style="margin-left: 20px;">일정
+                                     <input type="radio" name="groupschedule" value="" style="margin-left: 20px;">일정
                                  </div>
                                  <div>
                                      <span class="groupvotetitle">만남일 </span>
-                                     <input class="groupvotedate" type="date" id="" value=""> ~
-                                     <input class="groupvotedate" type="date" id="" value="">
-                                     <input class="votemin" type="text" id="" value="">시<br>
+                                     <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
+                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
+                                     <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                      <span class="groupvotetitle1">장 소 </span>
-                                     <input class="groupvotemeet" type="text" id="" value="">
+                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
                                      <button type="button" class="btn btn-secondary">지도등록</button><br>
                                      <span class="groupvotetitle1">회 비 </span>
-                                     <input class="groupvotemeet" type="text" id="" value=""> 원(인당)<br>
+                                     <input class="groupvotemeet" type="text" id="price" name="price"> 원(인당)<br>
                                      <span class="groupvotetitle2">투표종료 </span>
-                                     <input class="groupvotedate" type="date" id="" value=""><br>
+                                     <input class="groupvotedate" type="date" id="voteEnd" name="voteEnd"><br>
                                      <div class="groupminmax">
                                          <span class="groupvotetitle3">최소인원</span>
-                                         <input class="votemin" type="text" id="" value="">명
+                                         <input class="votemin" type="text" id="minPerson" name="minPerson">명
                                          / <span class="groupvotetitle3">최대인원</span>
-                                         <input class="votemin" type="text" id="" value="">명
+                                         <input class="votemin" type="text" id="maxPerson" name="maxPerson">명
                                      </div>
                                  </div>
                                  <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-                                     <button type="button" class="btn btn-success"
-                                         style="margin-left: 10px;">등록하기</button>
+                                     <button type="button" class="btn btn-success" id="saveButton2" style="margin-left: 10px;">등록하기</button>
                                  </div>
                             </div>
                         </div>
                     </div>
                 </div>
-	      <!-- -------------------------------------------------결제일반-------------------------------------------------------->
+	      -------------------------------------------------결제일반------------------------------------------------------
                 <div class="modal" id="groupmeet">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
-                            <!-- Modal Header -->
+                            Modal Header
                             <div class="modal-header">
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <!-- Modal body -->
+                            Modal body
                             <div class="modal-body">
                                 <div class="grouptitle" id=""></div>
                                 <div class="groupschedule">
@@ -170,11 +181,11 @@
                                 </div>
                                 <div>
                                     <span class="groupvotetitle">만남일 </span>
-                                    <input class="groupvotedate" type="date" id="" value=""> ~
-                                    <input class="groupvotedate" type="date" id="" value="">
-                                    <input class="votemin" type="text" id="" value="">시<br>
+                                   	<input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
+                                    <input class="groupvotedate" type="date" id="endDate" name="endDate">
+									<input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                     <span class="groupvotetitle1">장 소 </span>
-                                    <input class="groupvotemeet" type="text" id="" value="">
+                                    <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
                                     <button type="button" class="btn btn-secondary">지도등록</button><br>
                                 </div>
                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
@@ -184,13 +195,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 			</form>
      <!-- 여기까지 -->
             </div>
             <!--/content-left-->
             <div class="content-right">
-                <table id="dataTable" style="display: none;">
+                <table id="dataTable1" style="display: none;">
                     <thead>
                         <tr>
                             <th class="noticegrouplist">
@@ -208,6 +219,29 @@
                                 <p class="noticegroupname" id="vote55"></p>
                                 <p class="noticegroupname" id="totalNum11"></p>
                                 <p class="noticegroupname" id="finDate11"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- 지도 -->
+                </table>
+                <table id="dataTable2" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th class="noticegrouplist">
+                                <p class="noticegroupname" id="result1"></p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="noticegrouplist1">
+                                <span class="noticegroupname" id="startDate1"></span> ~ <span class="noticegroupname" id="endDate1"></span>
+                                <p class="noticegroupname" id="meetTime1"></p>
+                                <p class="noticegroupname" id="meetPlace1"></p>
+                                <p class="noticegroupname" id="price1"></p>
+                                <p class="noticegroupname" id="voteEnd1"></p>
+                                <p class="noticegroupname" id="minPerson1"></p>
+                                <p class="noticegroupname" id="maxPerson1"></p>
                             </td>
                         </tr>
                     </tbody>
@@ -259,7 +293,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#saveButton").click(function() {
+    $("#saveButton1").on("click", function() {
         var voteTitle = $("#voteTitle").val();
         var vote1 = $("#vote1").val();
         var vote2 = $("#vote2").val();
@@ -269,7 +303,7 @@ $(document).ready(function() {
         var totalNum = $("#totalNum").val();
         var finDate = $("#finDate").val();
 
-        $("#dataTable").css("display", "block");
+        $("#dataTable1").css("display", "block");
         $("#general").modal("hide");
 
         $("#voteTitle11").text("제목 : " + voteTitle);
@@ -281,6 +315,45 @@ $(document).ready(function() {
         $("#totalNum11").text("최소인원 : " + totalNum);
         $("#finDate11").text("투표종료일 : " + finDate);
     });
+    
+    $("#saveButton2").on("click", function() {
+	    var meetYearValue = $('#meetYear').val();
+	    var meetMonValue = $('#meetMon').val();
+	    var meetNameValue = $('#meetName').val();
+	    var combinedValue = meetYearValue + ' ' + meetMonValue+ ' ' + meetNameValue;
+    	var result = $("#result").val();
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var meetTime = $("#meetTime").val();
+        var meetPlace = $("#meetPlace").val();
+        var price = $("#price").val();
+        var voteEnd = $("#voteEnd").val();
+        var minPerson = $("#minPerson").val();
+        var maxPerson = $("#maxPerson").val();
+
+        $("#dataTable2").css("display", "block");
+        $("#group").modal("hide");
+
+        $("#result1").text(combinedValue);
+        $("#startDate1").text("시작일 : " + startDate);
+        $("#endDate1").text("종료일 : " + endDate);
+        $("#meetTime1").text("시간 : " + meetTime+" 시");
+        $("#meetPlace1").text("장소 : " + meetPlace);
+        $("#price1").text("price회비 : " + price);
+        $("#voteEnd1").text("투표종료일 : " + voteEnd);
+        $("#minPerson1").text("최소인원 : " + minPerson);
+        $("#maxPerson1").text("최대인원 : " + maxPerson);
+    });
+    
+  	$('#group').on("click", function() {
+	    var meetYearValue = $('#meetYear').val();
+	    var meetMonValue = $('#meetMon').val();
+	    var meetNameValue = $('#meetName').val();
+	    var combinedValue = meetYearValue + ' ' + meetMonValue+ ' ' + meetNameValue;
+
+	    $('#result').text(combinedValue);
+	 });
+  	
     
 });
 
@@ -364,43 +437,6 @@ function CustomButton(context) {
     return button.render();
 }
 
-function handleOnChange1(e) {
-    const value = e.value;
-    document.getElementById('result1').innerText = value;
-}
-
-function handleOnChange2(e) {
-    const value = e.value;
-    document.getElementById('result2').innerText = value;
-}
-
-/*
-<select id="select1">
-  <option value="option1">Option 1</option>
-  <option value="option2">Option 2</option>
-  <option value="option3">Option 3</option>
-</select>
-
-<select id="select2">
-  <option value="value1">Value 1</option>
-  <option value="value2">Value 2</option>
-  <option value="value3">Value 3</option>
-</select>
-
-<button id="combineBtn">Combine</button>
-
-<div id="result"></div>
-
-$(document).ready(function() {
-	  $('#combineBtn').click(function() {
-	    var select1Value = $('#select1').val();
-	    var select2Value = $('#select2').val();
-	    var combinedValue = select1Value + ' ' + select2Value;
-
-	    $('#result').text(combinedValue);
-	  });
-}); 
-*/
 </script>
 
 </html>

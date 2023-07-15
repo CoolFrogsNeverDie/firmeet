@@ -19,6 +19,26 @@ public class NoticeBoardService {
 		System.out.println("notice noticeList 확인");
 		return dao.noticelist();
 	}
+//	public int editwrite(NoticeBoardVO vo) {
+//		dao.editwrite(vo);
+//		System.out.println("service editinsert 확인"+vo);
+//		System.out.println("service editinsert getAboardNo 확인"+vo.getAboardNo());
+		
+//		int aboardNo = vo.getAboardNo();
+//		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
+		//여기서 안들어감
+//		int voteNo = vo.getVoteNo();
+//		int meetNo = vo.getMeetNo();
+//		if(voteNo != 0) {
+//			dao.editwritevote(vo);
+//			System.out.println("service voteinsert 확인"+vo);
+//			System.out.println("service voteinsert getVoteNo 확인"+vo.getVoteNo());
+//		}else if(meetNo != 0) {
+//			dao.editgroupwrite(vo);
+//			System.out.println("service voteinsert getMeetNo 확인"+vo.getMeetNo());
+//		}
+//		return aboardNo;
+//	}
 
 	public int editwrite(NoticeBoardVO vo) {
 		dao.editwrite(vo);
@@ -31,6 +51,7 @@ public class NoticeBoardService {
 		dao.editwritevote(vo);
 		System.out.println("service voteinsert 확인"+vo);
 		System.out.println("service voteinsert getAboardNo 확인"+vo.getAboardNo());
+		System.out.println("service voteinsert getVoteNo 확인"+vo.getVoteNo());
 		
 		return aboardNo;
 	}
@@ -45,5 +66,9 @@ public class NoticeBoardService {
 		dao.voteinsert(vo);
 	}
 
+//	public List<NoticeBoardVO> votecount() {
+//		System.out.println("notice Count 확인");
+//		return dao.votecount();
+//	}
 
 }

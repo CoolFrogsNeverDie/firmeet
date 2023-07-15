@@ -7,7 +7,7 @@
     width: 100px;
     height: 30px;
     margin-bottom: 10px;
-    margin-right: 50px;
+    margin-right: 100px;
 }
 .noticetitle{
     width: 500px;
@@ -15,14 +15,20 @@
     margin-bottom: 10px;
     font-size: 15px;
 }
-.monthbox{
+.meetYear{
+    width: 80px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+}
+.meetMon{
     width: 50px;
     height: 30px;
     margin-bottom: 10px;
-    margin-left: 70px;
+    margin-left: 20px;
 }
-.groupbox{
-    width: 100px;
+.meetName{
+    width: 80px;
     height: 30px;
     margin-bottom: 10px;
     margin-left: 20px;

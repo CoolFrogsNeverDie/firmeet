@@ -20,25 +20,40 @@
 
 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
 		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent,
-		v.aboardNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+		v.aboardNo, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
 		from aboard a, club c, member m, avote v
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
 	
 	<insert id="editwritevote" parameterType="noticeboard">
+	 	<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
+			select seq_voteNo.nextval from dual
+		</selectKey>
 		insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, vote4, vote5, totalNum, finDate)
 		values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate}) 
 	</insert>
-	
-	<select id="votelist" parameterType="noticeboard" resultType="noticeboard">
-		<![CDATA[	
-			select voteNo, aboardNo, voteTitle, vote1, vote2, vote3, totalNum, finDate from aVote where aboardNo = #{aboardNo}
-		]]>
-	</select>
 	
 	<insert id="voteinsert" parameterType="noticeboard">
 		insert into voteResult(voteResult, voteNo, memberId, choice, voteDate)
 		values(seq_voteResultNo.nextval, #{voteNo}, #{memberId}, #{choice}, SYSDATE)
 	</insert>
+	
+<!-- 	<select id="votecount" parameterType="noticeboard" resultType="noticeboard">
+		select
+		    sum(case when choice = 1 then 1 else 0 end) as vote1
+		    ,sum(case when choice = 2 then 1 else 0 end) as vote2
+		    ,sum(case when choice = 3 then 1 else 0 end) as vote3
+		    ,sum(case when choice = 4 then 1 else 0 end) as vote4
+		from voteResult 
+		where voteNo = #{voteNo}
+	</select> -->
+	
+<!-- 	<insert id="editgroupwrite" parameterType="noticeboard">
+	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
+			select seq_meetNo.nextval from dual
+		</selectKey>
+		insert into meet_name(meetNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, address1, address2)
+		values(seq_meetNo.nextval, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, #{startDate}, #{endDate}, #{meetTime}, #{meetPlace}, #{address1}, #{address2}) 
+	</insert> -->
 
 </mapper>
