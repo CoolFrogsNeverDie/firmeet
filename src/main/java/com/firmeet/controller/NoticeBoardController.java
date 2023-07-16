@@ -41,16 +41,29 @@ public class NoticeBoardController {
 		return "notice/noticeList";
 	}
 	
-	@RequestMapping("/{clubId}/{memberId}/noticeEdit")
-	public String noticeEdit(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
+	//에디터 일반 페이지
+	@RequestMapping("/{clubId}/{memberId}/noticeEditGeneral")
+	public String noticeEditGeneral(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
 		
 		System.out.println("notice확인");
 		
 		System.out.println("controller memberId"+memberId);
 		
-		return "notice/noticeEdit";
+		return "notice/noticeEditGeneral";
 	}
 	
+	//에디터 결제 페이지
+	@RequestMapping("/{clubId}/{memberId}/noticeEditGroup")
+	public String noticeEditGroup(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
+		
+		System.out.println("notice확인");
+		
+		System.out.println("controller memberId"+memberId);
+		
+		return "notice/noticeEditGroup";
+	}
+	
+	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/{clubId}/{memberId}/editwrite")
 	public String editwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		
@@ -66,22 +79,7 @@ public class NoticeBoardController {
 		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
 	}
 	
-//	@RequestMapping("/{clubId}/{memberId}/editgroupwrite")
-//	public String editgroupwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
-		
-//		System.out.println("notice editgroupwrite 확인 ");
-//		System.out.println("controller clubId"+clubId);
-//		System.out.println("controller vo"+vo);
-//		System.out.println("controller memberId"+memberId);
-		
-//		noticeBoardService.editgroupwrite(vo);
-		
-//		System.out.println("번호확인"+vo.getVoteNo());
-		
-//		return "notice/noticeVoteView";
-//	}
-	
-	
+	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}/{voteNo}")
 	public String editlist(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
@@ -91,6 +89,32 @@ public class NoticeBoardController {
 		
 		System.out.println("controller voteNo 확인"+vo.getVoteNo());
 		return "notice/noticeGroupView";
+	}
+	
+	//에디터 모임 등록 후 나오는 페이지
+	@RequestMapping("/{clubId}/{memberId}/editwritegroup")
+	public String editgroupwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		
+		System.out.println("notice editgroupwrite 확인 ");
+		System.out.println("controller vo"+vo);
+		
+		noticeBoardService.editgroupwrite(vo);
+		
+		System.out.println("번호확인"+vo.getMeetNo());
+		
+		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlistgroup/"+vo.getAboardNo()+"/"+vo.getMeetNo();
+	}
+	
+	//에디터 모임 등록 후 나오는 리스트
+	@RequestMapping("/{clubId}/{memberId}/editlistgroup/{aboardNo}/{meetNo}")
+	public String editlistgroup(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("meetNo") int meetNo, Model model, HttpSession session, NoticeBoardVO vo) {
+		System.out.println("notice editgrouplist 확인");
+		System.out.println("controller aboardNo 확인"+aboardNo);
+		
+		model.addAttribute("vo", noticeBoardService.editlistgroup(aboardNo));
+		
+		System.out.println("controller meetno 확인"+vo.getMeetNo());
+		return "notice/noticeVoteView";
 	}
 	
 	@RequestMapping("/noticeEditView")

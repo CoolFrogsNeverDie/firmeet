@@ -61,11 +61,32 @@ public class NoticeBoardService {
 		return dao.editlist(aboardNo);
 	}
 
+	public int editgroupwrite(NoticeBoardVO vo) {
+		dao.editwrite(vo);
+		System.out.println("service editgroupwrite 확인"+vo);
+		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
+		
+		int aboardNo = vo.getAboardNo();
+		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
+
+		dao.editgroupwrite(vo);
+		System.out.println("service editgroupwrite 확인"+vo);
+		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
+		System.out.println("service editgroupwrite getMeetNo 확인"+vo.getMeetNo());
+		
+		return aboardNo;		
+	}
+
+	public NoticeBoardVO editlistgroup(int aboardNo) {
+		System.out.println("notice editlistgroup 확인");
+		return dao.editlistgroup(aboardNo);
+	}
+	
 	public void voteinsert(NoticeBoardVO vo) {
 		System.out.println("notice voteinsert 확인");
 		dao.voteinsert(vo);
 	}
-
+	
 //	public List<NoticeBoardVO> votecount() {
 //		System.out.println("notice Count 확인");
 //		return dao.votecount();

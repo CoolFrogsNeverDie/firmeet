@@ -37,7 +37,6 @@ public class NoticeBoardDAO {
 	}
 
 	public NoticeBoardVO editlist(int aboardNo) {
-		System.out.println("notice editlist dao 확인");
 		System.out.println("notice editlist dao 확인"+aboardNo);
 		return sql.selectOne("noticeboard.editlist", aboardNo);
 	}
@@ -45,6 +44,20 @@ public class NoticeBoardDAO {
 	public void voteinsert(NoticeBoardVO vo) {
 		System.out.println("notice voteinsert dao 확인"+vo);
 		sql.insert("noticeboard.voteinsert",vo);
+	}
+
+	public int editgroupwrite(NoticeBoardVO vo) {
+		System.out.println("dao editgroupwrite"+vo);
+
+		int meetNo = sql.insert("noticeboard.editgroupwrite", vo);
+		System.out.println("dao editgroupwrite 넘어오는 값 확인 : " + vo);
+		System.out.println("dao editgroupwrite 넘어오는 값 확인 : " + vo.getMeetNo());
+		return meetNo;		
+	}
+
+	public NoticeBoardVO editlistgroup(int aboardNo) {
+		System.out.println("notice editlistgroup dao 확인"+aboardNo);
+		return sql.selectOne("noticeboard.editlistgroup", aboardNo);
 	}
 
 //	public List<NoticeBoardVO> votecount() {

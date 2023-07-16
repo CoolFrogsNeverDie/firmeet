@@ -55,13 +55,13 @@
 	               <tbody>
 	                   <tr>
                        	  <td class="noticegrouplist1">
-                             <span class="noticegroupname" id="startDate1"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1">${vo.endDate}</span>
-                             <p class="noticegroupname" id="meetTime1"><span>만남일 : </span>${vo.meetTime}</p>
-                             <p class="noticegroupname" id="meetPlace1"><span>만남일 : </span>${vo.meetPlace}</p>
-                             <p class="noticegroupname" id="price1"><span>만남일 : </span>${vo.price}</p>
-                             <p class="noticegroupname" id="voteEnd1"><span>만남일 : </span>${vo.voteEnd}</p>
-                             <p class="noticegroupname" id="minPerson1"><span>만남일 : </span>${vo.minPerson}</p>
-                             <p class="noticegroupname" id="maxPerson1"><span>만남일 : </span>${vo.maxPerson}</p>
+                             <span class="noticegroupname" id="startDate1"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
+                             <p class="noticegroupname" id="meetTime1"><span>만남시간 : </span>${vo.meetTime}</p>
+                             <p class="noticegroupname" id="meetPlace1"><span>만남장소 : </span>${vo.meetPlace}</p>
+                             <p class="noticegroupname" id="price1"><span>회비 : </span>${vo.price}</p>
+                             <p class="noticegroupname" id="voteEnd1"><span>투표종료일 : </span>${vo.voteEnd}</p>
+                             <p class="noticegroupname" id="minPerson1"><span>최소인원 : </span>${vo.minPerson}</p>
+                             <p class="noticegroupname" id="maxPerson1"><span>최대인원 : </span>${vo.maxPerson}</p>
                           </td>
 	                 </tr>
 	               </tbody>

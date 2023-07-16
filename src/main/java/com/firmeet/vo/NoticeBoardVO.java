@@ -53,25 +53,6 @@ public class NoticeBoardVO {
 		this.boardContent = boardContent;
 	}
 
-	public NoticeBoardVO(int aboardNo, int clubId, String memberId, int meetNo, int aboardVal, String title,
-			String aboardDate, int likeCnt, String boardContent, String voteEnd, int minPerson, int maxPerson,
-			int price) {
-		super();
-		this.aboardNo = aboardNo;
-		this.clubId = clubId;
-		this.memberId = memberId;
-		this.meetNo = meetNo;
-		this.aboardVal = aboardVal;
-		this.title = title;
-		this.aboardDate = aboardDate;
-		this.likeCnt = likeCnt;
-		this.boardContent = boardContent;
-		this.voteEnd = voteEnd;
-		this.minPerson = minPerson;
-		this.maxPerson = maxPerson;
-		this.price = price;
-	}
-	
 	public NoticeBoardVO(int aboardNo, String title, String aboardDate, String boardContent, int voteNo,
 			String voteTitle, String vote1, String vote2, String vote3, String vote4, String vote5, int totalNum,
 			String finDate) {
@@ -115,12 +96,16 @@ public class NoticeBoardVO {
 		this.choice = choice;
 		this.voteDate = voteDate;
 	}
-	
-	public NoticeBoardVO(int clubId, int meetNo, int meetYear, int meetMon, String meetName, String startDate,
-			String endDate, String meetTime, String meetPlace, int address1, int address2) {
+
+	public NoticeBoardVO(int clubId, int meetNo, int minPerson, int maxPerson, int price, int meetYear, int meetMon,
+			String meetName, String startDate, String endDate, String meetTime, String meetPlace, int address1,
+			int address2, String voteEnd) {
 		super();
 		this.clubId = clubId;
 		this.meetNo = meetNo;
+		this.minPerson = minPerson;
+		this.maxPerson = maxPerson;
+		this.price = price;
 		this.meetYear = meetYear;
 		this.meetMon = meetMon;
 		this.meetName = meetName;
@@ -130,6 +115,7 @@ public class NoticeBoardVO {
 		this.meetPlace = meetPlace;
 		this.address1 = address1;
 		this.address2 = address2;
+		this.voteEnd = voteEnd;
 	}
 
 	public int getAboardNo() {

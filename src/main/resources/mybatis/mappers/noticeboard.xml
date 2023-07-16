@@ -48,12 +48,19 @@
 		where voteNo = #{voteNo}
 	</select> -->
 	
-<!-- 	<insert id="editgroupwrite" parameterType="noticeboard">
+	<insert id="editgroupwrite" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
 			select seq_meetNo.nextval from dual
 		</selectKey>
-		insert into meet_name(meetNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, address1, address2)
-		values(seq_meetNo.nextval, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, #{startDate}, #{endDate}, #{meetTime}, #{meetPlace}, #{address1}, #{address2}) 
-	</insert> -->
+		insert into meet_name(meetNo, aboardNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, voteEnd, minPerson, maxPerson, price, address1, address2)
+		values(seq_meetNo.nextval, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
+	</insert>
+	
+	<select id="editlistgroup" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent,
+		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, mn.startDate, mn.endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
+		from aboard a, club c, member m, meet_name mn
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and a.aboardNo = #{aboardNo}
+	</select>
 
 </mapper>
