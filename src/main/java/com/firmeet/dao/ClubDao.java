@@ -14,7 +14,7 @@ import com.firmeet.vo.TagVo;
 @Repository
 public class ClubDao {
 	
-//	@Autowired
+	@Autowired
 	private SqlSession session;
 	
 	public List<ClubVo> getMemClub(MemberVo memberVO){

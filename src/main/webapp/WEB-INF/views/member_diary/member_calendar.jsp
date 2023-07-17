@@ -106,7 +106,7 @@
   </div>
   <!--/wrap-->
   
-  <!--모달창-->
+  <!-- 일정 등록모달창-->
 <div class="container1" >
 
   <div class="popup-wrap" id="popup">
@@ -164,7 +164,69 @@
 </div>
 <!--모달창-->
 
-  <!--모달창-->
+
+
+  <!-- 일정 확인모달창-->
+<div class="container3" >
+
+  <div class="popup-wrap">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+          <div class="body-titlebox">
+            <h4><strong>일정등록</strong></h4>
+            
+          </div>
+       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
+            <input type="hidden" name = "address1" value = "-1">
+            <input type="hidden" name = "address2" value ="-1">
+            <input type="hidden" name = "memberId" value = "se">
+            <input type="hidden" >
+          <div class="body-contentbox">
+            <table id = "schedule-table">
+              <tr>
+                <th>일정</th>
+                <td><input type="text" placeholder="일정명을 입력하세요."name = "title"> </td>
+              </tr>
+              <tr>
+                <th rowspan="2">일정</th>
+                <td rowspan="2"><input type="date" name = "startDate">&nbsp; ~&nbsp; 
+                <input type="date" id = "endD" name ="endDate" ></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <th>장소등록</th>
+                <td>
+				<span class= "checkbox-loca"><input type ="checkbox"> &nbsp;장소 등록 <br></span>
+                <input type = "text" class= "search-place" name = "place" value = " " readonly><button type= "button" class="map-search-btn">위치검색</button></td>
+              </tr>
+              <tr class="content-area">
+                <th>내용</th>
+                <td><textarea name = "content"></textarea></td>
+              </tr>
+            </table>
+            
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">등록</button>
+            <button type ="button">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--모달창-->
+
+
+
+<!--모달창-->
 <div class="container2" >
 
   <div class="popup-wrap2" id="popup">
@@ -336,6 +398,7 @@ $('.add-persche').on("submit", function(){
 		alert('끝나는 날짜를 지정해주세요.')
 		return false;
 	}
+	return true;
 })
 
 
@@ -380,7 +443,13 @@ let calendar;
 $(document).ready(function() {
 	render();
 	getData();
-  });
+	
+	/*
+	$('.container3 .popup-wrap').css('display', 'block');
+	*/
+
+
+});
   
 //정렬 선택 했을때 데이터 다시 불러옴
 $('#select-array').on("change", function(){

@@ -84,7 +84,7 @@ public class CalendarController {
 		System.out.println("넘어온 개인 일정 정보" + scheduleVO);
 		calendarService.addPerSche(scheduleVO);
 		
-		return "";
+		return "redirect:/calendar/member?memberId="+ scheduleVO.getMemberId();
 	}
 	
 }	

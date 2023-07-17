@@ -94,7 +94,7 @@ td, tr {
     text-align:center;
     background-color:#f8f8f8;
     border-radius: 5%;
-    height:2vw;
+    height:26px;
     font-size:1.2em;
 }
 
@@ -104,7 +104,7 @@ td, tr {
     float: right;
     background-color:#f8f8f8;
     border-radius: 5%;
-    height:2vw;
+    height:26px;
     font-size:1.2em;
 }
 /*이벤트에 시간 기재되는 부분 삭제*/
