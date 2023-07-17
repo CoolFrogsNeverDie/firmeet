@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.ScheduleVO;
 
 @Repository
 public class AccountBookDao {
@@ -27,5 +28,23 @@ public class AccountBookDao {
 	    System.out.println("돌아온 아이 " + aList);
 	    
 	    return aList;
+	}
+
+	public List<ScheduleVO> getMeet(int clubId) {
+	    System.out.println("AccountBookDao getMeet 확인");
+	    System.out.println(clubId);
+		
+	    List<ScheduleVO> sList = session.selectList("accountbook.meetList", clubId);
+	    
+	    System.out.println("돌아온 아이 " + sList);
+	    
+	    return sList;
+	}
+
+	public void upload(AccountBookVo aBookVo) {
+		 System.out.println("AccountBookDao upload 확인");
+		 System.out.println(aBookVo);
+		 
+		 session.insert("accountbook.meetUpload", aBookVo);
 	}
 }

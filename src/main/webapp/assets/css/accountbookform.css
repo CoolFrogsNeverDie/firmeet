@@ -1,0 +1,43 @@
+.content-left {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  margin-top: 10px;
+  vertical-align: top; /* 추가 */
+}
+
+.content-right {
+  width: 49%;
+  height: 100%;
+  display: inline-block;
+  margin-top: 10px;
+  vertical-align: top;
+  padding: 20px;
+}
+
+.content-right form {
+  margin-bottom: 15px;
+}
+
+.content-right .form-group {
+  margin-bottom: 20px;
+}
+
+.content-right .form-group label {
+  font-weight: bold;
+}
+
+.content-right .form-control {
+  width: 100%;
+}
+
+.content-right button[type="submit"] {
+  background-color: black;
+  color: white;
+  margin-top: 15px;
+}
+
+
+.content-right div{
+  margin-bottom: 20px;
+}

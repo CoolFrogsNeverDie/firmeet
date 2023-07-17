@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>어푸어푸 가계부</title>
+<title>어푸어푸 가계부 업로드</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -16,7 +16,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <link
-	href="${pageContext.request.contextPath}/assets/css/accountbook.css"
+	href="${pageContext.request.contextPath}/assets/css/accountbookform.css"
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/main2.css"
 	rel="stylesheet" type="text/css" />
@@ -28,7 +28,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
 </head>
 
 <body>
@@ -76,76 +75,65 @@
 			</div>
 			<!--/diary-topbar-img-->
 			<div class="diary-subbar">
-				<h4>가계부</h4>
+				<h4>가계부 업로드</h4>
 			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
-					<div class="content-bnt">
-						<form method="POST">
-							<input type="date"> ~ <input type="date"> <input
-								type="text" placeholder="검색어를 입력하세요." /> <input
-								style="background-color: black; color: white; width: 100px; height: 50px;"
-								type="submit" value="검색" />
-						</form>
-						<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
-					</div>
-					<!--/content-bnt-->
-					<div class="table">
-						<div class="table-header">
-							<div class="header_item">
-								<a id="memberId" class="filter_link filter_link-number" href="#">결제자</a>
-							</div>
-							<div class="header_item">
-								<a id="dateTime" class="filter_link" href="#">일시</a>
-							</div>
-							<div class="header_item">
-								<a id="purpose" class="filter_link" href="#">용도</a>
-							</div>
-							<div class="header_item">
-								<a id="category" class="filter_link" href="#">수입/지출</a>
-							</div>
-							<div class="header_item">
-								<a id="income_expense" class="filter_link" href="#">카테고리</a>
-							</div>
-							<div class="header_item">
-								<a id="amount" class="filter_link" href="#">금액</a>
-							</div>
-							<div class="header_item">
-								<a id="meetNo" class="filter_link" href="#">모임명</a>
-							</div>
-						</div>
-						<div class="table-content-wrapper">
-							<div class="table-content" id="target">
-								<c:forEach var="account" items="${accountList}"
-									varStatus="status">
-									<div class="table-row">
-										<div class="table-data">${account.memberId}</div>
-										<div class="table-data">${account.datetime}</div>
-										<div class="table-data">${account.purpose}</div>
-										<div class="table-data">${account.incomeExpense}</div>
-										<div class="table-data">${account.category}</div>
-										<div class="table-data">${account.amount}원</div>
-										<div class="table-data">${account.meetNo}</div>
-										<div class="content-img" style="display: none">
-											<img class="group-profile-img"
-												src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}"
-												alt="가계부사진" />
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-					<!--/table-->
-					<script type="text/javascript">
-						$(".table-row").on('click', function() {
-							$(this).find(".content-img").toggle(); // 클릭 시 .content-img 요소의 표시/숨김 상태를 전환합니다.
-						});
-					</script>
-					<script src="${pageContext.request.contextPath}/assets/js/accountbook.js"></script>
+					<img id="preview" src="#" alt="미리보기 이미지"
+						style="max-width: 100%; max-height: 90%; display: none; margin: 0 auto;">
 				</div>
 				<!--/content-left-->
+				<div class="content-right">
+					<form action="${pageContext.request.contextPath}/accountBook/upload"  method="POST" enctype="multipart/form-data">
+						<div class="form-group d-flex justify-content-between">
+							<label for="expense">지출</label> 
+							<input type="radio" id="expense" name="incomeExpense" value="지출" checked>
+							<label for="income">수입</label>
+							<input type="radio" id="income" name="incomeExpense" value="수입">
+						</div>
+						<div class="form-group">
+							<label for="meetSelect">사용 모임:</label> <select id="meetSelect"
+								name="meet" class="form-select">
+								<c:forEach var="meet" items="${meetList}" varStatus="status">
+									<option value="${meet.meetNo}">${meet.meetName}</option>
+								</c:forEach>
+							</select>
+							<c:forEach var="meet" items="${meetList}" varStatus="status"
+								begin="0" end="0">
+								<input type="hidden" name="clubId" value="${meet.clubId}">
+							</c:forEach>
+							<input type="hidden" name="memberId" value="aaa">
+						</div>
+						<div class="form-group">
+							<label for="categorySelect">카테고리:</label> <select
+								id="categorySelect" name="category" class="form-select">
+								<option value="식비">식비</option>
+								<option value="유흥">유흥</option>
+								<option value="비품">비품</option>
+								<option value="시설">시설</option>
+								<option value="이동비">이동비</option>
+								<option value="의료">의료</option>
+								<option value="기타">기타</option>
+								<!-- 셀렉트 박스 옵션 추가 -->
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="amountInput">용도:</label> <input type="text"
+								id="amountInput" name="purpose" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="amountInput">금액:</label> <input type="text"
+								id="amountInput" name="amount" class="form-control">
+						</div>
+						<div class="form-group">
+                     		<label class="form-text">이미지선택</label> <input id="file" type="file" name="uploadPicture" value="" onchange="previewImage(event)">
+                  		</div>
+						<button type="submit" class="btn btn-primary">저장</button>
+					</form>
+
+				</div>
+
 			</div>
 			<!--/content-area-->
 		</div>
@@ -173,18 +161,17 @@
 		<!--/menu-bar-->
 	</div>
 	<!--/wrap-->
-	<footer> Copyright (C) 2023 어리쥬 all rights reserved.</footer>
+	<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
 </body>
 <script>
-  $(document).ready(function() {
-    $("#addButton").click(function() {
-      var path = window.location.pathname; // 현재 페이지의 경로
-      var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
-      window.location.href = "${pageContext.request.contextPath}/accountBook/uploadform/" + clubId;
-    });
-  });
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var image = document.getElementById('preview');
+			image.src = reader.result;
+			image.style.display = 'block';
+		}
+		reader.readAsDataURL(event.target.files[0]);
+	}
 </script>
-
-
-
 </html>
