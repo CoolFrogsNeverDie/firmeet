@@ -10,17 +10,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .container{
-            width: 60vw;
+        	border: 1px solid black;
+            width: 1000px;
             margin: 0 auto;
+            accent-color: black;
+            min-width:1000px;
         }
         h2{
-            color: purple;
+            color: #222;
             font-weight: bold;
             margin-bottom: 30px;
         }
         
         #cm_body{
-        		width:40vw;
+        		width: 800px;
         		margin:auto;
         
         }
@@ -65,11 +68,12 @@
         }
         .box-file-input label{
             display:inline-block;
-            background:#23a3a7;
+            background:#222;
             color:#fff;
             padding:0px 15px;
             line-height:35px;
             cursor:pointer;
+            border-radius: 5px;
         }
         .box-file-input label:after{
             content:"파일등록";
@@ -116,6 +120,18 @@
         	margin-top:-20px;
         }
         
+        button[type=submit]:hover{
+        	background:#222;
+        	color:#eee;
+        }
+        
+        button[type=button]:hover {
+        	background:#eee;
+        	color:#222;
+        	border:none;
+        }
+
+        
         
     </style>
   </head>
@@ -136,19 +152,19 @@
             <div class="col-sm-12">
                 <label for="firstName">모임 분류</label>
                 <span class="box box1 box3">
-                    <input type="radio" name="clubCateNo" value="1" /> 운동/액티비티 &nbsp;
-                    <input type="radio" name="clubCateNo" value="2" /> 스터디 &nbsp;
-                    <input type="radio" name="clubCateNo" value="3" checked="checked" /> 친목</br>
+                    <input type="radio" name="cateNo" value="1" /> 운동/액티비티 &nbsp;
+                    <input type="radio" name="cateNo" value="2" /> 스터디 &nbsp;
+                    <input type="radio" name="cateNo" value="3" checked="checked" /> 친목</br>
                 </span>
                 <span class="box box1 box3 box4">
-                    <input type="radio" name="clubCateNo" value="4" /> 건강/음식 &nbsp;
-                    <input type="radio" name="clubCateNo" value="5" /> 언어/문화 &nbsp;
-                    <input type="radio" name="clubCateNo" value="6" /> 종교</br>
+                    <input type="radio" name="cateNo" value="4" /> 건강/음식 &nbsp;
+                    <input type="radio" name="cateNo" value="5" /> 언어/문화 &nbsp;
+                    <input type="radio" name="cateNo" value="6" /> 종교</br>
                 </span>
                 <span class="box box1 box3 box4">
-                    <input type="radio" name="clubCateNo" value="7" /> 교육/학습 &nbsp;
-                    <input type="radio" name="clubCateNo" value="8" /> 음악/예술 &nbsp;
-                    <input type="radio" name="clubCateNo" value="9" /> 여행</br>
+                    <input type="radio" name="cateNo" value="7" /> 교육/학습 &nbsp;
+                    <input type="radio" name="cateNo" value="8" /> 음악/예술 &nbsp;
+                    <input type="radio" name="cateNo" value="9" /> 여행</br>
                 </span>
             </div>
 
@@ -159,7 +175,7 @@
 
             <div class="col-sm-12">
                 <label for="firstName">모임 태그</label>
-                <input type="text" class="box box1" id="" placeholder="" value="" required>
+                <input type="text" class="box box1" id="" placeholder="" value="" name="tagName" required>
             </div>
 
             <div class="col-sm-12">
@@ -215,7 +231,7 @@
           </div>
           <hr class="my-8">
           <div style="text-align: center;">
-            <button class="w-10 btn btn-primary btn-sm" type="submit"  style="margin-right: 20px;">동호회 등록</button>
+            <button class="w-10 btn btn-secondary btn-sm" type="submit"  style="margin-right: 20px;">동호회 등록</button>
             <button class="w-10 btn btn-secondary btn-sm" type="button">미리보기</button>
           </div>
         </br>
