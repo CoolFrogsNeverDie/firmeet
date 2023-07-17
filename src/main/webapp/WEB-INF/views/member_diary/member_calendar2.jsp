@@ -107,7 +107,7 @@
   <!--/wrap-->
   
   <!--모달창-->
-<div class="container1" >
+<div class="container" >
 
   <div class="popup-wrap" id="popup">
     <div class="popup">
@@ -120,16 +120,12 @@
             <h4><strong>일정등록</strong></h4>
             
           </div>
-       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
-            <input type="hidden" id = "address1" name = "address1" value = "-1">
-            <input type="hidden" id = "address2" name = "address2" value ="-1">
-            <input type="hidden" name = "memberId" value = "se" id = "memId">
-            <input type="hidden" id = "marker_place">
+       <form action="*" method = "">
           <div class="body-contentbox">
             <table id = "schedule-table">
               <tr>
                 <th>일정</th>
-                <td><input type="text" placeholder="일정명을 입력하세요." id = "title" name = "title"> </td>
+                <td><input type="text" placeholder="일정명을 입력하세요." name = "title"> </td>
               </tr>
               <tr>
                 <th rowspan="2">일정</th>
@@ -139,14 +135,12 @@
               <tr>
               </tr>
               <tr>
-                <th>장소등록</th>
-                <td>
-				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 <br></span>
-                <input type = "text" class= "search-place" id  = "place" name = "place" value = " " readonly><button type= "button" class="map-search-btn">위치검색</button></td>
+                <th>장소</th>
+                <td><input text="" name ="place"><button type= "button" class="map-btn">위치검색</button></td>
               </tr>
               <tr class="content-area">
                 <th>내용</th>
-                <td><textarea name = "content" id = "content"></textarea></td>
+                <td><textarea name = "content"></textarea></td>
               </tr>
             </table>
             
@@ -165,22 +159,26 @@
 <!--모달창-->
 
   <!--모달창-->
-<div class="container2" >
+<div class="container" >
 
   <div class="popup-wrap2" id="popup">
-    <div class="popup" id = "2th-popup">
+    <div class="popup">
       <div class="popup-head">
-        <div class="popup-close-btn2">X</div>
+        <div class="popup-close-btn">X</div>
       </div>
       <div class="popup-body">
         <div class="body-content">
        <form action="http://localhost:8000/link/search/" method = "get">
           <div class="body-titlebox">
-            <h4><strong>지도 선택</strong></h4>
-
+            <input type="text" name = "keyword">
+            <h4><strong>일정등록</strong></h4>
           </div>
           <div class="body-contentbox">
-            <div id="map" style="width:500px;height:400px;"></div>
+            <div id="map" style="width:300px;height:300px;"></div>
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">검색</button>
+            <button type ="button">취소</button>
           </div>
        </form>
           
@@ -194,182 +192,17 @@
   
   
 </body>
-<!-- 지도 JS 영역 -->
-<style>
-<!--지도-->
-.marker-place{
-padding:5px;font-size:14px; text-align:center; height: 100px;
-}
-.loca-insert-btn{
-	margin-bottom : 4px; background-color: black; color: white; text-align: center; font-size:12px; display:inline-block;
-	width:70px; height: 30px; margin-top:7px;
-	position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
-}
-.loca-insert-btn:hover{
-	background-color:white;
-	color: black; border: 0.5px solid black;
-}
-popup-wrap input {
-height:30px;
-}
-.map-search-btn{
- background-color: black; color: white;
-font-size: 15px;
-    width: 70px;
-    height: 30px;
-} 
-.checkbox-loca{
-  display: flex;
-  align-items: center;
-font-size : 13px;}
-</style>
 <script>
-// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
-    };  
+    };
 
-// 지도를 생성합니다    
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places(); 
-
-
-// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-function placesSearchCB (data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        var bounds = new kakao.maps.LatLngBounds();
-
-        for (var i=0; i<data.length; i++) {
-            displayMarker(data[i]);    
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }       
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
-    } 
-}
-
-// 지도에 마커를 표시하는 함수입니다
-function displayMarker(place) {
-    
-    // 마커를 생성하고 지도에 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x)
-    
-    });
-
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-
-		let lat =  marker.getPosition().getLat(); 
-        let lng =  marker.getPosition().getLng();
-        let place_name = place.place_name;
-        infowindow.setContent('<div class= "marker-place" style="height: 100px;">' + place_name + '<br> <button type="button" class= "loca-insert-btn">위치등록</button></div>');
-    	$('#address1').val(lat);
-    	$('#address2').val(lng);
-    	$('#marker_place').val(place_name);
-        infowindow.open(map, marker);
-    });
-}
-
-
-function setCenter(x, y) {            
-    // 이동할 위도 경도 위치를 생성합니다 
-    var moveLatLon = new kakao.maps.LatLng(x, y);
-    
-    // 지도 중심을 이동 시킵니다
-    map.setCenter(moveLatLon);
-}
-
-$('.map-search-btn').on("click", function(){
-	
-	var keyword = $('.search-place').val();
-	ps.keywordSearch(keyword, placesSearchCB); 
-	$('.container2 .popup-wrap2').css('display', 'block');
-	
-	
-});
-
-$('.popup-close-btn2').on("click", function(){
-	
-		console.log('확인');
-		$('.popup-wrap2').css("display", 'none');
-});
-
-//장소 등록
-$('#2th-popup').on("click",'.loca-insert-btn', function(){
-	let place_name =  $('#marker_place').val()
-	 $('.search-place').val(place_name);
-	$('.popup-wrap2').css("display", 'none');
-	$('#address1').disabled = false;
-	$('#address2').disabled = false;
-});
-
-//개인일정 등록 submit 이벤트
-$('.add-persche').on("submit", function(){
-	var memId = $('#memId').val();
-	var title = $('#title').val();
-	var startD = $('#startD').val();
-	var endD = $('#endD').val();
-	
-	if(title.length < 1){
-		alert('타이틀을 입력하세요.')
-		return false;
-	}if(memId.length < 1){
-		alert('로그인이 필요한 서비스입니다.')
-		return false;
-	}if(startD.length < 1){
-		alert('시작 날짜를 지정해주세요.')
-		return false;
-	}if(endD.length < 1){
-		alert('끝나는 날짜를 지정해주세요.')
-		return false;
-	}
-})
-
-
-function reset_popup1(){
-	$('#content').val("");
-	$('#startD').val("");
-	$('#endD').val("");
-	$('#title').val("");
-	$('#place').val("");
-	$('#address1').val("");
-	$('#address2').val("");
-	$('#address1').disabled = true;
-	$('#address2').disabled = true;
-	
-}
-
-$('#loca-insert-select').on('change', function() {
-	  if ($(this).is(':checked')) {
-		  $('#place').removeAttr('readonly');
-	  } else {
-		  $('#place').attr('readonly', 'readonly');
-	  }
-	});
-
 </script>
 
-
-
-
-
-<!--// 지도 JS 영역 //-->
-
-
-<!-- 캘린더 JS 영역 -->
 <script>
 
 //calendar 객체 전역변수 설정
@@ -382,11 +215,10 @@ $(document).ready(function() {
 	getData();
   });
   
-//정렬 선택 했을때 데이터 다시 불러옴
+//정렬 선택 했을때
 $('#select-array').on("change", function(){
 	getData();
 });
-//정렬 기준 변경 시 --내 일정-- 선택 시 결제/모임 정렬 기능 비활성화&전체로 value값 변경
 $('#select-club').on("change", function(){
 	
 	if( $(this).val() == '-88'){
@@ -449,7 +281,7 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 		
 	}
 	
-	//바뀐 캘린더 스케줄 불러오는 메서드//
+	
 	function getData(){
 		
 		var title = $("#fc-dom-1").text();
@@ -540,6 +372,71 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	
 	}
 	
+	
+	
 
+	/*
+
+	//스케줄 정보를 받아와서 render()에 넘겨주는 function
+	function getdata(){
+	var test = $("#fc-dom-1").text();
+	var years = test.substring(0,4);
+	var month = test.substring(test.length-2,test.length-1);
+ 	var viewOption1 =  $('#select-array').val(); 
+	var viewOption2 = $('#select-club').val();
+	var memberId = ${memberId}; 
+
+	console.log('test');
+	console.log(CalendarVO);
+	}
+
+	
+	 $.ajax({
+        
+        //요청 세팅
+        url : "${pageContext.request.contextPath}/calendar/getSchedule",      
+        type : "post",
+        data : CalendarVO,
+        
+        //응답 세팅
+        dataType : "json",
+        success : function(jsonResult){
+        	var data = jsonResult.data;
+			console.log(data)
+
+			calendar.removeAllEvents();
+			
+			if(data.length != 0){
+				for(var i = 0; i<data.length; i++){
+					if(data[i].meetCate == "3"){
+					    calendar.addEvent({
+							title: data[i].frontTitle +' '+ data[i].title,
+							start: data[i].startDate,
+							end:data[i].endDate,
+							url:'https://www.naver.com',
+							backgroundColor : '#FF6A00'
+						}); //eddEvent end
+					}else{
+					    calendar.addEvent({
+							title:  data[i].frontTitle +' '+ data[i].title,
+							start: data[i].startDate,
+							end:data[i].endDate,
+							url:'https://www.naver.com',
+							backgroundColor : '#66008c'
+						}); //eddEvent end
+					}
+				}
+			}
+        }, //success end
+        error : function(XHR, status, error) {
+        console.error(status + " : " + error);
+        }
+				            
+     });//ajax end
+	 
+	}//get data end
+
+
+*/
 </script>
 </html>

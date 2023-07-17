@@ -15,8 +15,8 @@
                		when aboardval = 3 then '[일정]'
 			        end as frontTitle
         		,b.title as title
-        		,a.startDate as startDate
-        		,a.endDate as endDate
+        		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
+        		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
 			from meet_name a join aboard b on a.meetNo = b.meetNo
 			where a.clubID = #{clubId} 	and meetyear in #{years}
 			and meetmon = #{month}
@@ -46,8 +46,8 @@
                		when aboardval = 3 then '(모임)'
 			        end as frontTitle
         		,b.title as title
-        		,a.startDate as startDate
-        		,a.endDate as endDate
+        		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
+        		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
                 from meet_name a join  aboard b on a.meetNo = b.meetNo
                 join club c on c.clubId = b.clubId
                 join club_member d on c.clubId = d.clubId 
@@ -75,8 +75,8 @@
                 myScheduleNo AS perScheduleNo
                 ,schetitle AS title
                 ,scheContent AS content
-                ,startDate
-                ,endDate
+        		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
+        		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
                 ,schePlace AS place
                 ,address1
                 ,address2
@@ -90,5 +90,41 @@
             and extract (year from endDate) = #{years})
 		]]>
 	</select>
-
+	
+	<insert id = "insertPerSche" parameterType ="schedule">
+		<![CDATA[
+			insert into my_schedule 
+    			(
+    			MYSCHEDULENO
+    			,MEMBERID
+    			,STARTDATE
+   				,ENDDATE
+  			    ,SCHETITLE
+   		    	,SCHECONTENT
+		]]>
+   		  	 <if test = "address1 != null">
+   			    ,SCHEPLACE
+    			,ADDRESS1
+    			,ADDRESS2
+	   		  </if>
+		<![CDATA[
+    			)
+    			
+			values(
+    			seq_mysche_no.nextval
+    			,#{memberId}
+    			,#{startDate}
+    			,#{endDate}
+   				,#{title}
+   				,#{content}
+		]]>
+   			 <if test = "address1 != null">
+   			    ,#{place}
+   	 			,#{address1}
+    			,#{address2}
+	   	     </if>
+		    )
+	</insert>
+	
+	
 </mapper>

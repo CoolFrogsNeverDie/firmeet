@@ -50,4 +50,10 @@ public class CalendarService {
 		return scheList;
 	}
 	
+	public void addPerSche(ScheduleVO scheduleVO) {
+		
+		scheduleDAO.insertPerSche(scheduleVO);
+		
+	}
+	
 }

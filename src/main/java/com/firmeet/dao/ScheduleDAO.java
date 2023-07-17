@@ -38,4 +38,10 @@ public class ScheduleDAO {
 		return perScheList;
 	}
 	
+	public void insertPerSche(ScheduleVO scheduleVO) {
+		
+		System.out.println("개인일정 추가 DAO까찌 오는지 확인  : " + scheduleVO);
+		session.insert("schedule.insertPerSche", scheduleVO);
+	}
+	
 }

@@ -1,18 +1,21 @@
-.container{
+.container1, .container2{
   margin:0;
   padding:0;
   box-sizing: border-box;
   height: 200%;
 }
-p{
+.container1 p , .container2 p{
   margin-top:10px;
 }
-.modal-btn-box{
+.container1 .modal-btn-box{
   width:100%;
   text-align:center;
 }
-
-.popup-wrap{
+.container1 input{
+	height: 30px;
+}
+.container1 .popup-wrap {
+  z-index: 1;
   background-color:rgba(0,0,0,.3);
   justify-content:center;
   align-items:center;
@@ -21,79 +24,82 @@ p{
   left:0;
   right:0;
   bottom:0;
+  /*
+  */
   display:none;
   padding:15px;
   position: fixed;
   z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
 }
-.popup{
-  width:100%;
-  height: 500px;
-  max-width:550px;
+.container1 .popup{
+  width: 550px;
+  min-height: 530px;
+  min-width: 550px;
+  min-height: 530px;
   background-color:#ffffff;
   border-radius:3px;
   overflow:hidden;
   background-color:#000000;
   box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
 }
-.popup-head{
+.container1 .popup-head{
   width:100%;
   height:30px;
   color: white;
   font-size: 21px;
 }
-.popup-close-btn{
+.container1 .popup-close-btn, .container2 .popup-close-btn2{
   float: right;
   text-align: center;
   margin-right: 5px;
   width:30px;
 }
-.head-title {
+.container1 .head-title {
     font-size: 20px;
     color: white;
     font-weight: 100;
     letter-spacing: 1px;
     text-align: center;
 }
-.popup-body{
+.container1 .popup-body{
   width:100%;
   background-color:#ffffff;
 }
-.body-content{
+.container1 .body-content{
   width:100%;
   height: 500px;
   padding:30px;
 }
-.body-titlebox{
+.container1 .body-titlebox{
   width:100%;
   height:10%;
   margin-bottom:10px;
   border-bottom: 2px solid black;
 }
-.body-contentbox{
+.container1 .body-contentbox{
   word-break:break-word;
   overflow-y:auto;
   min-height:100px;
   max-height:400px;
 }
-#schedule-table{
+.container1 #schedule-table{
   width: 98%;
   margin: 0 auto;
 }
-#schedule-table tr{
+.container1 #schedule-table tr{
   height : 35px;
 }
-#schedule-table tr, #schedule-table td{
+.container1 #schedule-table tr, #schedule-table td{
   padding-left: 2%;
   border:0.5px solid rgb(44, 44, 44);
 }
 
-#schedule-table th{
+.container1 #schedule-table th{
   text-align: center;
   background-color: #f8f8f8;
   width:20%;
 }
-.content-area textarea{
+.container1 .content-area textarea{
   padding-left: 0%;
   width:100%;
   height: 170px;
@@ -102,10 +108,10 @@ p{
   outline: none;
   padding-top: 2%;
 }
-#schedule-table .content-area{
+.container1 #schedule-table .content-area{
   height:170px;
 }
-.map-btn{
+.container1 .map-btn{
   background-color: #000000;
   color: white;
   margin-left: 10px;
@@ -113,22 +119,73 @@ p{
   height: 25px;
   font-size: 13px;
 }
-.sche-submit-btn{
+.container1 .sche-submit-btn{
   margin: 0 auto ;
   position: absolute;
   left:50%;
   transform: translateX(-50%);
+  min-width: 144px;
 }
-.sche-submit-btn button{
+.container1 .sche-submit-btn button{
   margin-top: 23px;
   height: 30px;
   width: 70px;
 }
-.sche-submit-btn button:nth-child(1){
+.container1 .sche-submit-btn button:nth-child(1){
   background-color: #000000;
   color: white;
 }
-.sche-submit-btn button:nth-child(2){
+.container1 .sche-submit-btn button:nth-child(2){
   background-color: white;
   border: 1px solid black;
+}
+
+/*2th popup*/
+
+.container2 .popup{
+  width: 550px;
+  height: 550px;
+  min-width: 550px;
+  min-height: 500px;
+  background-color:#ffffff;
+  border-radius:3px;
+  overflow:hidden;
+  background-color:#000000;
+ position: fixed;
+  _position: absolute;
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+  justify-content:center;
+  align-items:center;
+}
+
+
+.container2 .popup-wrap2 {
+  z-index: 2;
+  justify-content:center;
+  align-items:center;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  display:none;
+  bottom:0;
+  padding:15px;
+  position: fixed;
+  z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
+}
+
+.container2 .popup-head{
+  width:100%;
+  height:30px;
+  color: white;
+  font-size: 21px;
+}
+.container2 .popup-body{
+	background-color: white;
+}
+
+.container2 .body-content{
+  width:100%;
+  height: 500px;
+  padding:30px;
 }

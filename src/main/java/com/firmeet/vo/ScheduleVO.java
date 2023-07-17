@@ -1,7 +1,5 @@
 package com.firmeet.vo;
 
-import java.sql.Date;
-
 public class ScheduleVO {
 	
 	private int boardNo;
@@ -9,15 +7,16 @@ public class ScheduleVO {
 	private int meetNo;
 	private int meetCate;
 	private int clubId;
+	private String memberId;
 	private String clubName;
 	private String title;
 	private String content;
 	private String frontTitle;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String place;
-	private String address1;
-	private String address2;
+	private float address1;
+	private float address2;
 	
 	public ScheduleVO() {
 		super();
@@ -37,16 +36,6 @@ public class ScheduleVO {
 
 	public void setPerScheNo(int perScheNo) {
 		this.perScheNo = perScheNo;
-	}
-
-	
-	
-	public String getClubName() {
-		return clubName;
-	}
-
-	public void setClubName(String clubName) {
-		this.clubName = clubName;
 	}
 
 	public int getMeetNo() {
@@ -73,6 +62,22 @@ public class ScheduleVO {
 		this.clubId = clubId;
 	}
 
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getClubName() {
+		return clubName;
+	}
+
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -97,19 +102,19 @@ public class ScheduleVO {
 		this.frontTitle = frontTitle;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -121,30 +126,32 @@ public class ScheduleVO {
 		this.place = place;
 	}
 
-	public String getAddress1() {
+	public float getAddress1() {
 		return address1;
 	}
 
-	public void setAddress1(String address1) {
+	public void setAddress1(float address1) {
 		this.address1 = address1;
 	}
 
-	public String getAddress2() {
+	public float getAddress2() {
 		return address2;
 	}
 
-	public void setAddress2(String address2) {
+	public void setAddress2(float address2) {
 		this.address2 = address2;
 	}
 
 	@Override
 	public String toString() {
 		return "ScheduleVO [boardNo=" + boardNo + ", perScheNo=" + perScheNo + ", meetNo=" + meetNo + ", meetCate="
-				+ meetCate + ", clubId=" + clubId + ", clubName=" + clubName + ", title=" + title + ", content="
-				+ content + ", frontTitle=" + frontTitle + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", place=" + place + ", address1=" + address1 + ", address2=" + address2 + "]";
+				+ meetCate + ", clubId=" + clubId + ", memberId=" + memberId + ", clubName=" + clubName + ", title="
+				+ title + ", content=" + content + ", frontTitle=" + frontTitle + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", place=" + place + ", address1=" + address1 + ", address2=" + address2
+				+ "]";
 	}
 
 
+	
 	
 }
