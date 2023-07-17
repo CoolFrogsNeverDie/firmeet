@@ -18,10 +18,16 @@ public class NoticeBoardVO {
 	private int voteNo;
 	private String voteTitle;
 	private String vote1 = "";
+	private int vote1Cnt;
 	private String vote2 = "";
+	private int vote2Cnt;
 	private String vote3 = "";
+	private int vote3Cnt;
 	private String vote4 = "";
+	private int vote4Cnt;
 	private String vote5 = "";
+	private int vote5Cnt;
+	
 	private int totalNum;
 	private String finDate;
 	private int voteResult;
@@ -246,12 +252,28 @@ public class NoticeBoardVO {
 		this.vote1 = vote1;
 	}
 
+	public int getVote1Cnt() {
+		return vote1Cnt;
+	}
+
+	public void setVote1Cnt(int vote1Cnt) {
+		this.vote1Cnt = vote1Cnt;
+	}
+
 	public String getVote2() {
 		return vote2;
 	}
 
 	public void setVote2(String vote2) {
 		this.vote2 = vote2;
+	}
+
+	public int getVote2Cnt() {
+		return vote2Cnt;
+	}
+
+	public void setVote2Cnt(int vote2Cnt) {
+		this.vote2Cnt = vote2Cnt;
 	}
 
 	public String getVote3() {
@@ -262,6 +284,14 @@ public class NoticeBoardVO {
 		this.vote3 = vote3;
 	}
 
+	public int getVote3Cnt() {
+		return vote3Cnt;
+	}
+
+	public void setVote3Cnt(int vote3Cnt) {
+		this.vote3Cnt = vote3Cnt;
+	}
+
 	public String getVote4() {
 		return vote4;
 	}
@@ -270,12 +300,28 @@ public class NoticeBoardVO {
 		this.vote4 = vote4;
 	}
 
+	public int getVote4Cnt() {
+		return vote4Cnt;
+	}
+
+	public void setVote4Cnt(int vote4Cnt) {
+		this.vote4Cnt = vote4Cnt;
+	}
+
 	public String getVote5() {
 		return vote5;
 	}
 
 	public void setVote5(String vote5) {
 		this.vote5 = vote5;
+	}
+
+	public int getVote5Cnt() {
+		return vote5Cnt;
+	}
+
+	public void setVote5Cnt(int vote5Cnt) {
+		this.vote5Cnt = vote5Cnt;
 	}
 
 	public int getTotalNum() {
@@ -396,11 +442,13 @@ public class NoticeBoardVO {
 				+ meetNo + ", aboardVal=" + aboardVal + ", title=" + title + ", aboardDate=" + aboardDate + ", likeCnt="
 				+ likeCnt + ", boardContent=" + boardContent + ", voteEnd=" + voteEnd + ", minPerson=" + minPerson
 				+ ", maxPerson=" + maxPerson + ", price=" + price + ", voteNo=" + voteNo + ", voteTitle=" + voteTitle
-				+ ", vote1=" + vote1 + ", vote2=" + vote2 + ", vote3=" + vote3 + ", vote4=" + vote4 + ", vote5=" + vote5
-				+ ", totalNum=" + totalNum + ", finDate=" + finDate + ", voteResult=" + voteResult + ", choice="
-				+ choice + ", voteDate=" + voteDate + ", meetYear=" + meetYear + ", meetMon=" + meetMon + ", meetName="
-				+ meetName + ", startDate=" + startDate + ", endDate=" + endDate + ", meetTime=" + meetTime
-				+ ", meetPlace=" + meetPlace + ", address1=" + address1 + ", address2=" + address2 + "]";
+				+ ", vote1=" + vote1 + ", vote1Cnt=" + vote1Cnt + ", vote2=" + vote2 + ", vote2Cnt=" + vote2Cnt
+				+ ", vote3=" + vote3 + ", vote3Cnt=" + vote3Cnt + ", vote4=" + vote4 + ", vote4Cnt=" + vote4Cnt
+				+ ", vote5=" + vote5 + ", vote5Cnt=" + vote5Cnt + ", totalNum=" + totalNum + ", finDate=" + finDate
+				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
+				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
+				+ address1 + ", address2=" + address2 + "]";
 	}
 
 }

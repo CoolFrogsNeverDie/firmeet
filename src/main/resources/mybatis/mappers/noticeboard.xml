@@ -25,6 +25,17 @@
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
 	
+	<select id="voteresult" resultType="com.firmeet.vo.VoteResultVO" parameterType="com.firmeet.vo.VoteResultVO">
+		select
+			 sum(case when choice = 1 then 1 else 0 end) as Vote1Cnt
+			,sum(case when choice = 2 then 1 else 0 end) as Vote2Cnt
+			,sum(case when choice = 3 then 1 else 0 end) as Vote3Cnt
+			,sum(case when choice = 4 then 1 else 0 end) as Vote4Cnt
+			,sum(case when choice = 5 then 1 else 0 end) as Vote5Cnt
+		from voteResult
+		where voteNo = #{voteNo}
+	</select>
+	
 	<insert id="editwritevote" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
 			select seq_voteNo.nextval from dual
@@ -37,16 +48,6 @@
 		insert into voteResult(voteResult, voteNo, memberId, choice, voteDate)
 		values(seq_voteResultNo.nextval, #{voteNo}, #{memberId}, #{choice}, SYSDATE)
 	</insert>
-	
-<!-- 	<select id="votecount" parameterType="noticeboard" resultType="noticeboard">
-		select
-		    sum(case when choice = 1 then 1 else 0 end) as vote1
-		    ,sum(case when choice = 2 then 1 else 0 end) as vote2
-		    ,sum(case when choice = 3 then 1 else 0 end) as vote3
-		    ,sum(case when choice = 4 then 1 else 0 end) as vote4
-		from voteResult 
-		where voteNo = #{voteNo}
-	</select> -->
 	
 	<insert id="editgroupwrite" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">

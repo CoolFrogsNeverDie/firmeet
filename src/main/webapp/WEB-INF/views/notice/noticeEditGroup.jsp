@@ -258,7 +258,7 @@ $(document).ready(function() {
 	    var meetYearValue = $('#meetYear').val();
 	    var meetMonValue = $('#meetMon').val();
 	    var meetNameValue = $('#meetName').val();
-	    var combinedValue = meetYearValue + ' ' + meetMonValue+ ' ' + meetNameValue;
+	    var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
 
 	    $('#result').text(combinedValue);
 	 });

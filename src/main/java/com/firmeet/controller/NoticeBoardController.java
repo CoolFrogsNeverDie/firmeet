@@ -3,7 +3,6 @@ package com.firmeet.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +75,7 @@ public class NoticeBoardController {
 		
 		System.out.println("번호확인"+vo.getVoteNo());
 		
-		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+vo.getVoteNo();
+		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+(vo.getVoteNo()+1);
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
@@ -102,7 +101,7 @@ public class NoticeBoardController {
 		
 		System.out.println("번호확인"+vo.getMeetNo());
 		
-		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlistgroup/"+vo.getAboardNo()+"/"+vo.getMeetNo();
+		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlistgroup/"+vo.getAboardNo()+"/"+(vo.getMeetNo()+1);
 	}
 	
 	//에디터 모임 등록 후 나오는 리스트
@@ -125,28 +124,46 @@ public class NoticeBoardController {
 		return "notice/noticeEditView";
 	}
 	
-	@RequestMapping("/{memberId}/{voteNo}/vote")
-	public String vote(@PathVariable("memberId") String memberId, @PathVariable("voteNo") int voteNo, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	@RequestMapping("/{aboardNo}/{memberId}/{voteNo}/vote")
+	public String vote(@PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+		
+		model.addAttribute("aboardNo", aboardNo);
+		System.out.println("공지번호확인"+aboardNo);
 		
 		System.out.println("vote확인");
 		System.out.println("controller vo"+vo);
-		System.out.println("controller memberId"+memberId);
-		System.out.println("controller voteNo"+voteNo);
+		System.out.println("controller voteNo"+vo.getVoteNo());
+		
+//		session.getAttribute("voteNo");
+//		vo.setVoteNo(voteNo);
 		
 		noticeBoardService.voteinsert(vo);
 		
-		return "redirect:/notice/voteresult";
+		return "redirect:/notice/"+vo.getAboardNo()+"/"+vo.getMemberId()+"/"+(vo.getVoteNo()+1)+"/voteResult";
 	}
 	
-//	@RequestMapping("/voteresult")
-//	public String voteresult(Model model) {
+	//에디터 일반페이지 등록 후 리스트
+	@RequestMapping("/{aboardNo}/{memberId}/{voteNo}/voteResult")
+	public String voteResult(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
+		System.out.println("notice editlist 확인");
 		
-//		List<NoticeBoardVO> votelist = noticeBoardService.votecount();
-//		model.addAttribute("votelist", votelist);
+		model.addAttribute("aboardNo", aboardNo);
+		System.out.println("공지번호확인"+aboardNo);
 		
-//		return"notice/noticeGroupViewResult";
-//	}
+		System.out.println("controller aboardNo 확인"+aboardNo);
+		
+		model.addAttribute("vo", noticeBoardService.voteResult(aboardNo));
+		
+		System.out.println("controller voteNo 확인"+vo.getVoteNo());
+		return "notice/noticeGroupViewR";
+	}
 	
+	
+	@RequestMapping("/voteresult")
+	public String voteresult(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		System.out.println("voteresult controller 확인");
+		return"notice/noticeGroupViewResult";
+	}
 	
 	
 	@RequestMapping(value="/upload", produces = "application/json; charset=utf8")
