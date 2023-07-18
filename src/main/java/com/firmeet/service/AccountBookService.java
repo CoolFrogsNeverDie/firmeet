@@ -1,6 +1,7 @@
 package com.firmeet.service;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -39,45 +40,54 @@ public class AccountBookService {
 	
 	// 파일 작성
 	public void upload(AccountBookVo aBookVo, MultipartFile file) {
-		System.out.println("AccountBookService upload 확인");
-		System.out.println(file.getOriginalFilename());
+	    System.out.println("AccountBookService upload 확인");
+	    
+	    if (file != null && !file.isEmpty() && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()) {
+	        // 원파일 이름
+	        String orgName = file.getOriginalFilename();
+	        System.out.println("orgName : " + orgName);
 
-		// 원파일 이름
-		String orgName = file.getOriginalFilename();
-		System.out.println("orgName : " + orgName);
+	        // 확장자
+	        String exName = orgName.substring(orgName.lastIndexOf("."));
+	        System.out.println("exName : " + exName);
 
-		// 확장자
-		String exName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		System.out.println("exName : " + exName);
+	        // 저장파일 이름
+	        String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+	        System.out.println("saveName : " + saveName);
 
-		// 저장파일 이름
-		String savaName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
-		System.out.println("savaName : " + savaName);
+	        // 파일패스
+	        String filePath = saveDir + File.separator + saveName;
+	        System.out.println("filePath : " + filePath);
 
-		// 파일패스
-		String filePath = saveDir + "\\" + savaName;
-		System.out.println("filePath : " + filePath);
+	        // 파일사이즈
+	        long fileSize = file.getSize();
+	        System.out.println("fileSize : " + fileSize);
 
-		// 파일사이즈
-		long fileSize = file.getSize();
-		System.out.println("fileSize : " + fileSize);
-
-		// 파일 업로드(하드디스크에 저장)
-		try {
-			byte[] fileData = file.getBytes();
-			OutputStream out = new FileOutputStream(filePath);
-			BufferedOutputStream bout = new BufferedOutputStream(out);
-			bout.write(fileData);
-			bout.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		aBookVo.setReceipt(savaName);
-		System.out.println(aBookVo);
-		
-		accountBookDao.upload(aBookVo);
-		
+	        // 파일 업로드(하드디스크에 저장)
+	        try {
+	            byte[] fileData = file.getBytes();
+	            OutputStream out = new FileOutputStream(filePath);
+	            BufferedOutputStream bout = new BufferedOutputStream(out);
+	            bout.write(fileData);
+	            bout.close();
+	            
+	            aBookVo.setReceipt(saveName);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    System.out.println(aBookVo);
+	    
+	    accountBookDao.upload(aBookVo);
 	}
-	
+
+	public List<AccountBookVo> search(int clubId, String startDate, String endDate, String searchText) {
+		System.out.println("AccountBookService search 확인");
+
+		
+		List<AccountBookVo> searchResult =accountBookDao.search(clubId, startDate, endDate, searchText);
+		
+		return searchResult;
+	}
 }

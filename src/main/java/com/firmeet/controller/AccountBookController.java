@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.AccountBookService;
 import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.ClubVo;
@@ -70,6 +72,16 @@ public class AccountBookController {
 		
 		accountBookService.upload(aBookVo,file);
 		
-		return "";
+		return "redirect:/accountBook/main/"+clubId;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/search/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
+	public List<AccountBookVo> searchAccountBook(@RequestParam("startDate") String startDate,
+	                                             @RequestParam("endDate") String endDate,
+	                                             @RequestParam("searchText") String searchText,
+	                                             @PathVariable("clubId") int clubId) {
+	    List<AccountBookVo> searchResult = accountBookService.search(clubId, startDate, endDate, searchText);
+	    return searchResult;
 	}
 }

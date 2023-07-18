@@ -47,4 +47,23 @@ public class AccountBookDao {
 		 
 		 session.insert("accountbook.meetUpload", aBookVo);
 	}
+
+	public List<AccountBookVo> search(int clubId, String startDate, String endDate, String searchText) {
+		System.out.println("AccountBookDao search 확인");
+		System.out.println(clubId);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(searchText);
+		
+		Map<String, Object> sMap = new HashMap<>();
+		sMap.put("clubId", clubId);
+		sMap.put("startDate", startDate);
+		sMap.put("endDate", endDate);
+		sMap.put("searchText", searchText);
+		
+		List<AccountBookVo> searchResult =session.selectList("accountbook.search",sMap);
+		System.out.println(searchResult);
+		
+		return searchResult;
+	}
 }

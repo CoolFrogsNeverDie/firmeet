@@ -29,34 +29,57 @@
 		CLUBID,
 		meetName
 		FROM meet_name
-		where CLUBID = #{clubId}
+		where CLUBID =
+		#{clubId}
 		ORDER BY meetmon DESC
 	</select>
 	<insert id="meetUpload"
 		parameterType="com.firmeet.vo.AccountBookVo">
 		INSERT INTO Account_Book (id
-			, clubId
-			, meetNo
-			, memberId
-			, amount
-			, datetime
-			,category
-			, purpose
-			, income_expense
-			, receipt
-			, payment)
+		, clubId
+		, meetNo
+		, memberId
+		, amount
+		, datetime
+		,category
+		, purpose
+		, income_expense
+		, receipt
+		, payment)
 		VALUES (
-			SEQ_ACCOUNTID.NEXTVAL, 
-			#{clubId}
-			, #{meetNo}
-			, #{memberId}
-			, #{amount},
-			TO_DATE(SYSDATE,'YY/MM/DD')
-			, #{category}
-			, #{purpose}
-			,#{incomeExpense}
-			, #{receipt}
-			, #{payment})
+		SEQ_ACCOUNTID.NEXTVAL,
+		#{clubId}
+		, #{meetNo}
+		, #{memberId}
+		, #{amount},
+		TO_DATE(SYSDATE,'YY/MM/DD')
+		, #{category}
+		, #{purpose}
+		,#{incomeExpense}
+		, #{receipt}
+		, #{payment})
 	</insert>
+	
+<select id="search" parameterType="map" resultType="com.firmeet.vo.AccountBookVo">
+  SELECT ID
+  , CLUBID
+  , MEETNO
+  , MEMBERID
+  , AMOUNT
+  , TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
+  , CATEGORY
+  , PURPOSE
+  , INCOME_EXPENSE AS incomeExpense
+  , RECEIPT
+  , PAYMENT
+  FROM ACCOUNT_BOOK
+  WHERE CLUBID = #{clubId}
+    AND (DATETIME BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+    AND TO_DATE(#{endDate}, 'YYYY-MM-DD') 
+    OR #{startDate} IS NULL 
+    OR #{endDate} IS NULL)
+    AND (PURPOSE = #{searchText} 
+    OR #{searchText} IS NULL)
+</select>
 
 </mapper>
