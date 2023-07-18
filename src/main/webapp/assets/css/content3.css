@@ -2,13 +2,54 @@
 
 /* 왼쪽 */
 .content-left {
-  width: 100%;
-  height: 99%;
   display: inline-block;
-  margin-top: 9px;
-  background-color: #eeeeee;
+  margin-top: 10px;
+  background-color: white;
+  width: 25%;
+  height: 566px;
+  display: inline-block;
+  margin-bottom: 10px;
+  overflow: auto;
 }
 
+dt, dd {
+  width: 95%;
+  padding: 10px;
+}
+
+dt {
+  border: 1px solid #000000;
+  margin-bottom: 5px;
+}
+
+dt span {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+dd {
+  background-color: #eeeeee;;
+  margin-bottom: 5px;
+  display: none;
+}
+
+dd:hover{
+  background-color: black;
+  color:white;
+}
+.content-right {
+  width: 74%;
+  height: 100%;
+  display: inline-block;
+  margin-top: 10px;
+
+  float: right;
+  margin: 5px;
+}
 .border-write{
   width: 60%;
   height: 5%;

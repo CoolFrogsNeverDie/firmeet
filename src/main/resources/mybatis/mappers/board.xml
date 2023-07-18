@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	<select id = "getPerBoard" parameterType ="board" resultType ="board">
+		<![CDATA[
+			select
+        		a.boardNo as boardNo
+        		,a.clubId as clubId
+        		,a.memberId as memberId
+        		,b.clubname as clubName
+        		,a.boardContent as content
+        		,a.boardDate as boardDate
+        	from board a join club b on a.clubId = b.clubId
+        	where memberId = #{memberId}
+		]]>
+		<if test="clubId !=-99">
+			and a.clubId = #{clubId}
+		</if>
+		        order by boardNo desc
+	</select>
+	
+	
+	<select id = "getComment" parameterType ="board" resultType ="reply">
+		<![CDATA[
+    		SELECT
+       			replyno as replyNo
+       			,a.memberId as memberId 
+        		,memberName as memberName
+        		,replycontent as content
+        		,replydate as replyDate
+       			,REPLYGROUP as replyGroup
+        		,deep
+   			from board_reply a join member b on a.memberId = b.memberId
+    		where boardNo = #{boardNo}
+   			order by replygroup , deep
+		]]>
+	</select>
+	
+</mapper>

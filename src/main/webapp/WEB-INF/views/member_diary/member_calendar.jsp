@@ -50,7 +50,7 @@
       <!--/diary-topbar-img-->
       <div class="diary-subbar">
         <div>
-          <h4>${memberId}님의 달력</h4>
+          <h4>&#128197;&nbsp;&nbsp;${memberId}님의 달력</h4>
           <input type ="hidden" value ="${memberId}" id ="memId">
         </div>
         <div class="calendar-array">
@@ -141,8 +141,9 @@
               <tr>
                 <th>장소등록</th>
                 <td>
-				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 <br></span>
-                <input type = "text" class= "search-place" id  = "place" name = "place" value = " " readonly><button type= "button" class="map-search-btn">위치검색</button></td>
+				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 </span>
+				<span><input type = "text" readonly name = "place" id = "place-result" value =" "></span>
+                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></td>
               </tr>
               <tr class="content-area">
                 <th>내용</th>
@@ -201,7 +202,7 @@
               <tr>
                 <th>장소등록</th>
                 <td>
-				<span class= "checkbox-loca"><input type ="checkbox"> &nbsp;장소 등록 <br></span>
+	 				<span class= "checkbox-loca"><input type ="checkbox"> &nbsp;장소 등록 </span><br>
                 <input type = "text" class= "search-place" name = "place" value = " " readonly><button type= "button" class="map-search-btn">위치검색</button></td>
               </tr>
               <tr class="content-area">
@@ -372,10 +373,10 @@ $('.popup-close-btn2').on("click", function(){
 //장소 등록
 $('#2th-popup').on("click",'.loca-insert-btn', function(){
 	let place_name =  $('#marker_place').val()
-	 $('.search-place').val(place_name);
+// 	 
+	$('#place-result').val(place_name);
 	$('.popup-wrap2').css("display", 'none');
-	$('#address1').disabled = false;
-	$('#address2').disabled = false;
+	
 });
 
 //개인일정 등록 submit 이벤트
@@ -401,25 +402,30 @@ $('.add-persche').on("submit", function(){
 	return true;
 })
 
-
+//일정 등록 팝업 리셋
 function reset_popup1(){
 	$('#content').val("");
 	$('#startD').val("");
 	$('#endD').val("");
 	$('#title').val("");
 	$('#place').val("");
-	$('#address1').val("");
-	$('#address2').val("");
-	$('#address1').disabled = true;
-	$('#address2').disabled = true;
-	
+	$('#address1').val("-1");
+	$('#address2').val("-1");
+	$('#loca-insert-select').prop('selectedIndex', -1);
 }
+//일정등록 팝업 주소 리셋
+function reset_popup1_address(){
+	$('#address1').val("-1");
+	$('#address2').val("-1");
+}
+
 
 $('#loca-insert-select').on('change', function() {
 	  if ($(this).is(':checked')) {
 		  $('#place').removeAttr('readonly');
 	  } else {
 		  $('#place').attr('readonly', 'readonly');
+		  reset_popup1_address();
 	  }
 	});
 
@@ -434,6 +440,9 @@ $('#loca-insert-select').on('change', function() {
 
 <!-- 캘린더 JS 영역 -->
 <script>
+
+
+
 
 //calendar 객체 전역변수 설정
 let calendarEl;
@@ -482,6 +491,7 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 
 	  $(".popup-close-btn").click(function(){
 	      modalClose();
+	      reset_popup1();
 	  });
 	  function modalClose(){
 	    $("#popup").fadeOut();
@@ -501,7 +511,14 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 		    locale: 'ko',
 	    	initialView: 'dayGridMonth',
 	    	selectable: true,
+	    	eventlimit: true,
+			dayMaxEvents: true,
 	    	//드래그 이벤트처리
+	           views: {
+	        	    timeGrid: {
+	        	    	  eventLimit: 2
+	        	    }
+	        	  },
 	    	dateClick: function(info) {
 		        $("#popup").css('display','flex').hide().fadeIn()
 		        $('#startD').val(info.dateStr);
@@ -592,11 +609,17 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	 							title: per[i].title ,
 	 							start: per[i].startDate,
 	 							end: per[i].endDate + ' 24:00',
-	 							url: 'http://www.naver.com',
+	 							id : 'per',
+	 					        className : 'per-block',
 	 							backgroundColor: '#0C70F2',
-	 							borderColor:  '#0C70F2'
-	 						});//addEvent end
-	        		 }
+	 							borderColor:  '#0C70F2',
+	 						}
+	        			 
+	        			 
+	        			 
+	        			 );//addEvent end
+
+	        		 }//for end
 	        	 }//if end
 	         }, //success end
 	         error : function(XHR, status, error) {
@@ -609,6 +632,21 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	
 	}
 	
+	
 
 </script>
+
+<script>
+$('.per-block')on("click", function(){
+	
+	alert('test')
+});
+$('#calendar')on("click",'.per-block', function(){
+
+	alert('test')
+});
+
+
+</script>
+
 </html>

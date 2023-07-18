@@ -67,7 +67,7 @@
 }
 .container1 .body-content{
   width:100%;
-  height: 500px;
+  height: 530px;
   padding:30px;
 }
 .container1 .body-titlebox{
@@ -139,6 +139,13 @@
   background-color: white;
   border: 1px solid black;
 }
+.container1 #place-result {
+	
+border: none;
+ pointer-events: none;
+	
+}
+
 
 /*2th popup*/
 

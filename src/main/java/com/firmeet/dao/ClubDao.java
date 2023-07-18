@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
 @Repository
@@ -17,9 +16,9 @@ public class ClubDao {
 	@Autowired
 	private SqlSession session;
 	
-	public List<ClubVo> getMemClub(MemberVo memberVO){
+	public List<ClubVo> getMemClub(String memberId){
 		
-		List<ClubVo> memClubList = session.selectList("club.getMemClub", memberVO);
+		List<ClubVo> memClubList = session.selectList("club.getMemClub", memberId);
 		
 		return memClubList;
 	}

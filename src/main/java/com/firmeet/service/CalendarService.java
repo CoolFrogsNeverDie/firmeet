@@ -31,7 +31,7 @@ public class CalendarService {
 
 	public List<ClubVo> setCalOption(MemberVo memberVO){
 		
-		List<ClubVo> joinList = clubDAO.getMemClub(memberVO);
+		List<ClubVo> joinList = clubDAO.getMemClub(memberVO.getMemberId());
 		
 		return joinList;
 	}

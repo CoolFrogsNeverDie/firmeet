@@ -3,7 +3,8 @@
 
 <mapper namespace="club">
 
-	 <select id = "getMemClub" parameterType ="member" resultType ="club">
+
+	 <select id = "getMemClub" parameterType ="String" resultType ="club">
 	 	<![CDATA[
 			  	select 
 	                a.clubName

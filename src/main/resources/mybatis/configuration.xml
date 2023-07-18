@@ -10,6 +10,8 @@
 	<typeAlias type="com.firmeet.vo.ClubVo" alias="club"/>
 	<typeAlias type="com.firmeet.vo.MemberVo" alias="member"/>
 	<typeAlias type="com.firmeet.vo.AccountBookVo" alias="accountbook"/>
+	<typeAlias type="com.firmeet.vo.ReplyVO" alias="reply"/>
+	<typeAlias type="com.firmeet.vo.BoardVO" alias="board"/>
 	</typeAliases>
 
 	<mappers>
@@ -18,6 +20,7 @@
 	<mapper resource="mybatis/mappers/schedule.xml" />
 	<mapper resource="mybatis/mappers/club.xml" />
 	<mapper resource="mybatis/mappers/accountbook.xml" />
+	<mapper resource="mybatis/mappers/board.xml" />
     </mappers>
     
     

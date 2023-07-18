@@ -46,7 +46,7 @@
       <!--/diary-topbar-img-->
       <div class="diary-subbar">
         <div>
-          <h4>동호회 달력</h4>
+          <h4>&#128197;&nbsp;&nbsp;동호회 달력</h4>
         </div>
         <div class="calendar-array">
           <select id = "select-array">
