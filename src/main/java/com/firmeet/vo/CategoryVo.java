@@ -17,8 +17,6 @@ public class CategoryVo {
 	public CategoryVo() {
 		super();
 	}
-	
-	
 
 	public int getCateNo() {
 		return cateNo;
@@ -52,12 +50,13 @@ public class CategoryVo {
 		this.category = category;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "CategoryVo [cateNo=" + cateNo + ", clubId=" + clubId + ", memberId=" + memberId + ", category="
 				+ category + "]";
 	}
+	
+	
 	
 	
 	

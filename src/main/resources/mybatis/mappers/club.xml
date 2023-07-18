@@ -14,45 +14,34 @@
 	 </select>
  
       <insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
+       <selectKey resultType="int" order="BEFORE"
+         keyProperty="clubId">
+         select seq_clubId.nextval from dual
+      </selectKey>
         <![CDATA[
            insert into club(clubId,clubName,cre_date,max,preNum,intro1,intro2,address1,
                         address2,detailT,detailL,detailP,detailE,detailW)
-                    values(seq_clubId.nextval, #{clubName}, sysdate, #{max}, 1,
+                    values(#{clubId}, #{clubName}, sysdate, #{max}, 1,
                           #{intro1}, #{intro2}, #{address1}, #{address2},
                           #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW})
        ]]>
      </insert>
-    <!--  <select id = "selectCate" parameterType ="int" resultType ="com.firmeet.vo.CategoryVo">
-		 	<![CDATA[
-				  	select 
-		                cateNum
-		                from category
-		                where category=#{cateNo}
-		 	]]>
- 	</select>    
-      -->
-     <insert id="insertCate" parameterType="com.firmeet.vo.CategoryVo">
-	     <![CDATA[
-	         insert into club_category (clubCateNum,clubId,cateNum)
-	         			values(seq_club_category_no.nextval, #{clubId},#{cateNo})
-	       ]]>
+     <insert id="insertClubCate" parameterType="com.firmeet.vo.CategoryVo">
+		<![CDATA[	
+			insert into club_category (clubCateNum,clubId,cateNum)
+			values(seq_club_category_no.nextval, #{clubId},#{cateNo})
+		
+		 ]]>
      </insert>
      
-     <select id = "selectTag" parameterType ="com.firmeet.vo.TagVo" resultType ="com.firmeet.vo.TagVo">
-		 	<![CDATA[
-				  	select 
-		                tagNum , tagName
-		                from tag
-		                where tagName=#{tagName}
-		 	]]>
- 	</select>    
-     
-     <insert id="insertTag" parameterType="com.firmeet.vo.TagVo">
-	     <![CDATA[
-	         insert into club_tag (clubTagNum,clubId,tagNum)
-	         			values(seq_club_tagNo.nextval, #{clubId},#{tagNo})
-	       ]]>
+     <insert id="insertClubTag" parameterType="com.firmeet.vo.CategoryVo">
+		<![CDATA[	
+			insert into club_category (clubCateNum,clubId,tagNum)
+			values(seq_club_tagNo.nextval, #{clubId},#{tagNo})
+		
+		 ]]>
      </insert>
+
    
 
 </mapper>

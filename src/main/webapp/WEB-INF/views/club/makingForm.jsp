@@ -211,12 +211,12 @@
                 <input type="text" class="box box8" id="" placeholder="날씨" name="detailW" value="" required>
                 </div>
             </div>
-
+			
             <div class="col-sm-12">
                 <label for="firstName">메인 이미지</label></br>
                 <img src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" class="box7" width="150px" height="150px">
                 <div class="box-file-input box9"><label>
-                    <input type="file" name="ev_display" class="file-input"></label>
+                    <input type="file" name="img2" value="main" class="file-input" formation="/upload/clubImg"></label>
                     <span class="filename">파일을 선택해주세요.</span>
                 </div>
             </div>
@@ -224,7 +224,7 @@
                 <label for="firstName">배경 이미지</label></br>
                 <img src="${pageContext.request.contextPath }/assets/images/testimg/back.jpg" class="box7" width="200px" height="150px">
                 <div class="box-file-input box9"><label>
-                    <input type="file" name="ev_display" class="file-input"></label>
+                    <input type="file" name="img1" value="bg" class="file-input" formation="/upload/clubImg"></label>
                     <span class="filename">파일을 선택해주세요.</span>
                 </div>
             </div>
@@ -317,5 +317,8 @@ for(i=0; i<$(target).length; i++){
     }
 }
 </script>
+
+
+
 
 </html>

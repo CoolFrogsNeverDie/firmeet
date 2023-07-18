@@ -4,7 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.TagVo;
 
 @Repository
 public class MemberDao {
@@ -17,6 +19,14 @@ public class MemberDao {
 		System.out.println(memberVo);
 		sqlsession.insert("member.insertMem",memberVo);
 	
+	}
+	
+	public void insert(CategoryVo cateVo) {
+		sqlsession.insert("member.insertMemCate",cateVo);
+	}
+	
+	public void insert(TagVo tagVo) {
+		sqlsession.insert("member.insetMemTag",tagVo);
 	}
 	
 	public MemberVo selectMem(MemberVo memberVo) {

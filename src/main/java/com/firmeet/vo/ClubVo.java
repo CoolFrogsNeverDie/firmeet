@@ -22,6 +22,7 @@ public class ClubVo {
 		public String detailW;
 		
 		private CategoryVo cateVO;
+		private TagVo tagVo;
 		
 		public ClubVo(int clubId, String clubName, Date cre_date, int max, int preNum, String intro1, String intro2,
 				String address1, String address2, String img1, String img2, String detailT, String detailL,
@@ -62,6 +63,15 @@ public class ClubVo {
 
 		public void setCateVO(CategoryVo cateVO) {
 			this.cateVO = cateVO;
+		}
+			
+
+		public TagVo getTagVo() {
+			return tagVo;
+		}
+
+		public void setTagVo(TagVo tagVo) {
+			this.tagVo = tagVo;
 		}
 
 		public void setClubId(int clubId) {

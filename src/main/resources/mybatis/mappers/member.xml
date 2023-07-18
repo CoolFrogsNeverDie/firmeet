@@ -11,6 +11,22 @@
 		
 	</insert>
 	
+	<insert id="insertMemCate" parameterType="com.firmeet.vo.CategoryVo">
+		<![CDATA[
+			insert into member_cartegory(memCateN, memberId,cateNo)
+			values(seq_mem_CateNo.nextval #{memberId}, #{cateNo})
+	        ]]>	
+	</insert>
+	<insert id="insertMemTag" parameterMap="com.firmeet.vo.TagVo">
+		<![CDATA[
+			insert into member_tag(memTagNo, memberId,tagNo)
+			values(seq_mem_tagNo.nextval #{memberId}, #{tagNo})
+		    ]]>	
+	
+	</insert>
+	
+	
+	
 	<select id="selectMem" parameterType="com.firmeet.vo.MemberVo" resultType="com.firmeet.vo.MemberVo">
 		<![CDATA[
 			select memberId, memberName 

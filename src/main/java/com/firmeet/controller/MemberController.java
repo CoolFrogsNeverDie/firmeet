@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.MemberService;
+import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.TagVo;
 
 
 
@@ -30,7 +32,7 @@ public class MemberController {
 	@RequestMapping(value="/loginForm", method= {RequestMethod.GET})
 	public String loginForm(){
 		System.out.println("MemberController.loginForm()");
-		return"member/login";
+		return"member/memberForm";
 	}
 
 	/* 로그인 */
@@ -46,7 +48,7 @@ public class MemberController {
 			  return "main/mainList";
 		  }else {
 			  System.out.println("로그인 실패");
-			  return "member/loginForm";
+			  return "member/memberForm";
 		  }
 		 
 		
@@ -63,16 +65,18 @@ public class MemberController {
 	@RequestMapping(value="/joinForm", method= {RequestMethod.GET,RequestMethod.POST})
 	public String joinForm() {
 		System.out.println("MemberController.joinForm()");
-		return "member/joinForm";
+		return "member/memberForm";
 	}
 	
 	@RequestMapping(value="/join", method= { RequestMethod.GET , RequestMethod.POST})
-	public String join(@ModelAttribute MemberVo memberVo) {
+	public String join(@ModelAttribute MemberVo memberVo,
+						@ModelAttribute CategoryVo cateVo,
+						@ModelAttribute TagVo tagVo) {
 		System.out.println("MemberController.join()");
 		System.out.println(memberVo);
-		memberService.join(memberVo);
+		memberService.join(memberVo,cateVo,tagVo);
 			
-		return "member/loginForm";
+		return "member/memberForm";
 	}
 	
 	/* 아이디 체크 */

@@ -31,37 +31,18 @@ public class ClubController {
 	
 	@RequestMapping(value="/making", method= {RequestMethod.GET , RequestMethod.POST})
 	public String clubMake(@ModelAttribute ClubVo clubVo
-							,@ModelAttribute CategoryVo cateVO){
+							,@ModelAttribute CategoryVo cateVo
+							,@ModelAttribute TagVo tagVo){
 		System.out.println("ClubController.clubMaking()");
-		System.out.println("넘어온 VO  확인" +clubVo + cateVO);
+		System.out.println("넘어온 VO  확인" +clubVo + cateVo);
 		
-		clubService.make(clubVo,cateVO);
+		clubService.make(clubVo,cateVo,tagVo);
 		System.out.println(clubVo);
 		return"";
 
 	}
 
 	
-//	public String clubMake(@RequestParam("cateNo") int cateNo){
-//		System.out.println("ClubController.clubMaking()");
-//		 clubService.make(cateNo);
-//		
-//	 	return"";
-//
-//    }
-//	
 
 	
-	
-	
-	public String clubMake(@ModelAttribute TagVo tagVo){
-		System.out.println("ClubController.clubMaking()");
-		clubService.make(tagVo);
-		System.out.println(tagVo);
-	 	return"";
-
-    }
-	
-	
-
 }

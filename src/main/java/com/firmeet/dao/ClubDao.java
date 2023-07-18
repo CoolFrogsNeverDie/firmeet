@@ -31,27 +31,14 @@ public class ClubDao {
 	     
 	   }
 	  
-	  public CategoryVo selectCate(int cateNo) {
-		  
-		  CategoryVo categoryVo =  session.selectOne("club.selectCate",cateNo);
-		  System.out.println(cateNo);
-		  return categoryVo;
-	  }
-	  
-	  public void insertClub(CategoryVo categoryVo) {
-		  session.insert("club.insertCate",categoryVo);
-		  System.out.println(categoryVo);
-	  }
-	  
-	  
-	  public void selectTag(TagVo tagVo) {
-		  session.selectOne("club.selectTag",tagVo);
-		  System.out.println(tagVo);
-	  }
-	  
-	  public void insertClub(TagVo tagVo) {
-		  session.insert("club.insertTag", tagVo);
-		  System.out.println(tagVo);
-	  }
-	
+	 public void insertCate(CategoryVo cateVO) {
+		 
+		 System.out.println("넘어온 값 확인 " + cateVO);
+		 session.insert("club.insertClubCate",cateVO);
+		 
+	 }
+	 
+	 public void insertTag(TagVo tagVo) {
+		 System.out.println("넘어온 값 확인" + tagVo);
+	 }
 }

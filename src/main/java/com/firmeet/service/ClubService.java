@@ -14,24 +14,18 @@ public class ClubService {
 	@Autowired
 	private ClubDao clubDao;	
 	
-	public void make(ClubVo clubVo, CategoryVo cateVO) {
+	public void make(ClubVo clubVo, CategoryVo cateVO, TagVo tagVo) {
 		System.out.println("ClubService.make()");
 		System.out.println(clubVo);
 		clubDao.insertClub(clubVo);
+		
 		cateVO.setClubId(clubVo.getClubId());
+		clubDao.insertCate(cateVO);
+		
+		tagVo.setClubId(clubVo.getClubId());
+		clubDao.insertTag(tagVo);
 		
 		}
 	
-	public void make( int cateNo) {
-		System.out.println("ClubService.make()");
-		CategoryVo cateVo = clubDao.selectCate(cateNo);
-		clubDao.insertClub(cateVo);		
-		}
-	public void make(
-			TagVo tagVo) {
-		System.out.println("ClubService.make()");
-		clubDao.selectTag(tagVo);
-		clubDao.insertClub(tagVo);
-		
-		}
+	
 }

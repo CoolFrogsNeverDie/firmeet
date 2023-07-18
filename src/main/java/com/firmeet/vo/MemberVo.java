@@ -8,6 +8,9 @@ public class MemberVo {
 	public String memberPw;
 	public int memberPri;
 	
+	private CategoryVo cateVo;
+	private TagVo tagVo;
+	
 	public MemberVo(String memberId, String memberPhone, String memberName, String memberPw, int memberPri) {
 		super();
 		this.memberId = memberId;
@@ -19,6 +22,24 @@ public class MemberVo {
 
 	public MemberVo() {
 		super();
+	}
+
+	
+	
+	public CategoryVo getCateVo() {
+		return cateVo;
+	}
+
+	public void setCateVo(CategoryVo cateVo) {
+		this.cateVo = cateVo;
+	}
+
+	public TagVo getTagVo() {
+		return tagVo;
+	}
+
+	public void setTagVo(TagVo tagVo) {
+		this.tagVo = tagVo;
 	}
 
 	public String getMemberId() {
