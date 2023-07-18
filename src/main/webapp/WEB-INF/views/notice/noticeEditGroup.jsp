@@ -91,7 +91,7 @@
                             <div class="modal-body">
                                  <div class="grouptitle" id="result"></div>
                                  <div class="groupschedule">
-                                     <input type="radio" name="groupschedule" value="" checked>결제 &nbsp;
+                                     <input type="radio" name="groupschedule" value="" id="pay" checked>결제 &nbsp;
                                      <input type="radio" name="groupschedule" value="" style="margin-left: 20px;">일정
                                  </div>
                                   <div>
@@ -101,7 +101,19 @@
                                      <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                      <span class="groupvotetitle1">장 소 </span>
                                      <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
-                                     <button type="button" class="btn btn-secondary">지도등록</button><br>
+                                     <button type="button" class="btn btn-secondary" id="popupBtn">지도등록</button><br>
+                                     
+                                     <!------------------------------------- 팝업창 ----------------------------------> 
+										<div id="modalWrap">
+										  <div id="modalContent">
+										    <div id="modalBody">
+										      <span id="closeBtn">&times;</span> 
+										      <%@ include file="test.jsp" %>
+										    </div>
+										  </div>
+										</div>
+									<!------------------------------------- 팝업창 ----------------------------------> 
+									
                                      <span class="groupvotetitle1">회 비 </span>
                                      <input class="groupvotemeet" type="text" id="price" name="price"> 원(인당)<br>
                                      <span class="groupvotetitle2">투표종료 </span>
@@ -120,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-	      <!-- -------------------------------------------------결제일반------------------------------------------------------ -->
+	      <!---------------------------------------------------결제일반------------------------------------------------------ -->
                 <div class="modal" id="groupmeet">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -141,7 +153,7 @@
 									<input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                     <span class="groupvotetitle1">장 소 </span>
                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
-                                    <button type="button" class="btn btn-secondary">지도등록</button><br>
+                                    <button type="button" class="btn btn-secondary" id="searchButton">지도등록</button><br>
                                 </div>
                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
                                     <button type="button" class="btn btn-success"
@@ -152,6 +164,28 @@
                     </div>
                 </div>
 			</form>
+			<script>
+			/* 팝업창 띄우기 */
+			  const btn = document.getElementById('popupBtn');
+			  const modal = document.getElementById('modalWrap');
+			  const closeBtn = document.getElementById('closeBtn');
+			  
+			  modal.style.display = 'none';
+			
+			  btn.onclick = function() {
+			    modal.style.display = 'block';
+			  }
+			  closeBtn.onclick = function() {
+			    modal.style.display = 'none';
+			  }
+			
+			  window.onclick = function(event) {
+			    if (event.target == modal) {
+			      modal.style.display = "none";
+			    }
+			  }
+			/* 팝업창 띄우기 끝 */
+			</script>
      <!-- 여기까지 -->
             </div>
             <!--/content-left-->
@@ -207,10 +241,10 @@
 </div>
 <!--/wrap-->
 </body>
-
-
 <script>
+
 $(document).ready(function() {
+	
     let i = 4;
 
     $('.plusbtn').on("click", function() {
@@ -262,7 +296,6 @@ $(document).ready(function() {
 
 	    $('#result').text(combinedValue);
 	 });
-  	
     
 });
 
