@@ -35,11 +35,20 @@ public class BoardService {
 		String category = boardVO.getClubId()==-99?"전체보기":boardList.get(0).getClubName();
 				
 		boardInfoList.put("joinList", joinList);
-		boardInfoList.put("boardList", boardList);
 		boardInfoList.put("category", category);
 		
 		return boardInfoList;
 	}
 	
+	public List<BoardVO> getPerBoard(BoardVO boardVO){
+		//받아온 정보로 boardList 가져올 거임
+		
+		List<BoardVO> boardList = boardDAO.getBoardList(boardVO);
+		for(int i = 0; i<boardList.size(); i++) {
+			boardList.get(i).setReplyList(boardDAO.getBoardComment(boardList.get(i).getBoardNo()));
+		}
+		
+		return boardList;
+	}
 	
 }

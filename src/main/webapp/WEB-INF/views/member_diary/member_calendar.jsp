@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>어푸어푸 보더 업로드</title>
+  <title>개인 달력</title>
   <!--제이쿼리-->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <!--부트스트랩-->

@@ -29,5 +29,14 @@ public class BoardDAO {
 		return commentList;
 	}
 	
+	public List<BoardVO> getBoardList(BoardVO boardVO){
+		
+		System.out.println("DAO까지 오는지 확인" + boardVO);
+		List<BoardVO> boardList = session.selectList("board.getBoard", boardVO);
+		System.out.println("AJAX로 넘어온 리스트" + boardList);
+		
+		return boardList;
+	}
+	
 	
 }

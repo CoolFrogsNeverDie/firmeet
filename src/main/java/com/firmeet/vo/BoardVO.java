@@ -13,6 +13,9 @@ public class BoardVO {
 	private int likeCnt;
 	private List<ReplyVO> replyList;
 	private Date boardDate;
+	private int startNum;
+	private int endNum;
+	
 	public BoardVO() {
 		super();
 	}
@@ -66,13 +69,28 @@ public class BoardVO {
 	public void setReplyList(List<ReplyVO> replyList) {
 		this.replyList = replyList;
 	}
+	
+	
+	public int getStartNum() {
+		return startNum;
+	}
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
+	}
+	public int getEndNum() {
+		return endNum;
+	}
+	public void setEndNum(int endNum) {
+		this.endNum = endNum;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", clubId=" + clubId + ", clubName=" + clubName + ", memberId="
-				+ memberId + ", content=" + content + ", likeCnt=" + likeCnt + ", commentList=" + replyList
-				+ ", boardDate=" + boardDate + "]";
+				+ memberId + ", content=" + content + ", likeCnt=" + likeCnt + ", replyList=" + replyList
+				+ ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum=" + endNum + "]";
 	}
 
+	
 	
 	
 }

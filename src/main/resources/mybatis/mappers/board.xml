@@ -37,4 +37,45 @@
 		]]>
 	</select>
 	
+	<select id = "getBoard" parameterType ="board" resultType ="board">
+		<![CDATA[
+		  	select
+       			 boardNo
+       			,clubId
+       			,memberId
+       			,clubName
+       			,content
+       			,boardDate
+            from(
+  				select
+        			rownum as rw
+    			   ,boardNo
+   			       ,clubId
+    			   ,memberId
+   			       ,clubName
+     			   ,content
+    			   ,boardDate
+       	       from(
+					select
+        				a.boardNo as boardNo
+        				,a.clubId as clubId
+        				,a.memberId as memberId
+     			   		,b.clubname as clubName
+     			   		,a.boardContent as content
+      			  		,a.boardDate as boardDate
+        			from board a join club b on a.clubId = b.clubId
+        			where memberId = #{memberId}
+		]]>
+				<if test="clubId !=-99">
+					and a.clubId = #{clubId}
+				</if>
+		<![CDATA[
+			        order by boardNo desc
+		                        )
+    		           				 )
+    		      				where rw between #{startNum} and #{endNum}
+		]]>
+	</select>
+	
+	
 </mapper>

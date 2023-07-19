@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>어푸어푸 갤러리</title>
+    <title>개인 게시판</title>
+    <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -25,11 +26,11 @@
 
     <!-- 페이지 콘텐츠 -->
     <div class="wrap">
-        <div class="diary-area">
+        <div class="diary-area" data-memid = "${memberId}" data-clubid ="${clubId}">
             <div class="diary-topbar">
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                     alt="프로필사진" />
-                <h1>나의 다이어리</h1>
+                <h1>나의 게시판</h1>
             </div>
             <!--/diary-topbar-img-->
             <div class="diary-subbar">
@@ -50,56 +51,9 @@
                 <div class="content-right">
                     <div class="board-area">
 						<div class= "club-category"><h4><strong>&#128221;&nbsp;&nbsp;${category}</strong></h4></div>
-                        <div>
-                        <c:forEach items ="${boardList}" var ="board"> 
-							<div class= "board">
-								<div class= "board-header" >
-								<div class= "profile-pic">
-								  <img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-								</div>
-									<div class= "board-info">
-									<span class= "board-group"><strong>${board.clubName}</strong></span><br>
-									<span>작성일 :  ${board.boardDate} </span>
-									</div>
-								 </div>
-							<div  class= "board-content">
-								<p>
-								${board.content} 	
-								</p>
-								<span class= "likecolor">♡</span>
-								<span>좋아요 (<span>${board.likeCnt}</span>)</span>
-								</div>
-								<div class="board-comment-list">
-									<div class="board-comment">
-									<h5>댓글</h5> <span><button class="write-comment-btn">댓글 쓰기</button></span>
-										<c:forEach items="${board.replyList}" var="reply">
-											<div>
-												<c:if test = "${reply.deep > 1}">
-												<span>&nbsp;&nbsp;&#8627;&nbsp;${reply.memberName}님 : </span>
-												</c:if>
-												<c:if test = "${reply.deep == 1}">
-												<span>${reply.memberName}님 : </span>
-												</c:if>
-												<span>${reply.content}</span>
-												<c:if test = "${reply.deep==1}">
-												<span><button>답글</button></span>
-												</c:if>
-												<div class="reply-edit">
-												<span>${reply.replyDate}</span>
-												<span>삭제</span>
-												<span>수정</span>
-												</div>
-											</div>
-										</c:forEach>
-										<div class="write-comment">
-											<div class="new-content"><textarea></textarea><button class="add-reply">등록</button></div>
-										</div>
-									</div>
-								</div>
-							</div> <!--board end -->
-								</c:forEach>
-						
+                        <div class="board-area2" >
                         </div>
+					  <div id = "board-get"></div>
                     </div>
                     <!--board-area-->
                 </div>
@@ -134,12 +88,31 @@
     <footer>
     	Copyright (C) 2023 어리쥬 all rights reserved.
     </footer>
-<script src="${pageContext.request.contextPath}/assets/js/lightbox-plus-jquery.min.js"></script>
-<script>
-    var $target = $("dt"),
-        isClass = null;
 
-    $target.on("click", function () {
+<script>
+
+/*document load*/
+ 
+ 	//board 불러오기 위한 rownum 
+	let startNum = 1;
+	let endNum = 10;
+	
+
+	/*무한 스크롤 감지*/
+	const lastBoard = $('#board-get');    
+    const lastBoardObserver = new IntersectionObserver((entries) => {
+        const lastEntry = entries[entries.length - 1];
+        if (!lastEntry.isIntersecting) return;
+
+        getData();
+    });
+	//감시하는 객체
+    lastBoardObserver.observe(lastBoard[0]);
+
+	
+
+    /*메뉴바 선택 */
+    $("dt").on("click", function () {
         var _$self = $(this),
             isActive = _$self.hasClass("active");
 
@@ -147,7 +120,8 @@
         _$self.nextUntil("dt").slideToggle(!isActive);
     });
     
-    $('.write-comment-btn').on("click",function(){
+    /*댓글 쓰기 버튼 클릭 토글*/
+    $('.board-area').on("click",'.write-comment-btn',function(){
     	 var writeCommentDiv = $(this).closest('.board-comment').find('.write-comment');
     	  if (writeCommentDiv.is(':visible')) {
     		    writeCommentDiv.hide();
@@ -155,12 +129,107 @@
     		    writeCommentDiv.show();
     		  }
     });
- /*
-    $('.join-club-list')on("click", function(){
-		var clubId = $(this).data('clubid');
-    });
- */
+	
+
+
+
 
     
+ 	//BoardList AJAX
+ 	function getData(){
+ 		 
+ 	 	var memberId = $('.diary-area').data('memid');
+ 	 	var clubId = $('.diary-area').data('clubid');
+ 	 	
+ 	 
+ 	 	var BoardVO = {
+ 	 		memberId : memberId,
+ 	 		clubId : clubId,
+ 	 		startNum : startNum,
+ 	 		endNum : endNum
+ 			}
+ 	 
+ 	 		console.log(BoardVO);
+ 	 	
+
+ 		 $.ajax({
+ 	       
+ 	       //요청 세팅
+ 	       url : "${pageContext.request.contextPath}/board/member/getboard",
+ 	       type : "post",
+ 	       data : BoardVO,
+ 	       
+ 	       //응답 세팅
+ 	       dataType : "json",
+ 	       success : function(jsonResult){
+ 				
+ 	    	   let boardList = jsonResult.data;
+ 	    	   console.log(boardList);
+
+ 	    	   
+ 	    		 render(boardList);
+ 	    		 startNum +=10;
+ 	    		 endNum += 10;
+ 	    	   
+ 	       }, //success end
+ 	       error : function(XHR, status, error) {
+ 	       console.error(status + " : " + error);
+ 	       }
+ 					            
+ 	    });//ajax end
+ 	 
+ 	}//get data end
+ 	
+ 	
+ 	//AJAX로 불러온 데이터 그려주는 function
+	   function render(boardList){
+ 	   
+        boardList.forEach(function(board) {
+            var add = '';
+            add += '<div class="board">';
+            add += '<div class="board-header">';
+            add += '<div class="profile-pic">';
+            add += '<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
+            add += '</div>';
+            add += '<div class="board-info">';
+            add += '<span class="board-group"><strong>' + board.clubName + '</strong></span><br>';
+            add += '<span>작성일 : ' + board.boardDate + ' </span>';
+            add += '</div></div>';
+            add += '<div class="board-content">';
+            add += '<p>' + board.content + '</p>';
+            add += '<span class="likecolor">♡</span>';
+            add += '<span>좋아요 (<span>' + board.likeCnt + '</span>)</span>';
+            add += '</div><div class="board-comment-list">';
+            add += '<div class="board-comment">';
+            add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
+            
+            board.replyList.forEach(function(reply) {
+                add += '<div>';
+                if (reply.deep > 1) {
+                    add += '<span>  ↳ ' + reply.memberName + '님 : </span>';
+                } else if (reply.deep === 1) {
+                    add += '<span>' + reply.memberName + '님 : </span>';
+                }
+                add += '<span>' + reply.content + '</span>';
+                if (reply.deep === 1) {
+                    add += '<span><button>답글</button></span>';
+                }
+                add += '<div class="reply-edit">';
+                add += '<span>' + reply.replyDate + '</span>';
+                add += '<span>삭제</span><span>수정</span>';
+                add += '</div></div>';
+            });
+            
+            add += '<div class="write-comment">';
+            add += '<div class="new-content"><textarea></textarea><button class="add-reply">등록</button></div>';
+            add += '</div></div></div></div>';
+            
+            $('.board-area2').append(add);
+        });
+        
+ 	   }
+	
+ 	
+ 	
 </script>
 </html>
