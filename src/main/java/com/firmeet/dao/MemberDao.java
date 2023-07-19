@@ -26,7 +26,7 @@ public class MemberDao {
 	}
 	
 	public void insert(TagVo tagVo) {
-		sqlsession.insert("member.insetMemTag",tagVo);
+		sqlsession.insert("member.insertMemTag",tagVo);
 	}
 	
 	public MemberVo selectMem(MemberVo memberVo) {

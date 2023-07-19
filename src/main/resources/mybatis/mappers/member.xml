@@ -17,10 +17,10 @@
 			values(seq_mem_CateNo.nextval #{memberId}, #{cateNo})
 	        ]]>	
 	</insert>
-	<insert id="insertMemTag" parameterMap="com.firmeet.vo.TagVo">
+	<insert id="insertMemTag" parameterType="com.firmeet.vo.TagVo">
 		<![CDATA[
 			insert into member_tag(memTagNo, memberId,tagNo)
-			values(seq_mem_tagNo.nextval #{memberId}, #{tagNo})
+			values(seq_mem_tagNo.nextval, #{memberId}, #{tagNo})
 		    ]]>	
 	
 	</insert>
