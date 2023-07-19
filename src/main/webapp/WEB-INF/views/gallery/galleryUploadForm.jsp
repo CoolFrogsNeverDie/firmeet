@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>어푸어푸 갤러리</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/lightbox.min.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath }/assets/css/main2.css"
-	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/lightbox.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script src="${pageContext.request.contextPath }/assets/js/gallery_upload.js"></script>
@@ -36,7 +28,7 @@
 	border-radius: 8px;
 	font-size: 20px;
 	font-weight: bold;
-	margin-top:10px
+	margin-top: 10px
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -79,27 +71,17 @@
 	<!----------------------------------------- top Navigation ----------------------------------------->
 	<nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
 		<div class="container">
-			<a class="navbar-brand" href="#"> <img
-				src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..."
-				height="36" />
+			<a class="navbar-brand" href="#"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
 			</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">홈</a></li>
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">홈</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">링크</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							드롭다운 </a>
-						<ul class="dropdown-menu dropdown-menu-end"
-							aria-labelledby="navbarDropdown">
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 드롭다운 </a>
+						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">액션</a></li>
 							<li><a class="dropdown-item" href="#">다른 액션</a></li>
 							<li>
@@ -117,9 +99,7 @@
 	<div class="wrap">
 		<div class="diary-area">
 			<div class="diary-topbar">
-				<img class="diary-topbar-img"
-					src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg"
-					alt="프로필사진" />
+				<img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
 				<h1>어푸어푸</h1>
 			</div>
 			<!--/diary-topbar-img-->
@@ -129,17 +109,27 @@
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-right">
-					<div class="upload-btn-wrapper">
-						<input type="file" id="input_file" multiple="multiple"
-							style="height: 100%;" />
-						<button class="upload-btn">파일선택</button>
-					</div>
-					<br />
 
-					<form name="uploadForm" id="uploadForm"
-						enctype="multipart/form-data" method="post">
+
+					<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+						<div class="form-group">
+							<label for="meetSelect">사용 모임:</label> <select id="meetSelect" name="meet" class="form-select">
+								<c:forEach var="meet" items="${meetList}" varStatus="status">
+									<option value="${meet.meetNo}">${meet.meetName}</option>
+								</c:forEach>
+							</select>
+							<c:forEach var="meet" items="${meetList}" varStatus="status" begin="0" end="0">
+								<input type="hidden" name="clubId" value="${meet.clubId}">
+							</c:forEach>
+							<input type="hidden" name="memberId" value="aaa">
+						</div>
+						<div class="upload-btn-wrapper">
+							<input type="file" id="input_file" multiple="multiple" style="height: 100%;" />
+							<button class="upload-btn">파일선택</button>
+						</div>
+						<br />
 						<div id="img"></div>
-						<div id="dropZone" style="border: 2px; border-style: solid; border-color: black; ">
+						<div id="dropZone" style="border: 2px; border-style: solid; border-color: black;">
 							<div id="fileDragDesc">파일을 드래그 해주세요.</div>
 							<table id="fileListTable" width="100%" border="0px">
 								<tbody id="fileTableTbody">
@@ -148,8 +138,7 @@
 							</table>
 						</div>
 					</form>
-					<input type="button" onclick="uploadFile(); return false;"
-						class="btn bg_01" value="파일 업로드">
+					<input type="button" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
 				</div>
 				<!--/content-right-->
 			</div>
@@ -159,9 +148,7 @@
 		<div class="menu-bar" name="사이드메뉴바">
 			<div class="group-profile">
 				<div class="group-profile-img-area">
-					<img class="group-profile-img"
-						src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg"
-						alt="프로필사진" />
+					<img class="group-profile-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
 				</div>
 				<!--/group-profile-img-area-->
 			</div>
@@ -179,8 +166,6 @@
 		<!--/menu-bar-->
 	</div>
 	<!--/wrap-->
-	<footer>
-		Copyright (C) 2023 어리쥬
-	</footer>
+	<footer> Copyright (C) 2023 어리쥬 </footer>
 </body>
 </html>

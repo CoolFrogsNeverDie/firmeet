@@ -64,7 +64,7 @@
 						<form id="searchForm">
 							<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate"> 
 							<input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요.">
-							<button type="submit">검색</button>
+							<button class ="searchbnt" type="submit">검색</button>
 						</form>
 						<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
 					</div>
@@ -109,7 +109,7 @@
 										</div>
 										<div class="table-data">${account.meetNo}</div>
 										<div class="content-img" style="display: none">
-											<img src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="가계부사진" style="max-height: 500px;" />
+											<img src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="영수증 이미지가 없습니다!" style="max-height: 500px;" />
 										</div>
 									</div>
 								</c:forEach>
