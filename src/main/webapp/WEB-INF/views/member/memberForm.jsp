@@ -572,7 +572,7 @@
                 <div class="col-sm-6 form">
 
                     <div class="login form-peice ">
-                        <form action="http://localhost:8000/firmeet/member/login">
+                        <form action="http://localhost:8000/firmeet/main/mainList">
                             <div class="form-group">
                                 <label>Id</label>
                                 <input type="text" name="memberId" required>
@@ -590,7 +590,7 @@
                     </div>
 
                     <div class="signup form-peice switched">
-                        <form class="signup-form" method="post" action="http://localhost:8000/firmeet/member/join" >
+                        <form class="signup-form" method="post" action="http://localhost:8000/firmeet/main/mainList" >
                             <div class="form-group idForm">
                                 <label>Id</label>
                                 <input type="text" name="memberId" class="id">
