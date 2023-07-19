@@ -206,4 +206,10 @@ public class NoticeBoardController {
 		return "notice/test";
 	}
 	
+	@RequestMapping("/apitest2")
+	public String apitest2() {
+		
+		return "notice/test2";
+	}
+	
 }

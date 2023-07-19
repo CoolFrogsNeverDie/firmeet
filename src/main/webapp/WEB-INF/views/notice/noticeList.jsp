@@ -1,8 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="../include/topnav.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공지 에디터</title>
+    <%@ include file="../include/topnav.jsp" %>
+</head>
+<body>
+
+<!----------------------------------------- top Navigation ----------------------------------------->
+<%@ include file="../include/nav.jsp" %>
 
     <!-- Page Content -->
 
