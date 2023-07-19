@@ -21,6 +21,7 @@
 	<mapper resource="mybatis/mappers/club.xml" />
 	<mapper resource="mybatis/mappers/accountbook.xml" />
 	<mapper resource="mybatis/mappers/board.xml" />
+	<mapper resource="mybatis/mappers/gallery.xml" />
     </mappers>
     
     

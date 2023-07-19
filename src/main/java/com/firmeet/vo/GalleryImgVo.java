@@ -5,7 +5,7 @@ public class GalleryImgVo {
     private int galleryNo;
     private String imgName;
     private String imgSave;
-    private String imgSize;
+    private long imgSize;
     private String imgRoot;
     private String regDate;
         
@@ -13,14 +13,14 @@ public class GalleryImgVo {
 		super();
 	}
 
-	public GalleryImgVo(int imgNo, int galleryNo, String imgName, String imgSave, String imgSize, String imgRoot,
+	public GalleryImgVo(int imgNo, int galleryNo, String imgName, String imgSave, long fileSize, String imgRoot,
 			String regDate) {
 		super();
 		this.imgNo = imgNo;
 		this.galleryNo = galleryNo;
 		this.imgName = imgName;
 		this.imgSave = imgSave;
-		this.imgSize = imgSize;
+		this.imgSize = fileSize;
 		this.imgRoot = imgRoot;
 		this.regDate = regDate;
 	}
@@ -57,11 +57,11 @@ public class GalleryImgVo {
 		this.imgSave = imgSave;
 	}
 
-	public String getImgSize() {
+	public long getImgSize() {
 		return imgSize;
 	}
 
-	public void setImgSize(String imgSize) {
+	public void setImgSize(long imgSize) {
 		this.imgSize = imgSize;
 	}
 

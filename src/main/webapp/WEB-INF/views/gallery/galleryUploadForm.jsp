@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,64 +7,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>어푸어푸 갤러리</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/lightbox.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--드래그 앤 드롭-->
 
-<script src="${pageContext.request.contextPath }/assets/js/gallery_upload.js"></script>
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
 <style>
-.upload-btn-wrapper {
-	position: relative;
-	overflow: hidden;
-	display: inline-block;
-}
-
-.upload-btn {
-	border: 2px solid gray;
-	color: gray;
-	background-color: white;
-	padding: 8px 20px;
-	border-radius: 8px;
-	font-size: 20px;
-	font-weight: bold;
-	margin-top: 10px
-}
-
-.upload-btn-wrapper input[type=file] {
-	font-size: 100px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	opacity: 0;
-}
-
-.dropZone {
-	width: 500px;
-	height: 300px;
-	border: 3px solid black;
-	box-sizing: border-box; /* 추가 */
-}
-
-#fileDragDesc {
-	width: 100%;
-	height: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px;
-	text-align: center;
-	line-height: 300px;
-	vertical-align: middle;
-}
-
-.btn {
-	width: 250px;
-	height: 60px;
-	margin: 10px auto;
-	background-color: black;
-	color: white;
-}
+.drag-over { background-color: #ff0; }
+.thumb { width:200px; padding:5px; float:left; }
+.thumb > img { width:100%; }
+.thumb > .close { position:absolute; background-color:red; cursor:pointer; }
 </style>
 </head>
 
@@ -109,36 +68,25 @@
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-right">
-
-
-					<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+					<form action="${pageContext.request.contextPath}/gallery/upload/${meet.clubId}" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="meetSelect">사용 모임:</label> <select id="meetSelect" name="meet" class="form-select">
+							<label for="meetSelect">사용 모임:</label>
+							<select id="meetSelect" name="meet" class="form-select">
 								<c:forEach var="meet" items="${meetList}" varStatus="status">
 									<option value="${meet.meetNo}">${meet.meetName}</option>
 								</c:forEach>
 							</select>
-							<c:forEach var="meet" items="${meetList}" varStatus="status" begin="0" end="0">
-								<input type="hidden" name="clubId" value="${meet.clubId}">
-							</c:forEach>
-							<input type="hidden" name="memberId" value="aaa">
 						</div>
-						<div class="upload-btn-wrapper">
-							<input type="file" id="input_file" multiple="multiple" style="height: 100%;" />
-							<button class="upload-btn">파일선택</button>
+						<input type="button" id="btnSubmit" value="업로드"/>
+						<div id="drop" style="border:1px solid black; width:800px; height:300px; padding:3px">
+							여기로 drag & drop
+							<div id="thumbnails">
+							</div>
 						</div>
-						<br />
-						<div id="img"></div>
-						<div id="dropZone" style="border: 2px; border-style: solid; border-color: black;">
-							<div id="fileDragDesc">파일을 드래그 해주세요.</div>
-							<table id="fileListTable" width="100%" border="0px">
-								<tbody id="fileTableTbody">
-
-								</tbody>
-							</table>
-						</div>
+						<c:forEach var="meet" items="${meetList}" varStatus="status" begin="0" end="0">
+							<input type="hidden" name="clubId" value="${meet.clubId}">
+						</c:forEach>
 					</form>
-					<input type="button" onclick="uploadFile(); return false;" class="btn bg_01" value="파일 업로드">
 				</div>
 				<!--/content-right-->
 			</div>
@@ -168,4 +116,74 @@
 	<!--/wrap-->
 	<footer> Copyright (C) 2023 어리쥬 </footer>
 </body>
+<script>
+	var uploadFiles = [];
+	var $drop = $("#drop");
+	$drop.on("dragenter", function(e) {  //드래그 요소가 들어왔을떄
+	  $(this).addClass('drag-over');
+	}).on("dragleave", function(e) {  //드래그 요소가 나갔을때
+	  $(this).removeClass('drag-over');
+	}).on("dragover", function(e) {
+	  e.stopPropagation();
+	  e.preventDefault();
+	}).on('drop', function(e) {  //드래그한 항목을 떨어뜨렸을때
+	  e.preventDefault();
+	  $(this).removeClass('drag-over');
+	  var files = e.originalEvent.dataTransfer.files;  //드래그&드랍 항목
+	  for(var i = 0; i < files.length; i++) {
+		var file = files[i];
+		var size = uploadFiles.push(file);  //업로드 목록에 추가
+		preview(file, size - 1);  //미리보기 만들기
+	  }  
+	});
+	function preview(file, idx) {
+	  var reader = new FileReader();
+	  reader.onload = (function(f, idx) {
+		return function(e) {
+		  var div = '<div class="thumb"> \
+			<div class="close" data-idx="' + idx + '">X</div> \
+			<img src="' + e.target.result + '" title="' + escape(f.name) + '"/> \
+		  </div>';
+		  $("#thumbnails").append(div);
+		};
+	  })(file, idx);
+	  reader.readAsDataURL(file);
+	}
+	
+	$("#btnSubmit").on("click", function() {
+		  console.log("버튼클릭");
+		  var formData = new FormData();
+		  formData.append('meet', $('#meetSelect').val());
+		  console.log($('#meetSelect').val());
+		  var path = window.location.pathname; // 현재 페이지의 경로
+		  var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
+		  console.log("업로드할 파일: " + clubId);
+		  $.each(uploadFiles, function(i, file) {
+		    if (file.upload != 'disable') {
+		      formData.append('uploadPicture', file, file.name);
+		      console.log("업로드할 파일: " + file.name);
+		    }
+		  });
+		  $.ajax({
+		    url: '${pageContext.request.contextPath}/gallery/upload/' + clubId,
+		    data: formData,
+		    type: 'post',
+		    contentType: false,
+		    processData: false,
+		    success: function(ret) {
+		      alert("완료");
+		      window.location.href = "${pageContext.request.contextPath}/gallery/list/" + clubId;
+		    }
+		  });
+		});
+
+
+$("#thumbnails").on("click", ".close", function(e) {
+  var $target = $(e.target);
+  var idx = $target.attr('data-idx');
+  uploadFiles[idx].upload = 'disable';
+  $target.parent().remove();
+});
+
+</script>
 </html>

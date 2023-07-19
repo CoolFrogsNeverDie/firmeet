@@ -1,6 +1,5 @@
 package com.firmeet.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class AccountBookController {
 	
 	@RequestMapping(value = "/main/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String accountbookMain(@PathVariable("clubId") int clubId, Model model) {
-
+		// 각주 추가: 회계장부 메인 페이지 조회
 		System.out.println("accountbookMain 확인");
 		
 		List<AccountBookVo> aList = accountBookService.getList(clubId);
@@ -40,6 +39,7 @@ public class AccountBookController {
 	
 	@RequestMapping(value ="/uploadform/{clubId}",method = {RequestMethod.GET, RequestMethod.POST})
 	public String accountbookUploadform(@PathVariable("clubId") int clubId, Model model) {
+		// 각주 추가: 회계장부 업로드 폼 페이지 조회
 		System.out.println("accountbookUploadform 확인");
 		
 		List<ScheduleVO> sList = accountBookService.getMeet(clubId);
@@ -58,6 +58,7 @@ public class AccountBookController {
 									@RequestParam("memberId") String memberId,
 									@RequestParam("purpose") String purpose,
 									@RequestParam("uploadPicture") MultipartFile file) {
+		// 각주 추가: 회계 데이터 업로드
 		System.out.println("accountbookUpload 확인");
 		
 		System.out.println("clubId : "+clubId);
@@ -81,6 +82,7 @@ public class AccountBookController {
 	                                             @RequestParam("endDate") String endDate,
 	                                             @RequestParam("searchText") String searchText,
 	                                             @PathVariable("clubId") int clubId) {
+		// 각주 추가: 회계 데이터 검색
 	    List<AccountBookVo> searchResult = accountBookService.search(clubId, startDate, endDate, searchText);
 	    return searchResult;
 	}

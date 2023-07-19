@@ -20,6 +20,7 @@ public class AccountBookDao {
 	private SqlSession session;
 
 	public List<AccountBookVo> getList(int clubId) {
+		// 각주 추가: 클럽 ID에 해당하는 회계 리스트 조회
 	    System.out.println("AccountBookDao getList 확인");
 	    System.out.println(clubId);
 	    
@@ -31,6 +32,7 @@ public class AccountBookDao {
 	}
 
 	public List<ScheduleVO> getMeet(int clubId) {
+		// 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회
 	    System.out.println("AccountBookDao getMeet 확인");
 	    System.out.println(clubId);
 		
@@ -42,6 +44,7 @@ public class AccountBookDao {
 	}
 
 	public void upload(AccountBookVo aBookVo) {
+		// 각주 추가: 회계 데이터 업로드
 		 System.out.println("AccountBookDao upload 확인");
 		 System.out.println(aBookVo);
 		 
@@ -49,6 +52,7 @@ public class AccountBookDao {
 	}
 
 	public List<AccountBookVo> search(int clubId, String startDate, String endDate, String searchText) {
+		// 각주 추가: 회계 데이터 검색
 		System.out.println("AccountBookDao search 확인");
 		System.out.println(clubId);
 		System.out.println(startDate);

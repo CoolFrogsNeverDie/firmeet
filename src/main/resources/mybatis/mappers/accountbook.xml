@@ -3,83 +3,89 @@
 
 <mapper namespace="accountbook">
 
-	<select id="accountList" parameterType="int"
-		resultType="com.firmeet.vo.AccountBookVo">
-		SELECT
-		ID
-		, CLUBID
-		, MEETNO
-		, MEMBERID
-		, AMOUNT
-		,
-		TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
-		, CATEGORY
-		, PURPOSE
-		,
-		INCOME_EXPENSE AS incomeExpense
-		, RECEIPT
-		, PAYMENT
-		FROM ACCOUNT_BOOK
-		WHERE CLUBID = #{clubId}
+	<!-- 각주 추가: 클럽 ID에 해당하는 회계 리스트 조회 -->
+	<select id="accountList" parameterType="int" resultType="com.firmeet.vo.AccountBookVo">
+		<![CDATA[
+			SELECT
+				ID
+				, CLUBID
+				, MEETNO
+				, MEMBERID
+				, AMOUNT
+				, TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
+				, CATEGORY
+				, PURPOSE
+				, INCOME_EXPENSE AS incomeExpense
+				, RECEIPT
+				, PAYMENT
+			FROM ACCOUNT_BOOK
+			WHERE CLUBID = #{clubId}
+		]]>
 	</select>
-	<select id="meetList" parameterType="int"
-		resultType="com.firmeet.vo.MeetVo">
-		SELECT
-		MEETNO,
-		CLUBID,
-		meetName
-		FROM meet_name
-		where CLUBID =
-		#{clubId}
-		ORDER BY meetmon DESC
+
+	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
+	<select id="meetList" parameterType="int" resultType="com.firmeet.vo.MeetVo">
+		<![CDATA[
+			SELECT
+				MEETNO,
+				CLUBID,
+				meetName
+			FROM meet_name
+			WHERE CLUBID = #{clubId}
+			ORDER BY meetmon DESC
+		]]>
 	</select>
-	<insert id="meetUpload"
-		parameterType="com.firmeet.vo.AccountBookVo">
+
+	<!-- 각주 추가: 회계 데이터 업로드 -->
+	<insert id="meetUpload" parameterType="com.firmeet.vo.AccountBookVo">
 		INSERT INTO Account_Book (id
-		, clubId
-		, meetNo
-		, memberId
-		, amount
-		, datetime
-		,category
-		, purpose
-		, income_expense
-		, receipt
-		, payment)
+			, clubId
+			, meetNo
+			, memberId
+			, amount
+			, datetime
+			,category
+			, purpose
+			, income_expense
+			, receipt
+			, payment)
 		VALUES (
-		SEQ_ACCOUNTID.NEXTVAL,
-		#{clubId}
-		, #{meetNo}
-		, #{memberId}
-		, #{amount},
-		TO_DATE(SYSDATE,'YY/MM/DD')
-		, #{category}
-		, #{purpose}
-		,#{incomeExpense}
-		, #{receipt}
-		, #{payment})
+			SEQ_ACCOUNTID.NEXTVAL
+			, #{clubId}
+			, #{meetNo}
+			, #{memberId}
+			, #{amount}
+			, TO_DATE(SYSDATE,'YY/MM/DD')
+			, #{category}
+			, #{purpose}
+			, #{incomeExpense}
+			, #{receipt}
+			, #{payment})
 	</insert>
-	
-<select id="search" parameterType="map" resultType="com.firmeet.vo.AccountBookVo">
-  SELECT ID
-  , CLUBID
-  , MEETNO
-  , MEMBERID
-  , AMOUNT
-  , TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
-  , CATEGORY
-  , PURPOSE
-  , INCOME_EXPENSE AS incomeExpense
-  , RECEIPT
-  , PAYMENT
-  FROM ACCOUNT_BOOK
-  WHERE CLUBID = #{clubId}
-    AND (DATETIME BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
-    AND TO_DATE(#{endDate}, 'YYYY-MM-DD') 
-    OR #{startDate} IS NULL 
-    OR #{endDate} IS NULL)
-    AND (PURPOSE = #{searchText} 
-    OR #{searchText} IS NULL)
-</select>
+
+	<!-- 각주 추가: 회계 데이터 검색 -->
+	<select id="search" parameterType="map" resultType="com.firmeet.vo.AccountBookVo">
+		<![CDATA[
+			SELECT ID
+				, CLUBID
+				, MEETNO
+				, MEMBERID
+				, AMOUNT
+				, TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
+				, CATEGORY
+				, PURPOSE
+				, INCOME_EXPENSE AS incomeExpense
+				, RECEIPT
+				, PAYMENT
+			FROM ACCOUNT_BOOK
+			WHERE CLUBID = #{clubId}
+			AND (DATETIME BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+			AND TO_DATE(#{endDate}, 'YYYY-MM-DD') 
+			OR #{startDate} IS NULL 
+			OR #{endDate} IS NULL)
+			AND (PURPOSE = #{searchText} 
+			OR #{searchText} IS NULL)
+		]]>
+	</select>
 
 </mapper>

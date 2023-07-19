@@ -199,7 +199,7 @@ function deleteFile(fIndex) {
 }
 
 // 파일 등록
-function uploadFile() {
+/*function uploadFile() {
 	// 등록할 파일 리스트
 	var uploadFileList = Object.keys(fileList);
 
@@ -245,4 +245,4 @@ function uploadFile() {
 			}
 		});
 	}
-}
+}*/
