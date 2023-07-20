@@ -4,6 +4,10 @@
   box-sizing: border-box;
   height: 200%;
 }
+.container2{
+	display: none;
+}
+
 .container1 p , .container2 p, .container3 p{
   margin-top:10px;
 }
@@ -154,12 +158,11 @@ border: none;
   height: 550px;
   min-width: 550px;
   min-height: 500px;
-  background-color:#ffffff;
   border-radius:3px;
   overflow:hidden;
   background-color:#000000;
- position: fixed;
-  _position: absolute;
+  position: fixed;
+  left: 50%;
   box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
   justify-content:center;
   align-items:center;
@@ -174,7 +177,6 @@ border: none;
   top:0;
   left:0;
   right:0;
-  display:none;
   bottom:0;
   padding:15px;
   position: fixed;
@@ -198,17 +200,160 @@ border: none;
 }
 
 
+/*개인일정용 팝업*/
+.per-pop{
+    border: 1px solid black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background-color: white;
+    width: 400px;
+    height: 410px;
+  }
+.per-pop  .per-pop-header{
+    background-color: black;
+    height: 30px;
+    width:100%;
+  }
+.per-pop .per-pop-close-btn{
+    float: right;
+    text-align: center;
+    margin-right: 1px;
+    width: 30px;
+    color:white;
+    font-size: 20px;
+  }
+.per-pop .per-pop-content{
+  width: 100%;
+    height: 530px;
+    padding: 30px;
+  }
+.per-pop .body-titlebox{
+    width: 100%;
+    height: 9%;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+  }
+.per-pop #schedule-table{
+    width: 98% !important;
+    margin: 0 auto;
+    height: 50%;
+    
+  }
+.per-pop #schedule-table th{
+  width: 20%;
+  text-align: center;
+  background-color: #f8f8f8;
+  }
+.per-pop #schedule-table td{
+  padding-left: 2% ;
+}
+.per-pop #schedule-table td input[type="date"] {
+  width: 115px;
+}
+.per-pop  #schedule-table .see-place{
+  height: 24px;
+  width: 50px;
+  background-color: black;
+  color: white;
+  font-size: 13px;
+  float: right;
+}
+.per-pop  #schedule-table .content{
+  padding-left: 0%;
+    width: 100%;
+    height: 90%;
+    box-sizing: border-box;
+    resize: none;
+    outline: none;
+    padding-top: 2%;
+}
+.per-pop  #schedule-table .content  td ,th, tr {
+    border: 1px solid black;
+  }
+.per-pop  #schedule-table textarea[name="content"] {
+    width: 100%;
+    height: 95%;
+    resize: none;
+    outline: none;
+  }
+.per-pop .per-sche-edit{
+    /* border: 1px solid black; */
+    /* margin: 0 auto; */
+    /* position: absolute; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* min-width: 144px; */
+    margin: 0 auto;
+    margin: 5%;
+    /* position: absolute; */
+    margin-left: 33%;
+}
+.per-pop .per-sche-edit button{
+  font-size: 13px;
+  width: 55px;
+  height: 25px;
 
-/*3번째 확인 모달*/
+}
+.per-pop .per-sche-edit button:nth-child(1){
+  background-color: black;
+  color: white;
+}
+.per-pop .per-sche-edit button:nth-child(2){
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
 
-.container3 .modal-btn-box{
+.container4{
+  z-index: 1;
+  background-color:rgba(0,0,0,.3);
+  justify-content:center;
+  align-items:center;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  /*
+  */
+  display:none;
+  padding:15px;
+  position: fixed;
+  z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
+}
+.popup-close-btn, .popup-close-btn2, .per-pop-close-btn, .popup-close-btn3 {
+	cursor: pointer;
+}
+
+.de-end, .de-start{
+  resize: none;
+  outline: none;
+}
+
+
+/*수정창 css*/
+
+.container5{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  height: 200%;
+}
+
+.container5 p {
+  margin-top:10px;
+}
+.container5 .modal-btn-box{
   width:100%;
   text-align:center;
 }
-.container3 input{
+.container5 input{
 	height: 30px;
 }
-.container3 .popup-wrap {
+.container5 .popup-wrap {
   z-index: 1;
   background-color:rgba(0,0,0,.3);
   justify-content:center;
@@ -223,75 +368,79 @@ border: none;
   position: fixed;
   z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
 }
-.container3 .popup{
+.container5 .popup{
   width: 550px;
-  min-height: 530px;
   min-width: 550px;
   min-height: 530px;
-  background-color:#ffffff;
-  border-radius:3px;
-  overflow:hidden;
-  background-color:#000000;
-  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+  background-color: #ffffff;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: #000000;
+  box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, .3);
+  /* 팝업을 화면 중앙에 위치시키기 위한 스타일 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.container3 .popup-head{
+.container5 .popup-head{
   width:100%;
   height:30px;
   color: white;
   font-size: 21px;
 }
-.container3 .popup-close-btn, .container2 .popup-close-btn2{
+.container5 .popup-close-btn, .container2 .popup-close-btn2{
   float: right;
   text-align: center;
   margin-right: 5px;
   width:30px;
 }
-.container3 .head-title {
+.container5 .head-title {
     font-size: 20px;
     color: white;
     font-weight: 100;
     letter-spacing: 1px;
     text-align: center;
 }
-.container3 .popup-body{
+.container5 .popup-body{
   width:100%;
   background-color:#ffffff;
 }
-.container3 .body-content{
+.container5 .body-content{
   width:100%;
-  height: 500px;
+  height: 530px;
   padding:30px;
 }
-.container3 .body-titlebox{
+.container5 .body-titlebox{
   width:100%;
   height:10%;
   margin-bottom:10px;
   border-bottom: 2px solid black;
 }
-.container3 .body-contentbox{
+.container5 .body-contentbox{
   word-break:break-word;
   overflow-y:auto;
   min-height:100px;
   max-height:400px;
 }
-.container3 #schedule-table{
+.container5 #schedule-table{
   width: 98%;
   margin: 0 auto;
 }
-.container3 #schedule-table tr{
+.container5 #schedule-table tr{
   height : 35px;
 }
-.container3 #schedule-table tr, #schedule-table td{
+.container5 #schedule-table tr, #schedule-table td{
   padding-left: 2%;
   border:0.5px solid rgb(44, 44, 44);
 }
 
-.container3 #schedule-table th{
+.container5 #schedule-table th{
   text-align: center;
   background-color: #f8f8f8;
   width:20%;
 }
-.container3 .content-area textarea{
+.container5 .content-area textarea{
   padding-left: 0%;
   width:100%;
   height: 170px;
@@ -300,10 +449,10 @@ border: none;
   outline: none;
   padding-top: 2%;
 }
-.container3 #schedule-table .content-area{
+.container5 #schedule-table .content-area{
   height:170px;
 }
-.container3 .map-btn{
+.container5 .map-btn{
   background-color: #000000;
   color: white;
   margin-left: 10px;
@@ -311,24 +460,35 @@ border: none;
   height: 25px;
   font-size: 13px;
 }
-.container3 .sche-submit-btn{
+.container5 .sche-submit-btn{
   margin: 0 auto ;
   position: absolute;
   left:50%;
   transform: translateX(-50%);
   min-width: 144px;
 }
-.container3 .sche-submit-btn button{
+.container5 .sche-submit-btn button{
   margin-top: 23px;
   height: 30px;
   width: 70px;
 }
-.container3 .sche-submit-btn button:nth-child(1){
+.container5 .sche-submit-btn button:nth-child(1){
   background-color: #000000;
   color: white;
 }
-.container3 .sche-submit-btn button:nth-child(2){
+.container5 .sche-submit-btn button:nth-child(2){
   background-color: white;
   border: 1px solid black;
 }
-
+.container5 #edit-place-result {
+	
+border: none;
+ pointer-events: none;
+	
+}
+.container5 .popup-close-btn3{
+  float: right;
+  text-align: center;
+  margin-right: 5px;
+  width:30px;
+}

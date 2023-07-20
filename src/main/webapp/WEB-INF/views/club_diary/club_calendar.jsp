@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ include file="../include/topnav.jsp" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +33,7 @@
 
 <body>
   <!----------------------------------------- top Navigation ----------------------------------------->
-  
+  <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
   <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
   <!-- 페이지 콘텐츠 -->
 
@@ -94,6 +94,9 @@
   </div>
   <!--/wrap-->
 </body>
+    <footer>
+    	Copyright (C) 2023 어리쥬 all rights reserved.
+    </footer>
 <script>
 
 //calendar 객체 전역변수 설정

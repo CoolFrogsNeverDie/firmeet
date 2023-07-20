@@ -56,4 +56,22 @@ public class CalendarService {
 		
 	}
 	
-}
+	public ScheduleVO getPerScheDatail(ScheduleVO scheduleVO){
+		
+		ScheduleVO vo = scheduleDAO.getPerScheDetail(scheduleVO);
+		
+		System.out.println("돌아온 상세 정보" + vo);
+		return vo;
+	}
+	
+	public boolean deletePerSche(ScheduleVO scheduleVO) {
+		boolean result = false;
+		
+		if( scheduleDAO.deletePerSche(scheduleVO) >0) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+}	

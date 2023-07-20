@@ -23,7 +23,7 @@
 <body>
   
     <!-- // 상단 내비게이션 바 -->
-
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
     <!-- 페이지 콘텐츠 -->
     <div class="wrap">
         <div class="diary-area" data-memid = "${memberId}" data-clubid ="${clubId}">

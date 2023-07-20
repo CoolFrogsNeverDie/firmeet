@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/topnav.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +36,7 @@
 <body>
 
   <!----------------------------------------- top Navigation ----------------------------------------->
-
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
   <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
   <!-- 페이지 콘텐츠 -->
 
@@ -108,7 +107,6 @@
   
   <!-- 일정 등록모달창-->
 <div class="container1" >
-
   <div class="popup-wrap" id="popup">
     <div class="popup">
       <div class="popup-head">
@@ -166,68 +164,7 @@
 <!--모달창-->
 
 
-
-  <!-- 일정 확인모달창-->
-<div class="container3" >
-
-  <div class="popup-wrap">
-    <div class="popup">
-      <div class="popup-head">
-        <div class="popup-close-btn">X</div>
-      </div>
-      <div class="popup-body">
-        <div class="body-content">
-          <div class="body-titlebox">
-            <h4><strong>일정등록</strong></h4>
-            
-          </div>
-       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
-            <input type="hidden" name = "address1" value = "-1">
-            <input type="hidden" name = "address2" value ="-1">
-            <input type="hidden" name = "memberId" value = "se">
-            <input type="hidden" >
-          <div class="body-contentbox">
-            <table id = "schedule-table">
-              <tr>
-                <th>일정</th>
-                <td><input type="text" placeholder="일정명을 입력하세요."name = "title"> </td>
-              </tr>
-              <tr>
-                <th rowspan="2">일정</th>
-                <td rowspan="2"><input type="date" name = "startDate">&nbsp; ~&nbsp; 
-                <input type="date" id = "endD" name ="endDate" ></td>
-              </tr>
-              <tr>
-              </tr>
-              <tr>
-                <th>장소등록</th>
-                <td>
-	 				<span class= "checkbox-loca"><input type ="checkbox"> &nbsp;장소 등록 </span><br>
-                <input type = "text" class= "search-place" name = "place" value = " " readonly><button type= "button" class="map-search-btn">위치검색</button></td>
-              </tr>
-              <tr class="content-area">
-                <th>내용</th>
-                <td><textarea name = "content"></textarea></td>
-              </tr>
-            </table>
-            
-          </div>
-          <div class="sche-submit-btn">
-            <button type ="submit">등록</button>
-            <button type ="button">취소</button>
-          </div>
-       </form>
-          
-        </div>
-      </div>
-    </div>
-</div>
-</div>
-<!--모달창-->
-
-
-
-<!--모달창-->
+<!-- 지도 위치 검색 모달창-->
 <div class="container2" >
 
   <div class="popup-wrap2" id="popup">
@@ -252,11 +189,117 @@
     </div>
 </div>
 </div>
-<!--모달창-->
+<!--지도 팝업창-->
+
+<!--개인 일정 확인 팝업창-->
+<div class= "container4">
+<div class="per-pop">
+  <div class="per-pop-header">
+    <div class="per-pop-close-btn">X</div>
+  </div>
+  <div class="per-pop-body">
+    <div class="per-pop-content">
+      <div class="body-titlebox"><h5><strong>나의 일정</strong></h5></div>
+      <table id = "schedule-table">
+        <tr>
+          <th>일정</th>
+          <td class="de-title"></td>
+        </tr>
+        <tr>
+          <th rowspan="2">일정</th>
+          <td rowspan="2"><input type="date" name = "startDate" class="de-start" readonly>&nbsp; ~&nbsp; 
+          <input type="date" id = "endD" name ="endDate" class="de-end" readonly ></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <th>장소</th>
+          <td><span class="de-place"></span> &nbsp;&nbsp;<button type ="button" class="see-place" id = "see-map">장소보기</button></td>
+        </tr>
+        <tr class="content-area">
+          <th>내용</th>
+          <td><textarea name = "content" class="de-content" readOnly></textarea></td>
+        </tr>
+      </table>
+
+        <div class="per-sche-edit">
+          <button type = "button" class="edite-btn" >수정</button>
+          <button type = "button" class= "delete-per" id = "delete-per">삭제</button>
+        </div>
+    </div><!--per-pop-content-->
+
+  </div><!--popup body-->
+</div> <!--popup end-->
+</div>
+
 
   
+<!--//개인 일정 확인 팝업창//-->  
+ 
+<!---             일정 수정 팝업             --->
+ 
+ <div class="container5" >
+  <div class="popup-wrap">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn3">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+          <div class="body-titlebox">
+            <h4><strong>일정수정</strong></h4>
+            
+          </div>
+       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
+            <input type="hidden" id = "edit-address1" name = "address1" value = "-1">
+            <input type="hidden" id = "edit-address2" name = "address2" value ="-1">
+            <input type="hidden" name = "memberId" value = "se" id = "edit-memId">
+            <input type="hidden" name = "perScheNo" id = "edit-perScheNo">
+          <div class="body-contentbox">
+            <table id = "schedule-table">
+              <tr>
+                <th>일정</th>
+                <td><input type="text" placeholder="일정명을 입력하세요." id = "edit-title" name = "title"> </td>
+              </tr>
+              <tr>
+                <th rowspan="2">일정</th>
+                <td rowspan="2"><input type="date" id = "edit-startD" name = "startDate">&nbsp; ~&nbsp; 
+                <input type="date" id = "edit-endDate" name ="endDate" ></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <th>장소등록</th>
+                <td>
+				<span class= "checkbox-loca"><input type ="checkbox" id = "edit-place-checked" > &nbsp;장소 변경 </span>
+				<span><input type = "text" readonly name = "place" id = "edit-place-result" value =" "></span>
+                <input type = "text" class= "search-place" id  = "edit-place"  readonly><button type= "button" class="map-search-btn2">위치검색</button></td>
+              </tr>
+              <tr class="content-area">
+                <th>내용</th>
+                <td><textarea name = "content" id = "edit-content"></textarea></td>
+              </tr>
+            </table>
+            
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">등록</button>
+            <button type ="button" class = "popup-close-btn3">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
   
+<!--//             일정 수정 팝업              //-->
 </body>
+    <footer>
+    	Copyright (C) 2023 어리쥬 all rights reserved.
+    </footer>
 <!-- 지도 JS 영역 -->
 <style>
 <!--지도-->
@@ -272,10 +315,10 @@ padding:5px;font-size:14px; text-align:center; height: 100px;
 	background-color:white;
 	color: black; border: 0.5px solid black;
 }
-popup-wrap input {
+.popup-wrap input {
 height:30px;
 }
-.map-search-btn{
+.map-search-btn, .map-search-btn2{
  background-color: black; color: white;
 font-size: 15px;
     width: 70px;
@@ -287,6 +330,31 @@ font-size: 15px;
 font-size : 13px;}
 </style>
 <script>
+
+$('.edite-btn').on("click", function(){
+	
+	$('.container5 .popup-wrap ').css("display", "block");
+	
+	var data = $(this).data();
+	$('#edit-address1').val(data.address1);
+	$('#edit-address2').val(data.address2);
+	$('#edit-memId').val(data.memid);
+	$('#edit-title').val(data.title);
+	$('#edit-startD').val(data.start);
+	$('#edit-endDate').val(data.end);
+	$('#edit-place-result').val(data.place);
+	$('#edit-content').val(data.content);
+	$('#edit-perScheNo').val(data.scheno);
+	
+	
+
+	
+});
+
+
+
+/*---------------------------------지도 사용-----------------------------------------*/
+
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -296,10 +364,10 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 3 // 지도의 확대 레벨
     };  
 
-// 지도를 생성합니다    
+// 지도 생성   
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-// 장소 검색 객체를 생성합니다
+// 장소 검색 객체
 var ps = new kakao.maps.services.Places(); 
 
 
@@ -337,9 +405,11 @@ function displayMarker(place) {
 
 		let lat =  marker.getPosition().getLat(); 
         let lng =  marker.getPosition().getLng();
+        setCenter(marker.getPosition().getLat(), marker.getPosition().getLng())
         let place_name = place.place_name;
-        infowindow.setContent('<div class= "marker-place" style="height: 100px;">' + place_name + '<br> <button type="button" class= "loca-insert-btn">위치등록</button></div>');
-    	$('#address1').val(lat);
+        infowindow.setContent('<div class= "marker-place" style="height: 80px; width: 200px; text-align:center;">' + place_name + '<br> <button type="button" class= "loca-insert-btn">위치등록</button></div>');
+    	
+        $('#address1').val(lat);
     	$('#address2').val(lng);
     	$('#marker_place').val(place_name);
         infowindow.open(map, marker);
@@ -355,25 +425,28 @@ function setCenter(x, y) {
     map.setCenter(moveLatLon);
 }
 
+//주소 검색 버튼 
 $('.map-search-btn').on("click", function(){
 	
 	var keyword = $('.search-place').val();
 	ps.keywordSearch(keyword, placesSearchCB); 
 	$('.container2 .popup-wrap2').css('display', 'block');
-	
+	$('.container2').css('display', 'block');
 	
 });
-
+//주소 등록창 닫기 버튼//
 $('.popup-close-btn2').on("click", function(){
 	
 		console.log('확인');
 		$('.popup-wrap2').css("display", 'none');
 });
 
-//장소 등록
+
+
+//지도의 위치 등록 버튼 클릭이벤트//
 $('#2th-popup').on("click",'.loca-insert-btn', function(){
 	let place_name =  $('#marker_place').val()
-// 	 
+ 	 
 	$('#place-result').val(place_name);
 	$('.popup-wrap2').css("display", 'none');
 	
@@ -402,30 +475,24 @@ $('.add-persche').on("submit", function(){
 	return true;
 })
 
-//일정 등록 팝업 리셋
-function reset_popup1(){
-	$('#content').val("");
-	$('#startD').val("");
-	$('#endD').val("");
-	$('#title').val("");
-	$('#place').val("");
-	$('#address1').val("-1");
-	$('#address2').val("-1");
-	$('#loca-insert-select').prop('selectedIndex', -1);
-}
-//일정등록 팝업 주소 리셋
-function reset_popup1_address(){
-	$('#address1').val("-1");
-	$('#address2').val("-1");
-}
-
-
+//장소 넣기 checkbox 선택 시 장소 검색창 활성화
 $('#loca-insert-select').on('change', function() {
 	  if ($(this).is(':checked')) {
 		  $('#place').removeAttr('readonly');
 	  } else {
 		  $('#place').attr('readonly', 'readonly');
+		  $('#place').val("");
 		  reset_popup1_address();
+	  }
+	});
+//장소 넣기 checkbox 선택 시 장소 검색창 활성화
+$('#edit-place-checked').on('change', function() {
+	  if ($(this).is(':checked')) {
+		  $('#edit-place').removeAttr('readonly');
+	  } else {
+		  $('#edit-place').attr('readonly', 'readonly');
+		  $('#edit-place').val("");
+		  reset_popup2_address();
 	  }
 	});
 
@@ -441,6 +508,38 @@ $('#loca-insert-select').on('change', function() {
 <!-- 캘린더 JS 영역 -->
 <script>
 
+//개인 스케줄 삭제 버튼 클릭 이벤트
+$('#delete-per').on("click", function(){
+	let scheNo = $('#delete-per').data('scheno');
+	console.log("------");
+	console.log(scheNo);
+	
+	if(confirm('정말 삭제하시겠습니까?')){
+		deletePerSche(scheNo);
+	}
+	
+});
+
+
+
+
+/*-----------------------------------------개인 스케줄 팝업 열기---------------------------------------*/
+ 
+ //장소 보기 버튼 클릭 이벤트 
+$('#see-map').on("click", function(){
+  var screenWidth = screen.width;
+  var screenHeight = screen.height;
+  var windowWidth = 800;
+  var windowHeight = 600;
+  var windowLeft = (screenWidth - windowWidth) / 2 + 200; // 여기서 ,를 추가
+  var windowTop = (screenHeight - windowHeight) / 2;
+
+  var x = $(this).data('x');
+  var y = $(this).data('y');
+  window.open('https://map.kakao.com/link/map/' + x + ',' + y, '_blank', 'width=800,height=600,left=' + windowLeft + ',top=' + windowTop);
+});
+
+
 
 
 
@@ -448,23 +547,31 @@ $('#loca-insert-select').on('change', function() {
 let calendarEl;
 let calendar;
 
-//document ready
+//document ready 상태가 되면 달력을 그리고 해당하는 달에 추가할 data를 가져옴
 $(document).ready(function() {
 	render();
 	getData();
-	
-	/*
-	$('.container3 .popup-wrap').css('display', 'block');
-	*/
-
 
 });
   
-//정렬 선택 했을때 데이터 다시 불러옴
+/*-------------------------정렬 기준에 따른 데이터 reload----------------------------------*/
+ 
+//전체/결제/모임 정렬 선택
 $('#select-array').on("change", function(){
 	getData();
 });
-//정렬 기준 변경 시 --내 일정-- 선택 시 결제/모임 정렬 기능 비활성화&전체로 value값 변경
+
+//캘린더 이전 버튼 클릭 했을때
+$('.forCalendar').on("click",'button.fc-prev-button', function(){
+	getData();
+});
+//캘린더 이후 버튼 선택했을 때
+$('.forCalendar').on("click",'button.fc-next-button', function(){
+	getData();
+	console.log('test2');
+});
+
+//정렬선택에서 <<--내 일정-->> 선택 시 결제/모임 정렬 기능 비활성화&전체로 value값 변경
 $('#select-club').on("change", function(){
 	
 	if( $(this).val() == '-88'){
@@ -478,28 +585,51 @@ $('#select-club').on("change", function(){
 });
 
 
-//캘린더 이전 버튼 클릭 했을때
-$('.forCalendar').on("click",'button.fc-prev-button', function(){
-	getData();
-});
-//캘린더 이후 버튼 선택했을 때
-$('.forCalendar').on("click",'button.fc-next-button', function(){
-	getData();
-	console.log('test2');
-});
+/*--------------------popup close event ----------------------------------*/
 
-
-	  $(".popup-close-btn").click(function(){
-	      modalClose();
+//일정등록 팝업 닫기
+$(".popup-close-btn").click(function(){
+	 $("#popup").fadeOut();
 	      reset_popup1();
-	  });
-	  function modalClose(){
-	    $("#popup").fadeOut();
-	  }
+});
+
+/*개인일정 닫기 창*/
+$('.per-pop-close-btn').on("click", function(){
+	$('.container4').css("display", 'none');
+});
+//일정수정 닫기
+$('.popup-close-btn3').on("click", function(){
+	$('#edit-address1').val("-1");
+	$('#edit-address2').val("-1");
+	$('.container5 .popup-wrap').css("display", "none");
+});
+
+//일정 등록 팝업 리셋
+function reset_popup1(){
+	$('#content').val("");
+	$('#startD').val("");
+	$('#endD').val("");
+	$('#title').val("");
+	$('#place').val("");
+	$('#address1').val("-1");
+	$('#address2').val("-1");
+	$('#loca-insert-select').prop('selectedIndex', -1);
+}
+
+//일정등록 팝업 위도, 경도값 리셋
+function reset_popup1_address(){
+	$('#address1').val("-1");
+	$('#address2').val("-1");
+}
+function reset_popup2_address(){
+	$('#edit-address1').val("-1");
+	$('#edit-address2').val("-1");
+}
 
 
-	//캘린더 그리는 메서드
-	function render(){
+/*----------------------------캘린더 초기화 -----------------------------------*/
+
+function render(){
 	    calendarEl = $('#calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
@@ -529,13 +659,19 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 		        $('#startD').val(info.startStr);
 		        $('#endD').val(info.endStr);
 	        },
+	        eventClick: function(info) {
+	            if(info.event.classNames == 'per-event'){
+	                openPerSche(info.event.id);
+	            }
+	         }
 	    });
 
 	    calendar.render();
 		
 	}
 	
-	//바뀐 캘린더 스케줄 불러오는 메서드//
+	
+	/*------------------------------정렬, 바뀐 캘린더 년/월에 맞춰 해당하는 이벤트 reload 하는 메서드 ----------------------------------*/
 	function getData(){
 		
 		var title = $("#fc-dom-1").text();
@@ -606,19 +742,15 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	        	 if(per != null){
 	        		 for(var i =0; i<per.length; i++){
 	        			 calendar.addEvent({
-	 							title: per[i].title ,
+	 							title: '[개인]' + per[i].title ,
 	 							start: per[i].startDate,
 	 							end: per[i].endDate + ' 24:00',
-	 							id : 'per',
-	 					        className : 'per-block',
+	 							id : per[i].perScheNo,
+	 					        className : 'per-event',
 	 							backgroundColor: '#0C70F2',
 	 							borderColor:  '#0C70F2',
 	 						}
-	        			 
-	        			 
-	        			 
 	        			 );//addEvent end
-
 	        		 }//for end
 	        	 }//if end
 	         }, //success end
@@ -627,26 +759,108 @@ $('.forCalendar').on("click",'button.fc-next-button', function(){
 	         }
 	 				            
 	      });//ajax end
-	 	
-
 	
-	}
-	
+	}//render() end
 	
 
+
+	//개인 일정 팝업창 열고 정보 넣기
+	/*---------------------------------개인 일정 팝업창 열기----------------------------------------*/
+	
+	function openPerSche(perScheNo){
+	    
+	    ScheduleVO = {
+	    	perScheNo : perScheNo
+	    }
+	    
+	    $.ajax({
+	        
+	        //요청 세팅/calendar/member/getSchedule
+	        url : "${pageContext.request.contextPath}/calendar/member/gerScheDetail",      
+	        type : "POST",
+	        data : ScheduleVO,
+	        
+	        //응답 세팅
+	        dataType : "json",
+	        success : function(jsonResult){
+				
+		       	var sche = jsonResult.data;
+		       	console.log(sche);
+		       	console.log(sche.startDate);
+		       	console.log(sche.endDate);
+	        	
+	 		   $('.container4').css("display", "block");
+	           $('.de-title').text(sche.title);
+	           $('.de-start').val(sche.startDate);
+	           $('.de-end').val(sche.endDate);
+	           $('.de-place').text(sche.place);
+	 		   $('.de-content').text(sche.content);
+	 		   $('#delete-per').data('scheno', sche.perScheNo);
+	 		   $('.edite-btn').data('scheno',sche.perScheNo);
+	 		   $('.edite-btn').data('start',sche.startDate);
+	 		   $('.edite-btn').data('end',sche.endDate);
+	 		   $('.edite-btn').data('title',sche.title);
+	 		   $('.edite-btn').data('content',sche.content);
+	 		   $('.edite-btn').data('address1',sche.address1);
+	 		   $('.edite-btn').data('address2',sche.address2);
+	 		   $('.edite-btn').data('place',sche.place);
+	 		   $('.edite-btn').data('memid',sche.memberId);
+	 		   if(sche.address1 != -1){
+	 			  $('.see-place').prop('disabled', false);
+	 			  $('.see-place').css("background-color","black");
+		 		  $('#see-map').data('x', sche.address1);
+		 		  $('#see-map').data('y', sche.address2);
+	 		   }else{
+	 			  $('.see-place').prop('disabled', true);
+	 			  $('.see-place').css("background-color","#eeeeee");
+	 		   }
+				 		   
+	        }, //success end
+	        error : function(XHR, status, error) {
+	        console.error(status + " : " + error);
+	        }
+					            
+	     });//ajax end
+	}//openPerSche event end
+
+	/*---------------------------------------------개인 스케줄 삭제 function-----------------------------------------------------*/
+	
+	function deletePerSche(scheNo){
+		
+		  ScheduleVO = {
+			    	perScheNo : scheNo
+			    }
+			    
+			    $.ajax({
+			        
+			        //요청 세팅/calendar/member/getSchedule
+			        url : "${pageContext.request.contextPath}/calendar/member/deletePerSche",      
+			        type : "POST",
+			        data : ScheduleVO,
+			        
+			        //응답 세팅
+			        dataType : "json",
+			        success : function(jsonResult){
+						
+						if(jsonResult.data == true){
+							alert('스케줄이 삭제되었습니다.')
+							$('.container4').css("display", 'none');
+							getData();
+						}else{
+							alert('유효하지 않은 정보입니다. 잠시 후 다시 이용해주세요.')
+						}
+			        }, //success end
+			        error : function(XHR, status, error) {
+			        console.error(status + " : " + error);
+			        }
+							            
+			     });//ajax end
+		
+	}//deletePerSche end
+
+
+	
 </script>
 
-<script>
-$('.per-block')on("click", function(){
-	
-	alert('test')
-});
-$('#calendar')on("click",'.per-block', function(){
-
-	alert('test')
-});
-
-
-</script>
 
 </html>

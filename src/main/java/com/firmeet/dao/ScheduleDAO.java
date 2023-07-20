@@ -44,4 +44,22 @@ public class ScheduleDAO {
 		session.insert("schedule.insertPerSche", scheduleVO);
 	}
 	
+	public ScheduleVO getPerScheDetail(ScheduleVO scheduleVO) {
+		
+		System.out.println("DAO까찌 넘어오는거1!!!" + scheduleVO);
+		ScheduleVO schedule = session.selectOne("schedule.getPerScheDetail",scheduleVO);
+		
+		return schedule;
+	}
+	
+	public int deletePerSche(ScheduleVO scheduleVO) {
+		int row = 0;
+		
+		System.out.println("삭제 위해 넘어오는 정보 확인" + scheduleVO);
+		row = session.delete("schedule.deletePerSche", scheduleVO);
+		
+		
+		return row;
+	}
+	
 }

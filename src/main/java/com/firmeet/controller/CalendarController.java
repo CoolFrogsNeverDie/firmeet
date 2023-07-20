@@ -87,4 +87,30 @@ public class CalendarController {
 		return "redirect:/calendar/member?memberId="+ scheduleVO.getMemberId();
 	}
 	
+	/*세부 ScheDetail 정보 불러오기*/
+	@ResponseBody
+	@RequestMapping(value ="/member/gerScheDetail", method =RequestMethod.POST)
+	public JsonResult getPerScheDetail(@ModelAttribute ScheduleVO scheduleVO) {
+	
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("AJAX로 넘어온 정보 getPerScheDetail" +scheduleVO);
+		ScheduleVO sche = calendarService.getPerScheDatail(scheduleVO);
+		jsonResult.success(sche);
+		
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/member/deletePerSche", method  = RequestMethod.POST)
+	public JsonResult deletePerSche(@ModelAttribute ScheduleVO scheduleVO) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("delete하기 위한 정보 "+ scheduleVO);
+		boolean result =  calendarService.deletePerSche(scheduleVO);
+		jsonResult.success(result);
+		
+		
+		return jsonResult;
+	}
+	
 }	
