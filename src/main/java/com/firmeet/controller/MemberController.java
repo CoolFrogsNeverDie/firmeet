@@ -3,10 +3,13 @@ package com.firmeet.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,7 +48,7 @@ public class MemberController {
 		  if(member !=null){
 			  System.out.println("로그인 성공");
 			  session.setAttribute("member", member);
-			  return "main/mainList";
+			  return "main/mainForm";
 		  }else {
 			  System.out.println("로그인 실패");
 			  return "member/memberForm";
@@ -63,8 +66,12 @@ public class MemberController {
 	
 	/* 회원가입 */
 	@RequestMapping(value="/joinForm", method= {RequestMethod.GET,RequestMethod.POST})
-	public String joinForm() {
+	public String joinForm(Model model) {
 		System.out.println("MemberController.joinForm()");
+		List<TagVo> tagList = memberService.tagList();
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("cateList", cateList);
 		return "member/memberForm";
 	}
 	
@@ -93,4 +100,32 @@ public class MemberController {
 		System.out.println(jsonResult);
 		return jsonResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/tagList", method = {RequestMethod.POST, RequestMethod.GET})
+	public JsonResult tagList(){
+		System.out.println("MemberController.tagList()");
+		
+		List<TagVo> tagList = memberService.tagList();
+		System.out.println(tagList);
+		
+		JsonResult jsonResult1 = new JsonResult();
+		jsonResult1.success(tagList);
+		
+		return jsonResult1;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="/cateList", method = {RequestMethod.POST, RequestMethod.GET})
+	public JsonResult cateList() {
+		System.out.println("MemberController.cateList()");
+		List<CategoryVo> cateList = memberService.cateList();
+		System.out.println(cateList);
+		
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.success(cateList);
+		
+		return jsonResult;
+	}
 }
+

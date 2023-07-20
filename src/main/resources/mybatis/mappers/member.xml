@@ -47,6 +47,22 @@
 	        ]]>
 	
 	</select>
+	
+	<select id="tagList" resultType="com.firmeet.vo.TagVo">
+		<![CDATA[
+			select tagNo, tagName 
+			from tag
+	        ]]>
+	
+	</select>
+	
+	<select id="cateList" resultType="com.firmeet.vo.CategoryVo">
+		<![CDATA[
+			select cateNo, category
+			from category
+	        ]]>
+	
+	</select>
 
 
 

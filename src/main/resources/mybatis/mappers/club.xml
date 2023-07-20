@@ -27,6 +27,14 @@
                           #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW})
        ]]>
      </insert>
+     <insert id="insertImg" parameterType="com.firmeet.vo.ClubVo">
+		      <![CDATA[
+		           insert into club(img1,img2)
+		                    values(#{img1},#{img2})
+		       ]]>
+		     
+     </insert>
+     
      <insert id="insertClubCate" parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[	
 			insert into club_category (clubCateNum,clubId,cateNum)
@@ -37,7 +45,7 @@
      
      <insert id="insertClubTag" parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[	
-			insert into club_category (clubCateNum,clubId,tagNum)
+			insert into club_category (clubCateNum,clubId,tagNo)
 			values(seq_club_tagNo.nextval, #{clubId},#{tagNo})
 		
 		 ]]>

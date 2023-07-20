@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.firmeet.dao.ClubDao;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
 @Service
@@ -27,5 +28,9 @@ public class ClubService {
 		
 		}
 	
+	public void clubJoin(ClubVo clubVo , MemberVo memberVo){
+		
+	}
 	
 }
+
