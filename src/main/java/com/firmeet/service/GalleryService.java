@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.dao.GalleryDao;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryVo;
-import com.firmeet.vo.ScheduleVO;
+import com.firmeet.vo.MeetVo;
 
 @Service
 public class GalleryService {
@@ -24,12 +24,25 @@ public class GalleryService {
     private GalleryDao galleryDao;
     private String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
 
+	public List<MeetVo> getMeetA(int clubId) {
+		System.out.println("GalleryService getMeetA 확인");
+        List<MeetVo> sList = galleryDao.getMeetA(clubId);
+		return sList;
+	}
+    
     // 일정 목록 조회
-    public List<ScheduleVO> getMeet(int clubId) {
-        System.out.println("GalleryService getMeet 확인");
-        List<ScheduleVO> sList = galleryDao.getMeet(clubId);
+    public List<MeetVo> getMeet(int meetMon) {
+    	System.out.println("GalleryService getMeet 확인");
+        List<MeetVo> sList = galleryDao.getMeet(meetMon);
         return sList;
     }
+    
+    //일정 월별 출력
+	public List<MeetVo> getMeetMon(int clubId) {
+		System.out.println("GalleryService getMeetMon 확인");
+		 List<MeetVo> sList = galleryDao.getMeetMon(clubId);
+		return sList;
+	}
 
     // 갤러리 번호 조회
     public int getGalleryNo(int meet) {
@@ -96,5 +109,19 @@ public class GalleryService {
         List<GalleryImgVo> gImgVos = galleryDao.getGalleryImg(GalleryNo);
         return gImgVos;
     }
+
+	public List<MeetVo> getMeetName(int year, int month) {
+		System.out.println("GalleryService getGalleryImg 확인");
+		
+		List<MeetVo> gImgVos = galleryDao.getMeetName(year,month);
+		
+		return gImgVos;
+	}
+
+
+
+
+
+
 
 }

@@ -29,7 +29,9 @@
 			SELECT
 				MEETNO,
 				CLUBID,
-				meetName
+				meetName,
+				meetMon,
+				meetYear
 			FROM meet_name
 			WHERE CLUBID = #{clubId}
 			ORDER BY meetmon DESC

@@ -1,6 +1,8 @@
 package com.firmeet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryVo;
+import com.firmeet.vo.MeetVo;
 import com.firmeet.vo.ScheduleVO;
 
 @Repository
@@ -17,13 +20,23 @@ public class GalleryDao {
 	private SqlSession session;
 
 	// 갤러리 등록된 미팅 정보 조회
-	public List<ScheduleVO> getMeet(int clubId) {
+	public List<MeetVo> getMeet(int meetMon) {
 		System.out.println("GalleryDao getMeet 확인");
-		System.out.println(clubId);
+		System.out.println(meetMon);
 		
-	    List<ScheduleVO> sList = session.selectList("accountbook.meetList", clubId);
+	    List<MeetVo> sList = session.selectList("gallery.meetList", meetMon);
 	    
-	    System.out.println("돌아온 아이 " + sList);
+	    System.out.println("getMeet " + sList);
+		
+		return sList;
+	}
+	
+	public List<MeetVo> getMeetMon(int clubId) {
+		System.out.println("GalleryDao getMeetMon 확인");
+		
+		List<MeetVo> sList = session.selectList("gallery.meetMon", clubId);
+		
+		System.out.println("getMeetMon " + sList);
 		
 		return sList;
 	}
@@ -34,7 +47,6 @@ public class GalleryDao {
 	    System.out.println(meet);
 	    
 	    Integer galleryNo = session.selectOne("gallery.getGalleryNo", meet);
-	    System.out.println(galleryNo);
 	    int galleryNoValue = galleryNo != null ? galleryNo.intValue() : 0;
 	    System.out.println(galleryNoValue);
 	    return galleryNoValue;
@@ -53,7 +65,7 @@ public class GalleryDao {
 		List<GalleryImgVo> gImgVos = session.selectList("gallery.getGalleryImg", GalleryNo);
 		System.out.println(gImgVos);
 		
-		return null;
+		return gImgVos;
 	}
 
 	// 갤러리 목록 조회
@@ -66,4 +78,27 @@ public class GalleryDao {
 		
 		return galleryVos;
 	}
+
+	public List<MeetVo> getMeetA(int clubId) {
+		System.out.println("GalleryDao getMeetA 확인");
+		
+		List<MeetVo> sList = session.selectList("accountbook.meetList", clubId);
+		
+		return sList;
+	}
+
+	public List<MeetVo> getMeetName(int year, int month) {
+		System.out.println("GalleryDao getMeetName 확인");
+		
+        Map<String, Integer> variableMap = new HashMap<>();
+        variableMap.put("year", year);
+        variableMap.put("month", month);
+		
+		List<MeetVo> galleryVos = session.selectList("gallery.getMeetName",variableMap);
+		System.out.println(month+"GalleryDao getMeetName 확인: "+galleryVos);
+		
+		return galleryVos;
+	}
+
+
 }
