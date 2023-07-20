@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.NoticeBoardVO;
 import com.google.gson.JsonObject;
@@ -210,6 +211,18 @@ public class NoticeBoardController {
 	public String apitest2() {
 		
 		return "notice/test2";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/address")
+	public JsonResult idCheck(@ModelAttribute NoticeBoardVO vo) {
+		
+		System.out.println("넘어오는지 확인" + vo);
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.success(vo);
+		
+		return jsonResult;
+		
 	}
 	
 }

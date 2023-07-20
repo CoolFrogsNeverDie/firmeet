@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지 에디터</title>
-    <%@ include file="../include/topnav.jsp" %>
+    <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
+    
 </head>
 <body>
 
@@ -52,7 +55,7 @@
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
-                <table id="dataTable">
+                <table id="dataTable" style="width: 50%; float: left;">
 					<thead>
 					<tr>
 	                     <th class="noticegrouplist">
@@ -63,19 +66,25 @@
 	               <tbody>
 	                   <tr>
                        	  <td class="noticegrouplist1">
-                             <span class="noticegroupname" id="startDate1"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
-                             <p class="noticegroupname" id="meetTime1"><span>만남시간 : </span>${vo.meetTime}</p>
-                             <p class="noticegroupname" id="meetPlace1"><span>만남장소 : </span>${vo.meetPlace}</p>
-                             <p class="noticegroupname" id="price1"><span>회비 : </span>${vo.price}</p>
-                             <p class="noticegroupname" id="voteEnd1"><span>투표종료일 : </span>${vo.voteEnd}</p>
-                             <p class="noticegroupname" id="minPerson1"><span>최소인원 : </span>${vo.minPerson}</p>
-                             <p class="noticegroupname" id="maxPerson1"><span>최대인원 : </span>${vo.maxPerson}</p>
-                             <button>dfdsfs</button>
+                             <span class="noticegroupname"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
+                             <p class="noticegroupname"><span>만남시간 : </span>${vo.meetTime}</p>
+                             <p class="noticegroupname"><span>만남장소 : </span>${vo.meetPlace}</p>
+                             <p class="noticegroupname"><span>회비 : </span>${vo.price}</p>
+                             <p class="noticegroupname"><span>투표종료일 : </span>${vo.voteEnd}</p>
+                             <p class="noticegroupname"><span>최소인원 : </span>${vo.minPerson}</p>
+                             <p class="noticegroupname"><span>최대인원 : </span>${vo.maxPerson}</p>
+                             <p class="noticegroupname">address1 : <span id="address1">${vo.address1}</span></p>
+                             <p class="noticegroupname">address2 : <span id="address2">${vo.address2}</span></p>
+                             <button>버튼!</button>
                           </td>
 	                 </tr>
 	               </tbody>
                </table>
-      
+               
+               <div class="mapview">
+               		<div id="map2" style="width:100%;height:250px;"></div>
+               </div>
+               
               <div class="like">
                   <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
               </div>
@@ -128,44 +137,84 @@
   </body>
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
-		$(document).ready(function() {
-			$("#saveButton2").on("click", function() {
-			    var meetYearValue = $('#meetYear').val();
-			    var meetMonValue = $('#meetMon').val();
-			    var meetNameValue = $('#meetName').val();
-			    var combinedValue = meetYearValue + ' ' + meetMonValue+ ' ' + meetNameValue;
-		    	var result = $("#result").val();
-		        var startDate = $("#startDate").val();
-		        var endDate = $("#endDate").val();
-		        var meetTime = $("#meetTime").val();
-		        var meetPlace = $("#meetPlace").val();
-		        var price = $("#price").val();
-		        var voteEnd = $("#voteEnd").val();
-		        var minPerson = $("#minPerson").val();
-		        var maxPerson = $("#maxPerson").val();
+  $(document).ready(function() {
+	  
+	  var address1 = $("#address1").text();
+	  var address2 = $("#address2").text();
+		
+		console.log(address1);
+		console.log(address2);
+		
+		var NoticeBoardVO ={
+				address1 : address1,
+				address2 :  address2
+		}
+		
+		
+		//통신  id////////////////////////////////////////////
+		$.ajax({
+        url: '${pageContext.request.contextPath }/notice/address', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
+        method: 'POST',
+        data: NoticeBoardVO,
+        dataType: 'json',
+        
+        success: function(jsonResult) {
+        	console.log(jsonResult)
+        	var data = jsonResult.data;
+        	
+        	if(jsonResult.result == 'success'){
+        		if(jsonResult.data != null){
+        			$("#address11").val(data.address1);
+        			$("#address22").val(data.address2);
+        			console.log(data.address1);
+        			console.log(data.address2);
+        		}else{
+        			$("#x").html("사용불가");
+        		}
+        	}else {
+				//메세지 출력
+				var msg = jsonResult.failMsg;
+				alert(msg);
+			}
+        	
+        	//var data = jsonResult.data;
+        },
+        error: function(xhr, status, error) {
+            // 오류 처리
+            console.error('Error:', error);
+        }
+    });
+		
+	console.log('zz',address1);
+    
+/* map2 */        
+   	var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
+        mapOption2 = { 
+            center: new kakao.maps.LatLng(address1, address2), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+   	};
+   	console.log(address1, address2);
+    var map2 = new kakao.maps.Map(mapContainer2, mapOption2); // 지도를 생성합니다
 
-		        $("#dataTable2").css("display", "block");
-		        $("#group").modal("hide");
+    // 지도를 클릭한 위치에 표출할 마커입니다
+    var marker2 = new kakao.maps.Marker({ 
+        // 지도 중심좌표에 마커를 생성합니다 
+        position: map2.getCenter() 
+    }); 
+    // 지도에 마커를 표시합니다
+    marker2.setMap(map2);
 
-		        $("#result1").text(combinedValue);
-		        $("#startDate1").text("시작일 : " + startDate);
-		        $("#endDate1").text("종료일 : " + endDate);
-		        $("#meetTime1").text("시간 : " + meetTime+" 시");
-		        $("#meetPlace1").text("장소 : " + meetPlace);
-		        $("#price1").text("price회비 : " + price);
-		        $("#voteEnd1").text("투표종료일 : " + voteEnd);
-		        $("#minPerson1").text("최소인원 : " + minPerson);
-		        $("#maxPerson1").text("최대인원 : " + maxPerson);
-		    });
-		    
-		  	$('#group').on("click", function() {
-			    var meetYearValue = $('#meetYear').val();
-			    var meetMonValue = $('#meetMon').val();
-			    var meetNameValue = $('#meetName').val();
-			    var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
-
-			    $('#result').text(combinedValue);
-			 });
-		});
-  </script>
+    // 지도에 클릭 이벤트를 등록합니다
+    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+    kakao.maps.event.addListener(map2, 'click', function(mouseEvent) {        
+        
+        // 클릭한 위도, 경도 정보를 가져옵니다 
+        var latlng = mouseEvent.latLng; 
+        
+        // 마커 위치를 클릭한 위치로 옮깁니다
+        marker2.setPosition(latlng);
+   	});
+    
+});
+</script>
 </html>

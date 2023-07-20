@@ -40,8 +40,8 @@ public class NoticeBoardVO {
 	private String endDate;
 	private String meetTime;
 	private String meetPlace;
-	private int address1=0;
-	private int address2=0;
+	private double address1;
+	private double address2;
 	
 	public NoticeBoardVO() {
 		
@@ -104,8 +104,8 @@ public class NoticeBoardVO {
 	}
 
 	public NoticeBoardVO(int clubId, int meetNo, int minPerson, int maxPerson, int price, int meetYear, int meetMon,
-			String meetName, String startDate, String endDate, String meetTime, String meetPlace, int address1,
-			int address2, String voteEnd) {
+			String meetName, String startDate, String endDate, String meetTime, String meetPlace, double address1,
+			double address2, String voteEnd) {
 		super();
 		this.clubId = clubId;
 		this.meetNo = meetNo;
@@ -420,19 +420,19 @@ public class NoticeBoardVO {
 		this.meetPlace = meetPlace;
 	}
 
-	public int getAddress1() {
+	public double getAddress1() {
 		return address1;
 	}
 
-	public void setAddress1(int address1) {
+	public void setAddress1(double address1) {
 		this.address1 = address1;
 	}
 
-	public int getAddress2() {
+	public double getAddress2() {
 		return address2;
 	}
 
-	public void setAddress2(int address2) {
+	public void setAddress2(double address2) {
 		this.address2 = address2;
 	}
 
