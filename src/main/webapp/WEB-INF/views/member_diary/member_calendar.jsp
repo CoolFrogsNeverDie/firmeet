@@ -141,7 +141,9 @@
                 <td>
 				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 </span>
 				<span><input type = "text" readonly name = "place" id = "place-result" value =" "></span>
-                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></td>
+                <div class= "loca-btn-area">
+                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></div></td>                
+                
               </tr>
               <tr class="content-area">
                 <th>내용</th>
@@ -319,7 +321,8 @@ padding:5px;font-size:14px; text-align:center; height: 100px;
 height:30px;
 }
 .map-search-btn, .map-search-btn2{
- background-color: black; color: white;
+ background-color: black; 
+ color: white;
 font-size: 15px;
     width: 70px;
     height: 30px;
@@ -346,8 +349,6 @@ $('.edite-btn').on("click", function(){
 	$('#edit-content').val(data.content);
 	$('#edit-perScheNo').val(data.scheno);
 	
-	
-
 	
 });
 
@@ -479,9 +480,11 @@ $('.add-persche').on("submit", function(){
 $('#loca-insert-select').on('change', function() {
 	  if ($(this).is(':checked')) {
 		  $('#place').removeAttr('readonly');
+		  $('.loca-btn-area').css("display", 'block');
 	  } else {
 		  $('#place').attr('readonly', 'readonly');
 		  $('#place').val("");
+		  $('.loca-btn-area').css("display", 'none');
 		  reset_popup1_address();
 	  }
 	});
