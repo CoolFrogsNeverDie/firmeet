@@ -65,7 +65,7 @@
                 for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
                     var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
                     var clubId = list[i].clubId; 
-                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); // 변경: $dt -> #clubList
+                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/'+clubId+'/notice/noticelist">' + name + '</a></li>'); // 변경: $dt -> #clubList
                 }
             },
             error: function (error) {

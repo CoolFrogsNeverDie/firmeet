@@ -25,16 +25,17 @@ import com.firmeet.vo.NoticeBoardVO;
 import com.google.gson.JsonObject;
 
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("/{clubId}/notice")
 public class NoticeBoardController {
 	
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
 	@RequestMapping("/noticelist")
-	public String noticelist(Model model) {
-		
+	public String noticelist(@PathVariable("clubId") int clubId, Model model, NoticeBoardVO vo, HttpSession session) {
 		System.out.println("noticelist 확인");
+		
+		session.setAttribute("clubId", clubId);
 		
 		model.addAttribute("nlist",noticeBoardService.noticeList());
 		
@@ -42,48 +43,61 @@ public class NoticeBoardController {
 	}
 	
 	//에디터 일반 페이지
-	@RequestMapping("/{clubId}/{memberId}/noticeEditGeneral")
-	public String noticeEditGeneral(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/noticeEditGeneral")
+	public String noticeEditGeneral(HttpSession session, NoticeBoardVO vo, Model model) {
 		
-		System.out.println("notice확인");
+		System.out.println("noticeEditGeneral확인");
 		
-		System.out.println("controller memberId"+memberId);
+		int clubId = (int) session.getAttribute("clubId");
 		
+		System.out.println("controller clubId"+clubId);
+		System.out.println(vo);
 		return "notice/noticeEditGeneral";
 	}
 	
 	//에디터 결제 페이지
-	@RequestMapping("/{clubId}/{memberId}/noticeEditGroup")
-	public String noticeEditGroup(@PathVariable("clubId") int clubId, @PathVariable("memberId") String memberId, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/noticeEditGroup")
+	public String noticeEditGroup(HttpSession session, NoticeBoardVO vo, Model model) {
 		
-		System.out.println("notice확인");
+		int clubId = (int) session.getAttribute("clubId");
 		
-		System.out.println("controller memberId"+memberId);
+		System.out.println("noticeEditGroup확인");
+		
+		System.out.println("controller clubId"+clubId);
 		
 		return "notice/noticeEditGroup";
 	}
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
-	@RequestMapping("/{clubId}/{memberId}/editwrite")
-	public String editwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	@RequestMapping("/editwrite")
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, @RequestParam("memberId") String memberId, HttpSession session, Model model) {
 		
 		System.out.println("notice editwrite 확인 ");
-//		System.out.println("controller clubId"+clubId);
 		System.out.println("controller vo"+vo);
-//		System.out.println("controller memberId"+memberId);
+		
+		session.setAttribute("memberId확인", vo.getMemberId());
+		session.setAttribute("aboardNo확인", vo.getAboardNo());
 		
 		noticeBoardService.editwrite(vo);
 		
 		System.out.println("번호확인"+vo.getVoteNo());
+		session.setAttribute("voteNo확인", vo.getVoteNo());
 		
-		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlist/"+vo.getAboardNo()+"/"+(vo.getVoteNo()+1);
+		return "redirect:/notice/"+vo.getClubId()+"/editlist/"+vo.getMemberId()+vo.getAboardNo()+"/"+(vo.getVoteNo()+1);
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
-	@RequestMapping("/{clubId}/{memberId}/editlist/{aboardNo}/{voteNo}")
-	public String editlist(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/{clubId}/editlist")
+	public String editlist(@PathVariable("clubId") int clubId, @RequestParam("aboardNo") int aboardNo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
-		System.out.println("controller aboardNo 확인"+aboardNo);
+		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
+		
+		model.addAttribute("memberId", vo.getMemberId());
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		model.addAttribute("voteNo", vo.getVoteNo());
+		System.out.println("memberId"+ vo.getMemberId());
+		System.out.println("aboardNo"+ vo.getAboardNo());
+		System.out.println("voteNo"+ vo.getVoteNo());
 		
 		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
 		

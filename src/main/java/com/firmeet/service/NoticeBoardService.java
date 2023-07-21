@@ -25,6 +25,7 @@ public class NoticeBoardService {
 		dao.editwrite(vo);
 		System.out.println("service editinsert 확인"+vo);
 		System.out.println("service editinsert getAboardNo 확인"+vo.getAboardNo());
+		System.out.println("service editinsert getMemberId 확인"+vo.getMemberId());
 		
 		int aboardNo = vo.getAboardNo();
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());

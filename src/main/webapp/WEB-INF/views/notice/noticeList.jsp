@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,10 @@
         </div>
         <!--/diary-topbar-img-->
         <div class="diary-subbar">
-          <h4>공지 게시판</h4>
+          <h4 style="width: 50%">공지 게시판</h4>
+             <div style="width:100%;">
+        		<div style=" float: right;"><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeEditGenera"></a>글쓰기</div>
+        	</div>
         </div>
         <!--/diary-subbar-->
         <div class="content-area">
@@ -42,7 +46,7 @@
 		<tr>
 			<td>${row.aboardNo }</td>
 			<td>${row.memberId }</td>
-			<td>${row.title }</td>
+			<td><a href="${pageContext.request.contextPath }/notice/${clubId}/noticeEditGeneral?aboardNo=${row.aboardNo }"></a>${row.title }</td>
 			<td>${row.aboardDate }</td>
 			<td>${row.likeCnt }</td>
 		</tr>
