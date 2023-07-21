@@ -82,9 +82,28 @@
       </div>
       <!--/content-area-->
     </div>
-        <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
-    <!--/wrap-->
+    <!--/diary-area-->
+    <div class="menu-bar" name="사이드메뉴바">
+      <div class="group-profile">
+        <div class="group-profile-img-area">
+          <img class="group-profile-img" src="./asset/pro.jpg" alt="프로필사진" />
+        </div>
+        <!--/group-profile-img-area-->
+      </div>
+      <!--/group-profile-->
+      <ul class="side-nav">
+        <li>공지사항</li>
+        <li>갤러리</li>
+        <li>달력</li>
+        <li>자유 게시판</li>
+        <li>멤버</li>
+        <li>가계부</li>
+      </ul>
+      <!--/side-nav-->
+    </div>
+    <!--/menu-bar-->
+  </div>
+  <!--/wrap-->
   
   <!-- 일정 등록모달창-->
 <div class="container1" >
@@ -163,7 +182,7 @@
 
           </div>
           <div class="body-contentbox">
-            <div id="map" style="width:500px;height:400px; display:block; "></div>
+            <div id="map" style="width:500px;height:400px;"></div>
           </div>
        </form>
           
@@ -197,7 +216,7 @@
         </tr>
         <tr>
           <th>장소</th>
-          <td><span class="de-place"></span> &nbsp;&nbsp;<button type ="button" class="see-place" id = "see-map">길찾기</button></td>
+          <td><span class="de-place"></span> &nbsp;&nbsp;<button type ="button" class="see-place" id = "see-map">장소보기</button></td>
         </tr>
         <tr class="content-area">
           <th>내용</th>
@@ -407,10 +426,6 @@ function setCenter(x, y) {
     map.setCenter(moveLatLon);
 }
 
-function relayout() {    
-    map.relayout();
-} 
-
 //주소 검색 버튼 
 $('.map-search-btn').on("click", function(){
 	
@@ -418,7 +433,7 @@ $('.map-search-btn').on("click", function(){
 	ps.keywordSearch(keyword, placesSearchCB); 
 	$('.container2 .popup-wrap2').css('display', 'block');
 	$('.container2').css('display', 'block');
-	relayout();
+	
 });
 //주소 등록창 닫기 버튼//
 $('.popup-close-btn2').on("click", function(){
@@ -519,12 +534,12 @@ $('#see-map').on("click", function(){
   var screenHeight = screen.height;
   var windowWidth = 800;
   var windowHeight = 600;
-  var windowLeft = (screenWidth - windowWidth) / 2; // 여기서 ,를 추가
+  var windowLeft = (screenWidth - windowWidth) / 2 + 200; // 여기서 ,를 추가
   var windowTop = (screenHeight - windowHeight) / 2;
 
   var x = $(this).data('x');
   var y = $(this).data('y');
-  window.open('https://map.kakao.com/link/map/' + x + ',' + y, '_blank', 'width=800,height=600,left=2000px,top=2000px');
+  window.open('https://map.kakao.com/link/map/' + x + ',' + y, '_blank', 'width=800,height=600,left=' + windowLeft + ',top=' + windowTop);
 });
 
 

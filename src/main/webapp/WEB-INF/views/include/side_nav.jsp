@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-            </div>
-          <!--/content-left-->
-        </div>
-        <!--/content-area-->
-      </div>
+
       <!--/diary-area-->
       <div class="menu-bar" name="사이드메뉴바">
         <div class="group-profile">
