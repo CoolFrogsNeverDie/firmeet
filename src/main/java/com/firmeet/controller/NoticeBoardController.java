@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.google.gson.JsonObject;
 
@@ -32,10 +33,12 @@ public class NoticeBoardController {
 	private NoticeBoardService noticeBoardService;
 	
 	@RequestMapping("/noticelist")
-	public String noticelist(@PathVariable("clubId") int clubId, Model model, NoticeBoardVO vo, HttpSession session) {
+	public String noticelist(@PathVariable("clubId") int clubId, @ModelAttribute MemberVo membervo, Model model, NoticeBoardVO vo, HttpSession session) {
 		System.out.println("noticelist 확인");
 		
 		session.setAttribute("clubId", clubId);
+		
+		model.addAttribute("memberId", membervo.getMemberId());
 		
 		model.addAttribute("nlist",noticeBoardService.noticeList());
 		
@@ -44,11 +47,13 @@ public class NoticeBoardController {
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
-	public String noticeEditGeneral(HttpSession session, NoticeBoardVO vo, Model model) {
+	public String noticeEditGeneral(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
 		System.out.println("noticeEditGeneral확인");
 		
 		int clubId = (int) session.getAttribute("clubId");
+		
+		model.addAttribute("memberId", vo.getMemberId());
 		
 		System.out.println("controller clubId"+clubId);
 		System.out.println(vo);
@@ -70,20 +75,16 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
-	public String editwrite(@ModelAttribute NoticeBoardVO vo, @RequestParam("memberId") String memberId, HttpSession session, Model model) {
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
-		
-		session.setAttribute("memberId확인", vo.getMemberId());
-		session.setAttribute("aboardNo확인", vo.getAboardNo());
-		
 		noticeBoardService.editwrite(vo);
 		
-		System.out.println("번호확인"+vo.getVoteNo());
-		session.setAttribute("voteNo확인", vo.getVoteNo());
+		//System.out.println("번호확인"+vo.getVoteNo());
+		//session.setAttribute("voteNo확인", vo.getVoteNo());
 		
-		return "redirect:/notice/"+vo.getClubId()+"/editlist/"+vo.getMemberId()+vo.getAboardNo()+"/"+(vo.getVoteNo()+1);
+		return "redirect:"+vo.getClubId()+"/notice/editlist/";
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
@@ -215,18 +216,6 @@ public class NoticeBoardController {
 		return a;
 	}
 	
-	@RequestMapping("/apitest")
-	public String apitest() {
-		
-		return "notice/test";
-	}
-	
-	@RequestMapping("/apitest2")
-	public String apitest2() {
-		
-		return "notice/test2";
-	}
-	
 	@ResponseBody
 	@RequestMapping("/address")
 	public JsonResult idCheck(@ModelAttribute NoticeBoardVO vo) {
@@ -236,7 +225,6 @@ public class NoticeBoardController {
 		jsonResult.success(vo);
 		
 		return jsonResult;
-		
 	}
 	
 }

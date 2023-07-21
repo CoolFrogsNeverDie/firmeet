@@ -26,7 +26,7 @@
         <div class="diary-subbar">
           <h4 style="width: 50%">공지 게시판</h4>
              <div style="width:100%;">
-        		<div style=" float: right;"><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeEditGenera"></a>글쓰기</div>
+        		<button type="button" id="noticewrite" style=" float: right;">글쓰기</button>
         	</div>
         </div>
         <!--/diary-subbar-->
@@ -86,6 +86,12 @@
       <!--/menu-bar-->
     </div>
     <!--/wrap-->
-    
 </body>
+<script>
+$(document).ready(function() {
+	$('#noticewrite').click(function() {
+		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticeEditGeneral'	
+	});
+});
+</script>
 </html>
