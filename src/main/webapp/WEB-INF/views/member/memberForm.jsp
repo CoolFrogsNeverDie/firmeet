@@ -277,11 +277,13 @@
 
         .form form .form-group .tag{
             width: 80%;
+            height:100px;
             font-size: 12px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-left: 80px;
+            overflow-y: scroll;
         }
 
         .form form .form-group .tag button {
@@ -572,7 +574,7 @@
                 <div class="col-sm-6 form">
 
                     <div class="login form-peice ">
-                        <form action="http://localhost:8000/firmeet/main/mainList">
+                        <form action="/firmeet/member/login">
                             <div class="form-group">
                                 <label>Id</label>
                                 <input type="text" name="memberId" required>
@@ -590,7 +592,7 @@
                     </div>
 
                     <div class="signup form-peice switched">
-                        <form class="signup-form" method="post" action="http://localhost:8000/firmeet/main/mainList" >
+                        <form class="signup-form" method="post" action="/firmeet/member/join" >
                             <div class="form-group idForm">
                                 <label>Id</label>
                                 <input type="text" name="memberId" class="id">
@@ -633,35 +635,23 @@
                             <div class="form-group cateForm" >
                                 <label>카테고리</label>
                                 <ul class="category">
-                                    <li><input type="radio" name="category" value="0" checked><p>없음</p></li>
-                                    <li><input type="radio" name="category" value="1" ><p>운동/액티비티</p></li>
-                                    <li><input type="radio" name="category" value="2" ><p>스터디</p></li>
-                                    <li><input type="radio" name="category" value="3" ><p>친목</p> </li>
-                                    <li><input type="radio" name="category" value="4" ><p>건강/음식</p> </li>
-                                    <li><input type="radio" name="category" value="5" ><p>언어/문화</p></li>
-                                    <li><input type="radio" name="category" value="6" ><p>종교</p></li>
-                                    <li><input type="radio" name="category" value="7" ><p>교육/학습</p> </li>
-                                    <li><input type="radio" name="category" value="8" ><p>음악/예술</p></li>
-                                    <li><input type="radio" name="category" value="9" ><p>여행</p></li>
+                                   <c:forEach items="${cateList}" var="cate">
+                                   <li><input type="radio" name="category" value="${cate.cateNo}" ><p>${cate.category}</p></li>
+                                   </c:forEach>
                                 </ul>
                             </div>
 
                             <div class="form-group tagForm">
                                 <label>태그</label>
                                 <ul class="tag">
-                                    <li><button class="tagbtn">#운동광</button></li>
-                                    <li><button class="tagbtn">#수다왕</button></li>
-                                    <li><button class="tagbtn">#INTP</button></li>
-                                    <li><button class="tagbtn">#갓생러</button></li>
-                                    <li><button class="tagbtn">#여유로운</button></li>
-                                    <li><button class="tagbtn">#핫한</button></li>
-                                    <li><button class="tagbtn">#로맨틱</button></li>
-                                    <li><button class="tagbtn">#핵인싸</button></li>
-                                    <li><button class="tagbtn">#소통왕</button></li>
+				                   <c:forEach items="${tagList}" var = "tag">
+				                   	<li><button type="button" class="tagbtn" value="${tag.tagNo}">${tag.tagName}</button></li>
+				                   </c:forEach>
                                 </ul>
+                                
                                 <div class="tagSearch">
                                     <input type="search">
-                                    <button type="submit" class="search">검색</button>
+                                    <button type="submit" class="search" formation="">검색</button>
                                 </div>
                                 <div class="CTA">
                                     <input type="submit" value="join">
@@ -729,4 +719,7 @@
 	});
 
 </script>
+
+
+
 </html>

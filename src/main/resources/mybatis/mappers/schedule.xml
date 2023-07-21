@@ -74,6 +74,7 @@
 			SELECT 
                 myScheduleNo AS perScheduleNo
                 ,schetitle AS title
+                ,myScheduleNo as perScheNo
                 ,scheContent AS content
         		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
         		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
@@ -126,5 +127,30 @@
 		    )
 	</insert>
 	
+	
+	<!-- getMyscheDetail -->
+	<select id = "getPerScheDetail" parameterType ="schedule" resultType ="schedule">
+	<![CDATA[
+		 select 
+ 			myscheduleNo as perScheNo
+ 			,memberId 
+  			,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
+  			,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
+ 			, scheTitle as title
+ 			, scheContent as content
+ 			,schePlace as place
+ 			,address1 
+ 			,address2
+ 		from  my_schedule 
+ 		where myscheduleNo = #{perScheNo}
+	]]>
+	</select>
+	
+	
+	<delete id = "deletePerSche" parameterType ="schedule">
+		<![CDATA[
+			delete my_schedule where myscheduleno = #{perScheNo}
+		]]>
+	</delete>
 	
 </mapper>

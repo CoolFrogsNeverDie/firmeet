@@ -78,7 +78,7 @@
     color: gray;
 }
 .like{
-	margin-top: 50px;
+	margin-top: 37%;
 }
 .likecolor{
     color: red;
@@ -233,6 +233,14 @@
 
 #dataTable2{
 	margin-bottom: 20px;
+}
+
+.mapview{
+	width: 45%;
+	float: right;
+	margin-left: 20px;
+	border: 1px solid #000;
+	margin-top: 5%;
 }
 
 /* 지도api */

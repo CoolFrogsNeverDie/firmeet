@@ -1,5 +1,7 @@
 package com.firmeet.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,19 @@ public class MemberService {
 		}else {
 			return false;
 		}
+	}
+	
+	public List<TagVo> tagList() {
+		System.out.println("MemberService.tagList()");
+		 	List<TagVo> tagList = memberDao.tagList();
+		 	return tagList;
+		
+	}
+	
+	public List<CategoryVo> cateList() {
+		
+		List<CategoryVo> cateList = memberDao.cateList();
+		return cateList;
 	}
 	
 }

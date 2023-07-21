@@ -1,5 +1,7 @@
 package com.firmeet.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,5 +39,16 @@ public class MemberDao {
 	public MemberVo selectMem(String id) {
 		MemberVo memberVo = sqlsession.selectOne("member.selectMemId",id);
 		return memberVo;
+	}
+	
+	public List<TagVo> tagList() {
+		
+		List<TagVo> tagList = sqlsession.selectList("member.tagList");
+		return tagList;
+	}
+	
+	public List<CategoryVo> cateList() {
+		List<CategoryVo> cateList = sqlsession.selectList("member.cateList");
+		return cateList;
 	}
 }

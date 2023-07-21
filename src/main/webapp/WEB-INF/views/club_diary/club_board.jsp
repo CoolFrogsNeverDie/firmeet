@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -183,31 +184,8 @@
         </div>
         <!--/content-area-->
       </div>
-      <!--/diary-area-->
-      <div class="menu-bar" name="사이드메뉴바">
-        <div class="group-profile">
-          <div class="group-profile-img-area">
-            <img
-              class="group-profile-img"
-              src="../../../assets/image/pexels-photo-704569.jpeg"
-              alt="프로필사진"
-            />
-          </div>
-          <!--/group-profile-img-area-->
-        </div>
-        <!--/group-profile-->
-        <ul class="side-nav">
-          <li>공지사항</li>
-          <li>갤러리</li>
-          <li>달력</li>
-          <li>자유 게시판</li>
-          <li>멤버</li>
-          <li>가계부</li>
-        </ul>
-        <!--/side-nav-->
-      </div>
-      <!--/menu-bar-->
-    </div>
+           <!--/diary-area-->
+<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
     <!--/wrap-->
   </body>
   <!--아코디언 nav-->
