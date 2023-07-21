@@ -20,6 +20,7 @@ public class ClubDao {
 	public List<ClubVo> getMemClub(String memberId){
 		
 		List<ClubVo> memClubList = session.selectList("club.getMemClub", memberId);
+		 System.out.println(memClubList);
 		
 		return memClubList;
 	}

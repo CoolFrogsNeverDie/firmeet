@@ -1,5 +1,7 @@
 package com.firmeet.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,11 @@ public class ClubService {
 	public void clubJoin(ClubVo clubVo , MemberVo memberVo){
 		clubDao.clubJoinMem(clubVo,memberVo);
 	}
-	
+
+	public List<ClubVo> getMemClub(String memberId) {
+		List<ClubVo> clubVos = clubDao.getMemClub(memberId);
+		
+		return clubVos;
+	}
 }
 
