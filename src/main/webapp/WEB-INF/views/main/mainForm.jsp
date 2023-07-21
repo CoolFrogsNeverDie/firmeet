@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -278,6 +279,8 @@
 <body>
     
 
+	 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+	 
     <input id="main_search" type="search">
     <form id="hobby_form">
         <h3>나의 취향</h3>

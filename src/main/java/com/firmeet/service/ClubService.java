@@ -29,7 +29,7 @@ public class ClubService {
 		}
 	
 	public void clubJoin(ClubVo clubVo , MemberVo memberVo){
-		
+		clubDao.clubJoinMem(clubVo,memberVo);
 	}
 	
 }
