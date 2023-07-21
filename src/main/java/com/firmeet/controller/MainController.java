@@ -33,6 +33,7 @@ public class MainController {
 		return "/main/mainList";
 	}
 
+
 	@ResponseBody
 	@RequestMapping(value = "/clubList", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult clubList(@RequestParam("memberId") String memberId) {

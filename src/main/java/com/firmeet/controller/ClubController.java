@@ -51,6 +51,12 @@ public class ClubController {
 		return"/main/mainForm";
 
 	}
+	
+	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String clubMain() {
+
+		return "/club/clubMain";
+	}
 
 	
 	
