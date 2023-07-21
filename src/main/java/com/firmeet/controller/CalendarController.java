@@ -52,10 +52,13 @@ public class CalendarController {
 	}
 	
 	
-	@RequestMapping(value ="/member")
-	public String memCalendar(@ModelAttribute MemberVo memberVO
+	@RequestMapping(value ="/member/{memberId}")
+	public String memCalendar(@PathVariable String memberId
 							,Model model) {
 		
+		
+		MemberVo memberVO = new MemberVo();
+		memberVO.setMemberId(memberId);
 		List<ClubVo> joinList = calendarService.setCalOption(memberVO);
 		model.addAttribute("memberId", memberVO.getMemberId());
 		model.addAttribute("joinClubList", joinList);
@@ -85,7 +88,7 @@ public class CalendarController {
 		System.out.println("넘어온 개인 일정 정보" + scheduleVO);
 		calendarService.addPerSche(scheduleVO);
 		
-		return "redirect:/calendar/member?memberId="+ scheduleVO.getMemberId();
+		return "redirect:/calendar/member/" + scheduleVO.getMemberId();
 	}
 	
 	/*세부 ScheDetail 정보 불러오기*/

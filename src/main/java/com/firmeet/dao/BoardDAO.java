@@ -15,12 +15,7 @@ public class BoardDAO {
 	@Autowired
 	SqlSession session;
 	
-	public List<BoardVO> getPerBList(BoardVO boardVO){
-		
-		List<BoardVO> boardList = session.selectList("board.getPerBoard",boardVO);
-		System.out.println("DAO까찌 오는지 확인" + boardList);
-		return boardList;
-	}
+
 
 	public List<ReplyVO> getBoardComment(int boardNo){
 		

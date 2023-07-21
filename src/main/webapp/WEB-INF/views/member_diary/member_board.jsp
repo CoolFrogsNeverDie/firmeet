@@ -27,6 +27,8 @@
     <!-- 페이지 콘텐츠 -->
     <div class="wrap">
         <div class="diary-area" data-memid = "${memberId}" data-clubid ="${clubId}">
+        	<input type="text" value="${memberId}">
+        	<input type="text" value="${clubId}">
             <div class="diary-topbar">
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                     alt="프로필사진" />
@@ -40,10 +42,10 @@
             <div class="content-area">
                 <div class="content-left">
                     <dl>
-                        <dt class="all-category"><span></span><a href = "${pageContext.request.contextPath}/board/member?memberId=se&clubId=-99">전체보기</a></dt>
+                        <dt class="all-category"><span></span><a href = "${pageContext.request.contextPath}/board/member/${member.memberId}/-99">전체보기</a></dt>
                         <dt><span></span>가입한 동호회</dt>
                         <c:forEach items="${joinList}" var ="club">
-                        <dd class= "join-club-list" data-clubid = "${club.clubId}"><a href = "${pageContext.request.contextPath}/board/member?memberId=se&clubId=${club.clubId}">-  ${club.clubName}</a></dd>
+                        <dd class= "join-club-list" data-clubid = "${club.clubId}"><a href = "${pageContext.request.contextPath}/board/member/${member.memberId}/${club.clubId}">-  ${club.clubName}</a></dd>
                         </c:forEach>
                     </dl>
                 </div>
@@ -145,11 +147,11 @@
  				
  	    	   let boardList = jsonResult.data;
  	    	   console.log(boardList);
-
- 	    	   
- 	    		 render(boardList);
+				
+ 	    		 render(boardList); 	    		   
  	    		 startNum +=10;
  	    		 endNum += 10;
+ 	    	   	
  	    	   
  	       }, //success end
  	       error : function(XHR, status, error) {

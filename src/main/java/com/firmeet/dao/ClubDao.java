@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
@@ -43,8 +44,17 @@ public class ClubDao {
 		 System.out.println("넘어온 값 확인" + tagVo);
 	 }
 	 
+	 
 	 public void clubJoinMem(ClubVo clubVo ,MemberVo memberVo) {
 		 session.insert("cllub.insertMem", clubVo);
 		 session.insert("cllub.insertMem", memberVo);
 	 }
+
+	 public String getClubName(BoardVO boardVO) {
+		 
+		 return session.selectOne("club.getClubName", boardVO);
+	 }
+	 
+	 
+	 
 }

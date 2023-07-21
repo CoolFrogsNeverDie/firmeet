@@ -50,5 +50,14 @@
 		
 		 ]]>
      </insert>
-
+		
+		
+	<select id = "getClubName" parameterType = "board" resultType = "String">
+		<![CDATA[
+			select 
+				clubName 
+			from club 
+			where clubId = #{clubId}
+		]]>
+	</select>	
 </mapper>

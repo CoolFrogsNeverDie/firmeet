@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,16 +23,19 @@ public class BoardController {
 	BoardService boardService;
 	
 	
-	@RequestMapping(value = "/member")
-	public String PerBoard(@ModelAttribute BoardVO boardVO,
-							Model model) {
+	@RequestMapping(value = "/member/{memberId}/{clubId}")
+	public String PerBoard(@PathVariable("memberId") String memberId
+							,@PathVariable("clubId") int clubId
+							,Model model) {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setClubId(clubId);
+		boardVO.setMemberId(memberId);
 		
 		System.out.println("멤버 게시판" + boardVO);
 		Map<String, Object> info = boardService.getPerBoardInfo(boardVO);
 		//삭제 예정
 		
 		model.addAttribute("joinList",info.get("joinList"));
-//		model.addAttribute("boardList",info.get("boardList"));
 		model.addAttribute("category",info.get("category"));
 		model.addAttribute("memberId", boardVO.getMemberId());
 		model.addAttribute("clubId", boardVO.getClubId());
@@ -48,8 +52,9 @@ public class BoardController {
 		
 		System.out.println("넘어오는 값 확인" + boardVO);
 		List<BoardVO> list = boardService.getPerBoard(boardVO);
-		
-		json.success(list);
+		if(list != null) {
+			json.success(list);
+		}
 		
 		return json;
 	}

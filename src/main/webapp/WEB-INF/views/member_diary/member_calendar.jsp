@@ -102,7 +102,7 @@
        <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
             <input type="hidden" id = "address1" name = "address1" value = "-1">
             <input type="hidden" id = "address2" name = "address2" value ="-1">
-            <input type="hidden" name = "memberId" value = "se" id = "memId">
+            <input type="hidden" name = "memberId" value = "${member.memberId}" id = "memId">
             <input type="hidden" id = "marker_place">
           <div class="body-contentbox">
             <table id = "schedule-table">
