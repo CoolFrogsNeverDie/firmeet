@@ -20,29 +20,7 @@
 
 <body>
 	<!-- top Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
-		<div class="container">
-			<a class="navbar-brand" href="#"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
-			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">홈</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">링크</a></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">드롭다운</a>
-						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">액션</a></li>
-							<li><a class="dropdown-item" href="#">다른 액션</a></li>
-							<li><hr class="dropdown-divider" /></li>
-							<li><a class="dropdown-item" href="#">다른 항목</a></li>
-						</ul></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- // top Navigation -->
+	<%@ include file="../include/nav.jsp" %>
 
 	<div class="wrap">
 		<div class="diary-area">
