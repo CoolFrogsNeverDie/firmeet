@@ -87,7 +87,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                  	<form action="${pageContext.request.contextPath }/notice/${aboardNo}/${memberId}/${voteNo}/vote" method="get">
+                  	<form action="${pageContext.request.contextPath }/notice/vote/${vo.voteNo}" method="get">
 						${vo.voteTitle}
                         <div class="voteleft">
                         	
