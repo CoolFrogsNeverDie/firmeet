@@ -5,7 +5,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
 
 <!-- jqueyr -->    
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>.
 
 
 <!-- 모름 -->
@@ -20,6 +20,7 @@ crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
 crossorigin="anonymous">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 <!-- summernote -->
@@ -38,4 +39,7 @@ crossorigin="anonymous">
 <!-- 자작 -->
 <link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/editstyle.css" rel="stylesheet" type="text/css">
+
+
+    
   

@@ -9,6 +9,11 @@
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
     
+	    <!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
 </head>
 <body>
 
@@ -69,13 +74,13 @@
                              <span class="noticegroupname"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
                              <p class="noticegroupname"><span>만남시간 : </span>${vo.meetTime}</p>
                              <p class="noticegroupname"><span>만남장소 : </span>${vo.meetPlace}</p>
-                             <p class="noticegroupname"><span>회비 : </span>${vo.price}</p>
+                             <p class="noticegroupname">회비 :<span id="price">${vo.price}</span></p>
                              <p class="noticegroupname"><span>투표종료일 : </span>${vo.voteEnd}</p>
                              <p class="noticegroupname"><span>최소인원 : </span>${vo.minPerson}</p>
                              <p class="noticegroupname"><span>최대인원 : </span>${vo.maxPerson}</p>
                              <p class="noticegroupname">address1 : <span id="address1">${vo.address1}</span></p>
                              <p class="noticegroupname">address2 : <span id="address2">${vo.address2}</span></p>
-                             <button>버튼!</button>
+                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
                           </td>
 	                 </tr>
 	               </tbody>
@@ -137,12 +142,60 @@
   </body>
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
+  
+  var price = $('#price').text();
+  console.log(price);
+  
+  function kakaopay(){
+  
+	var IMP = window.IMP; // 생략 가능
+	IMP.init("imp51377887"); // 예: imp00000000
+	
+	IMP.request_pay({		
+		pg : 'kakaopay',
+		pay_method : 'card',
+		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
+		name : 'firmeet',                                  //상품명
+		amount : $('#price').text(),                    //가격
+		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
+		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
+		buyer_name : 'buyer_name',                           //구매자 이름
+		buyer_tel : 'hp',                                    //전화번호
+		buyer_addr : 'addr',	                             //주소
+	},function(data){
+		if(data.success){
+			console.log('빌링키 발급 성공', data)
+			alert("결제가 완료되었습니다.")
+        }else{
+        	var msg = "결제 실패"
+        	msg += "에러 내용" + data.error_msg;
+        	alert(msg);
+        	return false;
+        }
+		$("#paybtn").submit();
+	});
+ }
+	
+/*   function (rsp) {
+      console.log(rsp);
+      if (rsp.success) {
+        var msg = '결제가 완료되었습니다.';
+        alert(msg);
+        location.href = "결제 완료 후 이동할 페이지 url"
+      } else {
+        var msg = '결제에 실패하였습니다.';
+        msg += '에러내용 : ' + rsp.error_msg;
+        alert(msg);
+      }
+    } */
+</script>
+<script>
   $(document).ready(function() {
 	  
 	  var address1 = $("#address1").text();
 	  var address2 = $("#address2").text();
 		
-		console.log(address1);
+		console.log('ㅎㅎ',address1);
 		console.log(address2);
 		
 		var NoticeBoardVO ={
@@ -213,7 +266,10 @@
         
         // 마커 위치를 클릭한 위치로 옮깁니다
         marker2.setPosition(latlng);
+        
+        
    	});
+    map2.setZoomable(true);   
     
 });
 </script>
