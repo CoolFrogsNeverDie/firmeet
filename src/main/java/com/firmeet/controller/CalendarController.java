@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
@@ -29,9 +29,10 @@ public class CalendarController {
 	
 	
 	/*클럽 캘린더*/
-	@RequestMapping(value ="/club", method = RequestMethod.GET)
-	public String clubCalendar(@RequestParam(value ="clubId", required = false, defaultValue="0") int clubId
+	@RequestMapping(value ="/club/{clubId}", method = RequestMethod.GET)
+	public String clubCalendar(@PathVariable("clubId") int clubId
 								,Model model ) {
+		
 		
 		model.addAttribute("clubId",clubId);
 		

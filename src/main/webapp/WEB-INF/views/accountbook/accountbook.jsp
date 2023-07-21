@@ -164,29 +164,11 @@
 			</div>
 			<!--/content-area-->
 		</div>
-		<!--/diary-area-->
-		<div class="menu-bar" name="사이드메뉴바">
-			<div class="group-profile">
-				<div class="group-profile-img-area">
-					<img class="group-profile-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-				</div>
-				<!--/group-profile-img-area-->
-			</div>
-			<!--/group-profile-->
-			<ul class="side-nav">
-				<li>공지사항</li>
-				<li>갤러리</li>
-				<li>달력</li>
-				<li>자유 게시판</li>
-				<li>멤버</li>
-				<li>가계부</li>
-			</ul>
-			<!--/side-nav-->
-		</div>
-		<!--/menu-bar-->
-	</div>
-	<!--/wrap-->
-	<footer> Copyright (C) 2023 어리쥬 all rights reserved.</footer>
+        <!--/diary-area-->
+<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+    <!--/wrap-->
+	<footer> Copyright (C) 2023 어리쥬 all rights reserved.</foo
+	ter>
 </body>
 <script>
 	$(document)

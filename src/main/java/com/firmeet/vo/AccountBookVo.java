@@ -3,7 +3,7 @@ package com.firmeet.vo;
 import java.util.Date;
 
 public class AccountBookVo {
-    private int id;
+    private int accountId;
     private int clubId;
     private int meetNo;
     private String memberId;
@@ -19,10 +19,10 @@ public class AccountBookVo {
     	  // 기본 생성자 내용
     	}
     
-	public AccountBookVo(int id, int clubId, int meetNo, String memberId, int amount, String datetime, String category,
+	public AccountBookVo(int accountId, int clubId, int meetNo, String memberId, int amount, String datetime, String category,
 			String purpose, String incomeExpense, String receipt, int payment) {
 		super();
-		this.id = id;
+		this.accountId = accountId;
 		this.clubId = clubId;
 		this.meetNo = meetNo;
 		this.memberId = memberId;
@@ -35,12 +35,12 @@ public class AccountBookVo {
 		this.payment = payment;
 	}
 
-	public int getId() {
-		return id;
+	public int getAccountId() {
+		return accountId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setaccountId(int accountId) {
+		this.accountId = accountId;
 	}
 
 	public int getClubId() {
@@ -125,7 +125,7 @@ public class AccountBookVo {
 
 	@Override
 	public String toString() {
-		return "AccountBookVo [id=" + id + ", clubId=" + clubId + ", meetNo=" + meetNo + ", memberId=" + memberId
+		return "AccountBookVo [accountId=" + accountId + ", clubId=" + clubId + ", meetNo=" + meetNo + ", memberId=" + memberId
 				+ ", amount=" + amount + ", datetime=" + datetime + ", category=" + category + ", purpose=" + purpose
 				+ ", incomeExpense=" + incomeExpense + ", receipt=" + receipt + ", payment=" + payment + "]";
 	}

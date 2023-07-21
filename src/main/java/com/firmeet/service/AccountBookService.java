@@ -19,7 +19,9 @@ import com.firmeet.vo.ScheduleVO;
 @Service
 public class AccountBookService {
 
-	String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\accountimg";
+//	String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\accountimg";
+
+	String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\accountimg";
 	
 	@Autowired
 	private AccountBookDao accountBookDao;

@@ -49,8 +49,8 @@
       <!--/diary-topbar-img-->
       <div class="diary-subbar">
         <div>
-          <h4>&#128197;&nbsp;&nbsp;${memberId}님의 달력</h4>
-          <input type ="hidden" value ="${memberId}" id ="memId">
+          <h4>&#128197;&nbsp;&nbsp;${member.memberId}님의 달력</h4>
+          <input type ="hidden" value ="${member.memberId}" id ="memId">
         </div>
         <div class="calendar-array">
 			<select id ="select-club">

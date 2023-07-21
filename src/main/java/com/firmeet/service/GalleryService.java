@@ -22,7 +22,7 @@ public class GalleryService {
 
     @Autowired
     private GalleryDao galleryDao;
-    private String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
+    private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
 
 	public List<MeetVo> getMeetA(int clubId) {
 		System.out.println("GalleryService getMeetA 확인");

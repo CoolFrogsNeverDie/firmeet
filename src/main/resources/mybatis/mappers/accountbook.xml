@@ -7,7 +7,7 @@
 	<select id="accountList" parameterType="int" resultType="com.firmeet.vo.AccountBookVo">
 		<![CDATA[
 			SELECT
-				ID
+				ACCOUNTID
 				, CLUBID
 				, MEETNO
 				, MEMBERID
@@ -40,7 +40,7 @@
 
 	<!-- 각주 추가: 회계 데이터 업로드 -->
 	<insert id="meetUpload" parameterType="com.firmeet.vo.AccountBookVo">
-		INSERT INTO Account_Book (id
+		INSERT INTO Account_Book (ACCOUNTID
 			, clubId
 			, meetNo
 			, memberId
@@ -68,7 +68,7 @@
 	<!-- 각주 추가: 회계 데이터 검색 -->
 	<select id="search" parameterType="map" resultType="com.firmeet.vo.AccountBookVo">
 		<![CDATA[
-			SELECT ID
+			SELECT ACCOUNTID
 				, CLUBID
 				, MEETNO
 				, MEMBERID

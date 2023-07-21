@@ -4,7 +4,7 @@
 <!-- top Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
 	<div class="container">
-		<a class="navbar-brand" href="#"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/main/index"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -65,12 +65,12 @@
                 for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
                     var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
                     var clubId = list[i].clubId; 
-                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/'+clubId+'/notice/noticelist">' + name + '</a></li>'); // 변경: $dt -> #clubList
+                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); 
                 }
             },
             error: function (error) {
                 // AJAX 에러 시 실행되는 코드
-                console.error('Error:', error);
+                console.error('Error:', error)
             }
         });
     });
