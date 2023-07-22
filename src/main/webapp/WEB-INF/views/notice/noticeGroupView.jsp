@@ -87,10 +87,12 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                  	<form action="${pageContext.request.contextPath }/notice/vote/${vo.voteNo}" method="get">
+                  	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote/${vo.voteNo}" method="get">
 						${vo.voteTitle}
                         <div class="voteleft">
-                        	
+                        	<input type="text" name="clubId" value="${clubId}"><br>
+                        	<input type="text" name="voteNo" value="${vo.voteNo}"><br>
+                        	<input type="text" name="memberId" value="${member.memberId}">${memberId}<br>
                             <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
                             <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
                            	<input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>

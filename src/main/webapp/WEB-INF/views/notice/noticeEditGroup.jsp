@@ -38,7 +38,7 @@
             <div class="content-left">
 
                 <!-- 여기부터 작성 -->
-                <form action="${pageContext.request.contextPath}/notice/${clubId}/editwritegroup" class="formleft" method="get">
+                <form action="${pageContext.request.contextPath}/${clubId}/notice/editgroupwrite" class="formleft" method="get">
                     <div>
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
@@ -82,7 +82,7 @@
                             <option value="번개모임">번개모임</option>
                             <option value="일반모임">일반모임</option>
                         </select>
-
+						<input type="text" name="memberId" value="${member.memberId}">${memberId}
                         <button type="submit" class="btnbox">등록</button>
                     </div>
 

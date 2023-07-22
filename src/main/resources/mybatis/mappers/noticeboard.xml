@@ -27,11 +27,11 @@
 	
 	<select id="voteresult" resultType="com.firmeet.vo.VoteResultVO" parameterType="com.firmeet.vo.VoteResultVO">
 		select
-			 sum(case when choice = 1 then 1 else 0 end) as Vote1Cnt
-			,sum(case when choice = 2 then 1 else 0 end) as Vote2Cnt
-			,sum(case when choice = 3 then 1 else 0 end) as Vote3Cnt
-			,sum(case when choice = 4 then 1 else 0 end) as Vote4Cnt
-			,sum(case when choice = 5 then 1 else 0 end) as Vote5Cnt
+			 sum(case when choice = 1 then 1 else 0 end) as vote1cnt
+			,sum(case when choice = 2 then 1 else 0 end) as vote2cnt
+			,sum(case when choice = 3 then 1 else 0 end) as vote3cnt
+			,sum(case when choice = 4 then 1 else 0 end) as vote4cnt
+			,sum(case when choice = 5 then 1 else 0 end) as vote5cnt
 		from voteResult
 		where voteNo = #{voteNo}
 	</select>

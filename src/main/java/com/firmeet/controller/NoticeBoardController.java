@@ -1,29 +1,19 @@
 package com.firmeet.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
-import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
-import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -45,7 +35,7 @@ public class NoticeBoardController {
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
-	public String noticeEditGeneral(@ModelAttribute NoticeBoardVO vo, MemberVo membervo, HttpSession session, Model model) {
+	public String noticeEditGeneral(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
 		System.out.println("noticeEditGeneral확인");
 		
@@ -59,11 +49,11 @@ public class NoticeBoardController {
 	
 	//에디터 결제 페이지
 	@RequestMapping("/noticeEditGroup")
-	public String noticeEditGroup(HttpSession session, NoticeBoardVO vo, Model model) {
-		
-		int clubId = (int) session.getAttribute("clubId");
+	public String noticeEditGroup(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
 		System.out.println("noticeEditGroup확인");
+		
+		int clubId = (int) session.getAttribute("clubId");
 		
 		System.out.println("controller clubId"+clubId);
 		
@@ -73,7 +63,6 @@ public class NoticeBoardController {
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
 	public String editwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
-		
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
 		noticeBoardService.editwrite(vo);
@@ -85,10 +74,11 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist/{aboardNo}")
-	public String editlist(@PathVariable("aboardNo") int aboardNo, Model model, HttpSession session, NoticeBoardVO vo) {
+	public String editlist(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
+		model.addAttribute("clubId", clubvo.getClubId());
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("aboardNo"+ vo.getAboardNo());
 		model.addAttribute("voteNo", vo.getVoteNo());
@@ -99,100 +89,79 @@ public class NoticeBoardController {
 		return "notice/noticeGroupView";
 	}
 	
-	@RequestMapping("/vote")
-	public String vote(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	@RequestMapping("/vote/{voteNo}")
+	public String vote(@PathVariable("voteNo") int voteNo, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
-		System.out.println("controller voteNo"+vo.getVoteNo());
 		System.out.println("controller vo"+vo);
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("voteNo"+ vo.getVoteNo());
 		
 		noticeBoardService.voteinsert(vo);
 		
-		return "redirect:/notice/"+vo.getVoteNo()+"/voteResult";
-	}
-	
-	//에디터 모임 등록 후 나오는 페이지
-	@RequestMapping("/editwritegroup")
-	public String editgroupwrite(HttpSession session, @ModelAttribute NoticeBoardVO vo) {
-		
-		System.out.println("notice editgroupwrite 확인 ");
-		System.out.println("controller vo"+vo);
-		
-		noticeBoardService.editgroupwrite(vo);
-		
-		System.out.println("번호확인"+vo.getMeetNo());
-		
-		return "redirect:/notice/"+vo.getClubId()+"/"+vo.getMemberId()+"/editlistgroup/"+vo.getAboardNo()+"/"+(vo.getMeetNo()+1);
-	}
-	
-	//에디터 모임 등록 후 나오는 리스트
-	@RequestMapping("/editlistgroup/{aboardNo}/{meetNo}")
-	public String editlistgroup(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("meetNo") int meetNo, Model model, HttpSession session, NoticeBoardVO vo) {
-		System.out.println("notice editgrouplist 확인");
-		System.out.println("controller aboardNo 확인"+aboardNo);
-		
-		model.addAttribute("vo", noticeBoardService.editlistgroup(aboardNo));
-		
-		System.out.println("controller meetno 확인"+vo.getMeetNo());
-		return "notice/noticeVoteView";
-	}
-	
-	@RequestMapping("/noticeEditView")
-	public String noticeEditView() {
-		
-		System.out.println("noticeEditView확인");
-		
-		return "notice/noticeEditView";
+		return "redirect:/"+vo.getClubId()+"/notice/"+vo.getVoteNo()+"/voteResult";
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/{voteNo}/voteResult")
-	public String voteResult(@PathVariable("memberId") String memberId, @PathVariable("aboardNo") int aboardNo, @PathVariable("voteNo") int voteNo, Model model, HttpSession session, NoticeBoardVO vo) {
+	public String voteResult(@PathVariable("voteNo") int voteNo, @ModelAttribute NoticeBoardVO vo, @ModelAttribute("aboardNo") int aboardNo, Model model, HttpSession session) {
 		System.out.println("notice editlist 확인");
-		
-		model.addAttribute("aboardNo", aboardNo);
-		System.out.println("공지번호확인"+aboardNo);
-		
-		System.out.println("controller aboardNo 확인"+aboardNo);
-		
+		model.addAttribute("aboardNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(aboardNo));
 		
 		System.out.println("controller voteNo 확인"+vo.getVoteNo());
 		return "notice/noticeGroupViewR";
 	}
 	
-	
-	@RequestMapping("/voteresult")
-	public String voteresult(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
-		System.out.println("voteresult controller 확인");
-		return"notice/noticeGroupViewResult";
+	//에디터 모임 등록 후 나오는 페이지
+	@RequestMapping("/editgroupwrite")
+	public String editgroupwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+		
+		System.out.println("notice editgroupwrite 확인 ");
+		System.out.println("controller vo"+vo);
+		
+		noticeBoardService.editgroupwrite(vo);
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		System.out.println("번호확인"+vo.getMeetNo());
+		
+		return "redirect:/"+vo.getClubId()+"/notice/editlistgroup/"+vo.getAboardNo();
 	}
 	
+	//에디터 모임 등록 후 나오는 리스트
+	@RequestMapping("/editlistgroup/{aboardNo}")
+	public String editlistgroup(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+		System.out.println("notice editgrouplist 확인");
+		System.out.println("controller aboardNo 확인"+aboardNo);
+		
+		model.addAttribute("clubId", clubvo.getClubId());
+		
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		System.out.println("aboardNo"+ vo.getAboardNo());
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("vo", noticeBoardService.editlistgroup(aboardNo));
+		
+		System.out.println("controller meetno 확인"+vo.getMeetNo());
+		return "notice/noticeVoteView";
+	}
 	
-	@RequestMapping(value="/upload", produces = "application/json; charset=utf8")
+/*	
+	@RequestMapping(value="/upload", produces = "application/json")
 	@ResponseBody
-	public String upload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-		System.out.println("사진 들어갔니~??");
+	public JsonObject upload(@RequestParam("file") MultipartFile multipartFile) {
+		
 		JsonObject jsonObject = new JsonObject();
 		
-        /*
-		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-		 */
-		
-		// 내부경로로 저장
-		String contextRoot = request.getServletContext().getRealPath("/");
-		String fileRoot = contextRoot+"resources/fileupload/";
-		
+		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+				
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
 		
 		File targetFile = new File(fileRoot + savedFileName);	
+		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "/summernote/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 				
 		} catch (IOException e) {
@@ -200,9 +169,10 @@ public class NoticeBoardController {
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
-		String a = jsonObject.toString();
-		return a;
+		
+		return jsonObject;
 	}
+*/
 	
 	@ResponseBody
 	@RequestMapping("/address")

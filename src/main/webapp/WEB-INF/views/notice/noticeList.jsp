@@ -46,7 +46,7 @@
 		<tr>
 			<td>${row.aboardNo }</td>
 			<td>${row.memberId }</td>
-			<td><a href="${pageContext.request.contextPath }/notice/${clubId}/noticeEditGeneral?aboardNo=${row.aboardNo }"></a>${row.title }</td>
+			<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist/${row.aboardNo}?aboardNo=${row.aboardNo}">${row.title }</a></td>
 			<td>${row.aboardDate }</td>
 			<td>${row.likeCnt }</td>
 		</tr>

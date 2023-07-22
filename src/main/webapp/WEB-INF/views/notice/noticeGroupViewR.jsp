@@ -78,34 +78,7 @@
               <div class="like">
                   <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
               </div>
-              
-        <div class="modal" id="vote">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                  	<form action="${pageContext.request.contextPath }/notice/${aboardNo}/${memberId}/${voteNo}/vote" method="get">
-						${vo.voteTitle}
-                        <div class="voteleft">
-                        	
-                            <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
-                            <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
-                           	<input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
-                           	<input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
-                           	<input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
-                        </div>
-                        <div style="text-align: center; font-weight: bold;">
-                			<button type="submit" class="btn btn-success btn-sm">투표완료</button>
-                        </div>
-                    </form>
-                   </div>
-              </div>
-          </div>
-      </div>
-              
-   </div>
+            </div>  
           <!-- 여기까지 -->
       <!-- -------------------------------------------------일반투표-------------------------------------------------------->
   </div>
