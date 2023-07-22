@@ -392,7 +392,14 @@ for(i=0; i<$(target).length; i++){
 
 
 </script>
+<script>
+$(".tagbtn").on("click", function(){
+	var select =  $(this).val();
+	console.log(select);
+	$("#selectedTag").append("value",select);
+});
 
+</script>
 
 
 </html>

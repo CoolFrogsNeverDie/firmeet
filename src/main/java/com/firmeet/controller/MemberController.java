@@ -59,9 +59,11 @@ public class MemberController {
 	}
 	
 	/* 로그아웃 */
-	
-	public String logout() {
-		return"";
+	@RequestMapping(value="/logout", method= {RequestMethod.GET})
+	public String logout(HttpSession session) {
+		session.removeAttribute("authUser");
+		session.invalidate();
+		return"member/memberForm";
 	}
 	
 	/* 회원가입 */
@@ -106,26 +108,25 @@ public class MemberController {
 	public JsonResult tagList(){
 		System.out.println("MemberController.tagList()");
 		
-		List<TagVo> tagList = memberService.tagList();
-		System.out.println(tagList);
+		List<TagVo> tag = memberService.tagList();
+		System.out.println(tag);
 		
 		JsonResult jsonResult1 = new JsonResult();
-		jsonResult1.success(tagList);
+		jsonResult1.success(tag);
 		
 		return jsonResult1;
 		
 	}
-	@ResponseBody
-	@RequestMapping(value="/cateList", method = {RequestMethod.POST, RequestMethod.GET})
-	public JsonResult cateList() {
-		System.out.println("MemberController.cateList()");
-		List<CategoryVo> cateList = memberService.cateList();
-		System.out.println(cateList);
-		
-		JsonResult jsonResult = new JsonResult();
-		jsonResult.success(cateList);
-		
-		return jsonResult;
-	}
+	
+	 @ResponseBody
+	 @RequestMapping(value="/cateList", method = {RequestMethod.POST,
+	 RequestMethod.GET}) public JsonResult cateList() {
+	 System.out.println("MemberController.cateList()"); List<CategoryVo> cateList
+	 = memberService.cateList(); System.out.println(cateList);
+	 
+	 JsonResult jsonResult = new JsonResult(); jsonResult.success(cateList);
+	 
+	 return jsonResult; }
+	 
 }
 

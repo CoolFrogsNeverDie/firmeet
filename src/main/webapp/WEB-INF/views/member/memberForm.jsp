@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -635,18 +636,21 @@
                             <div class="form-group cateForm" >
                                 <label>카테고리</label>
                                 <ul class="category">
-                                   <c:forEach items="${cateList}" var="cate">
-                                   <li><input type="radio" name="category" value="${cate.cateNo}" ><p>${cate.category}</p></li>
-                                   </c:forEach>
+                                  <%--  <c:forEach var="cate" items="${cateList}" >
+                                   	<li>
+                                   		<input type="radio" name="category" value="${cate.cateNo}" >
+                                   		<p>${cate.category}</p>
+                                   	</li>
+                                   </c:forEach> --%>
                                 </ul>
                             </div>
 
                             <div class="form-group tagForm">
                                 <label>태그</label>
                                 <ul class="tag">
-				                   <c:forEach items="${tagList}" var = "tag">
-				                   	<li><button type="button" class="tagbtn" value="${tag.tagNo}">${tag.tagName}</button></li>
-				                   </c:forEach>
+				                   <c:forEach items="${tagList}" var="tag">
+				 					<li><button type="button"class="tagbtn" value="${tag.tagNo}"><p>${tag.tagName}</p></button></li>
+				 					</c:forEach>
                                 </ul>
                                 
                                 <div class="tagSearch">

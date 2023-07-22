@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
@@ -33,6 +34,12 @@ public class ClubDao {
 	     
 	   }
 	  
+		
+		  public void insertAdmin(ClubMemVo clubMemVo) {
+		  
+		  System.out.println("ClubDao.insertAdmin()");
+		  session.insert("club.insertAdmin" , clubMemVo); }
+		 
 	 public void insertCate(CategoryVo cateVO) {
 		 
 		 System.out.println("넘어온 값 확인 " + cateVO);

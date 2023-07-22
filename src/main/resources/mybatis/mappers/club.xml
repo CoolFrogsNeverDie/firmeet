@@ -50,6 +50,20 @@
 		
 		 ]]>
      </insert>
+     
+     <insert id="insertAdmin" parameterType="com.firmeet.vo.ClubMemVo">
+     	<![CDATA[	
+     			insert into club_member (clubMemNo, memberId, memLevel,joinDate)
+     			values(seq_club_memNo.nextVal, #{memberId},0,hire_date)
+      	]]>
+     </insert> 
+     
+     <insert id="insertJoinMem" parameterType="com.firmeet.vo.ClubMemVo" >
+     <![CDATA[	
+     			insert into club_member (memberId, memLevel)
+     			values( #{memberId},-10)
+      	]]>
+     </insert>
 		
 		
 	<select id = "getClubName" parameterType = "board" resultType = "String">

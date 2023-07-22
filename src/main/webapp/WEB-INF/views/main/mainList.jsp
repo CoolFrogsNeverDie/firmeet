@@ -295,7 +295,7 @@
 	        </div>
         <ul id="meetList">
             <li>
-                <a href="">
+                <a href="http://localhost:8000/firmeet/club/joinForm" role="button">
                 	<img src="" alt="사진 1" class="meetPhoto">
                 	<p class="meetTitle">모임 제목 제목</p>
                 	<p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
