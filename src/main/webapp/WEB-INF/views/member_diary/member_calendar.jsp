@@ -30,6 +30,9 @@
     .fc .fc-daygrid-day-top {
       display: block;
     }
+	
+	
+
   </style>
 </head>
 
@@ -121,9 +124,10 @@
                 <th>장소등록</th>
                 <td>
 				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 </span>
+				  <div class= "loca-btn-area">
+                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></div>
 				<span><input type = "text" readonly name = "place" id = "place-result" value =" "></span>
-                <div class= "loca-btn-area">
-                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></div></td>                
+              </td>                
                 
               </tr>
               <tr class="content-area">
@@ -201,7 +205,8 @@
         </tr>
         <tr class="content-area">
           <th>내용</th>
-          <td><textarea name = "content" class="de-content" readOnly></textarea></td>
+          <td><textarea name = "content" class="de-content" readOnly></textarea>
+          <div id="map2" style="width:300px;height:200px;"></div></td>
         </tr>
       </table>
 
@@ -339,18 +344,18 @@ $('.edite-btn').on("click", function(){
 
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
-
 // 지도 생성   
 var map = new kakao.maps.Map(mapContainer, mapOption); 
-
 // 장소 검색 객체
 var ps = new kakao.maps.services.Places(); 
+
+
+
 
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
@@ -466,10 +471,12 @@ $('#loca-insert-select').on('change', function() {
 	  if ($(this).is(':checked')) {
 		  $('#place').removeAttr('readonly');
 		  $('.loca-btn-area').css("display", 'block');
+		  $('.container1 .body-content').css("height", '535px');
 	  } else {
 		  $('#place').attr('readonly', 'readonly');
 		  $('#place').val("");
 		  $('.loca-btn-area').css("display", 'none');
+		  $('.container1 .body-content').css("height", '506px');
 		  reset_popup1_address();
 	  }
 	});
@@ -793,12 +800,13 @@ function render(){
 	 		   $('.edite-btn').data('address2',sche.address2);
 	 		   $('.edite-btn').data('place',sche.place);
 	 		   $('.edite-btn').data('memid',sche.memberId);
-	 		   if(sche.address1 != -1){
+	 		   if(sche.address1 != -1){ //address가 있는 일정일 경우 길찾기 버튼 활성화 + 컬러 black으로 변경 
 	 			  $('.see-place').prop('disabled', false);
 	 			  $('.see-place').css("background-color","black");
 		 		  $('#see-map').data('x', sche.address1);
 		 		  $('#see-map').data('y', sche.address2);
-	 		   }else{
+	 			 load_map2(sche.address1,sche.address2);
+	 		   }else{ //address 정보 없는 일정일 경우 길찾기 버튼 비활성화 + 컬러 gray로 변경
 	 			  $('.see-place').prop('disabled', true);
 	 			  $('.see-place').css("background-color","#eeeeee");
 	 		   }
@@ -811,6 +819,20 @@ function render(){
 	     });//ajax end
 	}//openPerSche event end
 
+	function load_map2(x,y){
+		var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
+	        level: 3, // 지도의 확대 레벨
+	        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+	    }; 
+
+	// 지도를 생성한다 
+	var map2 = new kakao.maps.Map(mapContainer, mapOption); 
+		
+	}
+	
+	
 	/*---------------------------------------------개인 스케줄 삭제 function-----------------------------------------------------*/
 	
 	function deletePerSche(scheNo){
