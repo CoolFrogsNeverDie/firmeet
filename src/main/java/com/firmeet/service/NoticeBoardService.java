@@ -72,6 +72,7 @@ public class NoticeBoardService {
 
 	public NoticeBoardVO editlistgroup(int aboardNo) {
 		System.out.println("notice editlistgroup 확인");
+		dao.hits(aboardNo);
 		return dao.editlistgroup(aboardNo);
 	}
 	
