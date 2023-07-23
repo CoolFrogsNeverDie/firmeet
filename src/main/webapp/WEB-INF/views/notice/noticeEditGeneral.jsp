@@ -35,8 +35,8 @@
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
                         </select>
-                        <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임
+                        <input type="radio" name="aboardVal" value="general" id="aboardVal" checked>일반 &nbsp;
+                        <input type="radio" name="aboardVal" value="group" id="aboardVal" style="margin-left: 20px;">모임
                             
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
@@ -187,6 +187,12 @@
 
 <script>
 $(document).ready(function() {
+    // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
+    $('input[name="aboardVal"]').on('change', function() {
+        // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
+        window.location.href = "noticeEditGroup";
+    });
+	
     let i = 4;
 
     $('.plusbtn').on("click", function() {
@@ -274,22 +280,6 @@ var setting = {
     }
 };
 
-function upload(file, editor) {
-    var data = new FormData();
-    data.append("file", file);
-    $.ajax({
-        url: 'upload',
-        type: "POST",
-        enctype: 'multipart/form-data',
-        data: data,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            $(editor).summernote('editor.insertImage', data.url);
-        }
-    });
-}
-
 function CustomButton(context) {
     var ui = $.summernote.ui;
     var button = ui.button({
@@ -304,6 +294,26 @@ function CustomButton(context) {
         }
     });
     return button.render();
+}
+
+function upload(file, editor) {
+    var data = new FormData();
+    data.append("file", file);
+    $.ajax({
+        url: '${pageContext.request.contextPath }/${clubId}/notice/SummerNoteImageFile',
+        type: "POST",
+        enctype: 'multipart/form-data',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data) {
+           var json = JSON.parse(data);
+           console.log(data);
+		   console.log(editor);
+		   $(editor).summernote("insertImage",data.url);
+		}
+	});
 }
 
 </script>

@@ -41,7 +41,7 @@
               <div>
                   <p class="noticetitle">${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="btn btn-warning">목록</button>
+                    <button type="button" class="btn btn-warning" id="nlist">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
                   </div>
               </div>
@@ -192,18 +192,18 @@
 <script>
   $(document).ready(function() {
 	  
+	  $('#nlist').click(function() {
+		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
+	  });
+	  
 	  var address1 = $("#address1").text();
 	  var address2 = $("#address2").text();
-		
 		console.log('ㅎㅎ',address1);
 		console.log(address2);
-		
 		var NoticeBoardVO ={
 				address1 : address1,
 				address2 :  address2
 		}
-		
-		
 		//통신  id////////////////////////////////////////////
 		$.ajax({
         url: '${pageContext.request.contextPath }/notice/address', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
@@ -237,7 +237,6 @@
             console.error('Error:', error);
         }
     });
-		
 	console.log('zz',address1);
     
 /* map2 */        

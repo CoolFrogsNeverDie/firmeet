@@ -75,4 +75,8 @@ public class NoticeBoardDAO {
 		System.out.println("notice editlistgroup dao 확인"+aboardNo);
 		return sql.selectOne("noticeboard.editlistgroup", aboardNo);
 	}
+
+	public void hits(int aboardNo) {
+		sql.update("noticeboard.hits", aboardNo);
+	}
 }

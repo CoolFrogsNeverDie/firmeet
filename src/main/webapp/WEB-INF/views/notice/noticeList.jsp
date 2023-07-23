@@ -43,12 +43,12 @@
 			<th>조회수</th>
 		</tr>
 		<c:forEach var="row" items="${nlist }">
-		<tr>
+		<tr id="scroll">
 			<td>${row.aboardNo }</td>
 			<td>${row.memberId }</td>
 			<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist/${row.aboardNo}?aboardNo=${row.aboardNo}">${row.title }</a></td>
 			<td>${row.aboardDate }</td>
-			<td>${row.likeCnt }</td>
+			<td>${row.aboardHit }</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -92,6 +92,39 @@ $(document).ready(function() {
 	$('#noticewrite').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticeEditGeneral'	
 	});
+	
+	var page = 1; // 초기 페이지 설정
+	var isLoading = false; // 중복 로딩 방지를 위한 플래그
+
+	$(window).scroll(function() {
+	    // 스크롤이 하단에 도달하면 데이터를 로드합니다.
+	  if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+	    loadMoreData();
+	  }
+	});
+	function loadMoreData() {
+	   if (isLoading) return; // 이미 로딩 중이면 중복으로 호출하지 않습니다.
+		  isLoading = true;
+
+		  $.ajax({
+		    url: '/your-server-endpoint?page=' + page,
+		    type: 'GET',
+		    beforeSend: function() {
+		        // 로딩 중 스피너 등의 UI 처리를 할 수 있습니다.
+		        // 예: $('#loadingSpinner').show();
+		    },
+	      	success: function(data) {
+	        // 가져온 데이터를 이용하여 게시물 목록을 동적으로 생성하여 추가합니다.
+	       	 $('#scroll').append(data);
+	       	 page++;
+	         isLoading = false; // 로딩 완료 후 플래그를 false로 변경합니다.
+	      },
+	      	error: function(xhr) {
+	          console.log(xhr.responseText);
+	          isLoading = false; // 에러 발생 시 플래그를 false로 변경합니다.
+	        }
+	    });
+	 }
 });
 </script>
 </html>

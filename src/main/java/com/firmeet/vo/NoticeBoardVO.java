@@ -42,6 +42,7 @@ public class NoticeBoardVO {
 	private String meetPlace;
 	private double address1;
 	private double address2;
+	private int aboardHit;
 	
 	public NoticeBoardVO() {
 		
@@ -436,6 +437,14 @@ public class NoticeBoardVO {
 		this.address2 = address2;
 	}
 
+	public int getAboardHit() {
+		return aboardHit;
+	}
+
+	public void setAboardHit(int aboardHit) {
+		this.aboardHit = aboardHit;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -448,7 +457,7 @@ public class NoticeBoardVO {
 				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
-				+ address1 + ", address2=" + address2 + "]";
+				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + "]";
 	}
 
 }

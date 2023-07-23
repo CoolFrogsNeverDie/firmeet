@@ -43,8 +43,8 @@
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
                         </select>
-                        <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임
+                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반 &nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" checked style="margin-left: 20px;">모임
                             
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
@@ -107,8 +107,8 @@
                             <div class="modal-body">
                                  <div class="grouptitle" id="result"></div>
                                  <div class="groupschedule">
-                                     <input type="radio" name="groupschedule" value="1" id="" checked>결제 &nbsp;
-                                     <input type="radio" name="groupschedule" value="2" id="" style="margin-left: 20px;">일정
+                                     <input type="radio" name="groupschedule" value="group" id="" checked>결제 &nbsp;
+                                     <input type="radio" name="groupschedule" value="groupmeet" id="" style="margin-left: 20px;">일정
                                  </div>
                                   <div>
                                      <span class="groupvotetitle">만남일 </span>
@@ -136,7 +136,7 @@
 									        <div id="pagination"></div>
 									    </div>
 									</div>
-                           
+                           			<br>
                                      <span class="groupvotetitle1">회 비 </span>
                                      <input class="groupvotemeet" type="text" id="price" name="price"> 원(인당)<br>
                                      <span class="groupvotetitle2">투표종료 </span>
@@ -167,8 +167,8 @@
                             <div class="modal-body">
                                 <div class="grouptitle" id=""></div>
                                 <div class="groupschedule">
-                                    <input type="radio" name="groupschedule" value="" checked>결제 &nbsp;
-                                    <input type="radio" name="groupschedule" value="" style="margin-left: 20px;">일정
+                                    <input type="radio" name="groupschedule" value="group">결제 &nbsp;
+                                    <input type="radio" name="groupschedule" value="groupmeet" checked style="margin-left: 20px;">일정
                                 </div>
                                 <div>
                                     <span class="groupvotetitle">만남일 </span>
@@ -250,6 +250,26 @@ $(document).keypress(function(e) {
 });
 
 $(document).ready(function() {
+	 $('.map_wrap').hide();
+	 
+	 $('#openmap').on('click', function() {
+         // 버튼 클릭 시 지도 보여주기
+         $('.map_wrap').show();
+	 });
+	 
+	// 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
+    $('input[name="aboardVal"]').on('change', function() {
+        // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
+        window.location.href = "noticeEditGeneral";
+    });
+	
+	 $('input[name="groupschedule"]').on('click', function() {
+	      var selectedModal = $('input[name="groupschedule"]:checked').val();
+
+	      // 선택한 모달 창 보여주기
+	      $('.modal').hide();
+	      $('#' + selectedModal).show();
+	    });
 	
 	$("#openmap").on("click", function() {
 		var location = $("#meetPlace").val();
@@ -552,6 +572,8 @@ $('#searchButton').click(function(event) {
       
       document.getElementById('address1').value = x;
       document.getElementById('address2').value = y;
+      
+      $(".map_wrap").hide();
    });
    
    // 검색결과 항목을 Element로 반환하는 함수입니다

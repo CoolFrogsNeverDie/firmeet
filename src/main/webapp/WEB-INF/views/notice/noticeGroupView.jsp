@@ -34,7 +34,7 @@
               <div>
                   <p class="noticetitle">${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="btn btn-warning">목록</button>
+                    <button type="button" class="btn btn-warning" id="nlist">목록</a></button>
                     <button type="button" class="btn btn-success">다음글</button>
                   </div>
               </div>
@@ -46,7 +46,7 @@
                       <span class="userdate">작성일 : </span>
                       <span class="usertext">${vo.aboardDate}</span>
                       <span class="usercount">조회수 : </span>
-                      <span class="usertext"></span>
+                      <span class="usertext">${vo.aboardHit}</span>
                   </div>
               </div>
               <hr>
@@ -157,7 +157,9 @@
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
 		$(document).ready(function() {
-			
+			$('#nlist').click(function() {
+				  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
+			});
 		});
   </script>
 </html>

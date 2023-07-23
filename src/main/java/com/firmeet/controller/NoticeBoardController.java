@@ -8,12 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
+import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -84,8 +88,11 @@ public class NoticeBoardController {
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
-		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
+		model.addAttribute("aboardHit",vo.getAboardHit());
+		System.out.println("AboardHit"+vo.getAboardHit());
 		
+		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
+				
 		return "notice/noticeGroupView";
 	}
 	
@@ -100,6 +107,8 @@ public class NoticeBoardController {
 		
 		return "redirect:/"+vo.getClubId()+"/notice/"+vo.getVoteNo()+"/voteResult";
 	}
+	
+	
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/{voteNo}/voteResult")
@@ -174,6 +183,13 @@ public class NoticeBoardController {
 	}
 */
 	
+	@RequestMapping(value="/SummerNoteImageFile" , method = RequestMethod.POST)
+	public @ResponseBody JsonObject SummerNoteImageFile(@RequestParam("file") MultipartFile file) {
+		JsonObject jsonObject = noticeBoardService.SummerNoteImageFile(file);
+		 System.out.println(jsonObject);
+		return jsonObject;
+	}
+	
 	@ResponseBody
 	@RequestMapping("/address")
 	public JsonResult idCheck(@ModelAttribute NoticeBoardVO vo) {
@@ -184,5 +200,6 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
+	
 	
 }
