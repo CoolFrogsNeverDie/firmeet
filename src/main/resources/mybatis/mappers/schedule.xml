@@ -85,10 +85,10 @@
                 my_schedule
             WHERE
             memberId = #{memberId}
-            AND (EXTRACT(MONTH FROM startDate) = #{month}
+            AND ((EXTRACT(MONTH FROM startDate) = #{month}
             and extract(year from startDate) = #{years})
             or (extract(month from endDate) = #{month}
-            and extract (year from endDate) = #{years})
+            and extract (year from endDate) = #{years}))
 		]]>
 	</select>
 	

@@ -206,7 +206,7 @@
         <tr class="content-area">
           <th>내용</th>
           <td><textarea name = "content" class="de-content" readOnly></textarea>
-          <div id="map2" style="width:300px;height:200px;"></div></td>
+          <div id="map2" style="width:333px;height:200px;"></div></td>
         </tr>
       </table>
 

@@ -213,7 +213,7 @@ border: none;
     z-index: 999;
     background-color: white;
     width: 500px;
-    height: 500px;
+    height: 532px;
   }
 .per-pop  .per-pop-header{
     background-color: black;
@@ -251,7 +251,7 @@ border: none;
   background-color: #f8f8f8;
   }
 .per-pop #schedule-table td{
-  padding-left: 2% ;
+  padding: 1% ;
 }
 .per-pop #schedule-table td input[type="date"] {
   width: 115px;
@@ -278,21 +278,15 @@ border: none;
   }
 .per-pop  #schedule-table textarea[name="content"] {
     width: 100%;
-    height: 95%;
+    height: 30%;
     resize: none;
     outline: none;
   }
 .per-pop .per-sche-edit{
-    /* border: 1px solid black; */
-    /* margin: 0 auto; */
-    /* position: absolute; */
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
-    /* min-width: 144px; */
     margin: 0 auto;
-    margin: 5%;
-    /* position: absolute; */
-    margin-left: 33%;
+    margin: 3%;
+    text-align: center;
+    margin-bottom: 20%;
 }
 .per-pop .per-sche-edit button{
   font-size: 13px;
@@ -308,6 +302,10 @@ border: none;
   background-color: white;
   border: 1px solid black;
   color: black;
+}
+
+#map2{
+	margin:0%;
 }
 
 .container4{
