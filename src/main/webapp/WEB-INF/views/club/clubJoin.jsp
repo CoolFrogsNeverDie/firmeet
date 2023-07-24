@@ -228,7 +228,7 @@ a{text-decoration: none; color: #212121;}
             <div class="club-memeber-cnt">(1/5)</div>
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!</div>
             <div class="club-tag">#성인수영 #새벽수영 #갓생 #친목 #운동러버 #초보환영</div>
-            <div class="join-btn-area"><button type="button" class="join-btn" action="">가입 신청</button></div>
+            <div class="join-btn-area"><button type="button" class="join-btn" onclick="location.href='${pageContext.request.contextPath }/club/clubJoin'">가입 신청</button></div>
         </div>
         <!--메인라인 종료-->
 

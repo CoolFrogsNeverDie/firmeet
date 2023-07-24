@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -106,7 +107,7 @@
         width: 1000px;
         margin: auto;
     }
-    #select_field p{
+    #select_field>p{
         transform: translate(20px , 10px);
         font-size: 17px;
         font-weight: 600;
@@ -115,16 +116,23 @@
 
     #select_field ul{
         margin: 20px;
-        width: 800px;
+        width:1000px;
         display: flex;
         flex-wrap: wrap;
         accent-color: black;
     }
      
     #select_field li{
-        font-size: 14px;
-        width: 25%;
+        font-size: 12px;
+        width:150px;
+        height:30px;
+        display: flex;
+        gap:10px;
     }
+    
+     #select_field li>p{
+     transform: translateY(7px);
+     }
 
     #keyword {
         border: 1px solid #888;
@@ -292,39 +300,20 @@
         </div>
         
         <div id="select_field">
-            <p>원하는 분야 </p>
+            <p><label for="cate">원하는 분야</label></p>
             <ul>
-                <li><input type="radio">분야 1</li>
-                <li><input type="radio">분야 2</li>
-                <li><input type="radio">분야 3</li>
-                <li><input type="radio">분야 4</li>
-                <li><input type="radio">분야 5</li>
-                <li><input type="radio">분야 6</li>
-                <li><input type="radio">분야 7</li>
-                <li><input type="radio">분야 8</li>
-                <li><input type="radio">분야 9</li>
+                 <c:forEach  items="${cateList}" var="cate" >
+                 	<li><input type="radio" name="category"  value="${cate.cateNo}" ><p>${cate.category}</p></li>
+                 </c:forEach>
             </ul>
         </div>
         <div id="keyword">
             <p>원하는 키워드</p>
             
             <ul id="select_tag">
-                <li><button>운동광</button></li>
-                <li><button>수다광</button></li>
-                <li><button>INTP</button></li>
-                <li><button>갓생러</button></li>
-                <li><button>여유로운</button></li>
-                <li><button>핫한</button></li>
-                <li><button>로멘틱</button></li>
-                <li><button>핵인싸</button></li>
-                <li><button>소통왕</button></li>
-                <li><button>먹지순례</button></li>
-                <li><button>여행</button></li>
-                <li><button>수영</button></li>
-                <li><button>축구</button></li>
-                <li><button>게임</button></li>
-                <li><button>서바이벌</button></li>
-                <li><button>번개모임</button></li> 
+                 <c:forEach items="${tagList}" var="tag">
+				 	<li><button type="button"class="tagbtn" value="${tag.tagNo}">${tag.tagName}</button></li>
+				 </c:forEach>
             </ul>
 
             <input type="search">
@@ -346,13 +335,15 @@
             <button type="button"><a href="http://localhost:8000/firmeet/club/makingForm">나의 모임 만들기</a></button>
         </div>
         <ul id="meetList">
+        <c:forEach items="${clubList}" var="clubs" >
             <li>
-                <a href="">
+                <a href="http://localhost:8000/firmeet/club/joinForm/${clubs.clubId}">
                     <img src="" alt="사진 1" class="meetPhoto">
-                    <p class="meetTitle">모임 제목 제목</p>
-                    <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
+                    <p class="meetTitle">${clubs.clubName} 모임제목</p>
+                    <p class="meetContent">${clubs.intro1} 모임 내용</p>
                 </a>
             </li>
+        </c:forEach>
             <li>
                 <a href="">
                     <img src="" alt="사진 2" class="meetPhoto">
@@ -492,5 +483,8 @@ for(i=0; i<$(target).length; i++){
     }
 }
 </script>
+
+
+
 
 </html>

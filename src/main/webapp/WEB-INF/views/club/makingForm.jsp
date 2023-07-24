@@ -141,19 +141,38 @@
             margin:-24px 0px 0px 105px;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            width: 50%;
+            gap: 15px;
+            width: 700px;
             height: 100px;
             overflow-y: scroll;
+            position:relative;
         }
-        .tag button{
-            width: 80px;
-            height: 30px;
+        .tag .tags{
+        	position:absolute;
+            width: 1px;
+            height: 1px;
+            padding:0;
+            margin: -1px;
             font-size: 10px;
-            border: #eee;
-            background: #aaa;
-            border-radius: 10px;
-            
+            overflow:hidden;
+            border:none;
+            background: transparent;     
+        }
+        .tagLabel{
+        	display:block;
+        	text-align:center;
+        	width:110px;
+        	height:25px;
+        	font-size:13px;
+        	font-weight:200;
+        	border-radius:5px;
+        	padding:2px;
+        	background-color:#bbb;
+        }
+        
+        .tag .tags:checked+.tagLabel{
+        	background-color:#000;
+        	color:#eee;
         }
         #selTag {
         	display:flex;
@@ -162,10 +181,14 @@
         }
         
         #selectedTag{
-        	display:block;
-        	width:400px;
-        	transform: translateX(50px);
-        	border:none;
+        	margin-left:15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 600px;
+            height: 50px;
+            overflow-y: scroll;
+            position:relative;
     
         }
         
@@ -213,12 +236,17 @@
                 <label for="firstName">모임 태그</label>
                 <ul class="tag">
 				 <c:forEach items="${tagList}" var="tag">
-				 	<li><button type="button"class="tagbtn" value="${tag.tagNo}">${tag.tagName}</button></li>
+				 	<li>
+				 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tag" data-tagname="${tag.tagName}">
+				 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
+				 	</li>
 				 </c:forEach>
                </ul>
                <div id="selTag">
-	               <label for="selectedTag" >선택된 태그</label>
-	               <input  id= "selectedTag"type="text" value=""/>
+	               <p>선택된 태그</p>
+	              	<ul id="selectedTag">
+	              	
+	              	</ul>
             	</div>
             </div>
 
@@ -245,19 +273,19 @@
                     <input type="text" class="box box8" id="" placeholder="시간" name="detailT" value="" required>
                     <img src="${pageContext.request.contextPath }/assets/images/icon/place.png" width="30px" height="30px">
                     <input type="text" class="box box8" id="" placeholder="위치" name="detailL" value="" required>
-                </br>
+                <br>
                 <img src="${pageContext.request.contextPath }/assets/images/icon/message.png" width="30px" height="30px">
                 <input type="text" class="box box8" id="" placeholder="연락처" name="detailP" value="" required>
                 <img src="${pageContext.request.contextPath }/assets/images/icon/vodka.png" width="30px" height="30px">
                 <input type="text" class="box box8" id="" placeholder="회식" name="detailE" value=""  required>
-                </br>
+                <br>
                 <img src="${pageContext.request.contextPath }/assets/images/icon/cloud.png" width="30px" height="30px">
                 <input type="text" class="box box8" id="" placeholder="날씨" name="detailW" value="" required>
                 </div>
             </div>
 			
             <div class="col-sm-12">
-                <label for="firstName">메인 이미지</label></br>
+                <label for="firstName">메인 이미지</label><br>
                 <img id="mainImg" src="" class="box7" width="150px" height="150px">
                 <div class="box-file-input box9"><label>
                     <input id="img2" type="file" name="img2" value="main" class="file-input" formation="/upload/clubImg"
@@ -365,6 +393,7 @@ for(i=0; i<$(target).length; i++){
 </script>
 
 <script>
+
 	$("#img1").on("change", function(event) {
 	
 	    var file = event.target.files[0];
@@ -390,15 +419,44 @@ for(i=0; i<$(target).length; i++){
 	    reader.readAsDataURL(file);
 	});
 
-
+	//태그를 클릭했을때 아래쪽 그린다
+	$(".tags").on("click", function(){
+		var tagList= [];
+		
+		$("#selectedTag").empty();
+		
+		$('input[name="tag"]:checked').each(function(i){
+			 tagList.push($(this).data("tagname")); 
+			
+			 let tagName = $(this).data("tagname")
+			 
+			 /* console.log($(this).data("tagname")) */
+			 /*
+			 for(int i=0; i>tagList.length(); i++){
+				 if($this.val()!=tagList.[i]){
+					 $("#selTag").append("<li>"+$(this).val()+"<li>");
+				 }
+			 }
+			 */
+			 let str = "<li class='tagLabel'>"+tagName+"</li>"
+			 $("#selectedTag").append(str);
+			
+		});
+		
+		console.log(tagList);
+		 
+	});
 </script>
 <script>
-$(".tagbtn").on("click", function(){
-	var select =  $(this).val();
-	console.log(select);
-	$("#selectedTag").append("value",select);
-});
 
+
+
+$(document).ready(function(){
+	
+			
+		
+	
+});
 </script>
 
 

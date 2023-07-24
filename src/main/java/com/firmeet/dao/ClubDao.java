@@ -48,9 +48,14 @@ public class ClubDao {
 	 }
 	 
 	 public void insertTag(TagVo tagVo) {
+		 System.out.println(tagVo);
 		 System.out.println("넘어온 값 확인" + tagVo);
 	 }
 	 
+	 public List<ClubVo> clubList() {
+		 List<ClubVo> clubVo = session.selectList("club.clubAllList");
+		 return clubVo;
+	 }
 	 
 	 public void clubJoinMem(ClubVo clubVo ,MemberVo memberVo) {
 		 session.insert("cllub.insertMem", clubVo);
@@ -70,7 +75,13 @@ public class ClubDao {
 		
 		return clubVo;
 	}
-	 
+	
+	 public TagVo selectTag(int tagNo) {
+		 TagVo selectedTag = session.selectOne("club.selectTag",tagNo);
+		 System.out.println(selectedTag);
+
+		 return selectedTag;
+	 }
 	 
 	 
 }

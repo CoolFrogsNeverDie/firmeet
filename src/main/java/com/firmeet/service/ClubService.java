@@ -33,6 +33,10 @@ public class ClubService {
 		clubDao.insertAdmin(clubMemVo);
 		
 		}
+	public List<ClubVo> clubList() {
+		List<ClubVo> clubVo = clubDao.clubList();
+		return clubVo;
+	}
 	
 	public void clubJoin(ClubVo clubVo , MemberVo memberVo ,ClubMemVo clubMemVo){
 		clubDao.clubJoinMem(clubVo,memberVo);
@@ -47,6 +51,12 @@ public class ClubService {
 	public ClubVo getClubVo(int clubId) {
 		ClubVo clubVo = clubDao.getClubVo(clubId);
 		return clubVo;
+	}
+	
+	public TagVo selectTag(int tagNo) {
+		TagVo selectedTag = clubDao.selectTag(tagNo);
+		
+		return selectedTag;
 	}
 }
 

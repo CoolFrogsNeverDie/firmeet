@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
+import com.firmeet.service.MemberService;
+import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.MeetVo;
+import com.firmeet.vo.TagVo;
 
 @Controller
 @RequestMapping(value = "/main")
@@ -21,16 +24,30 @@ public class MainController {
 	@Autowired
 	private ClubService clubService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public String home() {
 
 		return "/main/index";
 	}
 
-	@RequestMapping(value = "/mainList", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainList() {
-
-		return "/main/mainList";
+	@RequestMapping(value = "/mainForm", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mainList(Model model) {
+		List<TagVo> tagList = memberService.tagList();
+		model.addAttribute("tagList", tagList);
+		System.out.println(tagList);
+		
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("cateList", cateList);
+		System.out.println(cateList);
+		
+		List<ClubVo> clubList = clubService.clubList();
+		model.addAttribute("clubList",clubList);
+		System.out.println(clubList);
+		
+		return "/main/mainForm";
 	}
 
 
