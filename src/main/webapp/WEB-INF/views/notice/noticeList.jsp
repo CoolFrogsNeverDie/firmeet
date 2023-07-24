@@ -8,6 +8,21 @@
     <title>공지 에디터</title>
     <%@ include file="../include/topnav.jsp" %>
 </head>
+<style>
+    #list-container {
+      max-height: 620px; /* 리스트 컨테이너의 최대 높이 지정 (스크롤을 가질 영역) */
+      max-width: 1200px;
+      overflow-y: auto; /* 세로 스크롤을 활성화하여 리스트 컨테이너를 넘어가는 항목들을 볼 수 있게 함 */
+    }
+
+    .list-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .table1000{
+    	width:1000px;
+    }
+</style>
 <body>
 
 <!----------------------------------------- top Navigation ----------------------------------------->
@@ -30,27 +45,39 @@
         	</div>
         </div>
         <!--/diary-subbar-->
-        <div class="content-area">
+        <div class="content-area"  id="list-container">
           <div class="content-left">
 	<!-- 여기부터 -->
 	
-	<table border="1" width="1000px">
+	<table class="table1000" border="1">
 		<tr>
 			<th>번호</th>
 			<th>작성자</th>
 			<th>제목</th>
 			<th>등록일</th>
 			<th>조회수</th>
+			<th>1/2</th>
 		</tr>
-		<c:forEach var="row" items="${nlist }">
-		<tr id="scroll">
-			<td>${row.aboardNo }</td>
-			<td>${row.memberId }</td>
-			<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist/${row.aboardNo}?aboardNo=${row.aboardNo}">${row.title }</a></td>
-			<td>${row.aboardDate }</td>
-			<td>${row.aboardHit }</td>
-		</tr>
-		</c:forEach>
+	<c:forEach var="row" items="${nlist }">
+		<c:if test="${sessionScope.clubId == row.clubId }">
+			<tr id="scroll" class="list-item">
+				<td>${row.aboardNo }</td>
+				<td>${row.memberId }</td>
+				<c:choose>
+					<c:when test="${row.aboardVal == 1 }">
+						<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}">${row.title }</a></td>
+					</c:when>
+					<c:when test="${row.aboardVal == 2 }">
+						<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">${row.title }</a></td>
+					</c:when>
+				</c:choose>
+				<td>${row.aboardDate }</td>
+				<td>${row.aboardHit }</td>
+				<td>${row.aboardVal }</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+		
 	</table>
 
 	<!-- 여기까지 -->
@@ -89,42 +116,31 @@
 </body>
 <script>
 $(document).ready(function() {
+	
+    $("#list-container").scroll(function () {
+	    // 스크롤이 컨테이너의 하단에 도달하면 새로운 항목을 로드
+      if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        loadMoreItems();
+      }
+    });
+
 	$('#noticewrite').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticeEditGeneral'	
 	});
-	
-	var page = 1; // 초기 페이지 설정
-	var isLoading = false; // 중복 로딩 방지를 위한 플래그
-
-	$(window).scroll(function() {
-	    // 스크롤이 하단에 도달하면 데이터를 로드합니다.
-	  if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-	    loadMoreData();
-	  }
-	});
-	function loadMoreData() {
-	   if (isLoading) return; // 이미 로딩 중이면 중복으로 호출하지 않습니다.
-		  isLoading = true;
-
-		  $.ajax({
-		    url: '/your-server-endpoint?page=' + page,
-		    type: 'GET',
-		    beforeSend: function() {
-		        // 로딩 중 스피너 등의 UI 처리를 할 수 있습니다.
-		        // 예: $('#loadingSpinner').show();
-		    },
-	      	success: function(data) {
-	        // 가져온 데이터를 이용하여 게시물 목록을 동적으로 생성하여 추가합니다.
-	       	 $('#scroll').append(data);
-	       	 page++;
-	         isLoading = false; // 로딩 완료 후 플래그를 false로 변경합니다.
-	      },
-	      	error: function(xhr) {
-	          console.log(xhr.responseText);
-	          isLoading = false; // 에러 발생 시 플래그를 false로 변경합니다.
-	        }
-	    });
-	 }
 });
+	
+function loadMoreItems() {
+  // 여기에서 서버에서 데이터를 가져오는 API 요청을 수행하거나 미리 준비한 항목들을 추가합니다.
+  // 이 예제에서는 미리 준비한 항목을 추가합니다.
+  for (let i = 1; i <= 5; i++) {
+    $("#list-container").append('<tr id="scroll" class="list-item">');
+    $("#list-container").append('<td>${row.aboardNo }</td>');
+    $("#list-container").append('<td>${row.memberId }</td>');
+    $("#list-container").append('<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}">${row.title }</a></td>');
+    $("#list-container").append('<td>${row.aboardDate }</td>');
+    $("#list-container").append('<td>${row.aboardHit }</td>');
+    $("#list-container").append('</tr>');
+  }
+}
 </script>
 </html>

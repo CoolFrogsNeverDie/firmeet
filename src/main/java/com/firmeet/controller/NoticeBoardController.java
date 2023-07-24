@@ -8,16 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
-import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -69,16 +65,17 @@ public class NoticeBoardController {
 	public String editwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
+		session.getAttribute("aboardNo");
 		noticeBoardService.editwrite(vo);
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("getAboardNo"+vo.getAboardNo());
 		
-		return "redirect:/"+vo.getClubId()+"/notice/editlist/"+vo.getAboardNo();
+		return "redirect:/"+vo.getClubId()+"/notice/editlist";
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
-	@RequestMapping("/editlist/{aboardNo}")
-	public String editlist(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/editlist")
+	public String editlist(ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
@@ -88,36 +85,34 @@ public class NoticeBoardController {
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
-		model.addAttribute("aboardHit",vo.getAboardHit());
-		System.out.println("AboardHit"+vo.getAboardHit());
+		model.addAttribute("vo", noticeBoardService.editlist(vo.getAboardNo()));
 		
-		model.addAttribute("vo", noticeBoardService.editlist(aboardNo));
-				
 		return "notice/noticeGroupView";
 	}
 	
-	@RequestMapping("/vote/{voteNo}")
-	public String vote(@PathVariable("voteNo") int voteNo, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
-		
+	@RequestMapping("/vote")
+	public String vote(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+		session.getAttribute("voteNo");
+		session.getAttribute("aboradNo");
 		System.out.println("controller vo"+vo);
 		model.addAttribute("voteNo", vo.getVoteNo());
+		model.addAttribute("aboradNo", vo.getAboardNo());
 		System.out.println("voteNo"+ vo.getVoteNo());
+		System.out.println("getAboardNo"+ vo.getAboardNo());
 		
 		noticeBoardService.voteinsert(vo);
 		
-		return "redirect:/"+vo.getClubId()+"/notice/"+vo.getVoteNo()+"/voteResult";
+		return "redirect:/"+vo.getClubId()+"/notice/voteResult/"+vo.getAboardNo();
 	}
 	
 	
-	
 	//에디터 일반페이지 등록 후 리스트
-	@RequestMapping("/{voteNo}/voteResult")
-	public String voteResult(@PathVariable("voteNo") int voteNo, @ModelAttribute NoticeBoardVO vo, @ModelAttribute("aboardNo") int aboardNo, Model model, HttpSession session) {
-		System.out.println("notice editlist 확인");
-		model.addAttribute("aboardNo", vo.getAboardNo());
+	@RequestMapping("/voteResult/{aboardNo}")
+	public String voteResult(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+		model.addAttribute("clubId", clubvo.getClubId());
+		session.getAttribute("aboardNo");
+		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(aboardNo));
-		
-		System.out.println("controller voteNo 확인"+vo.getVoteNo());
 		return "notice/noticeGroupViewR";
 	}
 	
@@ -132,62 +127,24 @@ public class NoticeBoardController {
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("번호확인"+vo.getMeetNo());
 		
-		return "redirect:/"+vo.getClubId()+"/notice/editlistgroup/"+vo.getAboardNo();
+		return "redirect:/"+vo.getClubId()+"/notice/editlistgroup";
 	}
 	
 	//에디터 모임 등록 후 나오는 리스트
-	@RequestMapping("/editlistgroup/{aboardNo}")
-	public String editlistgroup(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/editlistgroup")
+	public String editlistgroup(ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editgrouplist 확인");
-		System.out.println("controller aboardNo 확인"+aboardNo);
+		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
 		model.addAttribute("clubId", clubvo.getClubId());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("aboardNo"+ vo.getAboardNo());
 		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("vo", noticeBoardService.editlistgroup(aboardNo));
+		model.addAttribute("vo", noticeBoardService.editlistgroup(vo.getAboardNo()));
 		
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteView";
-	}
-	
-/*	
-	@RequestMapping(value="/upload", produces = "application/json")
-	@ResponseBody
-	public JsonObject upload(@RequestParam("file") MultipartFile multipartFile) {
-		
-		JsonObject jsonObject = new JsonObject();
-		
-		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-				
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
-		File targetFile = new File(fileRoot + savedFileName);	
-		
-		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
-			jsonObject.addProperty("responseCode", "success");
-				
-		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}
-		
-		return jsonObject;
-	}
-*/
-	
-	@RequestMapping(value="/SummerNoteImageFile" , method = RequestMethod.POST)
-	public @ResponseBody JsonObject SummerNoteImageFile(@RequestParam("file") MultipartFile file) {
-		JsonObject jsonObject = noticeBoardService.SummerNoteImageFile(file);
-		 System.out.println(jsonObject);
-		return jsonObject;
 	}
 	
 	@ResponseBody
@@ -200,6 +157,12 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
-	
-	
+/*	
+	@RequestMapping(value="/clubImg", method= RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile file, @ModelAttribute NoticeBoardVO vo, ClubVo clubId, Model model )  {
+		System.out.println("UploadController.clubMainImg()");
+		noticeBoardService.imgup(file , vo ,clubId);
+		return"";
+	}
+*/
 }
