@@ -17,10 +17,10 @@
 
   <!--CSS-->
   <link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/content2.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/content2.css" type="text/css" />
   <!--풀 캘린더 CSS-->
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/memcalendar.css" type="text/css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/popup.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/memcalendar.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
   <!--풀 캘린더 JS-->
   <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
   <!-- 카카오 map  -->

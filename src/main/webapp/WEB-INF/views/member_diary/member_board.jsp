@@ -73,6 +73,51 @@
 
 <script>
 
+
+	/*댓글 등록 버튼 클릭 이벤트*/
+	$('.board-area').on("click",'.add-reply', function(){
+		
+		var content = $(this).prev().val();
+		var boardNo = $(this).data('boardno');
+		var memberId = $('.diary-area').data('memid');
+	
+		var ReplyVO = {
+				boardNo : boardNo,
+				content : content,
+				memberId : memberId
+		}
+		
+
+		 $.ajax({
+	       
+	       //요청 세팅
+	       url : "${pageContext.request.contextPath}/board/member/addComment",
+	       type : "post",
+	       data : ReplyVO,
+	       
+	       //응답 세팅
+	       dataType : "json",
+	       success : function(jsonResult){
+				
+	    	   
+	       }, //success end
+	       error : function(XHR, status, error) {
+	       console.error(status + " : " + error);
+	       }
+					            
+	    });//ajax end
+		
+		
+		
+		
+	});
+
+
+
+
+/* 무한 스크롤용 JS */
+ 
+ 
 /*document load*/
  
  	//board 불러오기 위한 rownum 
@@ -173,7 +218,7 @@
             add += '<div class="profile-pic">';
             add += '<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
             add += '</div>';
-            add += '<div class="board-info">';
+            add += '<div class="board-info" data-boardno ="' + board.boardNo +  '">';
             add += '<span class="board-group"><strong>' + board.clubName + '</strong></span><br>';
             add += '<span>작성일 : ' + board.boardDate + ' </span>';
             add += '</div></div>';
@@ -182,7 +227,7 @@
             add += '<span class="likecolor">♡</span>';
             add += '<span>좋아요 (<span>' + board.likeCnt + '</span>)</span>';
             add += '</div><div class="board-comment-list">';
-            add += '<div class="board-comment">';
+            add += '<div class="board-comment" >';
             add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
             
             board.replyList.forEach(function(reply) {
@@ -203,7 +248,7 @@
             });
             
             add += '<div class="write-comment">';
-            add += '<div class="new-content"><textarea></textarea><button class="add-reply">등록</button></div>';
+            add += '<div class="new-content"><textarea class= "comment-content"></textarea><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
             add += '</div></div></div></div>';
             
             $('.board-area2').append(add);

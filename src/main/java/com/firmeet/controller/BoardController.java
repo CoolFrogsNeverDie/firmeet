@@ -9,11 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.BoardService;
 import com.firmeet.vo.BoardVO;
+import com.firmeet.vo.ReplyVO;
 
 @RequestMapping("/board")
 @Controller
@@ -59,6 +61,17 @@ public class BoardController {
 		return json;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/member/addComment", method = RequestMethod.POST)
+	public JsonResult addReply(@ModelAttribute ReplyVO replyVO) {
+		
+		
+		System.out.println("AJAX로 넘어오는 정보" + replyVO);
+		boardService.addReply(replyVO);
+		
+		
+		
+		return null;
+	}
 	
 }

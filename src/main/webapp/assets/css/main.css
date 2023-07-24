@@ -141,6 +141,14 @@ nav {
 }
 .side-nav li:hover{
   background-color: #b2a4ff;
+  color: white;
+}
+.menu-bar a{
+	text-decoration: none;
+	color:black;
+}
+.menu-bar a:hover{
+	color:white;
 }
 
 /* diary-area */

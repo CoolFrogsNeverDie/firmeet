@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.firmeet.dao.BoardDAO;
 import com.firmeet.dao.ClubDao;
+import com.firmeet.dao.ReplyDAO;
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.ReplyVO;
 
 @Service
 public class BoardService {
@@ -19,6 +21,8 @@ public class BoardService {
 	ClubDao clubDAO;
 	@Autowired
 	BoardDAO boardDAO;
+	@Autowired
+	ReplyDAO replyDAO; 
 	
 	//board 정보를 불러오는 메서드
 	//필요한 정보 : 내가 가입한 동호회 목록, 내가 선택한 동호회의 이름
@@ -48,6 +52,14 @@ public class BoardService {
 		}
 		
 		return boardList;
+	}
+	
+	
+	public ReplyVO addReply(ReplyVO replyVO) {
+		
+		replyDAO.addReply(replyVO);
+		
+		return null;
 	}
 	
 }
