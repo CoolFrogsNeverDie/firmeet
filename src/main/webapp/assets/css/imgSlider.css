@@ -2,13 +2,13 @@
   position: relative;
   width: 100%;
   height: 100%;
-
+  overflow: hidden;
 }
 
 .slider ul {
   position: absolute;
   list-style: none;
-  left: -55px;
+  left: -145px;
 }
 ul > .item {
   position: absolute;
@@ -16,41 +16,50 @@ ul > .item {
   width: 450px;
   border: 1px solid #333;
 }
+
+.item img{
+	height: 100%;
+}
 .item1 {
-  top: 130px;
+  top: 110px;
   height: 300px;
-  left: 60px;
+  left: 75px;
   z-index: 1;
   background: #0f0;
 }
+
 .item2 {
-  top: 110px;
+  top: 80px;
   height: 340px;
-  left: 120px;
+  left: 160px;
   z-index: 2;
   background: #ff0;
 }
+
 .item3 {
-  top: 90px;
+  top: 50px;
   height: 400px;
-  left: 180px;
+  left: 245px;
   z-index: 3;
   background: #cc66ff;
 }
+
 .item4 {
-  top: 110px;
+  top: 80px;
   height: 340px;
-  left: 240px;
+  left: 330px;
   z-index: 2;
   background: #dcdcdc;
 }
+
 .item5 {
-  top: 130px;
+  top: 110px;
   height: 300px;
-  left: 300px;
+  left: 415px;
   z-index: 1;
   background: #444;
 }
+
 
 .slider button{
   margin: 0 auto;

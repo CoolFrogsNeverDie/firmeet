@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.AccountBookService;
+import com.firmeet.service.ClubService;
 import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.ScheduleVO;
@@ -24,11 +25,16 @@ public class AccountBookController {
 
 	@Autowired
 	private AccountBookService accountBookService;
+	@Autowired
+	private ClubService clubService;
 	
 	@RequestMapping(value = "/main/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String accountbookMain(@PathVariable("clubId") int clubId, Model model) {
 		// 각주 추가: 회계장부 메인 페이지 조회
 		System.out.println("accountbookMain 확인");
+		
+		ClubVo clubVo = clubService.getClubVo(clubId);
+		model.addAttribute("club", clubVo);
 		
 		List<AccountBookVo> aList = accountBookService.getList(clubId);
 		
@@ -43,6 +49,9 @@ public class AccountBookController {
 		System.out.println("accountbookUploadform 확인");
 		
 		List<ScheduleVO> sList = accountBookService.getMeet(clubId);
+		
+		ClubVo clubVo = clubService.getClubVo(clubId);
+		model.addAttribute("club", clubVo);
 		
 		model.addAttribute("meetList",sList);
 		

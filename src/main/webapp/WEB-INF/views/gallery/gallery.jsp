@@ -48,9 +48,6 @@
 			<div class="content-area">
 				<div class="content-left">
 					<dl id="meetList">
-						<dt>
-							<span></span>전체보기
-						</dt>
 						<c:forEach var="meet" items="${meetList}">
 							<dt>
 								<span></span>${meet.meetYear}년 ${meet.meetMon}월

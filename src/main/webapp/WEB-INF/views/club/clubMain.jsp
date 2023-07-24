@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>어푸어푸 메인</title>
+<title>${club.clubName} 메인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
@@ -24,7 +24,7 @@
 		<div class="diary-area">
 			<div class="diary-topbar">
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-				<h1>어푸어푸</h1>
+				<h1>${club.clubName}</h1>
 			</div>
 			<!--/diary-topbar-img-->
 			<div class="diary-subbar">
@@ -35,11 +35,11 @@
 				<div class="content-left">
 					<div class="slider">
 						<ul>
-							<li class="item item1">1</li>
-							<li class="item item2">2</li>
-							<li class="item item3">3</li>
-							<li class="item item4">4</li>
-							<li class="item item5">5</li>
+							<li class="item item1"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
+							<li class="item item2"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
+							<li class="item item3"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
+							<li class="item item4"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
+							<li class="item item5"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
 						</ul>
 						<div class="p"></div>
 						<div class="n"></div>
@@ -82,5 +82,6 @@
     <!--/wrap-->
   
 </body>
+
 <script src="${pageContext.request.contextPath}/assets/js/imgSlider.js"></script>
 </html>
