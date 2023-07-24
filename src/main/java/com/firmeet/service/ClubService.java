@@ -43,5 +43,10 @@ public class ClubService {
 		
 		return clubVos;
 	}
+
+	public ClubVo getClubVo(int clubId) {
+		ClubVo clubVo = clubDao.getClubVo(clubId);
+		return clubVo;
+	}
 }
 

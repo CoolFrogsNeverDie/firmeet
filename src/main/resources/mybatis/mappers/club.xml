@@ -4,7 +4,7 @@
 <mapper namespace="club">
 
 
-	 <select id = "getMemClub" parameterType ="String" resultType ="club">
+	<select id="getMemClub" parameterType="String" resultType="club">
 	 	<![CDATA[
 			  	select 
 	                a.clubName
@@ -12,13 +12,37 @@
 	                from club a join club_member b on a.clubId = b.clubId
 	            where b.memberId = #{memberId}	
 	 	]]>
-	 </select>
- 
-      <insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
-       <selectKey resultType="int" order="BEFORE"
-         keyProperty="clubId">
-         select seq_clubId.nextval from dual
-      </selectKey>
+	</select>
+
+	<select id="getClubVo" parameterType="int" resultType="club">
+	 	<![CDATA[
+			  	select 
+	                clubId
+	                ,clubName
+	                ,cre_date
+	                ,max
+	                ,preNum
+	                ,intro1
+					,intro2
+					,address1
+					,address2
+					,img1
+					,img2
+					,detailT
+					,detailL
+					,detailP
+					,detailE
+					,detailW
+	                from club
+	            where clubId = #{clubId}	
+	 	]]>
+	</select>
+
+	<insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="clubId">
+			select seq_clubId.nextval from dual
+		</selectKey>
         <![CDATA[
            insert into club(clubId,clubName,cre_date,max,preNum,intro1,intro2,address1,
                         address2,detailT,detailL,detailP,detailE,detailW)
@@ -26,52 +50,57 @@
                           #{intro1}, #{intro2}, #{address1}, #{address2},
                           #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW})
        ]]>
-     </insert>
-     <insert id="insertImg" parameterType="com.firmeet.vo.ClubVo">
+	</insert>
+	<insert id="insertImg" parameterType="com.firmeet.vo.ClubVo">
 		      <![CDATA[
 		           insert into club(img1,img2)
 		                    values(#{img1},#{img2})
 		       ]]>
-		     
-     </insert>
-     
-     <insert id="insertClubCate" parameterType="com.firmeet.vo.CategoryVo">
+
+	</insert>
+
+	<insert id="insertClubCate"
+		parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[	
 			insert into club_category (clubCateNum,clubId,cateNum)
 			values(seq_club_category_no.nextval, #{clubId},#{cateNo})
 		
 		 ]]>
-     </insert>
-     
-     <insert id="insertClubTag" parameterType="com.firmeet.vo.CategoryVo">
+	</insert>
+
+	<insert id="insertClubTag"
+		parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[	
 			insert into club_category (clubCateNum,clubId,tagNo)
 			values(seq_club_tagNo.nextval, #{clubId},#{tagNo})
 		
 		 ]]>
-     </insert>
-     
-     <insert id="insertAdmin" parameterType="com.firmeet.vo.ClubMemVo">
+	</insert>
+
+	<insert id="insertAdmin"
+		parameterType="com.firmeet.vo.ClubMemVo">
      	<![CDATA[	
      			insert into club_member (clubMemNo, memberId, memLevel,joinDate)
      			values(seq_club_memNo.nextVal, #{memberId},0,hire_date)
       	]]>
-     </insert> 
-     
-     <insert id="insertJoinMem" parameterType="com.firmeet.vo.ClubMemVo" >
+	</insert>
+
+	<insert id="insertJoinMem"
+		parameterType="com.firmeet.vo.ClubMemVo">
      <![CDATA[	
      			insert into club_member (memberId, memLevel)
      			values( #{memberId},-10)
       	]]>
-     </insert>
-		
-		
-	<select id = "getClubName" parameterType = "board" resultType = "String">
+	</insert>
+
+
+	<select id="getClubName" parameterType="board"
+		resultType="String">
 		<![CDATA[
 			select 
 				clubName 
 			from club 
 			where clubId = #{clubId}
 		]]>
-	</select>	
+	</select>
 </mapper>

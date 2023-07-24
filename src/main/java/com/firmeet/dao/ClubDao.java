@@ -61,6 +61,15 @@ public class ClubDao {
 		 
 		 return session.selectOne("club.getClubName", boardVO);
 	 }
+
+	public ClubVo getClubVo(int clubId) {
+		
+		ClubVo clubVo= session.selectOne("club.getClubVo", clubId);
+		
+		System.out.println(clubVo);
+		
+		return clubVo;
+	}
 	 
 	 
 	 

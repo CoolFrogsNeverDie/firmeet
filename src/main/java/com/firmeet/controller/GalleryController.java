@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
+import com.firmeet.service.ClubService;
 import com.firmeet.service.GalleryService;
+import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
@@ -26,6 +28,8 @@ public class GalleryController {
 
     @Autowired
     private GalleryService galleryService;
+    @Autowired
+    private ClubService clubService;
 
     // 갤러리 목록 조회
     @RequestMapping(value = "/list/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
@@ -34,6 +38,10 @@ public class GalleryController {
         System.out.println("clubId : " + clubId);
 
         List<MeetVo> gMeetVos =galleryService.getMeetMon(clubId);
+        
+    	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
+		ClubVo clubVo = clubService.getClubVo(clubId);
+		model.addAttribute("club", clubVo);
         
         model.addAttribute("meetList", gMeetVos);
 
@@ -92,6 +100,10 @@ public class GalleryController {
         List<MeetVo> sList = galleryService.getMeetA(clubId);
 
         model.addAttribute("meetList", sList);
+        
+    	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
+		ClubVo clubVo = clubService.getClubVo(clubId);
+		model.addAttribute("club", clubVo);
 
         return "/gallery/galleryUploadForm";
     }

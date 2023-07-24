@@ -29,6 +29,16 @@ public class ClubController {
 	@Autowired
 	private MemberService memberService;
 
+	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
+	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String clubMain(@PathVariable int clubId, Model model) {
+
+		ClubVo clubVo = clubService.getClubVo(clubId);
+		model.addAttribute("club", clubVo);
+		
+		return "/club/clubMain";
+	}
+	
 	@RequestMapping(value = "/makingForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clubMakingForm(Model model) {
 		System.out.println("ClubController.clubMakingForm()");
@@ -57,15 +67,6 @@ public class ClubController {
 		return "/main/mainForm";
 
 	}
-
-	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubMain(@PathVariable int clubId, Model model) {
-
-		model.addAttribute("clubId", clubId);
-
-		return "/club/clubMain";
-	}
-
 	
 	@RequestMapping(value="/joinForm/{clubId}" , method = {RequestMethod.GET, RequestMethod.POST})
 	public String clubForm(@PathVariable int clubId, Model model) {
