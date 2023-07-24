@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.firmeet.service.ClubService;
+import com.firmeet.service.GalleryService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
@@ -28,6 +30,8 @@ public class ClubController {
 	private ClubService clubService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private GalleryService galleryService;
 
 	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
 	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -35,6 +39,8 @@ public class ClubController {
 
 		ClubVo clubVo = clubService.getClubVo(clubId);
 		model.addAttribute("club", clubVo);
+		List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+		model.addAttribute("gImgVos", gImgVos);
 		
 		return "/club/clubMain";
 	}

@@ -62,14 +62,16 @@
             , imgsave
             , imgsize
             , imgroot
-            , regdate)
+            , regdate
+            ,clubId)
         VALUES (SEQ_G_IMGNO.NEXTVAL
         , #{galleryNo}
         , #{imgName}
         , #{imgSave}
         , #{imgSize}
         , #{imgRoot}
-        , SYSDATE)
+        , SYSDATE
+        ,#{clubId})
         ]]>
     </insert>
 
@@ -99,6 +101,22 @@
             , regdate
         FROM gallery_img
         where GalleryNo = #{GalleryNo}
+        ]]>
+    </select>
+     <!-- 갤러리이미지 목록 조회 -->
+        <select id="getGalleryListAll" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
+        <![CDATA[
+        SELECT
+            imgno
+            , galleryno
+            , imgname
+            , imgsave
+            , imgsize
+            , imgroot
+            , regdate
+            , clubId
+        FROM gallery_img
+        where clubId = #{clubId}
         ]]>
     </select>
 </mapper>

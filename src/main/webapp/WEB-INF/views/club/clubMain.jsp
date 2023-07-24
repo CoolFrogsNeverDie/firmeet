@@ -5,20 +5,32 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName} 메인</title>
+<title>${club.clubName}메인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/assets/css/imgSlider.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css"/>
-<link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet"  type="text/css"/>
+<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
 <style>
+.side-nav li>a {
+  color: black;
+  text-decoration: none;
+}
+
+.side-nav li:hover{
+  background-color: #000000;
+}
+
+.side-nav li:hover>a{
+  color:white;
+}
 </style>
 </head>
 
 <body>
 	<!-- top Navigation -->
-	<%@ include file="../include/nav.jsp" %>
+	<%@ include file="../include/nav.jsp"%>
 
 	<div class="wrap">
 		<div class="diary-area">
@@ -32,19 +44,28 @@
 			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
-				<div class="content-left">
-					<div class="slider">
-						<ul>
-							<li class="item item1"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
-							<li class="item item2"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
-							<li class="item item3"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
-							<li class="item item4"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
-							<li class="item item5"><img src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" /></li>
-						</ul>
-						<div class="p"></div>
-						<div class="n"></div>
+				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 59%; height: 90%; display: inline-block; margin-top: 10px;">
+					<div class="carousel-inner" style="height: 100%;">
+						<div class="carousel-item carousel-item-next carousel-item-start">
+							<img class="d-block w-100" src="https://source.unsplash.com/user/erondu/1600x900" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" src="https://source.unsplash.com/collection/190727/1600x900" alt="...">
+						</div>
+						<div class="carousel-item active carousel-item-start">
+							<img class="d-block w-100" src="https://source.unsplash.com/WLUHO9A_xik/1600x900" alt="...">
+						</div>
 					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+					</button>
 				</div>
+
+
+
 				<!--/content-left-->
 				<div class="content-right">
 					<div class="announcement">
@@ -77,11 +98,13 @@
 			</div>
 			<!--/content-area-->
 		</div>
-        <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
-    <!--/wrap-->
-  
+		<!--/diary-area-->
+		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+		<!--/wrap-->
 </body>
 
 <script src="${pageContext.request.contextPath}/assets/js/imgSlider.js"></script>
+<script>
+	
+</script>
 </html>

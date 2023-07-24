@@ -22,7 +22,7 @@ public class GalleryService {
 
     @Autowired
     private GalleryDao galleryDao;
-    private String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
+    private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
 
 	public List<MeetVo> getMeetA(int clubId) {
 		System.out.println("GalleryService getMeetA 확인");
@@ -86,7 +86,7 @@ public class GalleryService {
                 bout.close();
 
                 // 갤러리 이미지 정보 저장
-                GalleryImgVo gImgVo = new GalleryImgVo(0, galleryNo, orgName, saveName, fileSize, filePath, "");
+                GalleryImgVo gImgVo = new GalleryImgVo(0, galleryNo, orgName, saveName, fileSize, filePath, "",clubId);
                 System.out.println(gImgVo);
 
                 galleryDao.upload(gImgVo);
@@ -102,6 +102,8 @@ public class GalleryService {
         List<GalleryVo> galleryVos = galleryDao.getGalleryList(clubId);
         return galleryVos;
     }
+    
+    
 
     // 갤러리 이미지 목록 조회
     public List<GalleryImgVo> getGalleryImg(int GalleryNo) {
@@ -114,6 +116,14 @@ public class GalleryService {
 		System.out.println("GalleryService getGalleryImg 확인");
 		
 		List<MeetVo> gImgVos = galleryDao.getMeetName(year,month);
+		
+		return gImgVos;
+	}
+
+	public List<GalleryImgVo> getGalleryListAll(int clubId) {
+		System.out.println("GalleryService getGalleryListAll 확인");
+		
+		List<GalleryImgVo> gImgVos = galleryDao.getGalleryListAll(clubId);
 		
 		return gImgVos;
 	}

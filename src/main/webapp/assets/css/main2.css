@@ -143,8 +143,17 @@ nav {
   padding-top: 6px;
   margin-top : 7px;
 }
+
+.side-nav li>a {
+  color: black;
+  text-decoration: none;
+}
+
 .side-nav li:hover{
   background-color: #000000;
+}
+
+.side-nav li:hover>a{
   color:white;
 }
 

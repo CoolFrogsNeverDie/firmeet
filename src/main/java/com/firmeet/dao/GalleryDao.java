@@ -100,5 +100,14 @@ public class GalleryDao {
 		return galleryVos;
 	}
 
+	public List<GalleryImgVo> getGalleryListAll(int clubId) {
+		System.out.println("GalleryDao getGalleryListAll 확인");
+		
+		List<GalleryImgVo> galleryVos = session.selectList("gallery.getGalleryListAll",clubId);
+		System.out.println(galleryVos);
+		
+		return galleryVos;
+	}
+
 
 }

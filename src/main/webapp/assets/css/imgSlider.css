@@ -1,90 +1,92 @@
 .slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 }
 
 .slider ul {
-  position: absolute;
-  list-style: none;
-  left: -145px;
-}
-ul > .item {
-  position: absolute;
-  overflow: hidden;
-  width: 450px;
-  border: 1px solid #333;
+	position: absolute;
+	list-style: none;
+	left: -145px;
 }
 
-.item img{
+ul>.item {
+	position: absolute;
+	overflow: hidden;
+	width: 450px;
+	border: 1px solid #333;
+}
+
+.item img {
+	width: 100%;
 	height: 100%;
 }
+
 .item1 {
-  top: 110px;
-  height: 300px;
-  left: 75px;
-  z-index: 1;
-  background: #0f0;
+	top: 110px;
+	height: 300px;
+	left: 75px;
+	z-index: 1;
+	background: #0f0;
 }
 
 .item2 {
-  top: 80px;
-  height: 340px;
-  left: 160px;
-  z-index: 2;
-  background: #ff0;
+	top: 80px;
+	height: 340px;
+	left: 160px;
+	z-index: 2;
+	background: #ff0;
 }
 
 .item3 {
-  top: 50px;
-  height: 400px;
-  left: 245px;
-  z-index: 3;
-  background: #cc66ff;
+	top: 50px;
+	height: 400px;
+	left: 245px;
+	z-index: 3;
+	background: #cc66ff;
 }
 
 .item4 {
-  top: 80px;
-  height: 340px;
-  left: 330px;
-  z-index: 2;
-  background: #dcdcdc;
+	top: 80px;
+	height: 340px;
+	left: 330px;
+	z-index: 2;
+	background: #dcdcdc;
 }
 
 .item5 {
-  top: 110px;
-  height: 300px;
-  left: 415px;
-  z-index: 1;
-  background: #444;
+	top: 110px;
+	height: 300px;
+	left: 415px;
+	z-index: 1;
+	background: #444;
 }
 
-
-.slider button{
-  margin: 0 auto;
+.slider button {
+	margin: 0 auto;
 }
 
-.p{
-  margin: auto 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 150px;
-  height: 100%;
-  background-color: transparent;
-  z-index: 99;
-  box-sizing: border-box;
+.prev {
+	margin: auto 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 150px;
+	height: 100%;
+	background-color: transparent;
+	z-index: 99;
+	box-sizing: border-box;
 }
 
-.n{
-  margin: auto 0;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 150px;
-  height: 100%;
-  background-color: transparent;
-  z-index: 99;
-  box-sizing: border-box;
+.next {
+	margin: auto 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 150px;
+	height: 100%;
+	background-color: transparent;
+	z-index: 99;
+	box-sizing: border-box;
 }

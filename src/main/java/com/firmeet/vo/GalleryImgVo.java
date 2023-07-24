@@ -8,21 +8,23 @@ public class GalleryImgVo {
     private long imgSize;
     private String imgRoot;
     private String regDate;
+    private int clubId;
         
 	public GalleryImgVo() {
 		super();
 	}
 
-	public GalleryImgVo(int imgNo, int galleryNo, String imgName, String imgSave, long fileSize, String imgRoot,
-			String regDate) {
+	public GalleryImgVo(int imgNo, int galleryNo, String imgName, String imgSave, long imgSize, String imgRoot,
+			String regDate, int clubId) {
 		super();
 		this.imgNo = imgNo;
 		this.galleryNo = galleryNo;
 		this.imgName = imgName;
 		this.imgSave = imgSave;
-		this.imgSize = fileSize;
+		this.imgSize = imgSize;
 		this.imgRoot = imgRoot;
 		this.regDate = regDate;
+		this.clubId = clubId;
 	}
 
 	public int getImgNo() {
@@ -80,10 +82,23 @@ public class GalleryImgVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	
+	
+
+	public int getClubId() {
+		return clubId;
+	}
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
+	}
 
 	@Override
 	public String toString() {
 		return "GalleryImgVo [imgNo=" + imgNo + ", galleryNo=" + galleryNo + ", imgName=" + imgName + ", imgSave="
-				+ imgSave + ", imgSize=" + imgSize + ", imgRoot=" + imgRoot + ", regDate=" + regDate + "]";
+				+ imgSave + ", imgSize=" + imgSize + ", imgRoot=" + imgRoot + ", regDate=" + regDate + ", clubId="
+				+ clubId + "]";
 	}
+
+
 }
