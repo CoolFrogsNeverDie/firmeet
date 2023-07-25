@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    
 </head>
 <body>
 
@@ -57,6 +56,7 @@
                   </div>
               </div>
               <hr>
+        <div id="content_body">
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
@@ -89,7 +89,7 @@
                <div class="mapview">
                		<div id="map2" style="width:100%;height:250px;"></div>
                </div>
-               
+        </div>
               <div class="like">
                   <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
               </div>

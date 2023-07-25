@@ -50,6 +50,7 @@
                   </div>
               </div>
               <hr>
+          <div id="content_body">
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
@@ -99,7 +100,7 @@
 	                 </tr>
 	               </tbody>
                </table>
-      
+      	</div>
               <div class="like">
                   <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
               </div>
