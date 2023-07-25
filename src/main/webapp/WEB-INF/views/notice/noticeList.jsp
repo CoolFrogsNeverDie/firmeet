@@ -17,10 +17,11 @@
 
     .list-item {
       padding: 10px;
+      width: 100%;
       border-bottom: 1px solid #ccc;
     }
     .table1000{
-    	width:1000px;
+    	width:1070px;
     }
 </style>
 <body>
@@ -56,7 +57,6 @@
 			<th>제목</th>
 			<th>등록일</th>
 			<th>조회수</th>
-			<th>1/2</th>
 		</tr>
 	<c:forEach var="row" items="${nlist }">
 		<c:if test="${sessionScope.clubId == row.clubId }">
@@ -73,7 +73,6 @@
 				</c:choose>
 				<td>${row.aboardDate }</td>
 				<td>${row.aboardHit }</td>
-				<td>${row.aboardVal }</td>
 			</tr>
 		</c:if>
 	</c:forEach>
