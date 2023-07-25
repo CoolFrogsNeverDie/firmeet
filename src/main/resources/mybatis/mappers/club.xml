@@ -80,8 +80,8 @@
 	<insert id="insertAdmin"
 		parameterType="com.firmeet.vo.ClubMemVo">
      	<![CDATA[	
-     			insert into club_member (clubMemNo, memberId, memLevel,joinDate)
-     			values(seq_club_memNo.nextVal, #{memberId},0,hire_date)
+     			insert into club_member (clubMemNo, memberId, clubId, memLevel, joinDate)
+     			values(SEQ_CLUB_MEMNO.nextVal, #{memberId}, #{clubId}, 0, sysdate)
       	]]>
 	</insert>
 	

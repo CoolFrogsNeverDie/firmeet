@@ -2,6 +2,8 @@ package com.firmeet.service;
 
 import java.util.List;
 
+import javax.annotation.processing.SupportedSourceVersion;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,11 @@ public class ClubService {
 	@Autowired
 	private ClubDao clubDao;	
 	
-	public void make(ClubVo clubVo) {
+	public void make(ClubVo clubVo , MemberVo memberVo) {
 		System.out.println("ClubService.make()");
 		System.out.println(clubVo);
+		
+		
 		
 		clubDao.insertClub(clubVo);
 		
@@ -37,6 +41,14 @@ public class ClubService {
 		cateVo.setClubId(clubVo.getClubId());
 		cateVo.setCateNo(clubVo.getCateNo());
 		clubDao.insertClubCate(cateVo);
+		
+		ClubMemVo clubMemVo = new ClubMemVo();
+		clubMemVo.setClubId(clubVo.getClubId());
+		clubMemVo.setMemberId(memberVo.getMemberId());
+		System.out.println(clubMemVo);
+		clubDao.insertAdmin(clubMemVo);
+		
+		
 		
 		/*
 		 * cateVO.setClubId(clubVo.getClubId()); clubDao.insertCate(cateVO);
@@ -59,6 +71,10 @@ public class ClubService {
 		List<ClubVo> clubVos = clubDao.getMemClub(memberId);
 		
 		return clubVos;
+	}
+	
+	public void adminMem(String id) {
+		System.out.println("ClubService.adminMem");
 	}
 
 	public ClubVo getClubVo(int clubId) {

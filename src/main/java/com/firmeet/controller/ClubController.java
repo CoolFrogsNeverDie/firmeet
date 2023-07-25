@@ -66,9 +66,16 @@ public class ClubController {
 		   ) {
 			System.out.println("ClubController.clubMaking()");
 			System.out.println("넘어온 VO  확인" + clubVo );
+			
+			MemberVo id= (MemberVo)session.getAttribute("member");
+			System.out.println(id);
+			
+			clubService.make(clubVo,id);
 
-
-			clubService.make(clubVo);
+			
+			
+		
+			
 			List<TagVo> tagList = memberService.tagList();
 			List<CategoryVo> cateList = memberService.cateList();
 			model.addAttribute("tagList", tagList);
@@ -85,6 +92,7 @@ public class ClubController {
 		/* clubService.clubList(clubId); */
 		return "/club/clubJoin";
 	}
+	
 
 	
 	/* 클럽 가입 하기 */

@@ -27,7 +27,7 @@ public class ClubDao {
 		return memClubList;
 	}
 	
-	  public void insertClub(ClubVo clubVo){
+	public void insertClub(ClubVo clubVo){
 	      System.out.println("ClubDao.insertClub()");
 	      System.out.println(clubVo);
 	      session.insert("club.insertClub",clubVo);
@@ -35,10 +35,11 @@ public class ClubDao {
 	   }
 	  
 		
-		  public void insertAdmin(ClubMemVo clubMemVo) {
+	public void insertAdmin(ClubMemVo clubMemVo) {
 		  
 		  System.out.println("ClubDao.insertAdmin()");
-		  session.insert("club.insertAdmin" , clubMemVo); }
+		  session.insert("club.insertAdmin" , clubMemVo); 
+	}
 		 
 	 public void insertClubCate(CategoryVo cateVo) {
 		 
@@ -66,6 +67,7 @@ public class ClubDao {
 		 
 		 return session.selectOne("club.getClubName", boardVO);
 	 }
+	 
 
 	public ClubVo getClubVo(int clubId) {
 		

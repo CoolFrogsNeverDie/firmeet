@@ -52,26 +52,23 @@ public class MemberController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("cateList", cateList);
 		MemberVo member =  memberService.login(memberVo);
-		
+		String memberId = null;
 		
 		  if(member !=null){
 			  System.out.println("로그인 성공");
 			  session.setAttribute("member", member);
-			  
 			  return "main/mainForm";
 		  }else {
 			  System.out.println("로그인 실패");
 			  return "member/memberForm";
-		  }
-		 
-		
+		  }	
 		
 	}
 	
 	/* 로그아웃 */
 	@RequestMapping(value="/logout", method= {RequestMethod.GET})
 	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
+		session.removeAttribute("member");
 		session.invalidate();
 		return"member/memberForm";
 	}

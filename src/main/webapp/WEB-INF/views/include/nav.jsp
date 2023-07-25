@@ -33,7 +33,7 @@
 								<li><a class="dropdown-item" href="#">알람확인</a></li>
 								<li><a class="dropdown-item" href="#">정보수정</a></li>
 								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="#">로그아웃</a></li>
+								<li><a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 							</ul>
 						</li>
 					</ul>
