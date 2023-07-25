@@ -8,8 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.ClubVo;
@@ -43,6 +44,8 @@ public class NoticeBoardController {
 		
 		System.out.println("controller clubId"+clubId);
 		System.out.println(vo);
+		
+		model.addAttribute("clubId", clubId);
 		
 		return "notice/noticeEditGeneral";
 	}
@@ -157,12 +160,31 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
-/*	
-	@RequestMapping(value="/clubImg", method= RequestMethod.POST, produces = "application/json; charset=utf8")
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile file, @ModelAttribute NoticeBoardVO vo, ClubVo clubId, Model model )  {
-		System.out.println("UploadController.clubMainImg()");
-		noticeBoardService.imgup(file , vo ,clubId);
-		return"";
+
+	/*
+   @ResponseBody
+   @RequestMapping(value="/upload")
+   public JsonObject upload(@RequestParam("file") MultipartFile file, @ModelAttribute NoticeBoardVO vo, @ModelAttribute ClubVo clubVo, Model model, @RequestParam("aboardNo") int aboardNo) {
+      System.out.println("FileUploadController.upload()");
+      
+      JsonObject jsonObject = noticeBoardService.imgup(file , vo ,clubVo, aboardNo);
+      
+      return jsonObject;
+   }
+   */
+   
+	//파일 업로드 처리  (썸머노트 이미지 첨부 하면 바로 저장됨  이미지 경로를 리턴)
+	@ResponseBody
+	@RequestMapping(value="/upload")
+	public JsonResult upload(@RequestParam("file") MultipartFile file) {
+		System.out.println("FileUploadController.upload()");
+		System.out.println(file.getOriginalFilename());
+		
+		JsonResult jsonResult = new JsonResult();
+		String psaveName = noticeBoardService.imgup(file);
+		System.out.println("확확확"+psaveName);
+		jsonResult.success(psaveName);
+		
+		return jsonResult;
 	}
-*/
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.NoticeImgVO;
+import com.firmeet.vo.UploadVo;
 import com.firmeet.vo.VoteResultVO;
 
 @Repository
@@ -78,5 +80,10 @@ public class NoticeBoardDAO {
 
 	public void hits(int aboardNo) {
 		sql.update("noticeboard.hits", aboardNo);
+	}
+
+	public NoticeImgVO imginsert(int aboardNo) {
+		System.out.println("notice imginsert dao 확인"+aboardNo);
+		return sql.selectOne("noticeboard.imginsert", aboardNo);
 	}
 }

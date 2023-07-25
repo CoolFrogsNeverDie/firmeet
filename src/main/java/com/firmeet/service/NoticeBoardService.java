@@ -1,9 +1,15 @@
 package com.firmeet.service;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.NoticeBoardVO;
@@ -91,5 +97,51 @@ public class NoticeBoardService {
 		vo.setVote5Cnt(voteResultvo.getVote5Cnt());
 		
 		return vo;
+	}
+	
+
+	public String imgup(MultipartFile file) {
+	
+		System.out.println("noticeBoardService.imgup()");
+
+		String saveDir = "C:\\firmeet\\upload";
+
+		//원파일 이름
+		String poriginname = file.getOriginalFilename();
+		System.out.println("poriginname : " + poriginname);
+		
+		//확장자
+		String exName = poriginname.substring(poriginname.lastIndexOf("."));
+		System.out.println(exName);
+		
+		//저장파일 이름
+		String psaveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+		System.out.println("psaveName: " + psaveName);
+		
+		//파일패스
+		String filePath = saveDir +"\\"+psaveName;
+		System.out.println("filePath: " + filePath);
+		
+		//File targetFile = new File(saveDir+psaveName);
+
+		//파일 사이즈
+		 long fileSize =file.getSize(); 
+		 System.out.println("fileSize: " + fileSize);
+		 
+		// 파일 업로드
+		
+		try {
+			byte[] fileData = file.getBytes();
+			OutputStream out  = new FileOutputStream(filePath);
+			BufferedOutputStream bout=  new BufferedOutputStream(out);
+			bout.write(fileData);
+			bout.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return psaveName;
+	
 	}
 }

@@ -67,5 +67,10 @@
 	<update id="hits" parameterType="int">
 		update aboard set aboardHit = aboardHit +1 where aboardNo = #{aboardNo}
 	</update>
+	
+    <insert id="imginsert" parameterType="com.firmeet.vo.NoticeImgVO">
+       insert into aboard_img(pno, aboardNo, poriginname, psaveName, psize, ppath, pdate)
+       values (SEQ_ABOARD_PNO.NEXTVAL, #{aboardNo}, #{poriginname}, #{psaveName}, #{psize}, #{ppath}, SYSDATE)
+   </insert>
 
 </mapper>

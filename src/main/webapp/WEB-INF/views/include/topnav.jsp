@@ -25,10 +25,8 @@ crossorigin="anonymous">
 
 <!-- summernote -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/summernote-lite.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
-
 
 <!-- 외부 -->
 <link href="${pageContext.request.contextPath }/assets/css/imgSlider.css" rel="stylesheet" type="text/css">

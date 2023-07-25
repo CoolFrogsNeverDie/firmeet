@@ -74,7 +74,7 @@
                             <option value="번개모임">번개모임</option>
                             <option value="일반모임">일반모임</option>
                         </select>
-						<input type="text" name="memberId" value="${member.memberId}">${memberId}
+                  <input type="text" name="memberId" value="${member.memberId}">${memberId}
                         <button type="submit" class="btnbox">등록</button>
                     </div>
 
@@ -84,12 +84,12 @@
                     </div>
 
                     <div class="ababab">
-                        <textarea id="summernote" name="boardContent"></textarea>
+                        <textarea id="summernote" name="summernote"></textarea>
                         <div class="contentleftbox"></div>
                     </div>
                 
 
-	      <!-- -------------------------------------------------일반투표-------------------------------------------------------->
+         <!-- -------------------------------------------------일반투표-------------------------------------------------------->
                 <div class="modal" id="general">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -127,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-			</form>
+         </form>
      <!-- 여기까지 -->
             </div>
             <!--/content-left-->
@@ -186,13 +186,15 @@
 
 
 <script>
+
+
 $(document).ready(function() {
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
         window.location.href = "noticeEditGroup";
     });
-	
+   
     let i = 4;
 
     $('.plusbtn').on("click", function() {
@@ -256,44 +258,56 @@ $(document).ready(function() {
         fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Tahoma', 'Courier New', '맑은 고딕', '굴림', '돋움'],
         buttons: {
             vote: CustomButton // 버튼 동작을 처리하는 함수
+        },
+        callbacks: {
+        	onImageUpload: function(files, editor, welEditable){
+        		uploadSummernoteImageFile(files[0], this);
+        	}
+        
         }
+    
     });
 });
 
- var setting = {
-    height: 500,
-    minHeight: null,
-    maxHeight: null,
-    focus: true,
-    lang: 'ko-KR',
-    toolbar: toolbar,
-    //콜백 함수
-   /*  callbacks: {
-    	onImageUpload : function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-            uploadSummernoteImageFile(files[i], this);
-		}
-	} */
-};
+function uploadSummernoteImageFile(file, editor){
+	console.log("파일업로드  <img src=>");
+	
+	data = new FormData(); 
+	data.append("file",file); 
+	
+	console.log(file);
+	console.log("gg"+editor);
+	
+	//ajax통신  -> 요청은 같은 기술 , 응답 이 데이터만 온다
+	$.ajax({
+		url : "${pageContext.request.contextPath }/"+${requestScope.clubId}+"/notice/upload",		
+		type : "post",
+		/* contentType : "application/json", */
+		data : data, 
+		contentType:false, 
+        processData:false, 
+		
+		dataType : "json",
+		success : function(jsonResult){
+			/* 성공시 처리해야될 코드 작성 */
+			if(jsonResult.data != null){
 
- 
- /* function uploadSummernoteImageFile(file, el) {
-		data = new FormData();
-		data.append("file", file);
-		$.ajax({
-			data : data,
-			type : "POST",
-			url : "${pageContext.request.contextPath }/notice/uploadSummernoteImageFile",
-			contentType : false,
-			enctype : 'multipart/form-data',
-			processData : false,
-			success : function(data) {
-				$(#summernote).summernote('editor.insertImage', img_name);
+			     var imageUrl = 'http://localhost:8000/firmeet/upload/' + jsonResult.data ;
+			     var style = 'width: 25%';
+			     
+			     
+			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")
+                 $(editor).summernote('insertNode', $img[0]);
+			     
+			     
+			     //$(editor).summernote('editor.insertImage', imageUrl);
 			}
-		});
-	}
- */
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+}
 
 function CustomButton(context) {
     var ui = $.summernote.ui;
