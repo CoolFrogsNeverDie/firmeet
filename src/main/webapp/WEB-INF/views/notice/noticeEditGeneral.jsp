@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="ababab">
-                        <textarea id="summernote" name="summernote"></textarea>
+                        <textarea id="summernote" name="boardContent"></textarea>
                         <div class="contentleftbox"></div>
                     </div>
                 
@@ -120,7 +120,7 @@
                                       <input class="voteend" type="date" id="finDate" name="finDate">
                                   </div>
                                   <div style="text-align: center; font-weight: bold;">
-                                      <button type="reset" class="btn btn-warning btn-sm">작성 취소</button>
+                                      <button type="button" id="reset" class="btn btn-warning btn-sm">작성 취소</button>
                                       <button type="button" class="btn btn-success btn-sm" id="saveButton1" style="margin-left: 10px;">작성 완료</button>
                                   </div>
                             </div>
@@ -189,12 +189,18 @@
 
 
 $(document).ready(function() {
+	
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
         window.location.href = "noticeEditGroup";
     });
-   
+    
+    $("#reset").on("click", function() {
+        $("#general").hide();
+        $(".modal-backdrop.show").css("display", "none");
+    });
+    
     let i = 4;
 
     $('.plusbtn').on("click", function() {
@@ -260,7 +266,7 @@ $(document).ready(function() {
             vote: CustomButton // 버튼 동작을 처리하는 함수
         },
         callbacks: {
-        	onImageUpload: function(files, editor, welEditable){
+        	onImageUpload: function(files, editor){
         		uploadSummernoteImageFile(files[0], this);
         	}
         
@@ -291,16 +297,11 @@ function uploadSummernoteImageFile(file, editor){
 		success : function(jsonResult){
 			/* 성공시 처리해야될 코드 작성 */
 			if(jsonResult.data != null){
-
-			     var imageUrl = 'http://localhost:8000/firmeet/upload/' + jsonResult.data ;
+			     var imageUrl = '${pageContext.request.contextPath }/upload/' + jsonResult.data ;
 			     var style = 'width: 25%';
-			     
 			     
 			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")
                  $(editor).summernote('insertNode', $img[0]);
-			     
-			     
-			     //$(editor).summernote('editor.insertImage', imageUrl);
 			}
 		},
 		error : function(XHR, status, error) {

@@ -149,6 +149,7 @@
                                      </div>
                                  </div>
                                  <div style="text-align: center; font-weight: bold; margin-top: 20px;">
+                                 	 <button type="button" id="reset" class="btn btn-warning btn-sm">등록취소</button>
                                      <button type="button" class="btn btn-success" id="saveButton2" style="margin-left: 10px;">등록하기</button>
                                  </div>
                             </div>
@@ -180,6 +181,7 @@
                                     <button type="button" class="btn btn-secondary" id="sButton">지도등록</button><br>
                                 </div>
                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
+                                	<button type="button" id="reset" class="btn btn-warning btn-sm">등록취소</button>
                                     <button type="button" class="btn btn-success" style="margin-left: 10px;">등록하기</button>
                                 </div>
                             </div>
@@ -250,6 +252,13 @@ $(document).keypress(function(e) {
 });
 
 $(document).ready(function() {
+	
+    $("#reset").on("click", function() {
+        $("#group").hide();
+        $("#groupmeet").hide();
+        $(".modal-backdrop.show").css("display", "none");
+    });
+	
 	 $('.map_wrap').hide();
 	 
 	 $('#openmap').on('click', function() {
@@ -378,45 +387,50 @@ $(document).ready(function() {
         fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Tahoma', 'Courier New', '맑은 고딕', '굴림', '돋움'],
         buttons: {
             vote: CustomButton // 버튼 동작을 처리하는 함수
+        },
+        callbacks: {
+        	onImageUpload: function(files, editor){
+        		uploadSummernoteImageFile(files[0], this);
+        	}
+        
         }
-    });
-   
+   });
 });
 
-var setting = {
-    height: 500,
-    minHeight: null,
-    maxHeight: null,
-    focus: true,
-    lang: 'ko-KR',
-    toolbar: toolbar,
-    //콜백 함수
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-                upload(files[i], this);
-            }
-        }
-    }
-};
-
-function upload(file, editor) {
-    var data = new FormData();
-    data.append("file", file);
-    $.ajax({
-        url: 'upload',
-        type: "POST",
-        enctype: 'multipart/form-data',
-        data: data,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-            $(editor).summernote('editor.insertImage', data.url);
-        }
-    });
+function uploadSummernoteImageFile(file, editor){
+	console.log("파일업로드  <img src=>");
+	
+	data = new FormData(); 
+	data.append("file",file); 
+	
+	console.log(file);
+	console.log("gg"+editor);
+	
+	//ajax통신  -> 요청은 같은 기술 , 응답 이 데이터만 온다
+	$.ajax({
+		url : "${pageContext.request.contextPath }/"+${requestScope.clubId}+"/notice/upload",		
+		type : "post",
+		/* contentType : "application/json", */
+		data : data, 
+		contentType:false, 
+        processData:false, 
+		
+		dataType : "json",
+		success : function(jsonResult){
+			/* 성공시 처리해야될 코드 작성 */
+			if(jsonResult.data != null){
+			     var imageUrl = '${pageContext.request.contextPath }/upload/' + jsonResult.data ;
+			     var style = 'width: 25%';
+			     
+			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")
+                 $(editor).summernote('insertNode', $img[0]);
+			}
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
 }
-
 
 /* 섬머노트버튼 투표모달창 */
 function CustomButton(context) {

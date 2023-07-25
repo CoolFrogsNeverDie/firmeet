@@ -59,7 +59,7 @@
 	
 	<select id="editlistgroup" parameterType="noticeboard" resultType="noticeboard">
 		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
-		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, mn.startDate, mn.endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
+		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 		from aboard a, club c, member m, meet_name mn
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
@@ -67,10 +67,5 @@
 	<update id="hits" parameterType="int">
 		update aboard set aboardHit = aboardHit +1 where aboardNo = #{aboardNo}
 	</update>
-	
-    <insert id="imginsert" parameterType="com.firmeet.vo.NoticeImgVO">
-       insert into aboard_img(pno, aboardNo, poriginname, psaveName, psize, ppath, pdate)
-       values (SEQ_ABOARD_PNO.NEXTVAL, #{aboardNo}, #{poriginname}, #{psaveName}, #{psize}, #{ppath}, SYSDATE)
-   </insert>
 
 </mapper>

@@ -60,7 +60,7 @@
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
-                <table id="dataTable" style="width: 50%; float: left;">
+                <table id="dataTable" style="width: 40%; float: left;">
 					<thead>
 					<tr>
 	                     <th class="noticegrouplist">

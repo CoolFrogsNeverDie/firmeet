@@ -60,6 +60,8 @@ public class NoticeBoardController {
 		
 		System.out.println("controller clubId"+clubId);
 		
+		model.addAttribute("clubId", clubId);
+		
 		return "notice/noticeEditGroup";
 	}
 	

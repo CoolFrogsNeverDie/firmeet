@@ -46,13 +46,6 @@ public class NoticeBoardVO {
 	private double address2;
 	private int aboardHit;
 	
-	private String poriginname;
-	private String psaveName;
-	private long psize;
-	private String ppath;
-	private String pdate;
-	
-	
 	public NoticeBoardVO() {
 		
 	}
@@ -134,18 +127,6 @@ public class NoticeBoardVO {
 		this.voteEnd = voteEnd;
 	}
 	
-	public NoticeBoardVO(int aboardNo, int clubId, String memberId, String poriginname, String psaveName, long psize,
-			String ppath, String pdate) {
-		super();
-		this.aboardNo = aboardNo;
-		this.clubId = clubId;
-		this.memberId = memberId;
-		this.poriginname = poriginname;
-		this.psaveName = psaveName;
-		this.psize = psize;
-		this.ppath = ppath;
-		this.pdate = pdate;
-	}
 
 	public int getAboardNo() {
 		return aboardNo;
@@ -467,46 +448,6 @@ public class NoticeBoardVO {
 		this.aboardHit = aboardHit;
 	}
 
-	public String getPoriginname() {
-		return poriginname;
-	}
-
-	public void setPoriginname(String poriginname) {
-		this.poriginname = poriginname;
-	}
-
-	public String getPsaveName() {
-		return psaveName;
-	}
-
-	public void setPsaveName(String psaveName) {
-		this.psaveName = psaveName;
-	}
-
-	public long getPsize() {
-		return psize;
-	}
-
-	public void setPsize(long psize) {
-		this.psize = psize;
-	}
-
-	public String getPpath() {
-		return ppath;
-	}
-
-	public void setPpath(String ppath) {
-		this.ppath = ppath;
-	}
-
-	public String getPdate() {
-		return pdate;
-	}
-
-	public void setPdate(String pdate) {
-		this.pdate = pdate;
-	}
-
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -519,8 +460,8 @@ public class NoticeBoardVO {
 				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
-				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", poriginname=" + poriginname + ", psaveName="
-				+ psaveName + ", psize=" + psize + ", ppath=" + ppath + ", pdate=" + pdate + "]";
+				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + "]";
 	}
+
 
 }
