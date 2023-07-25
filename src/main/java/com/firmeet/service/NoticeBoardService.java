@@ -1,21 +1,13 @@
 package com.firmeet.service;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.VoteResultVO;
-import com.google.gson.JsonObject;
 
 @Service
 public class NoticeBoardService {
@@ -47,9 +39,8 @@ public class NoticeBoardService {
 	
 	public NoticeBoardVO editlist(int aboardNo ) {
 		System.out.println("notice editlist 확인");
-		
+		dao.hits(aboardNo);
 		NoticeBoardVO vo = dao.editlist(aboardNo);
-		dao.hits(aboardNo);		
 		return vo;
 	}
 	
@@ -101,30 +92,4 @@ public class NoticeBoardService {
 		
 		return vo;
 	}
-	
-	
-	public JsonObject SummerNoteImageFile(MultipartFile file) {
-		JsonObject jsonObject = new JsonObject();
-		String fileRoot = "C:\\summernoteImg\\";
-		String originalFileName = file.getOriginalFilename();
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-		
-		String saveFileName = UUID.randomUUID()+extension;
-			
-		File targetFile = new File(fileRoot+saveFileName);
-		
-		try {
-			InputStream fileStream = file.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
-			jsonObject.addProperty("responseCode", "succcess");
-		} catch(IOException e) {
-			FileUtils.deleteQuietly(targetFile);
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}	
-		return jsonObject;
-	}
-
-
 }

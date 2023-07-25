@@ -7,7 +7,7 @@
 
 	<!-- 쿼리문 작성 -->
 	<select id="noticelist" resultType="noticeboard">
-		select aboardNo, memberId, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,likeCnt, aboardHit from aboard order by aboardNo asc
+		select aboardNo, clubId, memberId, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate , aboardVal, likeCnt, aboardHit from aboard order by aboardNo asc
 	</select>
 	
 	<insert id="editwrite" parameterType="noticeboard">

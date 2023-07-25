@@ -26,7 +26,6 @@
 	</insert>
 	
 	
-	
 	<select id="selectMem" parameterType="com.firmeet.vo.MemberVo" resultType="com.firmeet.vo.MemberVo">
 		<![CDATA[
 			select memberId, memberName 

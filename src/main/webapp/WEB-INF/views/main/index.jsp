@@ -59,7 +59,7 @@
     
           <div class="col-md-3 text-end ">
             <button type="button" class="btn btn-outline-primary me-2"><a href="http://localhost:8000/firmeet/member/loginForm">Login</a></button>
-            <button type="button" class="btn btn-outline-primary me-2"><a href="http://localhost:8000/firmeet/member/joinForm">Join Us</a></button>
+            <!-- <button type="button" class="btn btn-outline-primary me-2"><a href="http://localhost:8000/firmeet/member/joinForm">Join Us</a></button> -->
           </div>
         </header>
       </div>

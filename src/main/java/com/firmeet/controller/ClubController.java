@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
 import com.firmeet.service.GalleryService;
 import com.firmeet.service.MemberService;
@@ -75,22 +78,45 @@ public class ClubController {
 	}
 	
 	@RequestMapping(value="/joinForm/{clubId}" , method = {RequestMethod.GET, RequestMethod.POST})
-	public String clubForm(@PathVariable int clubId, Model model) {
-		model.addAttribute("clubId" , clubId);
+	public String clubForm(@PathVariable int clubId) {
+		System.out.println("ClubController.clubForm()");
+		System.out.println(clubId);
+		/* clubService.clubList(clubId); */
 		return "/club/clubJoin";
 	}
 
 	
 	/* 클럽 가입 하기 */
 	  
-	  @RequestMapping(value="/clubJoin" ,method={RequestMethod.GET,RequestMethod.POST}) 
+	 @RequestMapping(value="/clubJoin" ,method={RequestMethod.GET,RequestMethod.POST}) 
 	  public String clubJoin(@ModelAttribute ClubVo clubVo,
 			  @ModelAttribute MemberVo memberVo,
-			  @ModelAttribute ClubMemVo clubMemVo) { 
-		  clubService.clubJoin(clubVo, memberVo,clubMemVo);
+			  @ModelAttribute ClubMemVo clubMemVo, Model model) { 
+		  	System.out.println("ClubController.clubJoin()");
+		  	clubMemVo.setMemberId(memberVo.getMemberId());
+			clubMemVo.setClubId(clubVo.getClubId());
+			/* clubService.clubJoin(clubVo, memberVo,clubMemVo); */
+			System.out.println(clubMemVo);
 	  return"/club/clubJoin";
 	  
 	  }
+	   @ResponseBody
+		@RequestMapping(value="/selectTag", method=RequestMethod.POST)
+		public String selectTag(@RequestParam(value="tagNo[]") List<Integer> tagNo) {
+			
+			System.out.println(tagNo);
+			for(int i=0; i<tagNo.size(); i++) {
+			TagVo selectTag = clubService.selectTag(tagNo.get(i));
+			JsonResult jsonResult = new JsonResult();
+			jsonResult.success(selectTag);
+			System.out.println(jsonResult);
+			}
+			
+			System.out.println(String.valueOf(tagNo));
+		
+			String result =String.valueOf(tagNo);
+			return result ;
+		}
 	 
 	
 	public String searchTag() {

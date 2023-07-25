@@ -51,4 +51,6 @@ public class MemberDao {
 		List<CategoryVo> cateList = sqlsession.selectList("member.cateList");
 		return cateList;
 	}
+
+	
 }

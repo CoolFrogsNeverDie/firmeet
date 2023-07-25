@@ -70,11 +70,12 @@ dd:hover{
 
 /* 오른쪽 */
 .content-right {
-  width: 74%;
+  width: 100%;
   height: 100%;
   display: inline-block;
   margin-top: 10px;
   position: relative;
+  border:1px solid black;
 }
 
 .board-area{
@@ -110,6 +111,30 @@ dd:hover{
 	margin-top: 30px;
 	
 }
+.search-board{
+	position: relative;
+    left: 465px;
+}
+.search-board input{
+    height: 40px;
+    border: 1px solid black;
+    position: relative;
+    bottom: -2px;
+}
+.search-board .board-btn{
+	background-color: black;
+	color: white;
+	width:70px;
+	height:40px;
+}
+.search-board .board-write{
+	font-size : 30px;
+	position: relative;
+    bottom: -5px;
+    cursor: pointer;
+
+}
+
 .board .board-header{
 	height: 100px;
 	width: 98%;

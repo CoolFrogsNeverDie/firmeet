@@ -3,6 +3,82 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--  이 공간에 있는 쿼리문들을 호출할 때 이름의 시작 -->
-<mapper namespace="noticeboard">
-
+<mapper namespace="reply">
+	
+	<insert id = "insertReply" parameterType = "reply">
+		<selectKey keyProperty = "replyNo" resultType ="int" order ="BEFORE">
+			select seq_board_replyNo.nextval from dual
+		</selectKey>
+		<![CDATA[
+			insert into board_reply(
+				replyNo
+				, memberId
+				, boardNo
+				, replyContent
+				, replyDate
+				, ReplyGroup
+				, deep)
+			values(
+		]]>
+		<![CDATA[
+				#{replyNo}
+				,#{memberId}
+				,#{boardNo}
+				, #{content}
+				, sysdate
+		]]>
+			<if test="replyGroup ==0">
+				, #{replyNo}
+				, 1
+			</if>
+			<if test ="replyGroup !=0">
+				, #{replyGroup}
+				, 2
+			</if>	
+		<![CDATA[
+				)
+		]]>			
+	</insert>
+	
+	<select id ="getReply" parameterType = "reply" resultType ="reply">
+		<![CDATA[
+			select 
+       			replyNo 
+        		, boardNo
+        		, memberName
+        		, replyContent as content
+        		, replyDate
+        		, replyGroup 
+        		, deep
+    		from board_reply  a join member b on b.memberId = a.memberId
+    		where replyNo = #{replyNo}
+		]]>
+	</select>
+	
+	
+	<select id ="checkReply" parameterType ="reply" resultType ="int">
+		<![CDATA[
+			select 
+				count(replyNo)
+			from board_reply
+			where replyGroup = #{replyNo} and replyNo != #{replyNo}
+		]]>
+	</select>
+	
+	<update id = "updateDelStat" parameterType ="reply">
+		<![CDATA[
+			update  board_reply 
+				set replyContent = '삭제된 댓글입니다.' 
+			where replyNo = #{replyNo}		
+		]]>
+	</update>
+	
+	<delete id = "deleteReply" parameterType ="reply">
+		<![CDATA[
+			delete board_reply  
+				where replyNo = #{replyNo}
+		]]>
+	</delete>
+	
+	
 </mapper>

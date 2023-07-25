@@ -554,6 +554,9 @@
 
 
 <body>
+
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+
     <div class="container">
         <section id="formHolder">
             <div>
@@ -636,12 +639,12 @@
                             <div class="form-group cateForm" >
                                 <label>카테고리</label>
                                 <ul class="category">
-                                  <%--  <c:forEach var="cate" items="${cateList}" >
+                                  <c:forEach  items="${cateList}" var="cate" >
                                    	<li>
                                    		<input type="radio" name="category" value="${cate.cateNo}" >
                                    		<p>${cate.category}</p>
                                    	</li>
-                                   </c:forEach> --%>
+                                   </c:forEach>
                                 </ul>
                             </div>
 

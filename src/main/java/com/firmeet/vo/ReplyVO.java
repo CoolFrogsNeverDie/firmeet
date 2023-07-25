@@ -12,17 +12,14 @@ public class ReplyVO {
 	private Date replyDate;
 	private int replyGroup;
 	private int deep;
-	
-	
-	
 	public ReplyVO() {
 		super();
 	}
-	public int getCommentNo() {
+	public int getReplyNo() {
 		return replyNo;
 	}
-	public void setCommentNo(int commentNo) {
-		this.replyNo = commentNo;
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
 	}
 	public int getBoardNo() {
 		return boardNo;
@@ -36,7 +33,6 @@ public class ReplyVO {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	
 	public String getMemberName() {
 		return memberName;
 	}
@@ -69,10 +65,13 @@ public class ReplyVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [commentNo=" + replyNo + ", boardNo=" + boardNo + ", memberId=" + memberId + ", memberName="
+		return "ReplyVO [replyNo=" + replyNo + ", boardNo=" + boardNo + ", memberId=" + memberId + ", memberName="
 				+ memberName + ", content=" + content + ", replyDate=" + replyDate + ", replyGroup=" + replyGroup
 				+ ", deep=" + deep + "]";
 	}
+	
+	
+
 
 	
 }

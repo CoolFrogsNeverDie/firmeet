@@ -17,7 +17,7 @@
         		,deep
    			from board_reply a join member b on a.memberId = b.memberId
     		where boardNo = #{boardNo}
-   			order by replygroup , deep
+   			order by replygroup , deep 
 		]]>
 	</select>
 	

@@ -1,6 +1,7 @@
 package com.firmeet.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ClubVo {
 
@@ -21,6 +22,8 @@ public class ClubVo {
 		public String detailE;
 		public String detailW;
 		
+		private List<Integer> tagNo;
+
 		private CategoryVo cateVO;
 		private TagVo tagVo;
 		
@@ -198,6 +201,14 @@ public class ClubVo {
 			this.detailW = detailW;
 		}
 
+		public List<Integer> getTagNo() {
+			return tagNo;
+		}
+		
+		public void setTagNo(List<Integer> tagNo) {
+			this.tagNo = tagNo;
+		}
+		
 		@Override
 		public String toString() {
 			return "ClubVo [clubId=" + clubId + ", clubName=" + clubName + ", cre_date=" + cre_date + ", max=" + max

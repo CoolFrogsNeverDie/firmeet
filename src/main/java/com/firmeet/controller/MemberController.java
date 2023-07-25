@@ -33,21 +33,31 @@ public class MemberController {
 	
 	/* 로그인 폼*/
 	@RequestMapping(value="/loginForm", method= {RequestMethod.GET})
-	public String loginForm(){
+	public String loginForm(Model model){
 		System.out.println("MemberController.loginForm()");
+		List<TagVo> tagList = memberService.tagList();
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("cateList", cateList);
 		return"member/memberForm";
 	}
 
 	/* 로그인 */
 	@RequestMapping(value="/login", method= {RequestMethod.GET})
-	public String login(@ModelAttribute MemberVo memberVo,HttpSession session ){
+	public String login(@ModelAttribute MemberVo memberVo,HttpSession session, Model model){
 		System.out.println("MemberController.login()");
 		System.out.println(memberVo);
+		List<TagVo> tagList = memberService.tagList();
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("cateList", cateList);
 		MemberVo member =  memberService.login(memberVo);
+		
 		
 		  if(member !=null){
 			  System.out.println("로그인 성공");
 			  session.setAttribute("member", member);
+			  
 			  return "main/mainForm";
 		  }else {
 			  System.out.println("로그인 실패");
@@ -71,9 +81,13 @@ public class MemberController {
 	public String joinForm(Model model) {
 		System.out.println("MemberController.joinForm()");
 		List<TagVo> tagList = memberService.tagList();
+		System.out.println(tagList);
 		List<CategoryVo> cateList = memberService.cateList();
+		System.out.println(cateList);
 		model.addAttribute("tagList", tagList);
+		System.out.println(tagList);
 		model.addAttribute("cateList", cateList);
+		System.out.println(cateList);
 		return "member/memberForm";
 	}
 	

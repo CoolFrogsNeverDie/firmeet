@@ -33,7 +33,7 @@
               <div>
                   <p class="noticetitle">${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="btn btn-warning">목록</button>
+                    <button type="button" class="btn btn-warning" id="nlist">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
                   </div>
               </div>
@@ -127,7 +127,10 @@
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
 		$(document).ready(function() {
-			
+			$('#nlist').click(function() {
+				  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
+			});
 		});
+  </script>
   </script>
 </html>

@@ -53,7 +53,7 @@
                       <span class="userdate">작성일 : </span>
                       <span class="usertext">${vo.aboardDate}</span>
                       <span class="usercount">조회수 : </span>
-                      <span class="usertext">${vo.aboardHit }</span>
+                      <span class="usertext">${vo.aboardHit}</span>
                   </div>
               </div>
               <hr>

@@ -35,8 +35,8 @@
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
                         </select>
-                        <input type="radio" name="aboardVal" value="general" id="aboardVal" checked>일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="group" id="aboardVal" style="margin-left: 20px;">모임
+                        <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반 &nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임
                             
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
@@ -229,9 +229,7 @@ $(document).ready(function() {
         $("#totalNum11").text("최소인원 : " + totalNum);
         $("#finDate11").text("투표종료일 : " + finDate);
     });
-   
 });
-
 
 $(document).ready(function() {
 
@@ -262,7 +260,7 @@ $(document).ready(function() {
     });
 });
 
-var setting = {
+ var setting = {
     height: 500,
     minHeight: null,
     maxHeight: null,
@@ -270,15 +268,32 @@ var setting = {
     lang: 'ko-KR',
     toolbar: toolbar,
     //콜백 함수
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
+   /*  callbacks: {
+    	onImageUpload : function(files, editor, welEditable) {
             // 파일 업로드(다중업로드를 위해 반복문 사용)
             for (var i = files.length - 1; i >= 0; i--) {
-                upload(files[i], this);
-            }
-        }
-    }
+            uploadSummernoteImageFile(files[i], this);
+		}
+	} */
 };
+
+ 
+ /* function uploadSummernoteImageFile(file, el) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "${pageContext.request.contextPath }/notice/uploadSummernoteImageFile",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				$(#summernote).summernote('editor.insertImage', img_name);
+			}
+		});
+	}
+ */
 
 function CustomButton(context) {
     var ui = $.summernote.ui;
@@ -294,26 +309,6 @@ function CustomButton(context) {
         }
     });
     return button.render();
-}
-
-function upload(file, editor) {
-    var data = new FormData();
-    data.append("file", file);
-    $.ajax({
-        url: '${pageContext.request.contextPath }/${clubId}/notice/SummerNoteImageFile',
-        type: "POST",
-        enctype: 'multipart/form-data',
-        data: data,
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function(data) {
-           var json = JSON.parse(data);
-           console.log(data);
-		   console.log(editor);
-		   $(editor).summernote("insertImage",data.url);
-		}
-	});
 }
 
 </script>

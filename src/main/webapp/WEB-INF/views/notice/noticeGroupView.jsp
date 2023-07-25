@@ -8,7 +8,7 @@
     <title>공지 에디터</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
 <!----------------------------------------- top Navigation ----------------------------------------->
 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
@@ -53,6 +53,7 @@
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
+              
                 <table id="dataTable" data-bs-toggle="modal" data-bs-target="#vote">
 					<thead>
 					<tr>
@@ -75,6 +76,29 @@
 	                 </tr>
 	               </tbody>
                </table>
+               
+               <table id="dataTable1" style="display: none;">
+					<thead>
+					<tr>
+	                     <th class="noticegrouplist">
+	                         <p class="noticegroupname"><span>투표 제목 : </span>${vo.voteTitle}</p>
+	                     </th>
+	                   </tr>
+	               </thead>
+	               <tbody>
+	                   <tr>
+	                     <td class="noticegrouplist1">
+	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}<span id="Count">${vo.vote1Cnt }</span></p>
+	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}<span id="Count">${vo.vote2Cnt }</span></p>
+	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}<span id="Count">${vo.vote3Cnt }</span></p>
+	                         <p class="noticegroupname"><span>투표4 : </span>${vo.vote4}<span id="Count">${vo.vote4Cnt }</span></p>
+	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}<span id="Count">${vo.vote5Cnt }</span></p>
+	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
+	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
+	                     </td>
+	                 </tr>
+	               </tbody>
+               </table>
       
               <div class="like">
                   <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
@@ -87,11 +111,12 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                  	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote/${vo.voteNo}" method="get">
+                  	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote?aboardNo=${vo.aboardNo}" method="get">
 						${vo.voteTitle}
                         <div class="voteleft">
                         	<input type="text" name="clubId" value="${clubId}"><br>
                         	<input type="text" name="voteNo" value="${vo.voteNo}"><br>
+                        	<input type="text" name="aboardNo" value="${vo.aboardNo}"><br>
                         	<input type="text" name="memberId" value="${member.memberId}">${memberId}<br>
                             <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
                             <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
@@ -100,7 +125,7 @@
                            	<input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
                         </div>
                         <div style="text-align: center; font-weight: bold;">
-                			<button type="submit" class="btn btn-success btn-sm">투표완료</button>
+                			<button type="submit" class="btn btn-success btn-sm" id="lastvote">투표완료</button>
                         </div>
                     </form>
                    </div>
@@ -160,6 +185,15 @@
 			$('#nlist').click(function() {
 				  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
 			});
+	      $("#lastvote").click(function() {
+	          // 기존 내용과 대체 내용의 가시성(visibility)을 토글
+	          $("#dataTable").toggle();
+	          $("#dataTable1").toggle();
+	        });
 		});
+		window.history.forward();
+		function noBack(){
+			window.history.forward();
+		}
   </script>
 </html>
