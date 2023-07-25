@@ -223,9 +223,10 @@
 }
 
 #content_body {
-  height: 400px; /* div의 높이를 지정합니다. */
+  height: 370px; /* div의 높이를 지정합니다. */
   width: 1100px; /* div의 가로 크기를 지정합니다. */
   overflow-y: auto; /* 세로 스크롤이 필요한 경우 스크롤을 표시합니다. */
+  padding-bottom: 30px;
 }
 
 #result1{
