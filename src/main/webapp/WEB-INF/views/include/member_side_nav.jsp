@@ -20,7 +20,7 @@
           <li><a href ="${pageContext.request.contextPath }/calendar/member/${member.memberId}">달력</a></li>
           <li><a href ="${pageContext.request.contextPath }/board/member/${member.memberId}/-99">자유 게시판</a></li>
           <li><a href ="#">멤버</a></li>
-          <li><a href ="#">가계부</a></li>
+          <li><a href ="${pageContext.request.contextPath }/accountBook/member/main/${member.memberId}">가계부</a></li>
         </ul>
         <!--/side-nav-->
       </div>

@@ -148,52 +148,16 @@ public class GalleryController {
 
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회
-	@RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
-		System.out.println("myGalleryList 확인");
-		System.out.println("memberId : " + memberId);
+	// 갤러리 목록 조회
+    @RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
+        System.out.println("myGalleryList 확인");
+        System.out.println("memberId : " + memberId);
 
-		List<ClubVo> clubVos = clubService.getMemClub(memberId);
-		// clubVos 리스트를 쉼표로 구분된 문자열로 변환
-		String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
-				.collect(Collectors.joining(","));
+        List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
 
-		System.out.println("clubIdsString : " + clubIdsString);
-		
-		// clubIdsString을 모델에 추가
-		model.addAttribute("clubIdsString", clubIdsString);
+        model.addAttribute("meetList", mList);
 
-		System.out.println("clubVos" + clubVos);
-
-		List<MeetVo> mList = new ArrayList<MeetVo>();
-
-		for (ClubVo clubVo : clubVos) {
-			// ClubVo 객체에서 원하는 값을 추출합니다.
-			int clubId = clubVo.getClubId();
-			String clubName = clubVo.getClubName();
-
-			System.out.println(clubId);
-
-			List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
-
-			for (MeetVo meetVo : gMeetVos) {
-				meetVo.setMeetName(clubName);
-			}
-
-			// gMeetVos 리스트의 요소들을 mList에 추가합니다.
-			mList.addAll(gMeetVos);
-
-		}
-
-		System.out.println("mList" + mList);
-
-		model.addAttribute("meetList", mList);
-
-		return "/member_diary/member_gallery";
-	}
-
-	public Integer getclubId(String memberId) {
-
-		return null;
-	}
+        return "/member_diary/member_gallery";
+    }
 }

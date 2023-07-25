@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName}메인</title>
+<title>${member.memberId} 메인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/assets/css/imgSlider.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
 <style>
@@ -57,7 +58,7 @@
 		<div class="diary-area">
 			<div class="diary-topbar">
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-				<h1>${club.clubName}</h1>
+				<h1>${member.memberId}</h1>
 			</div>
 			<!--/diary-topbar-img-->
 			<div class="diary-subbar">

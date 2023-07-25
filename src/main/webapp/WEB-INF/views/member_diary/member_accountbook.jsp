@@ -165,10 +165,9 @@
 			<!--/content-area-->
 		</div>
         <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/member_side_nav.jsp"></c:import>
     <!--/wrap-->
-	<footer> Copyright (C) 2023 어리쥬 all rights reserved.</foo
-	ter>
+	<footer> Copyright (C) 2023 어리쥬 all rights reserved.</footer>
 </body>
 <script>
 	$(document)

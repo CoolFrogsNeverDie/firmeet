@@ -5,14 +5,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.GalleryDao;
+import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
@@ -20,6 +23,9 @@ import com.firmeet.vo.MeetVo;
 @Service
 public class GalleryService {
 
+	@Autowired
+	private ClubService clubService;
+	
     @Autowired
     private GalleryDao galleryDao;
     private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
@@ -129,7 +135,27 @@ public class GalleryService {
 	}
 
 
+    public List<MeetVo> getMyGalleryList(String memberId) {
+        List<ClubVo> clubVos = clubService.getMemClub(memberId);
+        String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
+                .collect(Collectors.joining(","));
+        List<MeetVo> mList = new ArrayList<>();
 
+        for (ClubVo clubVo : clubVos) {
+            int clubId = clubVo.getClubId();
+            String clubName = clubVo.getClubName();
+
+            List<MeetVo> gMeetVos = getMeetMon(clubId);
+
+            for (MeetVo meetVo : gMeetVos) {
+                meetVo.setMeetName(clubName);
+            }
+
+            mList.addAll(gMeetVos);
+        }
+
+        return mList;
+    }
 
 
 
