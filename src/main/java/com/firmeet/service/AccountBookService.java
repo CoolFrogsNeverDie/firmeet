@@ -19,8 +19,6 @@ import com.firmeet.vo.ScheduleVO;
 @Service
 public class AccountBookService {
 
-//	String saveDir = "C:\\Users\\cheoho-hi\\git\\firmeet\\src\\main\\webapp\\assets\\images\\accountimg";
-
 	String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\accountimg";
 	
 	@Autowired
@@ -91,9 +89,17 @@ public class AccountBookService {
 		// 각주 추가: 회계 데이터 검색
 		System.out.println("AccountBookService search 확인");
 
-		
 		List<AccountBookVo> searchResult = accountBookDao.search(clubId, startDate, endDate, searchText);
 		
 		return searchResult;
+	}
+
+	/*-------------------------------------마이겔러리---------------------------- */
+	public List<AccountBookVo> getMyList(String memberId) {
+		System.out.println("AccountBookService getList 확인");
+		
+		List<AccountBookVo> aList = accountBookDao.getMyList(memberId);
+		
+		return aList;
 	}
 }

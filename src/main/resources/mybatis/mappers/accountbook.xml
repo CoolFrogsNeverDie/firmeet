@@ -90,4 +90,24 @@
 		]]>
 	</select>
 
+
+	<!-- 각주 추가: 클럽 ID에 해당하는 회계 리스트 조회 -->
+	<select id="myAccountList" parameterType="String" resultType="com.firmeet.vo.AccountBookVo">
+		<![CDATA[
+			SELECT
+				ACCOUNTID
+				, CLUBID
+				, MEETNO
+				, MEMBERID
+				, AMOUNT
+				, TO_CHAR(DATETIME, 'YYYY-MM-DD') AS datetime
+				, CATEGORY
+				, PURPOSE
+				, INCOME_EXPENSE AS incomeExpense
+				, RECEIPT
+				, PAYMENT
+			FROM ACCOUNT_BOOK
+			WHERE MEMBERID = #{MEMBERID}
+		]]>
+	</select>
 </mapper>

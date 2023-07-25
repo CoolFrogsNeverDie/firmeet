@@ -70,4 +70,17 @@ public class AccountBookDao {
 		
 		return searchResult;
 	}
+
+	/*-------------------------------------마이겔러리---------------------------- */
+	public List<AccountBookVo> getMyList(String memberId) {
+		// 각주 추가: 클럽 ID에 해당하는 회계 리스트 조회
+	    System.out.println("AccountBookDao getList 확인");
+	    System.out.println(memberId);
+	    
+	    List<AccountBookVo> aList = session.selectList("accountbook.myAccountList", memberId);
+	    
+	    System.out.println("돌아온 아이 " + aList);
+	    
+	    return aList;
+	}
 }

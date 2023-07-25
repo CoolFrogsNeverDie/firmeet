@@ -95,4 +95,17 @@ public class AccountBookController {
 	    List<AccountBookVo> searchResult = accountBookService.search(clubId, startDate, endDate, searchText);
 	    return searchResult;
 	}
+	
+	/*-------------------------------------마이겔러리---------------------------- */
+	@RequestMapping(value = "/member/main/{memberId}", method = {RequestMethod.GET, RequestMethod.POST})
+	public String myAccountbookMain(@PathVariable("memberId") String memberId, Model model) {
+		// 각주 추가: 회계장부 메인 페이지 조회
+		System.out.println("accountbookMain 확인");
+		
+		List<AccountBookVo> aList = accountBookService.getMyList(memberId);
+		
+		model.addAttribute("accountList",aList);
+		
+		return "/member_diary/member_accountbook";
+	}
 }
