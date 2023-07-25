@@ -62,12 +62,19 @@ public class ClubController {
 	/* 클럽 만들기 */
 
 	@RequestMapping(value = "/making", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubMake(@ModelAttribute ClubVo clubVo, HttpSession session
+	public String clubMake(@ModelAttribute ClubVo clubVo, HttpSession session,Model model
 		   ) {
 			System.out.println("ClubController.clubMaking()");
 			System.out.println("넘어온 VO  확인" + clubVo );
 
+
 			clubService.make(clubVo);
+			List<TagVo> tagList = memberService.tagList();
+			List<CategoryVo> cateList = memberService.cateList();
+			model.addAttribute("tagList", tagList);
+			model.addAttribute("cateList", cateList);
+
+			
 			return "/main/mainForm";
 	}
 	

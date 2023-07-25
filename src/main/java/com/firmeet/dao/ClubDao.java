@@ -52,8 +52,8 @@ public class ClubDao {
 		session.insert("club.insertClubTag",tagVo);
 	 }
 	 
-	 public List<ClubVo> clubList() {
-		 List<ClubVo> clubVo = session.selectList("club.clubAllList");
+	 public List<ClubVo> clubList(int clubId) {
+		 List<ClubVo> clubVo = session.selectList("club.getClubVo",clubId);
 		 return clubVo;
 	 }
 	 

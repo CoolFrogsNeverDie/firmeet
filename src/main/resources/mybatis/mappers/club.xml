@@ -84,6 +84,7 @@
      			values(seq_club_memNo.nextVal, #{memberId},0,hire_date)
       	]]>
 	</insert>
+	
 
 	<insert id="insertJoinMem"
 		parameterType="com.firmeet.vo.ClubMemVo">

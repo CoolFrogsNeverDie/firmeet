@@ -107,8 +107,8 @@
                             <div class="modal-body">
                                  <div class="grouptitle" id="result"></div>
                                  <div class="groupschedule">
-                                     <input type="radio" name="groupschedule" value="group" id="" checked>결제 &nbsp;
-                                     <input type="radio" name="groupschedule" value="groupmeet" id="" style="margin-left: 20px;">일정
+                                     <input type="radio" name="groupschedule" value="group" checked>결제 &nbsp;
+                                     <input type="radio" name="groupschedule" value="groupmeet" style="margin-left: 20px;">일정
                                  </div>
                                   <div>
                                      <span class="groupvotetitle">만남일 </span>
@@ -166,7 +166,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="grouptitle" id=""></div>
+                                <div class="grouptitle" id="result1"></div>
                                 <div class="groupschedule">
                                     <input type="radio" name="groupschedule" value="group">결제 &nbsp;
                                     <input type="radio" name="groupschedule" value="groupmeet" checked style="margin-left: 20px;">일정
@@ -178,7 +178,25 @@
                            <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                     <span class="groupvotetitle1">장 소 </span>
                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
-                                    <button type="button" class="btn btn-secondary" id="sButton">지도등록</button><br>
+                                    <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
+                                    <input type="text" name="address1" value="x" id="address1"> 
+									 <input type="text" name="address2" value="y" id="address2">
+                                     
+ 									<div class="map_wrap">
+									   <div id="map" style="width:100%;height:100%;display: block;"></div>
+									      <div id="menu_wrap" class="bg_white">
+									        <div class="option">
+									            <div>
+									               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
+									                <input type="text" id="keyword" size="15">
+									              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
+									            </div>
+									        </div>
+									        <hr>
+									        <ul id="placesList"></ul>
+									        <div id="pagination"></div>
+									    </div>
+									</div><br>
                                 </div>
                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
                                 	<button type="button" id="reset" class="btn btn-warning btn-sm">등록취소</button>
@@ -272,9 +290,8 @@ $(document).ready(function() {
         window.location.href = "noticeEditGeneral";
     });
 	
-	 $('input[name="groupschedule"]').on('click', function() {
+ 	 $('input[name="groupschedule"]').on('click', function() {
 	      var selectedModal = $('input[name="groupschedule"]:checked').val();
-
 	      // 선택한 모달 창 보여주기
 	      $('.modal').hide();
 	      $('#' + selectedModal).show();
@@ -348,16 +365,23 @@ $(document).ready(function() {
     
 });
     
-     $('#group').on("click", function() {
-       var meetYearValue = $('#meetYear').val();
-       var meetMonValue = $('#meetMon').val();
-       var meetNameValue = $('#meetName').val();
-       var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
+ $('#group').on("click", function() {
+   var meetYearValue = $('#meetYear').val();
+   var meetMonValue = $('#meetMon').val();
+   var meetNameValue = $('#meetName').val();
+   var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
 
-       $('#result').text(combinedValue);
-    });
-     
+   $('#result').text(combinedValue);
+});
+ $('#groupmeet').on("click", function() {
+     var meetYearValue = $('#meetYear').val();
+     var meetMonValue = $('#meetMon').val();
+     var meetNameValue = $('#meetName').val();
+     var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
 
+     $('#result1').text(combinedValue);
+  });
+       
 });
 
 
