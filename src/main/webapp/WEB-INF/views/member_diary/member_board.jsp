@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/topnav.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,6 @@
     <title>개인 게시판</title>
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -30,11 +29,11 @@
             <div class="diary-topbar">
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                     alt="프로필사진" />
-                <h1>${memberVO.memberName}의 게시판</h1>
+                <h1>${member.memberName}의 게시판</h1>
             </div>
             <!--/diary-topbar-img-->
             <div class="diary-subbar">
-                <h4>&#9997;&nbsp;&nbsp;${memberVO.memberName}님이 쓴 게시판</h4>
+                <h4>&#9997;&nbsp;&nbsp;내가 쓴 게시판</h4>
             </div>
             <!--/diary-subbar-->
             <div class="content-area">
@@ -62,7 +61,7 @@
             <!--/content-area-->
         </div>
         <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/member_side_nav.jsp"></c:import>
     <!--/wrap-->
 </body>
     <footer>
@@ -324,13 +323,14 @@ function addReply(element, reply){
  		 
  	 	var memberId = $('.diary-area').data('memid');
  	 	var clubId = $('.diary-area').data('clubid');
- 	 	
+ 	 	var keyword = "";
  	 
  	 	var BoardVO = {
  	 		memberId : memberId,
  	 		clubId : clubId,
  	 		startNum : startNum,
- 	 		endNum : endNum
+ 	 		endNum : endNum,
+ 	 		keyword : keyword
  			}
  	 
  	 		console.log(BoardVO);
@@ -350,6 +350,11 @@ function addReply(element, reply){
  	    	   let boardList = jsonResult.data;
  	    	   console.log(boardList);
 				
+ 	    	   	if(boardList.length < 1){
+ 	    	   		alert('게시물이 없습니다.');
+ 	    	   	}
+ 	    	   	
+ 	    	   
  	    		 render(boardList,memberId); 	    		   
  	    		 startNum +=10;
  	    		 endNum += 10;

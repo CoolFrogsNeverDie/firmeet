@@ -41,12 +41,12 @@
     <div class="diary-area">
       <div class="diary-topbar">
         <img class="diary-topbar-img" src="./asset/pro.jpg" alt="프로필사진" />
-        <h1>어푸어푸</h1>
+        <h1>${club.clubName}</h1>
       </div>
       <!--/diary-topbar-img-->
       <div class="diary-subbar">
         <div>
-          <h4>&#128197;&nbsp;&nbsp;동호회 달력</h4>
+          <h4>&#128197;&nbsp;&nbsp;${club.clubName} 달력</h4>
         </div>
         <div class="calendar-array">
           <select id = "select-array">
@@ -141,7 +141,7 @@ $('.forCalendar').on("click",'button', function(){
 	var title = $("#fc-dom-1").text();
 	var years = title.substring(0,4);
 	var month = title.substring(title.length-2,title.length-1);
-	var clubId =  ${clubId};
+	var clubId =  ${clubVo.clubId};
  	var viewOption1 =  $('#select-array').val(); 
 	
 

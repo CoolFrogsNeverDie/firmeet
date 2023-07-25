@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.CalendarService;
+import com.firmeet.service.ClubService;
 import com.firmeet.vo.CalendarVO;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
@@ -26,15 +27,16 @@ public class CalendarController {
 		
 	@Autowired
 	private CalendarService calendarService;
-	
+	@Autowired
+	private ClubService clubService;
 	
 	/*클럽 캘린더*/
 	@RequestMapping(value ="/club/{clubId}", method = RequestMethod.GET)
 	public String clubCalendar(@PathVariable("clubId") int clubId
 								,Model model ) {
 		
-		
-		model.addAttribute("clubId",clubId);
+	    ClubVo clubVo = clubService.getClubVo(clubId);
+	    model.addAttribute("club", clubVo);
 		
 		return "club_diary/club_calendar";
 	}

@@ -15,6 +15,7 @@ public class BoardVO {
 	private Date boardDate;
 	private int startNum;
 	private int endNum;
+	private String keyword;
 	
 	public BoardVO() {
 		super();
@@ -83,14 +84,17 @@ public class BoardVO {
 	public void setEndNum(int endNum) {
 		this.endNum = endNum;
 	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", clubId=" + clubId + ", clubName=" + clubName + ", memberId="
 				+ memberId + ", content=" + content + ", likeCnt=" + likeCnt + ", replyList=" + replyList
-				+ ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum=" + endNum + "]";
+				+ ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum=" + endNum + ", keyword=" + keyword
+				+ "]";
 	}
-
-	
-	
-	
 }

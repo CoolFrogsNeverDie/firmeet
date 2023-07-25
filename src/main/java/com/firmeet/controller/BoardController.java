@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
@@ -18,7 +19,6 @@ import com.firmeet.service.ClubService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.ReplyVO;
 
 @RequestMapping("/board")
@@ -32,17 +32,32 @@ public class BoardController {
 	@Autowired
 	ClubService clubService;
 	
+	
 	@RequestMapping(value ="/club/{clubId}")
 	public String clubBoard(@PathVariable ("clubId") int clubId
+							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
 							,Model model) {
 		
 	      ClubVo clubVo = clubService.getClubVo(clubId);
 	      model.addAttribute("club", clubVo);
+	      model.addAttribute("keyword", keyword);
 		
 		return "club_diary/club_board";
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/club/getboard")
+	public JsonResult clubBoard(@ModelAttribute BoardVO boardVO) {
+		JsonResult json = new JsonResult();
+		
+		System.out.println("넘어오는 값 확인" + boardVO);
+		List<BoardVO> list = boardService.getClubBoard(boardVO);
+		if(list != null) {
+			json.success(list);
+		}
+		
+		return json;
+	}
 	
 	
 	

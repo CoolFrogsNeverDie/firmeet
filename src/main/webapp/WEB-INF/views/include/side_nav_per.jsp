@@ -15,12 +15,12 @@
         </div>
         <!--/group-profile-->
         <ul class="side-nav">
-          <li><a href ="#">공지사항</a></li>  
-          <li><a href ="${pageContext.request.contextPath }/gallery/member/list/${member.memberId}">갤러리</a></li>
+          <li><a href ="${pageContext.request.contextPath }/gallery/list/${club.clubId}">갤러리</a></li>
           <li><a href ="${pageContext.request.contextPath }/calendar/member/${member.memberId}">달력</a></li>
           <li><a href ="${pageContext.request.contextPath }/board/member/${member.memberId}/-99">자유 게시판</a></li>
-          <li><a href ="#">멤버</a></li>
-          <li><a href ="#">가계부</a></li>
+          <li><a href ="${pageContext.request.contextPath }/accountBook/main/${club.clubId}">가계부</a></li>
+          <li><a href ="#">동호회 관리</a></li>
+          <li><a href ="#">정보수정</a></li>
         </ul>
         <!--/side-nav-->
       </div>

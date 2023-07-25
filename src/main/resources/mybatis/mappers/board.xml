@@ -48,8 +48,15 @@
      			   		,a.boardContent as content
       			  		,a.boardDate as boardDate
         			from board a join club b on a.clubId = b.clubId
-        			where memberId = #{memberId}
+        			where 1 = 1
 		]]>
+				<if test="memberId !=null">
+        			and memberId = #{memberId}
+				</if>
+				<if test="keyword !=''">
+  					and boardContent like '%' || #{keyword} || '%'
+				</if>
+
 				<if test="clubId !=-99">
 					and a.clubId = #{clubId}
 				</if>

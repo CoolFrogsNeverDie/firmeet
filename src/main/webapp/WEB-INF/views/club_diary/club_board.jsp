@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/topnav.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +20,6 @@
 </head>
 
 <body>
-  
     <!-- // 상단 내비게이션 바 -->
 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
     <!-- 페이지 콘텐츠 -->
@@ -35,13 +33,21 @@
             <!--/diary-topbar-img-->
             <div class="diary-subbar">
                 <h4>&#9997;&nbsp;&nbsp;${club.clubName} 자유 게시판</h4>
-             <div class= "search-board">  <input type = "text" ><button type ="button" class="board-btn">검색</button><span class="board-write"> &#10133;</span></div>
             </div>
             <!--/diary-subbar-->
             <div class="content-area">
+             <div class= "search-board">  
+             	<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
+             	<button type ="button" class="board-search-btn">검색</button>
+             	<button class="board-write">+</button>
+             </div>
                 <div class="content-right">
                     <div class="board-area">
-						<div class= "club-category"><h4><strong>&#128221;&nbsp;&nbsp;자유게시판</strong></h4></div>
+						<div class= "club-category">
+						<!--
+						<h4><strong>&#128221;&nbsp;&nbsp;자유게시판</strong></h4> 
+						 -->
+						</div>
                         <div class="board-area2" >
                         </div>
 					  <div id = "board-get"></div>
@@ -306,22 +312,33 @@ function addReply(element, reply){
     });
 	
 
-
+	$('.board-search-btn').on("click",function(){
+		
+ 	 	var clubId = $('.diary-area').data('clubid');
+ 	 	var keyword = $('#search-keyword').val();
+ 	 	
+		window.location.href = "${pageContext.request.contextPath}/board/club/" + clubId + "?keyword=" +keyword;
+		
+		
+	});
 
 
     
  	//BoardList AJAX
  	function getData(){
  		 
- 	 	var memberId = $('.diary-area').data('memid');
  	 	var clubId = $('.diary-area').data('clubid');
+		var memberId = $('.diary-area').data('memid');
+ 	 	var keyword = $('#search-keyword').val();
  	 	
- 	 
+ 	 	console.log(keyword + "키춰드");
+
+ 	 	
  	 	var BoardVO = {
- 	 		memberId : memberId,
  	 		clubId : clubId,
  	 		startNum : startNum,
- 	 		endNum : endNum
+ 	 		endNum : endNum,
+ 	 		keyword : keyword
  			}
  	 
  	 		console.log(BoardVO);
@@ -330,7 +347,7 @@ function addReply(element, reply){
  		 $.ajax({
  	       
  	       //요청 세팅
- 	       url : "${pageContext.request.contextPath}/board/member/getboard",
+ 	       url : "${pageContext.request.contextPath}/board/club/getboard",
  	       type : "post",
  	       data : BoardVO,
  	       
@@ -340,7 +357,11 @@ function addReply(element, reply){
  				
  	    	   let boardList = jsonResult.data;
  	    	   console.log(boardList);
-				
+	    	   	
+ 	    	   if(boardList.length < 1){
+ 	    	   		alert('게시물이 없습니다.');
+ 	    	   	}
+ 	    	   	
  	    		 render(boardList,memberId); 	    		   
  	    		 startNum +=10;
  	    		 endNum += 10;

@@ -24,6 +24,19 @@ public class BoardService {
 	@Autowired
 	ReplyDAO replyDAO; 
 	
+	public List<BoardVO> getClubBoard(BoardVO boardVO){
+		//받아온 정보로 boardList 가져올 거임
+		
+		List<BoardVO> boardList = boardDAO.getBoardList(boardVO);
+		System.out.println(boardList + "clubBoard 넘어오는가요?!!!");
+		for(int i = 0; i<boardList.size(); i++) {
+			boardList.get(i).setReplyList(boardDAO.getBoardComment(boardList.get(i).getBoardNo()));
+		}
+		
+		return boardList;
+	}
+
+	
 	//board 정보를 불러오는 메서드
 	//필요한 정보 : 내가 가입한 동호회 목록, 내가 선택한 동호회의 이름
 	public Map<String, Object> getPerBoardInfo(BoardVO boardVO){

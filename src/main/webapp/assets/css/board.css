@@ -136,13 +136,13 @@ dd:hover{
 .board .board-comment{
 	padding: 15px;
 }
-.board .like-btn{
-    color: red;
-    margin-right: 10px;
-    cursor: pointer;
+
+.likecolor{
+	color:red;
+	margin-right: 10px;
+	cursor: pointer;
 	font-size: 20px;
 }
-
 .board .reply-edit{
 	color: #939393;
 	float: right;
