@@ -14,17 +14,39 @@
 <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
 <style>
 .side-nav li>a {
-  color: black;
-  text-decoration: none;
+	color: black;
+	text-decoration: none;
 }
 
-.side-nav li:hover{
-  background-color: #000000;
+.side-nav li:hover {
+	background-color: #000000;
 }
 
-.side-nav li:hover>a{
-  color:white;
+.side-nav li:hover>a {
+	color: white;
 }
+
+.carousel-inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background-color: #222222;
+}
+
+.carousel-item {
+	position: absolute;
+	display: none;
+	float: left;
+	width: 100%;
+	margin-right: -100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: transform .6s ease-in-out;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+
 </style>
 </head>
 
@@ -40,21 +62,17 @@
 			</div>
 			<!--/diary-topbar-img-->
 			<div class="diary-subbar">
-				<h4>다이어리 메인</h4>
+				<h4>&#127968 &nbsp;&nbsp; 다이어리 메인</h4>
 			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 59%; height: 90%; display: inline-block; margin-top: 10px;">
 					<div class="carousel-inner" style="height: 100%;">
-						<div class="carousel-item carousel-item-next carousel-item-start">
-							<img class="d-block w-100" src="https://source.unsplash.com/user/erondu/1600x900" alt="...">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="https://source.unsplash.com/collection/190727/1600x900" alt="...">
-						</div>
-						<div class="carousel-item active carousel-item-start">
-							<img class="d-block w-100" src="https://source.unsplash.com/WLUHO9A_xik/1600x900" alt="...">
-						</div>
+						<c:forEach var="img" items="${gImgVos}" varStatus="status">
+							<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+								<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
+							</div>
+						</c:forEach>
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
@@ -63,8 +81,6 @@
 						<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 					</button>
 				</div>
-
-
 
 				<!--/content-left-->
 				<div class="content-right">

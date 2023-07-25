@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName}갤러리</title>
+<title>${member.memberId} 갤러리</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -38,7 +38,7 @@
 		<div class="diary-area">
 			<div class="diary-topbar">
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-				<h1>${club.clubName}</h1>
+				<h1>${member.memberId}</h1>
 			</div>
 			<!--/diary-topbar-img-->
 			<div class="diary-subbar">
@@ -53,16 +53,13 @@
 						</dt>
 						<c:forEach var="meet" items="${meetList}">
 							<dt class="list">
-								<span></span>${meet.meetYear}년 ${meet.meetMon}월
+								<span></span>${meet.meetYear}년 ${meet.meetMon}월 - ${meet.meetName}
 							</dt>
 						</c:forEach>
 					</dl>
 				</div>
 				<!--/content-left-->
 				<div class="content-right">
-					<div class="content-bnt">
-						<button id="addButton">사진올리기</button>
-					</div>
 					<div class="gallery-area">
 						<div></div>
 					</div>
@@ -73,7 +70,7 @@
 			<!--/content-area-->
 		</div>
 		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/member_side_nav.jsp"></c:import>
 		<!--/wrap-->
 </body>
 <footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
@@ -81,34 +78,39 @@
 <script>
 //갤러리 목록 조회
 $('#meetList').on('click', 'dt.viewAll', function() {
-  var clubId = ${club.clubId};
-  console.log(clubId);
+  var clubIds = "${clubIdsString}".split(",");
+  console.log(clubIds);
 
-  $.ajax({
-    url: "${pageContext.request.contextPath}/gallery/getGalleryListAll",
-    method: "GET",
-    data: {
-      clubId: clubId
-    },
-    success: function(jsonResult) {
-      var list = jsonResult.data;
-      console.log(list);
+  for (var i = 0; i < clubIds.length; i++) {
+	  var clubId = clubIds[i];
+	  console.log(clubId);
+	  $.ajax({
+		    url: "${pageContext.request.contextPath}/gallery/getGalleryListAll",
+		    method: "GET",
+		    data: {
+		      clubId: clubId
+		    },
+		    success: function(jsonResult) {
+		      var list = jsonResult.data;
+		      console.log(list);
 
-      var galleryHTML = '';
-      for (var i = 0; i < list.length; i++) {
-        var imgSave = list[i].imgSave;
-        console.log(imgSave);
-        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set">';
-        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-        galleryHTML += '</a>';
-      }
+		      var galleryHTML = '';
+		      for (var i = 0; i < list.length; i++) {
+		        var imgSave = list[i].imgSave;
+		        console.log(imgSave);
+		        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set">';
+		        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+		        galleryHTML += '</a>';
+		      }
 
-      $('.gallery-area div').html(galleryHTML);
-    },
-    error: function() {
-      console.error("AJAX 요청 실패");
-    }
-  });
+		      $('.gallery-area div').html(galleryHTML);
+		    },
+		    error: function() {
+		      console.error("AJAX 요청 실패");
+		    }
+		  });
+}
+  
 });
 
 // 상위 요소인 <dl> 태그에 이벤트 리스너를 등록하여 <dd> 태그를 클릭했을 때 이벤트를 처리합니다.
@@ -193,5 +195,4 @@ $target.on("click", function() {
 
 
 </script>
-
 </html>
