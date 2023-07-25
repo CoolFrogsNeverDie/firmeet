@@ -46,8 +46,8 @@ public class ClubService {
 		 * clubMemVo.setClubId(clubVo.getClubId()); clubDao.insertAdmin(clubMemVo);
 		 */
 		}
-	public List<ClubVo> clubList() {
-		List<ClubVo> clubVo = clubDao.clubList();
+	public List<ClubVo> clubList(int clubId) {
+		List<ClubVo> clubVo = clubDao.clubList(clubId);
 		return clubVo;
 	}
 	
