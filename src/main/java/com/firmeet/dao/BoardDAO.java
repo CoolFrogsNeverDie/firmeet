@@ -32,6 +32,14 @@ public class BoardDAO {
 		
 		return boardList;
 	}
+
+	public void insertBoard(BoardVO boardVO) {
+		
+		System.out.println("넘어온 정보 확인" + boardVO);
+		int row = session.insert("board.insertBoard", boardVO);
+		
+		
+	}
 	
 	
 }

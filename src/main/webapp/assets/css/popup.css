@@ -1,17 +1,17 @@
-.container1, .container2, .container3{
+.container1, .container2, .container3, .container6{
   margin:0;
   padding:0;
   box-sizing: border-box;
   height: 200%;
 }
-.container2{
+.container2, .container6{
 	display: none;
 }
 .container1 .loca-btn-area{
 	display: none;
 }
 
-.container1 p , .container2 p, .container3 p{
+.container1 p , .container2 p, .container3 p,  .container6 p{
   margin-top:10px;
 }
 .container1 .modal-btn-box{
@@ -55,7 +55,7 @@
   color: white;
   font-size: 21px;
 }
-.container1 .popup-close-btn, .container2 .popup-close-btn2{
+.container1 .popup-close-btn, .container2 .popup-close-btn2, .container6 .popup-close-btn3{
   float: right;
   text-align: center;
   margin-right: 5px;
@@ -156,7 +156,7 @@ border: none;
 
 /*2th popup*/
 
-.container2 .popup{
+.container2 .popup {
   width: 550px;
   height: 550px;
   min-width: 550px;
@@ -172,8 +172,9 @@ border: none;
 }
 
 
-.container2 .popup-wrap2 {
-  z-index: 2;
+.container2 .popup-wrap2,  .container6 .popup-wrap2  {
+/*   z-index: 2;
+ */  
   justify-content:center;
   align-items:center;
   position:fixed;
@@ -186,17 +187,17 @@ border: none;
   z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
 }
 
-.container2 .popup-head{
+.container2 .popup-head, .container6 .popup-head{
   width:100%;
   height:30px;
   color: white;
   font-size: 21px;
 }
-.container2 .popup-body{
+.container2 .popup-body , .container6 .popup-body {
 	background-color: white;
 }
 
-.container2 .body-content{
+.container2 .body-content , .container6 .body-content {
   width:100%;
   height: 500px;
   padding:30px;
@@ -242,15 +243,24 @@ border: none;
 .per-pop #schedule-table{
     width: 98% !important;
     margin: 0 auto;
-    height: 50%;
+    height: 78%;
     
   }
+.per-pop #map2{
+    width: 341px;
+    height: 156px;
+    padding: 0;
+    position: absolute;
+    bottom: 53px;
+    left: 121px;
+} 
+ 
 .per-pop #schedule-table th{
   width: 20%;
   text-align: center;
   background-color: #f8f8f8;
   }
-.per-pop #schedule-table td{
+.per-pop #schedule-table td:nth-child(1), .per-pop #schedule-table td:nth-child(2) , .per-pop #schedule-table td:nth-child(3){
   padding: 1% ;
 }
 .per-pop #schedule-table td input[type="date"] {
@@ -277,10 +287,12 @@ border: none;
     border: 1px solid black;
   }
 .per-pop  #schedule-table textarea[name="content"] {
-    width: 100%;
-    height: 30%;
+	width: 100%;
+    height: 109px;
     resize: none;
     outline: none;
+    position: relative;
+    top: -74px;
   }
 .per-pop .per-sche-edit{
     margin: 0 auto;
@@ -304,9 +316,6 @@ border: none;
   color: black;
 }
 
-#map2{
-	margin:0%;
-}
 
 .container4{
   z-index: 1;
@@ -493,3 +502,21 @@ border: none;
   margin-right: 5px;
   width:30px;
 }
+
+.container6 .popup {
+  z-index: 99999999;
+  width: 550px;
+  height: 550px;
+  min-width: 550px;
+  min-height: 500px;
+  border-radius:3px;
+  overflow:hidden;
+  background-color:#000000;
+  position: fixed;
+  left: 50%;
+  top: 40px;
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+  justify-content:center;
+  align-items:center;
+}
+

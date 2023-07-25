@@ -206,7 +206,7 @@
         <tr class="content-area">
           <th>내용</th>
           <td><textarea name = "content" class="de-content" readOnly></textarea>
-          <div id="map2" style="width:333px;height:200px;"></div></td>
+          <div id="map2" ></div></td>
         </tr>
       </table>
 
@@ -261,7 +261,7 @@
                 <td>
 				<span class= "checkbox-loca"><input type ="checkbox" id = "edit-place-checked" > &nbsp;장소 변경 </span>
 				<span><input type = "text" readonly name = "place" id = "edit-place-result" value =" "></span>
-                <input type = "text" class= "search-place" id  = "edit-place"  readonly><button type= "button" class="map-search-btn2">위치검색</button></td>
+                <input type = "text" class= "search-place" id  = "edit-place"  readonly><button type= "button" class="map-search-btn2" disabled>위치검색</button></td>
               </tr>
               <tr class="content-area">
                 <th>내용</th>
@@ -281,10 +281,143 @@
     </div>
 </div>
 </div>
-
-  
 <!--//             일정 수정 팝업              //-->
+
+
+<!-- 지도 위치 검색 모달창-->
+<div class="container6" >
+
+  <div class="popup-wrap" id="popup">
+    <div class="popup" id = "2th-popup">
+      <div class="popup-head">
+        <div class="popup-close-btn3">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+       <form action="http://localhost:8000/link/search/" method = "get">
+          <div class="body-titlebox">
+            <h4><strong>지도 선택</strong></h4>
+
+          </div>
+          <div class="body-contentbox">
+            <div id="map3" style="width:500px;height:400px; display:block; "></div>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--지도 팝업창-->
+
+
 </body>
+
+<script>
+ /*세번째 지도*/
+ 
+// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+var infowindow3 = new kakao.maps.InfoWindow({zIndex:1});
+var mapContainer3 = document.getElementById('map3'), // 지도를 표시할 div 
+    mapOption3 = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+// 지도 생성   
+var map3 = new kakao.maps.Map(mapContainer3, mapOption3); 
+// 장소 검색 객체
+var ps3 = new kakao.maps.services.Places(); 
+
+
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB3 (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds3 = new kakao.maps.LatLngBounds();
+
+        for (var i=0; i<data.length; i++) {
+            displayMarker3(data[i]);    
+            bounds3.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map3.setBounds(bounds3);
+    } 
+}
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker3(place) {
+    
+    // 마커를 생성하고 지도에 표시합니다
+    var marker3 = new kakao.maps.Marker({
+        map: map3,
+        position: new kakao.maps.LatLng(place.y, place.x)
+    
+    });
+
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker3, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+
+		let lat =  marker3.getPosition().getLat(); 
+        let lng =  marker3.getPosition().getLng();
+        setCenter3(marker3.getPosition().getLat(), marker3.getPosition().getLng())
+        let place_name = place.place_name;
+        infowindow.setContent('<div class= "marker-place" style="height: 80px; width: 200px; text-align:center;">' + place_name + '<br> <button type="button" class= "loca-insert-btn">위치등록</button></div>');
+    	
+  //      $('#address1').val(lat);
+  //  	$('#address2').val(lng);
+  //  	$('#marker_place').val(place_name);
+        infowindow.open(map3, marker3);
+    });
+}
+
+
+function setCenter3(x, y) {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(x, y);
+    
+    // 지도 중심을 이동 시킵니다
+    map3.setCenter(moveLatLon);
+}
+
+function relayout3() {    
+    map3.relayout();
+} 
+ 
+
+	$('.map-search-btn2').on("click", function(){
+		var keyword = $('#edit-place').val();
+		$('.container6 .popup-wrap').css('display' , 'block');
+		$('.container6').css('display' , 'block');
+		ps3.keywordSearch(keyword, placesSearchCB3);
+		 relayout3();
+	});
+	
+	$('.popup-close-btn3').on("click",function(){
+		$('.container6').css('display' , 'none');
+	});
+	
+	$('#edit-place-checked').on('change', function() {
+		  if ($(this).is(':checked')) {
+			  $('.map-search-btn2').prop('disabled', false);
+			  $('.map-search-btn2').css('background-color', 'black');
+			  $('.map-search-btn2').css('color', 'white');
+		  } else {
+			  $('.map-search-btn2').prop('disabled', true);
+			  $('.map-search-btn2').css('background-color', 'rgb(238, 238, 238)');
+			  $('.map-search-btn2').css('color', 'white');
+
+		  }
+		});
+	
+</script>
+
+
     <footer>
     	Copyright (C) 2023 어리쥬 all rights reserved.
     </footer>
@@ -306,13 +439,20 @@ padding:5px;font-size:14px; text-align:center; height: 100px;
 .popup-wrap input {
 height:30px;
 }
-.map-search-btn, .map-search-btn2{
+.map-search-btn {
  background-color: black; 
  color: white;
 font-size: 15px;
     width: 70px;
     height: 30px;
 } 
+.map-search-btn2{
+ background-color: rgb(238, 238, 238); 
+ color: white;
+font-size: 15px;
+    width: 70px;
+    height: 30px;
+}
 .checkbox-loca{
   display: flex;
   align-items: center;
@@ -353,8 +493,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 // 장소 검색 객체
 var ps = new kakao.maps.services.Places(); 
-
-
 
 
 
@@ -480,6 +618,7 @@ $('#loca-insert-select').on('change', function() {
 		  reset_popup1_address();
 	  }
 	});
+
 //장소 넣기 checkbox 선택 시 장소 검색창 활성화
 $('#edit-place-checked').on('change', function() {
 	  if ($(this).is(':checked')) {
@@ -491,7 +630,32 @@ $('#edit-place-checked').on('change', function() {
 	  }
 	});
 
+
+
+function load_map2(x,y){
+	
+	if(x == -1){
+		$('#map2').css('display', 'none');
+	}else{
+		$('#map2').css('display', 'block');
+	var container = document.getElementById('map2'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(x,y), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map2 = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+	 var marker2 = new kakao.maps.Marker({
+	        map: map2,
+	        position: new kakao.maps.LatLng(x, y)
+	    
+	    });
+	}
+}
+
 </script>
+
 
 
 
@@ -800,12 +964,12 @@ function render(){
 	 		   $('.edite-btn').data('address2',sche.address2);
 	 		   $('.edite-btn').data('place',sche.place);
 	 		   $('.edite-btn').data('memid',sche.memberId);
+	 		  	load_map2(sche.address1,sche.address2);
 	 		   if(sche.address1 != -1){ //address가 있는 일정일 경우 길찾기 버튼 활성화 + 컬러 black으로 변경 
 	 			  $('.see-place').prop('disabled', false);
 	 			  $('.see-place').css("background-color","black");
 		 		  $('#see-map').data('x', sche.address1);
 		 		  $('#see-map').data('y', sche.address2);
-	 			 load_map2(sche.address1,sche.address2);
 	 		   }else{ //address 정보 없는 일정일 경우 길찾기 버튼 비활성화 + 컬러 gray로 변경
 	 			  $('.see-place').prop('disabled', true);
 	 			  $('.see-place').css("background-color","#eeeeee");
@@ -819,18 +983,6 @@ function render(){
 	     });//ajax end
 	}//openPerSche event end
 
-	function load_map2(x,y){
-		var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
-	        level: 3, // 지도의 확대 레벨
-	        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
-	    }; 
-
-	// 지도를 생성한다 
-	var map2 = new kakao.maps.Map(mapContainer, mapOption); 
-		
-	}
 	
 	
 	/*---------------------------------------------개인 스케줄 삭제 function-----------------------------------------------------*/

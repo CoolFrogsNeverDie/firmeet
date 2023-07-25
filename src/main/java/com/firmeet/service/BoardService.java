@@ -87,6 +87,7 @@ public class BoardService {
 		return returnVO;
 	}
 	
+	/*댓글 삭제*/
 	public boolean deleteReply(ReplyVO replyVO) {
 		boolean result = false;
 		
@@ -105,6 +106,13 @@ public class BoardService {
 		}
 			
 		return result;
+	}
+
+	/*----------------------클럽 일반 게시판 글 작성------------------*/
+	public void boardwrite(BoardVO boardVO) {
+		
+		boardDAO.insertBoard(boardVO);
+		
 	}
 	
 }

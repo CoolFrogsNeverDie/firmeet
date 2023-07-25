@@ -68,5 +68,25 @@
 		]]>
 	</select>
 	
-	
+		
+	<insert id = "insertBoard" parameterType = "board">
+		<![CDATA[
+			insert into board(
+				BOARDNO
+				, CLUBID
+				, MEMBERID
+				,BOARDCONTENT
+				, BOARDDATE
+				)
+            values(
+            	seq_boardno.nextval
+            	, #{clubId} 
+            	, #{memberId}
+            	, #{content}
+            	, sysdate
+            	)
+		]]>
+	</insert>
+		
+		
 </mapper>

@@ -59,6 +59,27 @@ public class BoardController {
 		return json;
 	}
 	
+	@RequestMapping(value = "/club/editpage/{clubId}")
+	public String editPage(@PathVariable ("clubId") int clubId
+							,Model model) {
+		
+		
+	    ClubVo clubVo = clubService.getClubVo(clubId);
+	    model.addAttribute("club", clubVo);
+	    
+	    return "club_diary/board_write";
+	}
+	
+	
+	@RequestMapping(value = "/club/upload" , method =RequestMethod.POST)
+	public String editPage(@ModelAttribute BoardVO boardVO) {
+			
+		System.out.println("넘어온 정보" + boardVO);
+		boardService.boardwrite(boardVO);
+		
+		
+		return "redirect:/board/club/" + boardVO.getClubId();
+	}
 	
 	
 	@RequestMapping(value = "/member/{memberId}/{clubId}")

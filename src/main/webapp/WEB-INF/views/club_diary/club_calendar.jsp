@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@ include file="../include/topnav.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,7 +142,7 @@ $('.forCalendar').on("click",'button', function(){
 	var title = $("#fc-dom-1").text();
 	var years = title.substring(0,4);
 	var month = title.substring(title.length-2,title.length-1);
-	var clubId =  ${clubVo.clubId};
+	var clubId =  ${club.clubId};
  	var viewOption1 =  $('#select-array').val(); 
 	
 

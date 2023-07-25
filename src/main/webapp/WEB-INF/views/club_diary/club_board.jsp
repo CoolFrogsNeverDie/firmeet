@@ -36,10 +36,10 @@
             </div>
             <!--/diary-subbar-->
             <div class="content-area">
-             <div class= "search-board">  
+             <div class= "search-board"> 
              	<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
              	<button type ="button" class="board-search-btn">검색</button>
-             	<button class="board-write">+</button>
+             	<a class= "board-write" href = "${pageContext.request.contextPath}/board/club/editpage/${club.clubId}">+</a>
              </div>
                 <div class="content-right">
                     <div class="board-area">
