@@ -1,223 +1,249 @@
 package com.firmeet.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClubVo {
 
-		public int clubId;
-		public String clubName;
-		public Date cre_date;
-		public int max;
-		public int preNum;
-		public String intro1;
-		public String intro2;
-		public String address1;
-		public String address2;
-		public String img1;
-		public String img2;
-		public String detailT;
-		public String detailL;
-		public String detailP;
-		public String detailE;
-		public String detailW;
-		
-		private List<Integer> tagNo;
+	public int clubId;
+	public String clubName;
+	public Date cre_date;
+	public int max;
+	public int preNum;
+	public String intro1;
+	public String intro2;
+	public String address1;
+	public String address2;
+	public String img1;
+	public String img2;
+	public String detailT;
+	public String detailL;
+	public String detailP;
+	public String detailE;
+	public String detailW;
+	public int[] tagNo; /* form=>컨트롤러 */
+	private CategoryVo cateVO; 
+	private TagVo tagVo;
+	
+	
+	/* public List<TagVo> tagList; */ /* DB=>화면 */
+	
+	public int cateNo;
+	public String category;
 
-		private CategoryVo cateVO;
-		private TagVo tagVo;
-		
-		public ClubVo(int clubId, String clubName, Date cre_date, int max, int preNum, String intro1, String intro2,
-				String address1, String address2, String img1, String img2, String detailT, String detailL,
-				String detailP, String detailE, String detailW) {
-			super();
-			this.clubId = clubId;
-			this.clubName = clubName;
-			this.cre_date = cre_date;
-			this.max = max;
-			this.preNum = preNum;
-			this.intro1 = intro1;
-			this.intro2 = intro2;
-			this.address1 = address1;
-			this.address2 = address2;
-			this.img1 = img1;
-			this.img2 = img2;
-			this.detailT = detailT;
-			this.detailL = detailL;
-			this.detailP = detailP;
-			this.detailE = detailE;
-			this.detailW = detailW;
-		}
+	public ClubVo() {
+		super();
+	}
 
-		public ClubVo() {
-			super();
-		}
+	public ClubVo(int clubId, String clubName, Date cre_date, int max, int preNum, String intro1, String intro2,
+			String address1, String address2, String img1, String img2, String detailT, String detailL, String detailP,
+			String detailE, String detailW, int[] tagNo, CategoryVo cateVO, TagVo tagVo, int cateNo, String category) {
+		super();
+		this.clubId = clubId;
+		this.clubName = clubName;
+		this.cre_date = cre_date;
+		this.max = max;
+		this.preNum = preNum;
+		this.intro1 = intro1;
+		this.intro2 = intro2;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.img1 = img1;
+		this.img2 = img2;
+		this.detailT = detailT;
+		this.detailL = detailL;
+		this.detailP = detailP;
+		this.detailE = detailE;
+		this.detailW = detailW;
+		this.tagNo = tagNo;
+		this.cateVO = cateVO;
+		this.tagVo = tagVo;
+		this.cateNo = cateNo;
+		this.category = category;
+	}
 
-		public int getClubId() {
-			return clubId;
-		}
-		
-		
+	public int getClubId() {
+		return clubId;
+	}
 
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
+	}
 
-		public CategoryVo getCateVO() {
-			return cateVO;
-		}
+	public String getClubName() {
+		return clubName;
+	}
 
-		public void setCateVO(CategoryVo cateVO) {
-			this.cateVO = cateVO;
-		}
-			
+	public void setClubName(String clubName) {
+		this.clubName = clubName;
+	}
 
-		public TagVo getTagVo() {
-			return tagVo;
-		}
+	public Date getCre_date() {
+		return cre_date;
+	}
 
-		public void setTagVo(TagVo tagVo) {
-			this.tagVo = tagVo;
-		}
+	public void setCre_date(Date cre_date) {
+		this.cre_date = cre_date;
+	}
 
-		public void setClubId(int clubId) {
-			this.clubId = clubId;
-		}
+	public int getMax() {
+		return max;
+	}
 
-		public String getClubName() {
-			return clubName;
-		}
+	public void setMax(int max) {
+		this.max = max;
+	}
 
-		public void setClubName(String clubName) {
-			this.clubName = clubName;
-		}
+	public int getPreNum() {
+		return preNum;
+	}
 
-		public Date getCre_date() {
-			return cre_date;
-		}
+	public void setPreNum(int preNum) {
+		this.preNum = preNum;
+	}
 
-		public void setCre_date(Date cre_date) {
-			this.cre_date = cre_date;
-		}
+	public String getIntro1() {
+		return intro1;
+	}
 
-		public int getMax() {
-			return max;
-		}
+	public void setIntro1(String intro1) {
+		this.intro1 = intro1;
+	}
 
-		public void setMax(int max) {
-			this.max = max;
-		}
+	public String getIntro2() {
+		return intro2;
+	}
 
-		public int getPreNum() {
-			return preNum;
-		}
+	public void setIntro2(String intro2) {
+		this.intro2 = intro2;
+	}
 
-		public void setPreNum(int preNum) {
-			this.preNum = preNum;
-		}
+	public String getAddress1() {
+		return address1;
+	}
 
-		public String getIntro1() {
-			return intro1;
-		}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
 
-		public void setIntro1(String intro1) {
-			this.intro1 = intro1;
-		}
+	public String getAddress2() {
+		return address2;
+	}
 
-		public String getIntro2() {
-			return intro2;
-		}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
 
-		public void setIntro2(String intro2) {
-			this.intro2 = intro2;
-		}
+	public String getImg1() {
+		return img1;
+	}
 
-		public String getAddress1() {
-			return address1;
-		}
+	public void setImg1(String img1) {
+		this.img1 = img1;
+	}
 
-		public void setAddress1(String address1) {
-			this.address1 = address1;
-		}
+	public String getImg2() {
+		return img2;
+	}
 
-		public String getAddress2() {
-			return address2;
-		}
+	public void setImg2(String img2) {
+		this.img2 = img2;
+	}
 
-		public void setAddress2(String address2) {
-			this.address2 = address2;
-		}
+	public String getDetailT() {
+		return detailT;
+	}
 
-		public String getImg1() {
-			return img1;
-		}
+	public void setDetailT(String detailT) {
+		this.detailT = detailT;
+	}
 
-		public void setImg1(String img1) {
-			this.img1 = img1;
-		}
+	public String getDetailL() {
+		return detailL;
+	}
 
-		public String getImg2() {
-			return img2;
-		}
+	public void setDetailL(String detailL) {
+		this.detailL = detailL;
+	}
 
-		public void setImg2(String img2) {
-			this.img2 = img2;
-		}
+	public String getDetailP() {
+		return detailP;
+	}
 
-		public String getDetailT() {
-			return detailT;
-		}
+	public void setDetailP(String detailP) {
+		this.detailP = detailP;
+	}
 
-		public void setDetailT(String detailT) {
-			this.detailT = detailT;
-		}
+	public String getDetailE() {
+		return detailE;
+	}
 
-		public String getDetailL() {
-			return detailL;
-		}
+	public void setDetailE(String detailE) {
+		this.detailE = detailE;
+	}
 
-		public void setDetailL(String detailL) {
-			this.detailL = detailL;
-		}
+	public String getDetailW() {
+		return detailW;
+	}
 
-		public String getDetailP() {
-			return detailP;
-		}
+	public void setDetailW(String detailW) {
+		this.detailW = detailW;
+	}
 
-		public void setDetailP(String detailP) {
-			this.detailP = detailP;
-		}
+	public int[] getTagNo() {
+		return tagNo;
+	}
 
-		public String getDetailE() {
-			return detailE;
-		}
+	public void setTagNo(int[] tagNo) {
+		this.tagNo = tagNo;
+	}
 
-		public void setDetailE(String detailE) {
-			this.detailE = detailE;
-		}
+	public CategoryVo getCateVO() {
+		return cateVO;
+	}
 
-		public String getDetailW() {
-			return detailW;
-		}
+	public void setCateVO(CategoryVo cateVO) {
+		this.cateVO = cateVO;
+	}
 
-		public void setDetailW(String detailW) {
-			this.detailW = detailW;
-		}
+	public TagVo getTagVo() {
+		return tagVo;
+	}
 
-		public List<Integer> getTagNo() {
-			return tagNo;
-		}
-		
-		public void setTagNo(List<Integer> tagNo) {
-			this.tagNo = tagNo;
-		}
-		
-		@Override
-		public String toString() {
-			return "ClubVo [clubId=" + clubId + ", clubName=" + clubName + ", cre_date=" + cre_date + ", max=" + max
-					+ ", preNum=" + preNum + ", intro1=" + intro1 + ", intro2=" + intro2 + ", address1=" + address1
-					+ ", address2=" + address2 + ", img1=" + img1 + ", img2=" + img2 + ", detailT=" + detailT
-					+ ", detailL=" + detailL + ", detailP=" + detailP + ", detailE=" + detailE + ", detailW=" + detailW
-					+ "]";
-		}
-		
-		
-		
+	public void setTagVo(TagVo tagVo) {
+		this.tagVo = tagVo;
+	}
+
+	public int getCateNo() {
+		return cateNo;
+	}
+
+	public void setCateNo(int cateNo) {
+		this.cateNo = cateNo;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "ClubVo [clubId=" + clubId + ", clubName=" + clubName + ", cre_date=" + cre_date + ", max=" + max
+				+ ", preNum=" + preNum + ", intro1=" + intro1 + ", intro2=" + intro2 + ", address1=" + address1
+				+ ", address2=" + address2 + ", img1=" + img1 + ", img2=" + img2 + ", detailT=" + detailT + ", detailL="
+				+ detailL + ", detailP=" + detailP + ", detailE=" + detailE + ", detailW=" + detailW + ", tagNo="
+				+ Arrays.toString(tagNo) + ", cateVO=" + cateVO + ", tagVo=" + tagVo + ", cateNo=" + cateNo
+				+ ", category=" + category + "]";
+	}
+
+	
+	
+	
+	 
+
 }

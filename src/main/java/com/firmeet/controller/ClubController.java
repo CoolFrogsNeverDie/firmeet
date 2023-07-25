@@ -62,19 +62,13 @@ public class ClubController {
 	/* 클럽 만들기 */
 
 	@RequestMapping(value = "/making", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubMake(@ModelAttribute ClubVo clubVo, 
-							@ModelAttribute CategoryVo cateVo,
-							@ModelAttribute TagVo tagVo, 
-							@ModelAttribute ClubMemVo clubMemVo,
-							HttpSession session
-							) {
-		System.out.println("ClubController.clubMaking()");
-		System.out.println("넘어온 VO  확인" + clubVo + cateVo);
-		clubMemVo.memberId = (String)session.getAttribute("memberId");
-		clubService.make(clubVo, cateVo, tagVo, clubMemVo);
-		System.out.println(clubVo);
-		return "/main/mainForm";
+	public String clubMake(@ModelAttribute ClubVo clubVo, HttpSession session
+		   ) {
+			System.out.println("ClubController.clubMaking()");
+			System.out.println("넘어온 VO  확인" + clubVo );
 
+			clubService.make(clubVo);
+			return "/main/mainForm";
 	}
 	
 	@RequestMapping(value="/joinForm/{clubId}" , method = {RequestMethod.GET, RequestMethod.POST})

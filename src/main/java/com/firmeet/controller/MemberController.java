@@ -92,13 +92,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/join", method= { RequestMethod.GET , RequestMethod.POST})
-	public String join(@ModelAttribute MemberVo memberVo,
-						@ModelAttribute CategoryVo cateVo,
-						@ModelAttribute TagVo tagVo) {
+	public String join(@ModelAttribute MemberVo memberVo
+						) {
 		System.out.println("MemberController.join()");
 		System.out.println(memberVo);
-		memberService.join(memberVo,cateVo,tagVo);
+		memberService.join(memberVo);
 			
+		System.out.println(memberVo.getMemberId());
 		return "member/memberForm";
 	}
 	

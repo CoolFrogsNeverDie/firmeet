@@ -18,20 +18,33 @@ public class ClubService {
 	@Autowired
 	private ClubDao clubDao;	
 	
-	public void make(ClubVo clubVo, CategoryVo cateVO, TagVo tagVo, ClubMemVo clubMemVo) {
+	public void make(ClubVo clubVo) {
 		System.out.println("ClubService.make()");
 		System.out.println(clubVo);
+		
 		clubDao.insertClub(clubVo);
 		
-		cateVO.setClubId(clubVo.getClubId());
-		clubDao.insertCate(cateVO);
+		System.out.println("클럽 아이디  확인 " + clubVo.getClubId());
 		
-		tagVo.setClubId(clubVo.getClubId());
-		clubDao.insertTag(tagVo);
+		for(int i=0; i<clubVo.tagNo.length;i++) {
+			TagVo tagVo = new TagVo();
+			tagVo.setClubId( clubVo.getClubId());
+			tagVo.setTagNo(clubVo.tagNo[i]);
+			clubDao.insertClubTag(tagVo);
+		}
 		
-		clubMemVo.setClubId(clubVo.getClubId());
-		clubDao.insertAdmin(clubMemVo);
+		CategoryVo cateVo = new CategoryVo();
+		cateVo.setClubId(clubVo.getClubId());
+		cateVo.setCateNo(clubVo.getCateNo());
+		clubDao.insertClubCate(cateVo);
 		
+		/*
+		 * cateVO.setClubId(clubVo.getClubId()); clubDao.insertCate(cateVO);
+		 * 
+		 * tagVo.setClubId(clubVo.getClubId()); clubDao.insertTag(tagVo);
+		 * 
+		 * clubMemVo.setClubId(clubVo.getClubId()); clubDao.insertAdmin(clubMemVo);
+		 */
 		}
 	public List<ClubVo> clubList() {
 		List<ClubVo> clubVo = clubDao.clubList();

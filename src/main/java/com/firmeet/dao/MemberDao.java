@@ -23,13 +23,15 @@ public class MemberDao {
 	
 	}
 	
-	public void insert(CategoryVo cateVo) {
+	public void insertMemCate(CategoryVo cateVo) {
 		sqlsession.insert("member.insertMemCate",cateVo);
 	}
 	
-	public void insert(TagVo tagVo) {
+	public void insertMemTag(TagVo tagVo) {
 		sqlsession.insert("member.insertMemTag",tagVo);
 	}
+	
+	
 	
 	public MemberVo selectMem(MemberVo memberVo) {
 		MemberVo member = sqlsession.selectOne("member.selectMem", memberVo);

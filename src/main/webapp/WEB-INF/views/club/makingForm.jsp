@@ -237,7 +237,7 @@
                 <ul class="tag">
 				 <c:forEach items="${tagList}" var="tag">
 				 	<li>
-				 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tag" data-tagname="${tag.tagName}">
+				 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
 				 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
 				 	</li>
 				 </c:forEach>
@@ -425,7 +425,7 @@ for(i=0; i<$(target).length; i++){
 		
 		$("#selectedTag").empty();
 		
-		$('input[name="tag"]:checked').each(function(i){
+		$('input[name="tagNo"]:checked').each(function(i){
 			 tagList.push($(this).data("tagname")); 
 			
 			 let tagName = $(this).data("tagname")
@@ -442,8 +442,6 @@ for(i=0; i<$(target).length; i++){
 			 $("#selectedTag").append(str);
 			
 		});
-		
-		console.log(tagList);
 		 
 	});
 </script>

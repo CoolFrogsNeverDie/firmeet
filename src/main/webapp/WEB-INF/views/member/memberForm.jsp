@@ -285,14 +285,56 @@
             gap: 10px;
             margin-left: 80px;
             overflow-y: scroll;
+            position:relative;
+            color: #222;
         }
 
-        .form form .form-group .tag button {
-            width: 70px;
-            height: 25px;
-            border-radius: 20px;
-            background-color: #444;
-            color: #fff;
+         .tag .tags {
+      
+            position:absolute;
+            width: 1px;
+            height: 1px;
+            padding:0;
+            margin: -1px;
+            font-size: 10px;
+            overflow:hidden;
+            border:none;
+            background: transparent;     
+        }
+        
+        .tag .tagLabel{
+        	display:block;
+        	text-align:center;
+        	width:70px;
+        	height:20px;
+        	font-size:11px;
+        	font-weight:200;
+        	border-radius:5px;
+        	padding:2px;
+        	background-color:#bbb;
+        }
+        
+        .tag .tags:checked+.tagLabel{
+        	background-color:#000;
+        	color:#eee;
+        }
+        
+         #selTag {
+        	display:flex;
+         	margin-top:15px;
+         
+        }
+        
+        #selectedTag{
+        	margin-left:15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 400px;
+            height: 30px;
+            overflow-y: scroll;
+            position:relative;
+    
         }
 
         .form form .tagForm .tagSearch{
@@ -398,6 +440,8 @@
         .form form .CTA a.switch:hover {
             color: #444;
         }
+        
+        
 
         @media (max-width: 768px) {
             .container {
@@ -470,9 +514,17 @@
             passwordError = true,
             passConfirm = true;
 
-            $('input').focus(function(){
+            $('input[type="text"], input[type="password"]').on( "click",function(){
                 $(this).siblings('label').addClass('active');
+                $(".tagLabel").removeClass('active');
+    			
             });
+            $('.tagLabel').on( "click",function(){
+               
+                $(".tagLabel").removeClass('active');
+    			
+            });
+     			
 
             $('input').blur(function(){
 
@@ -651,15 +703,23 @@
                             <div class="form-group tagForm">
                                 <label>태그</label>
                                 <ul class="tag">
-				                   <c:forEach items="${tagList}" var="tag">
-				 					<li><button type="button"class="tagbtn" value="${tag.tagNo}"><p>${tag.tagName}</p></button></li>
-				 					</c:forEach>
-                                </ul>
-                                
-                                <div class="tagSearch">
+								 <c:forEach items="${tagList}" var="tag">
+								 	<li>
+								 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
+								 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
+								 	</li>
+								 </c:forEach>
+				               </ul>
+				               <div id="selTag">
+						            <p>선택된 태그</p>
+						            <ul id="selectedTag">
+ 	
+						             </ul>
+				                </div>              
+                                <!-- <div class="tagSearch">
                                     <input type="search">
-                                    <button type="submit" class="search" formation="">검색</button>
-                                </div>
+                                    <button type="submit" class="search" >검색</button>
+                                </div> -->
                                 <div class="CTA">
                                     <input type="submit" value="join">
                                     <a href="" class="switch"> login</a>
@@ -722,6 +782,36 @@
 				console.error(status + " : " + error);
 			}
 		});
+		
+	});
+		
+		//태그를 클릭했을때 아래쪽 그린다
+		$(".tags").on("click", function(){
+			var tagList= [];
+			
+			$("#selectedTag").empty();
+			
+			$('input[name="tagNo"]:checked').each(function(i){
+				
+				 let tagName = $(this).data("tagname");
+				tagList.push($(this).data("tagname")); 
+				
+				
+				 
+				 /* console.log($(this).data("tagname")) */
+				 /*
+				 for(int i=0; i>tagList.length(); i++){
+					 if($this.val()!=tagList.[i]){
+						 $("#selTag").append("<li>"+$(this).val()+"<li>");
+					 }
+				 }
+				 */
+				 let str = "<li class='tagLabel'>"+tagName+"</li>"
+				 $("#selectedTag").append(str);
+				 
+				 console.log(tagList);
+				
+			});
 		
 	});
 

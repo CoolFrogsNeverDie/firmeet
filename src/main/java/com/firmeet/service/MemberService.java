@@ -16,17 +16,29 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public void join(MemberVo memberVo,  CategoryVo cateVo, TagVo tagVo) {
+	public void join(MemberVo memberVo) {
 		System.out.println("MemberService.join()");
 		System.out.println(memberVo);
 		memberDao.insert(memberVo);
 		
+		for(int i=0; i<memberVo.tagNo.length;i++) {
+			TagVo tagVo =new TagVo();
+			tagVo.setMemberId(memberVo.getMemberId());
+			tagVo.setTagNo(memberVo.tagNo[i]);
+			memberDao.insertMemTag(tagVo);
+			
+		}
 		
-		cateVo.setMemberId(memberVo.getMemberId()); 
-		memberDao.insert(cateVo);
+		CategoryVo cateVo = new CategoryVo();
+		cateVo.setMemberId(memberVo.getMemberId());
+		cateVo.setCateNo(memberVo.getCateNo());
+		memberDao.insertMemCate(cateVo);
 		
-		tagVo.setMemberId(memberVo.getMemberId());
-		memberDao.insert(tagVo);
+		/*
+		 * cateVo.setMemberId(memberVo.getMemberId()); memberDao.insert(cateVo);
+		 * 
+		 * tagVo.setMemberId(memberVo.getMemberId()); memberDao.insert(tagVo);
+		 */
 	}
 	
 	public MemberVo login(MemberVo memberVo) {

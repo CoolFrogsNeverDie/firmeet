@@ -40,16 +40,16 @@ public class ClubDao {
 		  System.out.println("ClubDao.insertAdmin()");
 		  session.insert("club.insertAdmin" , clubMemVo); }
 		 
-	 public void insertCate(CategoryVo cateVO) {
+	 public void insertClubCate(CategoryVo cateVo) {
 		 
-		 System.out.println("넘어온 값 확인 " + cateVO);
-		 session.insert("club.insertClubCate",cateVO);
+		
+		 session.insert("club.insertClubCate",cateVo);
 		 
 	 }
 	 
-	 public void insertTag(TagVo tagVo) {
-		 System.out.println(tagVo);
-		 System.out.println("넘어온 값 확인" + tagVo);
+	 public void insertClubTag(TagVo tagVo) {
+		
+		session.insert("club.insertClubTag",tagVo);
 	 }
 	 
 	 public List<ClubVo> clubList() {

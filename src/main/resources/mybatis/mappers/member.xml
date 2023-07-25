@@ -13,14 +13,14 @@
 	
 	<insert id="insertMemCate" parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[
-			insert into member_cartegory(memCateN, memberId,cateNo)
-			values(seq_mem_CateNo.nextval #{memberId}, #{cateNo})
+			insert into member_cartegory(memCateNo, memberId,cateNo)
+			values(SEQ_MEM_CATENO.nextval, #{memberId}, #{cateNo})
 	        ]]>	
 	</insert>
 	<insert id="insertMemTag" parameterType="com.firmeet.vo.TagVo">
 		<![CDATA[
 			insert into member_tag(memTagNo, memberId,tagNo)
-			values(seq_mem_tagNo.nextval, #{memberId}, #{tagNo})
+			values(SEQ_MEM_TAGNO.nextval, #{memberId}, #{tagNo})
 		    ]]>	
 	
 	</insert>

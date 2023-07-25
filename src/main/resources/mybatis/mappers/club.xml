@@ -62,17 +62,17 @@
 	<insert id="insertClubCate"
 		parameterType="com.firmeet.vo.CategoryVo">
 		<![CDATA[	
-			insert into club_category (clubCateNum,clubId,cateNum)
-			values(seq_club_category_no.nextval, #{clubId},#{cateNo})
+			insert into club_category (clubCateNo,clubId,cateNo)
+			values(SEQ_CLUB_CATEGORY_NO.nextval,#{clubId},#{cateNo})
 		
 		 ]]>
 	</insert>
 
 	<insert id="insertClubTag"
-		parameterType="com.firmeet.vo.CategoryVo">
+		parameterType="com.firmeet.vo.TagVo">
 		<![CDATA[	
-			insert into club_category (clubCateNum,clubId,tagNo)
-			values(seq_club_tagNo.nextval, #{clubId},#{tagNo})
+			insert into club_tag (clubTagNo,clubId,tagNo)
+			values(SEQ_CLUB_TAGNO.nextval,#{clubId},#{tagNo})
 		
 		 ]]>
 	</insert>
