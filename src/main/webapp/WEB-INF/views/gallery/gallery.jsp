@@ -66,7 +66,6 @@
 					<div class="gallery-area">
 						<div>
 						
-						galleryList
 						</div>
 					</div>
 					<!--gallery-area-->

@@ -148,7 +148,6 @@ public class GalleryController {
 
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회
-	// 갤러리 목록 조회
     @RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
     public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
         System.out.println("myGalleryList 확인");

@@ -1,6 +1,8 @@
 package com.firmeet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +86,22 @@ public class ClubDao {
 
 		 return selectedTag;
 	 }
+
+	public ClubVo checkMemLevel(String memberId, int clubId) {
+	      System.out.println("ClubDao.checkMemLevel()");
+	      System.out.println("memberId : "+memberId);
+	      System.out.println("clubId : "+clubId);
+	      
+	      Map<String, Object> cMap = new HashMap<>();
+	      cMap.put("memberId", memberId);
+	      cMap.put("clubId", clubId);
+	      System.out.println("cMap : "+cMap);
+	      
+	      ClubVo memLevel =session.selectOne("club.checkMemLevel", cMap);
+	      System.out.println("memLevel : "+memLevel);
+	      
+		return memLevel;
+	}
 	 
 	 
 }

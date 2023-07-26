@@ -87,5 +87,12 @@ public class ClubService {
 		
 		return selectedTag;
 	}
+	
+	public ClubVo checkMemLevel(String memberId, int clubId) {
+		
+		ClubVo checkMemLevel = clubDao.checkMemLevel(memberId,clubId);
+		
+		return checkMemLevel;
+	}
 }
 

@@ -68,8 +68,7 @@
 		 ]]>
 	</insert>
 
-	<insert id="insertClubTag"
-		parameterType="com.firmeet.vo.TagVo">
+	<insert id="insertClubTag" parameterType="com.firmeet.vo.TagVo">
 		<![CDATA[	
 			insert into club_tag (clubTagNo,clubId,tagNo)
 			values(SEQ_CLUB_TAGNO.nextval,#{clubId},#{tagNo})
@@ -84,7 +83,7 @@
      			values(SEQ_CLUB_MEMNO.nextVal, #{memberId}, #{clubId}, 0, sysdate)
       	]]>
 	</insert>
-	
+
 
 	<insert id="insertJoinMem"
 		parameterType="com.firmeet.vo.ClubMemVo">
@@ -102,6 +101,17 @@
 				clubName 
 			from club 
 			where clubId = #{clubId}
+		]]>
+	</select>
+
+	<select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
+		<![CDATA[
+			select 
+	            a.clubId
+	            ,a.clubName
+	            ,b.memLevel
+             from club a join club_member b on a.clubId = b.clubId
+             where b.memberId = #{memberId} and a.clubId = #{clubId}
 		]]>
 	</select>
 </mapper>

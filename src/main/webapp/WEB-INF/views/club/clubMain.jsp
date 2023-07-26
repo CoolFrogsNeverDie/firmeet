@@ -80,26 +80,12 @@
 				<div class="content-right">
 					<div class="announcement">
 						<table>
-							<tr>
-								<td class="title">[공지] 여과기 보수공사 관련 공지사항</td>
-								<td>23–06-01</td>
-							</tr>
-							<tr>
-								<td class="title">[공지] 올림픽스포츠센터 회원 대상 올림픽파..</td>
-								<td>23–04-14</td>
-							</tr>
-							<tr>
-								<td class="title">2023 여름방학특강 운영계획</td>
-								<td>23–04-14</td>
-							</tr>
-							<tr>
-								<td class="title">주차혼잡 안내문 (6.23~25)</td>
-								<td>23–04-14</td>
-							</tr>
-							<tr>
-								<td class="title">2023년 7월 회원등록안내</td>
-								<td>23–04-14</td>
-							</tr>
+							<c:forEach var="notice" items="${noticeList}" varStatus="status">
+								<tr>
+									<td class="title">${notice.title}</td>
+									<td>${notice.aboardDate}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div class="calendar"></div>
