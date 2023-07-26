@@ -79,7 +79,7 @@ public class NoticeBoardService {
 	}
 
 	public NoticeBoardVO voteResult(int aboardNo) {
-		System.out.println("notice editlist 확인");
+		System.out.println("notice voteResult 확인");
 		
 		NoticeBoardVO vo = dao.editlist(aboardNo);
 		
@@ -144,4 +144,16 @@ public class NoticeBoardService {
 		return psaveName;
 	
 	}
+
+	public void payinsert(NoticeBoardVO vo) {
+		System.out.println("notice payinsert 확인");
+		dao.payinsert(vo);
+	}
+	
+	public NoticeBoardVO payresult(int meetNo) {
+		System.out.println("notice payresult 확인");
+		//dao.paycount(meetNo);
+		return dao.payresult(meetNo);
+	}
+
 }

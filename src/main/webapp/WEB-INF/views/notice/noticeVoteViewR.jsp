@@ -39,7 +39,7 @@
            
             <div class="noticeform">
               <div>
-                  <p class="noticetitle">${vo.title }</p>
+                  <p class="noticetitle">[결제완료]${vo.title }</p>
                   <div class="noticebtn">
                     <button type="button" class="btn btn-warning">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
@@ -53,14 +53,15 @@
                       <span class="userdate">작성일 : </span>
                       <span class="usertext">${vo.aboardDate}</span>
                       <span class="usercount">조회수 : </span>
-                      <span class="usertext"></span>
+                      <span class="usertext">${vo.aboardHit}</span>
                   </div>
               </div>
               <hr>
+          <div id="content_body">    
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
-                <table id="dataTable" style="width: 50%; float: left;">
+                <table id="dataTable" style="width: 40%; float: left;">
 					<thead>
 					<tr>
 	                     <th class="noticegrouplist">
@@ -78,9 +79,9 @@
                              <p class="noticegroupname"><span>투표종료일 : </span>${vo.voteEnd}</p>
                              <p class="noticegroupname"><span>최소인원 : </span>${vo.minPerson}</p>
                              <p class="noticegroupname"><span>최대인원 : </span>${vo.maxPerson}</p>
-                             <p class="noticegroupname">address1 : <span id="address1">${vo.address1}</span></p>
-                             <p class="noticegroupname">address2 : <span id="address2">${vo.address2}</span></p>
-                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
+                             <p class="noticegroupname" hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
+	                         <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
+                             <p class="paycount"><span>현재인원 : </span>${vo.paycount} / <span>최대인원 : </span>${vo.maxPerson}</p>
                           </td>
 	                 </tr>
 	               </tbody>
@@ -89,10 +90,10 @@
                <div class="mapview">
                		<div id="map2" style="width:100%;height:250px;"></div>
                </div>
-               
-              <div class="like">
-                  <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
-              </div>
+            </div>   
+            <div class="like">
+                <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
+            </div>
               
    		</div>
           <!-- 여기까지 -->
@@ -146,50 +147,6 @@
   var price = $('#price').text();
   console.log(price);
   
-  function kakaopay(){
-  
-	var IMP = window.IMP; // 생략 가능
-	IMP.init("imp51377887"); // 예: imp00000000
-	
-	IMP.request_pay({		
-		pg : 'kakaopay',
-		pay_method : 'card',
-		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
-		name : 'firmeet',                                  //상품명
-		amount : $('#price').text(),                    //가격
-		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
-		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
-		buyer_name : 'buyer_name',                           //구매자 이름
-		buyer_tel : 'hp',                                    //전화번호
-		buyer_addr : 'addr',	                             //주소
-	},function(data){
-		if(data.success){
-			console.log('빌링키 발급 성공', data)
-			alert("결제가 완료되었습니다.")
-        }else{
-        	var msg = "결제 실패"
-        	msg += "에러 내용" + data.error_msg;
-        	alert(msg);
-        	return false;
-        }
-		$("#paybtn").submit();
-	});
- }
-	
-/*   function (rsp) {
-      console.log(rsp);
-      if (rsp.success) {
-        var msg = '결제가 완료되었습니다.';
-        alert(msg);
-        location.href = "결제 완료 후 이동할 페이지 url"
-      } else {
-        var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-        alert(msg);
-      }
-    } */
-</script>
-<script>
   $(document).ready(function() {
 	  
 	  var address1 = $("#address1").text();

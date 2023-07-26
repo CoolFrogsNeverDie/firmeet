@@ -53,7 +53,7 @@
 	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
 			select seq_meetNo.nextval from dual
 		</selectKey>
-		insert into meet_name(meetNo, aboardNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, voteEnd, minPerson, maxPerson, price, address1, address2)
+		insert into meet_name(meetNo, aboardNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, voteEnd, minPerson, maxPerson, price, address1, address2 )
 		values(seq_meetNo.nextval, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
 	</insert>
 	
@@ -68,4 +68,20 @@
 		update aboard set aboardHit = aboardHit +1 where aboardNo = #{aboardNo}
 	</update>
 
+	<insert id="payinsert" parameterType="noticeboard">
+		insert into PAYRESULT(payresultNo, meetNo, memberId, payvotedate)
+		values(SEQ_PAYRESULTNO.nextval, #{meetNo}, #{memberId}, SYSDATE)
+	</insert>
+	
+ 	<select id="payresult" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
+		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
+		from aboard a, club c, member m, meet_name mn
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
+	</select>
+	
+<!-- 	<update id="paycount" parameterType="int">
+		update aboard set paycount = paycount +1 where meetNo = #{meetNo}
+	</update>
+	 -->
 </mapper>

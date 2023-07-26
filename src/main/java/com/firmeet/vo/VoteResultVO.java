@@ -62,8 +62,8 @@ public class VoteResultVO {
 
 	@Override
 	public String toString() {
-		return "VoteResult [vote1Cnt=" + vote1Cnt + ", vote2Cnt=" + vote2Cnt + ", vote3Cnt=" + vote3Cnt + ", vote4Cnt="
-				+ vote4Cnt + ", vote5Cnt=" + vote5Cnt + "]";
+		return "VoteResultVO [vote1Cnt=" + vote1Cnt + ", vote2Cnt=" + vote2Cnt + ", vote3Cnt=" + vote3Cnt
+				+ ", vote4Cnt=" + vote4Cnt + ", vote5Cnt=" + vote5Cnt + "]";
 	}
-	
+
 }

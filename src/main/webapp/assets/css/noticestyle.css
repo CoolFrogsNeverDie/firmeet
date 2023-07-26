@@ -391,7 +391,23 @@
   overflow-y: auto; /* 세로 스크롤이 필요한 경우 스크롤을 표시합니다. */
   padding-bottom: 30px;
 }
-
+#paybtn{
+	width: 70px;
+    height: 40px;
+    background-color:#000;
+    font-size: 15px;
+    color:#fff;
+    border: 1px solid #000;
+    border-radius: 7px;
+    margin-left: 41%;
+}
+.paycount{
+	font-weight: bold;
+    font-size: 20px;
+    float : right;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
 #result1{
 	font-size: 20px;
 	font-weight: bold;

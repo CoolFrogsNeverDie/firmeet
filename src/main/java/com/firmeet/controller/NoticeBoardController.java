@@ -140,14 +140,15 @@ public class NoticeBoardController {
 	public String editlistgroup(ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editgrouplist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
+		System.out.println(vo);
 		
 		model.addAttribute("clubId", clubvo.getClubId());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
-		System.out.println("aboardNo"+ vo.getAboardNo());
+		System.out.println("meetNo"+ vo.getMeetNo());
 		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("memberId", vo.getMemberId());
 		model.addAttribute("vo", noticeBoardService.editlistgroup(vo.getAboardNo()));
-		
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteView";
 	}
@@ -163,18 +164,6 @@ public class NoticeBoardController {
 		return jsonResult;
 	}
 
-	/*
-   @ResponseBody
-   @RequestMapping(value="/upload")
-   public JsonObject upload(@RequestParam("file") MultipartFile file, @ModelAttribute NoticeBoardVO vo, @ModelAttribute ClubVo clubVo, Model model, @RequestParam("aboardNo") int aboardNo) {
-      System.out.println("FileUploadController.upload()");
-      
-      JsonObject jsonObject = noticeBoardService.imgup(file , vo ,clubVo, aboardNo);
-      
-      return jsonObject;
-   }
-   */
-   
 	//파일 업로드 처리  (썸머노트 이미지 첨부 하면 바로 저장됨  이미지 경로를 리턴)
 	@ResponseBody
 	@RequestMapping(value="/upload")
@@ -189,4 +178,45 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
+
+	@ResponseBody
+	@RequestMapping("/pay")
+	public JsonResult pay(@ModelAttribute NoticeBoardVO vo, HttpSession session) {
+		
+		System.out.println("넘어오는지 확인" + vo);
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.success(vo);
+		System.out.println("getMemberId"+vo.getMemberId());
+		System.out.println("getMeetNo"+vo.getMeetNo());
+		
+		return jsonResult;
+	}
+	
+	//에디터 일반페이지 등록 후 insert
+	@RequestMapping("/payinsert")
+	public String payinsert(@ModelAttribute NoticeBoardVO vo, Model model) {
+		
+		System.out.println("넘어는 오니?");
+		System.out.println(vo);
+		model.addAttribute("aboradNo", vo.getAboardNo());
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("memberId", vo.getMemberId());
+
+		noticeBoardService.payinsert(vo);
+		
+		return "redirect:/"+vo.getClubId()+"/notice/payresult/"+vo.getMeetNo();
+	}
+	
+	
+	//에디터 모임 등록 후 나오는 리스트
+	@RequestMapping("/payresult/{meetNo}")
+	public String payresult(@PathVariable("meetNo") int meetNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+		System.out.println("notice payresult 확인");
+		session.getAttribute("meetNo");
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("vo", noticeBoardService.payresult(vo.getMeetNo()));
+		System.out.println("controller meetno 확인"+vo.getMeetNo());
+		return "notice/noticeVoteViewR";
+	}
+	
 }

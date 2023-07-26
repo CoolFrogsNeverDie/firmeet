@@ -1,7 +1,5 @@
 package com.firmeet.vo;
 
-import java.sql.Date;
-
 public class NoticeBoardVO {
 	
 	private int aboardNo;
@@ -45,6 +43,9 @@ public class NoticeBoardVO {
 	private double address1;
 	private double address2;
 	private int aboardHit;
+	private int paycount;
+	private int payresultNo;
+	private String payvotedate;
 	
 	public NoticeBoardVO() {
 		
@@ -127,6 +128,13 @@ public class NoticeBoardVO {
 		this.voteEnd = voteEnd;
 	}
 	
+	public NoticeBoardVO(String memberId, int meetNo, int payresultNo, String payvotedate) {
+		super();
+		this.memberId = memberId;
+		this.meetNo = meetNo;
+		this.payresultNo = payresultNo;
+		this.payvotedate = payvotedate;
+	}
 
 	public int getAboardNo() {
 		return aboardNo;
@@ -448,6 +456,30 @@ public class NoticeBoardVO {
 		this.aboardHit = aboardHit;
 	}
 
+	public int getPaycount() {
+		return paycount;
+	}
+
+	public void setPaycount(int paycount) {
+		this.paycount = paycount;
+	}
+
+	public int getPayresultNo() {
+		return payresultNo;
+	}
+
+	public void setPayresultNo(int payresultNo) {
+		this.payresultNo = payresultNo;
+	}
+
+	public String getPayvotedate() {
+		return payvotedate;
+	}
+
+	public void setPayvotedate(String payvotedate) {
+		this.payvotedate = payvotedate;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -460,8 +492,8 @@ public class NoticeBoardVO {
 				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
-				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + "]";
+				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", paycount=" + paycount
+				+ ", payresultNo=" + payresultNo + ", payvotedate=" + payvotedate + "]";
 	}
-
 
 }
