@@ -36,7 +36,6 @@ crossorigin="anonymous">
 
 <!-- 자작 -->
 <link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/assets/css/editstyle.css" rel="stylesheet" type="text/css">
 
 
     
