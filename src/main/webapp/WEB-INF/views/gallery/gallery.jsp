@@ -64,7 +64,10 @@
 						<button id="addButton">사진올리기</button>
 					</div>
 					<div class="gallery-area">
-						<div></div>
+						<div>
+						
+						galleryList
+						</div>
 					</div>
 					<!--gallery-area-->
 				</div>
@@ -174,6 +177,34 @@ $(document).ready(function() {
       }
     });
   });
+  var clubId = ${club.clubId};
+  console.log(clubId);
+
+  $.ajax({
+    url: "${pageContext.request.contextPath}/gallery/getGalleryListAll",
+    method: "GET",
+    data: {
+      clubId: clubId
+    },
+    success: function(jsonResult) {
+      var list = jsonResult.data;
+      console.log(list);
+
+      var galleryHTML = '';
+      for (var i = 0; i < list.length; i++) {
+        var imgSave = list[i].imgSave;
+        console.log(imgSave);
+        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set">';
+        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+        galleryHTML += '</a>';
+      }
+
+      $('.gallery-area div').html(galleryHTML);
+    },
+    error: function() {
+      console.error("AJAX 요청 실패");
+    }
+  });
 });
 
 $("#addButton").click(function() {
@@ -191,7 +222,12 @@ $target.on("click", function() {
 	_$self.nextUntil("dt").slideToggle(!isActive);
 });
 
-
+// 페이지가 로드되면, 전체보기
+$(document)
+        .ready(
+                function() {
+                 
+                });
 </script>
 
 </html>

@@ -2,22 +2,25 @@
 
 /* 왼쪽 */
 .content-left {
-  width: 59%;
-  height: 90%;
-  display: inline-block;
-  margin-top: 10px;
-  border: 1px solid black;
+    width: 59%;
+    height: 90%;
+    display: flex;
+    margin-top: 10px;
+    background-color: #333333;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
 }
 
 
 /* 오른쪽 */
 .content-right {
-  width: 40%;
-  height: 90%;
-  border: 1px solid black;
-  display: inline-block;
-  margin-top: 10px;
-  box-sizing: border-box;
+    width: 40%;
+    height: 90%;
+    display: flex;
+    margin-top: 10px;
+    box-sizing: border-box;
+    flex-direction: column;
 }
 
 /*공지사항*/
@@ -36,13 +39,17 @@
 .announcement td {
   border: 1px solid black;
 }
+.announcement td:hover {
+  border: 1px solid #ffffff;
+}
 
 .announcement tr:hover {
-  background-color: #b2a4ff;
+  background-color: black;
+  color:#ffffff;
 }
 
 .announcement .title {
-  width: 80%;
+  width: 75%;
 }
 
 /*달력*/

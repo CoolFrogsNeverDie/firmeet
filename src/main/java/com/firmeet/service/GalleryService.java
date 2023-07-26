@@ -136,6 +136,7 @@ public class GalleryService {
 
 
     public List<MeetVo> getMyGalleryList(String memberId) {
+    	System.out.println("GalleryService getMyGalleryList 확인");
         List<ClubVo> clubVos = clubService.getMemClub(memberId);
         String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
                 .collect(Collectors.joining(","));
@@ -155,6 +156,25 @@ public class GalleryService {
         }
 
         return mList;
+    }
+    
+    public List<GalleryImgVo> getMyGalleryList2(String memberId) {
+    	System.out.println("GalleryService getMyGalleryList2 확인");
+        List<ClubVo> clubVos = clubService.getMemClub(memberId);
+        String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
+                .collect(Collectors.joining(","));
+        List<GalleryImgVo> gList = new ArrayList<>();
+
+        for (ClubVo clubVo : clubVos) {
+            int clubId = clubVo.getClubId();
+            String clubName = clubVo.getClubName();
+
+            List<GalleryImgVo> gImgVos = galleryDao.getGalleryListAll(clubId);
+
+            gList.addAll(gImgVos);
+        }
+
+        return gList;
     }
 
 

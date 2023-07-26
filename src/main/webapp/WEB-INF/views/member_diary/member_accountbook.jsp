@@ -44,7 +44,6 @@
 							<input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요.">
 							<button class ="searchbnt" type="submit">검색</button>
 						</form>
-						<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
 					</div>
 					<!--/content-bnt-->
 					<div class="table">

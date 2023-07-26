@@ -40,11 +40,11 @@ public class GalleryController {
 		System.out.println("clubId : " + clubId);
 
 		List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
-
+		List<GalleryImgVo> galleryImgVos = galleryService.getGalleryListAll(clubId);
 		// 각주 추가: 클럽 Id 로 clubVo 가저오기
 		ClubVo clubVo = clubService.getClubVo(clubId);
 		model.addAttribute("club", clubVo);
-
+		model.addAttribute("galleryList", galleryImgVos);
 		model.addAttribute("meetList", gMeetVos);
 
 		return "/gallery/gallery";
@@ -155,9 +155,18 @@ public class GalleryController {
         System.out.println("memberId : " + memberId);
 
         List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
-
+        List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
+        
         model.addAttribute("meetList", mList);
+        model.addAttribute("galleryList", gList);
+        
+        List<ClubVo> clubVos = clubService.getMemClub(memberId);
 
+        String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
+                .collect(Collectors.joining(","));
+        System.out.println(clubIdsString);
+        model.addAttribute("clubIdsString", clubIdsString);
+        
         return "/member_diary/member_gallery";
     }
 }

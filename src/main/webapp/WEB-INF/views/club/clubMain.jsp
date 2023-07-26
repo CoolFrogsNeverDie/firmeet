@@ -25,27 +25,21 @@
 	color: white;
 }
 
+.content-area {
+	width: 100%;
+	height: 82%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 .carousel-inner {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-	background-color: #222222;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
-
-.carousel-item {
-	position: absolute;
-	display: none;
-	float: left;
-	width: 100%;
-	margin-right: -100%;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	transition: transform .6s ease-in-out;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-
 </style>
 </head>
 
@@ -65,22 +59,23 @@
 			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 59%; height: 90%; display: inline-block; margin-top: 10px;">
-					<div class="carousel-inner" style="height: 100%;">
-						<c:forEach var="img" items="${gImgVos}" varStatus="status">
-							<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-								<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
-							</div>
-						</c:forEach>
+				<div class="content-left">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+						<div class="carousel-inner">
+							<c:forEach var="img" items="${gImgVos}" varStatus="status">
+								<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+									<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
+								</div>
+							</c:forEach>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+						</button>
 					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
-					</button>
 				</div>
-
 				<!--/content-left-->
 				<div class="content-right">
 					<div class="announcement">
@@ -117,9 +112,8 @@
 		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
 		<!--/wrap-->
 </body>
-
-<script src="${pageContext.request.contextPath}/assets/js/imgSlider.js"></script>
+<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
 <script>
-	
+    
 </script>
 </html>
