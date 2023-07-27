@@ -38,7 +38,7 @@ public class GalleryController {
 	public String galleryList(@PathVariable("clubId") int clubId, Model model) {
 		System.out.println("galleryList 확인");
 		System.out.println("clubId : " + clubId);
-
+		
 		List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
 		List<GalleryImgVo> galleryImgVos = galleryService.getGalleryListAll(clubId);
 		// 각주 추가: 클럽 Id 로 clubVo 가저오기

@@ -24,6 +24,7 @@ public class ClubService {
 	@Autowired
 	private ClubDao clubDao;	
 	
+	// 클럽 생성 메서드
 	public void make(ClubVo clubVo , MemberVo memberVo, MultipartFile[] files) {
 		System.out.println("ClubService.make()");
 		System.out.println(clubVo);
@@ -61,43 +62,54 @@ public class ClubService {
 		
 		
 		}
+	
+	// 클럽 목록 조회 메서드
 	public List<ClubVo> clubList(int clubId) {
 		List<ClubVo> clubVo = clubDao.clubList(clubId);
 		return clubVo;
 	}
 	
+	// 클럽 가입 처리 메서드
 	public void clubJoin(ClubVo clubVo , MemberVo memberVo ,ClubMemVo clubMemVo){
 		clubDao.clubJoinMem(clubVo,memberVo);
 	}
 
+	// 회원이 가입한 클럽 목록 조회 메서드
 	public List<ClubVo> getMemClub(String memberId) {
 		List<ClubVo> clubVos = clubDao.getMemClub(memberId);
 		
 		return clubVos;
 	}
 	
+	
+	// 클럽 관리자 권한 설정 메서드
 	public void adminMem(String id) {
 		System.out.println("ClubService.adminMem");
 	}
 	
+	// 클럽 정보 조회 메서드
 	/*클럽 dao에서 호출 중*/
 	public ClubVo getClubVo(int clubId) {
 		ClubVo clubVo = clubDao.getClubVo(clubId);
 		return clubVo;
 	}
 	
+	// 태그 정보 조회 메서드
 	public TagVo selectTag(int tagNo) {
 		TagVo selectedTag = clubDao.selectTag(tagNo);
 		
 		return selectedTag;
 	}
 	
-	public ClubVo checkMemLevel(int clubId) {
+	// 클럽 멤버 레벨 확인 메서드
+	public ClubVo checkMemLevel(String memberId, int clubId) {
 		
-		ClubVo checkMemLevel = clubDao.checkMemLevel(clubId);
+		ClubVo checkMemLevel = clubDao.checkMemLevel(memberId,clubId);
 		
 		return checkMemLevel;
 	}
+	
+    // 클럽 이미지 업로드 메서드
 	public String clubImgUpload(MultipartFile file) {
 		String saveDir = "C:\\firmeet\\upload";
 

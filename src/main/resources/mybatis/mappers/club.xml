@@ -3,131 +3,158 @@
 
 <mapper namespace="club">
 
-
-	<select id="getMemClub" parameterType="String" resultType="club">
-	 	<![CDATA[
-			  	select 
-	                a.clubName
-	                ,a.clubId
-	                from club a join club_member b on a.clubId = b.clubId
-	            where b.memberId = #{memberId}	
-	 	]]>
-	</select>
-	<select id="clubSum" parameterType="int" resultType="com.firmeet.vo.ClubVo">
-		<![CDATA[
-			select clubName, 
-				   intro1,
-				   img2
-			from club
-			where clubId = #{clubId}
-			]]>
-	
-	</select>
-	
-	
-
-	<select id="getClubVo" parameterType="int" resultType="club">
-	 	<![CDATA[
-			  	select 
-	                clubId
-	                ,clubName
-	                ,cre_date
-	                ,max
-	                ,preNum
-	                ,intro1
-					,intro2
-					,address1
-					,address2
-					,img1
-					,img2
-					,detailT
-					,detailL
-					,detailP
-					,detailE
-					,detailW
-	                from club
-	            where clubId = #{clubId}	
-	 	]]>
-	</select>
-
-	<insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
-		<selectKey resultType="int" order="BEFORE"
-			keyProperty="clubId">
-			select seq_clubId.nextval from dual
-		</selectKey>
+    <!-- 회원이 가입한 클럽 목록 조회 쿼리 -->
+    <select id="getMemClub" parameterType="String" resultType="club">
         <![CDATA[
-           insert into club(clubId,clubName,cre_date,max,preNum,intro1,intro2,address1,
-                        address2,detailT,detailL,detailP,detailE,detailW, img1, img2)
-                    values(#{clubId}, #{clubName}, sysdate, #{max}, 1,
-                          #{intro1}, #{intro2}, #{address1}, #{address2},
-                          #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW}, #{img1},#{img2})
-       ]]>
-	</insert>
-	<insert id="insertImg" parameterType="com.firmeet.vo.ClubVo">
-		      <![CDATA[
-		           insert into club(img1,img2)
-		                    values(#{img1},#{img2})
-		       ]]>
+            SELECT
+                a.clubName,
+                a.clubId
+            FROM
+                club a
+                JOIN club_member b ON a.clubId = b.clubId
+            WHERE
+                b.memberId = #{memberId}
+        ]]>
+    </select>
 
-	</insert>
+    <!-- 클럽 정보 조회 쿼리 -->
+    <select id="clubSum" parameterType="int" resultType="com.firmeet.vo.ClubVo">
+        <![CDATA[
+            SELECT
+                clubName,
+                intro1,
+                img2
+            FROM
+                club
+            WHERE
+                clubId = #{clubId}
+        ]]>
+    </select>
 
-	<insert id="insertClubCate"
-		parameterType="com.firmeet.vo.CategoryVo">
-		<![CDATA[	
-			insert into club_category (clubCateNo,clubId,cateNo)
-			values(SEQ_CLUB_CATEGORY_NO.nextval,#{clubId},#{cateNo})
-		
-		 ]]>
-	</insert>
+    <!-- 클럽 정보 조회 쿼리 -->
+    <select id="getClubVo" parameterType="int" resultType="club">
+        <![CDATA[
+            SELECT
+                clubId,
+                clubName,
+                cre_date,
+                max,
+                preNum,
+                intro1,
+                intro2,
+                address1,
+                address2,
+                img1,
+                img2,
+                detailT,
+                detailL,
+                detailP,
+                detailE,
+                detailW
+            FROM
+                club
+            WHERE
+                clubId = #{clubId}
+        ]]>
+    </select>
 
-	<insert id="insertClubTag" parameterType="com.firmeet.vo.TagVo">
-		<![CDATA[	
-			insert into club_tag (clubTagNo,clubId,tagNo)
-			values(SEQ_CLUB_TAGNO.nextval,#{clubId},#{tagNo})
-		
-		 ]]>
-	</insert>
+    <!-- 클럽 생성 쿼리 -->
+    <insert id="insertClub" parameterType="com.firmeet.vo.ClubVo">
+        <selectKey resultType="int" order="BEFORE" keyProperty="clubId">
+            SELECT seq_clubId.nextval FROM dual
+        </selectKey>
+        <![CDATA[
+            INSERT INTO club (
+                clubId,
+                clubName,
+                cre_date,
+                max,
+                preNum,
+                intro1,
+                intro2,
+                address1,
+                address2,
+                detailT,
+                detailL,
+                detailP,
+                detailE,
+                detailW,
+                img1,
+                img2
+            )
+            VALUES (
+                #{clubId},
+                #{clubName},
+                sysdate,
+                #{max},
+                1,
+                #{intro1},
+                #{intro2},
+                #{address1},
+                #{address2},
+                #{detailT},
+                #{detailL},
+                #{detailP},
+                #{detailE},
+                #{detailW},
+                #{img1},
+                #{img2}
+            )
+        ]]>
+    </insert>
 
-	<insert id="insertAdmin"
-		parameterType="com.firmeet.vo.ClubMemVo">
-     	<![CDATA[	
-     			insert into club_member (clubMemNo, memberId, clubId, memLevel, joinDate)
-     			values(SEQ_CLUB_MEMNO.nextVal, #{memberId}, #{clubId}, 0, sysdate)
-      	]]>
-	</insert>
+    <!-- 클럽 카테고리 정보 삽입 쿼리 -->
+    <insert id="insertClubCate" parameterType="com.firmeet.vo.CategoryVo">
+        <![CDATA[
+            INSERT INTO club_category (clubCateNo, clubId, cateNo)
+            VALUES (SEQ_CLUB_CATEGORY_NO.nextval, #{clubId}, #{cateNo})
+        ]]>
+    </insert>
 
+    <!-- 클럽 태그 정보 삽입 쿼리 -->
+    <insert id="insertClubTag" parameterType="com.firmeet.vo.TagVo">
+        <![CDATA[
+            INSERT INTO club_tag (clubTagNo, clubId, tagNo)
+            VALUES (SEQ_CLUB_TAGNO.nextval, #{clubId}, #{tagNo})
+        ]]>
+    </insert>
 
-	<insert id="insertJoinMem"
-		parameterType="com.firmeet.vo.ClubMemVo">
-     <![CDATA[	
-     			insert into club_member (memberId, memLevel)
-     			values( #{memberId},-10)
-      	]]>
-	</insert>
+    <!-- 클럽 관리자 정보 삽입 쿼리 -->
+    <insert id="insertAdmin" parameterType="com.firmeet.vo.ClubMemVo">
+        <![CDATA[
+            INSERT INTO club_member (clubMemNo, memberId, clubId, memLevel, joinDate)
+            VALUES (SEQ_CLUB_MEMNO.nextVal, #{memberId}, #{clubId}, 0, sysdate)
+        ]]>
+    </insert>
 
+    <select id="getClubName" parameterType="board" resultType="String">
+        <![CDATA[
+            SELECT
+                clubName
+            FROM
+                club
+            WHERE
+                clubId = #{clubId}
+        ]]>
+    </select>
 
-	<select id="getClubName" parameterType="board"
-		resultType="String">
-		<![CDATA[
-			select 
-				clubName 
-			from club 
-			where clubId = #{clubId}
-		]]>
-	</select>
-
-	<select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
-		<![CDATA[
-			SELECT
-			    a.clubid,
-			    clubname,
-			    b.memberid
-			FROM
-			    club a
-			    JOIN club_member b ON a.clubid = b.clubid
-			WHERE
-			    memlevel = 0
-			    AND a.clubid = #{clubId}
-		]]>
-	</select>
+    <!-- 클럽 멤버 레벨 확인 쿼리 -->
+    <select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
+        <![CDATA[
+            SELECT
+                a.clubid,
+                clubname,
+                cre_date,
+                max,
+                img1,
+                img2,
+                memlevel
+            FROM
+                club a
+                JOIN club_member b ON a.clubid = b.clubid
+            WHERE
+                a.clubid = #{clubId}
+                AND b.memberid = #{memberId}
+        ]]>
+    </select>
 </mapper>

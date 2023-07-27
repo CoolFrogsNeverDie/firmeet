@@ -21,8 +21,8 @@
 </div>
 <!--/menu-bar-->
 <c:choose>
-    <c:when test="${club.memberId eq member.memberId}">
-        <button id="addButton" style="background-color: #ffffff; width: 80px; height: 50px; position: absolute; right: 267px; top: 634px;"><i class="fa fa-cog" aria-hidden="true"></i></button>
+    <c:when test="${club.memlevel eq 0}">
+        <button id="addButton" style="background-color: #ffffff;width: 80px;height: 50px;position: absolute;right: 267px;top: 634px;font-size: xx-large;"><i class="fa fa-cog" aria-hidden="true"></i></button>
     </c:when>
 </c:choose>
 </div>

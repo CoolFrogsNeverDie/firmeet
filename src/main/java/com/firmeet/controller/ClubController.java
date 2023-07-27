@@ -41,24 +41,39 @@ public class ClubController {
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 
-	// 각주 추가: 클럽 Id 로 clubVo 가저오기
-		@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-		public String clubMain(@PathVariable int clubId, Model model) {
-			System.out.println("ClubController.clubMain()");
-				//관리자 등급 확인용
-				ClubVo club = clubService.checkMemLevel(clubId);
-				model.addAttribute("club", club);
-				
-				List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
-				model.addAttribute("gImgVos", gImgVos);
-				
-		        List<NoticeBoardVO> nList= noticeBoardService.noticeList();
-				System.out.println(nList);
-		        
-		        model.addAttribute("noticeList", nList);
+    // 클럽 메인 페이지 조회
+    @RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String clubMain(@PathVariable int clubId, Model model, HttpSession session) {
+        // 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+        MemberVo member = (MemberVo) session.getAttribute("member");
 
-				return "/club/clubMain";
-		}
+        String memberId = null;
+
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList();
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+            return "/club/clubMain";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+    }
 
 	@RequestMapping(value = "/makingForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clubMakingForm(Model model) {
