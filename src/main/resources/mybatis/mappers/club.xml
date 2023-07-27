@@ -13,6 +13,18 @@
 	            where b.memberId = #{memberId}	
 	 	]]>
 	</select>
+	<select id="clubSum" parameterType="int" resultType="com.firmeet.vo.ClubVo">
+		<![CDATA[
+			select clubName, 
+				   intro1,
+				   img2
+			from club
+			where clubId = #{clubId}
+			]]>
+	
+	</select>
+	
+	
 
 	<select id="getClubVo" parameterType="int" resultType="club">
 	 	<![CDATA[
@@ -45,10 +57,10 @@
 		</selectKey>
         <![CDATA[
            insert into club(clubId,clubName,cre_date,max,preNum,intro1,intro2,address1,
-                        address2,detailT,detailL,detailP,detailE,detailW)
+                        address2,detailT,detailL,detailP,detailE,detailW, img1, img2)
                     values(#{clubId}, #{clubName}, sysdate, #{max}, 1,
                           #{intro1}, #{intro2}, #{address1}, #{address2},
-                          #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW})
+                          #{detailT}, #{detailL}, #{detailP}, #{detailE},#{detailW}, #{img1},#{img2})
        ]]>
 	</insert>
 	<insert id="insertImg" parameterType="com.firmeet.vo.ClubVo">
@@ -102,7 +114,7 @@
 			from club 
 			where clubId = #{clubId}
 		]]>
-	</select>
+	</select> -
 
 	<select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
 		<![CDATA[

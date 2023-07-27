@@ -56,7 +56,7 @@ public class ClubDao {
 	 }
 	 
 	 public List<ClubVo> clubList(int clubId) {
-		 List<ClubVo> clubVo = session.selectList("club.getClubVo",clubId);
+		 List<ClubVo> clubVo = session.selectList("club.clubSum",clubId);
 		 return clubVo;
 	 }
 	 
@@ -70,14 +70,14 @@ public class ClubDao {
 		 return session.selectOne("club.getClubName", boardVO);
 	 }
 	 
-
+	 /*클럽 서비스에서 호출한 놈*/
 	public ClubVo getClubVo(int clubId) {
 		
-		ClubVo clubVo= session.selectOne("club.getClubVo", clubId);
+	ClubVo clubVo= session.selectOne("club.getClubName", clubId);
 		
-		System.out.println(clubVo);
+	System.out.println(clubVo); 
+	return clubVo;
 		
-		return clubVo;
 	}
 	
 	 public TagVo selectTag(int tagNo) {

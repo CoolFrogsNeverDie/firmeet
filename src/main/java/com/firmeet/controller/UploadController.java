@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.service.ClubService;
@@ -20,15 +21,16 @@ public class UploadController {
 	@Autowired
 	private UploadService uploadService;
 	
-	@Autowired 
-	private ClubService clubService;
 	
-	@RequestMapping(value="/clubImg", method= RequestMethod.GET)
 	
-	public String clubMainImg(@RequestParam("file") MultipartFile file,
+	@ResponseBody
+	@RequestMapping(value="/clubimg", method= RequestMethod.POST)
+	
+	public String clubMainImg(@RequestParam("uploadFile") MultipartFile file,
 							 @ModelAttribute UploadVo uploadVo,
 							 @ModelAttribute ClubVo clubVo, Model model) {
 		System.out.println("UploadController.clubMainImg()");
+	
 		
 		uploadService.clubImgUpload(file , uploadVo ,clubVo);
 		return"";

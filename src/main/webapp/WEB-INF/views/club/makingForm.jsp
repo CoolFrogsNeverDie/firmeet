@@ -201,7 +201,7 @@
       <h2>퍼밋 동호회 등록</h2>
     </div>
     <div id="cm_body">
-        <form action="${pageContext.request.contextPath }/club/making">
+        <form action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
           <div class="row g-3">
             <div>
                 <label for="firstName">모임명</label>
@@ -288,25 +288,23 @@
                 <label for="firstName">메인 이미지</label><br>
                 <img id="mainImg" src="" class="box7" width="150px" height="150px">
                 <div class="box-file-input box9"><label>
-                    <input id="img2" type="file" name="img2" value="main" class="file-input" formation="/upload/clubImg"
-                    		enctype="multipart/form-data"></label>
-                    <!-- <span class="filename">파일을 선택해주세요.</span> -->
+                <input id="img2" type="file" name="file" value="" class="imgFile file-input"></label>
+                <!-- <span class="filename">파일을 선택해주세요.</span> -->
                 </div>
             </div>
             <div class="col-sm-12">
                 <label for="firstName">배경 이미지</label></br>
                 <img id="bgImg" src=""  class="box7" width="200px" height="150px">
                 <div class="box-file-input box9"><label>
-                    <input id="img1" type="file" name="img1" value="bg" class="file-input" formation="/upload/clubImg"
-                    		enctype="multipart/form-data"></label>
-                   <!--  <span class="filename">파일을 선택해주세요.</span> -->
+                <input id="img1" type="file" name="file" value="" class="imgFile file-input"></label>
+                 <span class="filename">파일을 선택해주세요.</span>
                 </div>
             </div>
           </div>
           <hr class="my-8">
           <div style="text-align: center;">
             <button class="w-10 btn btn-secondary btn-sm" type="submit"  style="margin-right: 20px;">동호회 등록</button>
-            <button class="w-10 btn btn-secondary btn-sm" type="button">미리보기</button>
+            <button class="w-10 btn btn-secondary btn-sm" type="button" id="btnSubmit">미리보기</button>
           </div>
         </br>
         </form>
@@ -394,6 +392,31 @@ for(i=0; i<$(target).length; i++){
 
 <script>
 
+	//태그를 클릭했을때 아래쪽 그린다
+	$(".tags").on("click", function(){
+		var tagList= [];
+		
+		$("#selectedTag").empty();
+		
+		$('input[name="tagNo"]:checked').each(function(i){
+			 tagList.push($(this).data("tagname")); 
+			
+			 let tagName = $(this).data("tagname")
+			 
+			 /* console.log($(this).data("tagname")) */
+			 /*
+			 for(int i=0; i>tagList.length(); i++){
+				 if($this.val()!=tagList.[i]){
+					 $("#selTag").append("<li>"+$(this).val()+"<li>");
+				 }
+			 }
+			 */
+			 let str = "<li class='tagLabel'>"+tagName+"</li>"
+			 $("#selectedTag").append(str);
+			
+			 
+		});
+
 	$("#img1").on("change", function(event) {
 	
 	    var file = event.target.files[0];
@@ -419,43 +442,11 @@ for(i=0; i<$(target).length; i++){
 	    reader.readAsDataURL(file);
 	});
 
-	//태그를 클릭했을때 아래쪽 그린다
-	$(".tags").on("click", function(){
-		var tagList= [];
-		
-		$("#selectedTag").empty();
-		
-		$('input[name="tagNo"]:checked').each(function(i){
-			 tagList.push($(this).data("tagname")); 
-			
-			 let tagName = $(this).data("tagname")
-			 
-			 /* console.log($(this).data("tagname")) */
-			 /*
-			 for(int i=0; i>tagList.length(); i++){
-				 if($this.val()!=tagList.[i]){
-					 $("#selTag").append("<li>"+$(this).val()+"<li>");
-				 }
-			 }
-			 */
-			 let str = "<li class='tagLabel'>"+tagName+"</li>"
-			 $("#selectedTag").append(str);
-			
-		});
 		 
-	});
-</script>
-<script>
-
-
-
-$(document).ready(function(){
-	
-			
-		
-	
 });
+	
 </script>
+
 
 
 </html>

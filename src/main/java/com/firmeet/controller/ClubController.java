@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
@@ -87,14 +88,20 @@ public class ClubController {
 	/* 클럽 만들기 */
 
 	@RequestMapping(value = "/making", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubMake(@ModelAttribute ClubVo clubVo, HttpSession session, Model model) {
+	public String clubMake(@ModelAttribute ClubVo clubVo, 
+						   @RequestParam("file") MultipartFile[] files,
+						   HttpSession session, 
+						   Model model
+							){
 		System.out.println("ClubController.clubMaking()");
 		System.out.println("넘어온 VO  확인" + clubVo);
+		System.out.println("넘어온 VO  확인" + files[0].getOriginalFilename() );
+		System.out.println("넘어온 VO  확인" + files[1].getOriginalFilename() );
 
-		MemberVo id = (MemberVo) session.getAttribute("member");
-		System.out.println(id);
+		MemberVo authVo= (MemberVo)session.getAttribute("member");
+		System.out.println(authVo);
 
-		clubService.make(clubVo, id);
+		clubService.make(clubVo, authVo , files);
 
 		List<TagVo> tagList = memberService.tagList();
 		List<CategoryVo> cateList = memberService.cateList();
