@@ -218,9 +218,9 @@ a{text-decoration: none; color: #212121;}
 <body>
     <div class="wrap">
         <!--메인라인-->
-        <div class="back-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/${clubVo.img2}" >배경 이미지</div>
+        <div class="back-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img2}" >배경 이미지</div>
         <div class="color-box">
-            <div class="main-img"><img src="https://sitem.ssgcdn.com/64/46/21/item/1000524214664_i1_500.jpg"
+            <div class="main-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
                 <h1>어푸어푸 ${clubVo.clubName}</h1>

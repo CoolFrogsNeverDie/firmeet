@@ -54,10 +54,10 @@ public class MainController {
 		model.addAttribute("cateList", cateList);
 		//System.out.println(cateList);
 		
-		;
+		
 		ClubVo clubVo = new ClubVo();
 		System.out.println(clubVo.getClubId());
-		List<ClubVo> clubList = clubService.clubList(clubVo.getClubId());
+		List<ClubVo> clubList = clubService.clubList();
 		model.addAttribute("clubList",clubList); 
 		System.out.println(clubList);
 		 

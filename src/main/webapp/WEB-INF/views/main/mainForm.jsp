@@ -146,36 +146,6 @@
         font-weight: 600;
     }
 
-    #keyword #select_tag {
-        border: 1px solid #333;
-        overflow-y: scroll;
-        margin: 15px;
-        width: 800px;
-        height: 100px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding-top: 10px;
-    
-        
-    }
-
-
-   #select_tag button {
-        width: 100px;
-        height: 30px;
-        font-size: 14px;
-        border-radius: 30px;
-        color: white;
-        background-color: #111;
-        border: none;
-    }
-
-    #select_tag button:hover {
-        color: #444;
-        background-color: #eee;
-
-    }
 
     #keyword>input[type =search]{
         display: block;
@@ -185,15 +155,67 @@
         transform: translateX(600px); 
     }
    
-    #keyword #select {
-        border-top: 2px dotted #fff;
-        margin: 30px;
-        display: flex;
-        gap: 10px;
-    }
     #keyword #select li{
         transform: translateY(20px);
-    }
+    } 
+    
+    
+    #select_tag{
+            margin:-24px 0px 0px 105px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 700px;
+            height: 100px;
+            overflow-y: scroll;
+            position:relative;
+        }
+   #select_tag .tags{
+        	position:absolute;
+            width: 1px;
+            height: 1px;
+            padding:0;
+            margin: -1px;
+            font-size: 10px;
+            overflow:hidden;
+            border:none;
+            background: transparent;     
+        }
+    .tagLabel{
+        	display:block;
+        	text-align:center;
+        	width:110px;
+        	height:25px;
+        	font-size:13px;
+        	font-weight:200;
+        	border-radius:5px;
+        	padding:2px;
+        	background-color:#bbb;
+        }
+        
+    #select_tag .tags:checked+.tagLabel{
+        	background-color:#000;
+        	color:#eee;
+        }
+    #selTag {
+        	display:flex;
+         	margin-top:15px;
+         
+        }
+        
+    #selectedTag{
+        	margin-left:15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 600px;
+            height: 50px;
+            overflow-y: scroll;
+            position:relative;
+        }
+    #selectedTag::-webkit-scrollbar{
+        	display: none;
+   		 }
 
     #search_btn {
         font-size: 15px;
@@ -311,21 +333,23 @@
             <p>원하는 키워드</p>
             
             <ul id="select_tag">
-                 <c:forEach items="${tagList}" var="tag">
-				 	<li><button type="button"class="tagbtn" value="${tag.tagNo}">${tag.tagName}</button></li>
+                  <c:forEach items="${tagList}" var="tag">
+				 	<li>
+				 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
+				 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
+				 	</li>
 				 </c:forEach>
             </ul>
 
-            <input type="search">
+           <!--  <input type="search"> -->
 
 
-            <ul id="select">
-                <li><span>select1</span></li>
-                <li><span>select2</span></li>
-                <li><span>select3</span></li>
-                <li><span>select4</span></li>
-                <li><span>select5</span></li>
-            </ul>
+            <div id="selTag">
+	               <p>선택된 태그</p>
+	              	<ul id="selectedTag">
+	              	
+	              	</ul>
+            	</div>
         </div> 
         <button type="submit" id="search_btn">검색하기</button>
     </form>
@@ -483,7 +507,34 @@ for(i=0; i<$(target).length; i++){
     }
 }
 </script>
+<script>
+$(".tags").on("click", function(){
+	var tagList= [];
+	
+	$("#selectedTag").empty();
+	
+	$('input[name="tagNo"]:checked').each(function(i){
+		 tagList.push($(this).data("tagname")); 
+		
+		 let tagName = $(this).data("tagname")
+		 
+		 /* console.log($(this).data("tagname")) */
+		 /*
+		 for(int i=0; i>tagList.length(); i++){
+			 if($this.val()!=tagList.[i]){
+				 $("#selTag").append("<li>"+$(this).val()+"<li>");
+			 }
+		 }
+		 */
+		 let str = "<li class='tagLabel'>"+tagName+"</li>"
+		 $("#selectedTag").append(str);
+		
+		 
+	});
+});	
 
+
+</script>
 
 
 

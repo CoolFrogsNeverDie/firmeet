@@ -59,8 +59,8 @@ public class ClubDao {
 	 }
 	 
 	 // 클럽 목록 조회 메서드
-	 public List<ClubVo> clubList(int clubId) {
-		 List<ClubVo> clubVo = session.selectList("club.clubSum",clubId);
+	 public List<ClubVo> clubList() {
+		 List<ClubVo> clubVo = session.selectList("club.clubSum");
 		 return clubVo;
 	 }
 	 public ClubVo clubInfo(int clubId) {

@@ -93,16 +93,15 @@
     </insert>
     
        <!-- 클럽 정보 조회 쿼리 -->
-      <select id="clubSum" parameterType="int" resultType="com.firmeet.vo.ClubVo">
+      <select id="clubSum"  parameterType="int" resultType="com.firmeet.vo.ClubVo">
         <![CDATA[
             SELECT
+            	clubId,
                 clubName,
                 intro1,
                 img2
             FROM
                 club
-            WHERE
-                clubId = #{clubId}
         ]]>
     </select>
 
@@ -130,11 +129,11 @@
         ]]>
     </insert>
     
-    <insert id="inserMem"
+    <insert id="insertMem"
 		parameterType="com.firmeet.vo.ClubMemVo">
      <![CDATA[	
-     			insert into club_member (memberId,clubId ,memLevel)
-     			values( #{memberId}, #{clubId},-10)
+     			INSERT INTO club_member (clubMemNo,memberId,clubId)
+     			VALUES (SEQ_CLUB_MEMNO.nextVal, #{memberId},  #{clubId})
       	]]>
 	</insert>
 

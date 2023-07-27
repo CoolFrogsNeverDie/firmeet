@@ -64,8 +64,8 @@ public class ClubService {
 		}
 	
 	// 클럽 목록 조회 메서드
-	public List<ClubVo> clubList(int clubId) {
-		List<ClubVo> clubVo = clubDao.clubList(clubId);
+	public List<ClubVo> clubList() {
+		List<ClubVo> clubVo = clubDao.clubList();
 		return clubVo;
 	}
 	public ClubVo clubInfo(int clubId) {
@@ -115,7 +115,7 @@ public class ClubService {
 	
     // 클럽 이미지 업로드 메서드
 	public String clubImgUpload(MultipartFile file) {
-		String saveDir = "C:\\firmeet\\upload";
+		String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images";
 
 		System.out.println("UploadService.clubImgUpload()");
 

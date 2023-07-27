@@ -130,15 +130,17 @@ public class ClubController {
 							Model model) {
 		System.out.println("ClubController.clubJoin()");
 		System.out.println(clubId);
-//		clubMemVo.setMemberId(memberVo.getMemberId());
 		ClubMemVo clubMemVo = new ClubMemVo();
 		clubMemVo.setClubId(clubId);
 		MemberVo member = (MemberVo)session.getAttribute("member");
 		clubMemVo.setMemberId(member.memberId);
 		
+		
+		System.out.println(clubMemVo);
+		
 		clubService.clubJoin(clubMemVo);
 		
-		return "redirect:main/mainForm";
+		return "redirect:/main/mainForm";
 
 	}
 
