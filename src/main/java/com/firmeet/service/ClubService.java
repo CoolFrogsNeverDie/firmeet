@@ -68,10 +68,14 @@ public class ClubService {
 		List<ClubVo> clubVo = clubDao.clubList(clubId);
 		return clubVo;
 	}
+	public ClubVo clubInfo(int clubId) {
+		ClubVo clubVo = clubDao.clubInfo(clubId);
+		return clubVo;
+	}
 	
 	// 클럽 가입 처리 메서드
-	public void clubJoin(ClubVo clubVo , MemberVo memberVo ,ClubMemVo clubMemVo){
-		clubDao.clubJoinMem(clubVo,memberVo);
+	public void clubJoin(ClubMemVo clubMemVo){
+		 clubDao.clubJoinMem(clubMemVo);
 	}
 
 	// 회원이 가입한 클럽 목록 조회 메서드

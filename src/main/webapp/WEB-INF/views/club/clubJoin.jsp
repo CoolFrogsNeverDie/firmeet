@@ -218,17 +218,19 @@ a{text-decoration: none; color: #212121;}
 <body>
     <div class="wrap">
         <!--메인라인-->
-        <div class="back-img">배경 이미지</div>
+        <div class="back-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/${clubVo.img2}" >배경 이미지</div>
         <div class="color-box">
             <div class="main-img"><img src="https://sitem.ssgcdn.com/64/46/21/item/1000524214664_i1_500.jpg"
                     class="main-img-file"></div>
             <div class="club-title">
-                <h1>어푸어푸</h1>
+                <h1>어푸어푸 ${clubVo.clubName}</h1>
             </div><br>
-            <div class="club-memeber-cnt">(1/5)</div>
-            <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!</div>
+            <div class="club-memeber-cnt">(${clubVo.preNum}/${clubVo.max})</div>
+            <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
             <div class="club-tag">#성인수영 #새벽수영 #갓생 #친목 #운동러버 #초보환영</div>
-            <div class="join-btn-area"><button type="button" class="join-btn" onclick="location.href='${pageContext.request.contextPath }/club/clubJoin'">가입 신청</button></div>
+            <div class="join-btn-area">
+            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn">회원가입</button></a>
+            </div>
         </div>
         <!--메인라인 종료-->
 
@@ -244,6 +246,8 @@ a{text-decoration: none; color: #212121;}
                 <br>8/1 한강 수영대회 대비 집중 운동기간입니다.
                 <br>대회 준비하시는 분들 들어오셔서 함께 준비해요!
                 <br>궁금하신 점은 문의 게시판으로 편하게 문의 주세요-!
+                <br><br>
+                ${clubVo.intro2}
             </div>
         </div>
         <!--상세 설명 end-->
@@ -257,31 +261,32 @@ a{text-decoration: none; color: #212121;}
                 <tr>
                     <td class="info-icon"><i class="fa fa-clock-o " aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>매주화목금 아침 7시</p>
+                        <p>매주화목금 아침 7시
+                        ${clubVo.detailT}</p>
                     </td>
                     <td class="info-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>연 2회 회식</p>
+                        <p>연 2회 회식
+                        	${clubVo.detailE}</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="info-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>성수동 근처</p>
+                        <p>성수동 근처
+                        	${clubVo.detailL}</p>
                     </td>
                     <td class="info-icon"><i class="fa fa-cloud" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>날씨 상관 없음!</p>
+                        <p>날씨 상관 없음!
+                        ${clubVo.detailW}</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="info-icon"><i class="fa fa-commenting-o" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>단톡방 있음</p>
-                    </td>
-                    <td class="info-icon"></td>
-                    <td class="info">
-                        <P>공란</p>
+                        <p>단톡방 있음
+                        ${clubVo.detailP}</p>
                     </td>
                 </tr>
             </table>
@@ -326,9 +331,9 @@ a{text-decoration: none; color: #212121;}
 
         <!--답답해 보이지 않게 스크롤 늘여주는 div-->
         <div class="clear"></div>
-
+			${clubVo.clubId}
         <div class= "join-btn-last">
-            <button type="button" class= "join-btn">회원가입</button>
+            <a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn">회원가입</button></a>
         </div>
     </div>
 </body>
@@ -578,4 +583,6 @@ $('.qna-btn').on("click", function(){
 
 }); //문의하기 버튼 눌리면
 </script>
+
+
 </html>

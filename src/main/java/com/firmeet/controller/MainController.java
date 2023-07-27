@@ -1,7 +1,8 @@
 package com.firmeet.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,10 @@ import com.firmeet.service.GalleryService;
 import com.firmeet.service.MemberService;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
-import com.firmeet.vo.MeetVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.TagVo;
 
@@ -43,22 +45,22 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/mainForm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainList(Model model) {
+	public String mainList(Model model, HttpSession session) {
 		List<TagVo> tagList = memberService.tagList();
 		model.addAttribute("tagList", tagList);
-		System.out.println(tagList);
+		//System.out.println(tagList);
 		
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
-		System.out.println(cateList);
+		//System.out.println(cateList);
 		
+		;
 		ClubVo clubVo = new ClubVo();
-		clubVo.setClubId(clubVo.getClubId());
-		
-		List<ClubVo> clubList = clubService.clubList(clubVo.clubId);
-		model.addAttribute("clubList",clubList);
+		System.out.println(clubVo.getClubId());
+		List<ClubVo> clubList = clubService.clubList();
+		model.addAttribute("clubList",clubList); 
 		System.out.println(clubList);
-		
+		 
 		return "/main/mainForm";
 	}
 

@@ -338,13 +338,13 @@
         <c:forEach items="${clubList}" var="clubs" >
             <li>
                 <a href="http://localhost:8000/firmeet/club/joinForm/${clubs.clubId}">
-                    <img src="C:/firmeet/upload/clubImg/${clubs.img2}" alt="사진 1" class="meetPhoto">
+                    <img src="../assets/images/clubimg/${clubs.img2}" alt="사진 1" class="meetPhoto">
                     <p class="meetTitle">${clubs.clubName} 모임제목</p>
                     <p class="meetContent">${clubs.intro1} 모임 내용</p>
                 </a>
             </li>
         </c:forEach>
-            <li>
+          <!--   <li>
                 <a href="">
                     <img src="" alt="사진 2" class="meetPhoto">
                     <p class="meetTitle">모임 제목 제목</p>
@@ -412,7 +412,7 @@
                 <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
             </li>
 
-            
+             -->
             
         </ul>
     </div>

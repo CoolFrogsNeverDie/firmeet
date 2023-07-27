@@ -114,24 +114,31 @@ public class ClubController {
 	}
 
 	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubForm(@PathVariable int clubId) {
+	public String clubForm(@PathVariable int clubId, Model model) {
 		System.out.println("ClubController.clubForm()");
 		System.out.println(clubId);
-		/* clubService.clubList(clubId); */
-		return "/club/clubJoin";
+		ClubVo clubVo = clubService.clubInfo(clubId);
+		model.addAttribute("clubVo" , clubVo);
+	 return "/club/clubJoin";
 	}
 
 	/* 클럽 가입 하기 */
 
-	@RequestMapping(value = "/clubJoin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubJoin(@ModelAttribute ClubVo clubVo, @ModelAttribute MemberVo memberVo,
-			@ModelAttribute ClubMemVo clubMemVo, Model model) {
+	@RequestMapping(value = "/clubJoin/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String clubJoin(	@PathVariable("clubId") int clubId,
+							HttpSession session,
+							Model model) {
 		System.out.println("ClubController.clubJoin()");
-		clubMemVo.setMemberId(memberVo.getMemberId());
-		clubMemVo.setClubId(clubVo.getClubId());
-		/* clubService.clubJoin(clubVo, memberVo,clubMemVo); */
-		System.out.println(clubMemVo);
-		return "/club/clubJoin";
+		System.out.println(clubId);
+//		clubMemVo.setMemberId(memberVo.getMemberId());
+		ClubMemVo clubMemVo = new ClubMemVo();
+		clubMemVo.setClubId(clubId);
+		MemberVo member = (MemberVo)session.getAttribute("member");
+		clubMemVo.setMemberId(member.memberId);
+		
+		clubService.clubJoin(clubMemVo);
+		
+		return "redirect:main/mainForm";
 
 	}
 

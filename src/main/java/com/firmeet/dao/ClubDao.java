@@ -63,11 +63,15 @@ public class ClubDao {
 		 List<ClubVo> clubVo = session.selectList("club.clubSum",clubId);
 		 return clubVo;
 	 }
+	 public ClubVo clubInfo(int clubId) {
+		 
+		 ClubVo clubVo= session.selectOne("club.getClubVo", clubId);
+		 return clubVo;
+	 } 
 	 
 	 // 클럽 가입 처리 메서드
-	 public void clubJoinMem(ClubVo clubVo ,MemberVo memberVo) {
-		 session.insert("cllub.insertMem", clubVo);
-		 session.insert("cllub.insertMem", memberVo);
+	 public void clubJoinMem(ClubMemVo clubMemVo) {
+		 session.insert("club.insertMem", clubMemVo);
 	 }
 
 	 // 게시글이 속한 클럽 이름 조회 메서드

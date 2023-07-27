@@ -630,7 +630,7 @@
                 <div class="col-sm-6 form">
 
                     <div class="login form-peice ">
-                        <form action="/firmeet/member/login">
+                        <form action="/firmeet/member/login" method="POST">
                             <div class="form-group">
                                 <label>Id</label>
                                 <input type="text" name="memberId" required>

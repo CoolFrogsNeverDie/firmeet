@@ -43,7 +43,7 @@ public class MemberController {
 	}
 
 	/* 로그인 */
-	@RequestMapping(value="/login", method= {RequestMethod.GET})
+	@RequestMapping(value="/login", method= RequestMethod.POST)
 	public String login(@ModelAttribute MemberVo memberVo,HttpSession session, Model model){
 		System.out.println("MemberController.login()");
 		System.out.println(memberVo);
@@ -52,12 +52,12 @@ public class MemberController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("cateList", cateList);
 		MemberVo member =  memberService.login(memberVo);
-		String memberId = null;
+		
 		
 		  if(member !=null){
 			  System.out.println("로그인 성공");
 			  session.setAttribute("member", member);
-			  return "main/mainForm";
+			  return "redirect:/main/mainForm";
 		  }else {
 			  System.out.println("로그인 실패");
 			  return "member/memberForm";
