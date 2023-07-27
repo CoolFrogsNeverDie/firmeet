@@ -87,20 +87,20 @@ public class NoticeBoardDAO {
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(int payresultNo) {
-		System.out.println("notice payresult dao 확인");
-		//Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("memberId", memberId);
-		//map.put("payresultNo", payresultNo);
-		return sql.selectOne("noticeboard.payresult", payresultNo);
+	public NoticeBoardVO payresult(NoticeBoardVO noticeBoardVO ) {
+		System.out.println("notice payresult dao 확인=====================================");
+		System.out.println(noticeBoardVO.getAboardNo());
+		
+		NoticeBoardVO vo = sql.selectOne("noticeboard.payresult", noticeBoardVO.getAboardNo());
+		System.out.println("payresult dao "+vo);
+
+		return vo;
 	}
 
-	public int paycount(String memberId, int payresultNo) {
-		System.out.println("notice paycount dao 확인"+memberId);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberId", memberId);
-		map.put("payresultNo", payresultNo);
-		return sql.update("noticeboard.paycount", map);
+	public int paycount(NoticeBoardVO noticeBoardVO) {
+		System.out.println("notice paycount dao 확인");
+
+		return sql.update("noticeboard.paycount", noticeBoardVO);
 	}
 /*
 	public NoticeBoardVO findHeart(Map<String, Object> map) {

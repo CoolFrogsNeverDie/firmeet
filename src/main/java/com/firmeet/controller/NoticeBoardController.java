@@ -203,22 +203,31 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 insert
 	@RequestMapping("/payinsert")
-	public String payinsert(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session, ClubVo clubvo) {
+	public String payinsert(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session, ClubVo clubvo) {
+
+		/*
+		model.addAttribute("clubId", clubvo.getClubId());
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("memberId", vo.getMemberId());
+		*/
+
 		
 		System.out.println("넘어는 오니?");
 		System.out.println(vo);
-		model.addAttribute("clubId", clubvo.getClubId());
-		model.addAttribute("aboradNo", vo.getAboardNo());
-		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("memberId", vo.getMemberId());
+		
+		int aboardNo = vo.getAboardNo();
+		int meetNo = vo.getMeetNo();
+		String memberId = vo.getMemberId();
+		
 		
 		noticeBoardService.payinsert(vo);
 		
-		session.getAttribute("payresultNo");
-		model.addAttribute("payresultNo", vo.getPayresultNo());
-		System.out.println("결제번호들어가라"+vo.getPayresultNo());
+		int getPayresultNo = vo.getPayresultNo();
 		
-		return "redirect:/"+vo.getClubId()+"/notice/payresult";
+		String url = "/"+clubId+"/notice/payresult?aboardNo="+aboardNo+"&meetNo="+meetNo+"&memberId="+memberId+"&payresultNo="+getPayresultNo;
+		
+		return "redirect:"+ url;
 	}
 	
 	
@@ -227,13 +236,11 @@ public class NoticeBoardController {
 	public String payresult(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("notice payresult 확인");
 		System.out.println("notice getPayresultNo 확인"+vo.getPayresultNo());
-		session.getAttribute("payresultNo");
-		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("payresultNo", vo.getPayresultNo());
-		System.out.println("notice payresult 확인"+vo.getPayresultNo());
 		
 		System.out.println("확확확"+vo);
-		model.addAttribute("vo", noticeBoardService.payresult(vo.getMemberId(), vo.getPayresultNo()));
+		model.addAttribute("vo", noticeBoardService.payresult(vo));
+		
+		
 		return "notice/noticeVoteViewR";
 	}
 	

@@ -152,16 +152,11 @@ public class NoticeBoardService {
 		dao.payinsert(vo);
 	}
 	
-	public Map<String, Object> payresult(String memberId, int payresultNo) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberId", memberId);
-		map.put("payresultNo", payresultNo);
-		
+	public NoticeBoardVO payresult(NoticeBoardVO noticeBoardVO) {
 		System.out.println("notice payresult 확인");
-		dao.payresult(payresultNo);
-		dao.paycount(memberId, payresultNo);
-		return map;
+		NoticeBoardVO nVo = dao.payresult(noticeBoardVO);
+		dao.paycount(noticeBoardVO);
+		return nVo;
 	}
 /*	
 	public NoticeBoardVO findHeart(int aboardNo, String memberId) {

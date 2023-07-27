@@ -41,7 +41,7 @@
 			select seq_voteNo.nextval from dual
 		</selectKey>
 		insert into aVote(voteNo, aboardNo, voteTitle, vote1, vote2, vote3, vote4, vote5, totalNum, finDate)
-		values(seq_voteNo.nextval, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate}) 
+		values(#{voteNo}, #{aboardNo}, #{voteTitle}, #{vote1}, #{vote2}, #{vote3}, #{vote4}, #{vote5}, #{totalNum}, #{finDate}) 
 	</insert>
 	
 	<insert id="voteinsert" parameterType="noticeboard">
@@ -54,7 +54,7 @@
 			select seq_meetNo.nextval from dual
 		</selectKey>
 		insert into meet_name(meetNo, aboardNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, voteEnd, minPerson, maxPerson, price, address1, address2 )
-		values(seq_meetNo.nextval, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
+		values(#{meetNo}, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
 	</insert>
 	
 	<select id="editlistgroup" parameterType="noticeboard" resultType="noticeboard">
@@ -69,14 +69,14 @@
 	</update>
 
 	<insert id="payinsert" parameterType="noticeboard">
-		 <selectKey resultType="int" keyProperty="payresultNo" order="BEFORE">
+		<selectKey resultType="int" keyProperty="payresultNo" order="BEFORE">
 			select SEQ_PAYRESULTNO.nextval from dual
 		</selectKey>
 		insert into PAYRESULT(payresultNo, meetNo, memberId )
-		values(SEQ_PAYRESULTNO.nextval, #{meetNo}, #{memberId})
+		values(#{payresultNo}, #{meetNo}, #{memberId})
 	</insert>
 	
-	<select id="payresult" resultType="noticeboard" parameterType="noticeboard">
+	<select id="payresult" resultType="noticeboard" parameterType="int">
 	<![CDATA[
 	     SELECT
 		    a.aboardNo,
@@ -110,12 +110,12 @@
 		FROM
 		    aboard a, club c, member m, meet_name mn, payresult pr
 		where
-		    a.clubId = c.clubId and a.memberId = m.memberId	and a.aboardNo = mn.aboardNo and mn.meetNo = pr.meetNo and m.memberId = pr.memberId and m.memberId = pr.memberId
-		and pr.payresultNo = #{payresultNo}
+		    a.clubId = c.clubId and a.memberId = m.memberId	and a.aboardNo = mn.aboardNo and mn.meetNo = pr.meetNo and m.memberId = pr.memberId 
+			and a.aboardNo = #{aboardNo}
 		]]>	
 	</select>
 
-	<update id="paycount" parameterType="map">
+	<update id="paycount" parameterType="noticeboard">
 		update PAYRESULT set paycount = paycount +1 where memberId = #{memberId} and payresultNo = #{payresultNo}
 	</update>
 	
