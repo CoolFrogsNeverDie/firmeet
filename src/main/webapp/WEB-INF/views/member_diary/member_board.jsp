@@ -70,10 +70,55 @@
 
 <script>
 	
+		/*------------ 기본 댓글 등록 버튼 클릭 이벤트 ------------*/
+		$('.board-area').on("click",'.add-reply', function(){
+			
+			var textbox = $(this).prev();
+			var content = textbox.val();
+			var boardNo = $(this).data('boardno');
+			var memberId = $('.diary-area').data('memid');
+		
+			var ReplyVO = {
+					boardNo : boardNo,
+					content : content,
+					memberId : memberId
+			}
+			
+			if(content.length < 5){
+				alert('댓글을 다섯글자 이상 입력해주세요.');
+				return;
+			}
+			
+		
+			 $.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/board/member/addReply",
+		       type : "post",
+		       data : ReplyVO,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+					var reply = jsonResult.data;
+					var addElement = $('#r' +reply.boardNo);
+		
+					addReply(addElement,reply,'re');
+					textbox.val("");
+					
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+			
+		});//기본 댓글 등록 버튼 클릭 이벤트 end
 
 	
 	
-	/*댓글 삭제 이벤트*/
+	/*------------ 댓글 삭제 이벤트 ------------*/
+	
 	$('.board-area').on("click", '.reply-delete', function(){
 
 		var replyNo	 =	$(this).data('deletere');
@@ -115,13 +160,13 @@
 		       }
 						            
 		    });//ajax end
-		
-		
 	});
+	/*------------// 댓글 삭제 이벤트 //------------*/
 	
 	
 	
-	/*답글 등록 버튼 클릭 이벤트*/
+	/*------------리댓 등록 창 그리는 이벤트------------*/
+	
 	$('.board-area').on("click",'.rreply-btn', function(){
 		
 	    var writeCommentDiv = $(this).closest('.write-comment2');
@@ -151,14 +196,12 @@
 		} 
 	
 	});
+	/*------------//리댓 등록 창 그리는 이벤트//------------*/
 
-	$('.reply-area').on("click", ".add-reply2", function(){
-			
-		alert('오 마이');
-		
-	});
+
 	
-	/*리댓글 등록 클릭 이벤트 (댓글의 댓글)*/
+	/*------------ 리댓글 등록 클릭 이벤트 (댓글의 댓글) ------------*/
+	
 	$('.board-area').on("click", ".add-reply2", function(){
 		var textbox = $(this).prev();
 		var content = textbox.val();
@@ -202,109 +245,37 @@
 					            
 	    });//ajax end
 		
-		
-		
 	});
+	/*------------// 리댓글 등록 클릭 이벤트 (댓글의 댓글) //------------*/
 	
 	
-	
-	/*댓글 등록 버튼 클릭 이벤트*/
-	$('.board-area').on("click",'.add-reply', function(){
-		
-		var textbox = $(this).prev();
-		var content = textbox.val();
-		var boardNo = $(this).data('boardno');
-		var memberId = $('.diary-area').data('memid');
-	
-		var ReplyVO = {
-				boardNo : boardNo,
-				content : content,
-				memberId : memberId
-		}
-		
-		if(content.length < 5){
-			alert('댓글을 다섯글자 이상 입력해주세요.');
-			return;
-		}
-		
-
-		 $.ajax({
-	       
-	       //요청 세팅
-	       url : "${pageContext.request.contextPath}/board/member/addReply",
-	       type : "post",
-	       data : ReplyVO,
-	       
-	       //응답 세팅
-	       dataType : "json",
-	       success : function(jsonResult){
-				var reply = jsonResult.data;
-				var addElement = $('#r' +reply.boardNo);
-
-				addReply(addElement,reply,'re');
-				textbox.val("");
-				
-	       }, //success end
-	       error : function(XHR, status, error) {
-	       console.error(status + " : " + error);
-	       }
-					            
-	    });//ajax end
-		
-	});
-
-function addReply(element,reply, type){
-	
-	var add ="";
-    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
-    if (reply.deep > 1) {
-        add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
-    } else if (reply.deep === 1) {
-        add += '<span><b>' + reply.memberName + '님 : </b></span>';
-    }
-    add += '<span>' + reply.content + '</span>';
-    if (reply.deep === 1) {
-        add += '<span><button class= "rreply-btn" data-boardno ="' + reply.boardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
-    }
-    add += '<div class="reply-edit">';
-    add += '<span>' + reply.replyDate + '</span>';
-    add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
-    add += '</div></div>';
-	
-    if(type == 're'){
-   		element.append(add);
-    }else{
- 	   	var last = $('.group' + reply.replyGroup).last();
-   	 	last.after(add);
-    }
-    
-}
 
 
-/* 무한 스크롤용 JS */
+
+/*------------ 무한 스크롤용 JS ------------*/
  
- 
-/*document load*/
  
  	//board 불러오기 위한 rownum 
 	let startNum = 1;
 	let endNum = 10;
 	
 
-	/*무한 스크롤 감지*/
-	const lastBoard = $('#board-get');    
+	/*------------ 무한 스크롤 감지 ------------*/
+	const lastBoard = $('#board-get');
     const lastBoardObserver = new IntersectionObserver((entries) => {
         const lastEntry = entries[entries.length - 1];
         if (!lastEntry.isIntersecting) return;
 
         getData();
     });
+    
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
 
+	/*------------ 무한 스크롤 감지 ------------*/
 	
 
-    /*메뉴바 선택 */
+    /*------------ 메뉴바 선택 ------------*/
     $("dt").on("click", function () {
         var _$self = $(this),
             isActive = _$self.hasClass("active");
@@ -313,7 +284,9 @@ function addReply(element,reply, type){
         _$self.nextUntil("dt").slideToggle(!isActive);
     });
     
-    /*댓글 쓰기 버튼 클릭 토글*/
+    
+    
+    /*------------ 댓글 쓰기 창 오픈 버튼 클릭 토글 ------------*/
     $('.board-area').on("click",'.write-comment-btn',function(){
     	 var writeCommentDiv = $(this).closest('.board-comment').find('.write-comment');
     	  if (writeCommentDiv.is(':visible')) {
@@ -324,11 +297,58 @@ function addReply(element,reply, type){
     });
 	
 
+   
+ 	
 
-
-
-    
- 	//BoardList AJAX
+ 	/*좋아요 클릭 이벤트*/
+ 	$('.board-area').on("click",'.likecolor', function(){
+ 		var boardNo = $(this).data('bno');
+ 		var likeNo = $(this).data('likeno');
+ 	 	var memberId = $('.diary-area').data('memid');
+ 		var element = $(this);
+ 		var likeCntEle =  $(this).next('span').children();
+ 		var likeCnt = likeCntEle.text();
+ 	 	
+ 		BoardVO = {
+ 				boardNo : boardNo,
+ 				memberId : memberId,
+ 				likeNo : likeNo
+ 		}
+ 		
+ 		$.ajax({
+ 	 	       
+ 	 	       //요청 세팅
+ 	 	       url : "${pageContext.request.contextPath}/board/likeCnt",
+ 	 	       type : "post",
+ 	 	       data : BoardVO,
+ 	 	       
+ 	 	       //응답 세팅
+ 	 	       dataType : "json",
+ 	 	       success : function(jsonResult){
+ 	 				var result = jsonResult.data;
+ 	 				console.log(result);
+ 	 	    		//이미 좋아요가 눌러져 있었으면 좋아요에 있던 좋아요no 데이터로 좋아요 취소 + ♥ 가 ♡
+ 	 				if(result == null){
+ 	 					element.text('♡');
+ 	 					element.data('likeno',0);
+ 	 					likeCntEle.text(Number(likeCnt)-1);
+ 	 	    		//내가 누른 좋아요가 없었으면 좋아요 올리기 ♡ 가 ♥
+ 	 	    		}else{
+ 	 					element.text('♥');
+ 	 	    			element.data('likeno',result.likeNo);
+ 	 					likeCntEle.text(Number(likeCnt)+1);
+ 	 	    		}
+ 	 	       }, //success end
+ 	 	       error : function(XHR, status, error) {
+ 	 	       console.error(status + " : " + error);
+ 	 	       }
+ 	 					            
+ 	 	    });//ajax end
+ 		
+ 	});//좋아요 이벤트 end
+ 	
+ 	
+ 	/*BoardList 받아오는 기능*/
  	function getData(){
  		 
  	 	var memberId = $('.diary-area').data('memid');
@@ -365,7 +385,7 @@ function addReply(element,reply, type){
  	    	   		alert('게시물이 없습니다.');
  	    	   	}
  	    	   	
- 	    	   
+ 	    	   	 //가져온 게시물 리스트를 그려준다.
  	    		 render(boardList,memberId); 	    		   
  	    		 startNum +=10;
  	    		 endNum += 10;
@@ -380,61 +400,41 @@ function addReply(element,reply, type){
  	 
  	}//get data end
  	
-
  	
- 	$('.board-area').on("click",'.likecolor', function(){
- 		var boardNo = $(this).data('bno');
- 		var likeNo = $(this).data('likeno');
- 	 	var memberId = $('.diary-area').data('memid');
- 		var element = $(this);
- 		var likeCntEle =  $(this).next('span').children();
- 		var likeCnt = likeCntEle.text();
- 	 	
- 		BoardVO = {
- 				boardNo : boardNo,
- 				memberId : memberId,
- 				likeNo : likeNo
- 		}
- 		
- 		$.ajax({
- 	 	       
- 	 	       //요청 세팅
- 	 	       url : "${pageContext.request.contextPath}/board/likeCnt",
- 	 	       type : "post",
- 	 	       data : BoardVO,
- 	 	       
- 	 	       //응답 세팅
- 	 	       dataType : "json",
- 	 	       success : function(jsonResult){
- 	 				var result = jsonResult.data;
- 	 				console.log(result);
- 	 	    		//삭제 기능 수행한 거였으면?
- 	 				if(result == null){
- 	 					element.text('♡');
- 	 					element.data('likeno',0);
- 	 					likeCntEle.text(Number(likeCnt)-1);
- 	 	    		}else{
- 	 					element.text('♥');
- 	 	    			element.data('likeno',result.likeNo);
- 	 					likeCntEle.text(Number(likeCnt)+1);
- 	 	    		}
- 	 				
- 	 				
- 	 	       }, //success end
- 	 	       error : function(XHR, status, error) {
- 	 	       console.error(status + " : " + error);
- 	 	       }
- 	 					            
- 	 	    });//ajax end
- 		
- 		
- 		
- 	});
+ 	
+ 	
+	/*리댓글 html 그리는 거*/
+	function addReply(element,reply, type){
+		
+		var add ="";
+	    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
+	    if (reply.deep > 1) {
+	        add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
+	    } else if (reply.deep === 1) {
+	        add += '<span><b>' + reply.memberName + '님 : </b></span>';
+	    }
+	    add += '<span>' + reply.content + '</span>';
+	    if (reply.deep === 1) {
+	        add += '<span><button class= "rreply-btn" data-boardno ="' + reply.boardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
+	    }
+	    add += '<div class="reply-edit">';
+	    add += '<span>' + reply.replyDate + '</span>';
+	    add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
+	    add += '</div></div>';
+		
+	    if(type == 're'){
+	   		element.append(add);
+	    }else{
+	 	   	var last = $('.group' + reply.replyGroup).last();
+	   	 	last.after(add);
+	    }
+	    
+	}//리댓글 그리는 function end
  	
  	
  	
  	
- 	//AJAX로 불러온 데이터 그려주는 function
+ 	/*AJAX로 불러온 데이터 그려주는 function*/
 	   function render(boardList,memberId){
  	   
  		

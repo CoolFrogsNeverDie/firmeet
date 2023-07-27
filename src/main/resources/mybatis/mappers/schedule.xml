@@ -18,9 +18,12 @@
         		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
         		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
 			from meet_name a join aboard b on a.meetNo = b.meetNo
-			where a.clubID = #{clubId} 	and meetyear in #{years}
-			and meetmon = #{month}
+			where a.clubID = #{clubId} 	
 		]]>
+		<if test = "years !=null">
+			and meetyear in #{years}
+			and meetmon = #{month}
+		</if>
 		<if test="viewOption1 ==2">
 			and b.aboardVal = 2
 		</if>
