@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.ScheduleVO;
 
 @Controller
@@ -35,19 +38,36 @@ public class GalleryController {
 
 	// 갤러리 목록 조회
 	@RequestMapping(value = "/list/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String galleryList(@PathVariable("clubId") int clubId, Model model) {
+	public String galleryList(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
 		System.out.println("galleryList 확인");
 		System.out.println("clubId : " + clubId);
-		
-		List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
-		List<GalleryImgVo> galleryImgVos = galleryService.getGalleryListAll(clubId);
-		// 각주 추가: 클럽 Id 로 clubVo 가저오기
-		ClubVo clubVo = clubService.getClubVo(clubId);
-		model.addAttribute("club", clubVo);
-		model.addAttribute("galleryList", galleryImgVos);
-		model.addAttribute("meetList", gMeetVos);
 
-		return "/gallery/gallery";
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
+
+		String memberId = null;
+
+		if (member != null) {
+			memberId = member.getMemberId();
+
+			System.out.println(memberId); // memberId 값 출력;
+
+			// 클럽과 회원의 관계 정보를 가져옵니다.
+			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			// club이 null이면 쫒아내기!!!
+			model.addAttribute("club", club);
+
+			List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
+			List<GalleryImgVo> galleryImgVos = galleryService.getGalleryListAll(clubId);
+			model.addAttribute("galleryList", galleryImgVos);
+			model.addAttribute("meetList", gMeetVos);
+
+			return "/gallery/gallery";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
 
 	@ResponseBody
@@ -113,19 +133,35 @@ public class GalleryController {
 
 	// 갤러리 업로드 폼
 	@RequestMapping(value = "/uploadForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String uploadForm(@PathVariable("clubId") int clubId, Model model) {
+	public String uploadForm(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
 		System.out.println("uploadForm 확인");
 		System.out.println("clubId : " + clubId);
 
-		List<MeetVo> sList = galleryService.getMeetA(clubId);
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
 
-		model.addAttribute("meetList", sList);
+		String memberId = null;
 
-		// 각주 추가: 클럽 Id 로 clubVo 가저오기
-		ClubVo clubVo = clubService.getClubVo(clubId);
-		model.addAttribute("club", clubVo);
+		if (member != null) {
+			memberId = member.getMemberId();
 
-		return "/gallery/galleryUploadForm";
+			System.out.println(memberId); // memberId 값 출력;
+
+			// 클럽과 회원의 관계 정보를 가져옵니다.
+			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			// club이 null이면 쫒아내기!!!
+			model.addAttribute("club", club);
+
+			List<MeetVo> sList = galleryService.getMeetA(clubId);
+
+			model.addAttribute("meetList", sList);
+
+			return "/gallery/galleryUploadForm";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
 
 	// 갤러리 업로드
@@ -148,24 +184,24 @@ public class GalleryController {
 
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회
-    @RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
-        System.out.println("myGalleryList 확인");
-        System.out.println("memberId : " + memberId);
+	@RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
+		System.out.println("myGalleryList 확인");
+		System.out.println("memberId : " + memberId);
 
-        List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
-        List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
-        
-        model.addAttribute("meetList", mList);
-        model.addAttribute("galleryList", gList);
-        
-        List<ClubVo> clubVos = clubService.getMemClub(memberId);
+		List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
+		List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
 
-        String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
-                .collect(Collectors.joining(","));
-        System.out.println(clubIdsString);
-        model.addAttribute("clubIdsString", clubIdsString);
-        
-        return "/member_diary/member_gallery";
-    }
+		model.addAttribute("meetList", mList);
+		model.addAttribute("galleryList", gList);
+
+		List<ClubVo> clubVos = clubService.getMemClub(memberId);
+
+		String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
+				.collect(Collectors.joining(","));
+		System.out.println(clubIdsString);
+		model.addAttribute("clubIdsString", clubIdsString);
+
+		return "/member_diary/member_gallery";
+	}
 }

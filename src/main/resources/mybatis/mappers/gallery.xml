@@ -17,7 +17,7 @@
 		]]>
 	</select>
 	
-		<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
+	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
 	<select id="getMeetName" parameterType="map" resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT
@@ -28,18 +28,18 @@
 				meetYear
 			FROM meet_name
 			WHERE meetMon = #{month} 
-			and meetYear = #{year}
+			AND meetYear = #{year}
 		]]>
 	</select>
 	
-		<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
+	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
 	<select id="meetMon" parameterType="int" resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT 
-				DISTINCT MEETMON
-				,meetyear
+				DISTINCT MEETMON,
+				meetyear
 			FROM meet_name
-			where clubid = #{clubId} 
+			WHERE clubid = #{clubId} 
 		]]>
 	</select>
 	
@@ -49,7 +49,7 @@
         SELECT
             galleryNo
         FROM gallery
-        where meetno = #{meet}
+        WHERE meetno = #{meet}
         ]]>
     </select>
 
@@ -63,7 +63,7 @@
             , imgsize
             , imgroot
             , regdate
-            ,clubId)
+            , clubId)
         VALUES (SEQ_G_IMGNO.NEXTVAL
         , #{galleryNo}
         , #{imgName}
@@ -71,7 +71,7 @@
         , #{imgSize}
         , #{imgRoot}
         , SYSDATE
-        ,#{clubId})
+        , #{clubId})
         ]]>
     </insert>
 
@@ -80,16 +80,16 @@
         <![CDATA[
         SELECT
             galleryNo
-            , id as clubid
+            , id AS clubid
             , meetno
             , memberid
         FROM gallery
-        where Id = #{clubId}
+        WHERE Id = #{clubId}
         ]]>
     </select>
     
     <!-- 갤러리이미지 목록 조회 -->
-        <select id="getGalleryImg" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
+    <select id="getGalleryImg" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
         <![CDATA[
         SELECT
             imgno
@@ -100,11 +100,12 @@
             , imgroot
             , regdate
         FROM gallery_img
-        where GalleryNo = #{GalleryNo}
+        WHERE GalleryNo = #{GalleryNo}
         ]]>
     </select>
-     <!-- 갤러리이미지 목록 조회 -->
-        <select id="getGalleryListAll" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
+    
+    <!-- 갤러리이미지 목록 조회 -->
+    <select id="getGalleryListAll" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
         <![CDATA[
         SELECT
             imgno
@@ -116,7 +117,7 @@
             , regdate
             , clubId
         FROM gallery_img
-        where clubId = #{clubId}
+        WHERE clubId = #{clubId}
         ]]>
     </select>
 </mapper>

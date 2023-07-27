@@ -24,26 +24,29 @@ public class AccountBookService {
 	@Autowired
 	private AccountBookDao accountBookDao;
 
+	/**
+	 * 클럽 ID에 해당하는 회계 리스트 조회
+	 */
 	public List<AccountBookVo> getList(int clubId) {
-		// 각주 추가: 클럽 ID에 해당하는 회계 리스트 조회
 		System.out.println("AccountBookService getList 확인");
 		List<AccountBookVo> aList = accountBookDao.getList(clubId);
-		
 		return aList;
 	}
 
+	/**
+	 * 클럽 ID에 해당하는 스케줄 리스트 조회
+	 */
 	public List<ScheduleVO> getMeet(int clubId) {
-		// 각주 추가: 클럽 ID에 해당하는 스케줄 리스트 조회
 		System.out.println("AccountBookService getMeet 확인");
 		List<ScheduleVO> sList = accountBookDao.getMeet(clubId);
-		
 		return sList;
 	}
 	
-	// 파일 작성
+	/**
+	 * 회계 데이터 업로드
+	 */
 	public void upload(AccountBookVo aBookVo, MultipartFile file) {
-		// 각주 추가: 회계 데이터 업로드
-	    System.out.println("AccountBookService upload 확인");
+		System.out.println("AccountBookService upload 확인");
 	    
 	    if (file != null && !file.isEmpty() && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()) {
 	        // 원파일 이름
@@ -85,21 +88,23 @@ public class AccountBookService {
 	    accountBookDao.upload(aBookVo);
 	}
 
+	/**
+	 * 회계 데이터 검색
+	 */
 	public List<AccountBookVo> search(int clubId, String startDate, String endDate, String searchText) {
-		// 각주 추가: 회계 데이터 검색
 		System.out.println("AccountBookService search 확인");
-
 		List<AccountBookVo> searchResult = accountBookDao.search(clubId, startDate, endDate, searchText);
-		
 		return searchResult;
 	}
 
 	/*-------------------------------------마이겔러리---------------------------- */
+
+	/**
+	 * 마이겔러리 - 회계장부 메인 페이지 조회
+	 */
 	public List<AccountBookVo> getMyList(String memberId) {
-		System.out.println("AccountBookService getList 확인");
-		
+		System.out.println("AccountBookService getMyList 확인");
 		List<AccountBookVo> aList = accountBookDao.getMyList(memberId);
-		
 		return aList;
 	}
 }

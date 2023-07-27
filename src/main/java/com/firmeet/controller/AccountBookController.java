@@ -2,6 +2,8 @@ package com.firmeet.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import com.firmeet.service.AccountBookService;
 import com.firmeet.service.ClubService;
 import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.ScheduleVO;
 
 @Controller
@@ -27,85 +30,113 @@ public class AccountBookController {
 	private AccountBookService accountBookService;
 	@Autowired
 	private ClubService clubService;
-	
-	@RequestMapping(value = "/main/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
-	public String accountbookMain(@PathVariable("clubId") int clubId, Model model) {
-		// 각주 추가: 회계장부 메인 페이지 조회
-		System.out.println("accountbookMain 확인");
-		
-		ClubVo clubVo = clubService.getClubVo(clubId);
-		model.addAttribute("club", clubVo);
-		
-		List<AccountBookVo> aList = accountBookService.getList(clubId);
-		
-		model.addAttribute("accountList",aList);
-		
-		return "/accountbook/accountbook";
+
+	/**
+	 * 회계장부 메인 페이지 조회
+	 */
+	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String accountbookMain(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
+
+		String memberId = null;
+
+		if (member != null) {
+			memberId = member.getMemberId();
+			System.out.println(memberId); // memberId 값 출력;
+
+			// 클럽과 회원의 관계 정보를 가져옵니다.
+			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			model.addAttribute("club", club);
+
+			List<AccountBookVo> aList = accountBookService.getList(clubId);
+			model.addAttribute("accountList", aList);
+
+			return "/accountbook/accountbook";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
-	
-	@RequestMapping(value ="/uploadform/{clubId}",method = {RequestMethod.GET, RequestMethod.POST})
-	public String accountbookUploadform(@PathVariable("clubId") int clubId, Model model) {
-		// 각주 추가: 회계장부 업로드 폼 페이지 조회
-		System.out.println("accountbookUploadform 확인");
-		
-		List<ScheduleVO> sList = accountBookService.getMeet(clubId);
-		
-		ClubVo clubVo = clubService.getClubVo(clubId);
-		model.addAttribute("club", clubVo);
-		
-		model.addAttribute("meetList",sList);
-		
-		return "/accountbook/accountbookform";
+
+	/**
+	 * 회계장부 업로드 폼 페이지 조회
+	 */
+	@RequestMapping(value = "/uploadform/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String accountbookUploadform(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
+
+		String memberId = null;
+
+		if (member != null) {
+			memberId = member.getMemberId();
+			System.out.println(memberId); // memberId 값 출력;
+
+			// 클럽과 회원의 관계 정보를 가져옵니다.
+			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			model.addAttribute("club", club);
+
+			List<ScheduleVO> sList = accountBookService.getMeet(clubId);
+
+			model.addAttribute("meetList", sList);
+			return "/accountbook/accountbookform";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
-	
-	@RequestMapping(value = "/upload",method = {RequestMethod.GET, RequestMethod.POST})
+
+	/**
+	 * 회계 데이터 업로드
+	 */
+	@RequestMapping(value = "/upload", method = { RequestMethod.GET, RequestMethod.POST })
 	public String accountbookUpload(@RequestParam("clubId") int clubId,
-									@RequestParam("incomeExpense") String incomeExpense,
-									@RequestParam("meet") int meet,
-									@RequestParam("category") String category,
-									@RequestParam("amount") int amount,
-									@RequestParam("memberId") String memberId,
-									@RequestParam("purpose") String purpose,
-									@RequestParam("uploadPicture") MultipartFile file) {
-		// 각주 추가: 회계 데이터 업로드
+			@RequestParam("incomeExpense") String incomeExpense, @RequestParam("meet") int meet,
+			@RequestParam("category") String category, @RequestParam("amount") int amount,
+			@RequestParam("memberId") String memberId, @RequestParam("purpose") String purpose,
+			@RequestParam("uploadPicture") MultipartFile file) {
 		System.out.println("accountbookUpload 확인");
-		
-		System.out.println("clubId : "+clubId);
-		System.out.println("incomeExpense : "+incomeExpense);
-		System.out.println("meet : "+meet);
-		System.out.println("category : "+category);
-		System.out.println("amount : "+amount);
-		
-		AccountBookVo aBookVo = new AccountBookVo(0,clubId,meet,memberId,amount,"",category,purpose,incomeExpense,"",0);
-		
+
+		System.out.println("clubId : " + clubId);
+		System.out.println("incomeExpense : " + incomeExpense);
+		System.out.println("meet : " + meet);
+		System.out.println("category : " + category);
+		System.out.println("amount : " + amount);
+
+		AccountBookVo aBookVo = new AccountBookVo(0, clubId, meet, memberId, amount, "", category, purpose,
+				incomeExpense, "", 0);
+
 		System.out.println(aBookVo);
-		
-		accountBookService.upload(aBookVo,file);
-		
-		return "redirect:/accountBook/main/"+clubId;
+
+		accountBookService.upload(aBookVo, file);
+
+		return "redirect:/accountBook/main/" + clubId;
 	}
-	
+
+	/**
+	 * 회계 데이터 검색
+	 */
 	@ResponseBody
-	@RequestMapping(value = "/search/{clubId}", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/search/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public List<AccountBookVo> searchAccountBook(@RequestParam("startDate") String startDate,
-	                                             @RequestParam("endDate") String endDate,
-	                                             @RequestParam("searchText") String searchText,
-	                                             @PathVariable("clubId") int clubId) {
-		// 각주 추가: 회계 데이터 검색
-	    List<AccountBookVo> searchResult = accountBookService.search(clubId, startDate, endDate, searchText);
-	    return searchResult;
+			@RequestParam("endDate") String endDate, @RequestParam("searchText") String searchText,
+			@PathVariable("clubId") int clubId) {
+		List<AccountBookVo> searchResult = accountBookService.search(clubId, startDate, endDate, searchText);
+		return searchResult;
 	}
-	
+
 	/*-------------------------------------마이겔러리---------------------------- */
-	@RequestMapping(value = "/member/main/{memberId}", method = {RequestMethod.GET, RequestMethod.POST})
+
+	/**
+	 * 마이겔러리 - 회계장부 메인 페이지 조회
+	 */
+	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myAccountbookMain(@PathVariable("memberId") String memberId, Model model) {
-		// 각주 추가: 회계장부 메인 페이지 조회
-		System.out.println("accountbookMain 확인");
-		
 		List<AccountBookVo> aList = accountBookService.getMyList(memberId);
-		
-		model.addAttribute("accountList",aList);
-		
+		model.addAttribute("accountList", aList);
 		return "/member_diary/member_accountbook";
 	}
 }

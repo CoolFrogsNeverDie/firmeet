@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 <!--/diary-area-->
 <div class="menu-bar" name="사이드메뉴바">
 	<div class="group-profile">
@@ -22,7 +24,7 @@
 <!--/menu-bar-->
 <c:choose>
     <c:when test="${club.memlevel eq 0}">
-        <button id="addButton" style="background-color: #ffffff;width: 80px;height: 50px;position: absolute;right: 267px;top: 634px;font-size: xx-large;"><i class="fa fa-cog" aria-hidden="true"></i></button>
+        <button id="addButton" style="background-color: rgba(0,0,0,0); width: 80px;height: 50px;position: fixed;right: 245px;top: 612px;font-size: xx-large;"><i class="fa fa-cog" aria-hidden="true"></i></button>
     </c:when>
 </c:choose>
 </div>

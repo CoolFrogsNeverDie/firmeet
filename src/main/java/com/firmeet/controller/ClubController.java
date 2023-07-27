@@ -56,6 +56,7 @@ public class ClubController {
 
             // 클럽과 회원의 관계 정보를 가져옵니다.
             ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
             model.addAttribute("club", club);
 
             // 클럽의 갤러리 이미지 목록을 가져옵니다.

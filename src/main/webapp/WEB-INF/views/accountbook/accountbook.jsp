@@ -44,7 +44,12 @@
 							<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요.">
 							<button class="searchbnt" type="submit">검색</button>
 						</form>
-						<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
+						<c:choose>
+							<c:when test="${club.memlevel eq 0}">
+								<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
+							</c:when>
+						</c:choose>
+						
 					</div>
 					<!--/content-bnt-->
 					<div class="table">
@@ -191,10 +196,7 @@
 		<!--/diary-area-->
 		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
 		<!--/wrap-->
-		<footer>
-			Copyright (C) 2023 어리쥬 all rights reserved.
-			</foo
-	ter>
+		<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
 </body>
 <script>
     $(document)
