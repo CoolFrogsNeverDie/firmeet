@@ -1,8 +1,6 @@
 package com.firmeet.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,19 +85,14 @@ public class NoticeBoardDAO {
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(NoticeBoardVO noticeBoardVO ) {
+	public NoticeBoardVO payresult(NoticeBoardVO vo) {
 		System.out.println("notice payresult dao 확인=====================================");
-		System.out.println(noticeBoardVO.getAboardNo());
-		
-		NoticeBoardVO vo = sql.selectOne("noticeboard.payresult", noticeBoardVO.getAboardNo());
 		System.out.println("payresult dao "+vo);
-
-		return vo;
+		return sql.selectOne("noticeboard.payresult", vo);
 	}
 
 	public int paycount(NoticeBoardVO noticeBoardVO) {
 		System.out.println("notice paycount dao 확인");
-
 		return sql.update("noticeboard.paycount", noticeBoardVO);
 	}
 /*

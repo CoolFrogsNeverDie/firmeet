@@ -211,7 +211,6 @@ public class NoticeBoardController {
 		model.addAttribute("meetNo", vo.getMeetNo());
 		model.addAttribute("memberId", vo.getMemberId());
 		*/
-
 		
 		System.out.println("넘어는 오니?");
 		System.out.println(vo);
@@ -219,7 +218,6 @@ public class NoticeBoardController {
 		int aboardNo = vo.getAboardNo();
 		int meetNo = vo.getMeetNo();
 		String memberId = vo.getMemberId();
-		
 		
 		noticeBoardService.payinsert(vo);
 		
@@ -239,8 +237,6 @@ public class NoticeBoardController {
 		
 		System.out.println("확확확"+vo);
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
-		
-		
 		return "notice/noticeVoteViewR";
 	}
 	
