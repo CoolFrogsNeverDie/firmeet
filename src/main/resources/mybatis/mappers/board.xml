@@ -25,16 +25,18 @@
 	<select id = "getBoardList" parameterType ="board" resultType ="board">
 		<![CDATA[
 		  	select
-       			 boardNo
+       			 aa as boardNo
        			,clubId
        			,memberId
        			,clubName
        			,content
        			,boardDate
+       			,nvl((select likeNo from board_like c where c.boardNo = aa and memberId = #{keyword2} ), 0) as likeNo
+       			,(select count(likeNo) from board_like where boardNo = aa ) as likeCnt
             from(
   				select
         			rownum as rw
-    			   ,boardNo
+    			   ,boardNo as aa
    			       ,clubId
     			   ,memberId
    			       ,clubName
@@ -89,7 +91,7 @@
 		]]>
 	</insert>
 		
-	
+	<!-- 수정용 보드 넘버 가져오기 -->
 	<select id = "getBoard" parameterType = "board" resultType ="board" >
 		<![CDATA[
 			select
@@ -118,4 +120,42 @@
 			where boardNo = #{boardNo}		
 		]]>	
 	</delete>
+	
+	<delete id = "deletelike" parameterType = "board">
+		<![CDATA[
+			delete board_like 
+			where likeno = #{likeNo}
+		]]>
+	</delete>
+	
+	<insert id = "insertLike" parameterType = "board">
+		<selectKey keyProperty = "likeNo" resultType ="int" order ="BEFORE">
+			select seq_board_likeNo.nextval from dual
+		</selectKey>
+			<![CDATA[
+	            insert into board_like(
+	            	LIKENO
+	            	,BOARDNO
+	            	,MEMBERID
+	            	,REGDATE
+	            	)
+	            values (
+	              #{likeNo}
+	            , #{boardNo}
+	            , #{memberId}
+	            ,sysdate
+	            )
+			]]>
+	</insert>
+	
+	<select id = "getLike" parameterType = "board" resultType = "board">
+		<![CDATA[
+			select
+				likeNo
+				,boardNo
+			from board_like
+			where likeNo = #{likeNo}				
+		]]>
+	</select>
+	
 </mapper>

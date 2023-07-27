@@ -117,10 +117,19 @@ dd:hover{
 }
 
 .board{
-  box-shadow: 0 3px 3px rgba(0.2,0.2,0,0.2);
-	margin-right: 7px;
-	margin-top: 30px;
-	
+	    /* border: 1px solid #bcbcbc; */
+    /* border-radius: 5px; */
+    /* padding: 40px; */
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    /* box-shadow: 0 3px 3px rgba(0.2,0.2,0,0.2); */
+    margin-right: 23px;
+    margin-top: 30px;
+    margin-left: 7px;
+    padding: 36px;
+    border-radius: 5px;
 }
 .search-board{
 	height: 100px;

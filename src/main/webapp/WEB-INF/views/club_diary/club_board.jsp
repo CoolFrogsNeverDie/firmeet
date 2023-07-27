@@ -8,6 +8,7 @@
     <title>개인 게시판</title>
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -20,6 +21,7 @@
 </head>
 
 <body>
+
     <!-- // 상단 내비게이션 바 -->
 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
     <!-- 페이지 콘텐츠 -->
@@ -150,7 +152,7 @@
 	
 	});
 
-	
+	/*리댓글 등록 클릭 이벤트(댓글의 댓글)*/
 	$('.board-area').on("click", ".add-reply2", function(){
 		
 		var textbox = $(this).prev();
@@ -158,7 +160,6 @@
 		var groupNo = $(this).data('groupno');
 		var boardNo = $(this).data('boardno');
 		var memberId = $('.diary-area').data('memid');
-		var replyEditDiv = $(this).closest('.reply-area');
 		
 		console.log('teest' +  content + '그룹 번호 : ' +  groupNo + '게시글 번호 :' + boardNo + memberId);
 		
@@ -186,7 +187,7 @@
 	    	   var data = jsonResult.data;
 	    	   console.log(data);
 	    	   
-	    	   addReply(replyEditDiv, data);
+	    	   addReply(null, data, 'rere');
 	    	   $('.write-comment2').remove();
 	    	   
 	       }, //success end
@@ -234,7 +235,7 @@
 	       success : function(jsonResult){
 				var reply = jsonResult.data;
 				var addElement = $('#r' +reply.boardNo);
-				addReply(addElement, reply);
+				addReply(addElement,reply,'re');
 				textbox.val("");
 				
 	       }, //success end
@@ -246,10 +247,10 @@
 		
 	});
 
-function addReply(element, reply){
+	function addReply(element,reply, type){
 	
 	var add ="";
-    add += '<div  class="reply-area" id = "c'+reply.replyNo + '">';
+    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
     if (reply.deep > 1) {
         add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
     } else if (reply.deep === 1) {
@@ -257,14 +258,18 @@ function addReply(element, reply){
     }
     add += '<span>' + reply.content + '</span>';
     if (reply.deep === 1) {
-        add += '<span><button class= "rreply-btn" data-replyno ="' + reply.replyNo + '">답글</button></span>';
-    }
+    	  add += '<span><button class= "rreply-btn" data-boardno ="' + reply.boardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';    }
     add += '<div class="reply-edit">';
     add += '<span>' + reply.replyDate + '</span>';
     add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
     add += '</div></div>';
 	
-	element.append(add);
+    if(type == 're'){
+   		element.append(add);
+    }else{
+ 	   	var last = $('.group' + reply.replyGroup).last();
+   	 	last.after(add);
+    }
     
 }
 
@@ -328,8 +333,10 @@ function addReply(element, reply){
  	function getData(){
  		 
  	 	var clubId = $('.diary-area').data('clubid');
-		var memberId = $('.diary-area').data('memid');
+		var keyword2 = $('.diary-area').data('memid');
  	 	var keyword = $('#search-keyword').val();
+ 	 	var memberId = $('.diary-area').data('memid');
+
  	 	
  	 	console.log(keyword + "키춰드");
 
@@ -338,7 +345,8 @@ function addReply(element, reply){
  	 		clubId : clubId,
  	 		startNum : startNum,
  	 		endNum : endNum,
- 	 		keyword : keyword
+ 	 		keyword : keyword,
+ 	 		keyword2 : keyword2
  			}
  	 
  	 		console.log(BoardVO);
@@ -385,6 +393,57 @@ function addReply(element, reply){
  	});
  	
  	
+	$('.board-area').on("click",'.likecolor', function(){
+ 		var boardNo = $(this).data('bno');
+ 		var likeNo = $(this).data('likeno');
+ 	 	var memberId = $('.diary-area').data('memid');
+ 		var element = $(this);
+ 		var likeCntEle =  $(this).next('span').children();
+ 		var likeCnt = likeCntEle.text();
+ 	 	
+ 		BoardVO = {
+ 				boardNo : boardNo,
+ 				memberId : memberId,
+ 				likeNo : likeNo
+ 		}
+ 		
+ 		$.ajax({
+ 	 	       
+ 	 	       //요청 세팅
+ 	 	       url : "${pageContext.request.contextPath}/board/likeCnt",
+ 	 	       type : "post",
+ 	 	       data : BoardVO,
+ 	 	       
+ 	 	       //응답 세팅
+ 	 	       dataType : "json",
+ 	 	       success : function(jsonResult){
+ 	 				var result = jsonResult.data;
+ 	 				console.log(result);
+ 	 	    		//삭제 기능 수행한 거였으면?
+ 	 				if(result == null){
+ 	 					element.text('♡');
+ 	 					element.data('likeno',0);
+ 	 					likeCntEle.text(Number(likeCnt)-1);
+ 	 	    		}else{
+ 	 					element.text('♥');
+ 	 	    			element.data('likeno',result.likeNo);
+ 	 					likeCntEle.text(Number(likeCnt)+1);
+ 	 	    		}
+ 	 				
+ 	 				
+ 	 	       }, //success end
+ 	 	       error : function(XHR, status, error) {
+ 	 	       console.error(status + " : " + error);
+ 	 	       }
+ 	 					            
+ 	 	    });//ajax end
+ 		
+ 		
+ 		
+ 	});
+ 	
+ 	
+ 	
  	
  	//AJAX로 불러온 데이터 그려주는 function
 	   function render(boardList,memberId){
@@ -404,21 +463,25 @@ function addReply(element, reply){
             add += '</div></div>';
             add += '<div class="board-content">';
             add += '<p>' + board.content + '</p>';
-            add += '<span class="likecolor" data-bno = "'+board.boardNo + '">♡</span>';
-            add += '<span>좋아요 (<span>' + board.likeCnt + '</span>)</span>';
-            if(board.memberId == memberId){
-            add += '<span class= "edit-board-spans">'
-            add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/board/club/editform?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">수정</a>';
-            add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/board/club/delete?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">삭제</a>'
-            add += '</span>'
+            if(board.likeNo == 0){
+            add += '<span class="likecolor" data-bno = "'+board.boardNo + '"   data-likeno = "' + board.likeNo  + '" >♡</span>';
+            }else if(board.likeNo > 0){
+            add += '<span class="likecolor" data-bno = "'+board.boardNo + '"   data-likeno = "' + board.likeNo  + '">♥</span>';
             }
+            add += '<span>좋아요 (<span class= "likeCnt">' + board.likeCnt + '</span>)</span>';
+            if(board.memberId == memberId){
+                add += '<span class= "edit-board-spans">'
+                add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/board/club/editform?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">수정</a>';
+                add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/board/club/delete?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">삭제</a>'
+                add += '</span>'
+                }
             add += '</div><div class="board-comment-list">';
             add += '<div class="board-comment" >';
             add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
             add +='<div class="comment-list" id = "r' + board.boardNo + '">'
             
             board.replyList.forEach(function(reply) {
-                add += '<div class="reply-area" id = "c'+ reply.replyNo+'">';
+                add += '<div class="reply-area group' + reply.replyGroup  + '" id = "c'+ reply.replyNo+'">';
                 if (reply.deep > 1) {
                     add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
                 } else if (reply.deep === 1) {
@@ -445,6 +508,7 @@ function addReply(element, reply){
         
  	   }
 	
+ 	
  	
  	
 </script>

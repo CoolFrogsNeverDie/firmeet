@@ -3,6 +3,8 @@ package com.firmeet.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import com.firmeet.service.ClubService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.ReplyVO;
 
 @RequestMapping("/board")
@@ -36,13 +41,29 @@ public class BoardController {
 	@RequestMapping(value ="/club/{clubId}")
 	public String clubBoard(@PathVariable ("clubId") int clubId
 							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
-							,Model model) {
+							,Model model
+							,HttpSession session) {
 		
-	      ClubVo clubVo = clubService.getClubVo(clubId);
-	      model.addAttribute("club", clubVo);
-	      model.addAttribute("keyword", keyword);
+        MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+		    model.addAttribute("keyword", keyword);
+
+	        return "club_diary/club_board";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 		
-		return "club_diary/club_board";
 	}
 	
 	@ResponseBody
@@ -61,13 +82,27 @@ public class BoardController {
 	
 	@RequestMapping(value = "/club/editpage/{clubId}")
 	public String editPage(@PathVariable ("clubId") int clubId
-							,Model model) {
-		
-		
-	    ClubVo clubVo = clubService.getClubVo(clubId);
-	    model.addAttribute("club", clubVo);
+							,Model model
+							,HttpSession session) {
+        MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+
+		    return "club_diary/board_write";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 	    
-	    return "club_diary/board_write";
 	}
 	
 	
@@ -125,7 +160,6 @@ public class BoardController {
 		System.out.println("AJAX로 넘어오는 정보" + replyVO);
 		jsonResult.success(boardService.addReply(replyVO));
 		
-		
 		return jsonResult;
 	}
 
@@ -154,16 +188,27 @@ public class BoardController {
 	
 	@RequestMapping(value = "/club/editform")
 	public String editForm(@ModelAttribute BoardVO boardVO
+						   ,HttpSession session
 						   ,Model model) {
-		
-		System.out.println("넘어오는 정보 확인" + boardVO);
-		
-		BoardVO vo = boardService.getBoard(boardVO);
-	    ClubVo clubVo = clubService.getClubVo(vo.getClubId());
-	    model.addAttribute("club", clubVo);
-		model.addAttribute("board" , vo);
-		
-		return "club_diary/board_edit";
+        
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        
+        if (member != null) {
+            memberId = member.getMemberId();
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, boardVO.getClubId());
+            model.addAttribute("club", club);
+            BoardVO vo = boardService.getBoard(boardVO);
+			model.addAttribute("board" , vo);
+			return "club_diary/board_edit";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 	}
 	
 	@RequestMapping(value = "/club/edit" , method = RequestMethod.POST) 
@@ -182,6 +227,19 @@ public class BoardController {
 		boardService.deleteBoard(boardVO);
 		
 		return "redirect:/board/club/" + boardVO.getClubId();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/likeCnt", method = RequestMethod.POST)
+	public JsonResult likeCnt(@ModelAttribute BoardVO boardVO) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("넘어오는 거 체크" + boardVO);
+		BoardVO result = boardService.likeCnt(boardVO);
+		System.out.println(result);
+		jsonResult.success(result);
+		
+		return jsonResult;
 	}
 	
 }

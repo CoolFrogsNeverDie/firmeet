@@ -16,6 +16,8 @@ public class BoardVO {
 	private int startNum;
 	private int endNum;
 	private String keyword;
+	private String keyword2;
+	private int likeNo;
 	
 	public BoardVO() {
 		super();
@@ -90,11 +92,28 @@ public class BoardVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public String getKeyword2() {
+		return keyword2;
+	}
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
+	}
+	public int getLikeNo() {
+		return likeNo;
+	}
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", clubId=" + clubId + ", clubName=" + clubName + ", memberId="
 				+ memberId + ", content=" + content + ", likeCnt=" + likeCnt + ", replyList=" + replyList
 				+ ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum=" + endNum + ", keyword=" + keyword
-				+ "]";
+				+ ", keyword2=" + keyword2 + ", likeNo=" + likeNo + "]";
 	}
+	
+	
+
+
+	
 }

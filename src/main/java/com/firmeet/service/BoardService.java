@@ -134,5 +134,24 @@ public class BoardService {
 		
 		return boardDAO.deleteBoard(boardVO);
 	}
+
+	//like 되어 있는 게시물인지 확인 후 되어 있으면 insert 기록 없으면 delete 하기
+	//likeNo 가 0 이면 좋아요 안 된 게시물이고, 0 이상이면 좋아요 된 게시물이다.
+	//boardNo, memberId, LikeNo
+	public BoardVO likeCnt(BoardVO boardVO) {
+		BoardVO result = null;
+		var like = boardVO.getLikeNo();
+		if(like == 0) {
+		//좋아요 기능 수행	
+			boardDAO.insertLike(boardVO);
+			result = boardDAO.getLike(boardVO);
+			
+		}else {
+		//좋아요 취소 기능 수행
+			boardDAO.likeCancle(boardVO);
+		}
+		
+		return result;
+	}
 	
 }

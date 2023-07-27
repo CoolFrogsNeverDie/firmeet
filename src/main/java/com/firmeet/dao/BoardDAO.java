@@ -62,6 +62,18 @@ public class BoardDAO {
 		
 		return 	session.delete("board.deleteBoard", boardVO);
 	}
+
+	public int  likeCancle(BoardVO boardVO) {
+		return session.delete("board.deletelike",boardVO);
+	}
+
+	public void insertLike(BoardVO boardVO) {
+		session.insert("board.insertLike",boardVO);
+	}
+
+	public BoardVO getLike(BoardVO boardVO) {
+		return session.selectOne("board.getLike", boardVO);
+	}
 	
 	
 }

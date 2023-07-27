@@ -4,6 +4,8 @@ package com.firmeet.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.CalendarService;
 import com.firmeet.service.ClubService;
+import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.CalendarVO;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
@@ -33,12 +36,27 @@ public class CalendarController {
 	/*클럽 캘린더*/
 	@RequestMapping(value ="/club/{clubId}", method = RequestMethod.GET)
 	public String clubCalendar(@PathVariable("clubId") int clubId
+								,HttpSession session
 								,Model model ) {
 		
-	    ClubVo clubVo = clubService.getClubVo(clubId);
-	    model.addAttribute("club", clubVo);
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        
+        if (member != null) {
+            memberId = member.getMemberId();
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+
+            return "club_diary/club_calendar";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 		
-		return "club_diary/club_calendar";
 	}
 
 	

@@ -57,7 +57,7 @@ public class MainController {
 		;
 		ClubVo clubVo = new ClubVo();
 		System.out.println(clubVo.getClubId());
-		List<ClubVo> clubList = clubService.clubList();
+		List<ClubVo> clubList = clubService.clubList(clubVo.getClubId());
 		model.addAttribute("clubList",clubList); 
 		System.out.println(clubList);
 		 
