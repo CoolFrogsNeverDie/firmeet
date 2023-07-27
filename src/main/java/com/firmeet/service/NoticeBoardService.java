@@ -150,10 +150,11 @@ public class NoticeBoardService {
 		dao.payinsert(vo);
 	}
 	
-	public NoticeBoardVO payresult(int meetNo) {
+	public NoticeBoardVO payresult(String memberId, int payresultNo) {
 		System.out.println("notice payresult 확인");
-		//dao.paycount(meetNo);
-		return dao.payresult(meetNo);
+		NoticeBoardVO vo = dao.payresult(memberId, payresultNo);
+		dao.paycount(memberId, payresultNo);
+		return vo;
 	}
 
 }

@@ -80,21 +80,17 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.hits", aboardNo);
 	}
 
-	public void paycount(String memberId) {
-		sql.update("noticeboard.paycount", memberId);
-	}
-
 	public void payinsert(NoticeBoardVO vo) {
 		System.out.println("notice payinsert dao 확인"+vo);
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(int meetNo) {
-		System.out.println("notice payresult dao 확인"+meetNo);
-		return sql.selectOne("noticeboard.payresult", meetNo);
+	public NoticeBoardVO payresult(String memberId, int payresultNo) {
+		System.out.println("notice payresult dao 확인"+memberId);
+		return sql.selectOne("noticeboard.payresult", memberId);
 	}
 
-	public void paycount(int meetNo) {
-		sql.update("noticeboard.paycount", meetNo);
+	public void paycount(String memberId, int getPayresultNo) {
+		sql.update("noticeboard.paycount", memberId);
 	}
 }
