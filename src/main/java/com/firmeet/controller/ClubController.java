@@ -42,37 +42,23 @@ public class ClubController {
 	private NoticeBoardService noticeBoardService;
 
 	// 각주 추가: 클럽 Id 로 clubVo 가저오기
-	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubMain(@PathVariable int clubId, Model model, HttpSession session) {
-		System.out.println("ClubController.clubMain()");
+		@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+		public String clubMain(@PathVariable int clubId, Model model) {
+			System.out.println("ClubController.clubMain()");
+				//관리자 등급 확인용
+				ClubVo club = clubService.checkMemLevel(clubId);
+				model.addAttribute("club", club);
+				
+				List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+				model.addAttribute("gImgVos", gImgVos);
+				
+		        List<NoticeBoardVO> nList= noticeBoardService.noticeList();
+				System.out.println(nList);
+		        
+		        model.addAttribute("noticeList", nList);
 
-		MemberVo member = (MemberVo) session.getAttribute("member");
-
-		String memberId = null;
-
-		if (member != null) {
-			memberId = member.getMemberId();
-
-			System.out.println(memberId); // memberId 값 출력;
-
-			ClubVo club = clubService.checkMemLevel(memberId, clubId);
-			model.addAttribute("club", club);
-
-			List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
-			model.addAttribute("gImgVos", gImgVos);
-			
-	        List<NoticeBoardVO> nList= noticeBoardService.noticeList();
-			System.out.println(nList);
-	        
-	        model.addAttribute("noticeList", nList);
-
-			return "/club/clubMain";
-			
-		} else {
-			
-			return "member/memberForm";
+				return "/club/clubMain";
 		}
-	}
 
 	@RequestMapping(value = "/makingForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clubMakingForm(Model model) {

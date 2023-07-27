@@ -87,13 +87,11 @@ public class ClubDao {
 		 return selectedTag;
 	 }
 
-	public ClubVo checkMemLevel(String memberId, int clubId) {
+	public ClubVo checkMemLevel(int clubId) {
 	      System.out.println("ClubDao.checkMemLevel()");
-	      System.out.println("memberId : "+memberId);
 	      System.out.println("clubId : "+clubId);
 	      
 	      Map<String, Object> cMap = new HashMap<>();
-	      cMap.put("memberId", memberId);
 	      cMap.put("clubId", clubId);
 	      System.out.println("cMap : "+cMap);
 	      

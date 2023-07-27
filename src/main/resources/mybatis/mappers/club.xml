@@ -118,12 +118,16 @@
 
 	<select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
 		<![CDATA[
-			select 
-	            a.clubId
-	            ,a.clubName
-	            ,b.memLevel
-             from club a join club_member b on a.clubId = b.clubId
-             where b.memberId = #{memberId} and a.clubId = #{clubId}
+			SELECT
+			    a.clubid,
+			    clubname,
+			    b.memberid
+			FROM
+			    club a
+			    JOIN club_member b ON a.clubid = b.clubid
+			WHERE
+			    memlevel = 0
+			    AND a.clubid = #{clubId}
 		]]>
 	</select>
 </mapper>
