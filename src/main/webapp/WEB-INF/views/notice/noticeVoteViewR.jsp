@@ -41,7 +41,7 @@
               <div>
                   <p class="noticetitle">[결제완료]${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="btn btn-warning">목록</button>
+                    <button type="button" class="btn btn-warning" id="nlist">목록</button>
                     <button type="button" class="btn btn-success">다음글</button>
                   </div>
               </div>
@@ -148,6 +148,10 @@
   console.log(price);
   
   $(document).ready(function() {
+	  
+	  $('#nlist').click(function() {
+		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
+	  });
 	  
 	  var address1 = $("#address1").text();
 	  var address2 = $("#address2").text();

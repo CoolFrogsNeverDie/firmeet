@@ -209,12 +209,15 @@ public class NoticeBoardController {
 	
 	
 	//에디터 모임 등록 후 나오는 리스트
-	@RequestMapping("/payresult/{meetNo}")
-	public String payresult(@PathVariable("meetNo") int meetNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/payresult/{payresultNo}")
+	public String payresult(@PathVariable("payresultNo") int payresultNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice payresult 확인");
 		session.getAttribute("meetNo");
 		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("vo", noticeBoardService.payresult(vo.getMeetNo()));
+		model.addAttribute("payresultNo", vo.getPayresultNo());
+		System.out.println("notice payresult 확인"+vo.getPayresultNo());
+		System.out.println("확확확"+vo);
+		model.addAttribute("vo", noticeBoardService.payresult(vo.getMemberId(), vo.getPayresultNo()));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteViewR";
 	}

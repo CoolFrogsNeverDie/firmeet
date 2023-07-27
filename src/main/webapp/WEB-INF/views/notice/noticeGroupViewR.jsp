@@ -132,5 +132,4 @@
 			});
 		});
   </script>
-  </script>
 </html>

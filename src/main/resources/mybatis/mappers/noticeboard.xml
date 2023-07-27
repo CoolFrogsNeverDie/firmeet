@@ -73,15 +73,58 @@
 		values(SEQ_PAYRESULTNO.nextval, #{meetNo}, #{memberId}, SYSDATE)
 	</insert>
 	
- 	<select id="payresult" parameterType="noticeboard" resultType="noticeboard">
-		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
-		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
-		from aboard a, club c, member m, meet_name mn
-		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
-	</select>
-	
-<!-- 	<update id="paycount" parameterType="int">
-		update aboard set paycount = paycount +1 where meetNo = #{meetNo}
+	<select id="payresult" resultType="noticeboard" parameterType="noticeboard">
+	     SELECT
+		    a.aboardNo,
+		    c.clubId,
+		    m.memberId,
+		    a.aboardVal,
+		    a.title,
+		    TO_CHAR(aboardDate, 'YYYY-MM-DD') AS aboardDate,
+		    a.boardContent,
+		    aboardHit,
+		    mn.aboardNo,
+		    mn.meetNo,
+		    mn.clubId,
+		    mn.meetYear,
+		    mn.meetMon,
+		    mn.meetName,
+		    TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate,
+		    TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate,
+		    mn.meetTime,
+		    mn.meetPlace,
+		    mn.voteEnd,
+		    mn.minPerson,
+		    mn.maxPerson,
+		    mn.price,
+		    mn.address1,
+		    mn.address2,
+		    pr.payresultNo,
+		    pr.meetNo,
+		    pr.memberId,
+		    pr.payvotedate,
+		    pr.paycount
+		    
+		FROM
+		    aboard a, club c, member m, meet_name mn, payresult pr
+		where
+		    a.clubId = c.clubId
+		and
+		    a.memberId = m.memberId
+		and
+		    a.aboardNo = mn.aboardNo
+		and
+		    mn.meetNo = pr.meetNo AND m.memberId = pr.memberId
+		and
+		    pr.payresultNo = #{payresultNo}
+		AND
+		    (
+		        pr.paycount le 1 and
+		        pr.memberId eq #{memberId}
+		    )
+	 </select>
+
+	<update id="paycount" parameterType="noticeboard">
+		update PAYRESULT set paycount = paycount +1 where memberId eq #{memberId} and payresultNo eq #{payresultNo}
 	</update>
-	 -->
 </mapper>

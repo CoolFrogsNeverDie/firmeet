@@ -237,8 +237,10 @@
     content: '● ';
     color: gray;
 }
-.like{
-	margin-top: 10px;
+#heart{
+	width: 35px;
+	height: 35px;
+	padding-right: 10px;
 }
 .likecolor{
     color: red;
