@@ -238,10 +238,10 @@
             <h4><strong>일정수정</strong></h4>
             
           </div>
-       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
-            <input type="hidden" id = "edit-address1" name = "address1" value = "-1">
-            <input type="hidden" id = "edit-address2" name = "address2" value ="-1">
-            <input type="hidden" name = "memberId" value = "se" id = "edit-memId">
+       <form action="${pageContext.request.contextPath}/calendar/member/edit-persche" method = "GET" class= "edit-persche">
+            <input type="text" id = "edit-address1" name = "address1" value = "-1">
+            <input type="text" id = "edit-address2" name = "address2" value ="-1">
+            <input type="hidden" name = "memberId" value = "${member.memberId}" id = "edit-memId">
             <input type="hidden" name = "perScheNo" id = "edit-perScheNo">
           <div class="body-contentbox">
             <table id = "schedule-table">
@@ -252,7 +252,7 @@
               <tr>
                 <th rowspan="2">일정</th>
                 <td rowspan="2"><input type="date" id = "edit-startD" name = "startDate">&nbsp; ~&nbsp; 
-                <input type="date" id = "edit-endDate" name ="endDate" ></td>
+                <input type="date" id = "edit-endD" name ="endDate" ></td>
               </tr>
               <tr>
               </tr>
@@ -271,7 +271,7 @@
             
           </div>
           <div class="sche-submit-btn">
-            <button type ="submit">등록</button>
+            <button type ="submit">수정</button>
             <button type ="button" class = "popup-close-btn3">취소</button>
           </div>
        </form>
@@ -290,14 +290,14 @@
   <div class="popup-wrap" id="popup">
     <div class="popup" id = "2th-popup">
       <div class="popup-head">
-        <div class="popup-close-btn3">X</div>
+        <div class="popup-close-btn4">X</div>
       </div>
       <div class="popup-body">
         <div class="body-content">
        <form action="http://localhost:8000/link/search/" method = "get">
           <div class="body-titlebox">
             <h4><strong>지도 선택</strong></h4>
-
+			
           </div>
           <div class="body-contentbox">
             <div id="map3" style="width:500px;height:400px; display:block; "></div>
@@ -315,6 +315,34 @@
 </body>
 
 <script>
+
+$('.edit-persche').on("submit", function(){
+	
+	var title = $('#edit-title').val();
+	var memId = $('#edit-memId').val();
+	var startD = $('#edit-endD').val();
+	var endD = $('#edit-startD').val();
+	
+	
+	if(title.length < 1){
+		alert('타이틀을 입력하세요.')
+		return false;
+	}if(memId.length < 1){
+		alert('로그인이 필요한 서비스입니다.')
+		return false;
+	}if(startD.length < 1){
+		alert('시작 날짜를 지정해주세요.')
+		return false;
+	}if(endD.length < 1){
+		alert('끝나는 날짜를 지정해주세요.')
+		return false;
+	}
+	return true;
+	
+	
+});
+
+
  /*세번째 지도*/
  
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -367,14 +395,23 @@ function displayMarker3(place) {
         let lng =  marker3.getPosition().getLng();
         setCenter3(marker3.getPosition().getLat(), marker3.getPosition().getLng())
         let place_name = place.place_name;
-        infowindow.setContent('<div class= "marker-place" style="height: 80px; width: 200px; text-align:center;">' + place_name + '<br> <button type="button" class= "loca-insert-btn">위치등록</button></div>');
+        infowindow.setContent('<div class= "marker-place" style="height: 80px; width: 200px; text-align:center;">' + place_name + '<br> <button type="button" class= "loca-edit-btn">위치등록</button></div>');
     	
-  //      $('#address1').val(lat);
-  //  	$('#address2').val(lng);
-  //  	$('#marker_place').val(place_name);
+      	$('#edit-address1').val(lat);
+    	$('#edit-address2').val(lng);
+   		$('#edit-place').val(place_name);
         infowindow.open(map3, marker3);
     });
 }
+
+
+$('.container6 .popup').on("click",'.loca-edit-btn', function(){
+	$('.container6').css('display' , 'none');
+});
+$('.popup-close-btn4').on("click", function(){
+	$('.container6').css('display' , 'none');
+});
+
 
 
 function setCenter3(x, y) {            
@@ -389,7 +426,7 @@ function relayout3() {
     map3.relayout();
 } 
  
-
+	//
 	$('.map-search-btn2').on("click", function(){
 		var keyword = $('#edit-place').val();
 		$('.container6 .popup-wrap').css('display' , 'block');
@@ -398,9 +435,21 @@ function relayout3() {
 		 relayout3();
 	});
 	
+	//일정 수정창 삭제, X 버튼 클릭 이벤트
 	$('.popup-close-btn3').on("click",function(){
-		$('.container6').css('display' , 'none');
+		con5_reset(); 
 	});
+
+	
+	//일정 수정창 리셋
+	function con5_reset(){
+		$('.container6').css('display' , 'none');
+	  	$('#edit-address1').val(-1);
+		$('#edit-address2').val(-1);
+		$('#edit-place-result').val("");
+		$('#edit-place-checked').prop('checked', false);
+	}
+	
 	
 	$('#edit-place-checked').on('change', function() {
 		  if ($(this).is(':checked')) {
@@ -427,7 +476,7 @@ function relayout3() {
 .marker-place{
 padding:5px;font-size:14px; text-align:center; height: 100px;
 }
-.loca-insert-btn{
+.loca-insert-btn, .loca-edit-btn{
 	margin-bottom : 4px; background-color: black; color: white; text-align: center; font-size:12px; display:inline-block;
 	width:70px; height: 30px; margin-top:7px;
 	position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
@@ -470,7 +519,7 @@ $('.edite-btn').on("click", function(){
 	$('#edit-memId').val(data.memid);
 	$('#edit-title').val(data.title);
 	$('#edit-startD').val(data.start);
-	$('#edit-endDate').val(data.end);
+	$('#edit-endD').val(data.end);
 	$('#edit-place-result').val(data.place);
 	$('#edit-content').val(data.content);
 	$('#edit-perScheNo').val(data.scheno);

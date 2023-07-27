@@ -114,5 +114,25 @@ public class BoardService {
 		boardDAO.insertBoard(boardVO);
 		
 	}
+
+	
+	public BoardVO getBoard(BoardVO boardVO) {
+		
+		return boardDAO.getBoard(boardVO);
+		
+	}
+
+
+	public int editBoard(BoardVO boardVO) {
+
+		return boardDAO.updateBoard(boardVO);
+		
+	}
+
+
+	public int deleteBoard(BoardVO boardVO) {
+		
+		return boardDAO.deleteBoard(boardVO);
+	}
 	
 }

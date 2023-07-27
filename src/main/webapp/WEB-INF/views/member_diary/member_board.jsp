@@ -124,23 +124,23 @@
 	/*답글 등록 버튼 클릭 이벤트*/
 	$('.board-area').on("click",'.rreply-btn', function(){
 		
-		
-		
 	    var writeCommentDiv = $(this).closest('.write-comment2');
 	    
-		console.log('wth');	
 		var replyEditDiv = $(this).closest('.reply-area');
 		var groupNo = $(this).data('replyno');
 		var boardNo = $(this).data('boardno');
 		
+		console.log('wth' + groupNo);	
 		
 		var tag = $(this).parent().siblings(".write-comment2").attr('class');
+		
 		console.log(tag);	
+		
 		if(tag == null){
 			var	rreply = '';	
 			
 			rreply += '<div style ="width:762px; height:100px; margin-top:6px; " class="write-comment2" >';
-			rreply += '    <div class="new-content2" style ="width: 90%; height: 80px; border: 1px solid black; float: left;">';
+			rreply += '    <span ></span><div class="new-content2" style ="width: 80%; height: 80px; border: 1px solid black; float: left;">';
 			rreply += '        <textarea class= "comment-content" style ="width:100%; height:100%; padding:10px;"></textarea><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
 			rreply += '    </div>'
 	 		rreply += '</div>'
@@ -152,9 +152,14 @@
 	
 	});
 
+	$('.reply-area').on("click", ".add-reply2", function(){
+			
+		alert('오 마이');
+		
+	});
+	
 	
 	$('.board-area').on("click", ".add-reply2", function(){
-		
 		var textbox = $(this).prev();
 		var content = textbox.val();
 		var groupNo = $(this).data('groupno');
@@ -390,6 +395,12 @@ function addReply(element, reply){
             add += '<p>' + board.content + '</p>';
             add += '<span class="likecolor" data-bno = "'+board.boardNo + '">♡</span>';
             add += '<span>좋아요 (<span>' + board.likeCnt + '</span>)</span>';
+            if(board.memberId == memberId){
+                add += '<span class= "edit-board-spans">'
+                add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/board/club/editform?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">수정</a>';
+                add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/board/club/delete?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">삭제</a>'
+                add += '</span>'
+                }
             add += '</div><div class="board-comment-list">';
             add += '<div class="board-comment" >';
             add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
@@ -403,12 +414,12 @@ function addReply(element, reply){
                     add += '<span><b>' + reply.memberName + '님 : </b></span>';
                 }
                 add += '<span>' + reply.content + '</span>';
-                if (reply.deep === 1) {
+                if (reply.deep === 1 & reply.stat == 1) {
                     add += '<span><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
                 }
                 add += '<div class="reply-edit">';
                 add += '<span>' + reply.replyDate + '</span>';
-                if(memberId == reply.memberId){
+                if(memberId == reply.memberId	& reply.stat == 1){
                 add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
                 }
                 add += '</div></div>';

@@ -152,6 +152,36 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping(value = "/club/editform")
+	public String editForm(@ModelAttribute BoardVO boardVO
+						   ,Model model) {
+		
+		System.out.println("넘어오는 정보 확인" + boardVO);
+		
+		BoardVO vo = boardService.getBoard(boardVO);
+	    ClubVo clubVo = clubService.getClubVo(vo.getClubId());
+	    model.addAttribute("club", clubVo);
+		model.addAttribute("board" , vo);
+		
+		return "club_diary/board_edit";
+	}
 	
+	@RequestMapping(value = "/club/edit" , method = RequestMethod.POST) 
+	public String editBoard(@ModelAttribute BoardVO boardVO) {
+		
+		System.out.println( " 수정을 하려고 넘어온 값 확인 " + boardVO);
+		boardService.editBoard(boardVO);
+		
+		return "redirect:/board/club/" + boardVO.getClubId();
+	}
+	
+	@RequestMapping(value = "/club/delete")
+	public String deleteBoard(@ModelAttribute BoardVO boardVO) {
+		
+		System.out.println("Controller까지 넘어오는지 확인 " + boardVO);
+		boardService.deleteBoard(boardVO);
+		
+		return "redirect:/board/club/" + boardVO.getClubId();
+	}
 	
 }

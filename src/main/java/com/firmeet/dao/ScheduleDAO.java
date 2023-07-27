@@ -61,5 +61,11 @@ public class ScheduleDAO {
 		
 		return row;
 	}
+
+	public void updateSche(ScheduleVO scheduleVO) {
+		
+		System.out.println("수정하려고 넘어오는 정보 확인 : " +  scheduleVO);
+		int row = session.update("schedule.updatePerSche", scheduleVO);
+	}
 	
 }

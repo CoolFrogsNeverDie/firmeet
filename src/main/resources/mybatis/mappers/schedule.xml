@@ -153,4 +153,20 @@
 		]]>
 	</delete>
 	
+	
+	<update id = "updatePerSche" parameterType = "schedule">
+		<![CDATA[
+       		update  my_schedule 
+       			set 
+       			STARTDATE  = #{startDate}
+       			, ENDDATE = #{endDate}
+       			,SCHETITLE = #{title}
+       			, SCHECONTENT = #{content}
+       			, SCHEPLACE = #{place}
+       			, ADDRESS1 = #{address1}
+       			, ADDRESS2 = #{address2}
+       		where MYSCHEDULENO = ${perScheNo}
+		]]>
+	</update>
+	
 </mapper>

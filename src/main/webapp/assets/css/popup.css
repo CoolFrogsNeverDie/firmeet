@@ -334,7 +334,7 @@ border: none;
   position: fixed;
   z-index: 9999; /* 모달의 z-index를 설정하여 달력 위로 올리기 */
 }
-.popup-close-btn, .popup-close-btn2, .per-pop-close-btn, .popup-close-btn3 {
+.popup-close-btn, .popup-close-btn2, .per-pop-close-btn, .popup-close-btn3, .popup-close-btn4 {
 	cursor: pointer;
 }
 
@@ -399,7 +399,7 @@ border: none;
   color: white;
   font-size: 21px;
 }
-.container5 .popup-close-btn, .container2 .popup-close-btn2{
+.container5 .popup-close-btn, .container2 .popup-close-btn2, .popup-close-btn4{
   float: right;
   text-align: center;
   margin-right: 5px;
@@ -418,7 +418,7 @@ border: none;
 }
 .container5 .body-content{
   width:100%;
-  height: 530px;
+  height: 570px;
   padding:30px;
 }
 .container5 .body-titlebox{
@@ -489,6 +489,7 @@ border: none;
 .container5 .sche-submit-btn button:nth-child(2){
   background-color: white;
   border: 1px solid black;
+  margin-left: 4px;
 }
 .container5 #edit-place-result {
 	

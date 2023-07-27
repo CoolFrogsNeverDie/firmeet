@@ -9,6 +9,7 @@
 		<![CDATA[
     		SELECT
        			replyno as replyNo
+       			,stat
        			,a.memberId as memberId 
         		,memberName as memberName
         		,replycontent as content
@@ -17,11 +18,11 @@
         		,deep
    			from board_reply a join member b on a.memberId = b.memberId
     		where boardNo = #{boardNo}
-   			order by replygroup , deep 
+   			order by replygroup , deep , replyNo
 		]]>
 	</select>
 	
-	<select id = "getBoard" parameterType ="board" resultType ="board">
+	<select id = "getBoardList" parameterType ="board" resultType ="board">
 		<![CDATA[
 		  	select
        			 boardNo
@@ -88,5 +89,33 @@
 		]]>
 	</insert>
 		
-		
+	
+	<select id = "getBoard" parameterType = "board" resultType ="board" >
+		<![CDATA[
+			select
+                boardNo
+                ,a.clubId as clubId
+                ,b.clubName as clubName
+                ,memberId
+                ,boardContent as content
+                ,boardDate
+            from board a join club b on a.clubID = b.clubId
+            where boardNo = #{boardNo}
+		]]>	
+	</select>
+	
+	<update id = "updateBoard" parameterType = "board">
+		<![CDATA[
+			update board set
+				boardContent = #{content}
+			where boardNo = #{boardNo}
+		]]>
+	</update>
+	
+	<delete id = "deleteBoard" parameterType = "board">
+		<![CDATA[
+			delete board 
+			where boardNo = #{boardNo}		
+		]]>	
+	</delete>
 </mapper>

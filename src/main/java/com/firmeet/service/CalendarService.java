@@ -73,5 +73,11 @@ public class CalendarService {
 		
 		return result;
 	}
+
+	public void editSche(ScheduleVO scheduleVO) {
+		
+		scheduleDAO.updateSche(scheduleVO);
+		
+	}
 	
 }	

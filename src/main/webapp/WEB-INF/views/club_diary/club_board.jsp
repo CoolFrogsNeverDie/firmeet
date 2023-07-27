@@ -376,6 +376,15 @@ function addReply(element, reply){
  	 
  	}//get data end
  	
+ 	$('.board-area').on("click",'.delete-board-a', function(event){
+		
+		if(!confirm('삭제하시겠습니까?')){
+			event.preventDefault();
+		}
+ 		
+ 	});
+ 	
+ 	
  	
  	//AJAX로 불러온 데이터 그려주는 function
 	   function render(boardList,memberId){
@@ -397,6 +406,12 @@ function addReply(element, reply){
             add += '<p>' + board.content + '</p>';
             add += '<span class="likecolor" data-bno = "'+board.boardNo + '">♡</span>';
             add += '<span>좋아요 (<span>' + board.likeCnt + '</span>)</span>';
+            if(board.memberId == memberId){
+            add += '<span class= "edit-board-spans">'
+            add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/board/club/editform?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">수정</a>';
+            add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/board/club/delete?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">삭제</a>'
+            add += '</span>'
+            }
             add += '</div><div class="board-comment-list">';
             add += '<div class="board-comment" >';
             add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
@@ -410,12 +425,12 @@ function addReply(element, reply){
                     add += '<span><b>' + reply.memberName + '님 : </b></span>';
                 }
                 add += '<span>' + reply.content + '</span>';
-                if (reply.deep === 1) {
+                if (reply.deep === 1 & reply.stat == 1) {
                     add += '<span><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
                 }
                 add += '<div class="reply-edit">';
                 add += '<span>' + reply.replyDate + '</span>';
-                if(memberId == reply.memberId){
+                if(memberId == reply.memberId	& reply.stat == 1){
                 add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
                 }
                 add += '</div></div>';

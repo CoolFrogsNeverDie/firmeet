@@ -12,6 +12,7 @@ public class ReplyVO {
 	private Date replyDate;
 	private int replyGroup;
 	private int deep;
+	private int stat;
 	public ReplyVO() {
 		super();
 	}
@@ -63,14 +64,18 @@ public class ReplyVO {
 	public void setDeep(int deep) {
 		this.deep = deep;
 	}
+	public int getStat() {
+		return stat;
+	}
+	public void setStat(int stat) {
+		this.stat = stat;
+	}
 	@Override
 	public String toString() {
 		return "ReplyVO [replyNo=" + replyNo + ", boardNo=" + boardNo + ", memberId=" + memberId + ", memberName="
 				+ memberName + ", content=" + content + ", replyDate=" + replyDate + ", replyGroup=" + replyGroup
-				+ ", deep=" + deep + "]";
+				+ ", deep=" + deep + ", stat=" + stat + "]";
 	}
-	
-	
 
 
 	

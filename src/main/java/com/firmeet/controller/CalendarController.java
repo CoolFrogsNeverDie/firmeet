@@ -119,4 +119,15 @@ public class CalendarController {
 		return jsonResult;
 	}
 	
+	@RequestMapping(value = "/member/edit-persche")
+	public String editSche(@ModelAttribute ScheduleVO scheduleVO) {
+		
+		System.out.println("수정을 위해 넘어온 정보" + scheduleVO);
+		calendarService.editSche(scheduleVO);
+		
+		
+		return "redirect:/calendar/member/" + scheduleVO.getMemberId();
+	}
+	
+	
 }	

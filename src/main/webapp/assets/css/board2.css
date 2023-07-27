@@ -104,6 +104,18 @@ dd:hover{
   border-right: 0;
   background-color: #000000;
 }
+.board .edit-board-spans{
+	float:right;
+}
+.board .edit-board-spans{
+	float: right;
+    position: relative;
+    top: 5px;
+}
+.board .edit-board-a{
+	margin-right : 10px;
+}
+
 .board{
   box-shadow: 0 3px 3px rgba(0.2,0.2,0,0.2);
 	margin-right: 7px;
