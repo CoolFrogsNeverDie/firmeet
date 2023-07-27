@@ -119,8 +119,8 @@
                         <div class="voteleft">
                         	<input type="text" name="clubId" value="${clubId}"><br>
                         	<input type="text" name="voteNo" value="${vo.voteNo}"><br>
-                        	<input type="text" name="aboardNo" value="${vo.aboardNo}"><br>
-                        	<input type="text" name="memberId" value="${member.memberId}">${memberId}<br>
+                        	<input type="text" name="aboardNo" id="aboardNo" value="${vo.aboardNo}"><br>
+                        	<input type="text" name="memberId" id="memberId" value="${member.memberId}">${memberId}<br>
                             <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
                             <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
                            	<input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
@@ -187,7 +187,7 @@
   $(document).ready(function () {
 		
 		// 좋아요가 있는지 확인한 값을 heartval에 저장
-	        var heartval = ${heart.heart}
+	        var heartval = ${vo.likeNo}
 	        // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
 	        if(heartval>0) {
 	            console.log(heartval);
@@ -205,10 +205,20 @@
 		
 	        $(".heart").on("click", function () {
 	            var that = $(".heart");
+	            
+	            var memberId = $('#memberId').val();
+	  			var aboardNo = $('#aboardNo').val();
+					console.log('ㅎㅎ',memberId);
+					console.log(aboardNo);
+				var NoticeBoardVO ={
+						memberId : memberId,
+						aboardNo :  aboardNo
+					}
+	            
 		    $.ajax({
-		    	url :'${pageContext.request.contextPath }/noticen/heart',
+		    	url :'${pageContext.request.contextPath }/${clubId}/notice/heart',
 		        type :'POST',
-		        data : {'aboardNo':${sessionScope.aboardNo}, 'memberId':${sessionScope.memberId}},
+		        data : NoticeBoardVO,
 		    	success : function(data){
 		    		that.prop('name',data);
 		        	if(data==1) {
@@ -228,6 +238,7 @@
 	          $("#dataTable1").toggle();
 	        });
 		});
+  
 		window.history.forward();
 		function noBack(){
 			window.history.forward();

@@ -1,6 +1,8 @@
 package com.firmeet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,12 +87,37 @@ public class NoticeBoardDAO {
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(String memberId, int payresultNo) {
-		System.out.println("notice payresult dao 확인"+memberId);
-		return sql.selectOne("noticeboard.payresult", memberId);
+	public NoticeBoardVO payresult(int payresultNo) {
+		System.out.println("notice payresult dao 확인");
+		//Map<String, Object> map = new HashMap<String, Object>();
+		//map.put("memberId", memberId);
+		//map.put("payresultNo", payresultNo);
+		return sql.selectOne("noticeboard.payresult", payresultNo);
 	}
 
-	public void paycount(String memberId, int getPayresultNo) {
-		sql.update("noticeboard.paycount", memberId);
+	public int paycount(String memberId, int payresultNo) {
+		System.out.println("notice paycount dao 확인"+memberId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("payresultNo", payresultNo);
+		return sql.update("noticeboard.paycount", map);
+	}
+/*
+	public NoticeBoardVO findHeart(Map<String, Object> map) {
+		System.out.println("notice findHeart dao 확인");
+		return sql.selectOne("noticeboard.findHeart",map);
+	}
+*/
+	public NoticeBoardVO findHeart(NoticeBoardVO vo) {
+		return sql.selectOne("noticeboard.findHeart",vo);
+	}
+	
+	public int insertHeart(NoticeBoardVO vo) {
+		return sql.insert("noticeboard.insertHeart", vo);
+	}
+
+	public void deleteHeart(NoticeBoardVO vo) {
+		sql.delete("noticeboard.deleteHeart",vo);
+		
 	}
 }

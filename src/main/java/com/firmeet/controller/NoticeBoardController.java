@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,8 +92,16 @@ public class NoticeBoardController {
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
 		model.addAttribute("vo", noticeBoardService.editlist(vo.getAboardNo()));
+		//model.addAttribute("vo", noticeBoardService.findHeart(vo.getAboardNo(), vo.getMemberId()));
 		
 		return "notice/noticeGroupView";
+	}
+	
+	@RequestMapping(value="/heart", method=RequestMethod.POST)
+	@ResponseBody
+	public int heart(@ModelAttribute NoticeBoardVO vo) {
+		int result = noticeBoardService.insertHeart(vo);
+		return result;
 	}
 	
 	@RequestMapping("/vote")
@@ -194,31 +203,37 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 insert
 	@RequestMapping("/payinsert")
-	public String payinsert(@ModelAttribute NoticeBoardVO vo, Model model) {
+	public String payinsert(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session, ClubVo clubvo) {
 		
 		System.out.println("넘어는 오니?");
 		System.out.println(vo);
+		model.addAttribute("clubId", clubvo.getClubId());
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("meetNo", vo.getMeetNo());
 		model.addAttribute("memberId", vo.getMemberId());
-
+		
 		noticeBoardService.payinsert(vo);
 		
-		return "redirect:/"+vo.getClubId()+"/notice/payresult/"+vo.getMeetNo();
+		session.getAttribute("payresultNo");
+		model.addAttribute("payresultNo", vo.getPayresultNo());
+		System.out.println("결제번호들어가라"+vo.getPayresultNo());
+		
+		return "redirect:/"+vo.getClubId()+"/notice/payresult";
 	}
 	
 	
 	//에디터 모임 등록 후 나오는 리스트
-	@RequestMapping("/payresult/{payresultNo}")
-	public String payresult(@PathVariable("payresultNo") int payresultNo, ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	@RequestMapping("/payresult")
+	public String payresult(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("notice payresult 확인");
-		session.getAttribute("meetNo");
+		System.out.println("notice getPayresultNo 확인"+vo.getPayresultNo());
+		session.getAttribute("payresultNo");
 		model.addAttribute("meetNo", vo.getMeetNo());
 		model.addAttribute("payresultNo", vo.getPayresultNo());
 		System.out.println("notice payresult 확인"+vo.getPayresultNo());
+		
 		System.out.println("확확확"+vo);
 		model.addAttribute("vo", noticeBoardService.payresult(vo.getMemberId(), vo.getPayresultNo()));
-		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteViewR";
 	}
 	

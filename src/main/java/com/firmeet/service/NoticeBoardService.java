@@ -4,7 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,11 +152,40 @@ public class NoticeBoardService {
 		dao.payinsert(vo);
 	}
 	
-	public NoticeBoardVO payresult(String memberId, int payresultNo) {
+	public Map<String, Object> payresult(String memberId, int payresultNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("payresultNo", payresultNo);
+		
 		System.out.println("notice payresult 확인");
-		NoticeBoardVO vo = dao.payresult(memberId, payresultNo);
+		dao.payresult(payresultNo);
 		dao.paycount(memberId, payresultNo);
-		return vo;
+		return map;
+	}
+/*	
+	public NoticeBoardVO findHeart(int aboardNo, String memberId) {
+		System.out.println("notice findHeart 확인");
+		// 2개의 parameter를 보내기 위해 Map 선언 및 Map에 데이터 삽입
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("aboardNo", aboardNo);
+		map.put("memberId", memberId);
+		return dao.findHeart(map);
+	}
+*/
+	public int insertHeart(NoticeBoardVO vo) {
+		System.out.println("notice insertHeart 확인");
+		
+		int result = 0;
+		
+		NoticeBoardVO find = dao.findHeart(vo);
+		
+		if(find == null) {
+			result = dao.insertHeart(vo);
+		}else {
+			dao.deleteHeart(vo);
+		}
+		return result;
 	}
 
 }

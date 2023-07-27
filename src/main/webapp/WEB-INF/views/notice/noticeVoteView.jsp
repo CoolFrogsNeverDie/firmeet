@@ -80,6 +80,7 @@
 	                             <p class="noticegroupname"><span>최대인원 : </span>${vo.maxPerson}</p>
 	                             <p class="noticegroupname" hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
+	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
 	                             <p class="paycount"><span>현재인원 : </span>${vo.paycount} / <span>최대인원 : </span>${vo.maxPerson}</p>
 	                             <p class="noticegroupname">memberId :<span id="memberId">${member.memberId}</span></p>
 	                             <p class="noticegroupname">meetNo :<span id="meetNo">${vo.meetNo}</span></p>
@@ -92,11 +93,13 @@
                		<div id="map2" style="width:100%;height:250px;"></div>
                </div>
         </div>
-        <div class="like">
-            <span class="likecolor">♡</span><span>좋아요</span><span class="likecount">0</span>
-        </div>
+      	<div>
+			<a class="text-dark heart" style="text-decoration-line: none;">
+			<img id="heart" src="${pageContext.request.contextPath }/assets/images/icon/heart.svg">좋아요</a>
+			<span class="likecount">0</span>
+		</div>
               
-   		</div>
+   	</div>
           <!-- 여기까지 -->
       <!-- -------------------------------------------------일반투표-------------------------------------------------------->
   </div>
@@ -299,6 +302,50 @@
         
    	});
     map2.setZoomable(true);   
+    
+	// 좋아요가 있는지 확인한 값을 heartval에 저장
+    var heartval = ${vo.likeNo}
+    // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
+    if(heartval>0) {
+        console.log(heartval);
+        $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
+        $(".heart").prop('name',heartval)
+    }
+    else {
+        console.log(heartval);
+        $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart.svg");
+        $(".heart").prop('name',heartval)
+    }
+
+	// 좋아요 버튼을 클릭 시 실행되는 코드
+	console.log(${sessionScope.aboardNo});
+	
+    $(".heart").on("click", function () {
+        var that = $(".heart");
+        
+        var memberId = $('#memberId').text();
+		var aboardNo = $('#aboardNo').text();
+				console.log('ㅎㅎ',memberId);
+				console.log(aboardNo);
+			var NoticeBoardVO ={
+					memberId : memberId,
+					aboardNo :  aboardNo
+				}
+        
+	    $.ajax({
+	    	url :'${pageContext.request.contextPath }/${clubId}/notice/heart',
+	        type :'POST',
+	        data : NoticeBoardVO,
+	    	success : function(data){
+	    		that.prop('name',data);
+	        	if(data==1) {
+	            	     $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
+	        	} else {
+                	 $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart.svg");
+	        	}
+         	}
+	    	});
+    });
     
 });
 </script>

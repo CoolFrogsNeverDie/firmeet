@@ -45,7 +45,8 @@ public class NoticeBoardVO {
 	private int aboardHit;
 	private int paycount;
 	private int payresultNo;
-	private String payvotedate;
+	private int likeNo;
+	private String likeDate;
 	
 	public NoticeBoardVO() {
 		
@@ -128,12 +129,11 @@ public class NoticeBoardVO {
 		this.voteEnd = voteEnd;
 	}
 	
-	public NoticeBoardVO(String memberId, int meetNo, int payresultNo, String payvotedate) {
+	public NoticeBoardVO(String memberId, int meetNo, int payresultNo) {
 		super();
 		this.memberId = memberId;
 		this.meetNo = meetNo;
 		this.payresultNo = payresultNo;
-		this.payvotedate = payvotedate;
 	}
 
 	public int getAboardNo() {
@@ -472,12 +472,20 @@ public class NoticeBoardVO {
 		this.payresultNo = payresultNo;
 	}
 
-	public String getPayvotedate() {
-		return payvotedate;
+	public int getLikeNo() {
+		return likeNo;
 	}
 
-	public void setPayvotedate(String payvotedate) {
-		this.payvotedate = payvotedate;
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
+
+	public String getLikeDate() {
+		return likeDate;
+	}
+
+	public void setLikeDate(String likeDate) {
+		this.likeDate = likeDate;
 	}
 
 	@Override
@@ -493,7 +501,7 @@ public class NoticeBoardVO {
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
 				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", paycount=" + paycount
-				+ ", payresultNo=" + payresultNo + ", payvotedate=" + payvotedate + "]";
+				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + "]";
 	}
 
 }

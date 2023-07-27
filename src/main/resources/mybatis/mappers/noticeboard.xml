@@ -69,11 +69,15 @@
 	</update>
 
 	<insert id="payinsert" parameterType="noticeboard">
-		insert into PAYRESULT(payresultNo, meetNo, memberId, payvotedate)
-		values(SEQ_PAYRESULTNO.nextval, #{meetNo}, #{memberId}, SYSDATE)
+		 <selectKey resultType="int" keyProperty="payresultNo" order="BEFORE">
+			select SEQ_PAYRESULTNO.nextval from dual
+		</selectKey>
+		insert into PAYRESULT(payresultNo, meetNo, memberId )
+		values(SEQ_PAYRESULTNO.nextval, #{meetNo}, #{memberId})
 	</insert>
 	
 	<select id="payresult" resultType="noticeboard" parameterType="noticeboard">
+	<![CDATA[
 	     SELECT
 		    a.aboardNo,
 		    c.clubId,
@@ -102,29 +106,30 @@
 		    pr.payresultNo,
 		    pr.meetNo,
 		    pr.memberId,
-		    pr.payvotedate,
 		    pr.paycount
-		    
 		FROM
 		    aboard a, club c, member m, meet_name mn, payresult pr
 		where
-		    a.clubId = c.clubId
-		and
-		    a.memberId = m.memberId
-		and
-		    a.aboardNo = mn.aboardNo
-		and
-		    mn.meetNo = pr.meetNo AND m.memberId = pr.memberId
-		and
-		    pr.payresultNo = #{payresultNo}
-		AND
-		    (
-		        pr.paycount le 1 and
-		        pr.memberId eq #{memberId}
-		    )
-	 </select>
+		    a.clubId = c.clubId and a.memberId = m.memberId	and a.aboardNo = mn.aboardNo and mn.meetNo = pr.meetNo and m.memberId = pr.memberId and m.memberId = pr.memberId
+		and pr.payresultNo = #{payresultNo}
+		]]>	
+	</select>
 
-	<update id="paycount" parameterType="noticeboard">
-		update PAYRESULT set paycount = paycount +1 where memberId eq #{memberId} and payresultNo eq #{payresultNo}
+	<update id="paycount" parameterType="map">
+		update PAYRESULT set paycount = paycount +1 where memberId = #{memberId} and payresultNo = #{payresultNo}
 	</update>
+	
+	<select id="findHeart" parameterType="noticeboard" resultType="noticeboard">
+		select likeNo, aboardNo, memberId from aboard_like where aboardNo=#{aboardNo} and memberId=#{memberId}
+	</select>
+	
+	<insert id="insertHeart" parameterType="noticeboard">
+		insert into aboard_like(likeNo, aboardNo, memberId)
+		values(SEQ_ABOARD_LIKENO.nextval, #{aboardNo}, #{memberId})
+	</insert>
+	
+	<delete id="deleteHeart" parameterType="noticeboard">
+		delete from aboard_like where aboardNo=#{aboardNo} and memberId=#{memberId}
+	</delete>
+	
 </mapper>
