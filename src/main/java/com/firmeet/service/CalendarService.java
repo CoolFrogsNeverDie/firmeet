@@ -79,5 +79,12 @@ public class CalendarService {
 		scheduleDAO.updateSche(scheduleVO);
 		
 	}
+
+	public List<ScheduleVO> getClubSche2(CalendarVO calendarVO) {
+			
+		List<ScheduleVO> list = scheduleDAO.getClubSche2(calendarVO);
+		
+		return list;
+	}
 	
 }	

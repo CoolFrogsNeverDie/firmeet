@@ -23,6 +23,7 @@ public class ClubVo {
 	public String detailE;
 	public String detailW;
 	public int[] tagNo; /* form=>컨트롤러 */
+	private List<TagVo> clubTagList;
 	private CategoryVo cateVO; 
 	private TagVo tagVo;
 	private int memlevel;
@@ -248,6 +249,17 @@ public class ClubVo {
 	public void setMemlevel(int memlevel) {
 		this.memlevel = memlevel;
 	}
+	
+	
+
+	public List<TagVo> getClubTagList() {
+		return clubTagList;
+	}
+
+
+	public void setClubTagList(List<TagVo> clubTagList) {
+		this.clubTagList = clubTagList;
+	}
 
 
 	@Override
@@ -256,8 +268,10 @@ public class ClubVo {
 				+ ", preNum=" + preNum + ", intro1=" + intro1 + ", intro2=" + intro2 + ", address1=" + address1
 				+ ", address2=" + address2 + ", img1=" + img1 + ", img2=" + img2 + ", detailT=" + detailT + ", detailL="
 				+ detailL + ", detailP=" + detailP + ", detailE=" + detailE + ", detailW=" + detailW + ", tagNo="
-				+ Arrays.toString(tagNo) + ", cateVO=" + cateVO + ", tagVo=" + tagVo + ", memlevel=" + memlevel
-				+ ", cateNo=" + cateNo + ", category=" + category + "]";
+				+ Arrays.toString(tagNo) + ", clubTagList=" + clubTagList + ", cateVO=" + cateVO + ", tagVo=" + tagVo
+				+ ", memlevel=" + memlevel + ", cateNo=" + cateNo + ", category=" + category + "]";
 	}
+
+	
 
 }

@@ -13,6 +13,7 @@
 	<typeAlias type="com.firmeet.vo.ReplyVO" alias="reply"/>
 	<typeAlias type="com.firmeet.vo.BoardVO" alias="board"/>
 	<typeAlias type="com.firmeet.vo.AreplyVO" alias="areply"/>
+	<typeAlias type="com.firmeet.vo.TagVo" alias="tag"/>
 	</typeAliases>
 
 	<mappers>

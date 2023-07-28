@@ -165,5 +165,17 @@ public class ClubController {
 	public String searchTag() {
 		return "";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/tagrank" , method = RequestMethod.POST)
+	public JsonResult getRankTag(@ModelAttribute ClubVo clubVO) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("넘어오는지 확인 합니다." + clubVO);
+		jsonResult.success(clubService.getRankTag(clubVO));
+	
+		return jsonResult;
+	}
+	
 
 }

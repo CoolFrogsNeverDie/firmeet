@@ -167,4 +167,35 @@
                 AND b.memberid = #{memberId}
         ]]>
     </select>
+    
+    <!-- 해당 클럽에 가입한 사람들의 상위 5개 태그를 가져오는 쿼리문 -->
+    <select id  ="ClubTagRank" parameterType = "club" resultType = "tag">
+    	<![CDATA[
+			select
+			    totalCnt
+			    ,count as tagCnt
+			    ,tagName
+			    ,tagNo
+			from(
+			    select 
+			        rownum as rw
+			        ,totalcnt
+			        ,count
+			        ,tagName
+			        ,tagNo
+			    from(
+			            SELECT 
+			            (select count(tagNo) from member_tag a join club_member b on a.memberId = b.memberId where b.clubID = 1) as totalcnt,
+			            count(b.tagName) as count , b.tagName, b.tagNo
+			            FROM member_tag a
+			            JOIN tag b ON a.tagNo = b.tagNo
+			            JOIN club_member c ON c.memberId = a.memberId
+			            WHERE clubId = #{clubId}
+			            GROUP BY  b.tagName, b.tagNo
+			            order by count desc
+			        )
+			    )where rw between 1 and 5     
+    	]]>
+    </select>
+    
 </mapper>

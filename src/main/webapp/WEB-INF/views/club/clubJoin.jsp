@@ -471,30 +471,74 @@ a{text-decoration: none; color: #212121;}
 
 <!--차트 관련 js-->
 <script>
-    am5.ready(function () {
+
+	
+	$(document).ready(function() {
+		//render();
+		getTagData(); 
+	  });
+	
+	function getTagData(){
+		
+		var clubId = ${clubVo.clubId};
+		console.log(clubId)	
+		
+		var ClubVO = {
+			clubId : clubId
+		}
+		
+		console.log(ClubVO);
+		 $.ajax({
+		        
+		        //요청 세팅
+		        url : "${pageContext.request.contextPath}/club/tagrank",      
+		        type : "post",
+		        data : ClubVO,
+		        
+		        //응답 세팅
+		        dataType : "json",
+		        success : function(jsonResult){
+		        
+		        	var data = jsonResult.data;
+		        	console.log(jsonResult.data)
+		        	render(data);
+		        	
+		        }, //success end
+		        error : function(XHR, status, error) {
+		        console.error(status + " : " + error);
+		        }
+						            
+		     });//ajax end
+		
+	}
+	
+	
+	
+	function render(data2) {
+	
 
         // Create root element
         // https://www.amcharts.com/docs/v5/getting-started/#Root_element
         var root = am5.Root.new("chartdiv");
 
-        // Set themes
-        // https://www.amcharts.com/docs/v5/concepts/themes/
-        // root.setThemes([
-        //   am5themes_Animated.new(root)
-        // ]);
 
-        var data = {
+		 var data = {
             value: 0,
             children: []
         }
 
+       	data2.forEach(function(round) {
+       		data.children.push({ name: round.tagName + ' (' +round.tagCnt + ')'  , value: (100/parseFloat(round.totalCnt))*round.tagCnt });
+			console.log((100/parseFloat(round.totalCnt))*round.tagCnt );
+        });
+        
         /*원형차트 데이터 넣기*/
-        var chart1 = data.children.push({ name: "#활발한 ", value: 30 })
+/*         var chart1 = data.children.push({ name: "#활발한 ", value: 30 })
         var chart2 = data.children.push({ name: "#인싸환영", value: 2 })
         var chart3 = data.children.push({ name: "#조용한", value: 70 })
         var chart4 = data.children.push({ name: "#분위기있는", value: 10 })
         var chart4 = data.children.push({ name: "#재밌는", value: 10 })
-
+ */
 
         // Create wrapper container
         var container = root.container.children.push(
@@ -565,7 +609,7 @@ a{text-decoration: none; color: #212121;}
         // Make stuff animate on load
         series.appear(1000, 100);
 
-    }); // end am5.ready()
+    }; // end am5.ready()
 
 </script>
 

@@ -116,5 +116,11 @@ public class ClubDao {
 		return memLevel;
 	}
 	 
+	public List<TagVo> getClubTagRank(ClubVo clubVO){
+		
+		List<TagVo> list = 	session.selectList("club.ClubTagRank", clubVO);
+		
+		return list;
+	}
 	 
 }

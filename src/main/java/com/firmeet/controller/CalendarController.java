@@ -62,7 +62,7 @@ public class CalendarController {
 	
 	/*클럽 캘린더 스케줄 정보 불러오기 AJAX*/
 	@ResponseBody
-	@RequestMapping(value = "/club/getSchedule", method= RequestMethod.POST)
+	@RequestMapping(value = "/club/getschedule", method= RequestMethod.POST)
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
 		JsonResult jsonResult = new JsonResult();
 		List<ScheduleVO> list = calendarService.getClubSche(calendarVO);
@@ -70,6 +70,20 @@ public class CalendarController {
 		
 		return jsonResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/getschedule2", method =RequestMethod.POST)
+	public JsonResult getSchedule2(@ModelAttribute CalendarVO calendarVO) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("객체 정보 넘어오는지 체크" + calendarVO);
+		jsonResult.success(calendarService.getClubSche2(calendarVO));
+		System.out.println("보내기 전에 다시 확인" + calendarService.getClubSche2(calendarVO));
+		
+		
+		return jsonResult;
+	}
+	
 	
 	
 	@RequestMapping(value ="/member/{memberId}")
@@ -146,6 +160,7 @@ public class CalendarController {
 		
 		return "redirect:/calendar/member/" + scheduleVO.getMemberId();
 	}
+	
 	
 	
 }	

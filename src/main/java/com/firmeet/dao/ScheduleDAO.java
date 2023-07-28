@@ -67,5 +67,12 @@ public class ScheduleDAO {
 		System.out.println("수정하려고 넘어오는 정보 확인 : " +  scheduleVO);
 		int row = session.update("schedule.updatePerSche", scheduleVO);
 	}
+
+	public List<ScheduleVO> getClubSche2(CalendarVO calendarVO) {
+		
+		List<ScheduleVO> list = session.selectList("schedule.getClubSchedule2", calendarVO);
+		
+		return list;
+	}
 	
 }

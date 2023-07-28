@@ -18,7 +18,7 @@ public class testControllerS {
 		
 		testService.test();
 		
-		return "notice/noticeGroupViewR";
+		return "member_diary/member_board_test";
 	}
 	
 	

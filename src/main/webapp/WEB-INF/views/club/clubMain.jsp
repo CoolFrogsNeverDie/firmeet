@@ -43,8 +43,7 @@
 	width: 100%;
 	overflow: hidden;
 	display: flex;
-	align-items: center;
-}
+	align-items: center;}
 </style>
 </head>
 
@@ -93,7 +92,7 @@
 						</table>
 					</div>
 					<div class="calendar">
-						<div id='calendar'"></div>
+						<div id='calendar2'></div>
 					</div>
 				</div>
 				<!--/content-right-->
@@ -105,54 +104,64 @@
 		<!--/wrap-->
 </body>
 <footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
+<style>
+#calendar2 .fc-daygrid-day-number{font-size: 11px;}
+#calendar2 #fc-dom-1{font-size : 15px;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 15px;}
+#calendar2 .fc .fc-daygrid-day-number {padding: 2px;position: relative;z-index: 1;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 14px;}
+#calendar2 .fc .fc-daygrid-day-number { padding: 2px; position: relative; bottom: 3px; right: -1px; z-index: 4;}
+#calendar2 .fc-col-header-cell-cushion{font-size: 14px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-end{    margin-right: 0; margin-top: -8px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-start {margin-left: 0;}
+#calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
+</style>
 <script>
-
+//calendar용 전역변수 설정
 let calendarEl;
 let calendar;
 
-$(document).ready(function() {
-	render();
-	getData();
+	$(document).ready(function() {
+		render();
+		getData();
+		
+	  });
+
+	//calendar 그리는 메서드
+	function render(){
+	    calendarEl = $('#calendar2')[0];
+	    calendar = new FullCalendar.Calendar(calendarEl, {
+	    	 headerToolbar: {
+	             left: '',
+	             center: 'title',
+	             right: 'prev,next'
+	           },
+		    locale: 'en',
+	    	initialView: 'dayGridMonth',
+	    	selectable: false
+	    });
+		
+	    calendar.render();
+	} //render event() end
+
 	
-	calendar.addEvent({
-		title: '디졌다.',
-		start: '2023-07-23',
-		end:'2023-07-23',
-		url:'https://www.naver.com',
-		 display: 'background', // 백그라운드 색상을 표시하는 옵션
-         color: '#FF0000' // 원하는 색상 값으로 변경
-	}); //eddEvent end
-  });
-
-
-function render(){
-    calendarEl = $('#calendar')[0];
-    calendar = new FullCalendar.Calendar(calendarEl, {
-    	 headerToolbar: {
-             left: '',
-             center: 'title',
-             right: 'prev,next'
-           },
-	    locale: 'en',
-    	initialView: 'dayGridMonth',
-    	selectable: false
-    });
-	
-    calendar.render();
-} //render event() end
-
+	//calendar 데이터 가져오는 메서드
 	function getData(){
 	
 	var clubId =  ${club.clubId};
+
+	console.log(clubId);
 	
 	CalendarVO = {
-			  clubId: clubId,
+			clubId	: clubId,
 			}
 		
-	 $.ajax({
+	console.log('AJAX로 넘어갈 객체' + CalendarVO);
+	
+		 $.ajax({
 	        
 	        //요청 세팅
-	        url : "${pageContext.request.contextPath}/calendar/club/getSchedule",      
+	        url : "${pageContext.request.contextPath}/calendar/club/getschedule2",      
 	        type : "post",
 	        data : CalendarVO,
 	        
@@ -161,21 +170,23 @@ function render(){
 	        success : function(jsonResult){
 	        	var data = jsonResult.data;
 				console.log(data)
-				
-				if(data.length != 0){
+	
+ 				if(data.length != 0){
 					for(var i = 0; i<data.length; i++){
 						if(data[i].meetCate == "3"){
 						    calendar.addEvent({
-								title: data[i].frontTitle +' '+ data[i].title,
+								title: data[i].title,
 								start: data[i].startDate,
 								end:data[i].endDate + ' 24:00',
 								url:'https://www.naver.com',
+								display: 'background', // 백그라운드 색상을 표시하는 옵션
+						         color: '#FF0000', // 원하는 색상 값으로 변경
 								backgroundColor : '#FF6A00',
 	 							borderColor:  '#FF6A00'
 							}); //eddEvent end
 						}else{
 						    calendar.addEvent({
-								title:  data[i].frontTitle +' '+ data[i].title,
+								title: data[i].title,
 								start: data[i].startDate,
 								end:data[i].endDate + ' 24:00',
 								url:'https://www.naver.com',
@@ -184,18 +195,14 @@ function render(){
 							}); //eddEvent end
 						}
 					}
-				}
+				} 
 	        }, //success end
 	        error : function(XHR, status, error) {
 	        console.error(status + " : " + error);
 	        }
 					            
 	     });//ajax end
-	
-	
-	
-
-	}
+	}//getData() end
 
 </script>
 </html>

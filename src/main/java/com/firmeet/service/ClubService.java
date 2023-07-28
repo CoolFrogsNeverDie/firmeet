@@ -158,6 +158,12 @@ public class ClubService {
 
 		return saveName;
 	}
+
+	public List<TagVo> getRankTag(ClubVo clubVO) {
+		
+		return clubDao.getClubTagRank(clubVO);
+		
+	}
 	
 }
 

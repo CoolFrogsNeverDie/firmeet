@@ -35,6 +35,21 @@
 		</if>
 	</select>
 
+	
+	<select id = "getClubSchedule2" parameterType = "calendar" resultType = "schedule">
+		<![CDATA[
+			select
+       			 b.aboardNo as boardNo
+        		,b.aboardval as meetCate
+        		,b.title as title
+        		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
+        		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
+			from meet_name a join aboard b on a.meetNo = b.meetNo
+			where a.clubID = #{clubId}
+		]]>
+	</select>
+
+
 
 	<select id="getMemClubSche" parameterType="calendar"
 		resultType="schedule">

@@ -1,10 +1,12 @@
 package com.firmeet.vo;
 
 public class TagVo {
-	public int tagNo;
-	public int clubId;
-	public String tagName;
-	public String memberId;
+	private int tagNo;
+	private int clubId;
+	private String tagName;
+	private String memberId;
+	private int totalCnt;
+	private int tagCnt;
 	
 	public TagVo(int tagNo, int clubId, String tagName, String memberId) {
 		super();
@@ -49,10 +51,28 @@ public class TagVo {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	
+
+	public int getTotalCnt() {
+		return totalCnt;
+	}
+
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
+	}
+
+	public int getTagCnt() {
+		return tagCnt;
+	}
+
+	public void setTagCnt(int tagCnt) {
+		this.tagCnt = tagCnt;
+	}
 
 	@Override
 	public String toString() {
-		return "TagVo [tagNo=" + tagNo + ", clubId=" + clubId + ", tagName=" + tagName + ", memberId=" + memberId + "]";
+		return "TagVo [tagNo=" + tagNo + ", clubId=" + clubId + ", tagName=" + tagName + ", memberId=" + memberId
+				+ ", totalCnt=" + totalCnt + ", tagCnt=" + tagCnt + "]";
 	}
 	
 	
