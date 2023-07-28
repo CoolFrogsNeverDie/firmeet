@@ -1,5 +1,7 @@
 package com.firmeet.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
+import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.ReplyVO;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -92,7 +94,7 @@ public class NoticeBoardController {
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
-		model.addAttribute("vo", noticeBoardService.editlist(vo.getAboardNo()));
+		model.addAttribute("vo", noticeBoardService.editlist(vo));
 		//model.addAttribute("vo", noticeBoardService.findHeart(vo.getAboardNo(), vo.getMemberId()));
 		
 		return "notice/noticeGroupView";
@@ -127,7 +129,7 @@ public class NoticeBoardController {
 		model.addAttribute("clubId", clubvo.getClubId());
 		session.getAttribute("aboardNo");
 		model.addAttribute("aboradNo", vo.getAboardNo());
-		model.addAttribute("vo", noticeBoardService.voteResult(aboardNo));
+		model.addAttribute("vo", noticeBoardService.voteResult(vo));
 		return "notice/noticeGroupViewR";
 	}
 	
@@ -158,7 +160,7 @@ public class NoticeBoardController {
 		System.out.println("meetNo"+ vo.getMeetNo());
 		model.addAttribute("meetNo", vo.getMeetNo());
 		model.addAttribute("memberId", vo.getMemberId());
-		model.addAttribute("vo", noticeBoardService.editlistgroup(vo.getAboardNo()));
+		model.addAttribute("vo", noticeBoardService.editlistgroup(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteView";
 	}
@@ -206,13 +208,6 @@ public class NoticeBoardController {
 	@RequestMapping("/payinsert")
 	public String payinsert(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session, ClubVo clubvo) {
 
-		/*
-		model.addAttribute("clubId", clubvo.getClubId());
-		model.addAttribute("aboardNo", vo.getAboardNo());
-		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("memberId", vo.getMemberId());
-		*/
-		
 		System.out.println("넘어는 오니?");
 		System.out.println(vo);
 		
@@ -241,10 +236,12 @@ public class NoticeBoardController {
 		return "notice/noticeVoteViewR";
 	}
 	
-//-------------------------------------------------------------------------
+	
+	//----------------------------------------------------------------------------------------------
+	
 	@ResponseBody
 	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
-	public JsonResult addReply(@ModelAttribute NoticeBoardVO vo) {
+	public JsonResult addReply(@ModelAttribute AreplyVO vo) {
 		JsonResult jsonResult = new JsonResult();
 		
 		System.out.println("AJAX로 넘어오는 정보" + vo);
@@ -255,7 +252,7 @@ public class NoticeBoardController {
 
 	@ResponseBody
 	@RequestMapping(value = "/addReply_2", method = RequestMethod.POST)
-	public JsonResult addRreply(@ModelAttribute NoticeBoardVO vo) {
+	public JsonResult addRreply(@ModelAttribute AreplyVO vo) {
 		JsonResult jsonResult = new JsonResult();
 		
 		System.out.println("AJAX로 넘어오는 정보" + vo);
@@ -265,7 +262,7 @@ public class NoticeBoardController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
-	public JsonResult deleteReply(@ModelAttribute NoticeBoardVO vo) {
+	public JsonResult deleteReply(@ModelAttribute AreplyVO vo) {
 		
 		JsonResult jsonResult = new JsonResult();
 		System.out.println("AJAX로 넘어온 삭제할 코멘트 정보 " +vo);

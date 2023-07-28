@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.firmeet.dao.AreplyDAO;
 import com.firmeet.dao.NoticeBoardDAO;
+import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.ReplyVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Service
@@ -21,6 +22,8 @@ public class NoticeBoardService {
 
 	@Autowired
 	private NoticeBoardDAO dao;
+	@Autowired
+	private AreplyDAO rdao;
 
 	public List<NoticeBoardVO> noticeList() {
 		System.out.println("notice noticeList 확인");
@@ -44,14 +47,19 @@ public class NoticeBoardService {
 		return aboardNo;
 	}
 	
-	public NoticeBoardVO editlist(int aboardNo ) {
+	public NoticeBoardVO editlist(NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
-		dao.hits(aboardNo);
-		NoticeBoardVO vo = dao.editlist(aboardNo);
-		return vo;
+		dao.hits(vo);
+		
+		NoticeBoardVO vo1 = dao.editlist(vo);
+		List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		vo1.setReplyList(vo11);
+//		System.out.println("확확확확확"+dao.getBoardComment(vo));
+		System.out.println(vo1);
+//		return null;
+		return vo1;
 	}
 	
-
 	public int editgroupwrite(NoticeBoardVO vo) {
 		dao.editwrite(vo);
 		System.out.println("service editgroupwrite 확인"+vo);
@@ -68,10 +76,10 @@ public class NoticeBoardService {
 		return aboardNo;		
 	}
 
-	public NoticeBoardVO editlistgroup(int aboardNo) {
+	public NoticeBoardVO editlistgroup(NoticeBoardVO vo) {
 		System.out.println("notice editlistgroup 확인");
-		dao.hits(aboardNo);
-		return dao.editlistgroup(aboardNo);
+		dao.hits(vo);
+		return dao.editlistgroup(vo);
 	}
 	
 	public void voteinsert(NoticeBoardVO vo) {
@@ -79,15 +87,15 @@ public class NoticeBoardService {
 		dao.voteinsert(vo);
 	}
 
-	public NoticeBoardVO voteResult(int aboardNo) {
+	public NoticeBoardVO voteResult(NoticeBoardVO vo) {
 		System.out.println("notice voteResult 확인");
 		
-		NoticeBoardVO vo = dao.editlist(aboardNo);
+		NoticeBoardVO vo1 = dao.editlist(vo);
 		
 		System.out.println("보트넘버확인"+vo.getVoteNo());
 		
 		int voteNo = vo.getVoteNo();
-		VoteResultVO voteResultvo = dao.voteresult(voteNo);
+		VoteResultVO voteResultvo = dao.voteresult(vo);
 		System.out.println("확인확인"+voteResultvo);
 		System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
 		
@@ -97,7 +105,7 @@ public class NoticeBoardService {
 		vo.setVote4Cnt(voteResultvo.getVote4Cnt());
 		vo.setVote5Cnt(voteResultvo.getVote5Cnt());
 		
-		return vo;
+		return vo1;
 	}
 	
 
@@ -157,16 +165,7 @@ public class NoticeBoardService {
 		dao.paycount(noticeBoardVO);
 		return nVo;
 	}
-/*	
-	public NoticeBoardVO findHeart(int aboardNo, String memberId) {
-		System.out.println("notice findHeart 확인");
-		// 2개의 parameter를 보내기 위해 Map 선언 및 Map에 데이터 삽입
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("aboardNo", aboardNo);
-		map.put("memberId", memberId);
-		return dao.findHeart(map);
-	}
-*/
+
 	public int insertHeart(NoticeBoardVO vo) {
 		System.out.println("notice insertHeart 확인");
 		
@@ -182,41 +181,40 @@ public class NoticeBoardService {
 		return result;
 	}
 	
-//---------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------
 	
-public ReplyVO addReply(NoticeBoardVO vo) {
-		
-		dao.insertReply(vo);
+	public AreplyVO addReply(AreplyVO vo) {
 		System.out.println("insert 후 정보 확인 " + vo);
+		rdao.insertReply(vo);
 		
-		ReplyVO returnVO = dao.getReply(vo);
+		AreplyVO returnVO = rdao.getReply(vo);
 		
 		System.out.println("넘어온 댓글 객체 확인 : " + returnVO);
 		
 		return returnVO;
 	}
 	
-	public ReplyVO addReply2(NoticeBoardVO vo) {
+	public AreplyVO addReply2(AreplyVO vo) {
 		
-		dao.insertReply(vo);
-		ReplyVO returnVO = dao.getReply(vo);
+		rdao.insertReply(vo);
+		AreplyVO returnVO = rdao.getReply(vo);
 		return returnVO;
 	}
 	
 	/*댓글 삭제*/
-	public boolean deleteReply(NoticeBoardVO vo) {
+	public boolean deleteReply(AreplyVO vo) {
 		boolean result = false;
 		
 		/* cnt 0 이면 지울수 있다 */ /* cnt 0이 아니면 지울수 없다 */ 
-		int checkCnt = (vo.getDeep() == 1)?dao.checkReply(vo):0;
+		int checkCnt = (vo.getDeep() == 1)?rdao.checkReply(vo):0;
 		System.out.println(checkCnt  +"deep 확인 결과는");
 		//딸린 자식들이 있다는 뜻
 		
 		if(checkCnt>0) {
 			System.out.println("삭제X");
-			dao.updateReplyStat(vo);
+			rdao.updateReplyStat(vo);
 		}else {
-			dao.deleteReply(vo);
+			rdao.deleteReply(vo);
 			result =true;
 			System.out.println("딸린 자식 없는 아이 삭제");
 		}

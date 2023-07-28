@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.firmeet.vo.AreplyVO;
+import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.ReplyVO;
 import com.firmeet.vo.VoteResultVO;
@@ -53,14 +55,14 @@ public class NoticeBoardDAO {
 
 //-----------------------------------------------------------------------------
 	
-	public NoticeBoardVO editlist(int aboardNo) {
-		System.out.println("notice editlist dao 확인"+aboardNo);
-		return sql.selectOne("noticeboard.editlist", aboardNo);
+	public NoticeBoardVO editlist(NoticeBoardVO vo) {
+		System.out.println("notice editlist dao 확인"+vo);
+		return sql.selectOne("noticeboard.editlist", vo);
 	}
 	
-	public VoteResultVO voteresult(int voteNo) {
-		System.out.println("notice voteresult dao 확인"+voteNo);
-		return sql.selectOne("noticeboard.voteresult", voteNo);
+	public VoteResultVO voteresult(NoticeBoardVO vo) {
+		System.out.println("notice voteresult dao 확인"+vo);
+		return sql.selectOne("noticeboard.voteresult", vo);
 	}
 	
 //-----------------------------------------------------------------------------
@@ -72,13 +74,13 @@ public class NoticeBoardDAO {
 	
 //-----------------------------------------------------------------------------
 	
-	public NoticeBoardVO editlistgroup(int aboardNo) {
-		System.out.println("notice editlistgroup dao 확인"+aboardNo);
-		return sql.selectOne("noticeboard.editlistgroup", aboardNo);
+	public NoticeBoardVO editlistgroup(NoticeBoardVO vo) {
+		System.out.println("notice editlistgroup dao 확인"+vo);
+		return sql.selectOne("noticeboard.editlistgroup", vo);
 	}
 
-	public void hits(int aboardNo) {
-		sql.update("noticeboard.hits", aboardNo);
+	public void hits(NoticeBoardVO vo) {
+		sql.update("noticeboard.hits", vo.getAboardNo());
 	}
 
 	public void payinsert(NoticeBoardVO vo) {
@@ -96,12 +98,7 @@ public class NoticeBoardDAO {
 		System.out.println("notice paycount dao 확인");
 		return sql.update("noticeboard.paycount", noticeBoardVO);
 	}
-/*
-	public NoticeBoardVO findHeart(Map<String, Object> map) {
-		System.out.println("notice findHeart dao 확인");
-		return sql.selectOne("noticeboard.findHeart",map);
-	}
-*/
+
 	public NoticeBoardVO findHeart(NoticeBoardVO vo) {
 		return sql.selectOne("noticeboard.findHeart",vo);
 	}
@@ -115,35 +112,8 @@ public class NoticeBoardDAO {
 		
 	}
 	
-//-----------------------------------------------------------------------------------------------------
-	public int insertReply(NoticeBoardVO vo) {
-		
-		System.out.println("DAO까지 오는지 확인" + vo);
-		sql.insert("noticeboard.insertReply", vo);
-		
-		return 0;
-	}
-
-	
-	public ReplyVO getReply(NoticeBoardVO vo) {
-		System.out.println("DAO로 넘어오는 객체 댓글 가져오기용"  + vo);
-		return sql.selectOne("noticeboard.getReply",vo);
-	}
-	
-	public int checkReply(NoticeBoardVO vo){
-		
-		return sql.selectOne("noticeboard.checkReply", vo);
-	}
-	
-	
-	public int updateReplyStat(NoticeBoardVO vo) {
-		
-		return sql.update("noticeboard.updateDelStat", vo);
-	}
-	
-	public int deleteReply(NoticeBoardVO vo) {
-		
-		return sql.delete("noticeboard.deleteReply", vo);
+	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {
+		return sql.selectList("noticeboard.getComment",vo);
 	}
 	
 }

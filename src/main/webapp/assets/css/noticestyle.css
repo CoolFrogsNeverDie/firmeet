@@ -166,7 +166,7 @@
     width: 70px;
     height: 70px;
 }
-.username{
+.memberName{
     font-size: 20px;
     font-weight: bold;
     margin-left: 10px;;
@@ -174,8 +174,9 @@
 .userlevel{
     font-size: 14px;
 }
-.userdate{
+.replyDate{
     font-size: 12px;
+    margin-left: 20px;
 }
 .usercount{
     font-size: 12px;
@@ -253,10 +254,12 @@
 	margin-top: 20px;
 	width: 100%;
 	margin-left: -10px;
+	padding-bottom: 100px;
 }
-.noticereplytext{
-    width: 300px;
-    margin-right: 20px;
+.replyContent{
+    width: 800px;
+    margin-left: 20px;
+    border: 1px solid #000;
 }
 .noticereplytitle{
     margin-bottom: 10px;
@@ -348,6 +351,20 @@
     background-color: rgb(253, 207, 151);
     border: none;
     color: rgb(255, 255, 255);
+}
+#replylist{
+	margin-top: 30px;
+	margin-left: 5%;
+	border: 1px solid #000;
+}
+#memberName{
+	padding-right: 30px;
+}
+#replyContent{
+	padding-right: 30px;
+}
+#replyDate{
+	float: right;
 }
 #Count{
 	float: right;

@@ -1,7 +1,5 @@
 package com.firmeet.vo;
 
-import java.sql.Date;
-
 public class AreplyVO {
 	
 	private int replyNo;
@@ -9,7 +7,7 @@ public class AreplyVO {
 	private String memberId;
 	private String memberName;
 	private String replyContent;
-	private Date replyDate;
+	private String replyDate;
 	private int replyGroup;
 	private int deep;
 	private int stat;
@@ -50,12 +48,19 @@ public class AreplyVO {
 		this.memberName = memberName;
 	}
 
+	public String getReplyContent() {
+		return replyContent;
+	}
 
-	public Date getReplyDate() {
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
+	public String getReplyDate() {
 		return replyDate;
 	}
 
-	public void setReplyDate(Date replyDate) {
+	public void setReplyDate(String replyDate) {
 		this.replyDate = replyDate;
 	}
 
@@ -83,19 +88,12 @@ public class AreplyVO {
 		this.stat = stat;
 	}
 
-	public String getReplyContent() {
-		return replyContent;
-	}
-
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
-	}
-
 	@Override
 	public String toString() {
 		return "AreplyVO [replyNo=" + replyNo + ", aboardNo=" + aboardNo + ", memberId=" + memberId + ", memberName="
 				+ memberName + ", replyContent=" + replyContent + ", replyDate=" + replyDate + ", replyGroup="
 				+ replyGroup + ", deep=" + deep + ", stat=" + stat + "]";
 	}
+
 
 }

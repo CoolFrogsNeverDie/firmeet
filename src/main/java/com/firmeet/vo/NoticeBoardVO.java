@@ -1,5 +1,7 @@
 package com.firmeet.vo;
 
+import java.util.List;
+
 public class NoticeBoardVO {
 	
 	private int aboardNo;
@@ -47,14 +49,9 @@ public class NoticeBoardVO {
 	private int payresultNo;
 	private int likeNo;
 	private String likeDate;
-	
-	private int replyNo;
-	private String replyContent;
-	private String replyDate;
-	private String memberName;
-	private int replyGroup;
-	private int deep;
-	private int stat;
+	private List<AreplyVO> replyList;
+
+
 	public NoticeBoardVO() {
 		
 	}
@@ -144,19 +141,6 @@ public class NoticeBoardVO {
 		this.payresultNo = payresultNo;
 	}
 
-	public NoticeBoardVO(int aboardNo, String memberId, int replyNo, String replyContent, String replyDate,
-			String memberName, int replyGroup, int deep, int stat) {
-		super();
-		this.aboardNo = aboardNo;
-		this.memberId = memberId;
-		this.replyNo = replyNo;
-		this.replyContent = replyContent;
-		this.replyDate = replyDate;
-		this.memberName = memberName;
-		this.replyGroup = replyGroup;
-		this.deep = deep;
-		this.stat = stat;
-	}
 
 	public int getAboardNo() {
 		return aboardNo;
@@ -510,60 +494,12 @@ public class NoticeBoardVO {
 		this.likeDate = likeDate;
 	}
 
-	public int getReplyNo() {
-		return replyNo;
+	public List<AreplyVO> getReplyList() {
+		return replyList;
 	}
 
-	public void setReplyNo(int replyNo) {
-		this.replyNo = replyNo;
-	}
-
-	public String getReplyContent() {
-		return replyContent;
-	}
-
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
-	}
-
-	public String getReplyDate() {
-		return replyDate;
-	}
-
-	public void setReplyDate(String replyDate) {
-		this.replyDate = replyDate;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
-	public int getReplyGroup() {
-		return replyGroup;
-	}
-
-	public void setReplyGroup(int replyGroup) {
-		this.replyGroup = replyGroup;
-	}
-
-	public int getDeep() {
-		return deep;
-	}
-
-	public void setDeep(int deep) {
-		this.deep = deep;
-	}
-
-	public int getStat() {
-		return stat;
-	}
-
-	public void setStat(int stat) {
-		this.stat = stat;
+	public void setReplyList(List<AreplyVO> replyList) {
+		this.replyList = replyList;
 	}
 
 	@Override
@@ -579,9 +515,8 @@ public class NoticeBoardVO {
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
 				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", paycount=" + paycount
-				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyNo="
-				+ replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate + ", memberName=" + memberName
-				+ ", replyGroup=" + replyGroup + ", deep=" + deep + ", stat=" + stat + "]";
+				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyList="
+				+ replyList + "]";
 	}
 
 }

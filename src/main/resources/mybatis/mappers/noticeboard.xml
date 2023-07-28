@@ -19,8 +19,17 @@
 	</insert>
 
 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
-		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
-		v.aboardNo, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+		select 
+			a.aboardNo
+			, c.clubId
+			, m.memberId
+			, a.aboardVal
+			, a.title
+			, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, 
+			a.boardContent
+			, aboardHit
+			,v.aboardNo
+			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
 		from aboard a, club c, member m, avote v
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
@@ -77,38 +86,6 @@
 	</insert>
 	
 	<select id="payresult" resultType="noticeboard" parameterType="noticeboard">
-	<!-- <![CDATA[
-	     SELECT
-		    a.aboardNo,
-		    c.clubId,
-		    m.memberId,
-		    a.aboardVal,
-		    a.title,
-		    TO_CHAR(aboardDate, 'YYYY-MM-DD') AS aboardDate,
-		    a.boardContent,
-		    aboardHit,
-		    mn.aboardNo,
-		    mn.meetNo,
-		    mn.clubId,
-		    mn.meetYear,
-		    mn.meetMon,
-		    mn.meetName,
-		    TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate,
-		    TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate,
-		    mn.meetTime,
-		    mn.meetPlace,
-		    mn.voteEnd,
-		    mn.minPerson,
-		    mn.maxPerson,
-		    mn.price,
-		    mn.address1,
-		    mn.address2,
-		FROM
-		    aboard a, club c, member m, meet_name mn
-		where
-		    a.clubId = c.clubId and a.memberId = m.memberId	and a.aboardNo = mn.aboardNo and mn.meetNo = pr.meetNo 
-			and a.aboardNo = #{aboardNo}
-		]]>	 -->
 		<![CDATA[
 			select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
@@ -137,85 +114,30 @@
 	<delete id="deleteHeart" parameterType="noticeboard">
 		delete from aboard_like where aboardNo=#{aboardNo} and memberId=#{memberId}
 	</delete>
-	
-<!--  -->
 
-	<insert id = "insertReply" parameterType = "noticeboard">
-		<selectKey keyProperty = "replyNo" resultType ="int" order ="BEFORE">
-			select SEQ_AREPLYNO.nextval from dual
-		</selectKey>
+ 	<select id = "getComment" parameterType ="noticeboard" resultType ="areply">
 		<![CDATA[
-			insert into AREPLY(
-				replyNo
-				, memberId
-				, aboardNo
-				, replyContent
-				, replyDate
-				, replyGroup
-				, deep)
-			values(
-		]]>
-		<![CDATA[
-				#{replyNo}
-				,#{memberId}
-				,#{aboardNo}
-				, #{replyContent}
-				, sysdate
-		]]>
-			<if test="replyGroup ==0">
-				, #{replyNo}
-				, 1
-			</if>
-			<if test ="replyGroup !=0">
-				, #{replyGroup}
-				, 2
-			</if>	
-		<![CDATA[
-				)
-		]]>			
-	</insert>
-	
-	<select id ="getReply" parameterType = "noticeboard" resultType ="noticeboard">
-		<![CDATA[
-			select 
-       			replyNo 
+    		SELECT
+       			replyno as replyNo
        			,stat
-        		, aboardNo
-        		, memberName
-        		, replyContent
-        		, replyDate
-        		, replyGroup 
-        		, deep
-    		from AREPLY a join member m on m.memberId = a.memberId
-    		where replyNo = #{replyNo}
+       			,a.memberId as memberId 
+        		,memberName as memberName
+        		,replycontent as replyContent
+        		,TO_CHAR(replyDate, 'YYYY-MM-DD') as replyDate
+       			,REPLYGROUP as replyGroup
+        		,deep
+   			from areply a join member b on a.memberId = b.memberId
+    		where aboardNo = #{aboardNo}
+   			order by replygroup , deep , replyNo
 		]]>
 	</select>
-	
-	
-	<select id ="checkReply" parameterType ="noticeboard" resultType ="int">
-		<![CDATA[
-			select 
-				replyContent(replyNo)
-			from AREPLY
-			where replyGroup = #{replyNo} and replyNo != #{replyNo}
-		]]>
+<!-- 
+	<select id="getBoardList" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
+		v.aboardNo, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+		ar.replyNo, ar.memberName, ar.replyContent, ar.replyDate
+		from aboard a, club c, member m, avote v, areply ar
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
-	
-	<update id = "updateDelStat" parameterType ="noticeboard">
-		<![CDATA[
-			update  AREPLY 
-				set 
-				replyContent = '삭제된 댓글입니다.'
-				,stat = 99
-			where replyNo = #{replyNo}		
-		]]>
-	</update>
-	
-	<delete id = "deleteReply" parameterType ="noticeboard">
-		<![CDATA[
-			delete AREPLY  
-				where replyNo = #{replyNo}
-		]]>
-	</delete>	
-	
+	-->
 </mapper>
