@@ -198,4 +198,28 @@
     	]]>
     </select>
     
+    <select id="searchList" parameterType="com.firmeet.vo.ClubVo" resultType="com.firmeet.vo.ClubVo">
+ 		<![CDATA[
+    		select a.clubId,
+    			   a.clubName,
+    			   a.intro1,
+    			   a.img2
+    		from club a , club_category b
+    		where a.clubId = b.clubId
+    		]]>
+    	
+    	 <if test='address1 != null and address1 != ""' >
+			and a.address1 = #{address1}
+		</if> 
+    	<if test='address2 != null and address2 != ""' >
+			and a.address2 = #{address2}
+		</if> 
+    	<if test='cateNo != null' >
+			and b.cateNo = #{cateNo}
+		</if>
+    	
+    		
+    
+    </select>
+    
 </mapper>

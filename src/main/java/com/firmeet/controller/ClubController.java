@@ -110,7 +110,7 @@ public class ClubController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("cateList", cateList);
 
-		return "/main/mainForm";
+		return "redirect:/main/mainForm";
 	}
 
 	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })

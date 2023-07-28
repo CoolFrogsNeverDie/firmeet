@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,6 +101,23 @@ public class MainController {
         model.addAttribute("noticeList", nList);
         
 		return "/member_diary/member_main";
+	}
+	
+	@RequestMapping(value="/search" , method= {RequestMethod.GET , RequestMethod.POST})
+	public String searchList(@ModelAttribute ClubVo clubVo,
+								Model model) {
+		System.out.println("MainController.searchList()");
+		System.out.println(clubVo);
+		
+		List<TagVo> tagList = memberService.tagList();
+		model.addAttribute("tagList", tagList);
+		
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("cateList", cateList);
+		
+		List<ClubVo> clubList = clubService.searchList(clubVo);
+		model.addAttribute("clubList",clubList);
+		return "/main/mainForm";
 	}
 	
 }

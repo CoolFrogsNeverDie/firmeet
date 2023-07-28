@@ -165,5 +165,19 @@ public class ClubService {
 		
 	}
 	
+	public List<ClubVo> searchList(ClubVo clubVo) {
+		/*
+		 * System.out.println("clubService.searchList()"); System.out.println(clubVo);
+		 * System.out.println(clubVo.address1); System.out.println(clubVo.address2);
+		 */
+		
+		
+		
+			List<ClubVo> list = clubDao.searchList(clubVo);
+			return list;
+		
+		
+	}
+	
 }
 

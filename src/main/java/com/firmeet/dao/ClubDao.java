@@ -12,7 +12,6 @@ import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
 @Repository
@@ -120,6 +119,14 @@ public class ClubDao {
 		
 		List<TagVo> list = 	session.selectList("club.ClubTagRank", clubVO);
 		
+		return list;
+	}
+	
+	public List<ClubVo> searchList(ClubVo clubVo) {
+		System.out.println("clubDao.searchList()");
+		System.out.println(clubVo);
+		List<ClubVo> list = session.selectList("club.searchList", clubVo);
+		System.out.println(list);
 		return list;
 	}
 	 
