@@ -48,6 +48,13 @@ public class NoticeBoardVO {
 	private int likeNo;
 	private String likeDate;
 	
+	private int replyNo;
+	private String replyContent;
+	private String replyDate;
+	private String memberName;
+	private int replyGroup;
+	private int deep;
+	private int stat;
 	public NoticeBoardVO() {
 		
 	}
@@ -129,11 +136,26 @@ public class NoticeBoardVO {
 		this.voteEnd = voteEnd;
 	}
 	
-	public NoticeBoardVO(String memberId, int meetNo, int payresultNo) {
+	public NoticeBoardVO(String memberId, int meetNo, int paycount, int payresultNo) {
 		super();
 		this.memberId = memberId;
 		this.meetNo = meetNo;
+		this.paycount = paycount;
 		this.payresultNo = payresultNo;
+	}
+
+	public NoticeBoardVO(int aboardNo, String memberId, int replyNo, String replyContent, String replyDate,
+			String memberName, int replyGroup, int deep, int stat) {
+		super();
+		this.aboardNo = aboardNo;
+		this.memberId = memberId;
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyDate = replyDate;
+		this.memberName = memberName;
+		this.replyGroup = replyGroup;
+		this.deep = deep;
+		this.stat = stat;
 	}
 
 	public int getAboardNo() {
@@ -488,6 +510,62 @@ public class NoticeBoardVO {
 		this.likeDate = likeDate;
 	}
 
+	public int getReplyNo() {
+		return replyNo;
+	}
+
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
+	}
+
+	public String getReplyContent() {
+		return replyContent;
+	}
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
+	public String getReplyDate() {
+		return replyDate;
+	}
+
+	public void setReplyDate(String replyDate) {
+		this.replyDate = replyDate;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public int getReplyGroup() {
+		return replyGroup;
+	}
+
+	public void setReplyGroup(int replyGroup) {
+		this.replyGroup = replyGroup;
+	}
+
+	public int getDeep() {
+		return deep;
+	}
+
+	public void setDeep(int deep) {
+		this.deep = deep;
+	}
+
+	public int getStat() {
+		return stat;
+	}
+
+	public void setStat(int stat) {
+		this.stat = stat;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -501,7 +579,9 @@ public class NoticeBoardVO {
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
 				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", paycount=" + paycount
-				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + "]";
+				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyNo="
+				+ replyNo + ", replyContent=" + replyContent + ", replyDate=" + replyDate + ", memberName=" + memberName
+				+ ", replyGroup=" + replyGroup + ", deep=" + deep + ", stat=" + stat + "]";
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.ReplyVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Repository
@@ -113,4 +114,36 @@ public class NoticeBoardDAO {
 		sql.delete("noticeboard.deleteHeart",vo);
 		
 	}
+	
+//-----------------------------------------------------------------------------------------------------
+	public int insertReply(NoticeBoardVO vo) {
+		
+		System.out.println("DAO까지 오는지 확인" + vo);
+		sql.insert("noticeboard.insertReply", vo);
+		
+		return 0;
+	}
+
+	
+	public ReplyVO getReply(NoticeBoardVO vo) {
+		System.out.println("DAO로 넘어오는 객체 댓글 가져오기용"  + vo);
+		return sql.selectOne("noticeboard.getReply",vo);
+	}
+	
+	public int checkReply(NoticeBoardVO vo){
+		
+		return sql.selectOne("noticeboard.checkReply", vo);
+	}
+	
+	
+	public int updateReplyStat(NoticeBoardVO vo) {
+		
+		return sql.update("noticeboard.updateDelStat", vo);
+	}
+	
+	public int deleteReply(NoticeBoardVO vo) {
+		
+		return sql.delete("noticeboard.deleteReply", vo);
+	}
+	
 }

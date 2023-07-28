@@ -66,6 +66,9 @@
 	               <tbody>
 	                   <tr>
 	                     <td class="noticegrouplist1">
+	                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
+                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
+                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}">${memberId}<br>
 	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}</p>
 	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}</p>
 	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}</p>
@@ -143,16 +146,24 @@
           <!--/content-left-->
 </div>
         <!--/content-area-->
-    <div class="noticereply">
+      <div class="noticereply">
+		<div class= "club-category">
+		</div>
+        <div class="board-area2" >
+        </div>
+		<div id = "board-get"></div>
+      </div>
+<%--     <div class="noticereply">
        <h4 class="noticereplytitle">댓글</h4>
        <div>
            <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt=""> 
            <span class="username">홍순이</span>
            <p class="noticereplytext"></p>
+           
            <span class="userdate">작성일 : </span>
            <p class="usertext"></p>
        </div>
-   </div>
+   </div> --%>
         
 </div>
       <!--/diary-area-->
@@ -239,9 +250,206 @@
 	        });
 		});
   
-		window.history.forward();
-		function noBack(){
-			window.history.forward();
+  
+	$('.noticereply').on("click", '.reply-delete', function(){
+
+		var replyNo	 =	$(this).data('deletere');
+		var deep	 =	$(this).data('deep');
+		var memberId = $('#memberId').val();
+		var replyEle = $('#c' + replyNo);
+		var textarea = replyEle.find('span:eq(1)');
+		
+		var noticevo = {
+				replyNo : replyNo,
+				memberId : memberId,
+				deep : deep
 		}
+		
+		$.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/${clubId}/notice/deleteReply",
+		       type : "post",
+		       data : noticevo,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+					
+		    	   var data = jsonResult.data;
+		    	   console.log(data);
+		    	   //삭제했다는 거
+		    	   if(data == true){
+		    		   replyEle.remove();
+		    	   }else{
+		    		   textarea.text("삭제된 댓글입니다.")
+		    	   }
+
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+		
+		
+	});
+	
+	
+	
+	/*답글 등록 버튼 클릭 이벤트*/
+	$('.noticereply').on("click",'.rreply-btn', function(){
+		
+	    var writeCommentDiv = $(this).closest('.write-comment2');
+	    
+		console.log('wth');	
+		var replyEditDiv = $(this).closest('.reply-area');
+		var memberId = $('#memberId').val();
+		var groupNo = $(this).data('replyno');
+		var aboardNo = $(this).data('aboardNo');
+		
+		var tag = $(this).parent().siblings(".write-comment2").attr('class');
+		console.log(tag);	
+		if(tag == null){
+			var	rreply = '';	
+			
+			rreply += '<div style ="width:762px; height:100px; margin-top:6px; " class="write-comment2" >';
+			rreply += '    <div class="new-content2" style ="width: 90%; height: 80px; border: 1px solid black; float: left;">';
+			rreply += '        <textarea class= "comment-content" style ="width:100%; height:100%; padding:10px;"></textarea><button class="add-reply2" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+			rreply += '    </div>'
+	 		rreply += '</div>'
+	
+			replyEditDiv.append(rreply);
+		}else {
+	    	$('.write-comment2').remove();
+		} 
+	
+	});
+
+	/*리댓글 등록 클릭 이벤트(댓글의 댓글)*/
+	$('.noticereply').on("click", ".add-reply2", function(){
+		
+		var textbox = $(this).prev();
+		var replyContent = textbox.val();
+		var groupNo = $(this).data('groupno');
+		var aboardNo = $(this).data('aboardNo');
+		var memberId = $('#memberId').val();
+		
+		console.log('teest' +  replyContent + '그룹 번호 : ' +  groupNo + '게시글 번호 :' + aboardNo + memberId);
+		
+		var noticevo = {
+				aboardNo : aboardNo,
+				memberId : memberId,
+				replyContent : replyContent,
+				replyGroup : groupNo
+		}
+		
+		console.log(noticevo);
+		
+
+		 $.ajax({
+	       
+	       //요청 세팅
+	       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply_2",
+	       type : "post",
+	       data : noticevo,
+	       
+	       //응답 세팅
+	       dataType : "json",
+	       success : function(jsonResult){
+				
+	    	   var data = jsonResult.data;
+	    	   console.log(data);
+	    	   
+	    	   addReply(null, data, 'rere');
+	    	   $('.write-comment2').remove();
+	    	   
+	       }, //success end
+	       error : function(XHR, status, error) {
+	       console.error(status + " : " + error);
+	       }
+					            
+	    });//ajax end
+		
+		
+		
+	});
+	
+	
+	
+	/*댓글 등록 버튼 클릭 이벤트*/
+	$('.noticereply').on("click",'.add-reply', function(){
+		
+		var textbox = $(this).prev();
+		var replyContent = textbox.val();
+		var aboardNo = $(this).data('aboardNo');
+		var memberId = $('#memberId').val();
+	
+		var noticevo = {
+				aboardNo : aboardNo,
+				replyContent : replyContent,
+				memberId : memberId
+		}
+		
+		if(content.length < 5){
+			alert('댓글을 다섯글자 이상 입력해주세요.');
+			return;
+		}
+		
+
+		 $.ajax({
+	       
+	       //요청 세팅
+	       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply",
+	       type : "post",
+	       data : noticevo,
+	       
+	       //응답 세팅
+	       dataType : "json",
+	       success : function(jsonResult){
+				var reply = jsonResult.data;
+				var addElement = $('#r' +reply.aboardNo);
+				addReply(addElement,reply,'re');
+				textbox.val("");
+				
+	       }, //success end
+	       error : function(XHR, status, error) {
+	       console.error(status + " : " + error);
+	       }
+					            
+	    });//ajax end
+		
+	});
+
+	function addReply(element,reply, type){
+	
+	var add ="";
+    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
+    if (reply.deep > 1) {
+        add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
+    } else if (reply.deep === 1) {
+        add += '<span><b>' + reply.memberName + '님 : </b></span>';
+    }
+    add += '<span>' + reply.replyContent + '</span>';
+    if (reply.deep === 1) {
+    	  add += '<span><button class= "rreply-btn" data-aboardno ="' + reply.aboardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';    }
+    add += '<div class="reply-edit">';
+    add += '<span>' + reply.replyDate + '</span>';
+    add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
+    add += '</div></div>';
+	
+    if(type == 're'){
+   		element.append(add);
+    }else{
+ 	   	var last = $('.group' + reply.replyGroup).last();
+   	 	last.after(add);
+    }
+    
+}
+  
+window.history.forward();
+function noBack(){
+	window.history.forward();
+}
   </script>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.ReplyVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Service
@@ -178,6 +179,48 @@ public class NoticeBoardService {
 		}else {
 			dao.deleteHeart(vo);
 		}
+		return result;
+	}
+	
+//---------------------------------------------------------------------------
+	
+public ReplyVO addReply(NoticeBoardVO vo) {
+		
+		dao.insertReply(vo);
+		System.out.println("insert 후 정보 확인 " + vo);
+		
+		ReplyVO returnVO = dao.getReply(vo);
+		
+		System.out.println("넘어온 댓글 객체 확인 : " + returnVO);
+		
+		return returnVO;
+	}
+	
+	public ReplyVO addReply2(NoticeBoardVO vo) {
+		
+		dao.insertReply(vo);
+		ReplyVO returnVO = dao.getReply(vo);
+		return returnVO;
+	}
+	
+	/*댓글 삭제*/
+	public boolean deleteReply(NoticeBoardVO vo) {
+		boolean result = false;
+		
+		/* cnt 0 이면 지울수 있다 */ /* cnt 0이 아니면 지울수 없다 */ 
+		int checkCnt = (vo.getDeep() == 1)?dao.checkReply(vo):0;
+		System.out.println(checkCnt  +"deep 확인 결과는");
+		//딸린 자식들이 있다는 뜻
+		
+		if(checkCnt>0) {
+			System.out.println("삭제X");
+			dao.updateReplyStat(vo);
+		}else {
+			dao.deleteReply(vo);
+			result =true;
+			System.out.println("딸린 자식 없는 아이 삭제");
+		}
+			
 		return result;
 	}
 

@@ -16,6 +16,7 @@ import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.ReplyVO;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -238,6 +239,40 @@ public class NoticeBoardController {
 		System.out.println("확확확"+vo);
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
+	}
+	
+//-------------------------------------------------------------------------
+	@ResponseBody
+	@RequestMapping(value = "/addReply", method = RequestMethod.POST)
+	public JsonResult addReply(@ModelAttribute NoticeBoardVO vo) {
+		JsonResult jsonResult = new JsonResult();
+		
+		System.out.println("AJAX로 넘어오는 정보" + vo);
+		jsonResult.success(noticeBoardService.addReply(vo));
+		
+		return jsonResult;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/addReply_2", method = RequestMethod.POST)
+	public JsonResult addRreply(@ModelAttribute NoticeBoardVO vo) {
+		JsonResult jsonResult = new JsonResult();
+		
+		System.out.println("AJAX로 넘어오는 정보" + vo);
+		jsonResult.success(noticeBoardService.addReply2(vo));
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
+	public JsonResult deleteReply(@ModelAttribute NoticeBoardVO vo) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("AJAX로 넘어온 삭제할 코멘트 정보 " +vo);
+		boolean result = noticeBoardService.deleteReply(vo);
+		jsonResult.success(result);
+		
+		return jsonResult;
 	}
 	
 }

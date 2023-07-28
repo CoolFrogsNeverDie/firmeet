@@ -12,6 +12,7 @@
 	<typeAlias type="com.firmeet.vo.AccountBookVo" alias="accountbook"/>
 	<typeAlias type="com.firmeet.vo.ReplyVO" alias="reply"/>
 	<typeAlias type="com.firmeet.vo.BoardVO" alias="board"/>
+	<typeAlias type="com.firmeet.vo.AreplyVO" alias="areply"/>
 	</typeAliases>
 
 	<mappers>
@@ -23,6 +24,7 @@
 	<mapper resource="mybatis/mappers/board.xml" />
 	<mapper resource="mybatis/mappers/gallery.xml" />
 	<mapper resource="mybatis/mappers/reply.xml" />
+	<mapper resource="mybatis/mappers/areply.xml" />
     </mappers>
     
     
