@@ -53,9 +53,6 @@
 	
 	<form name="form1" method="post" action="${pageContext.request.contextPath }/${clubId }/notice/noticelist">
 		<select name="searchOption">
-			<option value="all"
-				<c:out value="${map.searchOption == 'all' ? 'selected' : ''}"/>>
-				제목+이름+제목</option>
 			<option value="userName"
 				<c:out value="${map.searchOption == 'memberId' ? 'selected' : ''}"/>>이름</option>
 			<option value="bcontent"
