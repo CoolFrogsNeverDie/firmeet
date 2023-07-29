@@ -83,7 +83,10 @@
 	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
 	                             <p class="paycount"><span>현재인원 : </span>${vo.paycount} / <span>최대인원 : </span>${vo.maxPerson}</p>
 	                             <p class="noticegroupname">memberId :<span id="memberId">${member.memberId}</span></p>
+	                             <p class="noticegroupname">aboardNo :<span id="aboardNo">${vo.aboardNo}</span></p>
 	                             <p class="noticegroupname">meetNo :<span id="meetNo">${vo.meetNo}</span></p>
+	                              <p class="noticegroupname">paycount :<span id="paycount">${vo.paycount}</span></p>
+	                             <p class="noticegroupname">payresultNo :<span id="payresultNo">${vo.payresultNo}</span></p>
 	                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
 	                          </td>
 		                 </tr>
@@ -93,11 +96,6 @@
                		<div id="map2" style="width:100%;height:250px;"></div>
                </div>
         </div>
-      	<div>
-			<a class="text-dark heart" style="text-decoration-line: none;">
-			<img id="heart" src="${pageContext.request.contextPath }/assets/images/icon/heart.svg">좋아요</a>
-			<span class="likecount">0</span>
-		</div>
               
    	</div>
           <!-- 여기까지 -->
@@ -107,15 +105,60 @@
 </div>
         <!--/content-area-->
     <div class="noticereply">
-       <h4 class="noticereplytitle">댓글</h4>
-       <div>
-           <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt=""> 
-           <span class="username">홍순이</span>
-           <p class="noticereplytext"></p>
-           <span class="userdate">작성일 : </span>
-           <p class="usertext"></p>
-       </div>
-   </div>
+        <div class="board-area2" >
+		    <div class="board">
+				    <div class="board-header">
+
+				    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
+					    </div>
+					    <div class="board-content">
+					    <c:if test="${vo.likeNo == 0 }">
+						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
+						</c:if>
+						<c:if test="${vo.likeNo > 0 }">
+						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
+					    </c:if>
+					    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
+					    </div>
+					    <div class="board-comment-list">
+						    <div class="board-comment" >
+						   
+						    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
+						    
+						    <c:forEach items="${vo.replyList}" var = "reply">
+						    
+								<div class="comment-list" id = "r${vo.aboardNo}">
+								
+								    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
+								    	<c:if test="${reply.deep > 1 }">
+								            <span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>${reply.memberName}님 : </b></span>
+								        </c:if>
+								        <c:if test="${reply.deep == 1 }">
+								            <span><b>${reply.memberName}님 :</b></span>
+								        </c:if>
+								        <span style="margin-left: 1%;">${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
+								        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
+								           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}" style="margin-left: 3%;">답글</button></span>
+								        </c:if>
+								        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+									        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: 1%;">&nbsp;삭제</span>
+									    </c:if>
+								    </div>
+								</div>
+								
+						    </c:forEach>
+	
+							<div class="write-comment">
+								<div class="new-content">
+					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 1000px;"></textarea>
+					            	<button class="add-reply"  data-boardno ="${vo.aboardNo}">등록</button>
+		            			</div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+	        </div>
+	   </div>
         
 </div>
       <!--/diary-area-->
@@ -148,81 +191,6 @@
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
   
-  var price = $('#price').text();
-  console.log(price);
-  
-  function kakaopay(){
-  
-	var IMP = window.IMP; // 생략 가능
-	IMP.init("imp51377887"); // 예: imp00000000
-	
-	IMP.request_pay({		
-		pg : 'kakaopay',
-		pay_method : 'card',
-		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
-		name : 'firmeet',                                  //상품명
-		amount : $('#price').text(),//가격
-		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
-		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
-		buyer_name : 'buyer_name',                           //구매자 이름
-		buyer_tel : 'hp',                                    //전화번호
-		buyer_addr : 'addr',	                             //주소
-	},function(data){
-		if(data.success){
-			console.log('빌링키 발급 성공', data)
-			alert("결제가 완료되었습니다.")
-			
-				  var memberId = $('#memberId').text();
-	  			  var meetNo = $('#meetNo').text();
-					console.log('ㅎㅎ',memberId);
-					console.log(meetNo);
-				var NoticeBoardVO ={
-							memberId : memberId,
-							meetNo :  meetNo
-					}
-					//통신  id////////////////////////////////////////////
-					$.ajax({
-			        url: '${pageContext.request.contextPath }/${clubId }/notice/pay', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
-			        method: 'POST',
-			        data: NoticeBoardVO,
-			        dataType: 'json',
-			        
-			        success: function(jsonResult) {
-			        	console.log(jsonResult)
-			        	var data = jsonResult.data;
-			        	
-			        	if(jsonResult.result == 'success'){
-			        		if(jsonResult.data != null){
- 						 		$("#memberId").val(data.memberId);
-			        			$("#meetNo").val(data.meetNo);
-			        			console.log(data.memberId);
-			        			console.log(data.meetNo);
-			        			window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payinsert?aboardNo=${aboardNo}&memberId='+data.memberId+'&meetNo='+data.meetNo
-			        		}else{
-			        			$("#x").html("사용불가");
-			        		}
-			        	}else {
-							//메세지 출력
-							var msg = jsonResult.failMsg;
-							alert(msg);
-						}
-			        },
-			        error: function(xhr, status, error) {
-			            // 오류 처리
-			            console.error('Error:', error);
-			        }
-			    });
-				
-		}else{
-        	var msg = "결제 실패"
-        	msg += "에러 내용" + data.error_msg;
-        	alert(msg);
-        	return false;
-        }
-		$("#paybtn").submit();
-	});
- }
-	
  $(document).ready(function() {
 	  
 	  $('#nlist').click(function() {
@@ -239,7 +207,7 @@
 		}
 		//통신  id////////////////////////////////////////////
 		$.ajax({
-        url: '${pageContext.request.contextPath }/notice/address', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
+        url: '${pageContext.request.contextPath }/${clubId}/notice/address', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
         method: 'POST',
         data: NoticeBoardVO,
         dataType: 'json',
@@ -301,52 +269,389 @@
         
         
    	});
-    map2.setZoomable(true);   
-    
-	// 좋아요가 있는지 확인한 값을 heartval에 저장
-    var heartval = ${vo.likeNo}
-    // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
-    if(heartval>0) {
-        console.log(heartval);
-        $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-        $(".heart").prop('name',heartval)
-    }
-    else {
-        console.log(heartval);
-        $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-        $(".heart").prop('name',heartval)
+    map2.setZoomable(true);  
+ });  
+//---------------------------------------------------------------------------------------
+$(document).ready(function () {
+	
+	$("#countButton").on("click", function() {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/${clubId}/notice/payinsert", // 스프링 컨트롤러의 매핑 URL
+            type: "POST",
+            success: function(response) {
+                // 카운트 증가 후 서버로부터의 응답을 받음
+                $("#countDisplay").text(response); // 응답으로 받은 새로운 카운트를 표시
+                $("#countButton").hide(); // 버튼 숨김
+            },
+            error: function() {
+                alert("카운트를 증가시키는데 실패했습니다.");
+            }
+        });
+    });
+	
+    $('.noticereply').on("click",'.add-reply', function(){
+    	
+    	var textbox = $(this).prev();
+		var replyContent = textbox.val();
+		var aboardNo = $('#aboardNo').text();
+		var memberId = $('#memberId').text();
+    	
+    	console.log(textbox);
+    	console.log(replyContent);
+    	console.log(aboardNo);
+    	console.log(memberId);
+
+    	var aReplyVO = {
+    			aboardNo : aboardNo,
+    			replyContent : replyContent,
+				memberId : memberId
+    	}
+    	
+    	if(replyContent.length < 5){
+    		alert('댓글을 다섯글자 이상 입력해주세요.');
+    		return;
+    	}
+    	
+    	 $.ajax({
+    	       //요청 세팅
+    	       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply",
+    	       type : "post",
+    	       data : aReplyVO,
+    	       
+    	       //응답 세팅
+    	       dataType : "json",
+    	       success : function(jsonResult){
+    				console.log(jsonResult);
+    				var reply = jsonResult.data;
+    				var addElement = $('#r'+reply.aboardNo);
+    					console.log(reply);
+    					console.log(addElement);
+    	    			$("#replyContent").text(replyContent);
+    	    			$("#replyDate").text(reply.replyDate);
+    	    			$("#memberName").text(reply.memberName);
+    	    			console.log(replyContent);
+    	    			console.log(reply.replyDate);
+    	    			console.log(reply.memberName);
+    	    			
+    	    			addReply(addElement,reply,'re');
+    				
+    	       }, //success end
+    	       error : function(XHR, status, error) {
+    	    	   alert("에러");
+    	       
+    	       }
+    					            
+    	    });//ajax end
+    	    
+    	 $("#replyContent").val("");
+    	    
+    	 location.reload();//새로고침
+    });//기본 댓글 등록 버튼 클릭 이벤트 end
+
+
+
+    /*------------ 댓글 삭제 이벤트 ------------*/
+
+    $('.noticereply').on("click", '.reply-delete', function(){
+
+    var replyNo	 =	$(this).data('deletere');
+    var deep	 =	$(this).data('deep');
+    var memberId = $('#memberId').val();
+    var replyEle = $('#c' + replyNo);
+    var textarea = replyEle.find('span:eq(1)');
+
+    var ReplyVO = {
+    		replyNo : replyNo,
+    		memberId : memberId,
+    		deep : deep
     }
 
-	// 좋아요 버튼을 클릭 시 실행되는 코드
-	console.log(${sessionScope.aboardNo});
-	
-    $(".heart").on("click", function () {
-        var that = $(".heart");
-        
-        var memberId = $('#memberId').text();
-		var aboardNo = $('#aboardNo').text();
-				console.log('ㅎㅎ',memberId);
-				console.log(aboardNo);
-			var NoticeBoardVO ={
-					memberId : memberId,
-					aboardNo :  aboardNo
-				}
-        
-	    $.ajax({
-	    	url :'${pageContext.request.contextPath }/${clubId}/notice/heart',
-	        type :'POST',
-	        data : NoticeBoardVO,
-	    	success : function(data){
-	    		that.prop('name',data);
-	        	if(data==1) {
-	            	     $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-	        	} else {
-                	 $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-	        	}
-         	}
-	    	});
+    $.ajax({
+           
+           //요청 세팅
+           url : "${pageContext.request.contextPath}/${clubId}/notice/deleteReply",
+           type : "post",
+           data : ReplyVO,
+           
+           //응답 세팅
+           dataType : "json",
+           success : function(jsonResult){
+    			
+        	   var data = jsonResult.data;
+        	   console.log(data);
+        	   //삭제했다는 거
+        	   if(data == true){
+        		   replyEle.remove();
+        	   }else{
+        		   textarea.text("삭제된 댓글입니다.")
+        	   }
+
+           }, //success end
+           error : function(XHR, status, error) {
+           console.error(status + " : " + error);
+           }
+    				            
+        });//ajax end
     });
+
+    /*------------ 리댓글 등록 클릭 이벤트 (댓글의 댓글) ------------*/
+
+    $('.noticereply').on("click", ".add-reply2", function(){
+    	var textbox = $(this).prev();
+    	var content = textbox.val();
+    	var groupNo = $(this).data('groupno');
+    	var aboardNo = $(this).data('aboardno');
+    	var memberId = $('#memberId').text();
+    	
+    	console.log('teest' +  content + '그룹 번호 : ' +  groupNo + '게시글 번호 :' + aboardNo + memberId);
+    	
+    	var ReplyVO = {
+    			aboardNo : aboardNo,
+    			memberId : memberId,
+    			replyContent : content,
+    			replyGroup : groupNo
+    	}
+    	
+    	console.log(ReplyVO);
+
+    	 $.ajax({
+           
+           //요청 세팅
+           url : "${pageContext.request.contextPath}/${clubId}/notice/addReply_2",
+           type : "post",
+           data : ReplyVO,
+           
+           //응답 세팅
+           dataType : "json",
+           success : function(jsonResult){
+        	   var data = jsonResult.data;
+        	   console.log(data);
+        	   
+        	   addReply(null, data, 'rere');
+        	   console.log(addReply);
+        	   $('.write-comment2').remove();
+        	   
+           }, //success end
+           error : function(XHR, status, error) {
+           console.error(status + " : " + error);
+           }
+           	            
+        });//ajax end
+        location.reload();//새로고침	
+    });
+
+    /*------------리댓 등록 창 그리는 이벤트------------*/
+
+    $('.noticereply').on("click",'.rreply-btn', function(){
+
+    var writeCommentDiv = $(this).closest('.write-comment2');
+
+    var replyEditDiv = $(this).closest('.reply-area');
+    var groupNo = $(this).data('replyno');
+    var aboardNo = $(this).data('aboardno');
+
+    console.log('wth' + groupNo);	
+
+    var tag = $(this).parent().siblings(".write-comment2").attr('class');
+
+    console.log(tag);	
+
+    if(tag == null){
+    	var	rreply = '';	
+    	
+    	rreply += '<div style ="width:1000px; height:50px; margin-top:6px; " class="write-comment2" >';
+    	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left;">';
+    	rreply += '        <textarea class= "comment-content" style ="width:900px; height:100%; border: 1px solid black; padding:10px;"></textarea><button class="add-reply2" style="margin-left:1%;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+    	rreply += '    </div>'
+    	rreply += '</div>'
+
+    	replyEditDiv.append(rreply);
+    }else {
+    	$('.write-comment2').remove();
+    } 
+
+    });
+    /*------------//리댓 등록 창 그리는 이벤트//------------*/
+
+
+    /*------------ 댓글 쓰기 창 오픈 버튼 클릭 토글 ------------*/
+    $('.noticereply').on("click",'.write-comment-btn',function(){
+     var writeCommentDiv = $(this).closest('.board-comment').find('.write-comment');
+      if (writeCommentDiv.is(':visible')) {
+    	    writeCommentDiv.hide();
+    	  } else {
+    	    writeCommentDiv.show();
+    	  }
+    });
+
+
+    /*좋아요 클릭 이벤트*/
+    $('.noticereply').on("click",'.likecolor', function(){
+    	var aboardNo = $('#aboardNo').val();
+    	var likeNo = $(this).data('likeno');
+    	var memberId = $('#memberId').val();
+    	var element = $(this);
+    	var likeCntEle =  $(this).next('span').children();
+    	var likeCnt = likeCntEle.text();
+    	console.log(aboardNo);
+    	console.log(likeNo);
+    	console.log(memberId);
+    	console.log(element);
+    	console.log(likeCntEle);
+    	console.log(likeCnt);
+    	
+    	noticeboardVO = {
+    			aboardNo : aboardNo,
+    			memberId : memberId,
+    			likeNo : likeNo
+    	}
+    	
+    	$.ajax({
+    	       
+    	       //요청 세팅
+    	       url : "${pageContext.request.contextPath}/${clubId}/notice/likeCnt",
+    	       type : "post",
+    	       data : noticeboardVO,
+    	       
+    	       //응답 세팅
+    	       dataType : "json",
+    	       success : function(jsonResult){
+    				var result = jsonResult.data;
+    				console.log(result);
+    	    		//이미 좋아요가 눌러져 있었으면 좋아요에 있던 좋아요no 데이터로 좋아요 취소 + ♥ 가 ♡
+    				if(result == null){
+    					element.text('♡');
+    					element.data('likeno',0);
+    					likeCntEle.text(Number(likeCnt)-1);
+    	    		//내가 누른 좋아요가 없었으면 좋아요 올리기 ♡ 가 ♥
+    	    		}else{
+    					element.text('♥');
+    	    			element.data('likeno',result.likeNo);
+    					likeCntEle.text(Number(likeCnt)+1);
+    	    		}
+    	       }, //success end
+    	       error : function(XHR, status, error) {
+    	       console.error(status + " : " + error);
+    	       }
+    					            
+    	    });//ajax end
+    	
+    });//좋아요 이벤트 end
+
+ });
+    /*리댓글 html 그리는 거*/
+    function addReply(element,reply, type){
+
+    var add ="";
+    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
+    if (reply.deep > 1) {
+        add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
+    } else if (reply.deep === 1) {
+        add += '<span><b>' + reply.memberName + '님 : </b></span>';
+    }
+    add += '<span>' + reply.replyContent + '</span>';
+    if (reply.deep === 1) {
+        add += '<span><button class= "rreply-btn" data-aboardno ="' + reply.aboardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
+    }
+    add += '<div class="reply-edit">';
+    add += '<span>' + reply.replyDate + '</span>';
+    add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
+    add += '</div></div>';
+
+    if(type == 're'){
+    		element.append(add);
+    }else{
+    	   	var last = $('.group' + reply.replyGroup).last();
+    	 	last.after(add);
+    }
+
+    }//리댓글 그리는 function end
     
-});
+//--------------------------------------------------------------------------------------------------------
+
+ var price = $('#price').text();
+  console.log(price);
+  
+  function kakaopay(){
+  
+	var IMP = window.IMP; // 생략 가능
+	IMP.init("imp51377887"); // 예: imp00000000
+	
+	IMP.request_pay({		
+		pg : 'kakaopay',
+		pay_method : 'card',
+		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
+		name : 'firmeet',                                  //상품명
+		amount : $('#price').text(),//가격
+		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
+		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
+		buyer_name : 'buyer_name',                           //구매자 이름
+		buyer_tel : 'hp',                                    //전화번호
+		buyer_addr : 'addr',	                             //주소
+	},function(data){
+		if(data.success){
+			console.log('빌링키 발급 성공', data)
+			alert("결제가 완료되었습니다.")
+			
+				  var memberId = $('#memberId').text();
+	  			  var meetNo = $('#meetNo').text();
+	  			  var payresultNo = $('#payresultNo').text();
+	  			  var paycount = $('#paycount').text();
+					console.log('ㅎㅎ',memberId);
+					console.log(meetNo);
+					console.log('ㅎㅎ',payresultNo);
+					console.log(paycount);
+				var NoticeBoardVO ={
+							memberId : memberId,
+							meetNo :  meetNo,
+							payresultNo : payresultNo,
+							paycount :  paycount
+					}
+					//통신  id////////////////////////////////////////////
+					$.ajax({
+			        url: '${pageContext.request.contextPath }/${clubId }/notice/pay', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
+			        method: 'POST',
+			        data: NoticeBoardVO,
+			        dataType: 'json',
+			        
+			        success: function(jsonResult) {
+			        	console.log(jsonResult)
+			        	var data = jsonResult.data;
+			        	
+			        	if(jsonResult.result == 'success'){
+			        		if(jsonResult.data != null){
+ 						 		$("#memberId").val(data.memberId);
+			        			$("#meetNo").val(data.meetNo);
+			        			$("#payresultNo").val(data.payresultNo);
+			        			$("#paycount").val(data.paycount);
+			        			paycount++;
+			        			console.log(data.memberId);
+			        			console.log(data.meetNo);
+			        			console.log(data.payresultNo);
+			        			console.log(data.paycount);
+			        		}else{
+			        			$("#x").html("사용불가");
+			        		}
+			        	}else {
+							//메세지 출력
+							var msg = jsonResult.failMsg;
+							alert(msg);
+						}
+			        },
+			        error: function(xhr, status, error) {
+			            // 오류 처리
+			            console.error('Error:', error);
+			        }
+			    });
+				
+		}else{
+        	var msg = "결제 실패"
+        	msg += "에러 내용" + data.error_msg;
+        	alert(msg);
+        	return false;
+        }
+		$("#paybtn").submit();
+	});
+ }
 </script>
 </html>

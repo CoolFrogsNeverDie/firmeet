@@ -72,7 +72,7 @@
 		values(#{meetNo}, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
 	</insert>
 	
-	<select id="editlistgroup" parameterType="int" resultType="noticeboard">
+	<select id="editlistgroup" parameterType="noticeboard" resultType="noticeboard">
 		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 		from aboard a, club c, member m, meet_name mn
@@ -97,7 +97,7 @@
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 			, pr.payresultNo, pr.paycount
 			from aboard a, club c, member m, meet_name mn, payresult pr
-			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and a.aboardNo = #{aboardNo}
+			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
 			and payresultNo = #{payresultNo}
 		]]>
 	</select>

@@ -104,11 +104,6 @@
 	               </tbody>
                </table>
       	</div>
-      	<%-- <div>
-			<a class="text-dark heart" style="text-decoration-line: none;">
-			<img id="heart" src="${pageContext.request.contextPath }/assets/images/icon/heart.svg">좋아요</a>
-			<span class="likecount">0</span>
-		</div> --%>
               
         <div class="modal" id="vote">
           <div class="modal-dialog">
@@ -178,16 +173,13 @@
 								        <c:if test="${reply.deep == 1 }">
 								            <span><b>${reply.memberName}님 :</b></span>
 								        </c:if>
-								        <span>${reply.replyContent}</span>
+								        <span style="margin-left: 1%;">${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
 								        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
-								           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+								           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}" style="margin-left: 3%;">답글</button></span>
 								        </c:if>
-								        <div class="reply-edit">
-									        <span>${reply.replyDate}</span>
-									        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
-									        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}">&nbsp;삭제</span>
-									        </c:if>
-								        </div>
+								        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+									        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: 1%;">&nbsp;삭제</span>
+									    </c:if>
 								    </div>
 								</div>
 								
@@ -195,7 +187,7 @@
 	
 							<div class="write-comment">
 								<div class="new-content">
-					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000;"></textarea>
+					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 1000px;"></textarea>
 					            	<button class="add-reply"  data-boardno ="${vo.aboardNo}">등록</button>
 		            			</div>
 						    </div>
@@ -247,10 +239,7 @@ $(document).ready(function () {
        $("#dataTable1").toggle();
    });
   
-window.history.forward();
-function noBack(){
-	window.history.forward();
-}
+
 
 $('.noticereply').on("click",'.add-reply', function(){
 	
@@ -307,8 +296,10 @@ $('.noticereply').on("click",'.add-reply', function(){
 	       }
 					            
 	    });//ajax end
-
-	
+	    
+	 $("#replyContent").val("");
+	    
+	 location.reload();//새로고침
 });//기본 댓글 등록 버튼 클릭 이벤트 end
 
 
@@ -398,9 +389,9 @@ $('.noticereply').on("click", ".add-reply2", function(){
        error : function(XHR, status, error) {
        console.error(status + " : " + error);
        }
-				            
+       	            
     });//ajax end
-	
+    location.reload();//새로고침	
 });
 
 /*------------리댓 등록 창 그리는 이벤트------------*/
@@ -422,11 +413,11 @@ console.log(tag);
 if(tag == null){
 	var	rreply = '';	
 	
-	rreply += '<div style ="width:762px; height:100px; margin-top:6px; " class="write-comment2" >';
-	rreply += '    <span ></span><div class="new-content2" style ="width: 80%; height: 80px; border: 1px solid black; float: left;">';
-	rreply += '        <textarea class= "comment-content" style ="width:100%; height:100%; padding:10px;"></textarea><button class="add-reply2" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+	rreply += '<div style ="width:1000px; height:50px; margin-top:6px; " class="write-comment2" >';
+	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left;">';
+	rreply += '        <textarea class= "comment-content" style ="width:900px; height:100%; border: 1px solid black; padding:10px;"></textarea><button class="add-reply2" style="margin-left:1%;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
 	rreply += '    </div>'
-		rreply += '</div>'
+	rreply += '</div>'
 
 	replyEditDiv.append(rreply);
 }else {
@@ -530,6 +521,10 @@ if(type == 're'){
 
 }//리댓글 그리는 function end
 
+window.history.forward();
+function noBack(){
+	window.history.forward();
+}
 
   </script>
 </html>

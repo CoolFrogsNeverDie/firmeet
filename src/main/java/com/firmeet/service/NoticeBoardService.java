@@ -15,6 +15,7 @@ import com.firmeet.dao.AreplyDAO;
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.PayresultVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Service
@@ -52,11 +53,10 @@ public class NoticeBoardService {
 		dao.hits(vo);
 		
 		NoticeBoardVO vo1 = dao.editlist(vo);
+		//댓글 리스트
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
-//		System.out.println("확확확확확"+dao.getBoardComment(vo));
 		System.out.println(vo1);
-//		return null;
 		return vo1;
 	}
 	
@@ -79,7 +79,13 @@ public class NoticeBoardService {
 	public NoticeBoardVO editlistgroup(NoticeBoardVO vo) {
 		System.out.println("notice editlistgroup 확인");
 		dao.hits(vo);
-		return dao.editlistgroup(vo);
+		//
+		NoticeBoardVO vo1 = dao.editlistgroup(vo);
+		//댓글 리스트
+		List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		vo1.setReplyList(vo11);
+		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
+		return vo1;
 	}
 	
 	public void voteinsert(NoticeBoardVO vo) {
@@ -152,17 +158,13 @@ public class NoticeBoardService {
 		return psaveName;
 	
 	}
-
-	public void payinsert(NoticeBoardVO vo) {
+	
+	public PayresultVO payinsert(PayresultVO vo) {
 		System.out.println("notice payinsert 확인");
 		dao.payinsert(vo);
-	}
-	
-	public NoticeBoardVO payresult(NoticeBoardVO noticeBoardVO) {
-		System.out.println("notice payresult 확인");
-		NoticeBoardVO nVo = dao.payresult(noticeBoardVO);
-		dao.paycount(noticeBoardVO);
-		return nVo;
+		dao.payresult(vo);
+		dao.paycount(vo);
+		return vo;
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------------

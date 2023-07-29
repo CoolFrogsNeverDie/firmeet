@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.PayresultVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Repository
@@ -81,18 +82,18 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.hits", vo.getAboardNo());
 	}
 
-	public void payinsert(NoticeBoardVO vo) {
+	public void payinsert(PayresultVO vo) {
 		System.out.println("notice payinsert dao 확인"+vo);
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(NoticeBoardVO vo) {
+	public NoticeBoardVO payresult(PayresultVO vo) {
 		System.out.println("notice payresult dao 확인=====================================");
 		System.out.println("payresult dao "+vo);
 		return sql.selectOne("noticeboard.payresult", vo);
 	}
 
-	public int paycount(NoticeBoardVO noticeBoardVO) {
+	public int paycount(PayresultVO noticeBoardVO) {
 		System.out.println("notice paycount dao 확인");
 		return sql.update("noticeboard.paycount", noticeBoardVO);
 	}

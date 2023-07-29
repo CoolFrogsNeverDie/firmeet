@@ -22,6 +22,7 @@ import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.NoticeBoardVO;
+import com.firmeet.vo.PayresultVO;
 
 @Controller
 @RequestMapping("/{clubId}/notice")
@@ -99,7 +100,6 @@ public class NoticeBoardController {
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
 		model.addAttribute("vo", noticeBoardService.editlist(vo));
-		//model.addAttribute("vo", noticeBoardService.findHeart(vo.getAboardNo(), vo.getMemberId()));
 		
 		return "notice/noticeGroupView";
 	}
@@ -146,7 +146,7 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/editlistgroup")
-	public String editlistgroup(ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	public String editlistgroup(ClubVo clubvo, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		System.out.println("notice editgrouplist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		System.out.println(vo);
@@ -156,7 +156,8 @@ public class NoticeBoardController {
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("meetNo"+ vo.getMeetNo());
 		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("memberId", vo.getMemberId());
+		session.getAttribute("memberId");
+		System.out.println("gsgsdsgsgsgsg"+vo.getMemberId());
 		model.addAttribute("vo", noticeBoardService.editlistgroup(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteView";
@@ -190,38 +191,39 @@ public class NoticeBoardController {
 
 	@ResponseBody
 	@RequestMapping("/pay")
-	public JsonResult pay(@ModelAttribute NoticeBoardVO vo, HttpSession session) {
+	public JsonResult pay(@ModelAttribute PayresultVO vo, HttpSession session) {
 		
 		System.out.println("넘어오는지 확인" + vo);
 		JsonResult jsonResult = new JsonResult();
-		jsonResult.success(vo);
+		jsonResult.success(noticeBoardService.payinsert(vo));
 		System.out.println("getMemberId"+vo.getMemberId());
 		System.out.println("getMeetNo"+vo.getMeetNo());
+		System.out.println("getMemberId"+vo.getPaycount());
+		System.out.println("getMeetNo"+vo.getPaycount());
 		
 		return jsonResult;
 	}
-	
+/*	
 	//에디터 일반페이지 등록 후 insert
-	@RequestMapping("/payinsert")
-	public String payinsert(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session, ClubVo clubvo) {
+	@ResponseBody
+	@RequestMapping(value = "/payinsert", method = RequestMethod.POST)
+	public JsonResult payinsert(@PathVariable("clubId") int clubId, @ModelAttribute PayresultVO vo, Model model, HttpSession session, ClubVo clubvo) {
 
 		System.out.println("넘어는 오니?");
 		System.out.println(vo);
 		
-		int aboardNo = vo.getAboardNo();
-		int meetNo = vo.getMeetNo();
-		String memberId = vo.getMemberId();
+		JsonResult jsonResult = new JsonResult();
 		
-		noticeBoardService.payinsert(vo);
+		System.out.println("AJAX로 넘어오는 정보" + vo);
+		jsonResult.success(noticeBoardService.payinsert(vo));
 		
-		int getPayresultNo = vo.getPayresultNo();
+		//int getPayresultNo = vo.getPayresultNo();
+		//String url = "/"+clubId+"/notice/payresult?memberId="+vo.getMemberId()+"&meetNo="+vo.getMeetNo()+"&payresultNo="+getPayresultNo;
 		
-		String url = "/"+clubId+"/notice/payresult?aboardNo="+aboardNo+"&meetNo="+meetNo+"&memberId="+memberId+"&payresultNo="+getPayresultNo;
-		
-		return "redirect:"+ url;
+		return jsonResult ;
 	}
-	
-	
+*/	
+/*	
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/payresult")
 	public String payresult(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
@@ -232,7 +234,7 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
 	}
-	
+*/	
 	
 	//----------------------------------------------------------------------------------------------
 	
