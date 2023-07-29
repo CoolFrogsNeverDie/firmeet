@@ -62,10 +62,17 @@
             <!--/content-area-->
         </div>
         <!-- diary area -->
-      <div class= "menu-bar2" style ="border: solid 1px black;">
-
+       <div class= "menu-bar2" >
+			<ul class= "side-bar2">
+				<li>공지사항</li>
+				<li>갤러리</li>
+				<li>달력</li>
+				<li>자유게시판</li>
+				<li>멤버</li>
+				<li>가계부</li>
+			</ul>
       </div>
-        
+        <!-- menu-bar -->
     </div>
     <!--/wrap-->
 </body>
@@ -353,7 +360,7 @@
  	/*BoardList 받아오는 기능*/
  	function getData(){
  		 
- 	 	var memberId = $('.diary-area').data('memid');
+ 	 	var memberId = 'test14';
  	 	var clubId = $('.diary-area').data('clubid');
  	 	var keyword = "";
  	 
@@ -384,7 +391,7 @@
  	    	   console.log(boardList);
 				
  	    	   	if(boardList.length < 1){
- 	    	   		alert('게시물이 없습니다.');
+	
  	    	   	}
  	    	   	
  	    	   	 //가져온 게시물 리스트를 그려준다.
@@ -461,6 +468,9 @@
             }
             add += '<span>좋아요 (<span class= "likeCnt">' + board.likeCnt + '</span>)</span>';
             if(board.memberId == memberId){
+            	
+            
+            	
                 add += '<span class= "edit-board-spans">'
                 add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/board/club/editform?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">수정</a>';
                 add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/board/club/delete?clubId=' + board.clubId + '&boardNo=' + board.boardNo + '">삭제</a>'

@@ -181,8 +181,8 @@ let calendar;
 								url:'https://www.naver.com',
 								display: 'background', // 백그라운드 색상을 표시하는 옵션
 						         color: '#FF0000', // 원하는 색상 값으로 변경
-								backgroundColor : '#FF6A00',
-	 							borderColor:  '#FF6A00'
+								backgroundColor : 'FF6D60',
+	 							borderColor:  '#FF6D60'
 							}); //eddEvent end
 						}else{
 						    calendar.addEvent({
@@ -190,8 +190,8 @@ let calendar;
 								start: data[i].startDate,
 								end:data[i].endDate + ' 24:00',
 								url:'https://www.naver.com',
-								backgroundColor : '#66008c',
-	 							borderColor:  '#66008c'
+								backgroundColor : 'F7D060',
+	 							borderColor:  'F7D060'
 							}); //eddEvent end
 						}
 					}
