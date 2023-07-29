@@ -1,6 +1,8 @@
 package com.firmeet.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.AreplyVO;
@@ -28,15 +31,16 @@ public class NoticeBoardController {
 	private NoticeBoardService noticeBoardService;
 	
 	@RequestMapping("/noticelist")
-	public String noticelist(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
+	public String noticelist(@PathVariable("clubId") int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
 		System.out.println("noticelist 확인");
 		
 		session.setAttribute("clubId", clubId);
 		
-		model.addAttribute("nlist",noticeBoardService.noticeList());
+		model.addAttribute("nlist",noticeBoardService.noticeList(keyword));
 		
 		return "notice/noticeList";
 	}
+	
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
@@ -98,13 +102,6 @@ public class NoticeBoardController {
 		//model.addAttribute("vo", noticeBoardService.findHeart(vo.getAboardNo(), vo.getMemberId()));
 		
 		return "notice/noticeGroupView";
-	}
-	
-	@RequestMapping(value="/heart", method=RequestMethod.POST)
-	@ResponseBody
-	public int heart(@ModelAttribute NoticeBoardVO vo) {
-		int result = noticeBoardService.insertHeart(vo);
-		return result;
 	}
 	
 	@RequestMapping("/vote")
@@ -267,6 +264,19 @@ public class NoticeBoardController {
 		JsonResult jsonResult = new JsonResult();
 		System.out.println("AJAX로 넘어온 삭제할 코멘트 정보 " +vo);
 		boolean result = noticeBoardService.deleteReply(vo);
+		jsonResult.success(result);
+		
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/likeCnt", method = RequestMethod.POST)
+	public JsonResult likeCnt(@ModelAttribute NoticeBoardVO vo) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("넘어오는 거 체크" + vo);
+		NoticeBoardVO result = noticeBoardService.likeCnt(vo);
+		System.out.println(result);
 		jsonResult.success(result);
 		
 		return jsonResult;

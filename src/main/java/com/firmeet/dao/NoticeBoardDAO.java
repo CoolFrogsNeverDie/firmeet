@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.AreplyVO;
-import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.ReplyVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Repository
@@ -18,9 +16,9 @@ public class NoticeBoardDAO {
 	@Autowired
 	private SqlSession sql;
 
-	public List<NoticeBoardVO> noticelist() {
+	public List<NoticeBoardVO> noticelist(String keyword) {
 		System.out.println("notice noticelist dao  확인");
-		return sql.selectList("noticeboard.noticelist");
+		return sql.selectList("noticeboard.noticelist", keyword);
 	}
 	
 //-----------------------------------------------------------------------------	
@@ -99,21 +97,20 @@ public class NoticeBoardDAO {
 		return sql.update("noticeboard.paycount", noticeBoardVO);
 	}
 
-	public NoticeBoardVO findHeart(NoticeBoardVO vo) {
-		return sql.selectOne("noticeboard.findHeart",vo);
-	}
-	
-	public int insertHeart(NoticeBoardVO vo) {
-		return sql.insert("noticeboard.insertHeart", vo);
-	}
-
-	public void deleteHeart(NoticeBoardVO vo) {
-		sql.delete("noticeboard.deleteHeart",vo);
-		
-	}
-	
 	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {
 		return sql.selectList("noticeboard.getComment",vo);
+	}
+	
+	public int  likeCancle(NoticeBoardVO vo) {
+		return sql.delete("noticeboard.deletelike",vo);
+	}
+
+	public void insertLike(NoticeBoardVO vo) {
+		sql.insert("noticeboard.insertLike",vo);
+	}
+
+	public NoticeBoardVO getLike(NoticeBoardVO vo) {
+		return sql.selectOne("noticeboard.getLike", vo);
 	}
 	
 }

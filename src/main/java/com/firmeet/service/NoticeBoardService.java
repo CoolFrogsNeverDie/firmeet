@@ -25,11 +25,11 @@ public class NoticeBoardService {
 	@Autowired
 	private AreplyDAO rdao;
 
-	public List<NoticeBoardVO> noticeList() {
+	public List<NoticeBoardVO> noticeList(String keyword) {
 		System.out.println("notice noticeList 확인");
-		return dao.noticelist();
+		return dao.noticelist(keyword);
 	}
-
+	
 	public int editwrite(NoticeBoardVO vo) {
 		dao.editwrite(vo);
 		System.out.println("service editinsert 확인"+vo);
@@ -38,7 +38,7 @@ public class NoticeBoardService {
 		
 		int aboardNo = vo.getAboardNo();
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
-		//여기서 안들어감
+		
 		dao.editwritevote(vo);
 		System.out.println("service voteinsert 확인"+vo);
 		System.out.println("service voteinsert getAboardNo 확인"+vo.getAboardNo());
@@ -94,7 +94,6 @@ public class NoticeBoardService {
 		
 		System.out.println("보트넘버확인"+vo.getVoteNo());
 		
-		int voteNo = vo.getVoteNo();
 		VoteResultVO voteResultvo = dao.voteresult(vo);
 		System.out.println("확인확인"+voteResultvo);
 		System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
@@ -166,21 +165,6 @@ public class NoticeBoardService {
 		return nVo;
 	}
 
-	public int insertHeart(NoticeBoardVO vo) {
-		System.out.println("notice insertHeart 확인");
-		
-		int result = 0;
-		
-		NoticeBoardVO find = dao.findHeart(vo);
-		
-		if(find == null) {
-			result = dao.insertHeart(vo);
-		}else {
-			dao.deleteHeart(vo);
-		}
-		return result;
-	}
-	
 	//-----------------------------------------------------------------------------------------------------------------------
 	
 	public AreplyVO addReply(AreplyVO vo) {
@@ -219,6 +203,22 @@ public class NoticeBoardService {
 			System.out.println("딸린 자식 없는 아이 삭제");
 		}
 			
+		return result;
+	}
+	
+	public NoticeBoardVO likeCnt(NoticeBoardVO vo) {
+		NoticeBoardVO result = null;
+		var like = vo.getLikeNo();
+		if(like == 0) {
+		//좋아요 기능 수행	
+			dao.insertLike(vo);
+			result = dao.getLike(vo);
+			
+		}else {
+		//좋아요 취소 기능 수행
+			dao.likeCancle(vo);
+		}
+		
 		return result;
 	}
 

@@ -20,10 +20,8 @@ import com.firmeet.service.GalleryService;
 import com.firmeet.service.MemberService;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.CategoryVo;
-import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
-import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.TagVo;
 
@@ -95,7 +93,7 @@ public class MainController {
         
         model.addAttribute("galleryList", gList);
         
-        List<NoticeBoardVO> nList= noticeBoardService.noticeList();
+        List<NoticeBoardVO> nList= noticeBoardService.noticeList(memberId);
 		System.out.println(nList);
         
         model.addAttribute("noticeList", nList);

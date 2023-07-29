@@ -64,7 +64,7 @@ public class ClubController {
             model.addAttribute("gImgVos", gImgVos);
 
             // 공지사항 목록을 가져옵니다.
-            List<NoticeBoardVO> nList = noticeBoardService.noticeList();
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
             System.out.println(nList);
             model.addAttribute("noticeList", nList);
 

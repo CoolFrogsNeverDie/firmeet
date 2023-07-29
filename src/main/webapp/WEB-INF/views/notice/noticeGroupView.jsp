@@ -104,11 +104,11 @@
 	               </tbody>
                </table>
       	</div>
-      	<div>
+      	<%-- <div>
 			<a class="text-dark heart" style="text-decoration-line: none;">
 			<img id="heart" src="${pageContext.request.contextPath }/assets/images/icon/heart.svg">좋아요</a>
 			<span class="likecount">0</span>
-		</div>
+		</div> --%>
               
         <div class="modal" id="vote">
           <div class="modal-dialog">
@@ -146,32 +146,66 @@
           <!--/content-left-->
 </div>
         <!--/content-area-->
-    <div class="noticereply">
-       <h4 class="noticereplytitle">댓글</h4>
-       <div>
-            <input type="hidden" name="clubId" value="${clubId}">
-         	<input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
-         	<input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
-           <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt=""> 
-           <span class="memberName">${member.memberName }</span>
-           <input type="text" class="replyContent" id="replyContent" name="replyContent">
-           <input type="text" class=replyDate id="replyDate" name="replyDate">
-           <button type="button" class="add-reply">등록</button>
-       </div>
-       <div id="replylist">
-	       <c:forEach items="${vo.replyList}" var = "reply">
-	       		<span id="memberName">${reply.memberName}</span><span id="replyContent">${reply.replyContent}</span><span id="replyDate">${reply.replyDate}</span><button class="reply-btn">답글</button><br>
-	       		<div class="rreply" style="height: 20px; display: none;">
-				  <input type="text" id="replyInput" class="toggle-element" />
-				  <button class="add-reply2">등록</button>
-				</div>
-	       		<%-- <span id="memberName">${reply.memberName}</span><span id="replyContent">${reply.replyContent}</span><span id="replyDate">${reply.replyDate}</span>${reply.replyGroup}${reply.deep}<br> --%>
-	       	function addReply();
-	       </c:forEach>
-       </div>
-   </div>
+   <div class="noticereply">
+        <div class="board-area2" >
+		    <div class="board">
+				    <div class="board-header">
 
-</div>
+				    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
+					    </div>
+					    <div class="board-content">
+					    <c:if test="${vo.likeNo == 0 }">
+						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
+						</c:if>
+						<c:if test="${vo.likeNo > 0 }">
+						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
+					    </c:if>
+					    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
+					    </div>
+					    <div class="board-comment-list">
+						    <div class="board-comment" >
+						   
+						    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
+						    
+						    <c:forEach items="${vo.replyList}" var = "reply">
+						    
+								<div class="comment-list" id = "r${vo.aboardNo}">
+								
+								    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
+								    	<c:if test="${reply.deep > 1 }">
+								            <span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>${reply.memberName}님 : </b></span>
+								        </c:if>
+								        <c:if test="${reply.deep == 1 }">
+								            <span><b>${reply.memberName}님 :</b></span>
+								        </c:if>
+								        <span>${reply.replyContent}</span>
+								        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
+								           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+								        </c:if>
+								        <div class="reply-edit">
+									        <span>${reply.replyDate}</span>
+									        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+									        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}">&nbsp;삭제</span>
+									        </c:if>
+								        </div>
+								    </div>
+								</div>
+								
+						    </c:forEach>
+	
+							<div class="write-comment">
+								<div class="new-content">
+					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000;"></textarea>
+					            	<button class="add-reply"  data-boardno ="${vo.aboardNo}">등록</button>
+		            			</div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+	        </div>
+	   </div>
+
+	</div>
       <!--/diary-area-->
       <div class="menu-bar" >
         <div class="group-profile">
@@ -202,82 +236,16 @@
   <script src="${pageContext.request.contextPath }/assets/js/imgSlider.js"></script>
   <script>
   
-  function listReply(){
-	$.ajax({
-		type : "get",
-		url : "${pageContext.request.contextPath}/${clubId}/notice/rlist",
-		success : function(result){
-			$("#listReply").html(result);
-		}
-	});
-}
-  
 $(document).ready(function () {
 	
-	  $(".reply-btn").click(function() {
-		    // 클릭한 답글 버튼에 해당하는 input 박스 보이기
-		    //$(".rreply").show();
-		    var target = $(this).data("target");
-
-		    // 해당 요소를 보이도록 함
-		    $("#" + target).show();
-
-		    // 다른 요소는 숨김 처리
-		    $(".toggle-element").not("#" + target).hide();
-		  });
-
-	// 좋아요가 있는지 확인한 값을 heartval에 저장
-	       var heartval = ${vo.likeNo}
-	       // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
-	       if(heartval>0) {
-	           console.log(heartval);
-	           $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-	           $(".heart").prop('name',heartval)
-	       }
-	       else {
-	           console.log(heartval);
-	           $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-	           $(".heart").prop('name',heartval)
-	       }
-	
-	// 좋아요 버튼을 클릭 시 실행되는 코드
-	console.log(${sessionScope.aboardNo});
-	
-	       $(".heart").on("click", function () {
-	           var that = $(".heart");
-	           
-	           var memberId = $('#memberId').val();
-	 			var aboardNo = $('#aboardNo').val();
-				console.log('ㅎㅎ',memberId);
-				console.log(aboardNo);
-			var NoticeBoardVO ={
-					memberId : memberId,
-					aboardNo :  aboardNo
-				}
-	           
-	    $.ajax({
-	    	url :'${pageContext.request.contextPath }/${clubId}/notice/heart',
-	        type :'POST',
-	        data : NoticeBoardVO,
-	    	success : function(data){
-	    		that.prop('name',data);
-	        	if(data==1) {
-	            	     $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-	        	} else {
-	                   	 $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-	        	}
-	            	}
-	    	});
-	       });
-		$('#nlist').click(function() {
-			  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
-		});
-	     $("#lastvote").click(function() {
-	         // 기존 내용과 대체 내용의 가시성(visibility)을 토글
-	         $("#dataTable").toggle();
-	         $("#dataTable1").toggle();
-	       });
+	$('#nlist').click(function() {
+		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
 	});
+   $("#lastvote").click(function() {
+       // 기존 내용과 대체 내용의 가시성(visibility)을 토글
+       $("#dataTable").toggle();
+       $("#dataTable1").toggle();
+   });
   
 window.history.forward();
 function noBack(){
@@ -285,6 +253,7 @@ function noBack(){
 }
 
 $('.noticereply').on("click",'.add-reply', function(){
+	
 	var replyContent = $('#replyContent').val();
 	var memberName = $('.memberName').text();
 	var memberId = $('#memberId').val();
@@ -308,43 +277,44 @@ $('.noticereply').on("click",'.add-reply', function(){
 		alert('댓글을 다섯글자 이상 입력해주세요.');
 		return;
 	}
-
+	
 	 $.ajax({
-       //요청 세팅
-       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply",
-       type : "post",
-       data : aReplyVO,
-       
-       //응답 세팅
-       dataType : "json",
-       success : function(jsonResult){
-			console.log(jsonResult);
-			var data = jsonResult.data;
-			if(jsonResult.data != null){
-    			$("#replyContent").text(replyContent);
-    			$("#replyDate").text(data.replyDate);
-    			$("#memberName").text(data.memberName);
-    			console.log(replyContent);
-    			console.log(data.replyDate);
-    			console.log(data.memberName);
-    			$("#replylist").append("<span id=memberName>"+data.memberName+"</span><span id=replyContent>"+data.replyContent+"</span><span id=replyDate>"+data.replyDate+"</span><button class=add-reply2>답글</button><br>");
-    		}else{
-    			$("#x").html("사용불가");
-    		}
-			
-		   // 
-			
-       }, //success end
-       error : function(XHR, status, error) {
-       console.error(status + " : " + error);
-       }
-				            
-    });//ajax end
-    
-	 $("#replyContent").val("");
+	       //요청 세팅
+	       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply",
+	       type : "post",
+	       data : aReplyVO,
+	       
+	       //응답 세팅
+	       dataType : "json",
+	       success : function(jsonResult){
+				console.log(jsonResult);
+				var reply = jsonResult.data;
+				var addElement = $('#r'+reply.aboardNo);
+					console.log(reply);
+					console.log(addElement);
+	    			$("#replyContent").text(replyContent);
+	    			$("#replyDate").text(reply.replyDate);
+	    			$("#memberName").text(reply.memberName);
+	    			console.log(replyContent);
+	    			console.log(reply.replyDate);
+	    			console.log(reply.memberName);
+	    			
+	    			addReply(addElement,reply,'re');
+				
+	       }, //success end
+	       error : function(XHR, status, error) {
+	       console.error(status + " : " + error);
+	       }
+					            
+	    });//ajax end
+
+	
 });//기본 댓글 등록 버튼 클릭 이벤트 end
 
+
+
 /*------------ 댓글 삭제 이벤트 ------------*/
+
 $('.noticereply').on("click", '.reply-delete', function(){
 
 var replyNo	 =	$(this).data('deletere');
@@ -387,85 +357,88 @@ $.ajax({
     });//ajax end
 });
 
-
 /*------------ 리댓글 등록 클릭 이벤트 (댓글의 댓글) ------------*/
 
 $('.noticereply').on("click", ".add-reply2", function(){
-	
-	var replyContent = $('#replyContent').val();
-	var memberName = $('.memberName').text();
+	var textbox = $(this).prev();
+	var content = textbox.val();
+	var groupNo = $(this).data('groupno');
+	var aboardNo = $(this).data('aboardno');
 	var memberId = $('#memberId').val();
-	var aboardNo = $('#aboardNo').val();
-	var replyDate = $('#replyDate').val();
-	var replyGroup = $('#replyGroup').val();
-	var deep = $('#deep').val();
-	console.log(replyContent);
-	console.log(memberName);
-	console.log(memberId);
-	console.log(aboardNo);
-	console.log(replyDate);
-
-	var aReplyVO = {
+	
+	console.log('teest' +  content + '그룹 번호 : ' +  groupNo + '게시글 번호 :' + aboardNo + memberId);
+	
+	var ReplyVO = {
 			aboardNo : aboardNo,
-			replyContent : replyContent,
 			memberId : memberId,
-			memberName : memberName,
-			replyDate : replyDate
+			replyContent : content,
+			replyGroup : groupNo
 	}
 	
-console.log(ReplyVO);
+	console.log(ReplyVO);
 
+	 $.ajax({
+       
+       //요청 세팅
+       url : "${pageContext.request.contextPath}/${clubId}/notice/addReply_2",
+       type : "post",
+       data : ReplyVO,
+       
+       //응답 세팅
+       dataType : "json",
+       success : function(jsonResult){
+    	   var data = jsonResult.data;
+    	   console.log(data);
+    	   
+    	   addReply(null, data, 'rere');
+    	   console.log(addReply);
+    	   $('.write-comment2').remove();
+    	   
+       }, //success end
+       error : function(XHR, status, error) {
+       console.error(status + " : " + error);
+       }
+				            
+    });//ajax end
+	
+});
 
- $.ajax({
-   
-   //요청 세팅
-   url : "${pageContext.request.contextPath}/${clubId}/notice/addReply_2",
-   type : "post",
-   data : ReplyVO,
-   
-   //응답 세팅
-   dataType : "json",
-   success : function(jsonResult){
-		console.log(jsonResult);
-		var data = jsonResult.data;
-		if(jsonResult.data != null){
-			$("#replyContent").text(data.replyContent);
-			$("#replyDate").text(data.replyDate);
-			$("#memberName").text(data.memberName);
-			$("#replyDate").text(data.replyDate);
-			$("#replyGroup").text(data.replyGroup);
-			$("#deep").text(data.deep);
-			console.log(replyContent);
-			console.log(data.replyDate);
-			console.log(data.memberName);
-			console.log(data.replyDate);
-			console.log(data.replyGroup);
-			console.log(data.deep);
-		}else{
-			$("#x").html("사용불가");
-		}
-		
-	   // 
-		
-  }, //success end
-   error : function(XHR, status, error) {
-   console.error(status + " : " + error);
-   }
-			            
-});//ajax end
+/*------------리댓 등록 창 그리는 이벤트------------*/
+
+$('.noticereply').on("click",'.rreply-btn', function(){
+
+var writeCommentDiv = $(this).closest('.write-comment2');
+
+var replyEditDiv = $(this).closest('.reply-area');
+var groupNo = $(this).data('replyno');
+var aboardNo = $(this).data('aboardno');
+
+console.log('wth' + groupNo);	
+
+var tag = $(this).parent().siblings(".write-comment2").attr('class');
+
+console.log(tag);	
+
+if(tag == null){
+	var	rreply = '';	
+	
+	rreply += '<div style ="width:762px; height:100px; margin-top:6px; " class="write-comment2" >';
+	rreply += '    <span ></span><div class="new-content2" style ="width: 80%; height: 80px; border: 1px solid black; float: left;">';
+	rreply += '        <textarea class= "comment-content" style ="width:100%; height:100%; padding:10px;"></textarea><button class="add-reply2" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+	rreply += '    </div>'
+		rreply += '</div>'
+
+	replyEditDiv.append(rreply);
+}else {
+	$('.write-comment2').remove();
+} 
 
 });
-/*------------// 리댓글 등록 클릭 이벤트 (댓글의 댓글) //------------*/
-
-
-
-
-
-
+/*------------//리댓 등록 창 그리는 이벤트//------------*/
 
 
 /*------------ 댓글 쓰기 창 오픈 버튼 클릭 토글 ------------*/
-$('.board-area').on("click",'.write-comment-btn',function(){
+$('.noticereply').on("click",'.write-comment-btn',function(){
  var writeCommentDiv = $(this).closest('.board-comment').find('.write-comment');
   if (writeCommentDiv.is(':visible')) {
 	    writeCommentDiv.hide();
@@ -475,20 +448,23 @@ $('.board-area').on("click",'.write-comment-btn',function(){
 });
 
 
-
-
-
 /*좋아요 클릭 이벤트*/
-$('.board-area').on("click",'.likecolor', function(){
+$('.noticereply').on("click",'.likecolor', function(){
 	var aboardNo = $('#aboardNo').val();
 	var likeNo = $(this).data('likeno');
 	var memberId = $('#memberId').val();
 	var element = $(this);
 	var likeCntEle =  $(this).next('span').children();
 	var likeCnt = likeCntEle.text();
+	console.log(aboardNo);
+	console.log(likeNo);
+	console.log(memberId);
+	console.log(element);
+	console.log(likeCntEle);
+	console.log(likeCnt);
 	
-	BoardVO = {
-			boardNo : boardNo,
+	noticeboardVO = {
+			aboardNo : aboardNo,
 			memberId : memberId,
 			likeNo : likeNo
 	}
@@ -498,7 +474,7 @@ $('.board-area').on("click",'.likecolor', function(){
 	       //요청 세팅
 	       url : "${pageContext.request.contextPath}/${clubId}/notice/likeCnt",
 	       type : "post",
-	       data : BoardVO,
+	       data : noticeboardVO,
 	       
 	       //응답 세팅
 	       dataType : "json",
@@ -525,59 +501,7 @@ $('.board-area').on("click",'.likecolor', function(){
 	
 });//좋아요 이벤트 end
 
-
-/*BoardList 받아오는 기능*/
-function getData(){
-	 
-	var memberId = $('#memberId').val();
-	var clubId = $('#clubId').val();
-	
-	console.log(memberId);
-	console.log(clubId);
-
-	var BoardVO = {
-		memberId : memberId,
-		clubId : clubId,
-	}
-		console.log(BoardVO);
-	
-
-	 $.ajax({
-    
-    //요청 세팅
-    url : "${pageContext.request.contextPath}/${clubId}/notice/getboard",
-    type : "post",
-    data : BoardVO,
-    
-    //응답 세팅
-    dataType : "json",
-    success : function(jsonResult){
-			
- 	   let boardList = jsonResult.data;
- 	   console.log(boardList);
-		
- 	   	if(boardList.length < 1){
- 	   		alert('게시물이 없습니다.');
- 	   	}
- 	   	
- 	   	 //가져온 게시물 리스트를 그려준다.
- 		 render(boardList,memberId); 	    		   
- 		 startNum +=10;
- 		 endNum += 10;
- 	   	
- 	   
-    }, //success end
-    error : function(XHR, status, error) {
-    console.error(status + " : " + error);
-    }
-				            
- });//ajax end
-
-}//get data end
-
-
-
-
+});
 /*리댓글 html 그리는 거*/
 function addReply(element,reply, type){
 
@@ -588,9 +512,9 @@ if (reply.deep > 1) {
 } else if (reply.deep === 1) {
     add += '<span><b>' + reply.memberName + '님 : </b></span>';
 }
-add += '<span>' + reply.content + '</span>';
+add += '<span>' + reply.replyContent + '</span>';
 if (reply.deep === 1) {
-    add += '<span><button class= "rreply-btn" data-boardno ="' + reply.boardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
+    add += '<span><button class= "rreply-btn" data-aboardno ="' + reply.aboardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
 }
 add += '<div class="reply-edit">';
 add += '<span>' + reply.replyDate + '</span>';
@@ -607,69 +531,5 @@ if(type == 're'){
 }//리댓글 그리는 function end
 
 
-
-
-/*AJAX로 불러온 데이터 그려주는 function*/
-function render(editlist,memberId){
-
-	
-	
-	editlist.forEach(function(board) {
-    var add = '';
-    add += '<div class="board">';
-    add += '<div class="board-header">';
-    add += '<div class="profile-pic">';
-    add += '<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
-    add += '</div>';
-    add += '<div class="board-info" data-boardno ="' + vo.boardNo +  '">';
-    add += '<span class="board-group"><strong>' + vo.clubName + '</strong></span><br>';
-    add += '<span>작성일 : ' + vo.boardDate + ' </span>';
-    add += '</div></div>';
-    add += '<div class="board-content">';
-    add += '<p>' + vo.content + '</p>';
-    if(vo.likeNo == 0){
-    add += '<span class="likecolor" data-bno = "'+vo.boardNo + '"   data-likeno = "' + vo.likeNo  + '" >♡</span>';
-    }else if(vo.likeNo > 0){
-    add += '<span class="likecolor" data-bno = "'+vo.boardNo + '"   data-likeno = "' + vo.likeNo  + '">♥</span>';
-    }
-    add += '<span>좋아요 (<span class= "likeCnt">' + vo.likeCnt + '</span>)</span>';
-    if(vo.memberId == memberId){
-        add += '<span class= "edit-board-spans">'
-        add += '<a class="edit-board-a" href="${pageContext.request.contextPath}/${clubId}/notice/editform?clubId=' + '&aboardNo=' + vo.aboardNo + '">수정</a>';
-        add += '<a class= "delete-board-a" href ="${pageContext.request.contextPath}/${clubId}/notice/delete?clubId=' + '&aboardNo=' + vo.aboardNo + '">삭제</a>'
-        add += '</span>'
-        }
-    add += '</div><div class="board-comment-list">';
-    add += '<div class="board-comment" >';
-    add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
-    add +='<div class="comment-list" id = "r' + vo.boardNo + '">'
-    
-    board.replyList.forEach(function(reply) {
-        add += '<div class="reply-area group' + reply.replyGroup  + '" id = "c'+ reply.replyNo+'">';
-        if (reply.deep > 1) {
-            add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
-        } else if (reply.deep === 1) {
-            add += '<span><b>' + reply.memberName + '님 : </b></span>';
-        }
-        add += '<span>' + reply.content + '</span>';
-        if (reply.deep === 1 & reply.stat == 1) {
-            add += '<span><button class= "rreply-btn" data-aboardno ="' + vo.aboardNo +  '"  data-replyno ="' + vo.replyNo + '">답글</button></span>';
-        }
-        add += '<div class="reply-edit">';
-        add += '<span>' + reply.replyDate + '</span>';
-        if(memberId == reply.memberId	& reply.stat == 1){
-        add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
-        }
-        add += '</div></div>';
-    });
-    add += '</div>'
-    add += '<div class="write-comment">';
-    add += '<div class="new-content"><textarea class= "comment-content"></textarea><button class="add-reply"  data-aboardno ="' + vo.aboardNo +  '">등록</button></div>';
-    add += '</div></div></div></div>';
-    
-    $('.board-area2').append(add);
-});
-
-}
   </script>
 </html>

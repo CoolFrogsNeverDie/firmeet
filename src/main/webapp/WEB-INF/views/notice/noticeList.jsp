@@ -50,6 +50,21 @@
           <div class="content-left">
 	<!-- 여기부터 -->
 	
+	
+	<form name="form1" method="post" action="${pageContext.request.contextPath }/${clubId }/notice/noticelist">
+		<select name="searchOption">
+			<option value="all"
+				<c:out value="${map.searchOption == 'all' ? 'selected' : ''}"/>>
+				제목+이름+제목</option>
+			<option value="userName"
+				<c:out value="${map.searchOption == 'memberId' ? 'selected' : ''}"/>>이름</option>
+			<option value="bcontent"
+				<c:out value="${map.searchOption == 'boardContent' ? 'selected' : ''}"/>>내용</option>
+			<option value="title"
+				<c:out value="${map.searchOption == 'title' ? 'selected' : ''}"/>>제목</option>
+		</select> <input name="keyword" value="${map.keyword }"> <input type="submit" value="조회">
+	</form>
+	
 	<table class="table1000" border="1">
 		<tr>
 			<th>번호</th>
