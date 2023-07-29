@@ -222,4 +222,64 @@
     
     </select>
     
+    
+    <!-- <select id="selectList4" parameterType="map" resultType="com.firmeet.vo.ClubVo">
+    	<![CDATA[
+    		select ort.rn,
+      	   	       ort.clubId,
+      	   	       ort.clubName,
+      	   	       ort.intro1,
+      	   	       ort.img2    			
+    		from ( select rownum rn,
+    			   		  ot.clubId,
+    			   		  ot.clubName,
+    			   		  ot.intro1,
+		    			  ot.img2
+		    	 from ( select a.clubId,
+		    			   	   a.clubName,
+		    			   	   a.intro1,
+		    			   	   a.img2
+		    		    from club a , club_category b
+		    		    where a.clubId = b.clubId
+		    		]]>  
+		    			<if test='keyword!=""and keyword !=null'>
+		    				and a.clubName like '%'|| #{keyword} ||'%'
+		    			</if>
+		    		  
+		    		  
+		    		 <![CDATA[ 
+		    		  oreder by clubId desc ) ot
+		    		    	) ort
+		    where rn>=#{startRnum}
+		    and rn<=#{endRnum}
+    					]]>
+    	
+    	
+    </select> -->
+    
+    
+    
+    
+    
+    
+    <insert id="insertQList" parameterType="com.firmeet.vo.ClubQnaVo">
+    		<![CDATA[
+    			insert into club_qna (qnaNo,clubId,memberId,qnaCotent,qnaDate)
+    			values(SEQ_CLUBQNANO.nextval,#{clubId},#{memberId},#{qnaCotent},sysdate)
+    		
+    		]]>
+    </insert>
+    
+    <select id="qnaList" parameterType="int" resultType="com.firmeet.vo.ClubQnaVo">
+    		<![CDATA[
+    		
+    			select clubId,memberId,qnaCotent,answerContent
+    			from club_qna
+    			where clubId = #{clubId}
+    		
+    		]]>
+    		
+    		
+    </select>
+    
 </mapper>

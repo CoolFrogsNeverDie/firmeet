@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
+import com.firmeet.vo.ClubQnaVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.TagVo;
 
@@ -62,6 +63,31 @@ public class ClubDao {
 		 List<ClubVo> clubVo = session.selectList("club.clubSum");
 		 return clubVo;
 	 }
+	 
+	 public int searchMainList2(String keyword){
+		 Map<String, String> bMap = new HashMap<String, String>();
+		 bMap.put("keyword", keyword);
+		 
+		 int totalCount = session.selectOne("club.totalCount2", bMap);
+		return totalCount;
+	 }
+	 
+	 public List<ClubVo> clubList2(int startRnum , int endRnum, String keyword) {
+		 System.out.println("BoardDao.selectList4()");
+			
+		Map<String, Object> bMap = new HashMap<String, Object>();
+		bMap.put("startRnum", startRnum);
+		bMap.put("endRnum", endRnum);
+		bMap.put("keyword", keyword);
+			
+		List<ClubVo> clubList = session.selectList("club.selectList4", bMap);
+			
+			return clubList;
+		 
+	 }
+	 
+	 
+	 
 	 public ClubVo clubInfo(int clubId) {
 		 
 		 ClubVo clubVo= session.selectOne("club.getClubVo", clubId);
@@ -130,4 +156,20 @@ public class ClubDao {
 		return list;
 	}
 	 
+	public void clubQ(ClubQnaVo clubQnaVo) {
+		System.out.println("ClubDao.ClubQList()");
+		System.out.println(clubQnaVo);
+		session.insert("club.insertQList", clubQnaVo);
+		
+	}
+	
+	public List<ClubQnaVo> qnaList(int clubId) {
+		System.out.println("ClubDao.qnaList()");
+		System.out.println(clubId);
+		
+		List<ClubQnaVo> qnaList = session.selectList("club.qnaList",clubId);
+		return qnaList;
+	}
+	
+	
 }

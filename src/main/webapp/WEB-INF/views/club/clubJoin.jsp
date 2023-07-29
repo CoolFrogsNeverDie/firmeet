@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -311,20 +312,37 @@ a{text-decoration: none; color: #212121;}
             </div>
 
             <!--문의사항 입력 영역(문의하기 버튼 눌러야 보임)-->
+            <form action = "${pageContext.request.contextPath }/club/clubQna/${clubVo.clubId}">
             <div class="qna-write-area">
-                <div  class= "qna-write"><textarea>문의사항 입력창</textarea><button type="submit" class="qna-write-btn">문의 등록</button></div>
+                <div  class= "qna-write"><textarea name="qnaCotent" >문의사항 입력창</textarea>
+                <button type="submit" class="qna-write-btn" >문의 등록</button>
+                </div>
                 <div></div>
             </div>
-            <!--문의사항 입력 영역-->
-
+            <!-- <button type="button" class="ans-btn">답변하기</button>
+            <div class="ans-write-area">
+                <div  class= "ans-write"><textarea name="answerContent" >답변사항 입력창</textarea>
+                <button type="submit" class="ans-write-btn" >답변입력</button>
+                </div>
+                <div></div>
+            </div> -->
+           
+            
+            </form>
+            
+    
+			 <c:forEach items="${qnaList}" var ="qna">
             <!--반복될 QNA 영역-->
-            <div class="qna-content-area">
-                <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
-                <div class="qna-content content"><p>문의<p></div>
-            </div>
-            <div class="qna-answer-area">
-                <div class="answer-content content"><p>답변</p></div>
-            </div>
+	            <div class="qna-content-area">
+	                <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
+	                <div class="qna-content content">${qna.qnaCotent}</div>
+	            </div>
+		         <c:if test="${qna.answerContent !=null}">
+		            <div class="qna-answer-area">
+		                <div class="answer-content content"><p>${qna.answerContent}</p></div>
+		            </div>
+		         </c:if>
+            </c:forEach>
             <!--반복될 QNA 영역 end-->
         
         </div>
@@ -383,8 +401,29 @@ a{text-decoration: none; color: #212121;}
         font-size: 15px; 
         margin-top: 11px;
     }
+    
+    .ans-btn{
+    
+    	right:10px;
+        float: right;
+        width: 100px;
+        height: 30px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 15px; 
+        margin-top: 11px;
+    }
 
     .qna-write-area{
+        width: 60vw;
+        height: 180px;
+        border: #e0e0e0;
+        display: none;
+    }
+    
+     .ans-write-area{
         width: 60vw;
         height: 180px;
         border: #e0e0e0;
@@ -397,7 +436,27 @@ a{text-decoration: none; color: #212121;}
         width: 50vw;
         height: 130px;
     }
+     .ans-write{
+        float: right;
+        margin-right: 2.5%;
+        margin-top: 2%;
+        width: 50vw;
+        height: 130px;
+    }
+    
+    
     .qna-write-btn{
+        border: none;
+        height: 30px;
+        background-color: #3498db;
+        color: white;
+        margin: 1%;
+        margin-top:105px;
+        position:absolute;
+        border-radius: 5px;
+    }
+    
+    .ans-write-btn{
         border: none;
         height: 30px;
         background-color: #3498db;
@@ -411,7 +470,19 @@ a{text-decoration: none; color: #212121;}
         width:85%;
         height: 100%;
     }
+    
+    .ans-write > textarea{
+        width:85%;
+        height: 100%;
+    }
     .qna-content-area {
+        width: 58vw;
+        height: 130px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    
+    .ans-content-area {
         width: 58vw;
         height: 130px;
         margin: 0 auto;
@@ -615,6 +686,9 @@ a{text-decoration: none; color: #212121;}
 
 <!--쿼리문용-->
 <script>
+
+
+
 $('.qna-btn').on("click", function(){
     
     var view =  $('.qna-write-area').css("display");
@@ -626,6 +700,23 @@ $('.qna-btn').on("click", function(){
     }
 
 }); //문의하기 버튼 눌리면
+
+$('.ans-btn').on("click", function(){
+    
+    var view =  $('.ans-write-area').css("display");
+
+    if(view == "none"){
+        $('.ans-write-area').css("display", "block");
+    }else{
+        $('.ans-write-area').css("display", "none");
+    }
+
+}); //문의하기 버튼 눌리면
+
+
+	
+
+
 </script>
 
 

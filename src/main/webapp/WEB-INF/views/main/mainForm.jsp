@@ -368,76 +368,22 @@
                 </a>
             </li>
         </c:forEach>
-          <!--   <li>
-                <a href="">
-                    <img src="" alt="사진 2" class="meetPhoto">
-                    <p class="meetTitle">모임 제목 제목</p>
-                    <p class="meetContent"> 모임 내용내용 내용 내용내용  내용내용내용 내용내용내용 내용</p>
-                </a>
-            </li>
-            <li>
-                <img src="" alt="사진 3" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 4" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 5" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 6" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 7" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 8" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 9" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 10" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 11" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 12" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 13" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-            <li>
-                <img src="" alt="사진 14" class="meetPhoto">
-                <p class="meetTitle">모임 제목 제목</p>
-                <p class="meetContent"> 모임 내용내용 내용 내용내용 내용내용내용 내용내용내용 내용</p>
-            </li>
-
-             -->
-            
+          <%-- <div id="paging">
+				<ul>
+					<c:if test="${pMap.prev == true}">
+						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.startPageBtnNo-1}&${param.keyword}">◀</a></li>
+							</c:if>
+								
+					<c:forEach begin="${pMap.startPageBtnNo}" end="${pMap.endPageBtnNo}"  step="1"  var="page">
+						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${page}&keyword=${param.keyword}">${page}</a></li>
+					</c:forEach>
+								
+					<c:if test="${pMap.next == true}">
+						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.endPageBtnNo+1}&${param.keyword}">▶</a></li>
+					</c:if>
+				</ul>
+				<div class="clear"></div>
+			</div> --%>
         </ul>
     </div>
 </body>

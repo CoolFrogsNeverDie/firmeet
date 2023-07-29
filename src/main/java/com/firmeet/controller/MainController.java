@@ -1,6 +1,7 @@
 package com.firmeet.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,20 +45,23 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/mainForm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainList(Model model, HttpSession session) {
+	public String mainList(@RequestParam(value="crtPage", required=false,defaultValue="1")int crtPage,
+						   @RequestParam(value="keyword", required=false,defaultValue="") String keyword,
+						   Model model, HttpSession session) {
 		List<TagVo> tagList = memberService.tagList();
 		model.addAttribute("tagList", tagList);
 		//System.out.println(tagList);
-		
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
 		//System.out.println(cateList);
-		
+			
 		
 		ClubVo clubVo = new ClubVo();
 		System.out.println(clubVo.getClubId());
 		List<ClubVo> clubList = clubService.clubList();
 		model.addAttribute("clubList",clubList); 
+		//Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
+		//model.addAttribute("pMap",pMap);
 		System.out.println(clubList);
 		 
 		return "/main/mainForm";

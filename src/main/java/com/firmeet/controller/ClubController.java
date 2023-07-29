@@ -22,6 +22,7 @@ import com.firmeet.service.MemberService;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
+import com.firmeet.vo.ClubQnaVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.MemberVo;
@@ -114,11 +115,25 @@ public class ClubController {
 	}
 
 	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubForm(@PathVariable int clubId, Model model) {
+	public String clubForm(@PathVariable int clubId, Model model,HttpSession session) {
 		System.out.println("ClubController.clubForm()");
 		System.out.println(clubId);
 		ClubVo clubVo = clubService.clubInfo(clubId);
 		model.addAttribute("clubVo" , clubVo);
+		
+		List<ClubQnaVo>	 qnaList = clubService.qnaList(clubId);
+		model.addAttribute("qnaList",qnaList);
+		
+		MemberVo member = (MemberVo)session.getAttribute("member");
+		String memberId = null;
+		memberId = member.getMemberId();
+		
+		System.out.println(clubId);
+		System.out.println(memberId);
+		ClubVo memberLv = clubService.checkMemLevel(memberId, clubId);
+		model.addAttribute("memberLv" , memberLv);
+		System.out.println(memberLv);
+		
 	 return "/club/clubJoin";
 	}
 
@@ -175,6 +190,21 @@ public class ClubController {
 		jsonResult.success(clubService.getRankTag(clubVO));
 	
 		return jsonResult;
+	}
+	
+	@RequestMapping(value = "/clubQna/{clubId}", method={RequestMethod.POST, RequestMethod.GET})
+	public String clubQna(@ModelAttribute ClubQnaVo clubQnaVo,
+							@PathVariable int clubId, HttpSession session) {
+		System.out.println("ClubController.clubQna()");
+		MemberVo member = (MemberVo)session.getAttribute("member");
+		clubQnaVo.setClubId(clubId);
+		clubQnaVo.setMemberId(member.memberId);
+		System.out.println(clubQnaVo);
+		
+		clubService.clubQ(clubQnaVo);
+		
+		return "redirect:/club/joinForm/{clubId}";
+		
 	}
 	
 

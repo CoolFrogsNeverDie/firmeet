@@ -4,7 +4,9 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.dao.ClubDao;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
+import com.firmeet.vo.ClubQnaVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
@@ -68,6 +71,54 @@ public class ClubService {
 		List<ClubVo> clubVo = clubDao.clubList();
 		return clubVo;
 	}
+	
+	
+	public Map<String, Object> clubList2(int crtPage, String keyword) {
+		crtPage = (crtPage>=1) ? crtPage : (crtPage=1);
+		int listCnt = 25;
+		
+		int startRnum = (crtPage-1)*listCnt+1;
+		int endRnum = (startRnum + listCnt)-1;
+		
+		List<ClubVo> clubList = clubDao.clubList2(startRnum,endRnum,keyword);
+		
+		int totalCount = clubDao.searchMainList2(keyword); 
+		
+		int pageBtnCount = 5;
+		int endPageBtnNo = (int)Math.ceil(crtPage/(double)pageBtnCount) * pageBtnCount;
+		int startPageNo = (endPageBtnNo-pageBtnCount)+1;
+		
+		//다음 화살표  true  false
+		boolean next = false;
+		if(endPageBtnNo * listCnt < totalCount) {  //10 * 10 < 123
+				next = true;
+		}else {
+				next = false;
+				//끝 버튼 번호 endPageBtnNo 다시 계산
+				endPageBtnNo =   (int)Math.ceil(totalCount/(double)listCnt);
+			}
+				
+		//이전 화살표
+		boolean prev = false;
+		if(startPageNo != 1) {
+			prev = true;
+		}
+		
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		pMap.put("prev", prev);
+		pMap.put("startPageBtnNo", startPageNo);
+		pMap.put("endPageBtnNo", endPageBtnNo);
+		pMap.put("next", next);
+		pMap.put("clubList", clubList);
+		
+		return pMap;
+		
+		
+		
+	}
+	
+	
+	
 	public ClubVo clubInfo(int clubId) {
 		ClubVo clubVo = clubDao.clubInfo(clubId);
 		return clubVo;
@@ -178,6 +229,25 @@ public class ClubService {
 		
 		
 	}
+	
+	
+	public void clubQ(ClubQnaVo clubQnaVo) {
+		System.out.println("ClubService.clubQ()");
+		System.out.println(clubQnaVo);
+		
+		clubDao.clubQ(clubQnaVo);
+		
+	}
+	
+	public List<ClubQnaVo> qnaList(int clubId) {
+		System.out.println("ClubService.qnaList()");
+		System.out.println(clubId);
+		List<ClubQnaVo> qnaList = clubDao.qnaList(clubId);
+		return qnaList;
+		
+	}
+	
+	
 	
 }
 
