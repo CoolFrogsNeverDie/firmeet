@@ -200,9 +200,11 @@ public class NoticeBoardController {
 		System.out.println("getPayresultNo"+vo.getPayresultNo());
 		//String url = "/"+clubId+"/notice/payresult?payresultNo="+vo.getPayresultNo();
 		
+		//return "redirect:/"+url;
+		
 		return jsonResult;
 	}
-
+/*
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/payresult")
 	@ResponseBody
@@ -219,7 +221,7 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
 	}
-
+*/
 	//----------------------------------------------------------------------------------------------
 	
 	@ResponseBody

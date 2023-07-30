@@ -91,7 +91,8 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.payupdate",vo);
 	}
 	
-	public PayresultVO payresult(NoticeBoardVO vo) {
+	public NoticeBoardVO payresult(PayresultVO vo) {
+		// TODO Auto-generated method stub
 		System.out.println("notice payresult dao 확인"+vo);
 		return sql.selectOne("noticeboard.payresult", vo);
 	}
@@ -111,5 +112,6 @@ public class NoticeBoardDAO {
 	public NoticeBoardVO getLike(NoticeBoardVO vo) {
 		return sql.selectOne("noticeboard.getLike", vo);
 	}
+
 
 }

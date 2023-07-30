@@ -91,23 +91,22 @@
 		values(#{payresultNo}, #{meetNo}, #{memberId})
 	</insert>
 	
-<!-- 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+ 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
 		<![CDATA[
 			select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 			, pr.payresultNo, pr.paycount
 			from aboard a, club c, member m, meet_name mn, payresult pr
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
-			and pr.payresultNo = #{payresultNo}
 		]]>
 	</select>
- -->
- 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+
+<!--  	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
 		select
 			 count(*)
 		from payresult
 		where meetNo = #{meetNo}
-	</select>
+	</select> -->
 
 	<update id="payupdate" parameterType="noticeboard">
 		<![CDATA[
