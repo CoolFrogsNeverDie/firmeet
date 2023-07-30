@@ -30,7 +30,7 @@
             <div class="diary-topbar">
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                     alt="프로필사진" />
-                <h1>${club.clubName} 자유게시판</h1>
+                <h1>${club.clubName}</h1>
                 <div class= "board-edit">
                  <div class= "search-board"> 
              	<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">

@@ -29,7 +29,7 @@
             <div class="diary-topbar">
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png"
                     alt="프로필사진" />
-                <h1>${member.memberName}의 게시판</h1>
+                <h1>${member.memberName}님의 다이어리</h1>
             </div>
             <!--/diary-topbar-img-->
             <div class="diary-subbar">

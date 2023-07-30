@@ -82,7 +82,7 @@
       <!--/content-area-->
     </div>
         <!--/diary-area-->
-	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+	<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
     <!--/wrap-->
   
   <!-- 일정 등록모달창-->
