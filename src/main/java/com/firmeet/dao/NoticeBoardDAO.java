@@ -87,13 +87,13 @@ public class NoticeBoardDAO {
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public PayresultVO payresult(PayresultVO vo) {
-		System.out.println("notice payresult dao 확인"+vo);
-		return sql.selectOne("noticeboard.payresult", vo);
-	}
-	
 	public void payupdate(PayresultVO vo) {
 		sql.update("noticeboard.payupdate",vo);
+	}
+	
+	public PayresultVO payresult(NoticeBoardVO vo) {
+		System.out.println("notice payresult dao 확인"+vo);
+		return sql.selectOne("noticeboard.payresult", vo);
 	}
 	
 	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {

@@ -202,13 +202,16 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
-/*
+
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/payresult")
 	@ResponseBody
 	public String payresult(@ModelAttribute NoticeBoardVO vo, ClubVo clubvo, Model model) {
 		model.addAttribute("clubId", clubvo.getClubId());
-		
+		model.addAttribute("aboradNo", vo.getAboardNo());
+		model.addAttribute("memberId", vo.getMemberId());
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("payresultNo", vo.getPayresultNo());
 		System.out.println("notice payresult 확인");
 		System.out.println("notice getPayresultNo 확인"+vo.getPayresultNo());
 		
@@ -216,7 +219,7 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
 	}
-*/
+
 	//----------------------------------------------------------------------------------------------
 	
 	@ResponseBody

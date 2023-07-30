@@ -612,7 +612,7 @@ $(document).ready(function () {
 			        			console.log(data.paycount);
 			        			console.log(data.payresultNo); 
 			        			//$("#paybtn").hide();
-			        			//window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult?payresultNo='+data.payresultNo;
+			        			window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult';
 			        		}else{
 			        			$("#x").html("사용불가");
 			        		}

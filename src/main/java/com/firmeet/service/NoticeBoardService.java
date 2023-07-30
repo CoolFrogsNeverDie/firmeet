@@ -110,11 +110,11 @@ public class NoticeBoardService {
 		System.out.println("확인확인"+voteResultvo);
 		System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
 		
-		vo.setVote1Cnt(voteResultvo.getVote1Cnt());
-		vo.setVote2Cnt(voteResultvo.getVote2Cnt());
-		vo.setVote3Cnt(voteResultvo.getVote3Cnt());
-		vo.setVote4Cnt(voteResultvo.getVote4Cnt());
-		vo.setVote5Cnt(voteResultvo.getVote5Cnt());
+		vo1.setVote1Cnt(voteResultvo.getVote1Cnt());
+		vo1.setVote2Cnt(voteResultvo.getVote2Cnt());
+		vo1.setVote3Cnt(voteResultvo.getVote3Cnt());
+		vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
+		vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
 		
 		return vo1;
 	}
@@ -168,10 +168,26 @@ public class NoticeBoardService {
 	public PayresultVO pay(PayresultVO vo) {
 		System.out.println("notice payinsert 확인");
 		dao.pay(vo);
-		vo.setPaycount(vo.getPaycount()+1);
+		//vo.setPaycount(vo.getPaycount()+1);
 		dao.payupdate(vo);
-		dao.payresult(vo);
 		return vo;
+	}
+	
+	public NoticeBoardVO payresult(NoticeBoardVO vo) {
+		System.out.println("notice voteResult 확인");
+		
+		NoticeBoardVO vo1 = dao.editlistgroup(vo);
+		
+		System.out.println("보트넘버확인"+vo.getVoteNo());
+		
+		PayresultVO pvo = dao.payresult(vo);
+		System.out.println("확인확인"+pvo);
+		System.out.println("vo.getVote1Cnt()"+pvo.getPaycount());
+		
+		vo1.setPayresultNo(pvo.getPayresultNo());
+		vo1.setPaycount(pvo.getPaycount());
+		
+		return vo1;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------

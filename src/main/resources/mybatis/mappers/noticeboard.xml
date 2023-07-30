@@ -40,17 +40,6 @@
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
 	
-	<select id="voteresult" resultType="com.firmeet.vo.VoteResultVO" parameterType="com.firmeet.vo.VoteResultVO">
-		select
-			 sum(case when choice = 1 then 1 else 0 end) as vote1cnt
-			,sum(case when choice = 2 then 1 else 0 end) as vote2cnt
-			,sum(case when choice = 3 then 1 else 0 end) as vote3cnt
-			,sum(case when choice = 4 then 1 else 0 end) as vote4cnt
-			,sum(case when choice = 5 then 1 else 0 end) as vote5cnt
-		from voteResult
-		where voteNo = #{voteNo}
-	</select>
-	
 	<insert id="editwritevote" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
 			select seq_voteNo.nextval from dual
@@ -63,6 +52,17 @@
 		insert into voteResult(voteResult, voteNo, memberId, choice, voteDate)
 		values(seq_voteResultNo.nextval, #{voteNo}, #{memberId}, #{choice}, SYSDATE)
 	</insert>
+	
+	<select id="voteresult" resultType="com.firmeet.vo.VoteResultVO" parameterType="com.firmeet.vo.VoteResultVO">
+		select
+			 sum(case when choice = 1 then 1 else 0 end) as vote1cnt
+			,sum(case when choice = 2 then 1 else 0 end) as vote2cnt
+			,sum(case when choice = 3 then 1 else 0 end) as vote3cnt
+			,sum(case when choice = 4 then 1 else 0 end) as vote4cnt
+			,sum(case when choice = 5 then 1 else 0 end) as vote5cnt
+		from voteResult
+		where voteNo = #{voteNo}
+	</select>
 	
 	<insert id="editgroupwrite" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
@@ -91,7 +91,7 @@
 		values(#{payresultNo}, #{meetNo}, #{memberId})
 	</insert>
 	
-	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+<!-- 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
 		<![CDATA[
 			select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
@@ -100,6 +100,13 @@
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
 			and pr.payresultNo = #{payresultNo}
 		]]>
+	</select>
+ -->
+ 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+		select
+			 count(*)
+		from payresult
+		where meetNo = #{meetNo}
 	</select>
 
 	<update id="payupdate" parameterType="noticeboard">
