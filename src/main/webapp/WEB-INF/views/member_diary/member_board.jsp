@@ -51,7 +51,7 @@
                 </div>
                 
                 <!--/content-left-->
-                <div class="content-right">
+                <div class="content-right mem-right">
                     <div class="board-area">
 						<div class= "club-category"><h4><strong>&#128221;&nbsp;&nbsp;${category}</strong></h4></div>
                         <div class="board-area2" >

@@ -61,7 +61,7 @@
             <!--/diary-subbar-->
             <div class="content-area">
 
-                <div class="content-right">
+                <div class="content-right calendar-right">
                     <div class="calendar-area">
                     	<div class="forCalendar">
             				<div id='club-calendar'></div>

@@ -72,7 +72,7 @@ dd:hover{
 .content-right {
     /* margin-left: 16px; */
     margin-right: px;
-    margin-left: -5px;
+/*     margin-left: -5px; */
     height: 619px;
     display: inline-block;
     /* margin-top: 10px; */
@@ -80,6 +80,13 @@ dd:hover{
     position: relative;
 }
 
+.mem-right{
+	    margin-left: -5px;
+}
+
+.calendar-right{
+	margin-left:0px;
+}
 .board-area{
     width: 100%;
     height: 619px;

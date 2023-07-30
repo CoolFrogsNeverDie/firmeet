@@ -16,10 +16,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
   <!--CSS-->
-  <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-      <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
+  <link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/content2.css" type="text/css" />
   <!--풀 캘린더 CSS-->
- 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/memcalendar.css" type="text/css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
   <!--풀 캘린더 JS-->
   <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
@@ -50,17 +50,20 @@
         <h1>${memberId}님의 다이어리</h1>
       </div>
       <!--/diary-topbar-img-->
-      <div class="diary-subbar memcal-subbar">
+      <div class="diary-subbar">
+        <div>
+          <h4>&#128197;&nbsp;&nbsp;${member.memberId}님의 달력</h4>
           <input type ="hidden" value ="${member.memberId}" id ="memId">
-        <div class="memcalendar-array">
-			<select  id ="select-club"   class ="select-sche-option">
+        </div>
+        <div class="calendar-array">
+			<select id ="select-club">
 				<option value="-99">전체</option>
 				<option value ="-88">나의 일정</option>
 				<c:forEach items ="${joinClubList}" var ="club">
 					<option value ="${club.clubId}">${club.clubName}</option>
 				</c:forEach>
        		</select>
-          <select id = "select-array" class= "select-sche-option2">
+          <select id = "select-array">
             <option value ="-99">전체</option>
             <option value = "2">결제공지</option>
             <option value ="3">일정</option>
@@ -69,20 +72,21 @@
       </div>
       <!--/diary-subbar-->
       <div class="content-area">
-        <div class="content-right calendar-right">
-       <div class="calendar-area">
+        <div class="content-left">
+
           <div class="forCalendar">
-            <div id='mem-calendar'></div>
+            <div id='calendar' style="width: 95%; height: 100%;"></div>
+
           </div>
-	</div>
+
           <!--/calendar-area-->
         </div>
-        <!--/content-right-->
+        <!--/content-left-->
       </div>
       <!--/content-area-->
     </div>
         <!--/diary-area-->
-	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/member_side_nav.jsp"></c:import>
     <!--/wrap-->
   
   <!-- 일정 등록모달창-->
@@ -182,7 +186,7 @@
   </div>
   <div class="per-pop-body">
     <div class="per-pop-content">
-      <div class="body-titlebox"><h4><strong>나의 일정</strong></h4></div>
+      <div class="body-titlebox"><h5><strong>나의 일정</strong></h5></div>
       <table id = "schedule-table">
         <tr>
           <th>일정</th>
@@ -235,8 +239,8 @@
             
           </div>
        <form action="${pageContext.request.contextPath}/calendar/member/edit-persche" method = "GET" class= "edit-persche">
-            <input type="hidden" id = "edit-address1" name = "address1" value = "-1">
-            <input type="hidden" id = "edit-address2" name = "address2" value ="-1">
+            <input type="text" id = "edit-address1" name = "address1" value = "-1">
+            <input type="text" id = "edit-address2" name = "address2" value ="-1">
             <input type="hidden" name = "memberId" value = "${member.memberId}" id = "edit-memId">
             <input type="hidden" name = "perScheNo" id = "edit-perScheNo">
           <div class="body-contentbox">
@@ -463,6 +467,9 @@ function relayout3() {
 </script>
 
 
+    <footer>
+    	Copyright (C) 2023 어리쥬 all rights reserved.
+    </footer>
 <!-- 지도 JS 영역 -->
 <style>
 <!--지도-->
@@ -831,7 +838,7 @@ function reset_popup2_address(){
 /*----------------------------캘린더 초기화 -----------------------------------*/
 
 function render(){
-	    calendarEl = $('#mem-calendar')[0];
+	    calendarEl = $('#calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
 	             left: '',
@@ -1009,7 +1016,7 @@ function render(){
 	 		  	load_map2(sche.address1,sche.address2);
 	 		   if(sche.address1 != -1){ //address가 있는 일정일 경우 길찾기 버튼 활성화 + 컬러 black으로 변경 
 	 			  $('.see-place').prop('disabled', false);
-	 			  $('.see-place').css("background-color","#1eafcc");
+	 			  $('.see-place').css("background-color","black");
 		 		  $('#see-map').data('x', sche.address1);
 		 		  $('#see-map').data('y', sche.address2);
 	 		   }else{ //address 정보 없는 일정일 경우 길찾기 버튼 비활성화 + 컬러 gray로 변경
