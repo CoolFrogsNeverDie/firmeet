@@ -15,7 +15,7 @@
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet"  type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/board_test.css" rel="stylesheet"  type="text/css" />
     <!--모달-->
 </head>
 
@@ -453,7 +453,7 @@
             add += '<div class="board">';
             add += '<div class="board-header">';
             add += '<div class="profile-pic">';
-            add += '<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
+            add += '<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
             add += '</div>';
             add += '<div class="board-info" data-boardno ="' + board.boardNo +  '">';
             add += '<span class="board-group"><strong>' + board.clubName + '</strong></span><br>';

@@ -128,8 +128,8 @@ public class BoardController {
 		System.out.println("멤버 게시판" + boardVO);
 		Map<String, Object> info = boardService.getPerBoardInfo(boardVO);
 		//삭제 예정
-
 		
+		System.out.println("가져오는 join List 재확인" + info.get("joinList"));
 		model.addAttribute("joinList",info.get("joinList"));
 		model.addAttribute("category",info.get("category"));
 		model.addAttribute("clubId",clubId);

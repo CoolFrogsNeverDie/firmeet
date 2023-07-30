@@ -1,85 +1,83 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-        <%@ include file="../include/topnav.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>동호회 달력</title>
-  <!--제이쿼리-->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <!--부트스트랩-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개인 게시판</title>
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
+  	<!--풀 캘린더 CSS-->
+  	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
+  	<!--풀 캘린더 JS-->
+  	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
+<style>
 
-  <!--CSS-->
-  <link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/content2.css" type="text/css" />
-  <!--풀 캘린더 CSS-->
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
-  <!--풀 캘린더 JS-->
-  <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
-  
-  
-  <style>
     .fc .fc-daygrid-day-top {
       display: block;
     }
-  </style>
+</style>
 </head>
 
+
 <body>
-  <!----------------------------------------- top Navigation ----------------------------------------->
-  <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-  <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
-  <!-- 페이지 콘텐츠 -->
 
-  <div class="wrap">
-    <div class="diary-area">
-      <div class="diary-topbar">
-        <img class="diary-topbar-img" src="./asset/pro.jpg" alt="프로필사진" />
-        <h1>${club.clubName}</h1>
-      </div>
-      <!--/diary-topbar-img-->
-      <div class="diary-subbar">
-        <div>
-          <h4>&#128197;&nbsp;&nbsp;${club.clubName} 달력</h4>
+    <!-- // 상단 내비게이션 바 -->
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+    <!-- 페이지 콘텐츠 -->
+    <div class="wrap">
+        <div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+            <div class="diary-topbar">
+                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
+                    alt="프로필사진" />
+                <h1>${club.clubName}</h1>
+                <div class= "board-edit">
+             
+             </div>
+            </div>
+            <!--/diary-topbar-img-->
+          <form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST"> 
+                <input type ="hidden" value = "${member.memberId}" name ="memberId">
+             	<input type ="hidden" value = "${club.clubId}" name ="clubId">
+            <div class="diary-subbar">
+		         <div class="calendar-array">
+		          <select id = "select-array">
+		            <option value ="-99">전체</option>
+		            <option value = "2">결제공지</option>
+		            <option value ="3">일정</option>
+		          </select>
+		        </div>
+             </div>
+            <!--/diary-subbar-->
+            <div class="content-area">
+
+                <div class="content-right">
+                    <div class="calendar-area">
+                    	<div class="forCalendar">
+            				<div id='club-calendar'></div>
+          				</div>
+                    </div>
+                    <!--board-area-->
+                </div>
+                <!--/content-right-->
+            </div>
+            <!--/content-area-->
+          </form>
         </div>
-        <div class="calendar-array">
-          <select id = "select-array">
-            <option value ="-99">전체</option>
-            <option value = "2">결제공지</option>
-            <option value ="3">일정</option>
-          </select>
-        </div>
-      </div>
-      <!--/diary-subbar-->
-      <div class="content-area">
-        <div class="content-left">
-
-          <div class="forCalendar">
-            <div id='calendar' style="width: 95%; height: 100%;"></div>
-
-          </div>
-
-          <!--/calendar-area-->
-        </div>
-        <!--/content-left-->
-      </div>
-      <!--/content-area-->
-    </div>
-    <!--/diary-area-->
-           <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+        <!--/diary-area-->
+<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
     <!--/wrap-->
 </body>
-    <footer>
-    	Copyright (C) 2023 어리쥬 all rights reserved.
-    </footer>
 <script>
 
 //calendar 객체 전역변수 설정
@@ -116,7 +114,7 @@ $('.forCalendar').on("click",'button', function(){
 
 	//캘린더 그리는 메서드
 	function render(){
-	    calendarEl = $('#calendar')[0];
+	    calendarEl = $('#club-calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
 	             left: '',
@@ -125,10 +123,7 @@ $('.forCalendar').on("click",'button', function(){
 	           },
 		    locale: 'ko',
 	    	initialView: 'dayGridMonth',
-	    	selectable: true
-	    	
-	    	
-	    	
+	    	selectable: false
 	    });
 
 	    calendar.render();
@@ -204,4 +199,5 @@ $('.forCalendar').on("click",'button', function(){
 
 
 </script>
+
 </html>

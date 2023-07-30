@@ -164,13 +164,25 @@ a:hover{
     right: 20px;
     color: #494949;
 }
-.board-area .reply-delete{
-	color: red;
-	cursor: pointer;
-}
-.reply-area .re{
-	color: blue;
-}
+
 .navbar {
 	position:relative;
+}
+
+
+<!-- 취소 등록 버튼-->
+
+.edit-close{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 35px;
+    position: relative;
+    right: -300px;
+    /* border: 1px solid #ccc; */
+    font-size: 18px;
+    background-color: #1eafcc;
+    color: white;
+    border-radius: 10px;
 }

@@ -14,8 +14,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet"  type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/board_test.css" rel="stylesheet"  type="text/css" />
     <!--모달-->
 </head>
 
@@ -27,25 +27,29 @@
     <div class="wrap">
         <div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${clubId}">
             <div class="diary-topbar">
-                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
+                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png"
                     alt="프로필사진" />
                 <h1>${member.memberName}의 게시판</h1>
             </div>
             <!--/diary-topbar-img-->
             <div class="diary-subbar">
-                <h4>&#9997;&nbsp;&nbsp;내가 쓴 게시판</h4>
+                <h4>${category}</h4>
             </div>
             <!--/diary-subbar-->
             <div class="content-area">
                 <div class="content-left">
-                    <dl>
+                    <dl class= "menu-list">
                         <dt class="all-category"><span></span><a href = "${pageContext.request.contextPath}/board/member/${member.memberId}/-99">전체보기</a></dt>
                         <dt><span></span>가입한 동호회</dt>
                         <c:forEach items="${joinList}" var ="club">
-                        <dd class= "join-club-list" data-clubid = "${club.clubId}"><a href = "${pageContext.request.contextPath}/board/member/${member.memberId}/${club.clubId}">-  ${club.clubName}</a></dd>
+                       		 <dd class= "join-club-list" data-clubid = "${club.clubId}">
+                        		<a href = "${pageContext.request.contextPath}/board/member/${member.memberId}/${club.clubId}">&nbsp&nbsp&nbsp${club.clubName}</a>
+                        	</dd>
                         </c:forEach>
                     </dl>
+      
                 </div>
+                
                 <!--/content-left-->
                 <div class="content-right">
                     <div class="board-area">
@@ -61,14 +65,14 @@
             <!--/content-area-->
         </div>
         <!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/member_side_nav.jsp"></c:import>
-    <!--/wrap-->
+<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
 </body>
-    <footer>
-    	Copyright (C) 2023 어리쥬 all rights reserved.
-    </footer>
-
 <script>
+
+	$('.all-category').on("click", function(){
+		window.location("${pageContext.request.contextPath}/board/member/${member.memberId}/-99");
+	})
+
 	
 		/*------------ 기본 댓글 등록 버튼 클릭 이벤트 ------------*/
 		$('.board-area').on("click",'.add-reply', function(){
@@ -184,9 +188,9 @@
 		if(tag == null){
 			var	rreply = '';	
 			
-			rreply += '<div style ="width:762px; height:100px; margin-top:6px; " class="write-comment2" >';
-			rreply += '    <span ></span><div class="new-content2" style ="width: 80%; height: 80px; border: 1px solid black; float: left;">';
-			rreply += '        <textarea class= "comment-content" style ="width:100%; height:100%; padding:10px;"></textarea><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+			rreply += '<div class="write-comment2" >';
+			rreply += '    <span ></span><div class="new-content2" >';
+			rreply += '        <input type ="text" class= "comment-content" ></input><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
 			rreply += '    </div>'
 	 		rreply += '</div>'
 	
@@ -409,11 +413,18 @@
 		var add ="";
 	    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
 	    if (reply.deep > 1) {
-	        add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
+            add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' 
+                add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+                    add += reply.memberName + '님  </b></span><br>';
 	    } else if (reply.deep === 1) {
-	        add += '<span><b>' + reply.memberName + '님 : </b></span>';
+                add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+	        add += '<span><b>' + reply.memberName + '님  </b></span><br>';
 	    }
-	    add += '<span>' + reply.content + '</span>';
+	    if (reply.deep > 1) {
+            add += '<span class= "rereply-content">' + reply.content + '</span>';
+	    } else if (reply.deep === 1) {
+            add += '<span class= "reply-content">' + reply.content + '</span>';
+	    }
 	    if (reply.deep === 1) {
 	        add += '<span><button class= "rreply-btn" data-boardno ="' + reply.boardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
 	    }
@@ -444,7 +455,7 @@
             add += '<div class="board">';
             add += '<div class="board-header">';
             add += '<div class="profile-pic">';
-            add += '<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />';
+            add += '<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
             add += '</div>';
             add += '<div class="board-info" data-boardno ="' + board.boardNo +  '">';
             add += '<span class="board-group"><strong>' + board.clubName + '</strong></span><br>';
@@ -471,25 +482,40 @@
             
             board.replyList.forEach(function(reply) {
                 add += '<div class="reply-area group' + reply.replyGroup  + '" id = "c'+ reply.replyNo+'">';
+                
+  
                 if (reply.deep > 1) {
-                    add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
-                } else if (reply.deep === 1) {
-                    add += '<span><b>' + reply.memberName + '님 : </b></span>';
+                    add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' 
+                add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+                    add += reply.memberName + '님  </b></span><br>';
+                if(memberId == reply.memberId	& reply.stat == 1){
+                add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
                 }
-                add += '<span>' + reply.content + '</span>';
+                } else if (reply.deep === 1) {
+                add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+                    add += '<span><b>' + reply.memberName + '님  </b></span><br>';
+                if(memberId == reply.memberId	& reply.stat == 1){
+                add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
+                }
+                }
+
+                if (reply.deep > 1) {
+                    add += '<span class= "rereply-content">' + reply.content + '</span>';
+                } else if (reply.deep === 1) {
+                    add += '<span class= "reply-content">' + reply.content + '</span>';
+                }
+
+
                 if (reply.deep === 1 & reply.stat == 1) {
                     add += '<span><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
                 }
                 add += '<div class="reply-edit">';
                 add += '<span>' + reply.replyDate + '</span>';
-                if(memberId == reply.memberId	& reply.stat == 1){
-                add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
-                }
                 add += '</div></div>';
             });
             add += '</div>'
             add += '<div class="write-comment">';
-            add += '<div class="new-content"><textarea class= "comment-content"></textarea><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
+            add += '<div class="new-content"><input type ="text" class= "comment-content"></input><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
             add += '</div></div></div></div>';
             
             $('.board-area2').append(add);

@@ -58,15 +58,26 @@ td, tr {
 	--fc-today-bg-color: #f8f7fc;
 	--fc-now-indicator-color: red;
 }
-
+.calendar-area{
+	width: 100%;
+    margin-top: 18px;
+    height: 605px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    overflow: auto;
+}
+.calendar-area .club-calendar{
+	height : 603px;
+}
 .forCalendar{
     background-color: #fff;
     width: 100%; height: 100%; padding: 0%; 
 }
 /*캘린더 큰 레이아웃*/
-.forCalendar #calendar {
-    width: 90%;
-    height: 98%;
+.forCalendar #club-calendar {
+    width: 100%;
+    height: 100%;
 	border-radius: 5px;
     top: 90px;
     margin-right: 24px;

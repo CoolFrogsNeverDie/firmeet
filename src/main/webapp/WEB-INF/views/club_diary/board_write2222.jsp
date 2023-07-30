@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/topnav.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,39 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>개인 게시판</title>
     <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
-	<!-- summernote -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-	<script src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
-<style>
-#edit-close{
-	height: 35px;
-    width: 90px;
-    border-radius: 10px;
-    position: relative;
-    background-color: white;
-    display: flex;
-    right: -440px;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #1eafcc;
-}
-</style>
+    <link href="${pageContext.request.contextPath}/assets/css/board_write.css" rel="stylesheet"  type="text/css" />
+    <!--모달-->
 </head>
 
-
 <body>
-
     <!-- // 상단 내비게이션 바 -->
 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
     <!-- 페이지 콘텐츠 -->
@@ -49,38 +23,26 @@
                 <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                     alt="프로필사진" />
                 <h1>${club.clubName}</h1>
-                <div class= "board-edit">
-             
-             </div>
             </div>
             <!--/diary-topbar-img-->
-          <form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST"> 
-                <input type ="hidden" value = "${member.memberId}" name ="memberId">
-             	<input type ="hidden" value = "${club.clubId}" name ="clubId">
-            <div class="diary-subbar">
-                <button type ="submit" class="board-write">등록</button>
-             	<a class="edit-close"  id ="edit-close"  href = "${pageContext.request.contextPath}/board/club/${club.clubId}">취소</a>
-            </div>
-            <!--/diary-subbar-->
             <div class="content-area">
-
+             <form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST"> 
+             <div class= "search-board"> 
+             	<input type ="hidden" value = "${member.memberId}" name ="memberId">
+             	<input type ="hidden" value = "${club.clubId}" name ="clubId">
+             	<button type ="submit" class="board-search-btn">등록</button>
+             	<a class="edit-close" href = "${pageContext.request.contextPath}/board/club/${club.clubId}">취소</a>
+             </div>
                 <div class="content-right">
                     <div class="board-area">
-						<div class= "club-category">
-						<!--
-						<h4><strong>&#128221;&nbsp;&nbsp;자유게시판</strong></h4> 
-						 -->
-						</div>
-                        <div class="board-area2" >
-                          <textarea id="summernote" name="content"></textarea>
-                        </div>
+      					    <textarea id="summernote" name="content"></textarea>
                     </div>
                     <!--board-area-->
                 </div>
                 <!--/content-right-->
+                </form>
             </div>
             <!--/content-area-->
-          </form>
         </div>
         <!--/diary-area-->
 <c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
@@ -109,9 +71,9 @@ $(document).ready(function() {
 	        		uploadSummernoteImageFile(files[0], this);
 	        	}
 	        },
-		  height: 800,                 // 에디터 높이
-		  minHeight: 565,             // 최소 높이
-		  maxHeight: 565,             // 최대 높이
+		  height: 300,                 // 에디터 높이
+		  minHeight: 414,             // 최소 높이
+		  maxHeight: 414,             // 최대 높이
 		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",					// 한글 설정
 		  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
@@ -156,5 +118,4 @@ function uploadSummernoteImageFile(file, editor){
 
 
 </script>
-
 </html>

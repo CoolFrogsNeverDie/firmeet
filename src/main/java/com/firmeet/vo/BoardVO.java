@@ -9,6 +9,7 @@ public class BoardVO {
 	private int clubId;
 	private String clubName;
 	private String memberId;
+	private String memberName;
 	private String content;
 	private int likeCnt;
 	private List<ReplyVO> replyList;
@@ -104,15 +105,19 @@ public class BoardVO {
 	public void setLikeNo(int likeNo) {
 		this.likeNo = likeNo;
 	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", clubId=" + clubId + ", clubName=" + clubName + ", memberId="
-				+ memberId + ", content=" + content + ", likeCnt=" + likeCnt + ", replyList=" + replyList
-				+ ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum=" + endNum + ", keyword=" + keyword
-				+ ", keyword2=" + keyword2 + ", likeNo=" + likeNo + "]";
+				+ memberId + ", memberName=" + memberName + ", content=" + content + ", likeCnt=" + likeCnt
+				+ ", replyList=" + replyList + ", boardDate=" + boardDate + ", startNum=" + startNum + ", endNum="
+				+ endNum + ", keyword=" + keyword + ", keyword2=" + keyword2 + ", likeNo=" + likeNo + "]";
 	}
-	
-	
 
 
 	

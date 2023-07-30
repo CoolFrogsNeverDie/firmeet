@@ -1,0 +1,418 @@
+/* 콘텐츠 안에 들어갈 것*/
+a{
+text-decoration: none;
+  color: inherit;
+}
+a:hover{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 왼쪽 */
+.content-left {
+    width: 267px;
+    height: 100%;
+    display: inline-block;
+    overflow: auto;
+}
+
+.content-left::-webkit-scrollbar {
+   width: 15px;
+}
+
+.content-left::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.content-left::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 6px solid rgba(0, 0, 0, 0.18);
+  border-left: 0;
+  border-right: 0;
+  background-color: #000000;
+}
+.content-left a {
+	width:100%;
+	height:100%;
+}
+dt, dd {
+  width: 100%;
+  padding: 10px;
+}
+
+dt {
+  border: 1px solid #000000;
+    margin-top: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+dt span {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+dd {
+  background-color: #eeeeee;;
+  margin-bottom: 5px;
+  display: none;
+}
+
+dd:hover{
+  background-color: black;
+  color:white;
+}
+
+/* 오른쪽 */
+.content-right {
+    /* margin-left: 16px; */
+    margin-right: px;
+    margin-left: -5px;
+    height: 619px;
+    display: inline-block;
+    /* margin-top: 10px; */
+    width: 1070px;
+    position: relative;
+}
+
+.board-area{
+    width: 100%;
+    height: 619px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    overflow: auto;
+}
+.board-area .club-category {
+    padding-left: 10px;
+    display: none;
+}
+.board-area::-webkit-scrollbar {
+  width: 15px;
+}
+
+.board-area::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.board-area::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 6px solid rgba(0, 0, 0, 0.18);
+  border-left: 0;
+  border-right: 0;
+  background-color: #000000;
+}
+.board .edit-board-spans{
+	float:right;
+}
+.board .edit-board-spans{
+	float: right;
+    position: relative;
+    top: 5px;
+}
+.board .edit-board-a{
+	margin-right : 10px;
+}
+
+.board {
+    /* margin-right: 10px; */
+    margin-top: 0px;
+    /* border: 1px solid red; */
+    margin-left: 45px;
+    margin-right: 50px;
+    border: 1.5px solid #c7c8c9;
+    border-radius: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.diary-area .search-board {
+    left: 427px;
+	width: 300px;
+    position: relative;
+    border-radius: 25px;
+    border:1px solid black;
+    left: 90px;
+}
+.search-board #search-keyword{
+    width: 245px;
+    height: 50px;
+    border-radius: 25px;
+    padding-left:30px;
+    outline: none; /* 포커스된 상태의 외곽선(디폴트 스타일) 제거 */
+    border: none; /* border 없애기 */
+    font-size:22px;
+}
+.diary-area .board-search-btn{
+    position: relative;
+    bottom: 4px;
+    /* width: 50px; */
+    /* top: 161px; */
+    /* right: 216px; */
+    background-color: white;
+}
+.board-search-btn img{
+	width:30px;
+}
+.board .board-header{
+    height: 55px;
+    width: 100%;
+    /* padding: 5px; */
+	padding-left: 20px;
+    padding-top: 20px;
+}
+
+.diary-topbar-img11{
+	    width: 90px;
+    height: 90px;
+    border-radius: 70%;
+    display: inline;
+    margin-right: 20px;
+    width: 50px;
+    /* border: 3px solid #d3d2d2; */
+    height: 50px;
+}
+.diary-subbar{
+	border:none !important;
+}
+.board-write{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 35px;
+    position: relative;
+    right: -421px;
+    /* border: 1px solid #ccc; */
+    font-size: 18px;
+    background-color: #1eafcc;
+    color: white;
+    border-radius: 10px;
+}
+
+.board .profile-pic{
+	float:left;
+}
+
+.board .board-info span:nth-child(3), .board .board-info span:nth-child(4){
+	font-size:15px;
+}
+.board .board-info .board-group{
+	font-size: 20px;
+}
+
+.diary-subbar{
+	        display: flex; /* Flexbox 사용 */
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+            width: 1070px; /* 외부 <div>의 가로 길이 설정 (원하는 크기로 변경 가능) */
+            height: 50px; /* 외부 <div>의 세로 길이 설정 (원하는 크기로 변경 가능) */
+}
+.board .board-content{
+    width: 100%;
+    padding-bottom: 11px;
+    padding-right: 73px;
+    padding-left: 73px;
+    margin-top: 30px;
+}
+.board .board-comment{
+	padding: 15px;
+	padding-left: 30px;
+    padding-right: 30px;
+}
+
+.likecolor{
+	color:red;
+	margin-right: 10px;
+	cursor: pointer;
+	font-size: 20px;
+}
+.board .reply-edit{
+	color: #939393;
+	float: right;
+}
+
+.board-comment-list .write-comment{
+	width:100%;
+	height: 45px;
+	margin-top : 20px;
+	display: none;
+}
+.board-comment-list .write-comment .new-content{
+    magin-left: 100px;
+    width: 85%;
+    height: 80px;
+    border: 1px solid #494949;
+    float: left;
+    margin-left: 50px;
+    width: 751px;
+    height: 29px;
+    border-radius: 5px;
+}
+.write-comment2{
+width:762px;
+height:35px;
+margin-top:6px;
+margin-bottom:18px;	
+}
+.new-content2{
+	width: 80%; height: 80px; 
+	border: 1px solid black; 
+	float: left;
+	
+}
+.new-content2 .comment-content{
+	width:100%;
+	height:29px;
+	padding:10px;
+}
+.board-comment-list .write-comment .new-content textarea{
+	width: 100%;
+	height: 100%;
+	padding:10px;
+}
+.add-reply, .add-reply2{
+	width:50px;
+	height:30px;
+    background-color:black;
+    color: white;
+    position: relative;
+    left: 101%;
+    bottom: 36px;
+    margin-top: 7px;
+}
+
+.add-reply2, .rreply-btn, .add-reply {
+    border-radius: 5px;
+    background-color: #1a97b0;}
+
+.rreply-btn{
+    background-color: #1a97b0;
+    color: white;
+    margin-left: 10px;
+    width: 30px;
+    height: 19px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 0px;
+    font-size: 13px;
+}
+
+
+.write-comment-btn{
+    position: relative;
+    float: right;
+    bottom: 30px;
+    background-color:white;
+    color: #494949;
+}
+.board-area .reply-delete{
+    color: #f14747;
+	cursor: pointer;
+	float:right;
+}
+.reply-area .re{
+    color: #888888;
+}
+.reply-area{
+	margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 5px;
+    margin-bottom:10px;
+}
+----------답글css--------
+
+.write-comment2{
+	width: 762px;
+    height: 100px;
+    margin-top: 6px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: #c0c0c0;
+    border-radius: 5px;
+}
+.new-content2 {
+    width: 98.4%;
+    height: 31px;
+    border: 1px solid black;
+    float: left;
+    margin-top: 9px;
+    left: 1;
+    position: relative;
+    left: 46px;
+    border-radius: 5px;
+}
+.comment-content{
+	width:100%; 
+	height:100%; 
+	padding:10px;
+	border-radius: 5px;
+	
+}
+.rereply-icon{
+	position: relative;
+    right: 585px;
+    top: 6px;
+}
+.reply-img {
+	width: 70px;
+    height: 70px;
+    border-radius: 70%;
+    display: inline;
+    margin-right: 10px;
+    width: 40px;
+    /* border: 3px solid #d3d2d2; */
+    height: 40px;
+}
+.reply-content{
+	margin-left: 50px;
+}
+.rereply-content{
+	margin-left: 85px;
+}
+.menu-list dt {
+	border: 1px solid #9b9b9b;
+    border-radius: 10px;
+}
+.join-club-list{
+    border-radius: 25px;
+}
+
+
+ <!-- 취소 등록 버튼-->
+
+#edit-close{
+height: 35px;
+    width: 90px;
+    border-radius: 10px;
+    position: relative;
+    background-color: white;
+    display: flex;
+    right: -440px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #1eafcc;
+}
+
+.diary-subbar .calendar-array{
+    height: 40px;
+    width: 300px;
+    position: relative;
+    left: -3px;
+    margin-top: 16px;
+}
+
+.calendar-array #select-array{
+	width: 298px;
+    height: 40px;
+    border: 1px solid #1a97b0;
+    border-radius: 25px;
+    padding-left: 20px;
+    font-size: 20px;
+    text-align: center;
+    }

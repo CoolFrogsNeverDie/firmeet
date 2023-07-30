@@ -1,0 +1,12 @@
+.calendar-area{
+	width: 100%;
+    margin-top: 18px;
+    height: 605px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    overflow: auto;
+}
+.calendar-area .club-calendar{
+	height : 603px;
+}
