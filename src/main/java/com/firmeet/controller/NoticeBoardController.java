@@ -1,9 +1,5 @@
 package com.firmeet.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,42 +187,28 @@ public class NoticeBoardController {
 
 	@ResponseBody
 	@RequestMapping("/pay")
-	public JsonResult pay(@ModelAttribute PayresultVO vo, HttpSession session) {
+	public JsonResult pay(@ModelAttribute PayresultVO vo, @PathVariable("clubId") int clubId, HttpSession session, Model model) {
 		
-		System.out.println("넘어오는지 확인" + vo);
+		System.out.println("넘어오는지 확인in" + vo);
 		JsonResult jsonResult = new JsonResult();
-		jsonResult.success(noticeBoardService.payinsert(vo));
+		
+		jsonResult.success(noticeBoardService.pay(vo));
+		
 		System.out.println("getMemberId"+vo.getMemberId());
 		System.out.println("getMeetNo"+vo.getMeetNo());
-		System.out.println("getMemberId"+vo.getPaycount());
-		System.out.println("getMeetNo"+vo.getPaycount());
+		System.out.println("getPaycount"+vo.getPaycount());
+		System.out.println("getPayresultNo"+vo.getPayresultNo());
+		//String url = "/"+clubId+"/notice/payresult?payresultNo="+vo.getPayresultNo();
 		
 		return jsonResult;
 	}
-/*	
-	//에디터 일반페이지 등록 후 insert
-	@ResponseBody
-	@RequestMapping(value = "/payinsert", method = RequestMethod.POST)
-	public JsonResult payinsert(@PathVariable("clubId") int clubId, @ModelAttribute PayresultVO vo, Model model, HttpSession session, ClubVo clubvo) {
-
-		System.out.println("넘어는 오니?");
-		System.out.println(vo);
-		
-		JsonResult jsonResult = new JsonResult();
-		
-		System.out.println("AJAX로 넘어오는 정보" + vo);
-		jsonResult.success(noticeBoardService.payinsert(vo));
-		
-		//int getPayresultNo = vo.getPayresultNo();
-		//String url = "/"+clubId+"/notice/payresult?memberId="+vo.getMemberId()+"&meetNo="+vo.getMeetNo()+"&payresultNo="+getPayresultNo;
-		
-		return jsonResult ;
-	}
-*/	
-/*	
+/*
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/payresult")
-	public String payresult(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+	@ResponseBody
+	public String payresult(@ModelAttribute NoticeBoardVO vo, ClubVo clubvo, Model model) {
+		model.addAttribute("clubId", clubvo.getClubId());
+		
 		System.out.println("notice payresult 확인");
 		System.out.println("notice getPayresultNo 확인"+vo.getPayresultNo());
 		
@@ -234,8 +216,7 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
 	}
-*/	
-	
+*/
 	//----------------------------------------------------------------------------------------------
 	
 	@ResponseBody

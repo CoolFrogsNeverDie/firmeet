@@ -85,6 +85,12 @@ public class NoticeBoardService {
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
 		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
+
+		//PayresultVO vo111 = dao.payresult(vo);
+		//vo1.setPayresultNo(vo111.getPayresultNo());
+		//vo1.setPaycount(vo111.getPaycount());
+		
+		System.out.println("확화고하닝런이ㅏ러밍널;ㅣㅏ머리ㅓㅇㅁㄴ"+vo11);
 		return vo1;
 	}
 	
@@ -159,14 +165,15 @@ public class NoticeBoardService {
 	
 	}
 	
-	public PayresultVO payinsert(PayresultVO vo) {
+	public PayresultVO pay(PayresultVO vo) {
 		System.out.println("notice payinsert 확인");
-		dao.payinsert(vo);
+		dao.pay(vo);
+		vo.setPaycount(vo.getPaycount()+1);
+		dao.payupdate(vo);
 		dao.payresult(vo);
-		dao.paycount(vo);
 		return vo;
 	}
-
+	
 	//-----------------------------------------------------------------------------------------------------------------------
 	
 	public AreplyVO addReply(AreplyVO vo) {

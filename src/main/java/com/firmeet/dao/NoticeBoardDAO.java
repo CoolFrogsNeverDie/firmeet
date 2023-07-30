@@ -82,27 +82,25 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.hits", vo.getAboardNo());
 	}
 
-	public void payinsert(PayresultVO vo) {
+	public void pay(PayresultVO vo) {
 		System.out.println("notice payinsert dao 확인"+vo);
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
-	public NoticeBoardVO payresult(PayresultVO vo) {
-		System.out.println("notice payresult dao 확인=====================================");
-		System.out.println("payresult dao "+vo);
+	public PayresultVO payresult(PayresultVO vo) {
+		System.out.println("notice payresult dao 확인"+vo);
 		return sql.selectOne("noticeboard.payresult", vo);
 	}
-
-	public int paycount(PayresultVO noticeBoardVO) {
-		System.out.println("notice paycount dao 확인");
-		return sql.update("noticeboard.paycount", noticeBoardVO);
+	
+	public void payupdate(PayresultVO vo) {
+		sql.update("noticeboard.payupdate",vo);
 	}
-
+	
 	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {
 		return sql.selectList("noticeboard.getComment",vo);
 	}
 	
-	public int  likeCancle(NoticeBoardVO vo) {
+	public int likeCancle(NoticeBoardVO vo) {
 		return sql.delete("noticeboard.deletelike",vo);
 	}
 
@@ -113,5 +111,5 @@ public class NoticeBoardDAO {
 	public NoticeBoardVO getLike(NoticeBoardVO vo) {
 		return sql.selectOne("noticeboard.getLike", vo);
 	}
-	
+
 }

@@ -132,16 +132,8 @@ public class NoticeBoardVO {
 		this.address2 = address2;
 		this.voteEnd = voteEnd;
 	}
+
 	
-	public NoticeBoardVO(String memberId, int meetNo, int paycount, int payresultNo) {
-		super();
-		this.memberId = memberId;
-		this.meetNo = meetNo;
-		this.paycount = paycount;
-		this.payresultNo = payresultNo;
-	}
-
-
 	public int getAboardNo() {
 		return aboardNo;
 	}

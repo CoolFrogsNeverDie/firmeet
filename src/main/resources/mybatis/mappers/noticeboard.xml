@@ -91,36 +91,23 @@
 		values(#{payresultNo}, #{meetNo}, #{memberId})
 	</insert>
 	
-	<select id="payresult" resultType="noticeboard" parameterType="noticeboard">
+	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
 		<![CDATA[
 			select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 			, pr.payresultNo, pr.paycount
 			from aboard a, club c, member m, meet_name mn, payresult pr
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
-			and payresultNo = #{payresultNo}
+			and pr.payresultNo = #{payresultNo}
 		]]>
 	</select>
 
-	<update id="paycount" parameterType="noticeboard">
+	<update id="payupdate" parameterType="noticeboard">
 		<![CDATA[
 			update PAYRESULT set paycount = paycount +1 where memberId = #{memberId} and payresultNo = #{payresultNo}
 		]]>
 	</update>
 	
-	<select id="findHeart" parameterType="noticeboard" resultType="noticeboard">
-		select likeNo, aboardNo, memberId from aboard_like where aboardNo=#{aboardNo} and memberId=#{memberId}
-	</select>
-	
-	<insert id="insertHeart" parameterType="noticeboard">
-		insert into aboard_like(likeNo, aboardNo, memberId)
-		values(SEQ_ABOARD_LIKENO.nextval, #{aboardNo}, #{memberId})
-	</insert>
-	
-	<delete id="deleteHeart" parameterType="noticeboard">
-		delete from aboard_like where aboardNo=#{aboardNo} and memberId=#{memberId}
-	</delete>
-
  	<select id = "getComment" parameterType ="noticeboard" resultType ="areply">
 		<![CDATA[
     		SELECT

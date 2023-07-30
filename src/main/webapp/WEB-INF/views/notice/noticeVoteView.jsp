@@ -81,12 +81,9 @@
 	                             <p class="noticegroupname" hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
-	                             <p class="paycount"><span>현재인원 : </span>${vo.paycount} / <span>최대인원 : </span>${vo.maxPerson}</p>
-	                             <p class="noticegroupname">memberId :<span id="memberId">${member.memberId}</span></p>
-	                             <p class="noticegroupname">aboardNo :<span id="aboardNo">${vo.aboardNo}</span></p>
-	                             <p class="noticegroupname">meetNo :<span id="meetNo">${vo.meetNo}</span></p>
-	                              <p class="noticegroupname">paycount :<span id="paycount">${vo.paycount}</span></p>
-	                             <p class="noticegroupname">payresultNo :<span id="payresultNo">${vo.payresultNo}</span></p>
+	                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
+	                             <span id="memberId">${member.memberId}</span><span id="aboardNo">${vo.aboardNo}</span><span id="meetNo">${vo.meetNo}</span>
+	                             <span id="paycount">${vo.paycount}</span><span id="payresultNo">${vo.payresultNo}</span>
 	                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
 	                          </td>
 		                 </tr>
@@ -273,21 +270,6 @@
  });  
 //---------------------------------------------------------------------------------------
 $(document).ready(function () {
-	
-	$("#countButton").on("click", function() {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/${clubId}/notice/payinsert", // 스프링 컨트롤러의 매핑 URL
-            type: "POST",
-            success: function(response) {
-                // 카운트 증가 후 서버로부터의 응답을 받음
-                $("#countDisplay").text(response); // 응답으로 받은 새로운 카운트를 표시
-                $("#countButton").hide(); // 버튼 숨김
-            },
-            error: function() {
-                alert("카운트를 증가시키는데 실패했습니다.");
-            }
-        });
-    });
 	
     $('.noticereply').on("click",'.add-reply', function(){
     	
@@ -487,9 +469,9 @@ $(document).ready(function () {
 
     /*좋아요 클릭 이벤트*/
     $('.noticereply').on("click",'.likecolor', function(){
-    	var aboardNo = $('#aboardNo').val();
+    	var aboardNo = $('#aboardNo').text();
     	var likeNo = $(this).data('likeno');
-    	var memberId = $('#memberId').val();
+    	var memberId = $('#memberId').text();
     	var element = $(this);
     	var likeCntEle =  $(this).next('span').children();
     	var likeCnt = likeCntEle.text();
@@ -570,6 +552,7 @@ $(document).ready(function () {
 //--------------------------------------------------------------------------------------------------------
 
  var price = $('#price').text();
+ 
   console.log(price);
   
   function kakaopay(){
@@ -595,17 +578,17 @@ $(document).ready(function () {
 			
 				  var memberId = $('#memberId').text();
 	  			  var meetNo = $('#meetNo').text();
-	  			  var payresultNo = $('#payresultNo').text();
 	  			  var paycount = $('#paycount').text();
+	  			  var payresultNo = $('#payresultNo').text();
 					console.log('ㅎㅎ',memberId);
 					console.log(meetNo);
-					console.log('ㅎㅎ',payresultNo);
-					console.log(paycount);
+					console.log('ㅎㅎ',paycount);
+					console.log(payresultNo);
 				var NoticeBoardVO ={
 							memberId : memberId,
 							meetNo :  meetNo,
 							payresultNo : payresultNo,
-							paycount :  paycount
+							paycount : paycount
 					}
 					//통신  id////////////////////////////////////////////
 					$.ajax({
@@ -620,15 +603,16 @@ $(document).ready(function () {
 			        	
 			        	if(jsonResult.result == 'success'){
 			        		if(jsonResult.data != null){
- 						 		$("#memberId").val(data.memberId);
+			        			$("#memberId").val(data.memberId);
 			        			$("#meetNo").val(data.meetNo);
-			        			$("#payresultNo").val(data.payresultNo);
-			        			$("#paycount").val(data.paycount);
-			        			paycount++;
+			        			$("#paycount").text(data.paycount);
+			        			$("#payresultNo").text(data.payresultNo);
 			        			console.log(data.memberId);
 			        			console.log(data.meetNo);
-			        			console.log(data.payresultNo);
 			        			console.log(data.paycount);
+			        			console.log(data.payresultNo); 
+			        			//$("#paybtn").hide();
+			        			//window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult?payresultNo='+data.payresultNo;
 			        		}else{
 			        			$("#x").html("사용불가");
 			        		}
