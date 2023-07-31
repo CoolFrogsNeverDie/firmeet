@@ -203,7 +203,7 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
-	
+/*	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/payresult")
 	public String payresult(ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
@@ -214,6 +214,7 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.payresult(vo));
 		return "notice/noticeVoteViewR";
 	}
+*/
 /*
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/payresult")

@@ -82,8 +82,8 @@
 	                             <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
 	                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
-	                             <span id="memberId">${member.memberId}</span><span id="aboardNo">${vo.aboardNo}</span><span id="meetNo">${vo.meetNo}</span>
-	                             <span id="paycount">${vo.paycount}</span><span id="payresultNo">${vo.payresultNo}</span>
+	                             <span id="memberId">${member.memberId}</span>/<span id="aboardNo">${vo.aboardNo}</span>/<span id="meetNo">${vo.meetNo}</span>/
+	                             <span id="paycount">${vo.paycount}</span>/<span id="payresultNo">${vo.payresultNo}</span>
 	                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
 	                          </td>
 		                 </tr>
@@ -613,7 +613,7 @@ $(document).ready(function () {
 			        			console.log(data.paycount);
 			        			console.log(data.payresultNo); 
 			        			$("#paybtn").hide();
-			        			window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult?memberId='+data.memberId+'&meetNo='+data.meetNo+'&payresultNo='+data.payresultNo;
+			        			//window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult?memberId='+data.memberId+'&meetNo='+data.meetNo;
 			        		}else{
 			        			$("#x").html("사용불가");
 			        		}
