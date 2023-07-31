@@ -47,6 +47,7 @@ input {
 
 .content-bnt input {
 	margin-right: 10px;
+    width: auto;
 }
 
 .content-bnt #addButton {

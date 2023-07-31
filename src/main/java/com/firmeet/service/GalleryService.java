@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.eclipse.jdt.internal.compiler.lookup.TypeConstants.DangerousMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.dao.GalleryDao;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
 
@@ -31,9 +33,9 @@ public class GalleryService {
 
 	private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
 
-	public List<MeetVo> getMeetA(int clubId) {
+	public MeetVo getMeetA(int meetNo) {
 		System.out.println("GalleryService getMeetA 확인");
-		List<MeetVo> sList = galleryDao.getMeetA(clubId);
+		MeetVo sList = galleryDao.getMeetA(meetNo);
 		return sList;
 	}
 
@@ -59,7 +61,7 @@ public class GalleryService {
 	}
 
 	// 갤러리 이미지 업로드
-	public void upload(int clubId, int galleryNo, MultipartFile file) {
+	public void upload(int clubId, int galleryNo, MultipartFile file, String memberId) {
 		System.out.println("GalleryService upload 확인");
 
 		// 파일 업로드 처리
@@ -94,7 +96,7 @@ public class GalleryService {
 				bout.close();
 
 				// 갤러리 이미지 정보 저장
-				GalleryImgVo gImgVo = new GalleryImgVo(0, galleryNo, orgName, saveName, fileSize, filePath, "", clubId);
+				GalleryImgVo gImgVo = new GalleryImgVo(0, galleryNo, orgName, saveName, fileSize, filePath, "", clubId, memberId);
 				System.out.println(gImgVo);
 
 				galleryDao.upload(gImgVo);
@@ -170,5 +172,15 @@ public class GalleryService {
 		}
 
 		return gList;
+	}
+
+	public List<GalleryLikeVo> checkLike(int imageNo) {
+		List<GalleryLikeVo> checkLike = galleryDao.checkLike(imageNo);
+		
+		return checkLike;
+	}
+
+	public void updateLikeStatus(int imgNo, int likeCnt, String memberId) {
+		//galleryDao.updateImg(imgNo,likeCnt);
 	}
 }

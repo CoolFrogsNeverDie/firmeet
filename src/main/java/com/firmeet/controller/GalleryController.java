@@ -22,10 +22,12 @@ import com.firmeet.service.ClubService;
 import com.firmeet.service.GalleryService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.ScheduleVO;
+
 
 @Controller
 @RequestMapping("/gallery")
@@ -51,7 +53,7 @@ public class GalleryController {
 			memberId = member.getMemberId();
 
 			System.out.println(memberId); // memberId 값 출력;
-
+			
 			// 클럽과 회원의 관계 정보를 가져옵니다.
 			ClubVo club = clubService.checkMemLevel(memberId, clubId);
 			// club이 null이면 쫒아내기!!!
@@ -133,10 +135,10 @@ public class GalleryController {
 
 	// 갤러리 업로드 폼
 	@RequestMapping(value = "/uploadForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String uploadForm(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
+	public String uploadForm(@PathVariable("clubId") int clubId, @RequestParam("meetNo") int meetNo, Model model, HttpSession session) {
 		System.out.println("uploadForm 확인");
 		System.out.println("clubId : " + clubId);
-
+		System.out.println("meetNo : " + meetNo);
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
 		MemberVo member = (MemberVo) session.getAttribute("member");
 
@@ -152,9 +154,9 @@ public class GalleryController {
 			// club이 null이면 쫒아내기!!!
 			model.addAttribute("club", club);
 
-			List<MeetVo> sList = galleryService.getMeetA(clubId);
+			MeetVo sList = galleryService.getMeetA(meetNo);
 
-			model.addAttribute("meetList", sList);
+			model.addAttribute("meet", sList);
 
 			return "/gallery/galleryUploadForm";
 
@@ -166,22 +168,75 @@ public class GalleryController {
 
 	// 갤러리 업로드
 	@RequestMapping(value = "/upload/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String upload(@PathVariable("clubId") int clubId, @RequestParam("meet") int meet,
+	public String upload(@PathVariable("clubId") int clubId, @RequestParam("meet") int meet,@RequestParam("memberId") String memberId,
 			@RequestParam("uploadPicture") List<MultipartFile> files) {
 		System.out.println("upload 확인");
 		System.out.println("clubId: " + clubId);
 		System.out.println("meet: " + meet);
+		System.out.println("memberId: " + memberId);
 
 		int galleryNo = galleryService.getGalleryNo(meet);
 
 		for (MultipartFile file : files) {
 			System.out.println("file: " + file.getOriginalFilename());
-			galleryService.upload(clubId, galleryNo, file);
+			galleryService.upload(clubId, galleryNo, file,memberId);
 		}
 
 		return "redirect:/gallery/list/" + clubId;
 	}
 
+	//유저 좋아요 확인
+	@ResponseBody
+	@RequestMapping(value = "/checkLike" , method = {RequestMethod.GET,RequestMethod.POST})
+	public JsonResult checkLike(@RequestParam("imgNo") int imgNo) {
+		JsonResult jsonResult = new JsonResult();
+		
+		System.out.println("checkLike 확인");
+		System.out.println(imgNo);
+		
+		try {
+			List<GalleryLikeVo> checkLikes = galleryService.checkLike(imgNo);
+			jsonResult.success(checkLikes); // "success"로 설정하고 데이터를 설정
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonResult.fail("데이터 가져오기에 실패했습니다."); // "fail"로 설정하고 실패 메시지 설정
+		}
+
+		return jsonResult;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateLike" , method = {RequestMethod.GET,RequestMethod.POST})
+    public JsonResult updateLikeStatus(@RequestParam("imgNo") int imgNo,
+    								   @RequestParam("likeCnt") int likeCnt,
+    								   @RequestParam("liked") boolean liked,
+    								   HttpSession session) {
+		System.out.println("updateLikeStatus 확인");
+		System.out.println("imgNo : "+imgNo);
+		System.out.println("likeCnt : "+likeCnt);
+		System.out.println("liked : "+liked);
+		
+        JsonResult jsonResult = new JsonResult();
+        MemberVo memberVo = (MemberVo)session.getAttribute("member");
+        System.out.println("memberVo : "+memberVo.getMemberId());
+        try {
+            // 좋아요 상태를 업데이트하는 서비스 메서드를 호출합니다.
+            galleryService.updateLikeStatus(imgNo, likeCnt,memberVo.getMemberId());
+
+            // 서비스 메서드가 성공적으로 처리되었다고 가정하고
+            // jsonResult에 성공 메시지와 업데이트된 좋아요 상태를 설정합니다.
+            jsonResult.success(liked);
+        } catch (Exception e) {
+            // 서비스 메서드가 예외를 발생시킨 경우, 에러 메시지를 설정합니다.
+            jsonResult.fail("좋아요 상태 업데이트 중 오류가 발생했습니다.");
+        }
+
+        return jsonResult;
+    }
+    
+	
+	
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회
 	@RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -204,4 +259,6 @@ public class GalleryController {
 
 		return "/member_diary/member_gallery";
 	}
+	
+	
 }

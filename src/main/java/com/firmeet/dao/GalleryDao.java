@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
 import com.firmeet.vo.ScheduleVO;
@@ -79,10 +80,11 @@ public class GalleryDao {
 		return galleryVos;
 	}
 
-	public List<MeetVo> getMeetA(int clubId) {
+	public MeetVo getMeetA(int meetNo) {
 		System.out.println("GalleryDao getMeetA 확인");
 
-		List<MeetVo> sList = session.selectList("accountbook.meetList", clubId);
+		MeetVo sList = session.selectOne("gallery.meetList2", meetNo);
+		System.out.println(sList);
 
 		return sList;
 	}
@@ -107,6 +109,13 @@ public class GalleryDao {
 		System.out.println(galleryVos);
 
 		return galleryVos;
+	}
+
+	public List<GalleryLikeVo> checkLike(int imageNo) {
+		List<GalleryLikeVo> checkLike =session.selectList("gallery.checkLike", imageNo);
+		System.out.println(checkLike);
+		
+		return checkLike;
 	}
 
 }

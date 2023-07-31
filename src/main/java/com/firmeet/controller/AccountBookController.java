@@ -94,12 +94,12 @@ public class AccountBookController {
 	 */
 	@RequestMapping(value = "/upload", method = { RequestMethod.GET, RequestMethod.POST })
 	public String accountbookUpload(@RequestParam("clubId") int clubId,
-			@RequestParam("incomeExpense") String incomeExpense, @RequestParam("meet") int meet,
+			@RequestParam(name = "incomeExpense") String incomeExpense, @RequestParam("meet") int meet,
 			@RequestParam("category") String category, @RequestParam("amount") int amount,
 			@RequestParam("memberId") String memberId, @RequestParam("purpose") String purpose,
 			@RequestParam("uploadPicture") MultipartFile file) {
+		
 		System.out.println("accountbookUpload 확인");
-
 		System.out.println("clubId : " + clubId);
 		System.out.println("incomeExpense : " + incomeExpense);
 		System.out.println("meet : " + meet);

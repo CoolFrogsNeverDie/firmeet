@@ -5,22 +5,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName} 가계부 업로드</title>
+<title>${club.clubName}가계부업로드</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/assets/css/accountbookform.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 <!--모달-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 </head>
 
 <body>
 	<!-- top Navigation -->
-	<%@ include file="../include/nav.jsp" %>
+	<%@ include file="../include/nav.jsp"%>
 
 	<div class="wrap">
 		<div class="diary-area">
@@ -35,13 +39,18 @@
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
-					<img id="preview" src="#" alt="미리보기 이미지" style="max-width: 100%; max-height: 90%; display: none; margin: 0 auto;">
+					<img id="preview" src="${pageContext.request.contextPath}/assets/images/accountimg/Previewimg.jpg" alt="미리보기 이미지" style="max-width: 100%; max-height: 90%; margin: 0 auto;">
 				</div>
 				<!--/content-left-->
 				<div class="content-right">
 					<form action="${pageContext.request.contextPath}/accountBook/upload" method="POST" enctype="multipart/form-data">
-						<div class="form-group d-flex justify-content-between">
-							<label for="expense">지출</label> <input type="radio" id="expense" name="incomeExpense" value="지출" checked> <label for="income">수입</label> <input type="radio" id="income" name="incomeExpense" value="수입">
+						<div class="form-group row">
+							<label class="col-form-label" for="expense">지출/수입</label>
+							<div class="d-flex justify-content-start">
+								<label class="radio-label"> <input type="radio" name="incomeExpense" value="지출" required> 지출
+								</label> <label class="radio-label"> <input type="radio" name="incomeExpense" value="수입" required> 수입
+								</label>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="meetSelect">사용 모임:</label> <select id="meetSelect" name="meet" class="form-select">
@@ -83,20 +92,19 @@
 			</div>
 			<!--/content-area-->
 		</div>
-	        <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
-    <!--/wrap-->
-	<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
+		<!--/diary-area-->
+		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+		<!--/wrap-->
 </body>
 <script>
-	function previewImage(event) {
-		var reader = new FileReader();
-		reader.onload = function() {
-			var image = document.getElementById('preview');
-			image.src = reader.result;
-			image.style.display = 'block';
-		}
-		reader.readAsDataURL(event.target.files[0]);
-	}
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var image = document.getElementById('preview');
+            image.src = reader.result;
+            image.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 </html>

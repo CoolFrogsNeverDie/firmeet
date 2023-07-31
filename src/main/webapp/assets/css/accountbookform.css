@@ -3,6 +3,7 @@
   height: 100%;
   display: inline-block;
   vertical-align: top; /* 추가 */
+  background-color: #1eafcc;
 }
 
 .content-right {
@@ -36,7 +37,3 @@
   margin-top: 15px;
 }
 
-
-.content-right div{
-  margin-bottom: 20px;
-}

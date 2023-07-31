@@ -9,15 +9,13 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/galleryUploadForm.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!--드래그 앤 드롭-->
 
 <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 .drag-over {
@@ -75,11 +73,9 @@
 			<div class="content-area">
 				<div class="content-left">
 					<dl id="meetList">
-						<c:forEach var="meet" items="${meetList}">
 							<dt>
-								<span></span>${meet.meetYear}년 ${meet.meetMon}월
+								<span></span>${meet.meetYear}년 ${meet.meetMon}월 - ${meet.meetName}
 							</dt>
-						</c:forEach>
 					</dl>
 				</div>
 				<div class="content-right">
@@ -88,9 +84,8 @@
 							여기로 drag & drop
 							<div id="thumbnails"></div>
 						</div>
-						<c:forEach var="meet" items="${meetList}" varStatus="status" begin="0" end="0">
-							<input type="hidden" name="clubId" value="${meet.clubId}">
-						</c:forEach>
+						<input type="hidden" name="clubId" value="${meet.clubId}">
+						<input type="hidden" id="memberId" value="${member.memberId}">
 						<input type="button" id="btnSubmit" value="업로드" />
 					</form>
 				</div>
@@ -99,9 +94,8 @@
 			<!--/content-area-->
 		</div>
 		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 		<!--/wrap-->
-		<footer> Copyright (C) 2023 어리쥬 </footer>
 </body>
 <script>
     var uploadFiles = [];
@@ -147,9 +141,13 @@
                     function() {
                         console.log("버튼클릭");
                         var formData = new FormData();
-                        var meetNoValue = $("dd.selected").data("meetno");
-                        console.log("선택한 meetNo: " + meetNoValue);
+                        var meetNoValue = ${meet.meetNo};
+                        console.log("선택한 meetNoValue: " + meetNoValue);
+                        
+                        var memberId = $("#memberId").val();
+                        console.log("선택한 memberId: " + memberId);
 
+                        formData.append('memberId', memberId);
                         formData.append('meet', meetNoValue);
                         var path = window.location.pathname; // 현재 페이지의 경로
                         var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
@@ -171,8 +169,7 @@
                                     processData : false,
                                     success : function(ret) {
                                         alert("완료");
-                                        window.location.href = "${pageContext.request.contextPath}/gallery/list/"
-                                                + clubId;
+                                        window.location.href = "${pageContext.request.contextPath}/gallery/list/"+ clubId;
                                     }
                                 });
                     });
@@ -184,76 +181,8 @@
         $target.parent().remove();
     });
 </script>
-<script>
-    $(document)
-            .ready(
-                    function() {
-                        // 페이지가 로드되면, 각 dt에 대해 AJAX를 통해 dd를 가져와서 출력
-                        $("#meetList dt")
-                                .each(
-                                        function() {
-                                            var $dt = $(this);
-                                            var text = $dt.text().trim(); // dt 태그 내용 가져오기
-                                            var year = text.substring(0, 4); // 연도 추출
-                                            var month = text.substring(5, 7); // 월 추출
-                                            console.log(year);
-                                            console.log(month);
+<script> 
 
-                                            $
-                                                    .ajax({
-                                                        url : "${pageContext.request.contextPath}/gallery/getMeetName", // AJAX 요청을 처리할 URL (백엔드에서 처리해야 함)
-                                                        method : "GET", // GET 또는 POST, 필요에 따라 변경
-                                                        data : {
-                                                            year : year,
-                                                            month : month
-                                                        },
-                                                        success : function(
-                                                                jsonResult) {
-                                                            // AJAX 요청 성공 시, 응답 데이터를 사용하여 dd 출력
-                                                            var list = jsonResult.data
-                                                            console.log(list);
-                                                            for (var i = 0; i < list.length; i++) {
-                                                                var name = list[i].meetName
-                                                                var meetNo = list[i].meetNo
-                                                                $dt
-                                                                        .after("<dd data-meetNo ="+meetNo+" >"
-                                                                                + name
-                                                                                + "</dd>");
-                                                            }
-                                                        },
-                                                        error : function() {
-                                                            // AJAX 요청 실패 시, 오류 처리
-                                                            console
-                                                                    .error("AJAX 요청 실패");
-                                                        }
-                                                    });
-                                        });
-
-                    });
-</script>
-<script>
-    var $target = $("dt"), isClass = null;
-
-    $target.on("click", function() {
-        var _$self = $(this), isActive = _$self.hasClass("active");
-
-        _$self.toggleClass("active");
-        _$self.nextUntil("dt").slideToggle(!isActive);
-    });
-
-    var $target = $("dd"), isClass = null;
-
-    $(document).on("click", "dd", function() {
-        console.log("클릭");
-
-        var _$self = $(this);
-
-        // 다른 <dd> 요소들의 'selected' 클래스를 모두 제거합니다.
-        $("dd").not(_$self).removeClass("selected");
-
-        // 클릭한 <dd> 요소에 'selected' 클래스를 토글합니다.
-        _$self.toggleClass("selected");
-    });
 </script>
 
 </html>

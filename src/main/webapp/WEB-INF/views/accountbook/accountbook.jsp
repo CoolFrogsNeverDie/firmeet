@@ -11,14 +11,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/assets/css/accountbook.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <!--모달-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+<!-- 라이브러리 추가 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </head>
 
 <body>
@@ -44,12 +45,16 @@
 							<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요.">
 							<button class="searchbnt" type="submit">검색</button>
 						</form>
+
+						<div style="width: 400px; height: 55px; display: flex; position: absolute; left: 570px; top: 50%; transform: translateY(-50%);">
+							<input type="text" id="calculator">
+						</div>
 						<c:choose>
 							<c:when test="${club.memlevel eq 0}">
 								<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
 							</c:when>
 						</c:choose>
-						
+
 					</div>
 					<!--/content-bnt-->
 					<div class="table">
@@ -84,15 +89,17 @@
 										<div class="table-data">${account.memberId}</div>
 										<div class="table-data">${account.datetime}</div>
 										<div class="table-data">${account.purpose}</div>
-										<div class="table-data">${account.incomeExpense}</div>
+										<div class="table-data incomeExpense">${account.incomeExpense}</div>
 										<div class="table-data">${account.category}</div>
-										<div class="table-data">
+										<div class="table-data account">
 											<fmt:formatNumber type="number" maxFractionDigits="3" value="${account.amount}" />
 											원
 										</div>
 										<div class="table-data">${account.meetNo}</div>
 										<div class="content-img" style="display: none">
-											<img src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="영수증 이미지가 없습니다!" style="max-height: 500px;" />
+											<a class="example-image-link" href="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" data-lightbox="example-set"> 
+												<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
+											</a>
 										</div>
 									</div>
 								</c:forEach>
@@ -100,16 +107,83 @@
 						</div>
 					</div>
 					<!--/table-->
-					<script type="text/javascript">
+					<script src="${pageContext.request.contextPath}/assets/js/accountbook.js"></script>
+				</div>
+				<!--/content-left-->
+			</div>
+			<!--/content-area-->
+		</div>
+		<!--/diary-area-->
+		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+		<!--/wrap-->
+</body>
+<script>
+    $(document)
+            .ready(
+                    function() {
                         // 클릭 이벤트 핸들러 함수 정의
                         function toggleContentImage() {
-                            $(".table-row").on('click', function() {
+                            $(".table-row").on("click", function() {
                                 $(this).find(".content-img").toggle();
                             });
                         }
 
                         // 초기에 페이지 로드될 때 이벤트 핸들러 바인딩
                         toggleContentImage();
+
+                        // 계산 함수 정의
+                        function calculateTotalAmount() {
+                            console.log("계산 클릭");
+                            $("#calculator").val("");
+
+                            // accountList의 amount 값들을 더하는 변수 초기화
+                            var totalAmount = 0;
+
+                            // accountList의 amount 값들을 더함
+                            $(".table-row")
+                                    .each(
+                                            function() {
+                                                var incomeExpenseText = $(this)
+                                                        .find(".incomeExpense")
+                                                        .text().trim();
+                                                var amountText = $(this).find(
+                                                        ".table-data.account")
+                                                        .text().trim();
+                                                console.log("incomeExpenseText"
+                                                        + incomeExpenseText);
+                                                console.log("amountText"
+                                                        + amountText);
+                                                // 쉼표(,) 제거
+                                                var amountValue = parseInt(
+                                                        amountText.replace(
+                                                                /,/g, ""), 10);
+                                                console.log("amountValue"
+                                                        + amountValue);
+                                                // 지출인 경우 +
+                                                if (incomeExpenseText === "지출") {
+                                                    console
+                                                            .log(totalAmount
+                                                                    + "+"
+                                                                    + amountValue);
+                                                    totalAmount += amountValue;
+                                                    console.log(totalAmount);
+                                                }
+                                                // 수입인 경우 -
+                                                else if (incomeExpenseText === "수입") {
+                                                    console
+                                                            .log(totalAmount
+                                                                    + "-"
+                                                                    + amountValue);
+                                                    totalAmount -= amountValue;
+                                                    console.log(totalAmount);
+                                                }
+                                            });
+
+                            // 계산 결과를 #calculator에 출력
+                            var formattedTotalAmount = new Intl.NumberFormat(
+                                    "ko-KR").format(totalAmount);
+                            $("#calculator").val(formattedTotalAmount + "원");
+                        }
 
                         // 검색 폼 제출 시 AJAX 요청 처리
                         $("#searchForm")
@@ -126,7 +200,7 @@
                                                         .val(),
                                                 endDate : $("#endDate").val(),
                                                 searchText : $("#searchText")
-                                                        .val()
+                                                        .val(),
                                             };
 
                                             // AJAX 요청
@@ -148,29 +222,31 @@
                                                                 html += '<div class="table-row">';
                                                                 html += '<div class="table-data">'
                                                                         + account.memberId
-                                                                        + '</div>';
+                                                                        + "</div>";
                                                                 html += '<div class="table-data">'
                                                                         + account.datetime
-                                                                        + '</div>';
+                                                                        + "</div>";
                                                                 html += '<div class="table-data">'
                                                                         + account.purpose
-                                                                        + '</div>';
-                                                                html += '<div class="table-data">'
+                                                                        + "</div>";
+                                                                html += '<div class="table-data incomeExpense">'
                                                                         + account.incomeExpense
-                                                                        + '</div>';
+                                                                        + "</div>";
                                                                 html += '<div class="table-data">'
                                                                         + account.category
-                                                                        + '</div>';
-                                                                html += '<div class="table-data">'
+                                                                        + "</div>";
+                                                                html += '<div class="table-data account">'
                                                                         + account.amount
-                                                                        + '원</div>';
+                                                                        + "원</div>";
                                                                 html += '<div class="table-data">'
                                                                         + account.meetNo
-                                                                        + '</div>';
+                                                                        + "</div>";
                                                                 html += '<div class="content-img" style="display: none">';
-                                                                html += '<img src="${pageContext.request.contextPath}/assets/images/accountimg/' + account.receipt + '" alt="가계부사진" style="max-height: 500px;" />';
-                                                                html += '</div>';
-                                                                html += '</div>';
+                                                                html += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + account.receipt + '" data-lightbox="example-set" >';
+                                                                html += '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' + account.receipt + '" alt="가계부사진" style="max-height: 500px;" />';
+                                                                html += '</a>';
+                                                                html += "</div>";
+                                                                html += "</div>";
                                                             }
 
                                                             $(".table-content")
@@ -178,27 +254,60 @@
 
                                                             // 새로 추가된 요소에 대한 이벤트 핸들러 바인딩
                                                             toggleContentImage();
+
+                                                            // 계산 함수 호출
+                                                            calculateTotalAmount();
                                                         },
                                                         error : function(xhr,
                                                                 status, error) {
                                                             console
                                                                     .error(error);
-                                                        }
+                                                        },
                                                     });
                                         });
-                    </script>
-					<script src="${pageContext.request.contextPath}/assets/js/accountbook.js"></script>
-				</div>
-				<!--/content-left-->
-			</div>
-			<!--/content-area-->
-		</div>
-		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
-		<!--/wrap-->
-		<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
-</body>
-<script>
+
+                        // 계산 버튼 클릭 시 이벤트 핸들러 추가
+                        $(".searchbnt").click(function() {
+                            // 검색 폼 제출 시 AJAX 요청을 먼저 실행하여 검색 결과를 가져온 후 계산 로직을 실행합니다.
+                            $("#searchForm").submit();
+                        });
+                    });
+
+    $(document).ready(
+            function() {
+                // accountList의 amount 값들을 더하는 변수 초기화
+                var totalAmount = 0;
+
+                // accountList의 amount 값들을 더함
+                $(".table-row").each(
+                        function() {
+                            var incomeExpenseText = $(this).find(
+                                    ".incomeExpense").text().trim();
+                            console.log(incomeExpenseText);
+                            var amountText = $(this)
+                                    .find(".table-data.account").text().trim();
+                            // 문자열에서 '원' 부분을 제거하고 숫자값만 추출하여 더함
+                            var amountValue = parseInt(amountText.replace("원",
+                                    "").replace(/,/g, ""));
+                            // 지출인 경우 +
+                            if (incomeExpenseText === "지출") {
+                                console.log(totalAmount + "+" + amountValue);
+                                totalAmount += amountValue;
+                                console.log(totalAmount);
+                            }
+                            // 수입인 경우 -
+                            else if (incomeExpenseText === "수입") {
+                                console.log(totalAmount + "-" + amountValue);
+                                totalAmount -= amountValue;
+                                console.log(totalAmount);
+                            }
+                        });
+
+                // 계산 결과를 #calculator에 출력
+                var formattedTotalAmount = new Intl.NumberFormat("ko-KR")
+                        .format(totalAmount);
+                $("#calculator").val(formattedTotalAmount + "원");
+            });
     $(document)
             .ready(
                     function() {
