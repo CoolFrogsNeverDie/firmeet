@@ -53,8 +53,8 @@ public class PayresultVO {
 
 	@Override
 	public String toString() {
-		return "PayresultVO [payresultNo=" + payresultNo + ", meetNo=" + meetNo + ", memberId=" + memberId
-				+ ", paycount=" + paycount + ", payvoteDate=" + payvoteDate + "]";
+		return "PayresultVO [payresultNo=" + payresultNo + ", meetNo=" + meetNo + ", memberId=" + memberId + ", paycount="
+				+ paycount + ", payvoteDate=" + payvoteDate + "]";
 	}
-	
+
 }

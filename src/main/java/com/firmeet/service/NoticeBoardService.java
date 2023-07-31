@@ -166,14 +166,27 @@ public class NoticeBoardService {
 	}
 	
 	public PayresultVO pay(PayresultVO vo) {
-		System.out.println("notice payinsert 확인");
+		
 		dao.pay(vo);
+		System.out.println("notice payinsert 확인"+vo);
 		//vo.setPaycount(vo.getPaycount()+1);
 		dao.payupdate(vo);
-		dao.payresult(vo);
 		return vo;
 	}
-
+	
+	public NoticeBoardVO payresult(NoticeBoardVO vo) {
+		System.out.println("notice payresult 확인");
+		
+		NoticeBoardVO vo1 = dao.editlistgroup(vo);
+		
+		PayresultVO pvo = dao.payresult(vo);
+		System.out.println("확인확인"+pvo);
+		
+		vo1.setPaycount(pvo.getPaycount());
+		
+		return vo1;
+	}
+	
 	//-----------------------------------------------------------------------------------------------------------------------
 	
 	public AreplyVO addReply(AreplyVO vo) {

@@ -87,11 +87,17 @@
 		<selectKey resultType="int" keyProperty="payresultNo" order="BEFORE">
 			select SEQ_PAYRESULTNO.nextval from dual
 		</selectKey>
-		insert into PAYRESULT(payresultNo, meetNo, memberId )
-		values(#{payresultNo}, #{meetNo}, #{memberId})
+		insert into PAYRESULT(payresultNo, meetNo, memberId, payvoteDate)
+		values(#{payresultNo}, #{meetNo}, #{memberId}, SYSDATE)
 	</insert>
 	
- 	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+	 <update id="payupdate" parameterType="com.firmeet.vo.PayresultVO">
+		<![CDATA[
+			update payresult set paycount = paycount +1 where memberId = #{memberId} and payresultNo = #{payresultNo}
+		]]>
+	</update>
+	
+<!--  	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
 		<![CDATA[
 			select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 			mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
@@ -99,20 +105,14 @@
 			from aboard a, club c, member m, meet_name mn, payresult pr
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
 		]]>
-	</select>
+	</select> -->
 
-<!--  	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="noticeboard">
+  	<select id="payresult" resultType="com.firmeet.vo.PayresultVO" parameterType="com.firmeet.vo.PayresultVO">
 		select
 			 count(*)
 		from payresult
 		where meetNo = #{meetNo}
-	</select> -->
-
-	<update id="payupdate" parameterType="noticeboard">
-		<![CDATA[
-			update PAYRESULT set paycount = paycount +1 where memberId = #{memberId} and payresultNo = #{payresultNo}
-		]]>
-	</update>
+	</select>
 	
  	<select id = "getComment" parameterType ="noticeboard" resultType ="areply">
 		<![CDATA[

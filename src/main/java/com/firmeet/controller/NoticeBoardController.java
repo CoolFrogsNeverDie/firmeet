@@ -196,13 +196,23 @@ public class NoticeBoardController {
 		
 		System.out.println("getMemberId"+vo.getMemberId());
 		System.out.println("getMeetNo"+vo.getMeetNo());
-		System.out.println("getPaycount"+vo.getPaycount());
 		System.out.println("getPayresultNo"+vo.getPayresultNo());
 		//String url = "/"+clubId+"/notice/payresult?payresultNo="+vo.getPayresultNo();
 		
 		//return "redirect:/"+url;
 		
 		return jsonResult;
+	}
+	
+	//에디터 일반페이지 등록 후 리스트
+	@RequestMapping("/payresult")
+	public String payresult(ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+		model.addAttribute("clubId", clubvo.getClubId());
+		session.getAttribute("meetNo");
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("memberId", vo.getMemberId());
+		model.addAttribute("vo", noticeBoardService.payresult(vo));
+		return "notice/noticeVoteViewR";
 	}
 /*
 	//에디터 모임 등록 후 나오는 리스트

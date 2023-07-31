@@ -88,11 +88,11 @@ public class NoticeBoardDAO {
 	}
 	
 	public void payupdate(PayresultVO vo) {
+		System.out.println("notice payinsert dao 확인"+vo);
 		sql.update("noticeboard.payupdate",vo);
 	}
 	
-	public NoticeBoardVO payresult(PayresultVO vo) {
-		// TODO Auto-generated method stub
+	public PayresultVO payresult(NoticeBoardVO vo) {
 		System.out.println("notice payresult dao 확인"+vo);
 		return sql.selectOne("noticeboard.payresult", vo);
 	}

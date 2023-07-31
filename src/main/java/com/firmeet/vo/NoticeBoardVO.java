@@ -45,8 +45,8 @@ public class NoticeBoardVO {
 	private double address1;
 	private double address2;
 	private int aboardHit;
-	private int paycount;
 	private int payresultNo;
+	private int paycount;
 	private int likeNo;
 	private String likeDate;
 	private List<AreplyVO> replyList;
@@ -133,7 +133,6 @@ public class NoticeBoardVO {
 		this.voteEnd = voteEnd;
 	}
 
-	
 	public int getAboardNo() {
 		return aboardNo;
 	}
@@ -462,14 +461,6 @@ public class NoticeBoardVO {
 		this.paycount = paycount;
 	}
 
-	public int getPayresultNo() {
-		return payresultNo;
-	}
-
-	public void setPayresultNo(int payresultNo) {
-		this.payresultNo = payresultNo;
-	}
-
 	public int getLikeNo() {
 		return likeNo;
 	}
@@ -494,6 +485,14 @@ public class NoticeBoardVO {
 		this.replyList = replyList;
 	}
 
+	public int getPayresultNo() {
+		return payresultNo;
+	}
+
+	public void setPayresultNo(int payresultNo) {
+		this.payresultNo = payresultNo;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -506,8 +505,8 @@ public class NoticeBoardVO {
 				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
 				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
-				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", paycount=" + paycount
-				+ ", payresultNo=" + payresultNo + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyList="
+				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", payresultNo=" + payresultNo
+				+ ", paycount=" + paycount + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyList="
 				+ replyList + "]";
 	}
 
