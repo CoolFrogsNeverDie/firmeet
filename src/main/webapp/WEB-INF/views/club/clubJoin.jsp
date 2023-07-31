@@ -221,7 +221,7 @@ a{text-decoration: none; color: #212121;}
         <!--메인라인-->
         <div class="back-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img2}" >배경 이미지</div>
         <div class="color-box">
-            <div class="main-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img2}"
+            <div class="main-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img1}"
                     class="main-img-file"></div>
             <div class="club-title">
                 <h1>어푸어푸 ${clubVo.clubName}</h1>

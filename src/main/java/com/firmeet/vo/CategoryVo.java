@@ -1,10 +1,10 @@
 package com.firmeet.vo;
 
 public class CategoryVo {
-	public int cateNo;
-	public int clubId;
-	public String memberId;
-	public String category;
+	private int cateNo;
+	private int clubId;
+	private String memberId;
+	private String category;
 	
 	public CategoryVo(int cateNo, int clubId, String memberId, String category) {
 		super();

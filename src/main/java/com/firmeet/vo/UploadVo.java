@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class UploadVo {
 
-	public int aboardNo;
-	public int clubId;
-	public String oriName;
-	public String saveName;
-	public long size;
-	public String path;
-	public Date uploadDate;
+	private int aboardNo;
+	private int clubId;
+	private String oriName;
+	private String saveName;
+	private long size;
+	private String path;
+	private Date uploadDate;
 	
 	public UploadVo(int aboardNo, int clubId, String oriName, String saveName, long size, String path,
 			Date uploadDate) {

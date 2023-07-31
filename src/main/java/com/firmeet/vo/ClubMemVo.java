@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class ClubMemVo {
 
-	public int clubMemNo;
-	public String memberId;
-	public int clubId;
-	public String memLevel;
-	public Date joinDate;
+	private int clubMemNo;
+	private String memberId;
+	private int clubId;
+	private String memLevel;
+	private Date joinDate;
 	
 	public ClubMemVo(int clubMemNo, String memberId, int clubId, String memLevel, Date joinDate) {
 		super();

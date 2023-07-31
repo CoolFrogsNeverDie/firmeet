@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class MemberVo {
 
-	public String memberId;
-	public String memberPhone;
-	public String memberName;
-	public String memberPw;
-	public int memberPri;
+	private String memberId;
+	private String memberPhone;
+	private String memberName;
+	private String memberPw;
+	private int memberPri;
 	
 	public int[] tagNo;
 	public int cateNo;
