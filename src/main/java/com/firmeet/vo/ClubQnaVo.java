@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class ClubQnaVo {
 	
-	public int qnaNo;
-	public int clubId;
-	public String memberId;
-	public String qnaCotent;
-	public Date qnaDate;
-	public String answerContent;
-	public Date answerDate;
+	private int qnaNo;
+	private int clubId;
+	private String memberId;
+	private String qnaCotent;
+	private Date qnaDate;
+	private String answerContent;
+	private Date answerDate;
 	
 	
 	public ClubQnaVo() {

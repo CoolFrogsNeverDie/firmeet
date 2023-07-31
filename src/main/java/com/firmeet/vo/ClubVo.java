@@ -6,22 +6,22 @@ import java.util.List;
 
 public class ClubVo {
 
-	public int clubId;
-	public String clubName;
-	public Date cre_date;
-	public int max;
-	public int preNum;
-	public String intro1;
-	public String intro2;
-	public String address1;
-	public String address2;
+	private int clubId;
+	private String clubName;
+	private Date cre_date;
+	private int max;
+	private int preNum;
+	private String intro1;
+	private String intro2;
+	private String address1;
+	private String address2;
 	public String img1;
 	public String img2;
-	public String detailT;
-	public String detailL;
-	public String detailP;
-	public String detailE;
-	public String detailW;
+	private String detailT;
+	private String detailL;
+	private String detailP;
+	private String detailE;
+	private String detailW;
 	public int[] tagNo; /* form=>컨트롤러 */
 	private List<TagVo> clubTagList;
 	private CategoryVo cateVO; 
@@ -31,8 +31,8 @@ public class ClubVo {
 	
 	/* public List<TagVo> tagList; */ /* DB=>화면 */
 	
-	public int cateNo;
-	public String category;
+	private int cateNo;
+	private String category;
 
 	public ClubVo() {
 		super();

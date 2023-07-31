@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.AreplyDAO;
 import com.firmeet.dao.NoticeBoardDAO;
+import com.firmeet.dao.PayDAO;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
@@ -25,7 +26,9 @@ public class NoticeBoardService {
 	private NoticeBoardDAO dao;
 	@Autowired
 	private AreplyDAO rdao;
-
+	@Autowired
+	private PayDAO pdao;
+	
 	public List<NoticeBoardVO> noticeList(String keyword) {
 		System.out.println("notice noticeList 확인");
 		return dao.noticelist(keyword);
@@ -85,11 +88,14 @@ public class NoticeBoardService {
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
 		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
+		
+		//PayresultVO paycnt = pdao.paylist(vo);
+		//vo1.setPaycount(paycnt.getPaycount());
 
 		//PayresultVO vo111 = dao.payresult(vo);
 		//vo1.setPayresultNo(vo111.getPayresultNo());
 		//vo1.setPaycount(vo111.getPaycount());
-		
+		//System.out.println("확화고하닝런이ㅏ러밍널;ㅣㅏ머리ㅓㅇㅁㄴ"+paycnt);
 		System.out.println("확화고하닝런이ㅏ러밍널;ㅣㅏ머리ㅓㅇㅁㄴ"+vo11);
 		return vo1;
 	}
@@ -166,11 +172,12 @@ public class NoticeBoardService {
 	}
 	
 	public PayresultVO pay(PayresultVO vo) {
-		System.out.println("notice payinsert 확인");
-		dao.pay(vo);
-		//vo.setPaycount(vo.getPaycount()+1);
-		dao.payupdate(vo);
-		dao.payresult(vo);
+		System.out.println("notice payinsert 확인"+vo);
+		pdao.payinsert(vo);
+		System.out.println("업데이트 확인 전"+vo);
+		pdao.payupdate(vo);
+		System.out.println("getPaycount"+vo.getPaycount());
+		System.out.println("업데이트 확인 후"+vo);
 		return vo;
 	}
 

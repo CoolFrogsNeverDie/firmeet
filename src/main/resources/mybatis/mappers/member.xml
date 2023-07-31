@@ -62,7 +62,40 @@
 	        ]]>
 	
 	</select>
+	
+	<select id = "requestMemList" parameterType = "member" resultType = "member">
+		<![CDATA[
+			 select
+		        memberId
+		        ,CLUBMEMNO
+		        ,memberName
+		        ,memberPhone
+		    from(
+		          select   
+		            rownum as rw
+		            ,CLUBMEMNO
+		            ,memberId
+		            ,memberName
+		            ,memberPhone
+		          from(
+		             select
+		                a.CLUBMEMNO
+		                ,a.memberId
+		                ,b.memberName
+		                ,case 
+		                   when b.memberpri = 99 then '개인정보 비공개'
+		                   when b.memberpri = 0 then (b.memberphone)
+		                   end as memberPhone
+		             from club_member a join member b on a.memberId = b.memberId
+		                where a.memlevel = 10 and clubId = ${clubId}))
+		                where rw between #{startNum} and #{endNum}
+		]]>
+	</select>
 
-
-
+<!-- 	<select id = "getMemCate" parameterType = "member" resultType = "category">
+		<![CDATA[
+			select 
+				
+		]]>
+	</select> -->
 </mapper>

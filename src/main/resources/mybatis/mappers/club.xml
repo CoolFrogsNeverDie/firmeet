@@ -223,7 +223,7 @@
     </select>
     
     
-    <!-- <select id="selectList4" parameterType="map" resultType="com.firmeet.vo.ClubVo">
+     <select id="selectList4" parameterType="map" resultType="com.firmeet.vo.ClubVo">
     	<![CDATA[
     		select ort.rn,
       	   	       ort.clubId,
@@ -242,7 +242,7 @@
 		    		    from club a , club_category b
 		    		    where a.clubId = b.clubId
 		    		]]>  
-		    			<if test='keyword!=""and keyword !=null'>
+		    			<if test='keyword!="" and keyword !=null'>
 		    				and a.clubName like '%'|| #{keyword} ||'%'
 		    			</if>
 		    		  
@@ -255,8 +255,7 @@
     					]]>
     	
     	
-    </select> -->
-    
+    </select> 
     
     
     

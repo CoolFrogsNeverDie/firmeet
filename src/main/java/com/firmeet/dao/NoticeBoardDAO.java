@@ -87,16 +87,22 @@ public class NoticeBoardDAO {
 		sql.insert("noticeboard.payinsert",vo);
 	}
 	
+	public PayresultVO paycnt(NoticeBoardVO vo) {
+		// TODO Auto-generated method stub
+		return sql.selectOne("noticeboard.paycnt",vo);
+	}
+
+/*	
 	public void payupdate(PayresultVO vo) {
+		System.out.println("notice payinsert dao 확인"+vo);
 		sql.update("noticeboard.payupdate",vo);
 	}
 	
-	public NoticeBoardVO payresult(PayresultVO vo) {
-		// TODO Auto-generated method stub
+	public PayresultVO payresult(NoticeBoardVO vo) {
 		System.out.println("notice payresult dao 확인"+vo);
 		return sql.selectOne("noticeboard.payresult", vo);
 	}
-	
+*/	
 	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {
 		return sql.selectList("noticeboard.getComment",vo);
 	}

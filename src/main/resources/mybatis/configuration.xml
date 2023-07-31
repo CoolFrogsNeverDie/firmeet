@@ -27,6 +27,7 @@
 	<mapper resource="mybatis/mappers/gallery.xml" />
 	<mapper resource="mybatis/mappers/reply.xml" />
 	<mapper resource="mybatis/mappers/areply.xml" />
+	<mapper resource="mybatis/mappers/pay.xml" />
     </mappers>
     
     

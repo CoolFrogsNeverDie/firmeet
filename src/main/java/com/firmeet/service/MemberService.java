@@ -72,6 +72,20 @@ public class MemberService {
 		List<CategoryVo> cateList = memberDao.cateList();
 		return cateList;
 	}
+
+	public List<MemberVo> requestMemList(MemberVo memberVO) {
+		
+		List<MemberVo> list = memberDao.requestMemList(memberVO); 
+		
+		/*
+		 * for(int i =0; i< list.size(); i++) { MemberVo vo = list.get(i);
+		 * List<CategoryVo> cateList = memberDao.getCateList(vo);
+		 * list.get(i).setCateList(); }
+		 */
+		
+		
+		return list;
+	}
 	
 	
 }

@@ -160,7 +160,7 @@
 					    <div class="board-comment-list">
 						    <div class="board-comment" >
 						   
-						    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
+						    <h5>댓글</h5><span><button class="write-comment-btn">댓글 닫기</button></span>
 						    
 						    <c:forEach items="${vo.replyList}" var = "reply">
 						    
