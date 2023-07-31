@@ -1,10 +1,10 @@
 package com.firmeet.vo;
 
 public class GalleryVo {
-	public int galleryNo;
-	public int clubId;
-	public int meetNo;
-	public String memberId;
+	private int galleryNo;
+	private int clubId;
+	private int meetNo;
+	private String memberId;
 		
 	public GalleryVo() {
 		super();
