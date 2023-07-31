@@ -14,7 +14,8 @@
 	<typeAlias type="com.firmeet.vo.BoardVO" alias="board"/>
 	<typeAlias type="com.firmeet.vo.AreplyVO" alias="areply"/>
 	<typeAlias type="com.firmeet.vo.TagVo" alias="tag"/>
-	<typeAlias type="com.firmeet.vo.GalleryLikeVo" alias="galleryLike"/>
+	<typeAlias type="com.firmeet.vo.PayresultVO" alias="pay"/>
+	<typeAlias type="com.firmeet.vo.CategoryVo" alias="category"/>
 	</typeAliases>
 
 	<mappers>
@@ -29,7 +30,4 @@
 	<mapper resource="mybatis/mappers/areply.xml" />
 	<mapper resource="mybatis/mappers/pay.xml" />
     </mappers>
-    
-    
-    
 </configuration>

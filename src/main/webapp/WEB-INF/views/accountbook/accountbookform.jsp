@@ -48,7 +48,7 @@
 							<label class="col-form-label" for="expense">지출/수입</label>
 							<div class="d-flex justify-content-start">
 								<label class="radio-label"> <input type="radio" name="incomeExpense" value="지출" required> 지출
-								</label> <label class="radio-label"> <input type="radio" name="incomeExpense" value="수입" required> 수입
+								</label> <label class="radio-label" style="margin-left: 10px;"> <input type="radio" name="incomeExpense" value="수입" required> 수입
 								</label>
 							</div>
 						</div>

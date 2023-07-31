@@ -47,7 +47,7 @@
 						</form>
 
 						<div style="width: 400px; height: 55px; display: flex; position: absolute; left: 570px; top: 50%; transform: translateY(-50%);">
-							<input type="text" id="calculator">
+							<input type="text" id="calculator" style="width: 160px; margin-left: 110px;" readonly >
 						</div>
 						<c:choose>
 							<c:when test="${club.memlevel eq 0}">
