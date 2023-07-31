@@ -83,12 +83,6 @@
 		update aboard set aboardHit = aboardHit +1 where aboardNo = #{aboardNo}
 	</update>
 	
- 	<select id="paycnt" resultType="pay" parameterType="pay">
-		select count(*)
-		from PAYRESULT
-		where meetNo = #{meetNo}
-	</select>
-
  	<select id = "getComment" parameterType ="noticeboard" resultType ="areply">
 		<![CDATA[
     		SELECT
