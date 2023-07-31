@@ -176,10 +176,11 @@
                                     <span class="groupvotetitle">만남일 </span>
                                       <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
-                           <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
+                           			<input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                     <span class="groupvotetitle1">장 소 </span>
                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
+                                    
                                     <input type="text" name="address1" value="x" id="address1"> 
 									 <input type="text" name="address2" value="y" id="address2">
                                      
@@ -376,17 +377,17 @@ $(document).ready(function() {
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
-        width: 700,
+        width: 600,
         minHeight: null, // set minimum height of editor
         maxHeight: null, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline']],
             ['color', ['color']],
             ['para', ['paragraph']],
-            ['insert', ['picture', 'link', 'video']],
+            ['insert', ['picture', 'video']],
             ['view', ['codeview']],
             ['custom', ['vote']]
         ],

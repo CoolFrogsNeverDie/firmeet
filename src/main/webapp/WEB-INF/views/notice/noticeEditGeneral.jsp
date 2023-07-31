@@ -232,17 +232,17 @@ $(document).ready(function() {
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
-        width: 700,
+        width: 600,
         minHeight: null, // set minimum height of editor
         maxHeight: null, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline']],
             ['color', ['color']],
             ['para', ['paragraph']],
-            ['insert', ['picture', 'link', 'video']],
+            ['insert', ['picture', 'video']],
             ['view', ['codeview']],
             ['custom', ['vote']]
         ],

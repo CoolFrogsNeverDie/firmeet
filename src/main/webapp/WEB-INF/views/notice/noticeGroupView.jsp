@@ -10,7 +10,7 @@
     <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();">
 
 <!----------------------------------------- top Navigation ----------------------------------------->
 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
@@ -283,7 +283,58 @@ $('.noticereply').on("click",'.add-reply', function(){
 	 location.reload();//새로고침
 });//기본 댓글 등록 버튼 클릭 이벤트 end
 
-
+/*좋아요 클릭 이벤트*/
+$('.noticereply').on("click",'.likecolor', function(){
+	var aboardNo = $('#aboardNo').val();
+	var likeNo = $(this).data('likeno');
+	var memberId = $('#memberId').val();
+	var element = $(this);
+	var likeCntEle =  $(this).next('span').children();
+	var likeCnt = likeCntEle.text();
+	console.log(aboardNo);
+	console.log(likeNo);
+	console.log(memberId);
+	console.log(element);
+	console.log(likeCntEle);
+	console.log(likeCnt);
+	
+	noticeboardVO = {
+			aboardNo : aboardNo,
+			memberId : memberId,
+			likeNo : likeNo
+	}
+	
+	$.ajax({
+	       
+	       //요청 세팅
+	       url : "${pageContext.request.contextPath}/${clubId}/notice/likeCnt",
+	       type : "post",
+	       data : noticeboardVO,
+	       
+	       //응답 세팅
+	       dataType : "json",
+	       success : function(jsonResult){
+				var result = jsonResult.data;
+				console.log(result);
+	    		//이미 좋아요가 눌러져 있었으면 좋아요에 있던 좋아요no 데이터로 좋아요 취소 + ♥ 가 ♡
+				if(result == null){
+					element.text('♡');
+					element.data('likeno',0);
+					likeCntEle.text(Number(likeCnt)-1);
+	    		//내가 누른 좋아요가 없었으면 좋아요 올리기 ♡ 가 ♥
+	    		}else{
+					element.text('♥');
+	    			element.data('likeno',result.likeNo);
+					likeCntEle.text(Number(likeCnt)+1);
+	    		}
+	       }, //success end
+	       error : function(XHR, status, error) {
+	       console.error(status + " : " + error);
+	       }
+					            
+	    });//ajax end
+	
+});//좋아요 이벤트 end
 
 /*------------ 댓글 삭제 이벤트 ------------*/
 

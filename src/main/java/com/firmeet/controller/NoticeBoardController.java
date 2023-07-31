@@ -1,5 +1,7 @@
 package com.firmeet.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
+import com.firmeet.service.ClubService;
+import com.firmeet.service.GalleryService;
+import com.firmeet.service.MemberService;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
 
@@ -24,6 +31,12 @@ import com.firmeet.vo.PayresultVO;
 @RequestMapping("/{clubId}/notice")
 public class NoticeBoardController {
 	
+	@Autowired
+	private ClubService clubService;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private GalleryService galleryService;
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
@@ -35,9 +48,36 @@ public class NoticeBoardController {
 		
 		model.addAttribute("nlist",noticeBoardService.noticeList(keyword));
 		
-		return "notice/noticeList";
+        MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+	        return "notice/noticeList";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
 	}
-	
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
