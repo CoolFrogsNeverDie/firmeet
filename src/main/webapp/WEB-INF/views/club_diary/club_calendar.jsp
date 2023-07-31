@@ -152,7 +152,7 @@ $('.forCalendar').on("click",'button', function(){
 	 $.ajax({
         
         //요청 세팅
-        url : "${pageContext.request.contextPath}/calendar/club/getSchedule",      
+        url : "${pageContext.request.contextPath}/calendar/club/getschedule",      
         type : "post",
         data : CalendarVO,
         

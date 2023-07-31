@@ -460,7 +460,7 @@ height: 35px;
     margin-right: 30px;
 }
 .mem-info {
-    height: 100px;
+    height: 143px;
     width: 316px;
     border: 1.5px solid #808080;
     float: left;
@@ -468,17 +468,16 @@ height: 35px;
     border-radius: 10px;
 }
 .mem-info .mem-pic{
-	float:left;
-	width: 100px;
-	height: 98px;
-	padding:10px;
-	background-color:#888888;
-	border-radius: 10px 0 0 10px;
-	margin-bottom: 1px;
+	float: left;
+    width: 58px;
+    height: 99px;
+    padding: 10px 13px 0px 13px;
+    border-radius: 10px 0 0 10px;
+    margin-bottom: 1px;
 }
 .mem-info .mem-pic img{
-	width: 80px;
-	height: 80px;
+	width: 55px;
+	height: 55px;
 }
 .mem-info .mem-deinfo{
 	float: left;
@@ -487,31 +486,43 @@ height: 35px;
     left: 139px;
     /* margin-top: -76px; */
     /* position: relative; */
-    position: absolute;
+    /* position: absolute; */
     top: 21px;
+    float: left;
+    /* position: relative; */
+    top: -15px;
+    left: 6px;
     padding: 10px;
-    padding: 21px 25px 17px 7px;
+    /* padding: 21px 25px 17px 7px; */
 }
+
 .mem-info .mem-deinfo span{
 	float: left;
     margin-left: 22px;
     margin-top: 3px;
 }
-.mem-info .mem-deinfo .new-mem-btn{
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 35px;
-    position: relative;
-    right: -421px;
-    /* border: 1px solid #ccc; */
-    font-size: 18px;
-    background-color: #1eafcc;
+.mem-info .mem-deinfo strong{
+	color:gray;
+	font-size:14px;
+}
+.mem-info .info-btns-area{
+    margin-top: 84px;
+    height: 40px;
+}
+.mem-info .info-btns-area button{
+    text-align: center;
+    width: 75px;
+    height: 31px;
     color: white;
     border-radius: 10px;
-    position: initial;
-    right: 33px;
-    left: 10px;
-    margin-left: 121px;
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-right: -25px;
+}
+/*가입승인거절 등*/
+.mem-info .info-btns-area button:nth-child(1){
+    background-color: #1eafcc;
+}
+.mem-info .info-btns-area button:nth-child(2){
+    background-color: #ff6969;
 }

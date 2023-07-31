@@ -77,7 +77,9 @@ public class MemberService {
 
 		List<MemberVo> list = memberDao.requestMemList(memberVO);
 
+		//리스트에 태그들 배열 추가하기
 			for(int i =0; i< list.size(); i++) {
+				System.out.println("돌아가나요? 이 for문이지?!");
 				List<TagVo> tagList = memberDao.getTagList(list.get(i));
 				list.get(i).setTagList(tagList);
 			}

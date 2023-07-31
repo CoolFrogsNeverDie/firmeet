@@ -58,20 +58,28 @@
 						 -->
 						</div>
                         <div class="list-area" >
+                        	
+                        	<!-- 반복될 곳 -->
+                        	
+                        	
+
+						
+                        	
                         	<div class= "mem-info" id = "c"><!--에이잭스로 삭제해야해서 아이디 줄 예정-->
                         		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
                         		<div class= "mem-deinfo">
-                        			<span><b>김세영</b> @seyoung2020</span><br>
+                        			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
                         			<span>010-3782-2337</span><br>
                         			<span>#intp #취미부자 #집돌이</span>
                         		</div>
                         		<div class= "info-btns-area">
                         			<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>
                         			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>
-                        			<button type ="button" class= "edit-mem-btn" data-clubmemno>권한</button>
                         		</div>
                         	</div>
 						
+						
+                        	<!-- 반복될 곳 -->
                         </div>
 					  <div id = "board-get"></div>
                     </div>
@@ -121,6 +129,7 @@
 				endNum : endNum
 		}
 		
+		console.log(MemberVo + '에이젝스로 넘어갈 값 확인' + clubId);
 		 $.ajax({
 		       
 		       //요청 세팅
@@ -150,11 +159,37 @@
 	function render(memberList){
 		
 		memberList.forEach(function(member) {
+/* 			
+        	<div class= "mem-info" id = "c">
+    		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
+    		<div class= "mem-deinfo">
+    			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
+    			<span>010-3782-2337</span><br>
+    			<span>#intp #취미부자 #집돌이</span>
+    		</div>
+    		<div class= "info-btns-area">
+    			<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>
+    			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>
+    		</div>
+    	</div> */
+			
 			var add = '';
-			add +=  '<a class= "mem-info" id = "c' + member.clubmemNo  + '" + >'<!--에이잭스로 삭제해야해서 아이디 줄 예정-->
-			add += '<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>'
-			add += '<div class= "mem-deinfo"><span><h5>' + member.memberName+ '</h5></span> <button type ="button" class= "new-mem-btn" data-clubmemno = "' +member.clubmemNo +'">가입승인</button></div>';
-			add += '</a>'
+			add +=  '<a class= "mem-info" id = "c' + member.clubmemNo  + '" + >'
+			add += 	'	<div class= "mem-pic">'
+			add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
+			add +=      +'</div>';
+			add += '    		<div class= "mem-deinfo">';
+			add += '<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>';
+			add += '<span>010-3782-2337</span><br>';
+			add += '    			<span>#intp #취미부자 #집돌이</span>';
+			add	+= '    		</div>'
+			add += '    		<div class= "info-btns-area">';
+			add += '	<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>';
+			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>';
+			add += '	</div>'
+			add += '</div>'
+			
+			
 			
 			$('.list-area').append(add);
 			
