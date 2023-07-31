@@ -15,7 +15,7 @@
         <!-- menu-bar -->
         <c:choose>
     <c:when test="${club.memlevel eq 0}">
-        <a href  ="${pageContext.request.contextPath }/host/management"><button id="addButton" style="background-color: rgba(0,0,0,0); width: 80px;height: 50px;position: relative;right: 15px;top: 7px;font-size: xx-large;color: gray;"><i class="fa fa-cog" aria-hidden="true"></i></button></a>
+        <a href  ="${pageContext.request.contextPath }/management/club/${club.clubId}"><button id="addButton" style="background-color: rgba(0,0,0,0); width: 80px;height: 50px;position: relative;right: 15px;top: 7px;font-size: xx-large;color: gray;"><i class="fa fa-cog" aria-hidden="true"></i></button></a>
     </c:when>
 	</c:choose>
     </div>

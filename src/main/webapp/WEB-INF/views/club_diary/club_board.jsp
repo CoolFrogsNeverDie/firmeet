@@ -516,7 +516,7 @@
 
 
              if (reply.deep === 1 & reply.stat == 1) {
-                 add += '<span><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
+                 add += '<zspan><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
              }
              add += '<div class="reply-edit">';
              add += '<span>' + reply.replyDate + '</span>';

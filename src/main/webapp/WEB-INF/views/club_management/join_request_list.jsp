@@ -41,6 +41,11 @@
             </div>
             <!--/diary-topbar-img-->
             <div class="diary-subbar">
+            	<div class= "manage-menu">
+				<a href = "#">권한설정</a>
+				<a href = "#">가입승인</a>
+				<a href = "#">정보수정</a>
+            	</div>
             </div>
             <!--/diary-subbar-->
             <div class="content-area admin-content">
@@ -52,7 +57,34 @@
 						<h4><strong>&#128221;&nbsp;&nbsp;자유게시판</strong></h4> 
 						 -->
 						</div>
-                        <div class="board-area2" >
+                        <div class="list-area" >
+                        	<a class= "mem-info" id = "c"><!--에이잭스로 삭제해야해서 아이디 줄 예정-->
+                        		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
+                        		<div class= "mem-deinfo"><span><h5>김세영</h5></span> <button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button></div>
+                        	</a>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
+                        	<div class= "mem-info"></div>
                         </div>
 					  <div id = "board-get"></div>
                     </div>
@@ -87,11 +119,39 @@
         if (!lastEntry.isIntersecting) return;
 
         getData();
+		console.log('테스트');
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
 
 	
+	function getData(){
+		var clubId = $('.diary-area').data('clubid');
+	
+		var MemberVo = {
+				clubId : clubId,
+				startNum : startNum,
+				endNum : endNum
+		}
+		
+		 $.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/management/club/memberlist",
+		       type : "post",
+		       data : MemberVo,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+					
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+	}
 
  
  	

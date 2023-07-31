@@ -15,6 +15,7 @@
 	<typeAlias type="com.firmeet.vo.AreplyVO" alias="areply"/>
 	<typeAlias type="com.firmeet.vo.TagVo" alias="tag"/>
 	<typeAlias type="com.firmeet.vo.PayresultVO" alias="pay"/>
+	<typeAlias type="com.firmeet.vo.CategoryVo" alias="category"/>
 	</typeAliases>
 
 	<mappers>

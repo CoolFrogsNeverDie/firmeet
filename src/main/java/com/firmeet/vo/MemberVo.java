@@ -1,6 +1,7 @@
 package com.firmeet.vo;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class MemberVo {
 
@@ -12,11 +13,18 @@ public class MemberVo {
 	
 	public int[] tagNo;
 	public int cateNo;
+	public int clubmemNo;
 	public String category;
+	
 	
 	private CategoryVo cateVo;
 	private TagVo tagVo;
+	private List<CategoryVo> cateList;	
 	
+	
+	private int startNum;
+	private int endNum;
+	private int clubId;
 	
 	public MemberVo() {
 		super();
@@ -137,16 +145,72 @@ public class MemberVo {
 	public void setTagVo(TagVo tagVo) {
 		this.tagVo = tagVo;
 	}
+	
+
+	public int getStartNum() {
+		return startNum;
+	}
+
+
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
+	}
+
+
+	public int getEndNum() {
+		return endNum;
+	}
+
+
+	public void setEndNum(int endNum) {
+		this.endNum = endNum;
+	}
+	
+	
+
+	public int getClubmemNo() {
+		return clubmemNo;
+	}
+
+
+	public void setClubmemNo(int clubmemNo) {
+		this.clubmemNo = clubmemNo;
+	}
+	
+
+	public int getClubId() {
+		return clubId;
+	}
+
+
+	public void setClubId(int clubId) {
+		this.clubId = clubId;
+	}
+
+	
+	
+
+	public List<CategoryVo> getCateList() {
+		return cateList;
+	}
+
+
+	public void setCateList(List<CategoryVo> cateList) {
+		this.cateList = cateList;
+	}
 
 
 	@Override
 	public String toString() {
 		return "MemberVo [memberId=" + memberId + ", memberPhone=" + memberPhone + ", memberName=" + memberName
 				+ ", memberPw=" + memberPw + ", memberPri=" + memberPri + ", tagNo=" + Arrays.toString(tagNo)
-				+ ", cateNo=" + cateNo + ", category=" + category + ", cateVo=" + cateVo + ", tagVo=" + tagVo + "]";
+				+ ", cateNo=" + cateNo + ", clubmemNo=" + clubmemNo + ", category=" + category + ", cateVo=" + cateVo
+				+ ", tagVo=" + tagVo + ", cateList=" + cateList + ", startNum=" + startNum + ", endNum=" + endNum
+				+ ", clubId=" + clubId + "]";
 	}
 
+
 	
-	
+
 	
 }

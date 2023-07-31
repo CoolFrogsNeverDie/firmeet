@@ -54,5 +54,19 @@ public class MemberDao {
 		return cateList;
 	}
 
+	public List<MemberVo> requestMemList(MemberVo memberVO) {
+		
+		List<MemberVo> memberList = sqlsession.selectList("member.requestMemList", memberVO);
+		System.out.println("받아온 정보"  + memberList + "h확인ㅇ나ㅓㅇ니멍") ;
+		return memberList;
+	}
+
+	public List<CategoryVo> getCateList(MemberVo vo) {
+		
+//		List<CategoryVo> cateList = sqlsession.selectList("member.getMemCate",vo);
+		
+		return null;
+	}
+
 	
 }
