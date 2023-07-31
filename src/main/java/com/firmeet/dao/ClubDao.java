@@ -160,10 +160,15 @@ public class ClubDao {
 		return list;
 	}
 	
-	public List<ClubVo> searchListTag(ClubVo clubVo) {
-		List<ClubVo> listTag = session.selectList("club.searchTagList" ,clubVo);
-		return listTag;
-	}
+	/*
+	 * public List<ClubVo> searchListTag(ClubVo clubVo) {
+	 * System.out.println("ClubDao.searchListTag()");
+	 * 
+	 * 
+	 * 
+	 * List<ClubVo> listTag = session.selectList("club.searchTagList" ,clubVo);
+	 * return listTag; }
+	 */
 	 
 	public void clubQ(ClubQnaVo clubQnaVo) {
 		System.out.println("ClubDao.ClubQList()");

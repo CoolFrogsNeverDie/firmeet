@@ -11,10 +11,10 @@ public class MemberVo {
 	private String memberPw;
 	private int memberPri;
 	
-	public int[] tagNo;
-	public int cateNo;
-	public int clubmemNo;
-	public String category;
+	private int[] tagNo;
+	private int cateNo;
+	private int clubmemNo;
+	private String category;
 	
 	
 	private CategoryVo cateVo;

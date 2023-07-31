@@ -119,8 +119,10 @@ public class MainController {
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
 		
-		List<ClubVo> clubList = clubService.searchList(clubVo);
-		model.addAttribute("clubList",clubList);
+		
+		  List<ClubVo> clubList = clubService.searchList(clubVo);
+		  model.addAttribute("clubList",clubList);
+		 
 		return "/main/mainForm";
 	}
 	
