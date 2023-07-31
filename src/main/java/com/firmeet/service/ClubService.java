@@ -71,8 +71,11 @@ public class ClubService {
 	}
 
 	public Map<String, Object> clubList2(int crtPage, String keyword) {
+		
+		System.out.println("ClubService.clubList2()");
+		
 		crtPage = (crtPage >= 1) ? crtPage : (crtPage = 1);
-		int listCnt = 5;
+		int listCnt = 10;
 
 		int startRnum = (crtPage - 1) * listCnt + 1;
 		int endRnum = (startRnum + listCnt) - 1;
@@ -82,17 +85,17 @@ public class ClubService {
 		int totalCount = clubDao.searchMainList2(keyword);
 
 		int pageBtnCount = 5;
-		int endPageBtnNo = (int) Math.ceil(crtPage / (double) pageBtnCount) * pageBtnCount;
-		int startPageNo = (endPageBtnNo - pageBtnCount) + 1;
+		int endPageNo = (int) Math.ceil(crtPage / (double) pageBtnCount) * pageBtnCount;
+		int startPageNo = (endPageNo - pageBtnCount) + 1;
 
 		// 다음 화살표 true false
 		boolean next = false;
-		if (endPageBtnNo * listCnt < totalCount) { // 10 * 10 < 123
+		if (endPageNo * listCnt < totalCount) { // 10 * 10 < 123
 			next = true;
 		} else {
 			next = false;
 			// 끝 버튼 번호 endPageBtnNo 다시 계산
-			endPageBtnNo = (int) Math.ceil(totalCount / (double) listCnt);
+			endPageNo = (int) Math.ceil(totalCount / (double)listCnt);
 		}
 
 		// 이전 화살표
@@ -103,8 +106,8 @@ public class ClubService {
 
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		pMap.put("prev", prev);
-		pMap.put("startPageBtnNo", startPageNo);
-		pMap.put("endPageBtnNo", endPageBtnNo);
+		pMap.put("startPageNo", startPageNo);
+		pMap.put("endPageNo", endPageNo);
 		pMap.put("next", next);
 		pMap.put("clubList", clubList);
 
@@ -242,7 +245,7 @@ public class ClubService {
 	public Map<String, Object> qnaList2(int crtPage, int clubId) {
 
 		/* 게시판 리스트: 페이징 포함 */
-		System.out.println("BoardService.getList3()");
+		System.out.println("ClubService.qnaList2()");
 
 		// 현재페이지 음수면 1페이지로 처리
 		crtPage = (crtPage >= 1) ? crtPage : (crtPage = 1);

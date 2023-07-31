@@ -124,9 +124,10 @@ public class ClubController {
 		ClubVo clubVo = clubService.clubInfo(clubId);
 		model.addAttribute("clubVo" , clubVo);
 		
-		Map<String, Object> pMap= clubService.qnaList2(crtPage, clubId );
-		model.addAttribute("pMap", pMap );
-		
+		/*
+		 * Map<String, Object> pMap= clubService.qnaList2(crtPage, clubId );
+		 * model.addAttribute("pMap", pMap );
+		 */
 		
 		List<ClubQnaVo>	 qnaList = clubService.qnaList(clubId);
 		model.addAttribute("qnaList",qnaList);
