@@ -28,7 +28,7 @@ public class NoticeBoardController {
 	private NoticeBoardService noticeBoardService;
 	
 	@RequestMapping("/noticelist")
-	public String noticelist(@PathVariable("clubId") int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
+	public String noticelist(@PathVariable int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
 		System.out.println("noticelist 확인");
 		
 		session.setAttribute("clubId", clubId);

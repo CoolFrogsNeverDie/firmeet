@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지 에디터</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
@@ -18,7 +20,7 @@
         <div class="diary-topbar">
           <img
             class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-          <h1>어푸어푸</h1>
+          <h1>${club.clubName}</h1>
         </div>
         <!--/diary-topbar-img-->
         <div class="diary-subbar">
@@ -199,28 +201,7 @@
 
 	</div>
       <!--/diary-area-->
-      <div class="menu-bar" >
-        <div class="group-profile">
-          <div class="group-profile-img-area">
-            <img
-              class="group-profile-img"
-              src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg"
-              alt="프로필사진"
-            />
-          </div>
-          <!--/group-profile-img-area-->
-        </div>
-        <!--/group-profile-->
-        <ul class="side-nav">
-          <li>공지사항</li>
-          <li>갤러리</li>
-          <li>달력</li>
-          <li>자유 게시판</li>
-          <li>멤버</li>
-          <li>가계부</li>
-        </ul>
-        <!--/side-nav-->
-      </div>
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
       <!--/menu-bar-->
     </div>
     <!--/wrap-->

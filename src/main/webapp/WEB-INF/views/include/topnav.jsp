@@ -31,7 +31,6 @@ crossorigin="anonymous">
 <!-- 외부 -->
 <link href="${pageContext.request.contextPath }/assets/css/imgSlider.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/assets/css/content.css" rel="stylesheet" type="text/css">
 
 
 
