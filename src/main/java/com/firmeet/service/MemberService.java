@@ -21,10 +21,10 @@ public class MemberService {
 		System.out.println(memberVo);
 		memberDao.insert(memberVo);
 		
-		for(int i=0; i<memberVo.tagNo.length;i++) {
+		for(int i=0; i<memberVo.getTagNo().length;i++) {
 			TagVo tagVo =new TagVo();
 			tagVo.setMemberId(memberVo.getMemberId());
-			tagVo.setTagNo(memberVo.tagNo[i]);
+			tagVo.setTagNo(memberVo.getTagNo()[i]);
 			memberDao.insertMemTag(tagVo);
 			
 		}
