@@ -15,14 +15,14 @@ public class ClubVo {
 	private String intro2;
 	private String address1;
 	private String address2;
-	private String img1;
-	private String img2;
+	public String img1;
+	public String img2;
 	private String detailT;
 	private String detailL;
 	private String detailP;
 	private String detailE;
 	private String detailW;
-	private int[] tagNo; /* form=>컨트롤러 */
+	public int[] tagNo; /* form=>컨트롤러 */
 	private List<TagVo> clubTagList;
 	private CategoryVo cateVO; 
 	private TagVo tagVo;

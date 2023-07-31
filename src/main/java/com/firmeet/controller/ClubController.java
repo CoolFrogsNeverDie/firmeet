@@ -148,7 +148,7 @@ public class ClubController {
 		ClubMemVo clubMemVo = new ClubMemVo();
 		clubMemVo.setClubId(clubId);
 		MemberVo member = (MemberVo)session.getAttribute("member");
-		clubMemVo.setMemberId(member.memberId);
+		clubMemVo.setMemberId(member.getMemberId());
 		
 		
 		System.out.println(clubMemVo);
@@ -198,7 +198,7 @@ public class ClubController {
 		System.out.println("ClubController.clubQna()");
 		MemberVo member = (MemberVo)session.getAttribute("member");
 		clubQnaVo.setClubId(clubId);
-		clubQnaVo.setMemberId(member.memberId);
+		clubQnaVo.setMemberId(member.getMemberId());
 		System.out.println(clubQnaVo);
 		
 		clubService.clubQ(clubQnaVo);
