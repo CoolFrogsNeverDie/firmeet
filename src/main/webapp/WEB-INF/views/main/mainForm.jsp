@@ -300,6 +300,17 @@
         height: 200px;
         border: 1px solid black;
     }
+    
+    #paging ul{
+    	width: 300px;
+    	margin:auto;
+    	height:20px;
+    	display:flex;
+    }
+    #paging ul li{
+    	width:20px;
+    	height:20px;
+    }
 
 
     </style>
@@ -367,12 +378,13 @@
                     <p class="meetContent">${clubs.intro1} 모임 내용</p>
                 </a>
             </li>
-        </c:forEach>
-          <%-- <div id="paging">
+        </c:forEach> 
+        </ul>
+        <div id="paging">
 				<ul>
 					<c:if test="${pMap.prev == true}">
 						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.startPageBtnNo-1}&${param.keyword}">◀</a></li>
-							</c:if>
+					</c:if>
 								
 					<c:forEach begin="${pMap.startPageBtnNo}" end="${pMap.endPageBtnNo}"  step="1"  var="page">
 						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${page}&keyword=${param.keyword}">${page}</a></li>
@@ -383,9 +395,9 @@
 					</c:if>
 				</ul>
 				<div class="clear"></div>
-			</div> --%>
-        </ul>
+			</div> 
     </div>
+     
 </body>
 
 <script>

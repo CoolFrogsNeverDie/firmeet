@@ -204,7 +204,7 @@ a{text-decoration: none; color: #212121;}
             margin: 0 auto;
             margin-top: 100px;
             margin-bottom: 100px;
-            height: 320px;
+            height: 410px;
             background-color: #e0e0e0;
             position: relative;
         }

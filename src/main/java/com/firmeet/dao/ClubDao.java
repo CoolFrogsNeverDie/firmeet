@@ -150,10 +150,19 @@ public class ClubDao {
 	
 	public List<ClubVo> searchList(ClubVo clubVo) {
 		System.out.println("clubDao.searchList()");
+		
+		System.out.println("=================================");
 		System.out.println(clubVo);
+		
+		
 		List<ClubVo> list = session.selectList("club.searchList", clubVo);
 		System.out.println(list);
 		return list;
+	}
+	
+	public List<ClubVo> searchListTag(ClubVo clubVo) {
+		List<ClubVo> listTag = session.selectList("club.searchTagList" ,clubVo);
+		return listTag;
 	}
 	 
 	public void clubQ(ClubQnaVo clubQnaVo) {
@@ -168,6 +177,27 @@ public class ClubDao {
 		System.out.println(clubId);
 		
 		List<ClubQnaVo> qnaList = session.selectList("club.qnaList",clubId);
+		return qnaList;
+	}
+	
+	public int totalQna(int clubId){
+		System.out.println("BoardDao.totalCount()");
+		
+		int totalCount = session.selectOne("club.totalQna",clubId);
+		return totalCount;
+	}
+	
+	public List<ClubQnaVo> qnaList2(int startRnum, int endRnum) {
+		System.out.println("BoardDao.selectList3()");
+		
+		Map<String, Integer> qMap = new HashMap<String, Integer>();
+		qMap.put("startRnum", startRnum);
+		qMap.put("endRnum", endRnum);
+		
+		List<ClubQnaVo> qnaList = session.selectList("club.qnaList2", qMap);
+		
+		System.out.println(qnaList);
+		
 		return qnaList;
 	}
 	

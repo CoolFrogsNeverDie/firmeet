@@ -693,7 +693,7 @@
                                 <ul class="category">
                                   <c:forEach  items="${cateList}" var="cate" >
                                    	<li>
-                                   		<input type="radio" name="category" value="${cate.cateNo}" >
+                                   		<input type="radio" name="cateNo" value="${cate.cateNo}" >
                                    		<p>${cate.category}</p>
                                    	</li>
                                    </c:forEach>

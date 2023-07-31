@@ -75,7 +75,7 @@ public class ClubService {
 	
 	public Map<String, Object> clubList2(int crtPage, String keyword) {
 		crtPage = (crtPage>=1) ? crtPage : (crtPage=1);
-		int listCnt = 25;
+		int listCnt = 5;
 		
 		int startRnum = (crtPage-1)*listCnt+1;
 		int endRnum = (startRnum + listCnt)-1;
@@ -110,6 +110,8 @@ public class ClubService {
 		pMap.put("endPageBtnNo", endPageBtnNo);
 		pMap.put("next", next);
 		pMap.put("clubList", clubList);
+		
+		System.out.println(pMap);
 		
 		return pMap;
 		
@@ -223,10 +225,12 @@ public class ClubService {
 		 */
 		
 		
+		//List<ClubVo> list = clubDao.searchList(clubVo);
+		List<ClubVo> list = clubDao.searchListTag(clubVo);
+		return list;	
 		
-			List<ClubVo> list = clubDao.searchList(clubVo);
-			return list;
 		
+	
 		
 	}
 	
@@ -244,6 +248,79 @@ public class ClubService {
 		System.out.println(clubId);
 		List<ClubQnaVo> qnaList = clubDao.qnaList(clubId);
 		return qnaList;
+		
+	}
+	
+	public Map<String, Object> qnaList2(int crtPage, int clubId) {
+		
+		/* 게시판 리스트: 페이징 포함 */
+			System.out.println("BoardService.getList3()");
+			
+			//현재페이지 음수면 1페이지로 처리
+			crtPage = (crtPage >=1) ? crtPage : (crtPage = 1);
+			
+			///////////////////////////////////////////////////////////////////////
+			//리스트 가져오기
+			///////////////////////////////////////////////////////////////////////
+			//페이지당 글갯수
+			int listCnt = 3;
+			
+			//시작글 번호      
+			int startRnum = (crtPage-1) * listCnt + 1;
+			
+			//끝글번호
+			int endRum = (startRnum + listCnt) - 1;
+			
+			List<ClubQnaVo> qnaList = clubDao.qnaList2(startRnum, endRum);
+
+			///////////////////////////////////////////////////////////////////////
+			//페이징 계산
+			///////////////////////////////////////////////////////////////////////
+			//전체 글갯수
+			int totalCount = clubDao.totalQna(clubId);
+			
+			//페이지당 버튼 갯수
+			int pageBtnCount = 5;
+			
+			//마지막 버튼 번호
+			//1   -->  1~5
+			//2   -->  1~5
+			//3   -->  1~5
+			//4   -->  1~5
+			//5   -->  1~5
+			//6   -->  6~10
+			//10  -->  6~10
+			int endPageBtnNo =  (int)Math.ceil(crtPage/(double)pageBtnCount) * pageBtnCount;
+			
+			//시작버튼 번호
+			int startPageBtnNo = (endPageBtnNo - pageBtnCount) + 1;
+			
+			//다음 화살표  true  false
+			boolean next = false;
+			if(endPageBtnNo * listCnt < totalCount) {  //10 * 10 < 123
+				next = true;
+			}else {
+				next = false;
+				//끝 버튼 번호 endPageBtnNo 다시 계산
+				endPageBtnNo =   (int)Math.ceil(totalCount/(double)listCnt);
+			}
+			
+			//이전 화살표
+			boolean prev = false;
+			if(startPageBtnNo != 1) {
+				prev = true;
+			}
+			
+			//맵으로 만들기
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("prev", prev);
+			pMap.put("startPageBtnNo", startPageBtnNo);
+			pMap.put("endPageBtnNo", endPageBtnNo);
+			pMap.put("next", next);
+			pMap.put("qnaList", qnaList);
+			
+			return pMap;
+
 		
 	}
 	

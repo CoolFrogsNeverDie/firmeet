@@ -60,8 +60,10 @@ public class MainController {
 		System.out.println(clubVo.getClubId());
 		List<ClubVo> clubList = clubService.clubList();
 		model.addAttribute("clubList",clubList); 
-		//Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
-		//model.addAttribute("pMap",pMap);
+		Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
+		model.addAttribute("pMap",pMap);
+		
+		System.out.println(pMap);
 		System.out.println(clubList);
 		 
 		return "/main/mainForm";

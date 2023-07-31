@@ -16,7 +16,7 @@ public class ClubVo {
 	private String address1;
 	private String address2;
 	public String img1;
-	public String img2;
+	private String img2;
 	private String detailT;
 	private String detailL;
 	private String detailP;
