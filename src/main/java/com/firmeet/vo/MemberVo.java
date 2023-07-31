@@ -19,7 +19,7 @@ public class MemberVo {
 	
 	private CategoryVo cateVo;
 	private TagVo tagVo;
-	private List<CategoryVo> cateList;	
+	private List<TagVo> tagList;	
 	
 	
 	private int startNum;
@@ -190,13 +190,13 @@ public class MemberVo {
 	
 	
 
-	public List<CategoryVo> getCateList() {
-		return cateList;
+	public List<TagVo> getTagList() {
+		return tagList;
 	}
 
 
-	public void setCateList(List<CategoryVo> cateList) {
-		this.cateList = cateList;
+	public void setTagList(List<TagVo> tagList) {
+		this.tagList = tagList;
 	}
 
 
@@ -205,7 +205,7 @@ public class MemberVo {
 		return "MemberVo [memberId=" + memberId + ", memberPhone=" + memberPhone + ", memberName=" + memberName
 				+ ", memberPw=" + memberPw + ", memberPri=" + memberPri + ", tagNo=" + Arrays.toString(tagNo)
 				+ ", cateNo=" + cateNo + ", clubmemNo=" + clubmemNo + ", category=" + category + ", cateVo=" + cateVo
-				+ ", tagVo=" + tagVo + ", cateList=" + cateList + ", startNum=" + startNum + ", endNum=" + endNum
+				+ ", tagVo=" + tagVo + ", tagList=" + tagList + ", startNum=" + startNum + ", endNum=" + endNum
 				+ ", clubId=" + clubId + "]";
 	}
 

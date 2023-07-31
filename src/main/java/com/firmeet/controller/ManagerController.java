@@ -1,5 +1,7 @@
 package com.firmeet.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,7 @@ public class ManagerController {
             
             //회장일 시 해당 페이지 접근함
             if(club.getMemlevel() == 0) {
-            	return "club_management/join_request_list";
+            	return "club_management/join_request";
             }
             //호스트가 아닐 시 동호회 메인 페이지로 이동
             return "redirect:/club/main/"+club.getClubId();
@@ -64,9 +66,11 @@ public class ManagerController {
 		
 		System.out.println("에이잭스로 넘어오는 값 확인 : " + memberVO);
 		
-		memberService.requestMemList(memberVO);
+		List<MemberVo> memberList = memberService.requestMemList(memberVO);
+		jsonResult.success(memberList);
 		
-		return null;
+		
+		return jsonResult;
 	}
 	
 }

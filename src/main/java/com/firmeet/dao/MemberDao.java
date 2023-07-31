@@ -61,11 +61,11 @@ public class MemberDao {
 		return memberList;
 	}
 
-	public List<CategoryVo> getCateList(MemberVo vo) {
+	public List<TagVo> getTagList(MemberVo vo) {
 		
-//		List<CategoryVo> cateList = sqlsession.selectList("member.getMemCate",vo);
+		List<TagVo> tagList = sqlsession.selectList("member.getMemTagList",vo);
 		
-		return null;
+		return tagList;
 	}
 
 	

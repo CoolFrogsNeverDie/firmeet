@@ -74,16 +74,15 @@ public class MemberService {
 	}
 
 	public List<MemberVo> requestMemList(MemberVo memberVO) {
+
+		List<MemberVo> list = memberDao.requestMemList(memberVO);
+
+			for(int i =0; i< list.size(); i++) {
+				List<TagVo> tagList = memberDao.getTagList(list.get(i));
+				list.get(i).setTagList(tagList);
+			}
 		
-		List<MemberVo> list = memberDao.requestMemList(memberVO); 
-		
-		/*
-		 * for(int i =0; i< list.size(); i++) { MemberVo vo = list.get(i);
-		 * List<CategoryVo> cateList = memberDao.getCateList(vo);
-		 * list.get(i).setCateList(); }
-		 */
-		
-		
+			
 		return list;
 	}
 	
