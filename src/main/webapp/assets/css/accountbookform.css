@@ -2,7 +2,7 @@
   width: 50%;
   height: 100%;
   display: inline-block;
-  vertical-align: top; /* 추가 */
+  vertical-align: top; 
 }
 
 .content-right {

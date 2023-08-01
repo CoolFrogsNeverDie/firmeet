@@ -118,207 +118,170 @@
 		<!--/wrap-->
 </body>
 <script>
-    $(document)
-            .ready(
-                    function() {
-                        // 클릭 이벤트 핸들러 함수 정의
-                        function toggleContentImage() {
-                            $(".table-row").on("click", function() {
-                                $(this).find(".content-img").toggle();
-                            });
-                        }
+  $(document).ready(function () {
+    // 클릭 이벤트 핸들러 함수 정의
+    function toggleContentImage() {
+      $(".table-row").on("click", function () {
+        $(this).find(".content-img").toggle();
+      });
+    }
 
-                        // 초기에 페이지 로드될 때 이벤트 핸들러 바인딩
-                        toggleContentImage();
+    // 초기에 페이지 로드될 때 이벤트 핸들러 바인딩
+    toggleContentImage();
 
-                        // 계산 함수 정의
-                        function calculateTotalAmount() {
-                            console.log("계산 클릭");
-                            $("#calculator").val("");
+    // 계산 함수 정의
+    function calculateTotalAmount() {
+      console.log("계산 클릭");
+      $("#calculator").val("");
 
-                            // accountList의 amount 값들을 더하는 변수 초기화
-                            var totalAmount = 0;
+      // accountList의 amount 값들을 더하는 변수 초기화
+      var totalAmount = 0;
 
-                            // accountList의 amount 값들을 더함
-                            $(".table-row")
-                                    .each(
-                                            function() {
-                                                var incomeExpenseText = $(this)
-                                                        .find(".incomeExpense")
-                                                        .text().trim();
-                                                var amountText = $(this).find(
-                                                        ".table-data.account")
-                                                        .text().trim();
-                                                console.log("incomeExpenseText"
-                                                        + incomeExpenseText);
-                                                console.log("amountText"
-                                                        + amountText);
-                                                // 쉼표(,) 제거
-                                                var amountValue = parseInt(
-                                                        amountText.replace(
-                                                                /,/g, ""), 10);
-                                                console.log("amountValue"
-                                                        + amountValue);
-                                                // 지출인 경우 +
-                                                if (incomeExpenseText === "지출") {
-                                                    console
-                                                            .log(totalAmount
-                                                                    + "+"
-                                                                    + amountValue);
-                                                    totalAmount += amountValue;
-                                                    console.log(totalAmount);
-                                                }
-                                                // 수입인 경우 -
-                                                else if (incomeExpenseText === "수입") {
-                                                    console
-                                                            .log(totalAmount
-                                                                    + "-"
-                                                                    + amountValue);
-                                                    totalAmount -= amountValue;
-                                                    console.log(totalAmount);
-                                                }
-                                            });
+      // accountList의 amount 값들을 더함
+      $(".table-row").each(function () {
+        var incomeExpenseText = $(this).find(".incomeExpense").text().trim();
+        var amountText = $(this).find(".table-data.account").text().trim();
+        console.log("incomeExpenseText" + incomeExpenseText);
+        console.log("amountText" + amountText);
+        // 쉼표(,) 제거
+        var amountValue = parseInt(amountText.replace(/,/g, ""), 10);
+        console.log("amountValue" + amountValue);
+        // 지출인 경우 +
+        if (incomeExpenseText === "지출") {
+          console.log(totalAmount + "+" + amountValue);
+          totalAmount += amountValue;
+          console.log(totalAmount);
+        }
+        // 수입인 경우 -
+        else if (incomeExpenseText === "수입") {
+          console.log(totalAmount + "-" + amountValue);
+          totalAmount -= amountValue;
+          console.log(totalAmount);
+        }
+      });
 
-                            // 계산 결과를 #calculator에 출력
-                            var formattedTotalAmount = new Intl.NumberFormat(
-                                    "ko-KR").format(totalAmount);
-                            $("#calculator").val(formattedTotalAmount + "원");
-                        }
+      // 계산 결과를 #calculator에 출력
+      var formattedTotalAmount = new Intl.NumberFormat("ko-KR").format(
+        totalAmount
+      );
+      $("#calculator").val(formattedTotalAmount + "원");
+    }
 
-                        // 검색 폼 제출 시 AJAX 요청 처리
-                        $("#searchForm")
-                                .submit(
-                                        function(event) {
-                                            event.preventDefault(); // 폼 제출 기본 동작 막기
+    // 검색 폼 제출 시 AJAX 요청 처리
+    $("#searchForm").submit(function (event) {
+      event.preventDefault(); // 폼 제출 기본 동작 막기
 
-                                            var path = window.location.pathname; // 현재 페이지의 경로
-                                            var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
+      var path = window.location.pathname; // 현재 페이지의 경로
+      var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
 
-                                            // AJAX 요청을 위한 데이터 준비
-                                            var formData = {
-                                                startDate : $("#startDate")
-                                                        .val(),
-                                                endDate : $("#endDate").val(),
-                                                searchText : $("#searchText")
-                                                        .val(),
-                                            };
+      // AJAX 요청을 위한 데이터 준비
+      var formData = {
+        startDate: $("#startDate").val(),
+        endDate: $("#endDate").val(),
+        searchText: $("#searchText").val(),
+      };
 
-                                            // AJAX 요청
-                                            $
-                                                    .ajax({
-                                                        type : "GET",
-                                                        url : "${pageContext.request.contextPath}/accountBook/search/"
-                                                                + clubId,
-                                                        data : formData,
-                                                        dataType : "json",
-                                                        success : function(
-                                                                response) {
-                                                            var searchResult = response; // 검색 결과 데이터
-                                                            var html = ""; // HTML 문자열
+      // AJAX 요청
+      $.ajax({
+        type: "GET",
+        url: "${pageContext.request.contextPath}/accountBook/search/" + clubId,
+        data: formData,
+        dataType: "json",
+        success: function (response) {
+          var searchResult = response; // 검색 결과 데이터
+          var html = ""; // HTML 문자열
 
-                                                            // 검색 결과를 HTML로 변환
-                                                            for (var i = 0; i < searchResult.length; i++) {
-                                                                var account = searchResult[i];
-                                                                html += '<div class="table-row">';
-                                                                html += '<div class="table-data">'
-                                                                        + account.memberId
-                                                                        + "</div>";
-                                                                html += '<div class="table-data">'
-                                                                        + account.datetime
-                                                                        + "</div>";
-                                                                html += '<div class="table-data">'
-                                                                        + account.purpose
-                                                                        + "</div>";
-                                                                html += '<div class="table-data incomeExpense">'
-                                                                        + account.incomeExpense
-                                                                        + "</div>";
-                                                                html += '<div class="table-data">'
-                                                                        + account.category
-                                                                        + "</div>";
-                                                                html += '<div class="table-data account">'
-                                                                        + account.amount
-                                                                        + "원</div>";
-                                                                html += '<div class="table-data">'
-                                                                        + account.meetNo
-                                                                        + "</div>";
-                                                                html += '<div class="content-img" style="display: none">';
-                                                                html += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + account.receipt + '" data-lightbox="example-set" >';
-                                                                html += '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' + account.receipt + '" alt="가계부사진" style="max-height: 500px;" />';
-                                                                html += '</a>';
-                                                                html += "</div>";
-                                                                html += "</div>";
-                                                            }
+          // 검색 결과를 HTML로 변환
+          for (var i = 0; i < searchResult.length; i++) {
+            var account = searchResult[i];
+            html += '<div class="table-row">';
+            html += '<div class="table-data">' + account.memberId + "</div>";
+            html += '<div class="table-data">' + account.datetime + "</div>";
+            html += '<div class="table-data">' + account.purpose + "</div>";
+            html +=
+              '<div class="table-data incomeExpense">' +
+              account.incomeExpense +
+              "</div>";
+            html += '<div class="table-data">' + account.category + "</div>";
+            html +=
+              '<div class="table-data account">' + account.amount + "원</div>";
+            html += '<div class="table-data">' + account.meetNo + "</div>";
+            html += '<div class="content-img" style="display: none">';
+            html +=
+              '<a class="example-image-link" href="' +
+              "${pageContext.request.contextPath}/assets/images/galleryImg/" +
+              account.receipt +
+              '" data-lightbox="example-set" >';
+            html +=
+              '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' +
+              account.receipt +
+              '" alt="가계부사진" style="max-height: 500px;" />';
+            html += "</a>";
+            html += "</div>";
+            html += "</div>";
+          }
 
-                                                            $(".table-content")
-                                                                    .html(html); // 검색 결과를 표시할 영역에 HTML 삽입
+          $(".table-content").html(html); // 검색 결과를 표시할 영역에 HTML 삽입
 
-                                                            // 새로 추가된 요소에 대한 이벤트 핸들러 바인딩
-                                                            toggleContentImage();
+          // 새로 추가된 요소에 대한 이벤트 핸들러 바인딩
+          toggleContentImage();
 
-                                                            // 계산 함수 호출
-                                                            calculateTotalAmount();
-                                                        },
-                                                        error : function(xhr,
-                                                                status, error) {
-                                                            console
-                                                                    .error(error);
-                                                        },
-                                                    });
-                                        });
+          // 계산 함수 호출
+          calculateTotalAmount();
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        },
+      });
+    });
 
-                        // 계산 버튼 클릭 시 이벤트 핸들러 추가
-                        $(".searchbnt").click(function() {
-                            // 검색 폼 제출 시 AJAX 요청을 먼저 실행하여 검색 결과를 가져온 후 계산 로직을 실행합니다.
-                            $("#searchForm").submit();
-                        });
-                    });
+    // 계산 버튼 클릭 시 이벤트 핸들러 추가
+    $(".searchbnt").click(function () {
+      // 검색 폼 제출 시 AJAX 요청을 먼저 실행하여 검색 결과를 가져온 후 계산 로직을 실행합니다.
+      $("#searchForm").submit();
+    });
+  });
 
-    $(document).ready(
-            function() {
-                // accountList의 amount 값들을 더하는 변수 초기화
-                var totalAmount = 0;
+  $(document).ready(function () {
+    // accountList의 amount 값들을 더하는 변수 초기화
+    var totalAmount = 0;
 
-                // accountList의 amount 값들을 더함
-                $(".table-row").each(
-                        function() {
-                            var incomeExpenseText = $(this).find(
-                                    ".incomeExpense").text().trim();
-                            console.log(incomeExpenseText);
-                            var amountText = $(this)
-                                    .find(".table-data.account").text().trim();
-                            // 문자열에서 '원' 부분을 제거하고 숫자값만 추출하여 더함
-                            var amountValue = parseInt(amountText.replace("원",
-                                    "").replace(/,/g, ""));
-                            // 지출인 경우 +
-                            if (incomeExpenseText === "지출") {
-                                console.log(totalAmount + "+" + amountValue);
-                                totalAmount += amountValue;
-                                console.log(totalAmount);
-                            }
-                            // 수입인 경우 -
-                            else if (incomeExpenseText === "수입") {
-                                console.log(totalAmount + "-" + amountValue);
-                                totalAmount -= amountValue;
-                                console.log(totalAmount);
-                            }
-                        });
+    // accountList의 amount 값들을 더함
+    $(".table-row").each(function () {
+      var incomeExpenseText = $(this).find(".incomeExpense").text().trim();
+      console.log(incomeExpenseText);
+      var amountText = $(this).find(".table-data.account").text().trim();
+      // 문자열에서 '원' 부분을 제거하고 숫자값만 추출하여 더함
+      var amountValue = parseInt(
+        amountText.replace("원", "").replace(/,/g, "")
+      );
+      // 지출인 경우 +
+      if (incomeExpenseText === "지출") {
+        console.log(totalAmount + "+" + amountValue);
+        totalAmount += amountValue;
+        console.log(totalAmount);
+      }
+      // 수입인 경우 -
+      else if (incomeExpenseText === "수입") {
+        console.log(totalAmount + "-" + amountValue);
+        totalAmount -= amountValue;
+        console.log(totalAmount);
+      }
+    });
 
-                // 계산 결과를 #calculator에 출력
-                var formattedTotalAmount = new Intl.NumberFormat("ko-KR")
-                        .format(totalAmount);
-                $("#calculator").val(formattedTotalAmount + "원");
-            });
-    $(document)
-            .ready(
-                    function() {
-                        $("#addButton")
-                                .click(
-                                        function() {
-                                            var path = window.location.pathname; // 현재 페이지의 경로
-                                            var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
-                                            window.location.href = "${pageContext.request.contextPath}/accountBook/uploadform/"
-                                                    + clubId;
-                                        });
-                    });
+    // 계산 결과를 #calculator에 출력
+    var formattedTotalAmount = new Intl.NumberFormat("ko-KR").format(
+      totalAmount
+    );
+    $("#calculator").val(formattedTotalAmount + "원");
+  });
+  $(document).ready(function () {
+    $("#addButton").click(function () {
+      var path = window.location.pathname; // 현재 페이지의 경로
+      var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
+      window.location.href =
+        "${pageContext.request.contextPath}/accountBook/uploadform/" + clubId;
+    });
+  });
 </script>
 </html>

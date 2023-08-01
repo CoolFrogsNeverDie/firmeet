@@ -97,6 +97,7 @@
 		<!--/wrap-->
 </body>
 <script>
+	//이미지 미리보기
     function previewImage(event) {
         var reader = new FileReader();
         reader.onload = function() {

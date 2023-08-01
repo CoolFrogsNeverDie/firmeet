@@ -278,118 +278,125 @@ dd {
     });
 
     // 특정 meetNo에 해당하는 갤러리 이미지를 불러오는 AJAX 요청 코드를 여기에 추가합니다...
-  }); 
+  });
 </script>
 <!-- JavaScript 추가 -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  <script>
-	  var imgSrc;
-	  var likeCnt;
-	  var memberId;
-	  var imgno;
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<script>
+  var imgSrc;
+  var likeCnt;
+  var memberId;
+  var imgno;
 
-    
-      // 이미지 클릭 시 모달창 열기
-      $('.gallery-area').on('click', '.example-image-link', function (e) {
-        e.preventDefault(); // 이벤트 전파 차단
-        var $imageLink = $(this);
-        imgSrc = $imageLink.attr('href');
-        likeCnt = $imageLink.data('likecnt');
-       	memberId = $imageLink.data('title');
-        imgno = $imageLink.data('imgno');
-        
-        console.log(" imgSrc : "+imgSrc);
-        console.log(" memberId : "+memberId);
-        console.log(" imgNo : "+imgno);
-        console.log(" likeCnt : "+likeCnt);
-        // 모달창에 이미지와 좋아요 정보를 채웁니다.
-        $('#modalImage').attr('src', imgSrc);
-        $('#likeCount').text('좋아요 수: ' + likeCnt);
+  // 이미지 클릭 시 모달창 열기
+  $(".gallery-area").on("click", ".example-image-link", function (e) {
+    e.preventDefault(); // 이벤트 전파 차단
+    var $imageLink = $(this);
+    imgSrc = $imageLink.attr("href");
+    likeCnt = $imageLink.data("likecnt");
+    memberId = $imageLink.data("title");
+    imgno = $imageLink.data("imgno");
 
-        $.ajax({
-            url: "${pageContext.request.contextPath}/gallery/checkLike",
-            method: "POST",
-            data: {
-                imgno: imgno
-            },
-            success: function (jsonResult) {
-                var result = jsonResult.data;
-                console.log(result);
-                
-                	if(result){
-                        $('#likeButton').addClass('btn-success').removeClass('btn-primary').text('좋아요 취소');
-                    }else{
-                        $('#likeButton').addClass('btn-primary').removeClass('btn-success').text('좋아요');
-                    }        
-                
-                // 모달창 열기
-                $('#imageModal').modal('show');
-            },
-            error: function () {
-              console.error("AJAX 요청 실패");
-            }
-        });
+    console.log(" imgSrc : " + imgSrc);
+    console.log(" memberId : " + memberId);
+    console.log(" imgNo : " + imgno);
+    console.log(" likeCnt : " + likeCnt);
+    // 모달창에 이미지와 좋아요 정보를 채웁니다.
+    $("#modalImage").attr("src", imgSrc);
+    $("#likeCount").text("좋아요 수: " + likeCnt);
 
-      });
-        
-      
-      // 좋아요 버튼 클릭 시 이벤트 처리
-      $(document).on('click', '.btn-primary', function () {
-        // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
-        console.log(".btn-primary 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
-        console.log(" imgNo : "+imgno);
-        console.log(" likeCnt : "+likeCnt);
-        $.ajax({
-          url: "${pageContext.request.contextPath}/gallery/updateLike",
-          method: "POST",
-          data: {
-              imgno: imgno,
-              likeCnt : likeCnt
-          },
-          success: function (jsonResult) {
-            // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
-              console.log("jsonResult"+jsonResult.data);
-            likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
-         	  console.log("새로운"+likeCnt);
-            $('#likeCount').text('좋아요 수: ' + likeCnt);
-            $('#likeButton').addClass('btn-success').removeClass('btn-primary').text('좋아요 취소');
-          },
-          error: function () {
-            console.error("AJAX 요청 실패");
-          }
-        });
-      });
-      
-   // 좋아요취소 버튼 클릭 시 이벤트 처리
-      $(document).on('click', '.btn-success', function () {
-          // 좋아요취소 기능 요청을 서버에 보냅니다. (AJAX 요청)
-          console.log(".btn-success 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
-          console.log(" imgNo : " + imgno);
-          console.log(" likeCnt : " + likeCnt);
-          $.ajax({
-              url: "${pageContext.request.contextPath}/gallery/deleteLike",
-              method: "POST",
-              data: {
-                  imgno: imgno,
-                  likeCnt : likeCnt
-              },
-              success: function (jsonResult) {
-                  // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
-                  console.log("jsonResult" + jsonResult.data);
-                  likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
-                  console.log("새로운" + likeCnt);
-                  $('#likeCount').text('좋아요 수: ' + likeCnt);
-                  $('#likeButton').addClass('btn-primary').removeClass('btn-success').text('좋아요');
-              },
-              error: function () {
-                  console.error("AJAX 요청 실패");
-              }
-          });
-      });
+    $.ajax({
+      url: "${pageContext.request.contextPath}/gallery/checkLike",
+      method: "POST",
+      data: {
+        imgno: imgno,
+      },
+      success: function (jsonResult) {
+        var result = jsonResult.data;
+        console.log(result);
 
- 
- 
-  </script>
+        if (result) {
+          $("#likeButton")
+            .addClass("btn-success")
+            .removeClass("btn-primary")
+            .text("좋아요 취소");
+        } else {
+          $("#likeButton")
+            .addClass("btn-primary")
+            .removeClass("btn-success")
+            .text("좋아요");
+        }
+
+        // 모달창 열기
+        $("#imageModal").modal("show");
+      },
+      error: function () {
+        console.error("AJAX 요청 실패");
+      },
+    });
+  });
+
+  // 좋아요 버튼 클릭 시 이벤트 처리
+  $(document).on("click", ".btn-primary", function () {
+    // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
+    console.log(".btn-primary 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
+    console.log(" imgNo : " + imgno);
+    console.log(" likeCnt : " + likeCnt);
+    $.ajax({
+      url: "${pageContext.request.contextPath}/gallery/updateLike",
+      method: "POST",
+      data: {
+        imgno: imgno,
+        likeCnt: likeCnt,
+      },
+      success: function (jsonResult) {
+        // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+        console.log("jsonResult" + jsonResult.data);
+        likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+        console.log("새로운" + likeCnt);
+        $("#likeCount").text("좋아요 수: " + likeCnt);
+        $("#likeButton")
+          .addClass("btn-success")
+          .removeClass("btn-primary")
+          .text("좋아요 취소");
+      },
+      error: function () {
+        console.error("AJAX 요청 실패");
+      },
+    });
+  });
+
+  // 좋아요취소 버튼 클릭 시 이벤트 처리
+  $(document).on("click", ".btn-success", function () {
+    // 좋아요취소 기능 요청을 서버에 보냅니다. (AJAX 요청)
+    console.log(".btn-success 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
+    console.log(" imgNo : " + imgno);
+    console.log(" likeCnt : " + likeCnt);
+    $.ajax({
+      url: "${pageContext.request.contextPath}/gallery/deleteLike",
+      method: "POST",
+      data: {
+        imgno: imgno,
+        likeCnt: likeCnt,
+      },
+      success: function (jsonResult) {
+        // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+        console.log("jsonResult" + jsonResult.data);
+        likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+        console.log("새로운" + likeCnt);
+        $("#likeCount").text("좋아요 수: " + likeCnt);
+        $("#likeButton")
+          .addClass("btn-primary")
+          .removeClass("btn-success")
+          .text("좋아요");
+      },
+      error: function () {
+        console.error("AJAX 요청 실패");
+      },
+    });
+  });
+</script>
+
 
 </html>

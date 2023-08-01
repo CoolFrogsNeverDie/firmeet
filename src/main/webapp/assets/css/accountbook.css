@@ -5,6 +5,7 @@
 	display: inline-block;
 }
 
+/* 검색창 스타일 */
 .search {
 	position: absolute;
 	width: 300px;
@@ -28,6 +29,7 @@ input {
 	margin: 0;
 }
 
+/* 콘텐츠 버튼 스타일 */
 .content-bnt {
 	width: 100%;
 	height: 100px;
@@ -70,6 +72,7 @@ input {
 	margin-left: 10px;
 }
 
+/* 사이드바 스타일 */
 .about {
 	position: fixed;
 	float: left;
@@ -78,6 +81,7 @@ input {
 	padding-right: 30px;
 }
 
+/* 테이블 스타일 */
 .table {
 	float: left;
 	width: calc(100% - 300px);
@@ -198,6 +202,7 @@ input {
 	}
 }
 
+/* 테이블 내용 스크롤바 스타일 */
 .table-content-wrapper {
 	height: 400px; /* Set the desired height for the scrollable area */
 	overflow-y: auto;
