@@ -63,6 +63,20 @@
                         	<!-- 반복될 곳 -->
                         	
                         	
+             <div class= "mem-info qna-info" id = "c" >
+			<div class= "mem-pic">
+			<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
+			</div>
+			<div class= "mem-deinfo">
+			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
+			<textarea class= "qna-content" readOnly>이런저런 이야기들</textarea><br>	
+			</div>
+			<div class= "qna-btns-area">
+			<button type ="button" class= "answer-insert-btn" data-clubmemno= "">답변등록</button>
+			</div>
+			</div>
+                        	
+                        	
 
 						
 						
@@ -80,6 +94,31 @@
 <c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
     <!--/wrap-->
     
+ 
+        <!-- 모달창 -->
+    	  <div class="modal fade" id="qna-modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+	    <div class="modal-dialog" role="document" style="max-width: 900px;">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h5 class="modal-title" id="imageModalLabel">답변하기</h5>
+	        </div>
+	        <div class="modal-body">
+	          <!-- 이미지가 표시될 곳 -->
+			  <div class= "qna-answer-area">
+				<textarea class= "qna-answer"></textarea>
+			  </div>
+	          <!-- 수정 , 취소 버튼-->
+	          <div class= "edit-modal-btn-area">
+	          <button id="answer-insert-btn" class="btn">수정</button>
+	          <button id="cancel-btn" class="btn">취소</button>
+	          </div>
+	          <span id="likeCount"></span>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    <!-- 모달창 -->
+ 
  
     
 </body>
@@ -104,85 +143,24 @@
         if (!lastEntry.isIntersecting) return;
 
         getData();
-		console.log('테스트');
+
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
 
 	
-	//가입 승인 버튼 클릭 이벤트
-	$('.list-area').on("click",'.new-mem-btn', function(){
-		var clubMemNo = $(this).data('clubmemno');
-		var clubId = ${club.clubId}
-		var memLevel = 2;
-		
-		
-		var ClubVO = {
-				clubMemNo : clubMemNo,
-				memlevel : 	memLevel,
-				clubId : clubId
-		}
-		
-		joinrequest(ClubVO);	
-		
-	}); //가입 승인 이벤트 end
+
+
 	
 	
-	//가입 거절 버튼 클릭 이벤트
-	$('.list-area').on("click",'.no-mem-btn', function(){
-		var clubMemNo = $(this).data('clubmemno');
-		var memLevel = -99;
-		var clubId = ${club.clubId}
-		alert(clubMemNo);
-		
-		var ClubVO = {
-				clubMemNo : clubMemNo,
-				memlevel : 	memLevel,
-				clubId : clubId
-		}
-		
-		joinrequest(ClubVO);
-		
-		
+	//모달창 닫는 이벤트
+	$('#cancel-btn').on("click", function(){
+		$('#qna-modal').modal('hide');
+	})
+	
+	$('.list-area').on("click",".answer-insert-btn",function(){
+		$('#qna-modal').modal('show');
 	});
-	
-	//버튼 클릭 처리 AJAX
-	function joinrequest(ClubVO){
-		
-		
-		 $.ajax({
-		       
-		       //요청 세팅
-		       url : "${pageContext.request.contextPath}/management/club/joinrequest",
-		       type : "post",
-		       data : ClubVO,
-		       
-		       //응답 세팅
-		       dataType : "json",
-		       success : function(jsonResult){
-		    	   var data = jsonResult.data;
-		    	   
-		    	   //1은 승인, 0은 거절, -99는 남은 인원 수 없음
-		    	   switch(data){
-		    		   
-		    	   	case 1: alert('가입승인이 완료되었습니다.');
-		    	   			$('#c' +ClubVO.clubMemNo).remove();
-		    	   			break;
-		    	   	case 0:	alert('거절이 완료되었습니다.');
-    	   					$('#c' +ClubVO.clubMemNo).remove();
-		    	   			break;
-		    	   	case -99: alert('승인 가능 인원을 초과하였습니다.');
-		    	   }
-					
-		       }, //success end
-		       error : function(XHR, status, error) {
-		       console.error(status + " : " + error);
-		       }
-						            
-		    });//ajax end
-		}
-		
-	
 	
 	
 	//가입요청한 유저 목록 볼 수 있는 
@@ -199,7 +177,7 @@
 		 $.ajax({
 		       
 		       //요청 세팅
-		       url : "${pageContext.request.contextPath}/management/club/requestlist",
+		       url : "${pageContext.request.contextPath}/management/club/qnalist",
 		       type : "post",
 		       data : MemberVo,
 		       
@@ -207,9 +185,9 @@
 		       dataType : "json",
 		       success : function(jsonResult){
 		    	   
-		    	   var memberList = jsonResult.data;
-					console.log(memberList);
-					render(memberList);
+		    	   var qnaList = jsonResult.data;
+					console.log(qnaList);
+					render(qnaList);
 					startNum +=10;
 					endNum += 10;
 					
@@ -222,27 +200,21 @@
 	}
 	
 	
-	function render(memberList){
+	function render(qnaList){
 		
-		memberList.forEach(function(member) {
+		qnaList.forEach(function(qna) {
 
 			var add = '';
-			add +=  '<div class= "mem-info" id = "c' + member.clubmemNo  + '" + >'
+			add +=  '<div class= "mem-info qna-info" id = "c' + qna.qnaNo  + '" + >'
 			add += 	'	<div class= "mem-pic">'
 			add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
 			add +=     '</div>';
 			add += '    		<div class= "mem-deinfo">';
-			add += '				<span><b>'+  member.memberName  +'</b> <strong>@'+ member.memberId +'</strong></span><br>';
-			add += '				<span>'+ member.memberPhone+'</span><br>';
-			add += '    			<span class= "tag-list">';
-				member.tagList.forEach(function(tag){
-					add += '#' + tag.tagName + ' '
-				})
-			add += '				</span>'		
+			add += '				<span><b>'+  qna.memberName  +'</b> <strong>@'+ qna.memberId +'</strong></span><br>';
+			add += '				<textarea class= "qna-content" readOnly>'+ qna.qnaContent+'</textarea><br>';		
 			add	+= '    		</div>'
-			add += '    <div class= "info-btns-area">';
-			add += '			<button type ="button" class= "new-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입승인</button>';
-			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입거절</button>';
+			add += '    <div class= "qna-btns-area">';
+			add += '			<button type ="button" class= "answer-insert-btn" data-qnano = "'+ qna.qnaNo +'">답변등록</button>';
 			add += '	</div>'
 			add += '</div>'
 			

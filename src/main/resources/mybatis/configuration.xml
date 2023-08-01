@@ -16,6 +16,7 @@
 	<typeAlias type="com.firmeet.vo.TagVo" alias="tag"/>
 	<typeAlias type="com.firmeet.vo.PayresultVO" alias="pay"/>
 	<typeAlias type="com.firmeet.vo.CategoryVo" alias="category"/>
+	<typeAlias type="com.firmeet.vo.QnaVO" alias="qna"/>
 	</typeAliases>
 
 	<mappers>

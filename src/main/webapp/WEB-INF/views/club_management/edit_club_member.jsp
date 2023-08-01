@@ -44,6 +44,7 @@
             	<div class= "manage-menu">
 				<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
 				<a href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
+				<a href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
 				<a href = "#">정보수정</a>
             	</div>
             </div>
@@ -63,22 +64,7 @@
                         	
                         	
 
-						
-                        	
-                        	<div class= "mem-info clubMem-info" id = "c"><!--에이잭스로 삭제해야해서 아이디 줄 예정-->
-                        		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
-                        		<div class= "mem-deinfo">
-                        			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
-                        			<span>010-3782-2337</span><br>
-                        			<span class= "tag-list">#intp #취미부자 #집돌이</span>
-                        			<span class= "mem-level-name">매니저</span>
-                        		</div>
-                        		<div class= "info-btns-area editPage-btns">
-                        			<button type ="button" class= "new-mem-btn" data-clubmemno>등급변경</button>
-                        			<button type ="button" class= "no-mem-btn" data-clubmemno>회원강퇴</button>
-                        		</div>
-                        	</div>
-						
+ 
 						
                         	<!-- 반복될 곳 -->
                         </div>
@@ -116,7 +102,7 @@
 						<option value =0>호스트</option>
 					</select>
 			  </div>
-	          <!-- 좋아요 버튼 -->
+	          <!-- 수정 , 취소 버튼-->
 	          <div class= "edit-modal-btn-area">
 	          <button id="grade-edit-btn" class="btn btn-primary">수정</button>
 	          <button id="cancel-btn" class="btn btn-danger">취소</button>
@@ -131,6 +117,7 @@
 </body>
 
 <script>
+	
 	
 
 /* 무한 스크롤용 JS */
@@ -193,9 +180,21 @@
 		       //응답 세팅
 		       dataType : "json",
 		       success : function(jsonResult){
-			
-		    	   
-		    	   
+				
+		    	   var data = jsonResult.data;
+		    	   console.log(data);
+		    	   	if(data== true){
+		    	   		$('#c' + clubmemNo + ' .edit-mem-btn').data('memlevel',memberLevel);
+		    	   		switch(memberLevel){
+		    	   		case "0":	$('#c' + clubmemNo + ' .mem-level-name').html('호스트'); break;
+		    	   		case "1":	$('#c' + clubmemNo + ' .mem-level-name').html('매니저'); break;
+		    	   		case "2":	$('#c' + clubmemNo + ' .mem-level-name').html('베이직'); break;
+		    	   		default:  $('#c' + clubmemNo + ' .mem-level-name').html('확인'); break;
+		    	   		}
+
+		    			$('#edit-grade-modal').modal('hide');
+		    	   	}
+		    	   	console.log($('#c' + clubmemNo + ' .edit-mem-btn').data('memlevel'));
 		       }, //success end
 		       error : function(XHR, status, error) {
 		       console.error(status + " : " + error);
@@ -203,20 +202,48 @@
 						            
 		    });//ajax end
 		 
-	});
+	});//등급 수정버튼 2차 end
 	
 	
 	//회원 강퇴 버튼 클릭 이벤트
 	$('.list-area').on("click",'.no-mem-btn', function(){
 		var clubMemNo = $(this).data('clubmemno');
-		var memLevel = -99;
-		var clubId = ${club.clubId}
 		
-		var ClubVO = {
-				clubMemNo : clubMemNo,
-				memlevel : 	memLevel,
-				clubId : clubId
-		}
+			if(!confirm("정말 강퇴시키겠습니까?")){
+				return false;
+			}	
+		
+		
+			var ClubVO = {
+				 clubMemNo : clubMemNo
+			 }
+		
+		 $.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/management/club/kickout",
+		       type : "post",
+		       data : ClubVO,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+				
+		    	   var data = jsonResult.data;
+		    	   
+		    	   if(data==true){
+		    		   $('#c'+clubMemNo).remove();
+		    		   $('#edit-grade-modal').modal('hide');
+		    	   }else{
+		    		   alert('삭제에 실패했습니다.');
+		    	   }
+		    	   
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
 		
 		
 	});

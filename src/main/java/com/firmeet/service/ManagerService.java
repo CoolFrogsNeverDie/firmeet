@@ -9,6 +9,7 @@ import com.firmeet.dao.ClubDao;
 import com.firmeet.dao.MemberDao;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.QnaVO;
 import com.firmeet.vo.TagVo;
 
 @Service
@@ -56,8 +57,21 @@ public class ManagerService {
 	}
 
 	public boolean changeGrade(MemberVo memberVO) {
+		boolean result = false;
+		result = memberDAO.updateMemGrade(memberVO) >0? true: false;
 		
-		int row = memberDAO.updateMemGrade(memberVO);
-		return false;
+		return result;
+	}
+
+	public boolean kickoutMem(ClubVo clubVO) {
+		boolean result = false;
+		result = memberDAO.deleteClubMem(clubVO) >0? true: false;
+		
+		return result;
+	}
+
+	public List<QnaVO> getClubQna(MemberVo memberVO) {
+		List<QnaVO> qnaList = clubDAO.getClubQnaList(memberVO);
+		return qnaList;
 	}
 }

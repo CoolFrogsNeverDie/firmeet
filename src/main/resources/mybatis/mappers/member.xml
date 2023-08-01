@@ -160,4 +160,13 @@
 		]]>
 	</select>
 	
+	
+	<update id = "changeMemLevel" parameterType = "member" >
+		<![CDATA[
+			update club_member 
+				set 
+				memLevel = #{memLevel}
+				where clubMemNo = #{clubmemNo}
+		]]>
+	</update>
 </mapper>

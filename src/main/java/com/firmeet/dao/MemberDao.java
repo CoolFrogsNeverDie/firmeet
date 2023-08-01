@@ -75,8 +75,8 @@ public class MemberDao {
 	}
 
 	public int deleteClubMem(ClubVo clubVO) {
-		int row = 0;
-		sqlsession.delete("member.deleteClubMem", clubVO);
+		
+		int row = sqlsession.delete("member.deleteClubMem", clubVO);
 		
 		return row;
 	}
@@ -89,6 +89,9 @@ public class MemberDao {
 
 	public int updateMemGrade(MemberVo memberVO) {
 		System.out.println("여기까지 오는지 확인 업데이트용" + memberVO);
-		return 0;
+		int row = sqlsession.update("member.changeMemLevel", memberVO);
+		System.out.println("업데이트 여부 확인 " + row);
+		return row;
 	}
+
 }

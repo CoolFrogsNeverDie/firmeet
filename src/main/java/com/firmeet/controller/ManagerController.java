@@ -19,6 +19,7 @@ import com.firmeet.service.ManagerService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.QnaVO;
 
 @RequestMapping("/management")
 @Controller
@@ -92,7 +93,34 @@ public class ManagerController {
         }
 	}
 	
-	
+	@RequestMapping("/club/qna/{clubId}")
+	public String qnaPage(@PathVariable("clubId") int clubId
+			   			  ,HttpSession session
+			   			  ,Model model) {
+		System.out.println("넘어오는 정보값 확인" + clubId);
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        
+        if (member != null) {
+            memberId = member.getMemberId();
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+            
+            //회장일 시 해당 페이지 접근함
+            if(club.getMemlevel() == 0) {
+            	return "club_management/qna_answer";
+            }
+            //호스트가 아닐 시 동호회 메인 페이지로 이동
+            return "redirect:/club/main/"+club.getClubId();
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+	}
 	
 	
 	
@@ -146,9 +174,30 @@ public class ManagerController {
 		JsonResult jsonResult = new JsonResult();
 		System.out.println("등급변경 위해서 넘어오는 정보 확인" + memberVO);
 		boolean result = managerService.changeGrade(memberVO);
+		jsonResult.success(result);
 		
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/kickout" , method = RequestMethod.POST)
+	public JsonResult kickoutMem(@ModelAttribute ClubVo clubVO) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("ㄷㄷㄷㄷ 삭제 위해 넘어오는 정보 확인 " + clubVO);
+		boolean result = managerService.kickoutMem(clubVO);
+		jsonResult.success(result);
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/club/qnalist", method=RequestMethod.POST)
+	public JsonResult getQnaList(@ModelAttribute MemberVo memberVO) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("QNA 등록을 위해 넘어온 정보들" + memberVO);
+		List<QnaVO> qnaList = managerService.getClubQna(memberVO);
+		jsonResult.success(qnaList);
 		
-		return null;
+		return jsonResult;
 	}
 	
 }

@@ -13,6 +13,8 @@ import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubQnaVo;
 import com.firmeet.vo.ClubVo;
+import com.firmeet.vo.MemberVo;
+import com.firmeet.vo.QnaVO;
 import com.firmeet.vo.TagVo;
 
 @Repository
@@ -218,6 +220,13 @@ public class ClubDao {
 		int result =  session.selectOne("club.checkClubMax",clubVO);
 		
 		return result;
+	}
+
+	public List<QnaVO> getClubQnaList(MemberVo memberVO) {
+		
+		List<QnaVO> qnaList = session.selectList("club.getClubQnaList", memberVO);
+		
+		return qnaList;
 	}
 	
 	

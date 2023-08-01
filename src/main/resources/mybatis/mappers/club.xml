@@ -373,4 +373,52 @@
     		
     </select> -->
     
+   	<select id = "checkClubMax" parameterType ="club" resultType ="int">
+    	<![CDATA[
+    		select 
+            	CASE WHEN (
+            		SELECT 
+            			COUNT(memberId) 
+            		FROM club_member 
+            		WHERE clubId = a.clubId and memlevel != -10
+            		) >= max 
+            	THEN 0 ELSE 1 END AS joinYN
+        	from club a where a.clubId = #{clubId}
+    	]]>
+    </select>
+    
+    <select id = "getClubQnaList" parameterType ="member" resultType ="qna">
+    	<![CDATA[
+    		select
+            	QNANO as qnaNo
+           		,memberId
+            	,qnaDate 
+            	, qnaCotent as qnaContent
+            	, memberName
+        	from(
+        		select
+            		rownum as rs
+            		,QNANO
+            		,memberId
+            		,qnaDate 
+            		, qnaCotent
+            		, memberName
+        		from(
+        			select
+            			QNANO
+            			,a.memberId
+            			,qnaDate 
+            			, qnaCotent
+            			, memberName
+        			from club_qna a 
+        			join member b 
+        			on a.memberId = b.memberId 
+        			where clubId = #{clubId}
+        			and answercontent is null 
+        			order by qnaNo desc
+        			)
+        		) 
+        	where rs between #{startNum} and #{endNum}
+    	]]>
+    </select>
 </mapper>
