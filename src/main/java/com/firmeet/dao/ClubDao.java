@@ -228,6 +228,14 @@ public class ClubDao {
 		
 		return qnaList;
 	}
+
+	public int updateQnaAnswer(QnaVO qnaVO) {
+		
+		System.out.println("여기까지 값 오는지 확인 : " + qnaVO);
+		int row = session.update("club.updateQnaAnswer",qnaVO); 
+				
+		return row;
+	}
 	
 	
 }

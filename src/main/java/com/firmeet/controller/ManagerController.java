@@ -196,8 +196,22 @@ public class ManagerController {
 		System.out.println("QNA 등록을 위해 넘어온 정보들" + memberVO);
 		List<QnaVO> qnaList = managerService.getClubQna(memberVO);
 		jsonResult.success(qnaList);
+		System.out.println("QNA등록 위해 넘어온 정보들 " + qnaList);
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/qnaanswer", method = RequestMethod.POST)
+	public JsonResult addQnaAnswer(@ModelAttribute QnaVO qnaVO) {
+		
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("넘어오는 값 확인" + qnaVO);
+		boolean result = managerService.addQnaAnswer(qnaVO);
+		
+		jsonResult.success(result);
 		
 		return jsonResult;
 	}
+	
 	
 }

@@ -421,4 +421,15 @@
         	where rs between #{startNum} and #{endNum}
     	]]>
     </select>
+    <update id = "updateQnaAnswer" parameterType ="qna">
+    	<![CDATA[
+			update club_qna 
+			set 
+				answerContent = #{answerContent} 
+				,answerDate = sysdate 
+			where qnaNo = #{qnaNo}   	
+    	]]>
+    </update>
+    
+    
 </mapper>

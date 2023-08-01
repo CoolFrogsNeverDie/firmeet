@@ -141,7 +141,7 @@ dd:hover{
 .diary-area .search-board {
     left: 427px;
     width: 300px;
-    position: fixed;
+	position: absolute;
     border-radius: 25px;
     border: 1px solid black;
     top: 151px;
@@ -466,6 +466,7 @@ height: 35px;
 	margin-right: 10px;
 }
 
+
 .list-area {
     height: 619px;
     margin-left: 30px;
@@ -473,6 +474,22 @@ height: 35px;
     border-radius: 10px;
     background-color: #f1f1f1;
     padding-left: 10px;
+}
+.list-area .error-page{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.list-area .error-icon{
+	width:100px;
+}
+.list-area .clear-div{
+	height:10px;
+}
+.clear-div{
+	width:1010px;
 }
 .mem-info {
     height: 143px;

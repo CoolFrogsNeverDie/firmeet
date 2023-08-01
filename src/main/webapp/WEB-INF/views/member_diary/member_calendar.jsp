@@ -868,7 +868,6 @@ function render(){
 	    });
 
 	    calendar.render();
-		
 	}
 	
 	
@@ -879,8 +878,8 @@ function render(){
 		var years = title.substring(0,4);
 		var month = title.substring(title.length-2,title.length-1);
 		var memberId =  $('#memId').val();
-	 	var viewOption1 =  $('#select-array').val(); 
-	 	var viewOption2 =  $('#select-club').val(); 
+	 	var viewOption2 =  $('#select-club').val(); //그룹옵션
+	 	var viewOption1 =  $('#select-array').val(); //일정 종류 옵션
 		
 	 	console.log('정보 확인  : ' + years + '달 : ' + month + '  멤버 아이디 : '  +memberId + ' 정렬 옵션 1 : ' + viewOption1 + '정렬옵션2: ' + viewOption2)
 		

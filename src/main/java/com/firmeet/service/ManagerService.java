@@ -74,4 +74,12 @@ public class ManagerService {
 		List<QnaVO> qnaList = clubDAO.getClubQnaList(memberVO);
 		return qnaList;
 	}
+
+	public boolean addQnaAnswer(QnaVO qnaVO) {
+		boolean result = false;
+		
+		result = clubDAO.updateQnaAnswer(qnaVO)>0?true:false;
+		
+		return result;
+	}
 }

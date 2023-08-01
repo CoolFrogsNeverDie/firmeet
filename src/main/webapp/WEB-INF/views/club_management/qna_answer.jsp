@@ -62,21 +62,7 @@
                         	
                         	<!-- 반복될 곳 -->
                         	
-                        	
-             <div class= "mem-info qna-info" id = "c" >
-			<div class= "mem-pic">
-			<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
-			</div>
-			<div class= "mem-deinfo">
-			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
-			<textarea class= "qna-content" readOnly>이런저런 이야기들</textarea><br>	
-			</div>
-			<div class= "qna-btns-area">
-			<button type ="button" class= "answer-insert-btn" data-clubmemno= "">답변등록</button>
-			</div>
-			</div>
-                        	
-                        	
+                
 
 						
 						
@@ -105,7 +91,7 @@
 	        <div class="modal-body">
 	          <!-- 이미지가 표시될 곳 -->
 			  <div class= "qna-answer-area">
-				<textarea class= "qna-answer"></textarea>
+				<textarea class= "qna-answer" id = "qna-answer"></textarea>
 			  </div>
 	          <!-- 수정 , 취소 버튼-->
 	          <div class= "edit-modal-btn-area">
@@ -143,24 +129,67 @@
         if (!lastEntry.isIntersecting) return;
 
         getData();
-
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
 
 	
-
-
-	
-	
 	//모달창 닫는 이벤트
 	$('#cancel-btn').on("click", function(){
 		$('#qna-modal').modal('hide');
+		$('.qna-answer').val("");
 	})
-	
+	//문의 등록하기 버튼 클릭
 	$('.list-area').on("click",".answer-insert-btn",function(){
+		var qnaNo = $(this).data('qnano');
+		$('#answer-insert-btn').data('qnano',qnaNo);
 		$('#qna-modal').modal('show');
+		$('#qna-modal textarea').focus();
 	});
+	//답변 등록
+	$('#answer-insert-btn').on("click", function(){
+		var qnaNo = $(this).data('qnano');
+		var content = $('#qna-answer').val();
+		
+		var QnaVO ={
+				qnaNo :	qnaNo,
+				answerContent : content
+		}
+		addAnswer(QnaVO);
+	});
+	
+	
+	
+	
+	//QNA 에 답변 등록
+	function addAnswer(QnaVO){
+			
+		
+		$.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/management/club/qnaanswer",
+		       type : "post",
+		       data : QnaVO,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+		    	   var data = jsonResult.data;
+		    	   if(data==true){
+		    		   alert('답변등록이 완료되었습니다.');
+		    		   $('#qna-modal').modal('hide');
+		    		   $('.qna-answer').val("");
+		    		   $('#c' + QnaVO.qnaNo).remove();
+		    	   }
+					
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+		}
 	
 	
 	//가입요청한 유저 목록 볼 수 있는 
@@ -172,6 +201,7 @@
 				startNum : startNum,
 				endNum : endNum
 		}
+		
 		
 		console.log(MemberVo + '에이젝스로 넘어갈 값 확인' + clubId);
 		 $.ajax({
@@ -186,10 +216,11 @@
 		       success : function(jsonResult){
 		    	   
 		    	   var qnaList = jsonResult.data;
-					console.log(qnaList);
-					render(qnaList);
-					startNum +=10;
-					endNum += 10;
+					if(qnaList.length > 0){
+						render(qnaList);
+						startNum +=10;
+						endNum += 10;
+					}
 					
 		       }, //success end
 		       error : function(XHR, status, error) {
@@ -205,7 +236,7 @@
 		qnaList.forEach(function(qna) {
 
 			var add = '';
-			add +=  '<div class= "mem-info qna-info" id = "c' + qna.qnaNo  + '" + >'
+			add +=  '<div class= "mem-info qna-info" id = "c' + qna.qnaNo  + '">'
 			add += 	'	<div class= "mem-pic">'
 			add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
 			add +=     '</div>';

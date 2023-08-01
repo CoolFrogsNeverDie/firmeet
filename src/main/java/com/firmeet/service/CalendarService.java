@@ -38,11 +38,15 @@ public class CalendarService {
 	
 	public Map<String, Object> getMemSche(CalendarVO calendarVO){
 		Map<String, Object> scheList = new HashMap<>();
+		//일정 종류(일정, 결제) 옵션 viewOption 1, 그룹 옵션 viewOption2
+		//나의 일정만 보기가 아니라면 그룹 일정 가져오기
 		
 		if(calendarVO.getViewOption2() != -88) {
 			List<ScheduleVO> clubSche = scheduleDAO.getMemClubSche(calendarVO);
 			scheList.put("clubSche", clubSche);
+		//전체보기나 나의 일정보기면 개인 일정 가져오기
 		}if(calendarVO.getViewOption2() == -99 || calendarVO.getViewOption2() == -88) {
+			System.out.println("개인 일정 받아올 거임!");
 			List<ScheduleVO> perSche = scheduleDAO.getMemPerSche(calendarVO);
 			scheList.put("perSche", perSche);
 		}

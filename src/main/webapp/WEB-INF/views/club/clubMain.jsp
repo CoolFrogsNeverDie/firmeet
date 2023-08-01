@@ -138,7 +138,15 @@ let calendar;
 	           },
 		    locale: 'en',
 	    	initialView: 'dayGridMonth',
-	    	selectable: false
+	    	contentHeight: 364,
+	    	selectable: false,
+	    	contentHeight:function(){
+	    		if(screen.width<800){
+	    		    return 500;
+	    		    }else{
+	    		    return 850;
+	    		    }
+	    		},
 	    });
 		
 	    calendar.render();

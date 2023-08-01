@@ -21,8 +21,11 @@
 			where a.clubID = #{clubId} 	
 		]]>
 		<if test = "years !=null">
-			and meetyear in #{years}
-			and meetmon = #{month}
+			and (TO_CHAR(startDate, 'YYYY') = #{years}
+        	and TO_CHAR(startDate, 'MM') = #{month})
+            or
+			(TO_CHAR(endDate, 'YYYY') = #{years}
+        	and TO_CHAR(endDate, 'MM') = #{month})
 		</if>
 		<if test="viewOption1 ==2">
 			and b.aboardVal = 2
@@ -55,6 +58,7 @@
 		resultType="schedule">
 		<![CDATA[
 			select
+				distinct
        			 b.aboardNo as boardNo
         		,b.aboardval as meetCate
         		,a.clubId as clubId
@@ -69,8 +73,12 @@
                 from meet_name a join  aboard b on a.meetNo = b.meetNo
                 join club c on c.clubId = b.clubId
                 join club_member d on c.clubId = d.clubId 
-                where d.memberId = #{memberId} and meetyear in #{years}
-                and meetmon= #{month}
+                where d.memberId = #{memberId} 
+				and (TO_CHAR(startDate, 'YYYY') = #{years}
+        		and TO_CHAR(startDate, 'MM') = #{month})
+            	or
+				(TO_CHAR(endDate, 'YYYY') = #{years}
+        		and TO_CHAR(endDate, 'MM') = #{month})
 		]]>
 		<if test="viewOption1 ==2">
 			and b.aboardVal = 2
@@ -171,7 +179,7 @@
 		]]>
 	</delete>
 	
-	
+	<!-- 개인일정 업데이트 -->
 	<update id = "updatePerSche" parameterType = "schedule">
 		<![CDATA[
        		update  my_schedule 

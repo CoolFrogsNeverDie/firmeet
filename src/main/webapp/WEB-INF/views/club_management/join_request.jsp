@@ -62,9 +62,20 @@
                         	
                         	<!-- 반복될 곳 -->
                         	
-                        	
-
-						
+<!-- 
+							<div class= "error-page">
+								<div>
+								<img class="error-icon" src ="${pageContext.request.contextPath}/assets/images/icon/error.png">
+								</div>
+								<div class= "clear-div">
+								</div>
+								<div>
+								<span>
+								 <b>존재하는 가입 요청이 없습니다!</b>
+								</span>
+								</div>
+							</div>
+ -->                        	
 						
                         	<!-- 반복될 곳 -->
                         </div>
@@ -146,6 +157,18 @@
 		
 	});
 	
+	//리스트 확인 후 없으면 html 리턴
+	function checkList(){
+		
+		 var hasClass = $(".list-area .mem-info").length > 0;
+		
+		 if(!hasClass){
+			 noData();
+		 }
+		 
+	}
+	
+	
 	//버튼 클릭 처리 AJAX
 	function joinrequest(ClubVO){
 		
@@ -167,9 +190,11 @@
 		    		   
 		    	   	case 1: alert('가입승인이 완료되었습니다.');
 		    	   			$('#c' +ClubVO.clubMemNo).remove();
+		    	   			checkList();
 		    	   			break;
 		    	   	case 0:	alert('거절이 완료되었습니다.');
     	   					$('#c' +ClubVO.clubMemNo).remove();
+    	   					checkList();
 		    	   			break;
 		    	   	case -99: alert('승인 가능 인원을 초과하였습니다.');
 		    	   }
@@ -209,9 +234,14 @@
 		    	   
 		    	   var memberList = jsonResult.data;
 					console.log(memberList);
-					render(memberList);
-					startNum +=10;
-					endNum += 10;
+					if(memberList.length >0){
+						render(memberList);
+						startNum +=10;
+						endNum += 10;
+						
+					}else if(memberList.length == 0 & startNum ==1){
+						checkList();
+					}
 					
 		       }, //success end
 		       error : function(XHR, status, error) {
@@ -219,6 +249,25 @@
 		       }
 						            
 		    });//ajax end
+	}
+	
+	function noData(){
+		
+		var add = '';
+		add += '<div class= "error-page">'
+		add += '	<div>'
+		add += '		<img class="error-icon" src ="${pageContext.request.contextPath}/assets/images/icon/error.png">'
+		add += '	</div>'
+		add += '	<div class= "clear-div">'
+		add += '	</div>'
+		add += '	<div>'
+		add += '		<span>'
+		add += '		 	<b>존재하는 가입 요청이 없습니다!</b>'
+		add += '		</span>'
+		add += '	</div>'
+		add += '</div>'
+		
+		$('.list-area').append(add);
 	}
 	
 	
