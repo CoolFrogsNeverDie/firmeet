@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
+import com.firmeet.service.ManagerService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
@@ -27,7 +28,8 @@ public class ManagerController {
 	ClubService clubService;
 	@Autowired
 	MemberService memberService;
-	
+	@Autowired
+	ManagerService managerService;
 	
 	@RequestMapping("/club/{clubId}")
 	public String memberManagement(@PathVariable("clubId") int clubId
@@ -72,5 +74,19 @@ public class ManagerController {
 		
 		return jsonResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/joinrequest", method= RequestMethod.POST)
+	public JsonResult joinRequest(@ModelAttribute ClubVo vo) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("회원 관리를 위해 AJAX로 넘어온 정보" + vo);
+		
+		int result = managerService.joinRequest(vo);
+		
+		jsonResult.success(result);
+		
+		return jsonResult;
+	}
+	
 	
 }

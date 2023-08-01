@@ -10,7 +10,7 @@ public class MemberVo {
 	private String memberName;
 	private String memberPw;
 	private int memberPri;
-	
+	private int memLevel;
 	private int[] tagNo;
 	private int cateNo;
 	private int clubmemNo;
@@ -199,18 +199,24 @@ public class MemberVo {
 		this.tagList = tagList;
 	}
 
+	public int getMemLevel() {
+		return memLevel;
+	}
+	
+	
+	public void setMemLevel(int memLevel) {
+		this.memLevel = memLevel;
+	}
+
 
 	@Override
 	public String toString() {
 		return "MemberVo [memberId=" + memberId + ", memberPhone=" + memberPhone + ", memberName=" + memberName
-				+ ", memberPw=" + memberPw + ", memberPri=" + memberPri + ", tagNo=" + Arrays.toString(tagNo)
-				+ ", cateNo=" + cateNo + ", clubmemNo=" + clubmemNo + ", category=" + category + ", cateVo=" + cateVo
-				+ ", tagVo=" + tagVo + ", tagList=" + tagList + ", startNum=" + startNum + ", endNum=" + endNum
-				+ ", clubId=" + clubId + "]";
+				+ ", memberPw=" + memberPw + ", memberPri=" + memberPri + ", memLevel=" + memLevel + ", tagNo="
+				+ Arrays.toString(tagNo) + ", cateNo=" + cateNo + ", clubmemNo=" + clubmemNo + ", category=" + category
+				+ ", cateVo=" + cateVo + ", tagVo=" + tagVo + ", tagList=" + tagList + ", startNum=" + startNum
+				+ ", endNum=" + endNum + ", clubId=" + clubId + "]";
 	}
-
-
-	
 
 	
 }

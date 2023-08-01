@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
@@ -68,5 +69,15 @@ public class MemberDao {
 		return tagList;
 	}
 
-	
+	public int updateMemLevel(ClubVo clubVO) {
+		int row = sqlsession.update("member.updateMemLevel", clubVO);
+		return row;
+	}
+
+	public int deleteClubMem(ClubVo clubVO) {
+		int row = 0;
+		sqlsession.delete("member.deleteClubMem", clubVO);
+		
+		return row;
+	}
 }

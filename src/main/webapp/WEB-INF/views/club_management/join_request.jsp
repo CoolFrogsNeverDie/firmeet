@@ -120,6 +120,83 @@
     lastBoardObserver.observe(lastBoard[0]);
 
 	
+	//가입 승인 버튼 클릭 이벤트
+	$('.list-area').on("click",'.new-mem-btn', function(){
+		var clubMemNo = $(this).data('clubmemno');
+		var clubId = ${club.clubId}
+		var memLevel = 2;
+		
+		alert(clubMemNo);
+		
+		var ClubVO = {
+				clubMemNo : clubMemNo,
+				memlevel : 	memLevel,
+				clubId : clubId
+		}
+		
+		joinrequest(ClubVO);	
+		
+	}); //가입 승인 이벤트 end
+	
+	
+	//가입 거절 버튼 클릭 이벤트
+	$('.list-area').on("click",'.no-mem-btn', function(){
+		var clubMemNo = $(this).data('clubmemno');
+		var memLevel = -99;
+		var clubId = ${club.clubId}
+		alert(clubMemNo);
+		
+		var ClubVO = {
+				clubMemNo : clubMemNo,
+				memlevel : 	memLevel,
+				clubId : clubId
+		}
+		
+		joinrequest(ClubVO);
+		
+		
+	});
+	
+	//버튼 클릭 처리 AJAX
+	function joinrequest(ClubVO){
+		
+		
+		 $.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/management/club/joinrequest",
+		       type : "post",
+		       data : ClubVO,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+		    	   var data = jsonResult.data;
+		    	   
+		    	   //1은 승인, 0은 거절, -99는 남은 인원 수 없음
+		    	   switch(data){
+		    		   
+		    	   	case 1: alert('가입승인이 완료되었습니다.');
+		    	   			$('#c' +ClubVO.clubMemNo).remove();
+		    	   			break;
+		    	   	case 0:	alert('거절이 완료되었습니다.');
+    	   					$('#c' +ClubVO.clubMemNo).remove();
+		    	   			break;
+		    	   	case -99: alert('승인 가능 인원을 초과하였습니다.');
+		    	   }
+					
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+		}
+		
+	
+	
+	
+	//가입요청한 유저 목록 볼 수 있는 
 	function getData(){
 		var clubId = $('.diary-area').data('clubid');
 	
@@ -145,7 +222,7 @@
 					console.log(memberList);
 					startNum +=10;
 					endNum += 10;
-					//render(memberList);
+					render(memberList);
 					
 		       }, //success end
 		       error : function(XHR, status, error) {
@@ -159,43 +236,31 @@
 	function render(memberList){
 		
 		memberList.forEach(function(member) {
-/* 			
-        	<div class= "mem-info" id = "c">
-    		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
-    		<div class= "mem-deinfo">
-    			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
-    			<span>010-3782-2337</span><br>
-    			<span>#intp #취미부자 #집돌이</span>
-    		</div>
-    		<div class= "info-btns-area">
-    			<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>
-    			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>
-    		</div>
-    	</div> */
-			
+
 			var add = '';
-			add +=  '<a class= "mem-info" id = "c' + member.clubmemNo  + '" + >'
+			add +=  '<div class= "mem-info" id = "c' + member.clubmemNo  + '" + >'
 			add += 	'	<div class= "mem-pic">'
 			add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
-			add +=      +'</div>';
+			add +=     '</div>';
 			add += '    		<div class= "mem-deinfo">';
-			add += '<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>';
-			add += '<span>010-3782-2337</span><br>';
-			add += '    			<span>#intp #취미부자 #집돌이</span>';
+			add += '				<span><b>'+  member.memberName  +'</b> <strong>@'+ member.memberId +'</strong></span><br>';
+			add += '				<span>'+ member.memberPhone+'</span><br>';
+			add += '    			<span>';
+				member.tagList.forEach(function(tag){
+					add += '#' + tag.tagName + ' '
+				})
+			add += '				</span>'		
 			add	+= '    		</div>'
-			add += '    		<div class= "info-btns-area">';
-			add += '	<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>';
-			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>';
+			add += '    <div class= "info-btns-area">';
+			add += '			<button type ="button" class= "new-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입승인</button>';
+			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입거절</button>';
 			add += '	</div>'
 			add += '</div>'
 			
 			
 			
 			$('.list-area').append(add);
-			
 		});
-	
-		
 	}
 	
  

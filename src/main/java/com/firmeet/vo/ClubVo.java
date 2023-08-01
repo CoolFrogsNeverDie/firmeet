@@ -24,21 +24,20 @@ public class ClubVo {
 	private String detailW;
 	private int[] tagNo; /* form=>컨트롤러 */
 	private List<TagVo> clubTagList;
-	private CategoryVo cateVO; 
+	private CategoryVo cateVO;
 	private TagVo tagVo;
 	private int memlevel;
-	
-	
+	private int clubMemNo;
+
 	/* public List<TagVo> tagList; */ /* DB=>화면 */
-	
+
 	private int cateNo;
 	private String category;
 
 	public ClubVo() {
 		super();
 	}
- 
-	
+
 	public ClubVo(int clubId, String clubName, int memlevel) {
 		super();
 		this.clubId = clubId;
@@ -245,22 +244,27 @@ public class ClubVo {
 		return memlevel;
 	}
 
-
 	public void setMemlevel(int memlevel) {
 		this.memlevel = memlevel;
 	}
-	
-	
 
 	public List<TagVo> getClubTagList() {
 		return clubTagList;
 	}
 
-
 	public void setClubTagList(List<TagVo> clubTagList) {
 		this.clubTagList = clubTagList;
 	}
+	
+	
+	
+	public int getClubMemNo() {
+		return clubMemNo;
+	}
 
+	public void setClubMemNo(int clubMemNo) {
+		this.clubMemNo = clubMemNo;
+	}
 
 	@Override
 	public String toString() {
@@ -269,8 +273,9 @@ public class ClubVo {
 				+ ", address2=" + address2 + ", img1=" + img1 + ", img2=" + img2 + ", detailT=" + detailT + ", detailL="
 				+ detailL + ", detailP=" + detailP + ", detailE=" + detailE + ", detailW=" + detailW + ", tagNo="
 				+ Arrays.toString(tagNo) + ", clubTagList=" + clubTagList + ", cateVO=" + cateVO + ", tagVo=" + tagVo
-				+ ", memlevel=" + memlevel + ", cateNo=" + cateNo + ", category=" + category + "]";
+				+ ", memlevel=" + memlevel + ", clubMemNo=" + clubMemNo + ", cateNo=" + cateNo + ", category="
+				+ category + "]";
 	}
-	
 
+	
 }

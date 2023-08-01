@@ -67,7 +67,7 @@
 		<![CDATA[
 			 select
 		        memberId
-		        ,CLUBMEMNO
+		        ,CLUBMEMNO as clubmemNo
 		        ,memberName
 		        ,memberPhone
 		    from(
@@ -87,15 +87,39 @@
 		                   when b.memberpri = 0 then (b.memberphone)
 		                   end as memberPhone
 		             from club_member a join member b on a.memberId = b.memberId
-		                where a.memlevel = 10 and clubId = ${clubId}))
+		                where a.memlevel = -10 and clubId = ${clubId}))
 		                where rw between #{startNum} and #{endNum}
 		]]>
 	</select>
 
-<!-- 	<select id = "getMemCate" parameterType = "member" resultType = "category">
+	<select  id="getMemTagList" parameterType="member" resultType="tag">
 		<![CDATA[
-			select 
-				
+			select
+				tagName
+			from(
+				select 
+					tagName, rank() over (order by a.tagNo) as tagRank
+				from member_tag a 
+				join tag b on a.tagNo = b.tagNo 
+				where memberId = #{memberId}
+			)
+			where tagRank <= 3	
 		]]>
-	</select> -->
+	</select>
+	<update id= "updateMemLevel" parameterType ="club">
+		<![CDATA[
+	        update club_member 
+	        	set 
+	        	MEMLEVEL = 2 
+	        	where clubMemNo = #{clubMemNo}
+		]]>
+	</update>
+	
+	
+	<delete id = "deleteClubMem" parameterType = "club">
+		<![CDATA[
+			delete club_member
+				where clubMemNo = #{clubMemNo}
+		]]>
+	</delete>
 </mapper>
