@@ -61,8 +61,48 @@ public class ManagerController {
         }
 	}
 	
+	
+	@RequestMapping("/club/editgrade/{clubId}")
+	public String editClubmember(@PathVariable("clubId") int clubId
+								   ,HttpSession session
+								   ,Model model) {
+		
+		System.out.println("넘어오는 정보값 확인" + clubId);
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        
+        if (member != null) {
+            memberId = member.getMemberId();
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+            
+            //회장일 시 해당 페이지 접근함
+            if(club.getMemlevel() == 0) {
+            	return "club_management/edit_club_member";
+            }
+            //호스트가 아닐 시 동호회 메인 페이지로 이동
+            return "redirect:/club/main/"+club.getClubId();
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@ResponseBody
-	@RequestMapping(value = "/club/memberlist", method = RequestMethod.POST)
+	@RequestMapping(value = "/club/requestlist", method = RequestMethod.POST)
 	public JsonResult getMemList(@ModelAttribute MemberVo memberVO) {
 		JsonResult jsonResult = new JsonResult();
 		
@@ -88,5 +128,27 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value ="/club/memberlist", method = RequestMethod.POST)
+	public JsonResult clubMemList(@ModelAttribute MemberVo memberVO) {
+	
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("넘어온 값 체크" + memberVO);
+		List<MemberVo> memberList = managerService.getMemList(memberVO);
+		jsonResult.success(memberList);
+		
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/changegrade", method = RequestMethod.POST)
+	public JsonResult changeGrade(@ModelAttribute MemberVo memberVO) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("등급변경 위해서 넘어오는 정보 확인" + memberVO);
+		boolean result = managerService.changeGrade(memberVO);
+		
+		
+		return null;
+	}
 	
 }

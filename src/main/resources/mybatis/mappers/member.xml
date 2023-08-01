@@ -110,7 +110,8 @@
 		<![CDATA[
 	        update club_member 
 	        	set 
-	        	MEMLEVEL = 2 
+	        	MEMLEVEL = 2
+	        	,joindate = sysdate
 	        	where clubMemNo = #{clubMemNo}
 		]]>
 	</update>
@@ -122,4 +123,41 @@
 				where clubMemNo = #{clubMemNo}
 		]]>
 	</delete>
+	
+	<select id = "clubMemList" parameterType= "member" resultType = "member">
+		<![CDATA[
+            select
+		        memberId
+		        ,CLUBMEMNO as clubmemNo
+		        ,memberName
+                ,memlevel as memLevel
+		        ,memberPhone
+                ,joinDate
+		    from(
+		          select   
+		            rownum as rw
+		            ,CLUBMEMNO
+		            ,memberId
+		            ,memberName
+                    ,memlevel
+		            ,memberPhone
+                    ,joindate
+		          from(
+		             select
+		                a.CLUBMEMNO
+		                ,a.memberId
+		                ,b.memberName
+                        ,a.memlevel
+                        ,a.joindate
+		                ,case 
+		                   when b.memberpri = 99 then '개인정보 비공개'
+		                   when b.memberpri = 0 then (b.memberphone)
+		                   end as memberPhone
+		             from club_member a join member b on a.memberId = b.memberId
+		                where a.memlevel in(0,1,2) and clubId = #{clubId}))
+		                where rw between #{startNum} and #{endNum}
+                        order by memLevel asc
+		]]>
+	</select>
+	
 </mapper>

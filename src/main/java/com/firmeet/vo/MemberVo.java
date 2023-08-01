@@ -1,5 +1,6 @@
 package com.firmeet.vo;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class MemberVo {
 	private int cateNo;
 	private int clubmemNo;
 	private String category;
-	
+	private Date joinDate;
 	
 	private CategoryVo cateVo;
 	private TagVo tagVo;
@@ -207,6 +208,17 @@ public class MemberVo {
 	public void setMemLevel(int memLevel) {
 		this.memLevel = memLevel;
 	}
+	
+	
+
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
 
 
 	@Override
@@ -214,8 +226,8 @@ public class MemberVo {
 		return "MemberVo [memberId=" + memberId + ", memberPhone=" + memberPhone + ", memberName=" + memberName
 				+ ", memberPw=" + memberPw + ", memberPri=" + memberPri + ", memLevel=" + memLevel + ", tagNo="
 				+ Arrays.toString(tagNo) + ", cateNo=" + cateNo + ", clubmemNo=" + clubmemNo + ", category=" + category
-				+ ", cateVo=" + cateVo + ", tagVo=" + tagVo + ", tagList=" + tagList + ", startNum=" + startNum
-				+ ", endNum=" + endNum + ", clubId=" + clubId + "]";
+				+ ", joinDate=" + joinDate + ", cateVo=" + cateVo + ", tagVo=" + tagVo + ", tagList=" + tagList
+				+ ", startNum=" + startNum + ", endNum=" + endNum + ", clubId=" + clubId + "]";
 	}
 
 	

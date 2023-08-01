@@ -65,16 +65,17 @@
 
 						
                         	
-                        	<div class= "mem-info" id = "c"><!--에이잭스로 삭제해야해서 아이디 줄 예정-->
+                        	<div class= "mem-info clubMem-info" id = "c"><!--에이잭스로 삭제해야해서 아이디 줄 예정-->
                         		<div class= "mem-pic"><img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" /></div>
                         		<div class= "mem-deinfo">
                         			<span><b>김세영</b> <strong>@seyoung2020</strong></span><br>
                         			<span>010-3782-2337</span><br>
-                        			<span>#intp #취미부자 #집돌이</span>
+                        			<span class= "tag-list">#intp #취미부자 #집돌이</span>
+                        			<span class= "mem-level-name">매니저</span>
                         		</div>
-                        		<div class= "info-btns-area">
-                        			<button type ="button" class= "new-mem-btn" data-clubmemno>가입승인</button>
-                        			<button type ="button" class= "no-mem-btn" data-clubmemno>가입거절</button>
+                        		<div class= "info-btns-area editPage-btns">
+                        			<button type ="button" class= "new-mem-btn" data-clubmemno>등급변경</button>
+                        			<button type ="button" class= "no-mem-btn" data-clubmemno>회원강퇴</button>
                         		</div>
                         	</div>
 						
@@ -92,8 +93,40 @@
         <!--/diary-area-->
 <c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
     <!--/wrap-->
-    
- 
+       <!-- 모달창 -->
+    	  <div class="modal fade" id="edit-grade-modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+	    <div class="modal-dialog" role="document" style="max-width: 900px;">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h5 class="modal-title" id="imageModalLabel">등급 수정</h5>
+	        </div>
+	        <div class="modal-body">
+	          <!-- 이미지가 표시될 곳 -->
+	          <div class= "edit-pic-area">
+		         <img class="edit-modal-pic" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
+				 	<input type= "hidden" name= "clubMemNo" id = "clubMemNo">
+			  </div>
+			  <div class= "edit-info-area">
+				 	<span id = "mem-name"><b>김세영님</b></span>
+					<span id = "mem-id">@seyoung2020</span>
+					<br> 
+					<select name = "memlevel" id = "memlevel">
+						<option value =2>일반</option>
+						<option value =1>매니저</option>
+						<option value =0>호스트</option>
+					</select>
+			  </div>
+	          <!-- 좋아요 버튼 -->
+	          <div class= "edit-modal-btn-area">
+	          <button id="grade-edit-btn" class="btn btn-primary">수정</button>
+	          <button id="cancel-btn" class="btn btn-danger">취소</button>
+	          </div>
+	          <span id="likeCount"></span>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+    <!-- 모달창 -->
     
 </body>
 
@@ -107,7 +140,7 @@
  
  	//board 불러오기 위한 rownum 
 	let startNum = 1;
-	let endNum = 10;
+	let endNum = 12;
 	
 
 	/*무한 스크롤 감지*/
@@ -117,89 +150,84 @@
         if (!lastEntry.isIntersecting) return;
 
         getData();
-		console.log('테스트');
+
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
 
 	
-	//가입 승인 버튼 클릭 이벤트
-	$('.list-area').on("click",'.new-mem-btn', function(){
+	//등급변경(1차) 버튼 클릭 시
+	$('.list-area').on("click",'.edit-mem-btn', function(){
 		var clubMemNo = $(this).data('clubmemno');
-		var clubId = ${club.clubId}
-		var memLevel = 2;
+		var memLevel = $(this).data('memlevel')		
+		var memName = $(this).data('membername')
+		var memId = $(this).data('memberid')
 		
-		alert(clubMemNo);
-		
-		var ClubVO = {
-				clubMemNo : clubMemNo,
-				memlevel : 	memLevel,
-				clubId : clubId
-		}
-		
-		joinrequest(ClubVO);	
-		
+		console.log('테스트 클럽 넘버 :' + clubMemNo+ '  레벨 : ' + memLevel + '  이름' + memName + ' 아이디 ' + memId);
+        
+ 		$('#memlevel').val(memLevel);
+		$('#mem-id').text('@' + memId);
+		$('#mem-name').text(memName + '님');
+		$('#grade-edit-btn').data('clubmemno', clubMemNo);
+		$('#edit-grade-modal').modal('show');
 	}); //가입 승인 이벤트 end
-	
-	
-	//가입 거절 버튼 클릭 이벤트
-	$('.list-area').on("click",'.no-mem-btn', function(){
-		var clubMemNo = $(this).data('clubmemno');
-		var memLevel = -99;
-		var clubId = ${club.clubId}
-		alert(clubMemNo);
 		
-		var ClubVO = {
-				clubMemNo : clubMemNo,
-				memlevel : 	memLevel,
-				clubId : clubId
-		}
+	//등급변경(2차) 버튼 클릭
+	$('#grade-edit-btn').on("click",function(){
+		 var memberLevel =  $('#memlevel').val();
+		 var clubmemNo = $('#grade-edit-btn').data('clubmemno');
 		
-		joinrequest(ClubVO);
-		
-		
-	});
-	
-	//버튼 클릭 처리 AJAX
-	function joinrequest(ClubVO){
-		
-		
+		 var MemberVo = {
+			 memLevel: memberLevel,
+			 clubmemNo : clubmemNo
+		 }
+		 
+		 
 		 $.ajax({
 		       
 		       //요청 세팅
-		       url : "${pageContext.request.contextPath}/management/club/joinrequest",
+		       url : "${pageContext.request.contextPath}/management/club/changegrade",
 		       type : "post",
-		       data : ClubVO,
+		       data : MemberVo,
 		       
 		       //응답 세팅
 		       dataType : "json",
 		       success : function(jsonResult){
-		    	   var data = jsonResult.data;
+			
 		    	   
-		    	   //1은 승인, 0은 거절, -99는 남은 인원 수 없음
-		    	   switch(data){
-		    		   
-		    	   	case 1: alert('가입승인이 완료되었습니다.');
-		    	   			$('#c' +ClubVO.clubMemNo).remove();
-		    	   			break;
-		    	   	case 0:	alert('거절이 완료되었습니다.');
-    	   					$('#c' +ClubVO.clubMemNo).remove();
-		    	   			break;
-		    	   	case -99: alert('승인 가능 인원을 초과하였습니다.');
-		    	   }
-					
+		    	   
 		       }, //success end
 		       error : function(XHR, status, error) {
 		       console.error(status + " : " + error);
 		       }
 						            
 		    });//ajax end
+		 
+	});
+	
+	
+	//회원 강퇴 버튼 클릭 이벤트
+	$('.list-area').on("click",'.no-mem-btn', function(){
+		var clubMemNo = $(this).data('clubmemno');
+		var memLevel = -99;
+		var clubId = ${club.clubId}
+		
+		var ClubVO = {
+				clubMemNo : clubMemNo,
+				memlevel : 	memLevel,
+				clubId : clubId
 		}
 		
+		
+	});
+	
+	//모달창 닫는 이벤트
+	$('#cancel-btn').on("click", function(){
+		$('#edit-grade-modal').modal('hide');
+	})
 	
 	
-	
-	//가입요청한 유저 목록 볼 수 있는 
+	//가입되어 있는 유저 목록 볼 수 있는
 	function getData(){
 		var clubId = $('.diary-area').data('clubid');
 	
@@ -213,19 +241,18 @@
 		 $.ajax({
 		       
 		       //요청 세팅
-		       url : "${pageContext.request.contextPath}/management/club/requestlist",
+		       url : "${pageContext.request.contextPath}/management/club/memberlist",
 		       type : "post",
 		       data : MemberVo,
 		       
 		       //응답 세팅
 		       dataType : "json",
 		       success : function(jsonResult){
-		    	   
 		    	   var memberList = jsonResult.data;
-					console.log(memberList);
+		    	   console.log(memberList);
+					startNum +=12;
+					endNum += 12;
 					render(memberList);
-					startNum +=10;
-					endNum += 10;
 					
 		       }, //success end
 		       error : function(XHR, status, error) {
@@ -236,12 +263,14 @@
 	}
 	
 	
+	
+	
 	function render(memberList){
 		
 		memberList.forEach(function(member) {
 
 			var add = '';
-			add +=  '<div class= "mem-info" id = "c' + member.clubmemNo  + '" + >'
+			add +=  '<div class= "mem-info clubMem-info" id = "c' + member.clubmemNo  + '" + >'
 			add += 	'	<div class= "mem-pic">'
 			add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
 			add +=     '</div>';
@@ -253,16 +282,32 @@
 					add += '#' + tag.tagName + ' '
 				})
 			add += '				</span>'		
-			add	+= '    		</div>'
-			add += '    <div class= "info-btns-area">';
-			add += '			<button type ="button" class= "new-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입승인</button>';
-			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">가입거절</button>';
+			add += '                 <span class= "mem-join-date">'
+			add += 					member.joinDate
+			add += '                 </span>'
+			add += '				<span class= "mem-level-name"><b>'
+				switch(member.memLevel){
+				case 0: add += '호스트'; break; 
+				case 1: add += '매니저'; break;
+				case 2: add += '베이직'; break;
+				}
+			add += ' 				</b></span> '
+			add += '    		</div>'
+			add += '    <div class= "info-btns-area editPage-btns">';
+			if(member.memLevel != 0){
+			add += '			<button type ="button" class= "edit-mem-btn" data-clubmemno= "' + member.clubmemNo  + '" data-memberid = "'+member.memberId +'" data-membername = "'+ member.memberName+'" data-memlevel= "'+member.memLevel+'">등급변경</button>';
+			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">회원강퇴</button>';
+			}
 			add += '	</div>'
 			add += '</div>'
 			
-			
-			
 			$('.list-area').append(add);
+			
+				switch(member.memLevel){
+				case 0:	$('#c'+member.clubmemNo + ' .mem-level-name').css("color","#ff6969");
+						break;
+				case 1:	$('#c'+member.clubmemNo + ' .mem-level-name').css("color","rgb(106 116 255)");
+				}
 		});
 	}
 	

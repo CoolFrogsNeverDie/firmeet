@@ -137,7 +137,7 @@
 		 $.ajax({
 		       
 		       //요청 세팅
-		       url : "${pageContext.request.contextPath}/management/club/memberlist",
+		       url : "${pageContext.request.contextPath}/management/club/requestlist",
 		       type : "post",
 		       data : MemberVo,
 		       

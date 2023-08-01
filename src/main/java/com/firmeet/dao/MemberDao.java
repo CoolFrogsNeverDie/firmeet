@@ -80,4 +80,15 @@ public class MemberDao {
 		
 		return row;
 	}
+
+	public List<MemberVo> getClubMemList(MemberVo memberVO) {
+		
+		List<MemberVo> memberList = sqlsession.selectList("member.clubMemList", memberVO);
+		return memberList;
+	}
+
+	public int updateMemGrade(MemberVo memberVO) {
+		System.out.println("여기까지 오는지 확인 업데이트용" + memberVO);
+		return 0;
+	}
 }

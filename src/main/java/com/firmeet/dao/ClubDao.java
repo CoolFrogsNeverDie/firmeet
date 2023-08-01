@@ -212,6 +212,13 @@ public class ClubDao {
 		
 		return qnaList;
 	}
+
+	public int checkPrenum(ClubVo clubVO) {
+		
+		int result =  session.selectOne("club.checkClubMax",clubVO);
+		
+		return result;
+	}
 	
 	
 }
