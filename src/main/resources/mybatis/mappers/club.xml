@@ -200,65 +200,65 @@
     
    
     
-    <select id="searchList" parameterType="map" resultType="com.firmeet.vo.ClubVo" >
-    	<![CDATA[
-    		
-    		select ort.rn,
-    			   ort.clubId,
-    			   ort.clubName,
-    			   ort.intro1,
-    			   ort.img2
-    		from(select rownum rn,
-    			   		ot.clubId,
-    			   		ot.clubName,
-    			   		ot.intro1,
-    			   		ot.img2
-    			 from(select c.clubId, 
-			        		 c.clubName, 
-			        		 c.intro1, 
-			        		 c.img2
-			 		   from club c, club_category b, (select c.clubId, 
-			               							  LISTAGG( to_char(t.tagNo, '099'), ',') tagNos
-			               							  from club_tag c, tag t 
-			               							  where c.tagNo = t.tagNo
-			               							  group by c.clubId )ts
-			 		    where c.clubId = ts.clubId
-			 			and c.clubId = b.clubId
-			
-			]]>	
-			
-					
-		    		
-		   			<if test='address1 neq null and address1 neq ""' >
-						and c.address1 = #{address1}
-					</if>
-					<if test='address2 neq null and address2 neq ""' >
-						and c.address2 = #{address2}
-					</if> 
-					<if test='cateNo neq 0' >
-						and b.cateNo = #{cateNo}
-					</if>
-						
-					<if test='tagNo neq null' >
-							
-						<foreach collection="tagNo" item="no">
-							and ts.tagNos like '%'||to_char(#{no}, '099')||'%'
-						</foreach>
-					</if>
-					<if test='keyword neq "" and keyword neq null'>
-		    				and c.clubName like '%'|| #{keyword} ||'%'
-		    		</if> 
-		    		
-		    		
-					
-		<![CDATA[	
-			order by clubId desc)ot )ort
-			where rn >= #{startRnum}
-		    and rn <= #{endRnum}
-		
-			]]>		
-	
-		
+<select id="searchList" parameterType="map" resultType="com.firmeet.vo.ClubVo" >
+       <![CDATA[
+          
+          select ort.rn,
+                ort.clubId,
+                ort.clubName,
+                ort.intro1,
+                ort.img2
+          from(select rownum rn,
+                      ot.clubId,
+                      ot.clubName,
+                      ot.intro1,
+                      ot.img2
+              from(select c.clubId, 
+                        c.clubName, 
+                        c.intro1, 
+                        c.img2
+                   from club c, club_category b, (select c.clubId, 
+                                               LISTAGG( to_char(t.tagNo, '099'), ',') tagNos
+                                               from club_tag c, tag t 
+                                               where c.tagNo = t.tagNo
+                                               group by c.clubId )ts
+                    where c.clubId = ts.clubId
+                   and c.clubId = b.clubId
+         
+         ]]>   
+         
+               
+                
+                  <if test='address1 neq null and address1 neq ""' >
+                  and c.address1 = #{address1}
+               </if>
+               <if test='address2 neq null and address2 neq ""' >
+                  and c.address2 = #{address2}
+               </if> 
+               <if test='cateNo neq 0' >
+                  and b.cateNo = #{cateNo}
+               </if>
+                  
+               <if test='tagNo neq null' >
+                     
+                  <foreach collection="tagNo" item="no">
+                     and ts.tagNos like '%'||to_char(#{no}, '099')||'%'
+                  </foreach>
+               </if>
+               <if test='keyword neq "" and keyword neq null'>
+                      and c.clubName like '%'|| #{keyword} ||'%'
+                </if> 
+                
+                
+               
+      <![CDATA[   
+         order by clubId desc)ot )ort
+         where rn >= #{startRnum}
+          and rn <= #{endRnum}
+      
+         ]]>      
+   
+
     </select>
     
     

@@ -71,7 +71,8 @@ public class GalleryController {
 			return "member/memberForm";
 		}
 	}
-
+	
+	//모임 이름 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getMeetName", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult getMeetName(@RequestParam("year") int year, @RequestParam("month") int month) {
@@ -94,6 +95,7 @@ public class GalleryController {
 		return jsonResult;
 	}
 
+	//이미지 리스트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getGalleryList", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult getGalleryList(@RequestParam("meetNo") int meetNo) {
@@ -114,6 +116,7 @@ public class GalleryController {
 		return jsonResult;
 	}
 
+	//전체 이미지 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getGalleryListAll", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult getGalleryListAll(@RequestParam("clubId") int clubId) {
@@ -185,6 +188,7 @@ public class GalleryController {
 		return "redirect:/gallery/list/" + clubId;
 	}
 
+	//좋아요 인원 확인
 	@ResponseBody
 	@RequestMapping(value = "/checkLike", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult checkLike(@RequestParam("imgno") int imgno,HttpSession session) {
@@ -263,8 +267,36 @@ public class GalleryController {
 	    return jsonResult;
 	}
 	
-    
+    //이미지삭제
+	@RequestMapping(value = "/deleteImg/{clubId}" , method = {RequestMethod.GET,RequestMethod.POST})
+	public String deleteImg(@PathVariable("clubId") int clubId,
+						 	@RequestParam("imgno")int imgno) {
+	    System.out.println("deleteLikeStatus 확인");
+	    System.out.println("clubId"+clubId);
+	    System.out.println("imgno"+imgno);
+	    
+	    galleryService.deleteImg(imgno);
+		
+		return "redirect:/gallery/list/" + clubId;
+	}
 	
+	//이미지 주인 찾기
+	@ResponseBody
+	@RequestMapping(value = "/checkmemberId", method = {RequestMethod.GET,RequestMethod.POST})
+	public JsonResult checkmemberId(@RequestParam("memberId")String memberId) {
+		  System.out.println("checkmemberId 확인");
+	    JsonResult jsonResult = new JsonResult();
+	    try {
+	    	MemberVo memberVo = galleryService.checkmemberId(memberId);
+	    	
+	    	jsonResult.success(memberVo);
+	    } catch (Exception e) {
+	        // 서비스 메서드가 예외를 발생시킨 경우, 에러 메시지를 설정합니다.
+	        jsonResult.fail("좋아요 상태 삭제 중 오류가 발생했습니다.");
+	    }
+
+	    return jsonResult;
+	}
 	
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회

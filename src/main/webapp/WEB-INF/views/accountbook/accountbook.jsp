@@ -32,10 +32,6 @@
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
-			<!--/diary-topbar-img-->
-			<div class="diary-subbar">
-				<h4>&#128221 &nbsp;&nbsp; 가계부</h4>
-			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
@@ -134,8 +130,9 @@
       console.log("계산 클릭");
       $("#calculator").val("");
 
-      // accountList의 amount 값들을 더하는 변수 초기화
-      var totalAmount = 0;
+      // 각각의 수입과 지출에 해당하는 데이터를 따로 저장
+      var incomeTotal = 0;
+      var expenseTotal = 0;
 
       // accountList의 amount 값들을 더함
       $(".table-row").each(function () {
@@ -146,25 +143,20 @@
         // 쉼표(,) 제거
         var amountValue = parseInt(amountText.replace(/,/g, ""), 10);
         console.log("amountValue" + amountValue);
-        // 지출인 경우 +
-        if (incomeExpenseText === "지출") {
-          console.log(totalAmount + "+" + amountValue);
-          totalAmount += amountValue;
-          console.log(totalAmount);
-        }
-        // 수입인 경우 -
-        else if (incomeExpenseText === "수입") {
-          console.log(totalAmount + "-" + amountValue);
-          totalAmount -= amountValue;
-          console.log(totalAmount);
-        }
+	      // 지출인 경우 +
+	      if (incomeExpenseText === "지출") {
+	        expenseTotal += amountValue;
+	      }
+	      // 수입인 경우 +
+	      else if (incomeExpenseText === "수입") {
+	        incomeTotal += amountValue;
+	      }
       });
 
       // 계산 결과를 #calculator에 출력
-      var formattedTotalAmount = new Intl.NumberFormat("ko-KR").format(
-        totalAmount
-      );
-      $("#calculator").val(formattedTotalAmount + "원");
+      var formattedIncomeTotal = new Intl.NumberFormat("ko-KR").format(incomeTotal);
+      var formattedExpenseTotal = new Intl.NumberFormat("ko-KR").format(expenseTotal);
+      $("#calculator").val("수입: " + formattedIncomeTotal + "원, 지출: " + formattedExpenseTotal + "원");
     }
 
     // 검색 폼 제출 시 AJAX 요청 처리
@@ -243,8 +235,9 @@
   });
 
   $(document).ready(function () {
-    // accountList의 amount 값들을 더하는 변수 초기화
-    var totalAmount = 0;
+      // 각각의 수입과 지출에 해당하는 데이터를 따로 저장
+      var incomeTotal = 0;
+      var expenseTotal = 0;
 
     // accountList의 amount 값들을 더함
     $(".table-row").each(function () {
@@ -257,23 +250,18 @@
       );
       // 지출인 경우 +
       if (incomeExpenseText === "지출") {
-        console.log(totalAmount + "+" + amountValue);
-        totalAmount += amountValue;
-        console.log(totalAmount);
+        expenseTotal += amountValue;
       }
-      // 수입인 경우 -
+      // 수입인 경우 +
       else if (incomeExpenseText === "수입") {
-        console.log(totalAmount + "-" + amountValue);
-        totalAmount -= amountValue;
-        console.log(totalAmount);
+        incomeTotal += amountValue;
       }
-    });
-
-    // 계산 결과를 #calculator에 출력
-    var formattedTotalAmount = new Intl.NumberFormat("ko-KR").format(
-      totalAmount
-    );
-    $("#calculator").val(formattedTotalAmount + "원");
+	});
+	
+	// 계산 결과를 #calculator에 출력
+	var formattedIncomeTotal = new Intl.NumberFormat("ko-KR").format(incomeTotal);
+	var formattedExpenseTotal = new Intl.NumberFormat("ko-KR").format(expenseTotal);
+	$("#calculator").val("수입: " + formattedIncomeTotal + "원, 지출: " + formattedExpenseTotal + "원");
   });
   $(document).ready(function () {
     $("#addButton").click(function () {

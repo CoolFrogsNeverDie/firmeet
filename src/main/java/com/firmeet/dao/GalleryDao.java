@@ -12,6 +12,7 @@ import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
+import com.firmeet.vo.MemberVo;
 
 @Repository
 public class GalleryDao {
@@ -31,6 +32,7 @@ public class GalleryDao {
 		return sList;
 	}
 
+	//모임 년도 월 가져오기
 	public List<MeetVo> getMeetMon(int clubId) {
 		System.out.println("GalleryDao getMeetMon 확인");
 
@@ -79,6 +81,7 @@ public class GalleryDao {
 		return galleryVos;
 	}
 
+	//모임이름 가져오기 A
 	public MeetVo getMeetA(int meetNo) {
 		System.out.println("GalleryDao getMeetA 확인");
 
@@ -88,6 +91,7 @@ public class GalleryDao {
 		return sList;
 	}
 
+	//모임 이름 가져오기
 	public List<MeetVo> getMeetName(int year, int month) {
 		System.out.println("GalleryDao getMeetName 확인");
 
@@ -109,7 +113,7 @@ public class GalleryDao {
 
 		return galleryVos;
 	}
-
+	//좋아요확인
 	public boolean checkLike(int imgNo, String memberId) {
 		System.out.println("GalleryDao checkLike 확인");
 		boolean result = false;
@@ -130,7 +134,7 @@ public class GalleryDao {
 		
 		return result;
 	}
-
+	//좋아요
 	public void updateImg(int imgNo, String memberId) {
 		Map<String, Object> variableMap = new HashMap<>();
 		variableMap.put("imgNo", imgNo);
@@ -139,7 +143,7 @@ public class GalleryDao {
 		
 		session.insert("gallery.updateImg", variableMap);
 	}
-
+	//좋아요 카운드 업데이트
 	public void updateCnt(int imgNo, int likeCnt) {
 		System.out.println("GalleryDao updateCnt 확인");
 		Map<String, Object> variableMap = new HashMap<>();
@@ -149,7 +153,7 @@ public class GalleryDao {
 		
 		session.update("gallery.updateCnt", variableMap);
 	}
-
+	//좋아요 취서
 	public void deleteLike(int imgNo, String memberId) {
 		System.out.println("GalleryDao deleteLike 확인");
 		Map<String, Object> variableMap = new HashMap<>();
@@ -161,5 +165,33 @@ public class GalleryDao {
 		System.out.println("삭제 결과 : "+test);
 		
 	}
+	
+	//이미지삭제
+	public void deleteImg(int imgno) {
+		System.out.println("GalleryDao deleteImg 확인");
+		System.out.println("imgno"+imgno);
+		
+		int test =session.delete("gallery.deleteImg", imgno);
+		System.out.println("삭제 결과 : "+test);
+	}
+	
+	//이미지가 가지고 있는 좋아요 리스트삭제
+	public void deleteImgLike(int imgno) {
+		System.out.println("GalleryDao deleteImgLike 확인");
+		System.out.println("imgno"+imgno);
+		
+		int test =session.delete("gallery.deleteImgLike", imgno);
+		System.out.println("삭제 결과 : "+test);
+		
+	}
 
+	//이미지 주인찾기
+	public MemberVo checkmemberId(String memberId) {
+		System.out.println("GalleryDao checkmemberId 확인");
+		System.out.println("imgno"+memberId);
+		
+		MemberVo memberVo = session.selectOne("gallery.checkmemberId", memberId);
+		System.out.println("memberVo"+memberVo);
+		return memberVo;
+	}
 }

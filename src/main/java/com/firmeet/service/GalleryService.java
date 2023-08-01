@@ -21,6 +21,7 @@ import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
+import com.firmeet.vo.MemberVo;
 
 @Service
 public class GalleryService {
@@ -33,6 +34,7 @@ public class GalleryService {
 
 	private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
 
+	// 갤러리 업로드 폼 모임 리스트
 	public MeetVo getMeetA(int meetNo) {
 		System.out.println("GalleryService getMeetA 확인");
 		MeetVo sList = galleryDao.getMeetA(meetNo);
@@ -120,18 +122,21 @@ public class GalleryService {
 		return gImgVos;
 	}
 
+	//모임 이름 가져오기
 	public List<MeetVo> getMeetName(int year, int month) {
 		System.out.println("GalleryService getMeetImg 확인");
 		List<MeetVo> gImgVos = galleryDao.getMeetName(year, month);
 		return gImgVos;
 	}
 
+	//전체 이미지 가져오기
 	public List<GalleryImgVo> getGalleryListAll(int clubId) {
 		System.out.println("GalleryService getGalleryListAll 확인");
 		List<GalleryImgVo> gImgVos = galleryDao.getGalleryListAll(clubId);
 		return gImgVos;
 	}
 
+	//나의 이미지 가져오기
 	public List<MeetVo> getMyGalleryList(String memberId) {
 		System.out.println("GalleryService getMyGalleryList 확인");
 		List<ClubVo> clubVos = clubService.getMemClub(memberId);
@@ -155,6 +160,7 @@ public class GalleryService {
 		return mList;
 	}
 
+	//나의 이미지 가져오기 2
 	public List<GalleryImgVo> getMyGalleryList2(String memberId) {
 		System.out.println("GalleryService getMyGalleryList2 확인");
 		List<ClubVo> clubVos = clubService.getMemClub(memberId);
@@ -173,22 +179,35 @@ public class GalleryService {
 
 		return gList;
 	}
-
+	//이 친구가 좋아요를 눌렀는지
 	public boolean checkLike(int imageNo, String memberId) {
 		System.out.println("GalleryService checkLike 확인");
 		boolean result = galleryDao.checkLike(imageNo, memberId);
 		
 		return result;
 	}
-
+	//좋아요
 	public void updateLikeStatus(int imgNo, int likeCnt, String memberId) {
 		galleryDao.updateImg(imgNo,memberId);
 		galleryDao.updateCnt(imgNo,likeCnt);
 	}
-
+	//좋아요 취서
 	public void deleteLikeStatus(int imgNo, int likeCnt, String memberId) {
 		galleryDao.deleteLike(imgNo,memberId);
 		galleryDao.updateCnt(imgNo,likeCnt);
+	}
+	//이미지 삭제
+	public void deleteImg(int imgno) {
+		//이미지삭제
+		galleryDao.deleteImg(imgno);
+		//이미지가 가지고 있는 좋아요 리스트삭제
+		galleryDao.deleteImgLike(imgno);
+	}
+
+	//이미지 주인찾기
+	public MemberVo checkmemberId(String memberId) {
+		MemberVo memberVo =galleryDao.checkmemberId(memberId);
+		return memberVo;
 	}
 
 }

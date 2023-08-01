@@ -4,7 +4,8 @@
 <mapper namespace="gallery">
 
 	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
-	<select id="meetList" parameterType="int" resultType="com.firmeet.vo.MeetVo">
+	<select id="meetList" parameterType="int"
+		resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT
 				MEETNO,
@@ -16,9 +17,10 @@
 			WHERE meetMon = #{meetMon} 
 		]]>
 	</select>
-	
+
 	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
-	<select id="getMeetName" parameterType="map" resultType="com.firmeet.vo.MeetVo">
+	<select id="getMeetName" parameterType="map"
+		resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT
 				MEETNO,
@@ -31,9 +33,10 @@
 			AND meetYear = #{year}
 		]]>
 	</select>
-	
+
 	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
-	<select id="meetMon" parameterType="int" resultType="com.firmeet.vo.MeetVo">
+	<select id="meetMon" parameterType="int"
+		resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT 
 				DISTINCT MEETMON,
@@ -42,19 +45,20 @@
 			WHERE clubid = #{clubId} 
 		]]>
 	</select>
-	
-    <!-- 갤러리 번호 조회 -->
-    <select id="getGalleryNo" parameterType="int" resultType="int">
+
+	<!-- 갤러리 번호 조회 -->
+	<select id="getGalleryNo" parameterType="int" resultType="int">
         <![CDATA[
         SELECT
             galleryNo
         FROM gallery
         WHERE meetno = #{meet}
         ]]>
-    </select>
+	</select>
 
-    <!-- 갤러리 이미지 등록 -->
-    <insert id="insertGalleryImage" parameterType="com.firmeet.vo.GalleryImgVo">
+	<!-- 갤러리 이미지 등록 -->
+	<insert id="insertGalleryImage"
+		parameterType="com.firmeet.vo.GalleryImgVo">
         <![CDATA[
         INSERT INTO gallery_img (imgno
             , galleryno
@@ -77,10 +81,11 @@
         , #{memberId}
         , 0)
         ]]>
-    </insert>
+	</insert>
 
-    <!-- 갤러리 목록 조회 -->
-    <select id="getGalleryList" parameterType="int" resultType="com.firmeet.vo.GalleryVo">
+	<!-- 갤러리 목록 조회 -->
+	<select id="getGalleryList" parameterType="int"
+		resultType="com.firmeet.vo.GalleryVo">
         <![CDATA[
         SELECT
             galleryNo
@@ -90,10 +95,11 @@
         FROM gallery
         WHERE Id = #{clubId}
         ]]>
-    </select>
-    
-    <!-- 갤러리이미지 목록 조회 -->
-    <select id="getGalleryImg" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
+	</select>
+
+	<!-- 갤러리이미지 목록 조회 -->
+	<select id="getGalleryImg" parameterType="int"
+		resultType="com.firmeet.vo.GalleryImgVo">
         <![CDATA[
         SELECT
             imgno
@@ -108,10 +114,11 @@
         FROM gallery_img
         WHERE GalleryNo = #{GalleryNo}
         ]]>
-    </select>
-    
-    <!-- 갤러리이미지 목록 조회 -->
-    <select id="getGalleryListAll" parameterType="int" resultType="com.firmeet.vo.GalleryImgVo">
+	</select>
+
+	<!-- 갤러리이미지 목록 조회 -->
+	<select id="getGalleryListAll" parameterType="int"
+		resultType="com.firmeet.vo.GalleryImgVo">
         <![CDATA[
         SELECT
             imgno
@@ -127,10 +134,11 @@
         FROM gallery_img
         WHERE clubId = #{clubId}
         ]]>
-    </select>
-   
+	</select>
+
 	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
-	<select id="meetList2" parameterType="int" resultType="com.firmeet.vo.MeetVo">
+	<select id="meetList2" parameterType="int"
+		resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
 			SELECT
 				MEETNO,
@@ -142,9 +150,10 @@
 			WHERE MEETNO = #{meetNo} 
 		]]>
 	</select>
-	
+
 	<!-- 좋아요 관리 -->
-	<select id="checkLike" parameterType="map" resultType="com.firmeet.vo.GalleryLikeVo">
+	<select id="checkLike" parameterType="map"
+		resultType="com.firmeet.vo.GalleryLikeVo">
 	    <![CDATA[
 		   	select imgNo, likeMember
 	        from gallery_like
@@ -152,15 +161,15 @@
 	        likeMember = #{memberId}
 	    ]]>
 	</select>
-    
-    <!--좋아요 추가-->
-    <insert id="updateImg" parameterType="map">
+
+	<!--좋아요 추가 -->
+	<insert id="updateImg" parameterType="map">
     <![CDATA[
 	    INSERT INTO gallery_like (IMGNO, LIKEMEMBER)
 		VALUES (#{imgNo}, #{memberId})
 	]]>
 	</insert>
-	
+
 	<!-- 좋아요 카운드 업데이트 -->
 	<update id="updateCnt" parameterType="map">
 	    <![CDATA[
@@ -169,11 +178,33 @@
 		WHERE IMGNO = #{imgNo}
 	]]>
 	</update>
-	
+
 	<!-- 좋아요 카운드 삭제 -->
-	<delete id="deleteLike"  parameterType="map">
-			DELETE FROM gallery_like
-			WHERE IMGNO = #{imgNo}
-			and LIKEMEMBER =#{memberId}
+	<delete id="deleteLike" parameterType="map">
+		DELETE FROM gallery_like
+		WHERE IMGNO = #{imgNo}
+		and LIKEMEMBER =#{memberId}
 	</delete>
+	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteImg" parameterType="map">
+		DELETE FROM gallery_img
+		WHERE IMGNO = #{imgNo}
+	</delete>
+	
+	<!-- 이미지가 가지고 있는 좋아요 리스트삭제 -->
+	<delete id="deleteImgLike" parameterType="map">
+		DELETE FROM gallery_like
+		WHERE IMGNO = #{imgNo}
+	</delete>
+	
+	<!-- 그림주인 -->
+	<select id="checkmemberId" parameterType="map"
+		resultType="com.firmeet.vo.MemberVo">
+	    <![CDATA[
+		   	select MEMBERID, MEMBERNAME
+	        from member
+	        where memberId = #{memberId}
+	    ]]>
+	</select>
 </mapper>
