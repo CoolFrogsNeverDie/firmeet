@@ -4,7 +4,11 @@ public class GalleryLikeVo {
 
 	private int imgNo;
 	private String likeMember;
-	
+
+	public GalleryLikeVo() {
+		super();
+	}
+
 	public GalleryLikeVo(int imgNo, String likeMember) {
 		super();
 		this.imgNo = imgNo;
@@ -29,6 +33,7 @@ public class GalleryLikeVo {
 
 	@Override
 	public String toString() {
-		return "galleryLikeVo [imgNo=" + imgNo + ", likeMember=" + likeMember + "]";
+		return "GalleryLikeVo [imgNo=" + imgNo + ", likeMember=" + likeMember + "]";
 	}
+
 }

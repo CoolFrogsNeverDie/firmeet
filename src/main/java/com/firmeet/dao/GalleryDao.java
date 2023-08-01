@@ -12,7 +12,6 @@ import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryLikeVo;
 import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.MeetVo;
-import com.firmeet.vo.ScheduleVO;
 
 @Repository
 public class GalleryDao {
@@ -111,11 +110,56 @@ public class GalleryDao {
 		return galleryVos;
 	}
 
-	public List<GalleryLikeVo> checkLike(int imageNo) {
-		List<GalleryLikeVo> checkLike =session.selectList("gallery.checkLike", imageNo);
-		System.out.println(checkLike);
+	public boolean checkLike(int imgNo, String memberId) {
+		System.out.println("GalleryDao checkLike 확인");
+		boolean result = false;
 		
-		return checkLike;
+		Map<String, Object> variableMap = new HashMap<>();
+		variableMap.put("imgNo", imgNo);
+		variableMap.put("memberId", memberId);
+		System.out.println(variableMap);
+		
+		List<GalleryLikeVo> checkLike =session.selectList("gallery.checkLike", variableMap);
+		System.out.println(checkLike);
+		if (checkLike.size() == 0) {
+			result = false;
+		}else {
+			result = true;
+		}
+		System.out.println(result);
+		
+		return result;
+	}
+
+	public void updateImg(int imgNo, String memberId) {
+		Map<String, Object> variableMap = new HashMap<>();
+		variableMap.put("imgNo", imgNo);
+		variableMap.put("memberId", memberId);
+		System.out.println(variableMap);
+		
+		session.insert("gallery.updateImg", variableMap);
+	}
+
+	public void updateCnt(int imgNo, int likeCnt) {
+		System.out.println("GalleryDao updateCnt 확인");
+		Map<String, Object> variableMap = new HashMap<>();
+		variableMap.put("imgNo", imgNo);
+		variableMap.put("likeCnt", likeCnt);
+		System.out.println(variableMap);
+		
+		session.update("gallery.updateCnt", variableMap);
+	}
+
+	public void deleteLike(int imgNo, String memberId) {
+		System.out.println("GalleryDao deleteLike 확인");
+		Map<String, Object> variableMap = new HashMap<>();
+		variableMap.put("imgNo", imgNo);
+		variableMap.put("memberId", memberId);
+		System.out.println(variableMap);
+		
+		int test =session.delete("gallery.deleteLike", variableMap);
+		System.out.println("삭제 결과 : "+test);
+		
 	}
 
 }

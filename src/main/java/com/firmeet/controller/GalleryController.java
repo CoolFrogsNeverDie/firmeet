@@ -185,48 +185,48 @@ public class GalleryController {
 		return "redirect:/gallery/list/" + clubId;
 	}
 
-	//유저 좋아요 확인
 	@ResponseBody
-	@RequestMapping(value = "/checkLike" , method = {RequestMethod.GET,RequestMethod.POST})
-	public JsonResult checkLike(@RequestParam("imgNo") int imgNo) {
-		JsonResult jsonResult = new JsonResult();
-		
-		System.out.println("checkLike 확인");
-		System.out.println(imgNo);
-		
-		try {
-			List<GalleryLikeVo> checkLikes = galleryService.checkLike(imgNo);
-			jsonResult.success(checkLikes); // "success"로 설정하고 데이터를 설정
-		} catch (Exception e) {
-			e.printStackTrace();
-			jsonResult.fail("데이터 가져오기에 실패했습니다."); // "fail"로 설정하고 실패 메시지 설정
-		}
+	@RequestMapping(value = "/checkLike", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult checkLike(@RequestParam("imgno") int imgno,HttpSession session) {
+	    System.out.println("checkLike 확인");
+	    JsonResult jsonResult = new JsonResult();
+        MemberVo memberVo = (MemberVo)session.getAttribute("member");
+        System.out.println("memberVo : "+memberVo.getMemberId());
+        
+	    try {
+	        // 좋아요 정보를 가져오는 서비스 메서드를 호출합니다.
+	        boolean result = galleryService.checkLike(imgno,memberVo.getMemberId());
+	        
+	        // 가져온 좋아요 정보를 jsonResult에 설정합니다.
+	        jsonResult.success(result);
+	    } catch (Exception e) {
+	        // 서비스 메서드가 예외를 발생시킨 경우, 에러 메시지를 설정합니다.
+	        jsonResult.fail("좋아요 정보 조회 중 오류가 발생했습니다.");
+	    }
 
-		return jsonResult;
-		
+	    return jsonResult;
 	}
-	
+
+	//좋아요 추가
 	@ResponseBody
 	@RequestMapping(value = "/updateLike" , method = {RequestMethod.GET,RequestMethod.POST})
-    public JsonResult updateLikeStatus(@RequestParam("imgNo") int imgNo,
+    public JsonResult updateLikeStatus(@RequestParam("imgno") int imgno,
     								   @RequestParam("likeCnt") int likeCnt,
-    								   @RequestParam("liked") boolean liked,
     								   HttpSession session) {
 		System.out.println("updateLikeStatus 확인");
-		System.out.println("imgNo : "+imgNo);
+		System.out.println("imgNo : "+imgno);
 		System.out.println("likeCnt : "+likeCnt);
-		System.out.println("liked : "+liked);
+		likeCnt+=1;
+		System.out.println("변경된 likeCnt : "+likeCnt);
 		
         JsonResult jsonResult = new JsonResult();
         MemberVo memberVo = (MemberVo)session.getAttribute("member");
         System.out.println("memberVo : "+memberVo.getMemberId());
         try {
             // 좋아요 상태를 업데이트하는 서비스 메서드를 호출합니다.
-            galleryService.updateLikeStatus(imgNo, likeCnt,memberVo.getMemberId());
+            galleryService.updateLikeStatus(imgno, likeCnt,memberVo.getMemberId());
 
-            // 서비스 메서드가 성공적으로 처리되었다고 가정하고
-            // jsonResult에 성공 메시지와 업데이트된 좋아요 상태를 설정합니다.
-            jsonResult.success(liked);
+            jsonResult.success(likeCnt);
         } catch (Exception e) {
             // 서비스 메서드가 예외를 발생시킨 경우, 에러 메시지를 설정합니다.
             jsonResult.fail("좋아요 상태 업데이트 중 오류가 발생했습니다.");
@@ -234,6 +234,35 @@ public class GalleryController {
 
         return jsonResult;
     }
+	
+	//좋아요 삭제
+	@ResponseBody
+	@RequestMapping(value = "/deleteLike", method = {RequestMethod.GET, RequestMethod.POST})
+	public JsonResult deleteLikeStatus(@RequestParam("imgno") int imgno,
+	                                    @RequestParam("likeCnt") int likeCnt,
+	                                    HttpSession session) {
+	    System.out.println("deleteLikeStatus 확인");
+	    System.out.println("imgNo : " + imgno);
+	    System.out.println("likeCnt : " + likeCnt);
+	    likeCnt -= 1;
+	    System.out.println("변경된 likeCnt : " + likeCnt);
+
+	    JsonResult jsonResult = new JsonResult();
+	    MemberVo memberVo = (MemberVo) session.getAttribute("member");
+	    System.out.println("memberVo : " + memberVo.getMemberId());
+	    try {
+	        // 좋아요 상태를 삭제하는 서비스 메서드를 호출합니다. (DELETE 쿼리 실행)
+	        galleryService.deleteLikeStatus(imgno,likeCnt, memberVo.getMemberId());
+
+	        jsonResult.success(likeCnt);
+	    } catch (Exception e) {
+	        // 서비스 메서드가 예외를 발생시킨 경우, 에러 메시지를 설정합니다.
+	        jsonResult.fail("좋아요 상태 삭제 중 오류가 발생했습니다.");
+	    }
+
+	    return jsonResult;
+	}
+	
     
 	
 	

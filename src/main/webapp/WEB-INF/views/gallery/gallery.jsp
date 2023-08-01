@@ -13,9 +13,6 @@
 <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/gallery.css" rel="stylesheet" type="text/css" />
 <!--모달-->
-<!-- 라이브러리 추가 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 <style>
 .gallery-img img {
 	width: 100%;
@@ -38,12 +35,9 @@ dd {
 	cursor: pointer;
 }
  
-  // 갤러리 이미지 클릭 시, 모달창에 이미지 리스트를 슬라이드로 보여줍니다.
-  lightbox.option({
-    'resizeDuration': 200,
-    'wrapAround': true
-  });
-  
+#modalImage{
+	width: 100%;
+}
 </style>
 </head>
 
@@ -93,6 +87,27 @@ dd {
 		<!--/diary-area-->
 		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 		<!--/wrap-->
+		 <!-- 모달창 추가 -->
+	  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+	    <div class="modal-dialog" role="document" style="max-width: 900px;">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h5 class="modal-title" id="imageModalLabel">이미지 상세 정보</h5>
+	          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	            <span aria-hidden="true">&times;</span>
+	          </button>
+	        </div>
+	        <div class="modal-body">
+	          <!-- 이미지가 표시될 곳 -->
+	          <img id="modalImage" class="example-image" src="" alt="" />
+	
+	          <!-- 좋아요 버튼 -->
+	          <button id="likeButton" class="btn btn-primary">좋아요</button>
+	          <span id="likeCount"></span>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
 </body>
 <script type="text/javascript" src=""></script>
 <script>
@@ -226,7 +241,7 @@ dd {
           console.log(i+" memberId : "+memberId);
           console.log(i+" imgNo : "+imgNo);
           console.log(i+" likeCnt : "+likeCnt);
-          galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
+          galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
           galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
           galleryHTML += '</a>';
       }
@@ -264,41 +279,117 @@ dd {
 
     // 특정 meetNo에 해당하는 갤러리 이미지를 불러오는 AJAX 요청 코드를 여기에 추가합니다...
   }); 
-
-    // 이미지 좋아요 기능 처리
-    $('.gallery-area').on('click', '.like-icon', function (e) {
-      e.stopPropagation(); // 모달창에서 버튼 클릭 시 모달창이 닫히지 않도록 이벤트 전파 차단
-      var $heartIcon = $(this);
-      var imgNo = $heartIcon.data('imgno');
-      var clubId = ${club.clubId}; // 이 부분은 클럽 ID를 얻는 방법에 맞게 변경해야 합니다.
-
-      // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
-      $.ajax({
-        url: "${pageContext.request.contextPath}/gallery/like",
-        method: "POST",
-        data: {
-          imageId: imgNo,
-          userId: 123 // 사용자 ID를 얻는 방법에 맞게 변경해야 합니다.
-        },
-        success: function (data) {
-          // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
-          var currentLikeCount = parseInt($heartIcon.next('.like-count').text());
-          if ($heartIcon.hasClass('liked')) {
-            $heartIcon.removeClass('liked');
-            $heartIcon.css('background-color', 'rgba(255, 0, 0, 0.7)');
-            $heartIcon.next('.like-count').text(currentLikeCount - 1);
-          } else {
-            $heartIcon.addClass('liked');
-            $heartIcon.css('background-color', 'red');
-            $heartIcon.next('.like-count').text(currentLikeCount + 1);
-          }
-        },
-        error: function () {
-          console.error("AJAX 요청 실패");
-        }
-      });
-    });
 </script>
+<!-- JavaScript 추가 -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+  <script>
+	  var imgSrc;
+	  var likeCnt;
+	  var memberId;
+	  var imgno;
 
+    
+      // 이미지 클릭 시 모달창 열기
+      $('.gallery-area').on('click', '.example-image-link', function (e) {
+        e.preventDefault(); // 이벤트 전파 차단
+        var $imageLink = $(this);
+        imgSrc = $imageLink.attr('href');
+        likeCnt = $imageLink.data('likecnt');
+       	memberId = $imageLink.data('title');
+        imgno = $imageLink.data('imgno');
+        
+        console.log(" imgSrc : "+imgSrc);
+        console.log(" memberId : "+memberId);
+        console.log(" imgNo : "+imgno);
+        console.log(" likeCnt : "+likeCnt);
+        // 모달창에 이미지와 좋아요 정보를 채웁니다.
+        $('#modalImage').attr('src', imgSrc);
+        $('#likeCount').text('좋아요 수: ' + likeCnt);
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/gallery/checkLike",
+            method: "POST",
+            data: {
+                imgno: imgno
+            },
+            success: function (jsonResult) {
+                var result = jsonResult.data;
+                console.log(result);
+                
+                	if(result){
+                        $('#likeButton').addClass('btn-success').removeClass('btn-primary').text('좋아요 취소');
+                    }else{
+                        $('#likeButton').addClass('btn-primary').removeClass('btn-success').text('좋아요');
+                    }        
+                
+                // 모달창 열기
+                $('#imageModal').modal('show');
+            },
+            error: function () {
+              console.error("AJAX 요청 실패");
+            }
+        });
+
+      });
+        
+      
+      // 좋아요 버튼 클릭 시 이벤트 처리
+      $(document).on('click', '.btn-primary', function () {
+        // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
+        console.log(".btn-primary 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
+        console.log(" imgNo : "+imgno);
+        console.log(" likeCnt : "+likeCnt);
+        $.ajax({
+          url: "${pageContext.request.contextPath}/gallery/updateLike",
+          method: "POST",
+          data: {
+              imgno: imgno,
+              likeCnt : likeCnt
+          },
+          success: function (jsonResult) {
+            // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+              console.log("jsonResult"+jsonResult.data);
+            likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+         	  console.log("새로운"+likeCnt);
+            $('#likeCount').text('좋아요 수: ' + likeCnt);
+            $('#likeButton').addClass('btn-success').removeClass('btn-primary').text('좋아요 취소');
+          },
+          error: function () {
+            console.error("AJAX 요청 실패");
+          }
+        });
+      });
+      
+   // 좋아요취소 버튼 클릭 시 이벤트 처리
+      $(document).on('click', '.btn-success', function () {
+          // 좋아요취소 기능 요청을 서버에 보냅니다. (AJAX 요청)
+          console.log(".btn-success 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
+          console.log(" imgNo : " + imgno);
+          console.log(" likeCnt : " + likeCnt);
+          $.ajax({
+              url: "${pageContext.request.contextPath}/gallery/deleteLike",
+              method: "POST",
+              data: {
+                  imgno: imgno,
+                  likeCnt : likeCnt
+              },
+              success: function (jsonResult) {
+                  // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+                  console.log("jsonResult" + jsonResult.data);
+                  likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+                  console.log("새로운" + likeCnt);
+                  $('#likeCount').text('좋아요 수: ' + likeCnt);
+                  $('#likeButton').addClass('btn-primary').removeClass('btn-success').text('좋아요');
+              },
+              error: function () {
+                  console.error("AJAX 요청 실패");
+              }
+          });
+      });
+
+ 
+ 
+  </script>
 
 </html>

@@ -128,18 +128,7 @@
         WHERE clubId = #{clubId}
         ]]>
     </select>
-    
-    <select id="checkLike" parameterType="int" resultType="com.firmeet.vo.GalleryLikeVo">
-        <![CDATA[
-        SELECT
-            IMGNO
-			,LIKEMEMBER
-        FROM gallery_like
-        WHERE IMGNO = #{imageNo}
-        ]]>
-    </select>
-    
-    	
+   
 	<!-- 각주 추가: 클럽 ID에 해당하는 모임 리스트 조회 -->
 	<select id="meetList2" parameterType="int" resultType="com.firmeet.vo.MeetVo">
 		<![CDATA[
@@ -153,4 +142,38 @@
 			WHERE MEETNO = #{meetNo} 
 		]]>
 	</select>
+	
+	<!-- 좋아요 관리 -->
+	<select id="checkLike" parameterType="map" resultType="com.firmeet.vo.GalleryLikeVo">
+	    <![CDATA[
+		   	select imgNo, likeMember
+	        from gallery_like
+	        where imgNo = #{imgNo} and
+	        likeMember = #{memberId}
+	    ]]>
+	</select>
+    
+    <!--좋아요 추가-->
+    <insert id="updateImg" parameterType="map">
+    <![CDATA[
+	    INSERT INTO gallery_like (IMGNO, LIKEMEMBER)
+		VALUES (#{imgNo}, #{memberId})
+	]]>
+	</insert>
+	
+	<!-- 좋아요 카운드 업데이트 -->
+	<update id="updateCnt" parameterType="map">
+	    <![CDATA[
+	    UPDATE GALLERY_IMG
+		SET LIKECNT = #{likeCnt}
+		WHERE IMGNO = #{imgNo}
+	]]>
+	</update>
+	
+	<!-- 좋아요 카운드 삭제 -->
+	<delete id="deleteLike"  parameterType="map">
+			DELETE FROM gallery_like
+			WHERE IMGNO = #{imgNo}
+			and LIKEMEMBER =#{memberId}
+	</delete>
 </mapper>

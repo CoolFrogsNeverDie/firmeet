@@ -174,13 +174,21 @@ public class GalleryService {
 		return gList;
 	}
 
-	public List<GalleryLikeVo> checkLike(int imageNo) {
-		List<GalleryLikeVo> checkLike = galleryDao.checkLike(imageNo);
+	public boolean checkLike(int imageNo, String memberId) {
+		System.out.println("GalleryService checkLike 확인");
+		boolean result = galleryDao.checkLike(imageNo, memberId);
 		
-		return checkLike;
+		return result;
 	}
 
 	public void updateLikeStatus(int imgNo, int likeCnt, String memberId) {
-		//galleryDao.updateImg(imgNo,likeCnt);
+		galleryDao.updateImg(imgNo,memberId);
+		galleryDao.updateCnt(imgNo,likeCnt);
 	}
+
+	public void deleteLikeStatus(int imgNo, int likeCnt, String memberId) {
+		galleryDao.deleteLike(imgNo,memberId);
+		galleryDao.updateCnt(imgNo,likeCnt);
+	}
+
 }
