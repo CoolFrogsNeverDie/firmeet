@@ -4,7 +4,7 @@
 <!-- top Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
 	<div class="container">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/main/index"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/main/mainForm"> <img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
