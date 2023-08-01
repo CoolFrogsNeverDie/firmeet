@@ -150,14 +150,24 @@ public class ClubDao {
 		return list;
 	}
 	
-	public List<ClubVo> searchList(ClubVo clubVo) {
+	public List<ClubVo> searchList(int startRnum , int endRnum, String keyword, ClubVo clubVo) {
 		System.out.println("clubDao.searchList()");
 		
 		System.out.println("=================================");
 		System.out.println(clubVo);
 		
 		
-		List<ClubVo> list = session.selectList("club.searchList", clubVo);
+		
+		Map<String,Object> mMap = new HashMap<String, Object>();
+		mMap.put("startRnum", startRnum);
+		mMap.put("endRnum", endRnum);
+		mMap.put("keyword", keyword);
+		mMap.put("address1", clubVo.getAddress1());
+		mMap.put("address2", clubVo.getAddress2());
+		mMap.put("cateNo",clubVo.getCateNo());
+		mMap.put("tagNo" ,clubVo.getTagNo());
+		System.err.println(mMap);
+		List<ClubVo> list = session.selectList("club.searchList", mMap);
 		System.out.println(list);
 		return list;
 	}

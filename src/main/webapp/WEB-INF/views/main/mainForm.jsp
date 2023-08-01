@@ -320,10 +320,14 @@
 <body>
     
 
-	 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-	 
-    <input id="main_search" type="search"  name="keyword" >
-    <form id="hobby_form" action="${pageContext.request.contextPath }/main/search">
+	  <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+      
+     
+      
+      <form id="hobby_form" action="${pageContext.request.contextPath }/main/mainForm">
+         
+        <input id="main_search" type="search"  name="keyword" value=""> 
+      
         <h3>나의 취향</h3>
       
         <div id="select_box">  

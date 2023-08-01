@@ -78,7 +78,14 @@ a{text-decoration: none; color: #212121;}
             width: 100%;
             height: 400px;
             border-bottom: 1px solid gray;
+           
         }
+        .back-img>img{
+        width:100%;
+        height: 400px;
+        background-size:cover;
+        }
+        
 
         .color-box {
             width: 100%;

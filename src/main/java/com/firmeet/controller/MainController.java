@@ -45,7 +45,9 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/mainForm", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainList(@RequestParam(value="crtPage", required=false,defaultValue="1")int crtPage,
+	public String mainList(
+			@ModelAttribute ClubVo clubVo ,
+			@RequestParam(value="crtPage", required=false,defaultValue="1")int crtPage,
 						   @RequestParam(value="keyword", required=false,defaultValue="") String keyword,
 						   Model model, HttpSession session) {
 		List<TagVo> tagList = memberService.tagList();
@@ -53,18 +55,10 @@ public class MainController {
 
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
-	
-			
-		
-		ClubVo clubVo = new ClubVo();
-		System.out.println(clubVo.getClubId());
-		/*
-		 * List<ClubVo> clubList = clubService.clubList();
-		 * model.addAttribute("clubList",clubList);
-		 */
+
 		
 		System.out.println("MainController.mainList()");
-		Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
+		Map<String, Object> pMap = clubService.clubList2(crtPage,keyword,clubVo);
 		model.addAttribute("pMap",pMap);
 		
 		System.out.println(pMap);
@@ -124,8 +118,10 @@ public class MainController {
 		model.addAttribute("cateList", cateList);
 		
 		
-//		Map<String, Object> sMap = clubService.clubList2(crtPage,keyword);
-//		model.addAttribute("sMap",sMap);
+		/*
+		 * Map<String, Object> pMap = clubService.searchList(crtPage,keyword, clubVo);
+		 * model.addAttribute("pMap",pMap);
+		 */
 		 
 		return "/main/mainForm";
 	}

@@ -70,18 +70,23 @@ public class ClubService {
 		return clubVo;
 	}
 
-	public Map<String, Object> clubList2(int crtPage, String keyword) {
-		
+	public Map<String, Object> clubList2(int crtPage, String keyword, ClubVo clubVo) {
+
 		System.out.println("ClubService.clubList2()");
-		
+		System.out.println(clubVo);
 		crtPage = (crtPage >= 1) ? crtPage : (crtPage = 1);
 		int listCnt = 10;
 
 		int startRnum = (crtPage - 1) * listCnt + 1;
 		int endRnum = (startRnum + listCnt) - 1;
-
-		List<ClubVo> clubList = clubDao.clubList2(startRnum, endRnum, keyword);
-
+		
+		// List<ClubVo> clubList = clubDao.clubList2(startRnum, endRnum, keyword);
+		
+		
+		List<ClubVo> clubList = clubDao.searchList(startRnum, endRnum, keyword, clubVo);
+		System.out.println("==========================================");
+		System.out.println(clubList);
+		System.out.println("==========================================");
 		int totalCount = clubDao.searchMainList2(keyword);
 
 		int pageBtnCount = 5;
@@ -95,7 +100,7 @@ public class ClubService {
 		} else {
 			next = false;
 			// 끝 버튼 번호 endPageBtnNo 다시 계산
-			endPageNo = (int) Math.ceil(totalCount / (double)listCnt);
+			endPageNo = (int) Math.ceil(totalCount / (double) listCnt);
 		}
 
 		// 이전 화살표
@@ -213,19 +218,56 @@ public class ClubService {
 
 	}
 
-	
-	public List<ClubVo> searchList(ClubVo clubVo) {
-	  
-		System.out.println("clubService.searchList()"); 
-		System.out.println(clubVo);
-		System.out.println(clubVo.getAddress1()); 
-		System.out.println(clubVo.getAddress2());
-	  
-		List<ClubVo> list = clubDao.searchList(clubVo); 
-	
-		return list;
-	 
-	}
+	/*
+	 * public Map<String, Object> searchList(int crtPage, String keyword, ClubVo
+	 * clubVo){
+	 * 
+	 * System.out.println("clubService.searchList()");
+	 * 
+	 * crtPage = (crtPage >= 1) ? crtPage : (crtPage = 1); int listCnt = 10;
+	 * 
+	 * int startRnum = (crtPage - 1) * listCnt + 1; int endRnum = (startRnum +
+	 * listCnt) - 1;
+	 * 
+	 * List<ClubVo> clubList = clubDao.searchList(startRnum, endRnum, keyword
+	 * ,clubVo);
+	 * 
+	 * int totalCount = clubDao.searchMainList2(keyword);
+	 * 
+	 * int pageBtnCount = 5; int endPageNo = (int) Math.ceil(crtPage / (double)
+	 * pageBtnCount) * pageBtnCount; int startPageNo = (endPageNo - pageBtnCount) +
+	 * 1;
+	 * 
+	 * // 다음 화살표 true false
+	 * 
+	 * boolean next = false; if (endPageNo * listCnt < totalCount) { // 10 * 10 <
+	 * 123 next = true;
+	 * 
+	 * } else { next = false; // 끝 버튼 번호endPageBtnNo 다시 계산 endPageNo = (int)
+	 * Math.ceil(totalCount / (double)listCnt); }
+	 * 
+	 * // 이전 화살표 boolean prev = false; if (startPageNo != 1) { prev = true; }
+	 * 
+	 * Map<String, Object> pMap = new HashMap<String, Object>();
+	 * pMap.put("prev",prev); pMap.put("startPageNo", startPageNo);
+	 * pMap.put("endPageNo", endPageNo); pMap.put("next", next);
+	 * pMap.put("clubList", clubList);
+	 * 
+	 * System.out.println(pMap);
+	 * 
+	 * return pMap;
+	 * 
+	 * 
+	 * 
+	 * 
+	 * List<ClubVo> list = clubDao.searchList(clubVo);
+	 * 
+	 * return list;
+	 * 
+	 * 
+	 * }
+	 */
+
 	public void clubQ(ClubQnaVo clubQnaVo) {
 		System.out.println("ClubService.clubQ()");
 		System.out.println(clubQnaVo);
