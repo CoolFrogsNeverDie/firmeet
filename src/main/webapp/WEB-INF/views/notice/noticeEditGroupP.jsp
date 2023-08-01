@@ -119,8 +119,8 @@
                                      <span class="groupvotetitle1">장 소 </span>
                                      <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="">
                                      <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
-                                  	 <input type="text" name="address1" value="x" id="address1"> 
-									 <input type="text" name="address2" value="y" id="address2">
+                                  	 <input type="hidden" name="address1" value="x" id="address1"> 
+									 <input type="hidden" name="address2" value="y" id="address2">
                                      
  									<div class="map_wrap">
 									   <div id="map" style="width:100%;height:100%;display: block;"></div>
@@ -157,57 +157,6 @@
                         </div>
                     </div>
                 </div>
-                
-
-<!-----------------------------------------------------------------------------결제일반-------------------------------------------------------------------------------- -->
-                <div class="modal" id="groupmeet">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="grouptitle" id="result1"></div>
-                                <div class="groupschedule">
-                                    <input type="radio" name="groupschedule" value="group">결제 &nbsp;
-                                    <input type="radio" name="groupschedule" value="groupmeet" checked style="margin-left: 20px;">일정
-                                </div>
-                                <div>
-                                    <span class="groupvotetitle">만남일 </span>
-                                      <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
-                                    <input class="groupvotedate" type="date" id="endDate" name="endDate">
-                           			<input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
-                                    <span class="groupvotetitle1">장 소 </span>
-                                    <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
-                                    <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
-                                    
-                                    <input type="text" name="address1" value="x" id="address1"> 
-									 <input type="text" name="address2" value="y" id="address2">
-                                     
- 									<div class="map_wrap">
-									   <div id="map" style="width:100%;height:100%;display: block;"></div>
-									      <div id="menu_wrap" class="bg_white">
-									        <div class="option">
-									            <div>
-									               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
-									                <input type="text" id="keyword" size="15">
-									              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
-									            </div>
-									        </div>
-									        <hr>
-									        <ul id="placesList"></ul>
-									        <div id="pagination"></div>
-									    </div>
-									</div><br>
-                                </div>
-                                <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-                                	<button type="button" id="reset" class="btn btn-warning btn-sm">등록취소</button>
-                                    <button type="button" class="btn btn-success" style="margin-left: 10px;">등록하기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
          </form>
          </div>
             <!--/content-left-->
@@ -235,6 +184,8 @@
                     </tbody>
                 </table>
                 <div id="map2" style="width:100%;height:150px;"></div>
+         <!-- ----------------------------------------------------------------------------------------------- -->       
+         
             </div>
         </div>
         <!--/content-area-->
@@ -255,9 +206,25 @@ $(document).keypress(function(e) {
 
 $(document).ready(function() {
 	
+    // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
+    $('input[name="groupschedule"]').on('change', function() {
+        // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
+        window.location.href = "noticeEditGroupG";
+    });
+    
+    $('#title').on('input', function() {
+        var title = $(this).val();
+        localStorage.setItem('title', title);
+    });
+    
+    $('#summernote').on('summernote.change', function() {
+        var editorContent = $(this).summernote('code');
+        localStorage.setItem('editorContent', editorContent);
+    });
+
+	
     $("#reset").on("click", function() {
         $("#group").hide();
-        $("#groupmeet").hide();
         $(".modal-backdrop.show").css("display", "none");
     });
 	
@@ -287,12 +254,12 @@ $(document).ready(function() {
 		$("#keyword").attr('value',location);
 		$("#searchButton").trigger("click");
 	});
-   	
+	
     $("#saveButton2").on("click", function() {
        var meetYearValue = $('#meetYear').val();
        var meetMonValue = $('#meetMon').val();
        var meetNameValue = $('#meetName').val();
-       var combinedValue = meetYearValue + ' ' + meetMonValue+ ' ' + meetNameValue;
+       var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
        var result = $("#result").val();
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
@@ -349,23 +316,15 @@ $(document).ready(function() {
     
 });
     
- $('#group').on("click", function() {
-   var meetYearValue = $('#meetYear').val();
-   var meetMonValue = $('#meetMon').val();
-   var meetNameValue = $('#meetName').val();
-   var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
-
-   $('#result').text(combinedValue);
-});
- $('#groupmeet').on("click", function() {
-     var meetYearValue = $('#meetYear').val();
-     var meetMonValue = $('#meetMon').val();
-     var meetNameValue = $('#meetName').val();
-     var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
-
-     $('#result1').text(combinedValue);
-  });
-       
+	 $('#group').on("click", function() {
+	   var meetYearValue = $('#meetYear').val();
+	   var meetMonValue = $('#meetMon').val();
+	   var meetNameValue = $('#meetName').val();
+	   var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
+	
+	   $('#result').text(combinedValue);
+	});
+	 
 });
 
 
@@ -377,7 +336,7 @@ $(document).ready(function() {
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
-        width: 600,
+        width: 620,
         minHeight: null, // set minimum height of editor
         maxHeight: null, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
@@ -702,5 +661,4 @@ $('#searchButton').click(function(event) {
    } */
 });
 </script>
-
 </html>

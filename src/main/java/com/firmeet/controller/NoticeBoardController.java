@@ -96,18 +96,23 @@ public class NoticeBoardController {
 	}
 	
 	//에디터 결제 페이지
-	@RequestMapping("/noticeEditGroup")
-	public String noticeEditGroup(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
-		
+	@RequestMapping("/noticeEditGroupP")
+	public String noticeEditGroupP(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("noticeEditGroup확인");
-		
 		int clubId = (int) session.getAttribute("clubId");
-		
 		System.out.println("controller clubId"+clubId);
-		
 		model.addAttribute("clubId", clubId);
-		
-		return "notice/noticeEditGroup";
+		return "notice/noticeEditGroupP";
+	}
+	
+	//에디터 결제 페이지
+	@RequestMapping("/noticeEditGroupG")
+	public String noticeEditGroupG(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+		System.out.println("noticeEditGroup확인");
+		int clubId = (int) session.getAttribute("clubId");
+		System.out.println("controller clubId"+clubId);
+		model.addAttribute("clubId", clubId);
+		return "notice/noticeEditGroupG";
 	}
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
@@ -197,6 +202,39 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.editlistgroup(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		return "notice/noticeVoteView";
+	}
+	
+	//에디터 모임 등록 후 나오는 페이지
+	@RequestMapping("/editgroupwriteG")
+	public String editgroupwriteG(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+		
+		System.out.println("notice editgroupwriteGG 확인 ");
+		System.out.println("controller vo"+vo);
+		
+		noticeBoardService.editgroupwriteG(vo);
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		System.out.println("번호확인"+vo.getMeetNo());
+		
+		return "redirect:/"+vo.getClubId()+"/notice/editlistgroupG";
+	}
+	
+	//에디터 모임 등록 후 나오는 리스트
+	@RequestMapping("/editlistgroupG")
+	public String editlistgroupG(ClubVo clubvo, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		System.out.println("notice editgrouplistGG 확인");
+		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
+		System.out.println(vo);
+		
+		model.addAttribute("clubId", clubvo.getClubId());
+		
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		System.out.println("meetNo"+ vo.getMeetNo());
+		model.addAttribute("meetNo", vo.getMeetNo());
+		session.getAttribute("memberId");
+		System.out.println("gsgsdsgsgsgsg"+vo.getMemberId());
+		model.addAttribute("vo", noticeBoardService.editlistgroupG(vo));
+		System.out.println("controller meetno 확인"+vo.getMeetNo());
+		return "notice/noticeVoteViewG";
 	}
 	
 	@ResponseBody

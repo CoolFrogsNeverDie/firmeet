@@ -76,17 +76,11 @@
 	                             <span class="noticegroupname"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
 	                             <p class="noticegroupname"><span>만남시간 : </span>${vo.meetTime}</p>
 	                             <p class="noticegroupname"><span>만남장소 : </span>${vo.meetPlace}</p>
-	                             <p class="noticegroupname">회비 :<span id="price">${vo.price}</span></p>
 	                             <p class="noticegroupname"><span>투표종료일 : </span>${vo.voteEnd}</p>
-	                             <p class="noticegroupname"><span>최소인원 : </span>${vo.minPerson}</p>
-	                             <p class="noticegroupname"><span>최대인원 : </span>${vo.maxPerson}</p>
 	                             <p class="noticegroupname" hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
-	                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
-	                             <span id="memberId">${member.memberId}</span>/<span id="aboardNo">${vo.aboardNo}</span>/<span id="meetNo">${vo.meetNo}</span>/
-	                             <span id="paycount">${vo.paycount}</span>/<span id="payresultNo">${vo.payresultNo}</span>
-	                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
+	                             <span id="memberId" hidden="hidden">${member.memberId}</span><span id="aboardNo" hidden="hidden">${vo.aboardNo}</span>
 	                          </td>
 		                 </tr>
 		               </tbody>
@@ -532,92 +526,5 @@ $(document).ready(function () {
     
 //--------------------------------------------------------------------------------------------------------
 
- var price = $('#price').text();
- 
-  console.log(price);
-  
-  function kakaopay(){
-  
-	var IMP = window.IMP; // 생략 가능
-	IMP.init("imp51377887"); // 예: imp00000000
-	
-	IMP.request_pay({		
-		pg : 'kakaopay',
-		pay_method : 'card',
-		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
-		name : 'firmeet',                                  //상품명
-		amount : $('#price').text(),//가격
-		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
-		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
-		buyer_name : 'buyer_name',                           //구매자 이름
-		buyer_tel : 'hp',                                    //전화번호
-		buyer_addr : 'addr',	                             //주소
-	},function(data){
-		if(data.success){
-			console.log('빌링키 발급 성공', data)
-			alert("결제가 완료되었습니다.")
-			
-				  var memberId = $('#memberId').text();
-	  			  var meetNo = $('#meetNo').text();
-	  			  var paycount = $('#paycount').text();
-	  			  var payresultNo = $('#payresultNo').text();
-					console.log('ㅎㅎ',memberId);
-					console.log(meetNo);
-					console.log('ㅎㅎ',paycount);
-					console.log(payresultNo);
-				var NoticeBoardVO ={
-							memberId : memberId,
-							meetNo :  meetNo,
-							payresultNo : payresultNo,
-							paycount : paycount
-					}
-					//통신  id////////////////////////////////////////////
-					$.ajax({
-			        url: '${pageContext.request.contextPath }/${clubId }/notice/pay', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
-			        method: 'POST',
-			        data: NoticeBoardVO,
-			        dataType: 'json',
-			        
-			        success: function(jsonResult) {
-			        	console.log(jsonResult)
-			        	var data = jsonResult.data;
-			        	
-			        	if(jsonResult.result == 'success'){
-			        		if(jsonResult.data != null){
-			        			$("#memberId").val(data.memberId);
-			        			$("#meetNo").val(data.meetNo);
-			        			$("#paycount").text(data.paycount);
-			        			data.paycount++;
-			        			$("#payresultNo").text(data.payresultNo);
-			        			console.log(data.memberId);
-			        			console.log(data.meetNo);
-			        			console.log(data.paycount);
-			        			console.log(data.payresultNo); 
-			        			$("#paybtn").hide();
-			        			//window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/payresult?memberId='+data.memberId+'&meetNo='+data.meetNo;
-			        		}else{
-			        			$("#x").html("사용불가");
-			        		}
-			        	}else {
-							//메세지 출력
-							var msg = jsonResult.failMsg;
-							alert(msg);
-						}
-			        },
-			        error: function(xhr, status, error) {
-			            // 오류 처리
-			            console.error('Error:', error);
-			        }
-			    });
-				
-		}else{
-        	var msg = "결제 실패"
-        	msg += "에러 내용" + data.error_msg;
-        	alert(msg);
-        	return false;
-        }
-		$("#paybtn").submit();
-	});
- }
 </script>
 </html>

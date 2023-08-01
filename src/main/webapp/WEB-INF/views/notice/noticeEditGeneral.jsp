@@ -38,8 +38,8 @@
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
                         </select>
-                        <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임
+                        <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반&nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임&nbsp;
                             
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
@@ -179,7 +179,7 @@ $(document).ready(function() {
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
-        window.location.href = "noticeEditGroup";
+        window.location.href = "noticeEditGroupP";
     });
     
     $("#reset").on("click", function() {
@@ -232,7 +232,7 @@ $(document).ready(function() {
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
-        width: 600,
+        width: 620,
         minHeight: null, // set minimum height of editor
         maxHeight: null, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
