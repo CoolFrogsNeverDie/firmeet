@@ -32,11 +32,4 @@ crossorigin="anonymous">
 <link href="${pageContext.request.contextPath }/assets/css/imgSlider.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/main2.css" rel="stylesheet" type="text/css">
 
-
-
-<!-- 자작 -->
-<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
-
-
-    
   

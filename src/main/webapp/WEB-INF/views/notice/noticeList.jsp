@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지 에디터</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 </head>
 <style>
     #list-container {
@@ -21,7 +23,7 @@
       border-bottom: 1px solid #ccc;
     }
     .table1000{
-    	width:1070px;
+    	width:1030px;
     }
 </style>
 <body>
@@ -34,33 +36,26 @@
     <div class="wrap">
       <div class="diary-area">
         <div class="diary-topbar">
-          <img
-            class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
+          <img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
           <h1>${club.clubName}</h1>
+	      <form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
+			  <div class="search-btn">
+					<input name="keyword" id="keyword" value="${map.keyword }" placeholder="검색어를 입력하세요">
+					<button type ="button" class="keyword-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
+			  </div>
+		  </form>
         </div>
         <!--/diary-topbar-img-->
-        <div class="diary-subbar">
+        <div class="diary-subbar" style="border : none; margin-bottom: 20px;">
           <h4 style="width: 50%">공지 게시판</h4>
              <div style="width:100%;">
-        		<button type="button" id="noticewrite" style=" float: right;">글쓰기</button>
+        		<button type="button" id="noticewrite">글쓰기</button>
         	</div>
         </div>
         <!--/diary-subbar-->
         <div class="content-area"  id="list-container">
           <div class="content-left">
 	<!-- 여기부터 -->
-	
-	
-	<form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
-		<select name="searchOption">
-			<option value="userName"
-				<c:out value="${map.searchOption == 'memberId' ? 'selected' : ''}"/>>이름</option>
-			<option value="bcontent"
-				<c:out value="${map.searchOption == 'boardContent' ? 'selected' : ''}"/>>내용</option>
-			<option value="title"
-				<c:out value="${map.searchOption == 'title' ? 'selected' : ''}"/>>제목</option>
-		</select> <input name="keyword" value="${map.keyword }"> <input type="submit" value="조회">
-	</form>
 	
 	<table class="table1000" border="1">
 		<tr>
@@ -81,6 +76,9 @@
 					</c:when>
 					<c:when test="${row.aboardVal == 2 }">
 						<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">${row.title }</a></td>
+					</c:when>
+					<c:when test="${row.aboardVal == 3 }">
+						<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroupG?aboardNo=${row.aboardNo}">${row.title }</a></td>
 					</c:when>
 				</c:choose>
 				<td>${row.aboardDate }</td>

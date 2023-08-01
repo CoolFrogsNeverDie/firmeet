@@ -13,7 +13,7 @@
     <!-- //css, js 링크 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
 	<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -44,9 +44,11 @@
                         <select name="" id="" class="selectbox">
                             <option value="notice">공지게시판</option>
                         </select>
-                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반 &nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal" checked style="margin-left: 20px;">모임
-                            
+                        
+                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반&nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;" checked>모임(결제)&nbsp;
+                        <input type="radio" name="aboardVal" value="3" id="aboardVal" style="margin-left: 20px;">모임(일정)
+                        
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
                             <option value="2024">2024년</option>
@@ -83,13 +85,13 @@
                             <option value="번개모임">번개모임</option>
                             <option value="일반모임">일반모임</option>
                         </select>
-						<input type="text" name="memberId" value="${member.memberId}">${memberId}
+						<input type="hidden" name="memberId" value="${member.memberId}">${memberId}
                         <button type="submit" class="btnbox">등록</button>
                     </div>
 
                     <div>
                         <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
-                        <input class="noticetitle" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
+                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
                     </div>
 
                     <div class="ababab">
@@ -107,10 +109,6 @@
                             </div>
                             <div class="modal-body">
                                  <div class="grouptitle" id="result"></div>
-                                 <div class="groupschedule">
-                                     <input type="radio" name="groupschedule" value="group" checked>결제 &nbsp;
-                                     <input type="radio" name="groupschedule" value="groupmeet" style="margin-left: 20px;">일정
-                                 </div>
                                   <div>
                                      <span class="groupvotetitle">만남일 </span>
                                      <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
@@ -207,22 +205,26 @@ $(document).keypress(function(e) {
 $(document).ready(function() {
 	
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
-    $('input[name="groupschedule"]').on('change', function() {
+    $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
-        window.location.href = "noticeEditGroupG";
+         // 선택된 값에 따라 페이지 이동
+         var selectedValue = $("input[name='aboardVal']:checked").val();
+            switch (selectedValue) {
+                case "1":
+                    window.location.href = "noticeEditGeneral";
+                    break;
+                case "2":
+                    window.location.href = "noticeEditGroupP";
+                    break;
+                case "3":
+                    window.location.href = "noticeEditGroupG";
+                    break;
+                default:
+                    // 선택된 값이 없을 경우 처리할 내용
+                    break;
+            }
     });
     
-    $('#title').on('input', function() {
-        var title = $(this).val();
-        localStorage.setItem('title', title);
-    });
-    
-    $('#summernote').on('summernote.change', function() {
-        var editorContent = $(this).summernote('code');
-        localStorage.setItem('editorContent', editorContent);
-    });
-
-	
     $("#reset").on("click", function() {
         $("#group").hide();
         $(".modal-backdrop.show").css("display", "none");

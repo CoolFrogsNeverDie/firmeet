@@ -8,7 +8,7 @@
     <title>공지 에디터</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -39,7 +39,8 @@
                             <option value="notice">공지게시판</option>
                         </select>
                         <input type="radio" name="aboardVal" value="1" id="aboardVal" checked>일반&nbsp;
-                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임&nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임(결제)&nbsp;
+                        <input type="radio" name="aboardVal" value="3" id="aboardVal" style="margin-left: 20px;">모임(일정)
                             
                        <select name="meetYear" id="meetYear" class="meetYear">
                             <option value="2023">2023년</option>
@@ -77,13 +78,13 @@
                             <option value="번개모임">번개모임</option>
                             <option value="일반모임">일반모임</option>
                         </select>
-                  <input type="text" name="memberId" value="${member.memberId}">${memberId}
+                  <input type="hidden" name="memberId" value="${member.memberId}">${memberId}
                         <button type="submit" class="btnbox">등록</button>
                     </div>
 
                     <div>
                         <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
-                        <input class="noticetitle" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
+                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
                     </div>
 
                     <div class="ababab">
@@ -179,7 +180,22 @@ $(document).ready(function() {
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
-        window.location.href = "noticeEditGroupP";
+         // 선택된 값에 따라 페이지 이동
+         var selectedValue = $("input[name='aboardVal']:checked").val();
+            switch (selectedValue) {
+                case "1":
+                    window.location.href = "noticeEditGeneral";
+                    break;
+                case "2":
+                    window.location.href = "noticeEditGroupP";
+                    break;
+                case "3":
+                    window.location.href = "noticeEditGroupG";
+                    break;
+                default:
+                    // 선택된 값이 없을 경우 처리할 내용
+                    break;
+            }
     });
     
     $("#reset").on("click", function() {

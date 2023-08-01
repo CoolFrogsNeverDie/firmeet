@@ -82,7 +82,6 @@ public class NoticeBoardController {
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
 	public String noticeEditGeneral(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
-		
 		System.out.println("noticeEditGeneral확인");
 		
 		int clubId = (int) session.getAttribute("clubId");
@@ -92,17 +91,74 @@ public class NoticeBoardController {
 		
 		model.addAttribute("clubId", clubId);
 		
-		return "notice/noticeEditGeneral";
+        MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+            return "notice/noticeEditGeneral";
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
+		
 	}
 	
 	//에디터 결제 페이지
 	@RequestMapping("/noticeEditGroupP")
 	public String noticeEditGroupP(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("noticeEditGroup확인");
+		
 		int clubId = (int) session.getAttribute("clubId");
+		
 		System.out.println("controller clubId"+clubId);
 		model.addAttribute("clubId", clubId);
-		return "notice/noticeEditGroupP";
+		
+		 MemberVo member = (MemberVo) session.getAttribute("member");
+	        String memberId = null;
+	        if (member != null) {
+	            memberId = member.getMemberId();
+
+	            System.out.println(memberId); // memberId 값 출력;
+	            
+	            // 클럽과 회원의 관계 정보를 가져옵니다.
+	            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+	            // club이 null이면 쫒아내기!!!
+	            model.addAttribute("club", club);
+
+	            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+	            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+	            model.addAttribute("gImgVos", gImgVos);
+
+	            // 공지사항 목록을 가져옵니다.
+	            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+	            System.out.println(nList);
+	            model.addAttribute("noticeList", nList);
+
+	            return "notice/noticeEditGroupP";
+	        } else {
+	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+	            return "member/memberForm";
+	        }
+		
+		
 	}
 	
 	//에디터 결제 페이지
@@ -112,7 +168,35 @@ public class NoticeBoardController {
 		int clubId = (int) session.getAttribute("clubId");
 		System.out.println("controller clubId"+clubId);
 		model.addAttribute("clubId", clubId);
-		return "notice/noticeEditGroupG";
+		
+		 MemberVo member = (MemberVo) session.getAttribute("member");
+	        String memberId = null;
+	        if (member != null) {
+	            memberId = member.getMemberId();
+
+	            System.out.println(memberId); // memberId 값 출력;
+	            
+	            // 클럽과 회원의 관계 정보를 가져옵니다.
+	            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+	            // club이 null이면 쫒아내기!!!
+	            model.addAttribute("club", club);
+
+	            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+	            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+	            model.addAttribute("gImgVos", gImgVos);
+
+	            // 공지사항 목록을 가져옵니다.
+	            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+	            System.out.println(nList);
+	            model.addAttribute("noticeList", nList);
+
+	            return "notice/noticeEditGroupG";
+	            
+	        } else {
+	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+	            return "member/memberForm";
+	        }
+		
 	}
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
@@ -130,11 +214,12 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist")
-	public String editlist(ClubVo clubvo, Model model, HttpSession session, NoticeBoardVO vo) {
+	public String editlist(Model model, HttpSession session, NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
-		model.addAttribute("clubId", clubvo.getClubId());
+		int clubId = (int) session.getAttribute("clubId");
+
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("aboardNo"+ vo.getAboardNo());
 		model.addAttribute("voteNo", vo.getVoteNo());
@@ -142,7 +227,34 @@ public class NoticeBoardController {
 		
 		model.addAttribute("vo", noticeBoardService.editlist(vo));
 		
-		return "notice/noticeGroupView";
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+    		return "notice/noticeGroupView";
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+
 	}
 	
 	@RequestMapping("/vote")
@@ -201,7 +313,36 @@ public class NoticeBoardController {
 		System.out.println("gsgsdsgsgsgsg"+vo.getMemberId());
 		model.addAttribute("vo", noticeBoardService.editlistgroup(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
-		return "notice/noticeVoteView";
+		
+		int clubId = (int) session.getAttribute("clubId");
+
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+    		return "notice/noticeVoteView";
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 	}
 	
 	//에디터 모임 등록 후 나오는 페이지
@@ -234,7 +375,37 @@ public class NoticeBoardController {
 		System.out.println("gsgsdsgsgsgsg"+vo.getMemberId());
 		model.addAttribute("vo", noticeBoardService.editlistgroupG(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
-		return "notice/noticeVoteViewG";
+		
+		int clubId = (int) session.getAttribute("clubId");
+
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+            model.addAttribute("gImgVos", gImgVos);
+
+            // 공지사항 목록을 가져옵니다.
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            System.out.println(nList);
+            model.addAttribute("noticeList", nList);
+
+    		return "notice/noticeVoteViewG";
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+
 	}
 	
 	@ResponseBody

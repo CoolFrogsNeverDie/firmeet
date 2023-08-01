@@ -29,7 +29,7 @@
           <h1>${club.clubName}</h1>
         </div>
         <!--/diary-topbar-img-->
-        <div class="diary-subbar">
+        <div class="diary-subbar" style="border : none;">
           <h4>공지 게시판</h4>
         </div>
         <!--/diary-subbar-->
@@ -40,10 +40,10 @@
            
             <div class="noticeform">
               <div>
-                  <p class="noticetitle">${vo.title }</p>
+                  <p class="noticetitle">제목 :&nbsp;&nbsp;${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="btn btn-warning" id="nlist">목록</button>
-                    <button type="button" class="btn btn-success">다음글</button>
+                    <button type="button" class="listbtn" id="nlist">목록</a></button>
+                    <button type="button" class="nextbtn">다음글</button>
                   </div>
               </div>
               <div class="noticeprofil">
@@ -92,7 +92,7 @@
 		               </tbody>
 	               </table>
                <div class="mapview">
-               		<div id="map2" style="width:85%;height:250px;"></div>
+               		<div id="map2" style="width:91%;height:250px;"></div>
                </div>
         </div>
               
@@ -110,7 +110,7 @@
 
 				    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
 					    </div>
-					    <div class="board-content">
+					    <div class="board-content" style="margin-left: 20px; margin-top: -80px;">
 					    <c:if test="${vo.likeNo == 0 }">
 						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
 						</c:if>
@@ -119,10 +119,10 @@
 					    </c:if>
 					    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
 					    </div>
-					    <div class="board-comment-list">
+					    <div class="board-comment-list" style="margin-top: 40px; margin-left: 50px; width: 1030px;">
 						    <div class="board-comment" >
 						   
-						    <h5>댓글</h5><span><button class="write-comment-btn">댓글 닫기</button></span>
+						   <h5>댓글</h5><!-- <span><button class="write-comment-btn">댓글 닫기</button></span> -->
 						    
 						    <c:forEach items="${vo.replyList}" var = "reply">
 						    
@@ -149,7 +149,7 @@
 	
 							<div class="write-comment">
 								<div class="new-content">
-					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 1000px;"></textarea>
+					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 950px; margin-top: 10px;"></textarea>
 					            	<button class="add-reply"  data-boardno ="${vo.aboardNo}">등록</button>
 		            			</div>
 						    </div>
@@ -422,9 +422,9 @@ $(document).ready(function () {
     if(tag == null){
     	var	rreply = '';	
     	
-    	rreply += '<div style ="width:1000px; height:50px; margin-top:6px; " class="write-comment2" >';
+    	rreply += '<div style ="width:1030px; height:50px; margin-top:6px; " class="write-comment2" >';
     	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left;">';
-    	rreply += '        <textarea class= "comment-content" style ="width:900px; height:100%; border: 1px solid black; padding:10px;"></textarea><button class="add-reply2" style="margin-left:1%;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+    	rreply += '        <img src="${pageContext.request.contextPath }/assets/images/icon/re.png" style ="width:20px; height:20px; margin-top:-50px; margin-left:20px;"><textarea class= "comment-content" style ="width:900px; height:100%; border: 1px solid black; padding:10px; margin-left:10px;"></textarea><button class="add-reply2" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">OK</button></div>'
     	rreply += '    </div>'
     	rreply += '</div>'
 
