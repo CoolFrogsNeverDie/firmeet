@@ -220,6 +220,12 @@ a{text-decoration: none; color: #212121;}
             width: 100%;
             height: 100%;
         }
+        
+       .btn-subscript{
+       		background-color:#444;
+       
+       }
+        
     </style>
 </head>
 
@@ -237,7 +243,8 @@ a{text-decoration: none; color: #212121;}
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
             <div class="club-tag">#성인수영 #새벽수영 #갓생 #친목 #운동러버 #초보환영</div>
             <div class="join-btn-area">
-            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn">회원가입</button></a>
+            	<button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
+            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join">회원가입</button></a>
             </div>
         </div>
         <!--메인라인 종료-->
@@ -358,6 +365,7 @@ a{text-decoration: none; color: #212121;}
         <div class="clear"></div>
 			${clubVo.clubId}
         <div class= "join-btn-last">
+        	<a href =""><button type="button" class= "join-btn btn-subscript">가입 신청됨</button></a>
             <a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn">회원가입</button></a>
         </div>
     </div>
@@ -724,6 +732,26 @@ $('.ans-btn').on("click", function(){
 	
 
 
+</script>
+
+<script>
+
+	<c:if test="${memberLv.memlevel == null}">
+	
+		alert("${memberLv.memlevel}")
+		$(".btn-join").css("display","block");
+		$(".btn-subscript").css("display","none");
+		
+	</c:if>
+	<c:if test="${memberLv.memlevel ==-10}">
+		alert("${memberLv.memlevel}")
+		$(".btn-join").css("display","none");
+		$(".btn-subscript").css("display","block");
+		
+	</c:if>
+	
+
+	
 </script>
 
 

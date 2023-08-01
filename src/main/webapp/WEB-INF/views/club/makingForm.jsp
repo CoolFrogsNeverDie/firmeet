@@ -8,21 +8,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
     	*{list-style:none}
+    	
+    	
+    	#background{
+    		box-sizing: border-box;
+    		width:1920px;
+    		height:1800px;
+    		background:#fcfcfc;
+    	
+    	}
+    	
+    	
     
+    	.navbar{
+    		position: fixed;
+    		margin:auto;
+    		width:100%;
+    		background:#fff;
+    		z-index:10;
+    	}
+    	
+    
+    		
         .container{
-        	border: 1px solid black;
+        	background:#fff;
             width: 1000px;
+          	height:100%;
             margin: 0 auto;
-            accent-color: black;
+            accent-color: #1eafcc;
             min-width:1000px;
         }
         h2{
             color: #222;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin: 50px auto;
         }
         
         #cm_body{
@@ -30,24 +53,53 @@
         		margin:auto;
         
         }
+        
+        .box#max{
+        	width:100px;
+        	transform: translateX(-20px);
+        }
+        
+        #select_field{
+       		 	
+        		width: 1000px;
+        		margin: auto;
+    	}
+    	#select_field>p{
+        		transform: translate(20px , 10px);
+        		font-size: 17px;
+        		font-weight: 600;
+    	}
+
+
+    	#select_field ul{
+        		margin: 20px;
+        		width:900px;
+        		display: flex;
+        		flex-wrap: wrap;
+        		accent-color: black;
+    	}
+     
+    	#select_field li{
+        		font-size: 12px;
+        		width:150px;
+        		height:30px;
+        		display: flex;
+        		gap:10px;
+    	}
+    
+     	#select_field li>p{
+     		transform: translateY(7px);
+     	}
+        
+   
+        
         .box{
             width: 70%;
-            border-radius: 7px 7px 7px 7px;
+            border-radius: 10px 10px 10px 10px;
             border: 1px solid rgb(221, 219, 219);
             margin-left: 80px;
         }
-        .box1{
-            margin-left: 60px;
-        }
-        .box2{
-            width: 50px;
-        }
-        .box3{
-            border: none;
-        }
-        .box4{
-            margin-left: 135px;
-        }
+        
         .box5{
             margin-left: 55px;
         }
@@ -126,13 +178,13 @@
         }
         
         button[type=submit]:hover{
-        	background:#222;
-        	color:#eee;
+        	background:#1eafcc;
+        	color:white;
         }
         
         button[type=button]:hover {
-        	background:#eee;
-        	color:#222;
+        	background:white;
+        	color:#1eafcc;
         	border:none;
         }
 	
@@ -167,12 +219,13 @@
         	font-weight:200;
         	border-radius:5px;
         	padding:2px;
-        	background-color:#bbb;
+        	background-color:#1eafcc;
+        	color:white;
         }
         
         .tag .tags:checked+.tagLabel{
-        	background-color:#000;
-        	color:#eee;
+        	background-color:white;
+        	color:#1eafcc;
         }
         #selTag {
         	display:flex;
@@ -192,25 +245,34 @@
     
         }
         
+       
+        
     </style>
   </head>
 <body>
+<div id="background">
+	<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
     
-<div class="container">
-    <div class="py-5 text-center">
-      <h2>퍼밋 동호회 등록</h2>
-    </div>
-    <div id="cm_body">
-        <form action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
-          <div class="row g-3">
-            <div>
-                <label for="firstName">모임명</label>
-                <input type="text" class="box" id="" placeholder="" name="clubName" value="" required>
-            </div>
+	<div class="container">
+    	<div class="py-5 text-center">
+     	 	<h2>퍼밋 동호회 등록</h2>
+    	</div>
+    	<div id="cm_body">
+        	<form action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
+          	<div class="row g-3">
+            	<div>
+                	<label for="firstName">모임명</label>
+                	<input type="text" class="box" id="" placeholder="" name="clubName" value="" required>
+            	</div>
 
-            <div class="col-sm-12">
-                <label for="firstName">모임 분류</label>
-                <span class="box box1 box3">
+            	<div id="select_field">
+                	<label for="firstName">모임 분류</label>
+                	<ul>
+                 		<c:forEach  items="${cateList}" var="cate" >
+                 			<li><input type="radio" name="cateNo"  value="${cate.cateNo}" ><p>${cate.category}</p></li>
+                 		</c:forEach>
+           		 	</ul>
+               <!--  <span class="box box1 box3">
                     <input type="radio" name="cateNo" value="1" /> 운동/액티비티 &nbsp;
                     <input type="radio" name="cateNo" value="2" /> 스터디 &nbsp;
                     <input type="radio" name="cateNo" value="3" checked="checked" /> 친목</br>
@@ -224,12 +286,12 @@
                     <input type="radio" name="cateNo" value="7" /> 교육/학습 &nbsp;
                     <input type="radio" name="cateNo" value="8" /> 음악/예술 &nbsp;
                     <input type="radio" name="cateNo" value="9" /> 여행</br>
-                </span>
-            </div>
+                </span> -->
+            	</div>
 
             <div class="col-sm-12">
                 <label for="firstName">모임 정원</label>
-                <input type="text" class="box box1 box2" id="" placeholder="" name="max" value="" required> 명
+                <input type="text" class="box" id="max" placeholder="" name="max" value="" required>명
             </div>
 
             <div class="col-sm-12">
@@ -284,20 +346,20 @@
                 </div>
             </div>
 			
-            <div class="col-sm-12">
-                <label for="firstName">메인 이미지</label><br>
+            <div class="col-sm-12 ,imgFile" >
+                <label for="img2">메인 이미지</label><br>
                 <img id="mainImg" src="" class="box7" width="150px" height="150px">
                 <div class="box-file-input box9"><label>
                 <input id="img2" type="file" name="file" value="" class="imgFile file-input"></label>
                 <!-- <span class="filename">파일을 선택해주세요.</span> -->
                 </div>
             </div>
-            <div class="col-sm-12">
-                <label for="firstName">배경 이미지</label></br>
+            <div class="col-sm-12 , imgFile">
+                <label for="img1">배경 이미지</label>
                 <img id="bgImg" src=""  class="box7" width="200px" height="150px">
                 <div class="box-file-input box9"><label>
                 <input id="img1" type="file" name="file" value="" class="imgFile file-input"></label>
-                 <span class="filename">파일을 선택해주세요.</span>
+                 <!-- <span class="filename">파일을 선택해주세요.</span> -->
                 </div>
             </div>
           </div>
@@ -310,7 +372,7 @@
         </form>
       </div>
     </div>
-
+</div>
 </body>
 <script>
     $('.TEXT').keyup(function (e){
