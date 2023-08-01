@@ -204,7 +204,7 @@ a{text-decoration: none; color: #212121;}
             margin: 0 auto;
             margin-top: 100px;
             margin-bottom: 100px;
-            height: 320px;
+            height: 410px;
             background-color: #e0e0e0;
             position: relative;
         }
@@ -219,9 +219,9 @@ a{text-decoration: none; color: #212121;}
 <body>
     <div class="wrap">
         <!--메인라인-->
-        <div class="back-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img2}" >배경 이미지</div>
+        <div class="back-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img1}" >배경 이미지</div>
         <div class="color-box">
-            <div class="main-img"><img src="C:/firmeet/firmeet/src/main/webapp/assets/images/clubimg/${clubVo.img1}"
+            <div class="main-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
                 <h1>어푸어푸 ${clubVo.clubName}</h1>

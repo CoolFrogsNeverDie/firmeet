@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공지 에디터</title>
-    <%@ include file="../include/topnav.jsp" %>
+    <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -17,7 +20,7 @@
         <div class="diary-topbar">
           <img
             class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-          <h1>어푸어푸</h1>
+          <h1>${club.clubName}</h1>
         </div>
         <!--/diary-topbar-img-->
         <div class="diary-subbar">
@@ -102,28 +105,7 @@
         
 </div>
       <!--/diary-area-->
-      <div class="menu-bar" >
-        <div class="group-profile">
-          <div class="group-profile-img-area">
-            <img
-              class="group-profile-img"
-              src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg"
-              alt="프로필사진"
-            />
-          </div>
-          <!--/group-profile-img-area-->
-        </div>
-        <!--/group-profile-->
-        <ul class="side-nav">
-          <li>공지사항</li>
-          <li>갤러리</li>
-          <li>달력</li>
-          <li>자유 게시판</li>
-          <li>멤버</li>
-          <li>가계부</li>
-        </ul>
-        <!--/side-nav-->
-      </div>
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
       <!--/menu-bar-->
     </div>
     <!--/wrap-->
@@ -132,53 +114,6 @@
   <script>
 		$(document).ready(function() {
 			
-			// 좋아요가 있는지 확인한 값을 heartval에 저장
-	        var heartval = ${vo.likeNo}
-	        // heartval이 1이면 좋아요가 이미 되있는것이므로 heart-fill.svg를 출력하는 코드
-	        if(heartval>0) {
-	            console.log(heartval);
-	            $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-	            $(".heart").prop('name',heartval)
-	        }
-	        else {
-	            console.log(heartval);
-	            $("#heart").prop("src", "${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-	            $(".heart").prop('name',heartval)
-	        }
-
-		// 좋아요 버튼을 클릭 시 실행되는 코드
-		console.log(${sessionScope.aboardNo});
-		
-	        $(".heart").on("click", function () {
-	            var that = $(".heart");
-	            
-	            var memberId = $('#memberId').text();
-	  			var aboardNo = $('#aboardNo').text();
-					console.log('ㅎㅎ',memberId);
-					console.log(aboardNo);
-				var NoticeBoardVO ={
-						memberId : memberId,
-						aboardNo :  aboardNo
-					}
-	            
-		    $.ajax({
-		    	url :'${pageContext.request.contextPath }/${clubId}/notice/heart',
-		        type :'POST',
-		        data : NoticeBoardVO,
-		    	success : function(data){
-		    		that.prop('name',data);
-		        	if(data==1) {
-		            	     $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart-fill.svg");
-		        	} else {
-	                    	 $('#heart').prop("src","${pageContext.request.contextPath }/assets/images/icon/heart.svg");
-		        	}
-	             	}
-		    	});
-	        });
-			
-			$('#nlist').click(function() {
-				  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
-			});
 		});
   </script>
 </html>

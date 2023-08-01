@@ -1,6 +1,7 @@
 package com.firmeet.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -115,11 +116,18 @@ public class ClubController {
 	}
 
 	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String clubForm(@PathVariable int clubId, Model model,HttpSession session) {
+	public String clubForm(@PathVariable int clubId, 
+			@RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,	
+			Model model,HttpSession session) {
 		System.out.println("ClubController.clubForm()");
 		System.out.println(clubId);
 		ClubVo clubVo = clubService.clubInfo(clubId);
 		model.addAttribute("clubVo" , clubVo);
+		
+		/*
+		 * Map<String, Object> pMap= clubService.qnaList2(crtPage, clubId );
+		 * model.addAttribute("pMap", pMap );
+		 */
 		
 		List<ClubQnaVo>	 qnaList = clubService.qnaList(clubId);
 		model.addAttribute("qnaList",qnaList);

@@ -4,6 +4,7 @@
 
        <div class= "menu-bar2" >
 			<ul class= "side-bar2">
+			  <li><a href="${pageContext.request.contextPath}/${club.clubId}/notice/noticelist">공지사항</a></li>
 	          <li><a href ="${pageContext.request.contextPath }/gallery/list/${club.clubId}">갤러리</a></li>
 	          <li><a href ="${pageContext.request.contextPath }/calendar/member/${member.memberId}">달력</a></li>
 	          <li><a href ="${pageContext.request.contextPath }/board/member/${member.memberId}/-99">자유 게시판</a></li>

@@ -21,10 +21,10 @@ public class MemberService {
 		System.out.println(memberVo);
 		memberDao.insert(memberVo);
 		
-		for(int i=0; i<memberVo.tagNo.length;i++) {
+		for(int i=0; i<memberVo.getTagNo().length;i++) {
 			TagVo tagVo =new TagVo();
 			tagVo.setMemberId(memberVo.getMemberId());
-			tagVo.setTagNo(memberVo.tagNo[i]);
+			tagVo.setTagNo(memberVo.getTagNo()[i]);
 			memberDao.insertMemTag(tagVo);
 			
 		}
@@ -74,16 +74,17 @@ public class MemberService {
 	}
 
 	public List<MemberVo> requestMemList(MemberVo memberVO) {
+
+		List<MemberVo> list = memberDao.requestMemList(memberVO);
+
+		//리스트에 태그들 배열 추가하기
+			for(int i =0; i< list.size(); i++) {
+				System.out.println("돌아가나요? 이 for문이지?!");
+				List<TagVo> tagList = memberDao.getTagList(list.get(i));
+				list.get(i).setTagList(tagList);
+			}
 		
-		List<MemberVo> list = memberDao.requestMemList(memberVO); 
-		
-		/*
-		 * for(int i =0; i< list.size(); i++) { MemberVo vo = list.get(i);
-		 * List<CategoryVo> cateList = memberDao.getCateList(vo);
-		 * list.get(i).setCateList(); }
-		 */
-		
-		
+			
 		return list;
 	}
 	

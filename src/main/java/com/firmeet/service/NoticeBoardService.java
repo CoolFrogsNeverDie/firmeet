@@ -89,6 +89,12 @@ public class NoticeBoardService {
 		vo1.setReplyList(vo11);
 		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
 		
+		
+		PayresultVO pvo = pdao.paycnt(vo1);
+		System.out.println(pvo);
+		
+		vo1.setPaycount(pvo.getPaycount());
+		vo1.setPayresultNo(pvo.getPayresultNo());
 		//PayresultVO paycnt = pdao.paylist(vo);
 		//vo1.setPaycount(paycnt.getPaycount());
 

@@ -171,31 +171,20 @@ let calendar;
 	        	var data = jsonResult.data;
 				console.log(data)
 	
- 				if(data.length != 0){
-					for(var i = 0; i<data.length; i++){
-						if(data[i].meetCate == "3"){
-						    calendar.addEvent({
-								title: data[i].title,
-								start: data[i].startDate,
-								end:data[i].endDate + ' 24:00',
-								url:'https://www.naver.com',
-								display: 'background', // 백그라운드 색상을 표시하는 옵션
-						         color: '#FF0000', // 원하는 색상 값으로 변경
-								backgroundColor : 'FF6D60',
-	 							borderColor:  '#FF6D60'
-							}); //eddEvent end
-						}else{
-						    calendar.addEvent({
-								title: data[i].title,
-								start: data[i].startDate,
-								end:data[i].endDate + ' 24:00',
+					data.forEach(function(data) {
+					
+ 						calendar.addEvent({
+								title: data.title,
+								start: data.startDate,
+								end:data.endDate + ' 24:00',
 								url:'https://www.naver.com',
 								backgroundColor : 'F7D060',
 	 							borderColor:  'F7D060'
 							}); //eddEvent end
-						}
-					}
-				} 
+				
+					});
+				
+				
 	        }, //success end
 	        error : function(XHR, status, error) {
 	        console.error(status + " : " + error);

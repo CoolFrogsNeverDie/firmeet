@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
-import com.firmeet.vo.PayresultVO;
 import com.firmeet.vo.VoteResultVO;
 
 @Repository
@@ -82,27 +81,6 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.hits", vo.getAboardNo());
 	}
 
-	public void pay(PayresultVO vo) {
-		System.out.println("notice payinsert dao 확인"+vo);
-		sql.insert("noticeboard.payinsert",vo);
-	}
-	
-	public PayresultVO paycnt(NoticeBoardVO vo) {
-		// TODO Auto-generated method stub
-		return sql.selectOne("noticeboard.paycnt",vo);
-	}
-
-/*	
-	public void payupdate(PayresultVO vo) {
-		System.out.println("notice payinsert dao 확인"+vo);
-		sql.update("noticeboard.payupdate",vo);
-	}
-	
-	public PayresultVO payresult(NoticeBoardVO vo) {
-		System.out.println("notice payresult dao 확인"+vo);
-		return sql.selectOne("noticeboard.payresult", vo);
-	}
-*/	
 	public List<AreplyVO> getBoardComment(NoticeBoardVO vo) {
 		return sql.selectList("noticeboard.getComment",vo);
 	}

@@ -13,8 +13,8 @@
 		values(#{payresultNo}, #{meetNo}, #{memberId}, #{paycount}, SYSDATE)
 	</insert>
 	
-  	<select id="paycnt" resultType="pay" parameterType="pay">
-		select count(*)
+  	<select id="paycnt" resultType="pay" parameterType="noticeboard">
+		select count(*) as paycount
 		from PAYRESULT
 		where meetNo = #{meetNo}
 	</select>

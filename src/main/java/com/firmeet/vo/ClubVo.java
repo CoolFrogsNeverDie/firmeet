@@ -15,14 +15,14 @@ public class ClubVo {
 	private String intro2;
 	private String address1;
 	private String address2;
-	public String img1;
-	public String img2;
+	private String img1;
+	private String img2;
 	private String detailT;
 	private String detailL;
 	private String detailP;
 	private String detailE;
 	private String detailW;
-	public int[] tagNo; /* form=>컨트롤러 */
+	private int[] tagNo; /* form=>컨트롤러 */
 	private List<TagVo> clubTagList;
 	private CategoryVo cateVO; 
 	private TagVo tagVo;
@@ -271,7 +271,6 @@ public class ClubVo {
 				+ Arrays.toString(tagNo) + ", clubTagList=" + clubTagList + ", cateVO=" + cateVO + ", tagVo=" + tagVo
 				+ ", memlevel=" + memlevel + ", cateNo=" + cateNo + ", category=" + category + "]";
 	}
-
 	
 
 }

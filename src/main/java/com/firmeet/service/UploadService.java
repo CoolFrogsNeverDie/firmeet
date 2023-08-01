@@ -65,9 +65,9 @@ public class UploadService {
 		uploadVo.setSize(fileSize);
 		uploadVo.setPath(filePath);
 
-		if (clubVo.img1 != null) {
+		if (clubVo.getImg1() != null) {
 			clubVo.setImg1(saveName);
-		} else if (clubVo.img2 != null) {
+		} else if (clubVo.getImg2() != null) {
 			clubVo.setImg2(saveName);
 		}
 

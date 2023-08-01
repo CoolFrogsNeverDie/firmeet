@@ -300,6 +300,17 @@
         height: 200px;
         border: 1px solid black;
     }
+    
+    #paging ul{
+    	width: 300px;
+    	margin:auto;
+    	height:20px;
+    	display:flex;
+    }
+    #paging ul li{
+    	width:20px;
+    	height:20px;
+    }
 
 
     </style>
@@ -311,7 +322,7 @@
 
 	 <c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 	 
-    <input id="main_search" type="search">
+    <input id="main_search" type="search"  name="keyword" >
     <form id="hobby_form" action="${pageContext.request.contextPath }/main/search">
         <h3>나의 취향</h3>
       
@@ -359,7 +370,7 @@
             <button type="button"><a href="http://localhost:8000/firmeet/club/makingForm">나의 모임 만들기</a></button>
         </div>
         <ul id="meetList">
-        <c:forEach items="${clubList}" var="clubs" >
+        <c:forEach items="${requestScope.pMap.clubList}" var="clubs" >
             <li>
                 <a href="http://localhost:8000/firmeet/club/joinForm/${clubs.clubId}">
                     <img src="../assets/images/clubimg/${clubs.img2}" alt="사진 1" class="meetPhoto">
@@ -367,25 +378,26 @@
                     <p class="meetContent">${clubs.intro1} 모임 내용</p>
                 </a>
             </li>
-        </c:forEach>
-          <%-- <div id="paging">
+        </c:forEach> 
+        </ul>
+        <div id="paging">
 				<ul>
 					<c:if test="${pMap.prev == true}">
-						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.startPageBtnNo-1}&${param.keyword}">◀</a></li>
-							</c:if>
+						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.startPageNo-1}&${param.keyword}">◀</a></li>
+					</c:if>
 								
-					<c:forEach begin="${pMap.startPageBtnNo}" end="${pMap.endPageBtnNo}"  step="1"  var="page">
+					<c:forEach begin="${pMap.startPageNo}" end="${pMap.endPageNo}"  step="1"  var="page">
 						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${page}&keyword=${param.keyword}">${page}</a></li>
 					</c:forEach>
 								
 					<c:if test="${pMap.next == true}">
-						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.endPageBtnNo+1}&${param.keyword}">▶</a></li>
+						<li><a href="${pageContext.request.contextPath}/main/mainForm?crtPage=${pMap.endPageNo+1}&${param.keyword}">▶</a></li>
 					</c:if>
 				</ul>
 				<div class="clear"></div>
-			</div> --%>
-        </ul>
+			</div> 
     </div>
+     
 </body>
 
 <script>

@@ -198,30 +198,62 @@
     	]]>
     </select>
     
-    <select id="searchList" parameterType="com.firmeet.vo.ClubVo" resultType="com.firmeet.vo.ClubVo">
- 		<![CDATA[
-    		select a.clubId,
-    			   a.clubName,
-    			   a.intro1,
-    			   a.img2
-    		from club a , club_category b
-    		where a.clubId = b.clubId
-    		]]>
-    	
-    	 <if test='address1 != null and address1 != ""' >
-			and a.address1 = #{address1}
-		</if> 
-    	<if test='address2 != null and address2 != ""' >
-			and a.address2 = #{address2}
-		</if> 
-    	<if test='cateNo != null' >
-			and b.cateNo = #{cateNo}
-		</if>
-    	
-    		
+   
     
+    <select id="searchList" parameterType="map" resultType="com.firmeet.vo.ClubVo" >
+    	<![CDATA[
+    		select c.clubId, 
+			       c.clubName, 
+			       c.intro1, 
+			       c.img2
+			from club c, club_category b, (select c.clubId, 
+			                 		   	   LISTAGG( to_char(t.tagNo, '099'), ',') tagNos
+			               			   	   from club_tag c, tag t 
+			                		   	   where c.tagNo = t.tagNo
+			                		   	   group by c.clubId )ts
+			where c.clubId = ts.clubId
+			and  ts.clubId = b.clubId
+				]]>	
+				
+		   			<if test='address1 neq null and address1 neq ""' >
+						and c.address1 = #{address1}
+					</if>
+					<if test='address2 neq null and address2 neq ""' >
+						and c.address2 = #{address2}
+					</if> 
+					<if test='cateNo neq 0' >
+						and b.cateNo = #{cateNo}
+					</if>
+						
+						
+					<if test='tagNo neq null' >
+							
+						<foreach collection="tagNo" item="no">
+							and ts.tagNos like '%'||to_char(#{no}, '099')||'%'
+						</foreach>
+					</if>
+						
+						
+		
     </select>
     
+    
+    
+    
+    
+    <select id="totalCount2" parameterType="map" resultType="int">
+    	<![CDATA[
+    		select count(*)
+    	    from club
+    	]]>
+    	<if test='keyword != "" and keyword != null' >
+			where title like '%'|| #{keyword} ||'%'
+		</if>	
+    </select>
+    
+   
+   
+   
     
      <select id="selectList4" parameterType="map" resultType="com.firmeet.vo.ClubVo">
     	<![CDATA[
@@ -248,7 +280,7 @@
 		    		  
 		    		  
 		    		 <![CDATA[ 
-		    		  oreder by clubId desc ) ot
+		    		  order by clubId desc ) ot
 		    		    	) ort
 		    where rn>=#{startRnum}
 		    and rn<=#{endRnum}
@@ -279,6 +311,42 @@
     		]]>
     		
     		
+    </select>	
+    
+  	<select id="totalQna" parameterType ="int" resultType="int">
+    		<![CDATA[
+    			select count (*)
+    			from club_qna
+    			where clubId = #{clubId}
+    		
+    		]]>
     </select>
+   
+    
+    	
+  <!--  	<select id="qnaList2" parameterType="map" resultType="com.firmeet.vo.ClubQnaVo">
+   		<![CDATA[
+    			select ort.rn,
+    				   ort.clubId,
+    				   ort.memberId,
+    				   ort.qnaCotent,
+    				   ort.answerContent	
+		    	from(select rownum rn,
+		    				ot.clubId,
+		    				ot.memberId,
+		    				ot.qnaCotent,
+		    				ot.answerContent
+			    	 from(select a.clubId,
+			    				 a.memberId,
+			    				 a.qnaCotent,
+			    				 a.answerContent
+			    		  from club_qna
+			    		  where clubId = #{clubId}
+			    		  ) ot) ort
+			   where rn>=#{startRnum}
+			   and rn<=#{endRnum} 		
+    		]]>
+    		
+    </select> -->
     
 </mapper>

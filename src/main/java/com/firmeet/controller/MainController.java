@@ -50,20 +50,24 @@ public class MainController {
 						   Model model, HttpSession session) {
 		List<TagVo> tagList = memberService.tagList();
 		model.addAttribute("tagList", tagList);
-		//System.out.println(tagList);
+
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
-		//System.out.println(cateList);
+	
 			
 		
 		ClubVo clubVo = new ClubVo();
 		System.out.println(clubVo.getClubId());
-		List<ClubVo> clubList = clubService.clubList();
-		model.addAttribute("clubList",clubList); 
-		//Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
-		//model.addAttribute("pMap",pMap);
-		System.out.println(clubList);
-		 
+		/*
+		 * List<ClubVo> clubList = clubService.clubList();
+		 * model.addAttribute("clubList",clubList);
+		 */
+		
+		System.out.println("MainController.mainList()");
+		Map<String, Object> pMap = clubService.clubList2(crtPage,keyword);
+		model.addAttribute("pMap",pMap);
+		
+		System.out.println(pMap);
 		return "/main/mainForm";
 	}
 
@@ -107,7 +111,9 @@ public class MainController {
 	
 	@RequestMapping(value="/search" , method= {RequestMethod.GET , RequestMethod.POST})
 	public String searchList(@ModelAttribute ClubVo clubVo,
-								Model model) {
+							 @RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,
+							 @RequestParam(value="keyword", required = false, defaultValue = "") String keyword,
+							 Model model) {
 		System.out.println("MainController.searchList()");
 		System.out.println(clubVo);
 		
@@ -117,8 +123,10 @@ public class MainController {
 		List<CategoryVo> cateList = memberService.cateList();
 		model.addAttribute("cateList", cateList);
 		
-		List<ClubVo> clubList = clubService.searchList(clubVo);
-		model.addAttribute("clubList",clubList);
+		
+//		Map<String, Object> sMap = clubService.clubList2(crtPage,keyword);
+//		model.addAttribute("sMap",sMap);
+		 
 		return "/main/mainForm";
 	}
 	

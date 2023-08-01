@@ -66,6 +66,7 @@ public class CalendarController {
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
 		JsonResult jsonResult = new JsonResult();
 		List<ScheduleVO> list = calendarService.getClubSche(calendarVO);
+		System.out.println("오는 건가? > "+ calendarVO);
 		jsonResult.success(list);
 		
 		return jsonResult;

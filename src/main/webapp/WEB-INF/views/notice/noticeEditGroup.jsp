@@ -12,7 +12,8 @@
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <!-- //css, js 링크 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
-
+	<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -25,7 +26,7 @@
         <div class="diary-topbar">
             <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
                 alt="프로필사진" />
-            <h1>어푸어푸</h1>
+            <h1>${club.clubName}</h1>
         </div>
         <!--/diary-topbar-img-->
 
@@ -175,10 +176,11 @@
                                     <span class="groupvotetitle">만남일 </span>
                                       <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
-                           <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
+                           			<input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                     <span class="groupvotetitle1">장 소 </span>
                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace">
                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
+                                    
                                     <input type="text" name="address1" value="x" id="address1"> 
 									 <input type="text" name="address2" value="y" id="address2">
                                      
@@ -238,25 +240,7 @@
         <!--/content-area-->
     </div>
     <!--/diary-area-->
-    <div class="menu-bar">
-        <div class="group-profile">
-            <div class="group-profile-img-area">
-                <img class="group-profile-img"
-                    src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-            </div>
-            <!--/group-profile-img-area-->
-        </div>
-        <!--/group-profile-->
-        <ul class="side-nav">
-            <li>공지사항</li>
-            <li>갤러리</li>
-            <li>달력</li>
-            <li>자유 게시판</li>
-            <li>멤버</li>
-            <li>가계부</li>
-        </ul>
-        <!--/side-nav-->
-    </div>
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
     <!--/menu-bar-->
 </div>
 <!--/wrap-->
@@ -393,17 +377,17 @@ $(document).ready(function() {
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
-        width: 700,
+        width: 600,
         minHeight: null, // set minimum height of editor
         maxHeight: null, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],
             ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline']],
             ['color', ['color']],
             ['para', ['paragraph']],
-            ['insert', ['picture', 'link', 'video']],
+            ['insert', ['picture', 'video']],
             ['view', ['codeview']],
             ['custom', ['vote']]
         ],

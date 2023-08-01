@@ -29,9 +29,4 @@ public class PayDAO {
 		return sql.selectOne("pay.paycnt",vo);
 	}
 	
-	public PayresultVO paylist(NoticeBoardVO vo) {
-		System.out.println("DAO로 넘어오는 paylist 가져오기용"  + vo);
-		return sql.selectOne("pay.paylist",vo);
-	}
-
 }
