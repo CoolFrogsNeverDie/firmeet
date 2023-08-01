@@ -106,6 +106,66 @@
 	                 </tr>
 	               </tbody>
                </table>
+               
+               <!-- 댓글 -->
+                  <div class="noticereply">
+        			<div class="board-area2" >
+		    			<div class="board">
+						    <div class="board-header">
+		
+						    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
+							    </div>
+							    <div class="board-content" style="margin-left: 20px; margin-top: 20px;">
+							    <c:if test="${vo.likeNo == 0 }">
+								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
+								</c:if>
+								<c:if test="${vo.likeNo > 0 }">
+								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
+							    </c:if>
+							    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
+							    </div>
+							    <div class="board-comment-list" style="margin-top: 40px; margin-left:30px; width: 900px;">
+								    <div class="board-comment" >
+								   
+								    <h5>댓글</h5><!-- <span><button class="write-comment-btn">댓글 닫기</button></span> -->
+								    
+								    <c:forEach items="${vo.replyList}" var = "reply">
+								    
+										<div class="comment-list" id = "r${vo.aboardNo}" style="margin-left: 30px;">
+										
+										    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
+										    	<c:if test="${reply.deep > 1 }">
+										            <span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>${reply.memberName}님 : </b></span>
+										        </c:if>
+										        <c:if test="${reply.deep == 1 }">
+										            <span><b>${reply.memberName}님 :</b></span>
+										        </c:if>
+										        <span style="margin-left: 1%;">${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
+										        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
+										           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+										        </c:if>
+										        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+											        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: 1%;">&nbsp;삭제</span>
+											    </c:if>
+										    </div>
+										</div>
+										
+								    </c:forEach>
+			
+									<div class="write-comment">
+										<div class="new-content">
+							            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 820px; margin-top: 10px;"></textarea>
+							            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+				            			</div>
+								    </div>
+							    </div>
+						    </div>
+					    </div>
+			        </div>
+			   </div>
+               
+              <!-- 댓글 끝 --> 
+               
       	</div>
               
         <div class="modal" id="vote">
@@ -136,70 +196,13 @@
               </div>
           </div>
       </div>
-              
-   </div>
+	</div>
           <!-- 여기까지 -->
       <!-- -------------------------------------------------일반투표-------------------------------------------------------->
   </div>
-          <!--/content-left-->
+   <!--/content-left-->
 </div>
-        <!--/content-area-->
-   <div class="noticereply">
-        <div class="board-area2" >
-		    <div class="board">
-				    <div class="board-header">
-
-				    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
-					    </div>
-					    <div class="board-content" style="margin-left: 20px; margin-top: -80px;">
-					    <c:if test="${vo.likeNo == 0 }">
-						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
-						</c:if>
-						<c:if test="${vo.likeNo > 0 }">
-						    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
-					    </c:if>
-					    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
-					    </div>
-					    <div class="board-comment-list" style="margin-top: 40px; margin-left: 50px; width: 1030px;">
-						    <div class="board-comment" >
-						   
-						    <h5>댓글</h5><!-- <span><button class="write-comment-btn">댓글 닫기</button></span> -->
-						    
-						    <c:forEach items="${vo.replyList}" var = "reply">
-						    
-								<div class="comment-list" id = "r${vo.aboardNo}">
-								
-								    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
-								    	<c:if test="${reply.deep > 1 }">
-								            <span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>${reply.memberName}님 : </b></span>
-								        </c:if>
-								        <c:if test="${reply.deep == 1 }">
-								            <span><b>${reply.memberName}님 :</b></span>
-								        </c:if>
-								        <span style="margin-left: 1%;">${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
-								        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
-								           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
-								        </c:if>
-								        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
-									        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: 1%;">&nbsp;삭제</span>
-									    </c:if>
-								    </div>
-								</div>
-								
-						    </c:forEach>
-	
-							<div class="write-comment">
-								<div class="new-content">
-					            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 950px; margin-top: 10px;"></textarea>
-					            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
-		            			</div>
-						    </div>
-					    </div>
-				    </div>
-			    </div>
-	        </div>
-	   </div>
-
+ <!--/content-area-->
 	</div>
       <!--/diary-area-->
 	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
