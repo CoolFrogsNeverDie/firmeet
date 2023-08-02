@@ -370,15 +370,15 @@ a{text-decoration: none; color: #212121;}
             <div id="paging">
 				<ul>
 					<c:if test="${qMap.prev == true}">
-						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.startPageNo-1}">◀</a></li>
+						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.startPageBtnNo-1}">◀</a></li>
 					</c:if>
 								
-					<c:forEach begin="${qMap.startPageNo}" end="${qMap.endPageNo}"  step="1"  var="page">
+					<c:forEach begin="${qMap.startPageBtnNo}" end="${qMap.endPageBtnNo}"  step="1"  var="page">
 						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${page}">${page}</a></li>
 					</c:forEach>
 								
 					<c:if test="${qMap.next == true}">
-						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.endPageNo+1}}">▶</a></li>
+						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.endPageBtnNo+1}}">▶</a></li>
 					</c:if>
 				</ul>
 				<div class="clear"></div>
