@@ -25,7 +25,7 @@
         .container {
             
             max-width: 1500px;
-            accent-color: black;
+            accent-color: #1eafcc;
             
         }
 
@@ -207,10 +207,11 @@
         .form form .form-group #btnIdCheck{
             width: 80px;
             height: 25px;
-            border-radius: 25px;
+            border:none;
+            border-radius: 10px;
             font-weight: 500;
             color: #fff;
-            background-color: #222;
+            background-color: #1eafcc;
             transform: translate(40px ,40px);
             font-size: 13px;
         }
@@ -311,12 +312,12 @@
         	font-weight:200;
         	border-radius:5px;
         	padding:2px;
-        	background-color:#bbb;
+        	background-color: #1eafcc;
         }
         
         .tag .tags:checked+.tagLabel{
-        	background-color:#000;
-        	color:#eee;
+        	background-color:#1eafcc;
+        	color:#fff;
         }
         
          #selTag {
@@ -334,6 +335,7 @@
             height: 30px;
             overflow-y: scroll;
             position:relative;
+            color:#1eafcc;
     
         }
 
@@ -399,6 +401,7 @@
         }
         .form form input:not([type=submit]).hasError {
             border-color: #000;
+            
         }
 
         .form form span.error{
@@ -410,6 +413,7 @@
             display: none;
         }
 
+        
         .form form input[type=password] {
              color: #000;
         }
@@ -422,19 +426,26 @@
             font-size: 12px;
             text-transform: uppercase;
             padding: 5px 30px;
-            background: #000;
+            background: #1eafcc;
             color: #fff;
-            border-radius: 30px;
+            border-radius: 10px;
             margin-right: 20px;
             border: none;
+            transform: translateX(100px);
         }
 
         .form form .CTA a.switch {
-            font-size: 13px;
+            font-size: 12px;
+            padding: 5px 30px;
             font-weight: 400;
-            color: #bbb;
-            text-decoration: underline;
+            background: #1eafcc;
+            color: #fff;
+            border-radius:10px;
+            width:110px; 
+            height:28px;
+            text-decoration: none;
             transition: all 0.3s;
+            transform: translate(250px,-28px);
         }
 
         .form form .CTA a.switch:hover {
@@ -641,8 +652,8 @@
                                 <input type="password" name="memberPw" required>
                             </div>
                             <div class="CTA">
-                                <input type="submit" value="login">
-                                <a href="#" class="switch">Join Us</a>
+                                <input type="submit" value="LOGIN">
+                                <a href="#" class="switch">JOIN US</a>
                             </div>
                         </form>
                     </div>
@@ -721,8 +732,8 @@
                                     <button type="submit" class="search" >검색</button>
                                 </div> -->
                                 <div class="CTA">
-                                    <input type="submit" value="join">
-                                    <a href="" class="switch"> login</a>
+                                    <input type="submit" value="JOIN">
+                                    <a href="" class="switch">LOGIN</a>
                                 </div>
                             </div>
                         </form>

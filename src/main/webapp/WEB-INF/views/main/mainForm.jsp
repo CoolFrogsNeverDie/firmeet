@@ -42,7 +42,7 @@
         margin: 50px auto;
         
     }
-    form::before{
+   /*  form::before{
         content: "";
         display: block;
         position: absolute;
@@ -52,15 +52,16 @@
         height: 100%;
         z-index: -1;
     }
-
+ */
     form{
        
-        width: 1300px;
+        border-radius:20px;
+        width: 1250px;
         padding-top: 10px;
-        color: white;
-        background:  #222;
+        color: #333;
+        background:  #eee;
         min-width: 1000px;
-        height: 520px;
+        height: 600px;
         margin: auto;
         position: relative;
     }
@@ -88,23 +89,24 @@
 
     #select_box #addressSi{
         border: none;
-        color: white;
-        background-color: #222;
+        color: #333;
+        background-color: #eee;
         border-radius: 10px;
         width: 25%;
     }
 
     #select_box #addressSiGunGu{
         border: none;
-        color: white;
-        background-color: #222;
+        color: #333;
+        background-color: #eee;
         border-radius: 10px;
         width: 25%;
     }
 
     #select_field{
-        border: 1px solid #444;
+        border: 1px solid #1eafcc;
         width: 1000px;
+        border-radius: 20px;
         margin: auto;
     }
     #select_field>p{
@@ -119,7 +121,7 @@
         width:1000px;
         display: flex;
         flex-wrap: wrap;
-        accent-color: black;
+        accent-color: #1eafcc;
     }
      
     #select_field li{
@@ -135,8 +137,9 @@
      }
 
     #keyword {
-        border: 1px solid #888;
+        border: 1px solid #1eafcc;
         width: 1000px;
+        border-radius: 20px;
         margin:  20px auto;
     }
 
@@ -190,12 +193,12 @@
         	font-weight:200;
         	border-radius:5px;
         	padding:2px;
-        	background-color:#bbb;
+        	background-color:#1eafcc;
         }
         
     #select_tag .tags:checked+.tagLabel{
-        	background-color:#000;
-        	color:#eee;
+        	background-color:#fff;
+        	color:#1eafcc;
         }
     #selTag {
         	display:flex;
@@ -220,18 +223,18 @@
     #search_btn {
         font-size: 15px;
         width: 120px;
-        border-radius: 5px;
-        height: 30px;
+        border-radius: 0 0 10px 10px;
+        height: 35px;
         position: absolute;
         border: none;
         right: 200px;
-        bottom: -0px;
+        bottom: 5px;
         
     }
 
     #search_btn:hover {
-        color: #eee;
-        background: #222;
+        color: #fff;
+        background: #1eafcc;
     }
 
     #meet {
@@ -244,23 +247,21 @@
     }
 
     #meet h5 {
-        font-size: 20px;
+        font-size: 30px;
         font-weight: 800;
         transform: translateX(20px);
     }
 
-    #meet button {
-        width: 120px;
-        height: 30px;
+    #meet a{
+    	
+    	padding: 10px 0px 0px 20px;
+    	display:block;
+    	width: 150px;
+        height: 40px;
         border-radius: 10px;
         border: none;
-        background: #222;
-        color: #eee;
-    }
-    
-    #meet button a{
-    	background: #222;
-        color: #eee;
+        background: #1eafcc;
+        color: white;
     }
 
   
@@ -371,7 +372,7 @@
     <div id="meetArea">
         <div id="meet">
             <h5>모여라</h5>
-            <button type="button"><a href="http://localhost:8000/firmeet/club/makingForm">나의 모임 만들기</a></button>
+            <a href="http://localhost:8000/firmeet/club/makingForm">나의 모임 만들기</a>
         </div>
         <ul id="meetList">
         <c:forEach items="${requestScope.pMap.clubList}" var="clubs" >

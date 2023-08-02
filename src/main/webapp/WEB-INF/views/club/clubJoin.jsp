@@ -740,13 +740,6 @@ $('.ans-btn').on("click", function(){
 </script>
 
 <script>
-	<c:if test="{memberLv.preNum >= memberLv.max}">
-		
-		$(".btn-close").css("display","block");
-		$(".btn-join").css("display","none");
-		$(".btn-main").css("display","none");
-		$(".btn-subscript").css("display","none");	
-	</c:if>
 	
 
 	<c:if test="${memberLv.memlevel == null}">
@@ -786,6 +779,13 @@ $('.ans-btn').on("click", function(){
 		$(".btn-subscript").css("display","none");
 	</c:if>
 
+	<c:if test="{memberLv.preNum >= memberLv.max}">
+	
+		$(".btn-close").css("display","block");
+		$(".btn-join").css("display","none");
+		$(".btn-main").css("display","none");
+		$(".btn-subscript").css("display","none");	
+	</c:if>
 
 	
 </script>
