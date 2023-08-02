@@ -11,11 +11,6 @@
     <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
 </head>
 <style>
-    #list-container {
-      max-height: 620px; /* 리스트 컨테이너의 최대 높이 지정 (스크롤을 가질 영역) */
-      max-width: 1200px;
-      overflow-y: auto; /* 세로 스크롤을 활성화하여 리스트 컨테이너를 넘어가는 항목들을 볼 수 있게 함 */
-    }
 
     .list-item {
       padding: 10px;
@@ -23,7 +18,8 @@
       border-bottom: 1px solid #ccc;
     }
     .table1000{
-    	width:1030px;
+    	width:960px;
+    	margin-left: 20px;
     }
 </style>
 <body>
@@ -36,7 +32,7 @@
     <div class="wrap">
       <div class="diary-area">
         <div class="diary-topbar">
-          <img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
+         <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
           <h1>${club.clubName}</h1>
 	      <form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
 			  <div class="search-btn">
@@ -53,10 +49,10 @@
         	</div>
         </div>
         <!--/diary-subbar-->
-        <div class="content-area"  id="list-container">
+        <div class="content-area">
           <div class="content-left">
 	<!-- 여기부터 -->
-	
+	<div id="list_body">
 	<table class="table1000" border="1">
 		<tr>
 			<th>번호</th>
@@ -88,7 +84,7 @@
 	</c:forEach>
 		
 	</table>
-
+</div>
 	<!-- 여기까지 -->
 
             </div>

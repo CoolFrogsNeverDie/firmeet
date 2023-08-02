@@ -171,6 +171,10 @@ public class NoticeBoardService {
 		vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
 		vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
 		
+		List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		vo1.setReplyList(vo11);
+		System.out.println(vo1);
+		
 		return vo1;
 	}
 	
@@ -275,9 +279,12 @@ public class NoticeBoardService {
 		NoticeBoardVO result = null;
 		var like = vo.getLikeNo();
 		if(like == 0) {
-		//좋아요 기능 수행	
+		//좋아요 기능 수행
+			System.out.println("들어가");
 			dao.insertLike(vo);
+			System.out.println("나와라");
 			result = dao.getLike(vo);
+			System.out.println("나와라");
 			
 		}else {
 		//좋아요 취소 기능 수행

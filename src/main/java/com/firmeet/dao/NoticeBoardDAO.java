@@ -86,14 +86,17 @@ public class NoticeBoardDAO {
 	}
 	
 	public int likeCancle(NoticeBoardVO vo) {
+		System.out.println("라이크캔슬");
 		return sql.delete("noticeboard.deletelike",vo);
 	}
 
 	public void insertLike(NoticeBoardVO vo) {
+		System.out.println("라이크 인서트");
 		sql.insert("noticeboard.insertLike",vo);
 	}
 
 	public NoticeBoardVO getLike(NoticeBoardVO vo) {
+		System.out.println("라이크셀렉트");
 		return sql.selectOne("noticeboard.getLike", vo);
 	}
 

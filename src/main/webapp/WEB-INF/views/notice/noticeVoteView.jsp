@@ -23,15 +23,11 @@
 
 <div class="wrap">
       <div class="diary-area">
-        <div class="diary-topbar">
-          <img
-            class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-          <h1>${club.clubName}</h1>
-        </div>
+         <div class="diary-topbar">
+            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+            <h1>${club.clubName}</h1>
+         </div>
         <!--/diary-topbar-img-->
-        <div class="diary-subbar" style="border : none;">
-          <h4>공지 게시판</h4>
-        </div>
         <!--/diary-subbar-->
         <div class="content-area">
           <div class="content-left">
@@ -40,9 +36,8 @@
            
             <div class="noticeform">
               <div>
-                  <p class="noticetitle">제목 :&nbsp;&nbsp;${vo.title }</p>
                   <div class="noticebtn">
-                    <button type="button" class="listbtn" id="nlist">목록</a></button>
+                    <button type="button" class="listbtn" id="nlist">목록</button>
                     <button type="button" class="nextbtn">다음글</button>
                   </div>
               </div>
@@ -57,11 +52,12 @@
                       <span class="usertext">${vo.aboardHit}</span>
                   </div>
               </div>
-              <hr>
         <div id="content_body">
               <div>
                   <p class="noticecontent"> ${vo.boardContent}</p>
               </div>
+              <!-- 내용 및 지도 -->
+              <div class="subcontent">
 	                <table id="dataTable" style="width: 40%; float: left;">
 						<thead>
 						<tr>
@@ -73,7 +69,7 @@
 		               <tbody>
 		                   <tr>
 	                       	  <td class="noticegrouplist1">
-	                             <span class="noticegroupname"><span>만남일 : </span>${vo.startDate}</span> ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
+	                             <span class="noticegroupname"><span>만남일 : </span>${vo.startDate}</span>&nbsp;&nbsp;&nbsp;&nbsp; ~ <span class="noticegroupname" id="endDate1"><span>종료일 : </span>${vo.endDate}</span>
 	                             <p class="noticegroupname"><span>만남시간 : </span>${vo.meetTime}</p>
 	                             <p class="noticegroupname"><span>만남장소 : </span>${vo.meetPlace}</p>
 	                             <p class="noticegroupname">회비 :<span id="price">${vo.price}</span></p>
@@ -84,8 +80,11 @@
 	                             <p class="noticegroupname" hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
 	                             <p class="noticegroupname" hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
 	                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
-	                             <span id="memberId">${member.memberId}</span>/<span id="aboardNo">${vo.aboardNo}</span>/<span id="meetNo">${vo.meetNo}</span>/
-	                             <span id="paycount">${vo.paycount}</span>/<span id="payresultNo">${vo.payresultNo}</span>
+	                             <span id="memberId" hidden="hidden">${member.memberId}</span>
+	                             <span id="aboardNo" hidden="hidden">${vo.aboardNo}</span>
+	                             <span id="meetNo" hidden="hidden">${vo.meetNo}</span>
+	                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
+	                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
 	                             <button id="paybtn" onclick="kakaopay()">결제하기</button>
 	                          </td>
 		                 </tr>
@@ -94,8 +93,9 @@
                <div class="mapview">
                		<div id="map2" style="width:91%;height:250px;"></div>
                </div>
-               
-                             <!-- 댓글 -->
+            </div>
+            <!-- 내용 및 지도 끝 -->
+                 <!-- 댓글 -->
                   <div class="noticereply">
         			<div class="board-area2" >
 		    			<div class="board">
@@ -103,7 +103,7 @@
 		
 						    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
 							    </div>
-							    <div class="board-content" style="margin-left: 20px; margin-top: 20px;">
+							    <div class="board-content" style="margin-left: 10px;">
 							    <c:if test="${vo.likeNo == 0 }">
 								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
 								</c:if>
@@ -115,25 +115,29 @@
 							    <div class="board-comment-list" style="margin-top: 40px; margin-left:30px; width: 900px;">
 								    <div class="board-comment" >
 								   
-								    <h5>댓글</h5><!-- <span><button class="write-comment-btn">댓글 닫기</button></span> -->
+								    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
 								    
 								    <c:forEach items="${vo.replyList}" var = "reply">
 								    
-										<div class="comment-list" id = "r${vo.aboardNo}" style="margin-left: 30px;">
+										<div class="comment-list" id = "r${vo.aboardNo}" style="height: 50p; margin-bottom: 10px;">
 										
 										    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
 										    	<c:if test="${reply.deep > 1 }">
-										            <span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>${reply.memberName}님 : </b></span>
+										            <span style="padding-left:80px;"><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>
+										            <img class="diary-topbar-img1111" src="${pageContext.request.contextPath }/assets/images/testimg/img.jpg" alt="프로필사진" />
+										            ${reply.memberName}님 : </b></span>
 										        </c:if>
 										        <c:if test="${reply.deep == 1 }">
+										        	<img class="diary-topbar-img111" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
 										            <span><b>${reply.memberName}님 :</b></span>
 										        </c:if>
-										        <span style="margin-left: 1%;">${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
+										        
+										        <span>${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
 										        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
-										           <span><button class= "rreply-btn" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+										           <span><button class= "rreply-btn" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
 										        </c:if>
 										        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
-											        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: 1%;">&nbsp;삭제</span>
+											        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: -16%; color:#ff6969;">&nbsp;삭제</span>
 											    </c:if>
 										    </div>
 										</div>
@@ -142,7 +146,8 @@
 			
 									<div class="write-comment">
 										<div class="new-content">
-							            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 820px; margin-top: 10px;"></textarea>
+											<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
+							            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
 							            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
 				            			</div>
 								    </div>
@@ -152,8 +157,7 @@
 			        </div>
 			   </div>
                
-              <!-- 댓글 끝 -->  
-               
+              <!-- 댓글 끝 --> 
                
         </div>
               
@@ -176,6 +180,8 @@
   <script>
   
  $(document).ready(function() {
+	 
+	 $('.write-comment').hide();
 	  
 	  $('#nlist').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
@@ -429,8 +435,8 @@ $(document).ready(function () {
     	var	rreply = '';	
     	
     	rreply += '<div style ="width:1030px; height:50px; margin-top:6px; " class="write-comment2" >';
-    	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left;">';
-    	rreply += '        <img src="${pageContext.request.contextPath }/assets/images/icon/re.png" style ="width:20px; height:20px; margin-top:-50px; margin-left:20px;"><textarea class= "comment-content" style ="width:900px; height:100%; border: 1px solid black; padding:10px; margin-left:10px;"></textarea><button class="add-reply2" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">OK</button></div>'
+    	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left; margin-left:40px;">';
+    	rreply += '        <img src="${pageContext.request.contextPath }/assets/images/icon/re.png" style ="width:20px; height:20px; margin-left:20px;"><textarea class= "comment-content" style ="width:800px; height:100%; border: 1px solid black; padding:10px; margin-left:10px;margin-bottom: -20px;"></textarea><button class="add-reply2" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">OK</button></div>'
     	rreply += '    </div>'
     	rreply += '</div>'
 

@@ -280,7 +280,38 @@ public class NoticeBoardController {
 		session.getAttribute("aboardNo");
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));
-		return "notice/noticeGroupViewR";
+		
+int clubId = (int) session.getAttribute("clubId");
+		
+		System.out.println("controller clubId"+clubId);
+		model.addAttribute("clubId", clubId);
+		
+		 MemberVo member = (MemberVo) session.getAttribute("member");
+	        String memberId = null;
+	        if (member != null) {
+	            memberId = member.getMemberId();
+
+	            System.out.println(memberId); // memberId 값 출력;
+	            
+	            // 클럽과 회원의 관계 정보를 가져옵니다.
+	            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+	            // club이 null이면 쫒아내기!!!
+	            model.addAttribute("club", club);
+
+	            // 클럽의 갤러리 이미지 목록을 가져옵니다.
+	            List<GalleryImgVo> gImgVos = galleryService.getGalleryListAll(clubId);
+	            model.addAttribute("gImgVos", gImgVos);
+
+	            // 공지사항 목록을 가져옵니다.
+	            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+	            System.out.println(nList);
+	            model.addAttribute("noticeList", nList);
+
+	            return "notice/noticeGroupViewR";
+	        } else {
+	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+	            return "member/memberForm";
+	        }
 	}
 	
 	//에디터 모임 등록 후 나오는 페이지
@@ -452,36 +483,7 @@ public class NoticeBoardController {
 		
 		return jsonResult;
 	}
-/*	
-	//에디터 일반페이지 등록 후 리스트
-	@RequestMapping("/payresult")
-	public String payresult(ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
-		model.addAttribute("clubId", clubvo.getClubId());
-		session.getAttribute("meetNo");
-		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("memberId", vo.getMemberId());
-		model.addAttribute("vo", noticeBoardService.payresult(vo));
-		return "notice/noticeVoteViewR";
-	}
-*/
-/*
-	//에디터 모임 등록 후 나오는 리스트
-	@RequestMapping("/payresult")
-	@ResponseBody
-	public String payresult(@ModelAttribute NoticeBoardVO vo, ClubVo clubvo, Model model) {
-		model.addAttribute("clubId", clubvo.getClubId());
-		model.addAttribute("aboradNo", vo.getAboardNo());
-		model.addAttribute("memberId", vo.getMemberId());
-		model.addAttribute("meetNo", vo.getMeetNo());
-		model.addAttribute("payresultNo", vo.getPayresultNo());
-		System.out.println("notice payresult 확인");
-		System.out.println("notice getPayresultNo 확인"+vo.getPayresultNo());
-		
-		System.out.println("확확확"+vo);
-		model.addAttribute("vo", noticeBoardService.payresult(vo));
-		return "notice/noticeVoteViewR";
-	}
-*/
+	
 	//----------------------------------------------------------------------------------------------
 	
 	@ResponseBody

@@ -17,11 +17,10 @@
 
 <div class="wrap">
     <div class="diary-area">
-        <div class="diary-topbar">
-            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
-                alt="프로필사진" />
+         <div class="diary-topbar">
+            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
             <h1>${club.clubName}</h1>
-        </div>
+         </div>
         <!--/diary-topbar-img-->
 
         <div class="diary-subbar">
@@ -124,8 +123,8 @@
                                       <input class="voteend" type="date" id="finDate" name="finDate">
                                   </div>
                                   <div style="text-align: center; font-weight: bold;">
-                                      <button type="button" id="reset" class="btn btn-warning btn-sm">작성 취소</button>
-                                      <button type="button" class="btn btn-success btn-sm" id="saveButton1" style="margin-left: 10px;">작성 완료</button>
+                                      <button type="button" id="reset" class="modelbtnR">작성 취소</button>
+                                      <button type="button" class="modelbtnS" id="saveButton1" style="margin-left: 10px;">작성 완료</button>
                                   </div>
                             </div>
                         </div>
@@ -177,6 +176,13 @@
 
 $(document).ready(function() {
 	
+	  const today = new Date().toISOString().split('T')[0];
+	  $('#vote1').attr('min', today);
+	  $('#vote2').attr('min', today);
+	  $('#vote3').attr('min', today);
+	  $('#vote4').attr('min', today);
+	  $('#vote5').attr('min', today);
+	
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
@@ -209,7 +215,7 @@ $(document).ready(function() {
         if (i <= 5) {
             $('.voteplus').append(
                 '<span class="votespan">' + i + '.</span>\
-                  <input class="votetitle" type="date" id="vote' + i + '" name="vote' + i + '"><br>'
+                  <input class="votetitle" type="date" id="vote' + i + '" name="vote' + i + '" min=' + today + '><br>'
             );
             i++;
         } else {
@@ -249,8 +255,8 @@ $(document).ready(function() {
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
         width: 620,
-        minHeight: null, // set minimum height of editor
-        maxHeight: null, // set maximum height of editor
+        minHeight: 390, // set minimum height of editor
+        maxHeight: 390, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],

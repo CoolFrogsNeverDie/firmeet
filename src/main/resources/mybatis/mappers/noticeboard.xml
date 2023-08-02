@@ -69,7 +69,7 @@
 			select seq_meetNo.nextval from dual
 		</selectKey>
 		insert into meet_name(meetNo, aboardNo, clubId, meetYear, meetMon, meetName, startDate, endDate, meetTime, meetPlace, voteEnd, minPerson, maxPerson, price, address1, address2 )
-		values(#{meetNo}, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, SYSDATE, SYSDATE, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
+		values(#{meetNo}, #{aboardNo}, #{clubId}, #{meetYear}, #{meetMon}, #{meetName}, #{startDate}, #{endDate}, #{meetTime}, #{meetPlace}, SYSDATE, #{minPerson}, #{maxPerson}, #{price}, #{address1}, #{address2}) 
 	</insert>
 	
 	<select id="editlistgroup" parameterType="noticeboard" resultType="noticeboard">

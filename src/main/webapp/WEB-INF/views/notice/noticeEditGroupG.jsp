@@ -23,11 +23,10 @@
 
 <div class="wrap">
     <div class="diary-area">
-        <div class="diary-topbar">
-            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
-                alt="프로필사진" />
+         <div class="diary-topbar">
+            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
             <h1>${club.clubName}</h1>
-        </div>
+         </div>
         <!--/diary-topbar-img-->
 
         <div class="diary-subbar">
@@ -108,16 +107,16 @@
                             </div>
                             <div class="modal-body">
                                  <div class="grouptitle" id="result"></div>
-                                  <div>
+                                  <div class="payvotebody">
                                      <span class="groupvotetitle">만남일 </span>
                                      <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
                                      <input class="groupvotedate" type="date" id="endDate" name="endDate">
                                      <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
                                      <span class="groupvotetitle1">장 소 </span>
                                      <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="">
-                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button><br>
-                                  	 <input type="text" name="address1" value="x" id="address1"> 
-									 <input type="text" name="address2" value="y" id="address2">
+                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button>
+                                  	 <input type="hidden" name="address1" value="x" id="address1"> 
+									 <input type="hidden" name="address2" value="y" id="address2">
                                      
  									<div class="map_wrap">
 									   <div id="map" style="width:100%;height:100%;display: block;"></div>
@@ -137,8 +136,8 @@
                            			<br>
                                  </div>
                                  <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-                                 	 <button type="button" id="reset" class="btn btn-warning btn-sm">등록취소</button>
-                                     <button type="button" class="btn btn-success" id="saveButton2" style="margin-left: 10px;">등록하기</button>
+                                 	 <button type="button" id="reset" class="modelbtnR">등록취소</button>
+                                     <button type="button" class="modelbtnS" id="saveButton2" style="margin-left: 10px;">등록하기</button>
                                  </div>
                             </div>
                         </div>
@@ -188,6 +187,10 @@ $(document).keypress(function(e) {
 });
 
 $(document).ready(function() {
+	
+	  const today = new Date().toISOString().split('T')[0];
+	  $('#startDate').attr('min', today);
+	  $('#endDate').attr('min', today);
 	
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {
@@ -315,8 +318,8 @@ $(document).ready(function() {
         lang: 'ko-KR', // default: 'en-US'
         height: 390, // set editor height
         width: 620,
-        minHeight: null, // set minimum height of editor
-        maxHeight: null, // set maximum height of editor
+        minHeight: 390, // set minimum height of editor
+        maxHeight: 390, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],
