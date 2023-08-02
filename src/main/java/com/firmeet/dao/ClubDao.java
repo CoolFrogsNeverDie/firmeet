@@ -234,6 +234,20 @@ public class ClubDao {
 				
 		return row;
 	}
+
+	public ClubVo getClubDetailInfo(ClubVo club) {
+			
+		System.out.println("클럽의 상세정보를 가져오기 위한 값 DAO 확인 + " + club);
+		ClubVo vo = session.selectOne("club.getClubDeInfo", club);
+		
+		return vo;
+	}
+
+	public List<TagVo> getTagList(ClubVo club) {
+		
+		List<TagVo> list = session.selectList("club.getClubTag", club);
+		return list;
+	}
 	
 	
 }

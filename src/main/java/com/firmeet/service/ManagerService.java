@@ -82,4 +82,15 @@ public class ManagerService {
 		
 		return result;
 	}
+	
+	//클럽 수정창을 만들기 위한 클럽 디테일한 정보 가져오는 메서드
+	public ClubVo clubDeInfo(ClubVo club) {
+		ClubVo clubVO = new ClubVo();
+		
+		clubVO = clubDAO.getClubDetailInfo(club);
+		clubVO.setClubTagList(clubDAO.getTagList(club));
+		System.out.println("넘어오는 최종 디테일 정보 확인 " + clubVO);
+		
+		return clubVO;
+	}
 }

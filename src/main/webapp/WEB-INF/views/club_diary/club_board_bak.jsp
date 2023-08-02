@@ -9,68 +9,134 @@
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
+   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
     <!--모달-->
 </head>
 
 <body>
-
+	<!-- 상단 내비게이션 바 -->
+	<div class="ly-head-container">
+		<header>
+			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+		</header>
+	</div>
     <!-- // 상단 내비게이션 바 -->
-<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-    <!-- 페이지 콘텐츠 -->
-    <div class="wrap">
-        <div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-            <div class="diary-topbar">
-                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}"
-                    alt="프로필사진" />
-                <h1>${club.clubName}</h1>
-                <div class= "board-edit">
-                 <div class= "search-board"> 
-             	<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-             	<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-             </div>
-             
-             </div>
-            </div>
-            <!--/diary-topbar-img-->
-            <div class="diary-subbar">
-                <a class= "board-write" href = "${pageContext.request.contextPath}/board/club/editpage/${club.clubId}">글쓰기</a>
-            </div>
-            <!--/diary-subbar-->
-            <div class="content-area">
-
-                <div class="content-right">
-                    <div class="board-area">
-						<div class= "club-category">
-						<!--
-						<h4><strong>&#128221;&nbsp;&nbsp;자유게시판</strong></h4> 
-						 -->
-						</div>
-                        <div class="board-area2" >
-                        </div>
-					  <div id = "board-get"></div>
-                    </div>
-                    <!--board-area-->
-                </div>
-                <!--/content-right-->
-            </div>
-            <!--/content-area-->
-        </div>
-        <!--/diary-area-->
-<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-    <!--/wrap-->
+    
+    <!-- 중간 콘텐츠 -->
+    <div class="ly-body-container ">
+		<div class="main">
+			<div class="main-content">
+				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+				
+				
+					<div class="diary-topbar">
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<h2>${club.clubName}</h2>
+  						
+  						
+						<div class= "search-board"> 
+							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
+							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
+						</div>						
+						
+					</div>		
+					<!-- //diary-topbar -->
+					
+					
+					<div class="diary-body">					
+						<!-- 개인별코딩 ---------------------------------------------------------------->
+						
+						
+						
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						
+						
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						
+						
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						
+						
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						ssss<br>
+						<!-- 개인별코딩 ---------------------------------------------------------------->
+					</div>
+				
+				</div>
+				<!--/diary-area-->	
+			</div>
+			<!-- //main-content -->
+			
+			<div class="side-menu">
+				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+			</div>
+		</div>
+		<!-- container -->
+	</div>
+    <!-- //중간 콘텐츠 -->
+    
 </body>
 
 <script>
 	
-
+	$('.board-area').on('keyup','.comment-content', function(){
+		var textLength = $(this).val();
+		console.log('바뀌는 댓글 정보' + textLength);
+		console.log('바뀌는 댓글 정보' + textLength.length);
+		if(textLength.length >40){
+			alert('댓글은 40자 이내로 작성해주세요.');
+			textLength = textLength.slice(0,50);
+	        $(this).val(textLength);
+		}
+	});
 	
 	
 	/*댓글 삭제 이벤트*/
@@ -121,21 +187,16 @@
 	
 	
 	
-	/*답글 등록 버튼 클릭 이벤트*/
+	/*답글 등록 버튼 클릭 이벤트  --> 답글 등록창이 뜬다*/ 
 	$('.board-area').on("click",'.rreply-btn', function(){
 		
-		
-		
 	    var writeCommentDiv = $(this).closest('.write-comment2');
-	    
-		console.log('wth');	
 		var replyEditDiv = $(this).closest('.reply-area');
 		var groupNo = $(this).data('replyno');
 		var boardNo = $(this).data('boardno');
 		
-		
 		var tag = $(this).parent().siblings(".write-comment2").attr('class');
-		console.log(tag);	
+		console.log('태그 보기' + tag);	
 		if(tag == null){
 			var	rreply = '';	
 			
@@ -321,6 +382,7 @@
     	 var writeCommentDiv = $(this).closest('.board-comment').find('.write-comment');
     	  if (writeCommentDiv.is(':visible')) {
     		    writeCommentDiv.hide();
+    		    $('.comment-content').val("");
     		  } else {
     		    writeCommentDiv.show();
     		  }

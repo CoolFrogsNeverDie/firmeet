@@ -45,8 +45,8 @@
 				<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
 				<a href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
 				<a href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
-				<a href = "#">정보수정</a>
-            	</div>
+				<a href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
+           	</div>
             </div>
             <!--/diary-subbar-->
             <div class="content-area admin-content">
@@ -149,7 +149,8 @@
 	//답변 등록
 	$('#answer-insert-btn').on("click", function(){
 		var qnaNo = $(this).data('qnano');
-		var content = $('#qna-answer').val();
+		var data = $('#qna-answer').val();
+		var content =	data.replace(/\n/g, "<BR>");
 		
 		var QnaVO ={
 				qnaNo :	qnaNo,
@@ -158,6 +159,15 @@
 		addAnswer(QnaVO);
 	});
 	
+	//답변 일정 길이 넘어가면~~
+	$('#qna-answer').on("keyup",function(){
+		var textLength = $(this).val();
+		if(textLength.length >300){
+			alert('댓글은 300자 이내로 작성해주세요.');
+			textLength = textLength.slice(0,300);
+	        $(this).val(textLength);
+		}
+	})
 	
 	
 	

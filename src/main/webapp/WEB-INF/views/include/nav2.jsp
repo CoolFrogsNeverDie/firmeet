@@ -3,7 +3,7 @@
 
 <!-- top Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark $purple-100 static-top">
-	<div class="container">  <!-- 좌우 12px패딩 -->
+	<div class="container">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/main/mainForm">
 			<img src="${pageContext.request.contextPath}/assets/images/logo/logo_b.png" alt="..." height="36" />
 		</a>

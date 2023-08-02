@@ -18,7 +18,7 @@ public class testControllerS {
 		
 		testService.test();
 		
-		return "member_diary/member_board_test";
+		return "member_diary/edit_member";
 	}
 	
 	

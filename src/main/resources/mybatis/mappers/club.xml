@@ -431,5 +431,34 @@
     	]]>
     </update>
     
+    <select id = "getClubDeInfo" parameterType ="club" resultType ="club">
+    	<![CDATA[
+    		 select
+                distinct
+                intro1
+                ,intro2
+                ,address1
+                ,address2
+                ,max
+                ,preNum
+                ,b.cateNo as cateNo
+                ,detailT
+                ,detailL
+                ,detailP
+                ,detailE
+                ,detailW
+                from club a join club_category b on a.clubId = b.clubId
+                join club_member c on a.clubId = c.clubId where a.clubId = #{clubId}
+    	]]>
+    </select>
+    
+    <select id = "getClubTag" parameterType = "club" resultType ="tag">
+    	<![CDATA[
+    		select
+    			tagNo
+    		from club_tag
+    		where clubId = #{clubId}
+    	]]>
+    </select>
     
 </mapper>

@@ -131,13 +131,13 @@ dd:hover{
     padding: 36px;
     border-radius: 5px;
 }
-.search-board{
+/* .search-board{
 	height: 100px;
     width: 1100px;
     border-bottom : 1px solid black;
 	position: relative;
-}
-.search-board input{
+} */
+/* .search-board input{
 	height: 40px;
     border: 1px solid black;
     position: relative;
@@ -149,8 +149,8 @@ dd:hover{
     right: 0;
     border-radius: 8px;
     padding: 10px;
-}
-.search-board .board-search-btn{
+} */
+/* .search-board .board-search-btn{
     background-color: black;
     color: white;
     width: 70px;
@@ -162,7 +162,7 @@ dd:hover{
     top: 50%;
     transform: translateY(-50%);
     right: 10px;
-}
+} */
 .search-board .board-write{
 font-size: 30px;
     position: relative;

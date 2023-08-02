@@ -45,7 +45,7 @@
 				<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
 				<a href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
 				<a href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
-				<a href = "#">정보수정</a>
+				<a href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
             	</div>
             </div>
             <!--/diary-subbar-->
