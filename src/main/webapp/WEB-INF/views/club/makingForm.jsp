@@ -18,7 +18,7 @@
     		box-sizing: border-box;
     		width:1920px;
     		height:1800px;
-    		background:#fcfcfc;
+    		background:#eeeeee;
     	
     	}
     	
@@ -31,6 +31,11 @@
     		background:#fff;
     		z-index:10;
     	}
+    	.navbar-brand{
+    		transform: translate(145px);
+    	
+    	}
+    	
     	
     
     		
@@ -97,7 +102,7 @@
             width: 70%;
             border-radius: 10px 10px 10px 10px;
             border: 1px solid rgb(221, 219, 219);
-            margin-left: 80px;
+            margin-left: 90px;
         }
         
         .box5{
@@ -245,6 +250,32 @@
     
         }
         
+       .file-input{
+       		width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			
+       		position:absolute;
+       		z-index:-1;
+        }
+        
+        .imgFile{ 
+			display:block;         
+         	background:#1eafcc;
+         	width:90px;
+         	color: white;
+    		border-radius: 10px;
+         	height:35px;
+         	padding: 6px 23px;  
+         	transform: translate(400px, 150px);
+        }
+        
+        .imgPre{
+        	margin-left:135px;
+        
+        }
+        
+        
        
         
     </style>
@@ -258,11 +289,11 @@
      	 	<h2>퍼밋 동호회 등록</h2>
     	</div>
     	<div id="cm_body">
-        	<form action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
+        	<form action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data" id = "make-club-form">
           	<div class="row g-3">
             	<div>
-                	<label for="firstName">모임명</label>
-                	<input type="text" class="box" id="" placeholder="" name="clubName" value="" required>
+                	<label for="firstName" >모임명</label>
+                	<input type="text" class="box" maxlength="5" id="" placeholder="   5글자 내로 입력해 주세요" name="clubName" value="" required>
             	</div>
 
             	<div id="select_field">
@@ -314,7 +345,7 @@
 
             <div class="col-sm-12">
                 <label for="firstName">한 줄 소개</label>
-                <input type="text" class="box box5 TEXT" id="" placeholder="" name="intro1" value="" required>
+                <input type="text" class="box box5 TEXT" id="" placeholder="  100자 이내로 작성해 주세요" name="intro1" value="" required>
                 <span style="color:#6b6969; font-size: 13px;" id="counter">(0 / 100)</span>
             </div>
             <div class="col-sm-12, address">
@@ -324,8 +355,8 @@
             </div>
 
             <div class="col-sm-12, info" >
-                <label for="firstName">모임 소개</label></br>
-                <textarea name="intro2" class="box box6" id=""  cols="30" rows="10"></textarea>
+                <label for="firstName">모임 소개</label><br>
+                <textarea name="intro2" class="box box6" id="intro2"  cols="30" rows="10"></textarea>
             </div>
             <div class="col-sm-12">
                 <label for="firstName">상세 정보</label>
@@ -346,19 +377,21 @@
                 </div>
             </div>
 			
-            <div class="col-sm-12 ,imgFile" >
-                <label for="img2">메인 이미지</label><br>
-                <img id="mainImg" src="" class="box7" width="150px" height="150px">
-                <div class="box-file-input box9"><label>
-                <input id="img2" type="file" name="file" value="" class="imgFile file-input"></label>
+            <div class="col-sm-12" >
+                <label >메인 이미지</label>
+                <label for="img2" class="imgFile">업로드</label>
+                <img id="mainImg" src="" class="imgPre" width="150px" height="150px">
+                <div class="box-file-input box9">
+                <input id="img2" type="file" name="file" value="" class="file-input">
                 <!-- <span class="filename">파일을 선택해주세요.</span> -->
                 </div>
             </div>
-            <div class="col-sm-12 , imgFile">
-                <label for="img1">배경 이미지</label>
-                <img id="bgImg" src=""  class="box7" width="200px" height="150px">
-                <div class="box-file-input box9"><label>
-                <input id="img1" type="file" name="file" value="" class="imgFile file-input"></label>
+            <div class="col-sm-12 ">
+                <label>배경 이미지</label>
+                <label for="img1" class="imgFile">업로드</label>
+                <img id="bgImg" src=""  class="imgPre" width="200px" height="150px">
+                <div class="box-file-input box9">
+                <input id="img1" type="file" name="file" value="" class="file-input">
                  <!-- <span class="filename">파일을 선택해주세요.</span> -->
                 </div>
             </div>
@@ -368,13 +401,22 @@
             <button class="w-10 btn btn-secondary btn-sm" type="submit"  style="margin-right: 20px;">동호회 등록</button>
             <button class="w-10 btn btn-secondary btn-sm" type="button" id="btnSubmit">미리보기</button>
           </div>
-        </br>
+        <br>
         </form>
       </div>
     </div>
 </div>
 </body>
 <script>
+
+	//동호회 등록 이벤트 발생 시
+	$('#make-club-form').on("submit", function(){
+		let val = $('#intro2').val();
+		$('#intro2').val(val.replace(/\n/g, "<BR>"));
+		
+	});
+
+
     $('.TEXT').keyup(function (e){
         var content = $(this).val();
         $('#counter').html("("+content.length+" / 100)");    //글자수 실시간 카운팅

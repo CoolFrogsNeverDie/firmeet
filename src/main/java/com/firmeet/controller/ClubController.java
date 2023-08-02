@@ -3,6 +3,7 @@ package com.firmeet.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -155,8 +156,8 @@ public class ClubController {
 			 * model.addAttribute("pMap", pMap );
 			 */
 			
-			List<ClubQnaVo>	 qnaList = clubService.qnaList(clubId);
-			model.addAttribute("qnaList",qnaList);
+			 Map<String,Object> qMap = clubService.qnaList2(crtPage,clubId);
+			 model.addAttribute("qMap",qMap);
 			
 			
 			System.out.println(clubId);
@@ -229,14 +230,15 @@ public class ClubController {
 	
 	@RequestMapping(value = "/clubQna/{clubId}", method={RequestMethod.POST, RequestMethod.GET})
 	public String clubQna(@ModelAttribute ClubQnaVo clubQnaVo,
-							@PathVariable int clubId, HttpSession session) {
+						  @RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,
+						  @PathVariable int clubId, HttpSession session) {
 		System.out.println("ClubController.clubQna()");
 		MemberVo member = (MemberVo)session.getAttribute("member");
 		clubQnaVo.setClubId(clubId);
 		clubQnaVo.setMemberId(member.getMemberId());
 		System.out.println(clubQnaVo);
 		
-		clubService.clubQ(clubQnaVo);
+		clubService.qnaList2(crtPage, clubId);
 		
 		return "redirect:/club/joinForm/{clubId}";
 		

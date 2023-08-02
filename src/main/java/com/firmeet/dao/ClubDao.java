@@ -197,18 +197,16 @@ public class ClubDao {
 		return totalCount;
 	}
 	
-	public List<ClubQnaVo> qnaList2(int startRnum, int endRnum) {
+	public List<ClubQnaVo> qnaList2(int startRnum, int endRnum, int clubId) {
 		System.out.println("ClubDao.qnaList2()");
 		
 		Map<String, Integer> qMap = new HashMap<String, Integer>();
 		qMap.put("startRnum", startRnum);
 		qMap.put("endRnum", endRnum);
-		
+		qMap.put("clubId", clubId);
 		System.out.println(qMap);
 		
 		List<ClubQnaVo> qnaList = session.selectList("club.qnaList2", qMap);
-		
-		
 	
 		System.out.println(qnaList);
 		

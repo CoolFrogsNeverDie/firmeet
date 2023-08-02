@@ -245,6 +245,7 @@ a{text-decoration: none; color: #212121;}
             <div class="join-btn-area">
             	<button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
             	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join">회원가입</button></a>
+            	<a href ="${pageContext.request.contextPath }/club/main/${clubVo.clubId}"><button type="button" class= "join-btn btn-main">모임 메인으로 가기</button></a>
             </div>
         </div>
         <!--메인라인 종료-->
@@ -364,10 +365,7 @@ a{text-decoration: none; color: #212121;}
         <!--답답해 보이지 않게 스크롤 늘여주는 div-->
         <div class="clear"></div>
 			${clubVo.clubId}
-        <div class= "join-btn-last">
-        	<a href =""><button type="button" class= "join-btn btn-subscript">가입 신청됨</button></a>
-            <a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn">회원가입</button></a>
-        </div>
+       
     </div>
 </body>
 <style>
@@ -737,19 +735,37 @@ $('.ans-btn').on("click", function(){
 <script>
 
 	<c:if test="${memberLv.memlevel == null}">
-	
 		alert("${memberLv.memlevel}")
 		$(".btn-join").css("display","block");
-		$(".btn-subscript").css("display","none");
-		
-	</c:if>
-	<c:if test="${memberLv.memlevel ==-10}">
-		alert("${memberLv.memlevel}")
-		$(".btn-join").css("display","none");
-		$(".btn-subscript").css("display","block");
-		
+		$(".btn-main").css("display","none");
+		$(".btn-subscript").css("display","none");	
 	</c:if>
 	
+	<c:if test="${memberLv.memlevel == -10}">
+		alert("${memberLv.memlevel}")
+		$(".btn-join").css("display","none");
+		$(".btn-main").css("display","none");
+		$(".btn-subscript").css("display","block");	
+	</c:if>
+	
+	<c:if test="${memberLv.memlevel == 0}">
+		$(".btn-main").css("display","block");
+		$(".btn-join").css("display","none");
+		$(".btn-subscript").css("display","none");
+	</c:if>
+	
+	<c:if test="${memberLv.memlevel == 1}">
+		$(".btn-main").css("display","block");
+		$(".btn-join").css("display","none");
+		$(".btn-subscript").css("display","none");
+	</c:if>
+	
+	<c:if test="${memberLv.memlevel == 2}">
+		$(".btn-main").css("display","block");
+		$(".btn-join").css("display","none");
+		$(".btn-subscript").css("display","none");
+	</c:if>
+
 
 	
 </script>

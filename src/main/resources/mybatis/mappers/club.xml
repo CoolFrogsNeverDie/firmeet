@@ -348,7 +348,7 @@
    
     
     	
-  <!--  	<select id="qnaList2" parameterType="map" resultType="com.firmeet.vo.ClubQnaVo">
+ 	<select id="qnaList2" parameterType="map" resultType="com.firmeet.vo.ClubQnaVo">
    		<![CDATA[
     			select ort.rn,
     				   ort.clubId,
@@ -360,10 +360,10 @@
 		    				ot.memberId,
 		    				ot.qnaCotent,
 		    				ot.answerContent
-			    	 from(select a.clubId,
-			    				 a.memberId,
-			    				 a.qnaCotent,
-			    				 a.answerContent
+			    	 from(select clubId,
+			    				 memberId,
+			    				 qnaCotent,
+			    				 answerContent
 			    		  from club_qna
 			    		  where clubId = #{clubId}
 			    		  ) ot) ort
@@ -371,8 +371,7 @@
 			   and rn<=#{endRnum} 		
     		]]>
     		
-    </select> -->
-    
+    </select> 
    	<select id = "checkClubMax" parameterType ="club" resultType ="int">
     	<![CDATA[
     		select 
