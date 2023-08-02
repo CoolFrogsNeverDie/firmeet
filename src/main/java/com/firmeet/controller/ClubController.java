@@ -239,7 +239,7 @@ public class ClubController {
 		clubQnaVo.setMemberId(member.getMemberId());
 		System.out.println(clubQnaVo);
 		
-		clubService.qnaList2(crtPage, clubId);
+		clubService.clubQ(clubQnaVo);
 		
 		return "redirect:/club/joinForm/{clubId}";
 		

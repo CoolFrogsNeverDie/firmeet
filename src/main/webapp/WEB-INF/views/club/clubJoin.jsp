@@ -353,7 +353,7 @@ a{text-decoration: none; color: #212121;}
             </form>
             
     
-			 <c:forEach items="${qnaList}" var ="qna">
+			 <c:forEach items="${requestScope.qMap.qnaList}" var ="qna">
             <!--반복될 QNA 영역-->
 	            <div class="qna-content-area">
 	                <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
@@ -366,6 +366,23 @@ a{text-decoration: none; color: #212121;}
 		         </c:if>
             </c:forEach>
             <!--반복될 QNA 영역 end-->
+            
+            <div id="paging">
+				<ul>
+					<c:if test="${qMap.prev == true}">
+						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.startPageNo-1}">◀</a></li>
+					</c:if>
+								
+					<c:forEach begin="${qMap.startPageNo}" end="${qMap.endPageNo}"  step="1"  var="page">
+						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${page}">${page}</a></li>
+					</c:forEach>
+								
+					<c:if test="${qMap.next == true}">
+						<li><a href="${pageContext.request.contextPath}/club/joinForm/{clubId}?crtPage=${qMap.endPageNo+1}}">▶</a></li>
+					</c:if>
+				</ul>
+				<div class="clear"></div>
+			</div> 
         
         </div>
 
