@@ -62,9 +62,6 @@
 	               <tbody>
 	                   <tr>
 	                     <td class="noticegrouplist1">
-	                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
-                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
-                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}">${memberId}<br>
 	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}</p>
 	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}</p>
 	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}</p>
@@ -72,6 +69,9 @@
 	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}</p>
 	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
 	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
+	                         <input type="hidden" name="clubId" value="${clubId}">
+                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
 	                     </td>
 	                 </tr>
 	               </tbody>
@@ -177,18 +177,18 @@
                   	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote?aboardNo=${vo.aboardNo}" method="get">
 						<div class="modalvotetitle">${vo.voteTitle}</div>
                         <div class="voteleft">
-                        	<input type="text" name="clubId" value="${clubId}"><br>
-                        	<input type="text" name="voteNo" value="${vo.voteNo}"><br>
-                        	<input type="text" name="aboardNo" id="aboardNo" value="${vo.aboardNo}"><br>
-                        	<input type="text" name="memberId" id="memberId" value="${member.memberId}">${memberId}<br>
-                            <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
-                            <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
-                           	<input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
-                           	<input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
-                           	<input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
+                        	<input type="hidden" name="clubId" value="${clubId}">
+                        	<input type="hidden" name="voteNo" value="${vo.voteNo}">
+                        	<input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+                        	<input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
+	                        <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
+	                        <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
+	                        <input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
+	                        <input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
+	                        <input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
                         </div>
                         <div style="text-align: center; font-weight: bold;">
-                			<button type="submit" class="btn btn-success btn-sm" id="lastvote">투표완료</button>
+                			<button type="submit" class="modelbtnS" id="lastvote">투표완료</button>
                         </div>
                     </form>
                    </div>
