@@ -65,8 +65,8 @@
       </div>
 
     <h1>First Meet , <br> Perfect Meet</h1>
-    <form>
-        <input type="search" placeholder="   모임을 검색해 보세요">
+    <form action="${pageContext.request.contextPath }/main/mainForm">
+        <input type="search" placeholder="   모임을 검색해 보세요" name="keyword">
         <button type="submit" id="sbutton" >검색</button>
     </form>
 
