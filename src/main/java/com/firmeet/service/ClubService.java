@@ -218,57 +218,9 @@ public class ClubService {
 
 	}
 
-	/*
-	 * public Map<String, Object> searchList(int crtPage, String keyword, ClubVo
-	 * clubVo){
-	 * 
-	 * System.out.println("clubService.searchList()");
-	 * 
-	 * crtPage = (crtPage >= 1) ? crtPage : (crtPage = 1); int listCnt = 10;
-	 * 
-	 * int startRnum = (crtPage - 1) * listCnt + 1; int endRnum = (startRnum +
-	 * listCnt) - 1;
-	 * 
-	 * List<ClubVo> clubList = clubDao.searchList(startRnum, endRnum, keyword
-	 * ,clubVo);
-	 * 
-	 * int totalCount = clubDao.searchMainList2(keyword);
-	 * 
-	 * int pageBtnCount = 5; int endPageNo = (int) Math.ceil(crtPage / (double)
-	 * pageBtnCount) * pageBtnCount; int startPageNo = (endPageNo - pageBtnCount) +
-	 * 1;
-	 * 
-	 * // 다음 화살표 true false
-	 * 
-	 * boolean next = false; if (endPageNo * listCnt < totalCount) { // 10 * 10 <
-	 * 123 next = true;
-	 * 
-	 * } else { next = false; // 끝 버튼 번호endPageBtnNo 다시 계산 endPageNo = (int)
-	 * Math.ceil(totalCount / (double)listCnt); }
-	 * 
-	 * // 이전 화살표 boolean prev = false; if (startPageNo != 1) { prev = true; }
-	 * 
-	 * Map<String, Object> pMap = new HashMap<String, Object>();
-	 * pMap.put("prev",prev); pMap.put("startPageNo", startPageNo);
-	 * pMap.put("endPageNo", endPageNo); pMap.put("next", next);
-	 * pMap.put("clubList", clubList);
-	 * 
-	 * System.out.println(pMap);
-	 * 
-	 * return pMap;
-	 * 
-	 * 
-	 * 
-	 * 
-	 * List<ClubVo> list = clubDao.searchList(clubVo);
-	 * 
-	 * return list;
-	 * 
-	 * 
-	 * }
-	 */
+	
 
-	public void clubQ(ClubQnaVo clubQnaVo) {
+	public void clubQ(int crtPage, ClubQnaVo clubQnaVo) {
 		System.out.println("ClubService.clubQ()");
 		System.out.println(clubQnaVo);
 
@@ -304,7 +256,7 @@ public class ClubService {
 		// 끝글번호
 		int endRum = (startRnum + listCnt) - 1;
 
-		List<ClubQnaVo> qnaList = clubDao.qnaList2(startRnum, endRum);
+		List<ClubQnaVo> qnaList = clubDao.qnaList2(startRnum, endRum,clubId);
 
 		///////////////////////////////////////////////////////////////////////
 		// 페이징 계산

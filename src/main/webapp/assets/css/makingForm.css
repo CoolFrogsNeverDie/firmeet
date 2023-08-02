@@ -1,0 +1,260 @@
+*{list-style:none}
+    	
+    	
+    	#background{
+    		box-sizing: border-box;
+    		width:1920px;
+    		height:1800px;
+    		background:#eeeeee;
+    	
+    	}
+    	
+    	
+    
+    	.navbar{
+    		position: fixed;
+    		margin:auto;
+    		width:100%;
+    		background:#fff;
+    		z-index:10;
+    	}
+    	
+    
+    		
+        .container{
+        	background:#fff;
+            width: 1000px;
+          	height:100%;
+            margin: 0 auto;
+            accent-color: #1eafcc;
+            min-width:1000px;
+        }
+        h2{
+            color: #222;
+            font-weight: bold;
+            margin: 50px auto;
+        }
+        
+        #cm_body{
+        		width: 800px;
+        		margin:auto;
+        
+        }
+        
+        .box#max{
+        	width:100px;
+        	transform: translateX(-20px);
+        }
+        
+        #select_field{
+       		 	
+        		width: 1000px;
+        		margin: auto;
+    	}
+    	#select_field>p{
+        		transform: translate(20px , 10px);
+        		font-size: 17px;
+        		font-weight: 600;
+    	}
+
+
+    	#select_field ul{
+        		margin: 20px;
+        		width:900px;
+        		display: flex;
+        		flex-wrap: wrap;
+        		accent-color: black;
+    	}
+     
+    	#select_field li{
+        		font-size: 12px;
+        		width:150px;
+        		height:30px;
+        		display: flex;
+        		gap:10px;
+    	}
+    
+     	#select_field li>p{
+     		transform: translateY(7px);
+     	}
+        
+   
+        
+        .box{
+            width: 70%;
+            border-radius: 10px 10px 10px 10px;
+            border: 1px solid rgb(221, 219, 219);
+            margin-left: 90px;
+        }
+        
+        .box5{
+            margin-left: 55px;
+        }
+        .box6{
+            margin-left: 135px;
+        }
+        .box7{
+            margin-left: 140px;
+        }
+        .box8{
+            margin-left: 10px;
+            width: 200px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .box9{
+            margin-left: 350px;
+        }
+        .boxtext{
+            font-size: 10px;
+        }
+        .box-file-input label{
+            display:inline-block;
+            /* background:#222;
+            color:#fff; */
+            padding:0px 15px;
+            line-height:35px;
+            cursor:pointer;
+            border-radius: 5px;
+        }
+        /* .box-file-input label:after{
+            content:"파일등록";
+        } */
+        .box-file-input .file-input{
+            display:block;
+            background:transparent;
+            
+        }
+        .box-file-input .filename{
+            display:inline-block;
+            padding-left:10px;
+        }
+        .TEXT1{
+            width: 20vw;
+        }
+        
+        .address{
+        	width:70vw;
+        	height:100px;
+        	position: relative;
+        }
+        
+        .form-select{
+        	display:block;
+        	height:35px;
+        	
+        	
+        }
+        #addressSi{
+        	margin: -25px 0px -35px 138px;
+        	left:145px;
+        	
+        }
+        #addressSiGUnGu{
+       		
+        	margin-left:345px;
+        	
+        }
+        
+        .info{
+        	display:block;
+        	margin-top:-50px;        	
+        }
+        .info>textarea{
+        	margin-top:-20px;
+        }
+        
+        button[type=submit]:hover{
+        	background:#1eafcc;
+        	color:white;
+        }
+        
+        button[type=button]:hover {
+        	background:white;
+        	color:#1eafcc;
+        	border:none;
+        }
+	
+		
+		 .tag{
+            margin:-24px 0px 0px 105px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 700px;
+            height: 100px;
+            overflow-y: scroll;
+            position:relative;
+        }
+        .tag .tags{
+        	position:absolute;
+            width: 1px;
+            height: 1px;
+            padding:0;
+            margin: -1px;
+            font-size: 10px;
+            overflow:hidden;
+            border:none;
+            background: transparent;     
+        }
+        .tagLabel{
+        	display:block;
+        	text-align:center;
+        	width:110px;
+        	height:25px;
+        	font-size:13px;
+        	font-weight:200;
+        	border-radius:5px;
+        	padding:2px;
+        	background-color:#1eafcc;
+        	color:white;
+        }
+        
+        .tag .tags:checked+.tagLabel{
+        	background-color:white;
+        	color:#1eafcc;
+        }
+        #selTag {
+        	display:flex;
+         	margin-top:15px;
+         
+        }
+        
+        #selectedTag{
+        	margin-left:15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 600px;
+            height: 50px;
+            overflow-y: scroll;
+            position:relative;
+    
+        }
+        
+       .file-input{
+       		width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			
+       		position:absolute;
+       		z-index:-1;
+        }
+        
+        .imgFile{ 
+			display:block;         
+         	background:#1eafcc;
+         	width:90px;
+         	color: white;
+    		border-radius: 10px;
+         	height:35px;
+         	padding: 6px 23px;  
+         	transform: translate(400px, 150px);
+        }
+        
+        .imgPre{
+        	margin-left:135px;
+        
+        }
+        
+     
