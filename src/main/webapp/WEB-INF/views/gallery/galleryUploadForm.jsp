@@ -53,7 +53,7 @@
 	<div class="wrap">
 		<div class="diary-area">
 			<div class="diary-topbar">
-				<img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
+				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
 			<!--/diary-subbar-->
@@ -85,84 +85,88 @@
 		<!--/wrap-->
 </body>
 <script>
-  var uploadFiles = [];
-  var $drop = $("#drop");
-  $drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄
-      $(this).addClass('drag-over');
-      $("#drop span").addClass('hidden');
-  }).on("dragleave", function(e) { //드래그 요소가 나갔을때
-      $(this).removeClass('drag-over');
-  }).on("dragover", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-  }).on('drop', function(e) { //드래그한 항목을 떨어뜨렸을때
-      e.preventDefault();
-      $(this).removeClass('drag-over');
-      var files = e.originalEvent.dataTransfer.files; //드래그&드랍 항목
-      for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          var size = uploadFiles.push(file); //업로드 목록에 추가
-          preview(file, size - 1); //미리보기 만들기
-      }
-  });
-  function preview(file, idx) {
-      var reader = new FileReader();
-      reader.onload = (function(f, idx) {
-          return function(e) {
-              var div = '<div class="thumb"> \
-    <div class="close" data-idx="' + idx + '">X</div> \
-    <img src="'
-                      + e.target.result
-                      + '" title="'
-                      + escape(f.name)
-                      + '"/> \
-    </div>';
-              $("#thumbnails").append(div);
-          };
-      })(file, idx);
-      reader.readAsDataURL(file);
-  }
+var uploadFiles = [];
+var $drop = $("#drop");
 
-  $("#btnSubmit").on("click", function() {
-                      console.log("버튼클릭");
-                      var formData = new FormData();
-                      var meetNoValue = ${meet.meetNo};
-                      console.log("선택한 meetNoValue: " + meetNoValue);
+$drop.on("dragenter", function (e) {
+    // 드래그 요소가 들어왔을 때
+    $(this).addClass('drag-over');
+    $("#drop span").addClass('hidden');
+}).on("dragleave", function (e) {
+    // 드래그 요소가 나갔을 때
+    $(this).removeClass('drag-over');
+}).on("dragover", function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+}).on('drop', function (e) {
+    // 드래그한 항목을 떨어뜨렸을 때
+    e.preventDefault();
+    $(this).removeClass('drag-over');
+    var files = e.originalEvent.dataTransfer.files; // 드래그&드랍 항목
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var size = uploadFiles.push(file); // 업로드 목록에 추가
+        preview(file, size - 1); // 미리보기 만들기
+    }
+});
 
-                      var memberId = $("#memberId").val();
-                      console.log("선택한 memberId: " + memberId);
+function preview(file, idx) {
+    var reader = new FileReader();
+    reader.onload = (function (f, idx) {
+        return function (e) {
+            var div = '<div class="thumb"> \
+                <div class="close" data-idx="' + idx + '">X</div> \
+                <img src="' + e.target.result + '" title="' + escape(f.name) + '"/> \
+                </div>';
+            $("#thumbnails").append(div);
+        };
+    })(file, idx);
+    reader.readAsDataURL(file);
+}
 
-                      formData.append('memberId', memberId);
-                      formData.append('meet', meetNoValue);
-                      var path = window.location.pathname; // 현재 페이지의 경로
-                      var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
-                      console.log("업로드할 파일: " + clubId);
-                      $.each(uploadFiles, function(i, file) {
-                          if (file.upload != 'disable') {
-                              formData.append('uploadPicture', file,
-                                      file.name);
-                              console.log("업로드할 파일: " + file.name);
-                          }
-                      });
-                      $.ajax({
-                                  url : '${pageContext.request.contextPath}/gallery/upload/'+ clubId,
-                                  data : formData,
-                                  type : 'post',
-                                  contentType : false,
-                                  processData : false,
-                                  success : function(ret) {
-                                      alert("완료");
-                                      window.location.href = "${pageContext.request.contextPath}/gallery/list/"+ clubId;
-                                  }
-                              });
-                  });
+$("#btnSubmit").on("click", function () {
+    console.log("버튼 클릭");
+    var formData = new FormData();
+    var meetNoValue = ${meet.meetNo};
+    console.log("선택한 meetNoValue: " + meetNoValue);
 
-  $("#thumbnails").on("click", ".close", function(e) {
-      var $target = $(e.target);
-      var idx = $target.attr('data-idx');
-      uploadFiles[idx].upload = 'disable';
-      $target.parent().remove();
-  });
+    var memberId = $("#memberId").val();
+    console.log("선택한 memberId: " + memberId);
+
+    formData.append('memberId', memberId);
+    formData.append('meet', meetNoValue);
+
+    var path = window.location.pathname; // 현재 페이지의 경로
+    var clubId = path.match(/\d+/)[0]; // 경로에서 숫자 값을 추출
+    console.log("업로드할 파일: " + clubId);
+
+    $.each(uploadFiles, function (i, file) {
+        if (file.upload != 'disable') {
+            formData.append('uploadPicture', file, file.name);
+            console.log("업로드할 파일: " + file.name);
+        }
+    });
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/gallery/upload/' + clubId,
+        data: formData,
+        type: 'post',
+        contentType: false,
+        processData: false,
+        success: function (ret) {
+            alert("완료");
+            window.location.href = "${pageContext.request.contextPath}/gallery/list/" + clubId;
+        }
+    });
+});
+
+$("#thumbnails").on("click", ".close", function (e) {
+    var $target = $(e.target);
+    var idx = $target.attr('data-idx');
+    uploadFiles[idx].upload = 'disable';
+    $target.parent().remove();
+});
+
 </script>
 
 </html>

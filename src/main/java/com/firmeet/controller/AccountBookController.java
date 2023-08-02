@@ -50,6 +50,7 @@ public class AccountBookController {
 			model.addAttribute("club", club);
 
 			List<AccountBookVo> aList = accountBookService.getList(clubId);
+
 			model.addAttribute("accountList", aList);
 
 			return "/accountbook/accountbook";
@@ -139,4 +140,5 @@ public class AccountBookController {
 		model.addAttribute("accountList", aList);
 		return "/member_diary/member_accountbook";
 	}
+
 }

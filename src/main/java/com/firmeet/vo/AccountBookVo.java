@@ -14,11 +14,34 @@ public class AccountBookVo {
     private String incomeExpense;
     private String receipt;
     private int payment;
+    private String memberName;
+    private String meetName;
     
     public AccountBookVo() {
     	  // 기본 생성자 내용
     	}
     
+	public AccountBookVo(int accountId, int clubId, int meetNo, String memberId, int amount, String datetime,
+			String category, String purpose, String incomeExpense, String receipt, int payment, String memberName,
+			String meetName) {
+		super();
+		this.accountId = accountId;
+		this.clubId = clubId;
+		this.meetNo = meetNo;
+		this.memberId = memberId;
+		this.amount = amount;
+		this.datetime = datetime;
+		this.category = category;
+		this.purpose = purpose;
+		this.incomeExpense = incomeExpense;
+		this.receipt = receipt;
+		this.payment = payment;
+		this.memberName = memberName;
+		this.meetName = meetName;
+	}
+
+
+
 	public AccountBookVo(int accountId, int clubId, int meetNo, String memberId, int amount, String datetime, String category,
 			String purpose, String incomeExpense, String receipt, int payment) {
 		super();
@@ -33,10 +56,6 @@ public class AccountBookVo {
 		this.incomeExpense = incomeExpense;
 		this.receipt = receipt;
 		this.payment = payment;
-	}
-
-	public int getAccountId() {
-		return accountId;
 	}
 
 	public void setaccountId(int accountId) {
@@ -122,11 +141,28 @@ public class AccountBookVo {
 	public void setPayment(int payment) {
 		this.payment = payment;
 	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getMeetName() {
+		return meetName;
+	}
+
+	public void setMeetName(String meetName) {
+		this.meetName = meetName;
+	}
 
 	@Override
 	public String toString() {
-		return "AccountBookVo [accountId=" + accountId + ", clubId=" + clubId + ", meetNo=" + meetNo + ", memberId=" + memberId
-				+ ", amount=" + amount + ", datetime=" + datetime + ", category=" + category + ", purpose=" + purpose
-				+ ", incomeExpense=" + incomeExpense + ", receipt=" + receipt + ", payment=" + payment + "]";
+		return "AccountBookVo [accountId=" + accountId + ", clubId=" + clubId + ", meetNo=" + meetNo + ", memberId="
+				+ memberId + ", amount=" + amount + ", datetime=" + datetime + ", category=" + category + ", purpose="
+				+ purpose + ", incomeExpense=" + incomeExpense + ", receipt=" + receipt + ", payment=" + payment
+				+ ", memberName=" + memberName + ", meetName=" + meetName + "]";
 	}
 }

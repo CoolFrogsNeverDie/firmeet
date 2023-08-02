@@ -30,6 +30,15 @@ public class AccountBookService {
 	public List<AccountBookVo> getList(int clubId) {
 		System.out.println("AccountBookService getList 확인");
 		List<AccountBookVo> aList = accountBookDao.getList(clubId);
+		
+		for (AccountBookVo accountBookVo : aList) {
+			System.out.println(accountBookVo.getMemberId()); // getMemberId 값 출력;
+			System.out.println(accountBookVo.getMeetNo()); // getMemberId 값 출력;
+			
+			accountBookVo.setMemberName(accountBookDao.setMemberName(accountBookVo.getMemberId()));
+			accountBookVo.setMeetName(accountBookDao.setMeetName(accountBookVo.getMeetNo()));
+		}
+		
 		return aList;
 	}
 
@@ -94,6 +103,19 @@ public class AccountBookService {
 	public List<AccountBookVo> search(int clubId, String startDate, String endDate, String searchText) {
 		System.out.println("AccountBookService search 확인");
 		List<AccountBookVo> searchResult = accountBookDao.search(clubId, startDate, endDate, searchText);
+		System.out.println(clubId);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(searchText);
+		
+		for (AccountBookVo accountBookVo : searchResult) {
+			System.out.println(accountBookVo.getMemberId()); // getMemberId 값 출력;
+			System.out.println(accountBookVo.getMeetNo()); // getMemberId 값 출력;
+			
+			accountBookVo.setMemberName(accountBookDao.setMemberName(accountBookVo.getMemberId()));
+			accountBookVo.setMeetName(accountBookDao.setMeetName(accountBookVo.getMeetNo()));
+		}
+		
 		return searchResult;
 	}
 
@@ -105,6 +127,15 @@ public class AccountBookService {
 	public List<AccountBookVo> getMyList(String memberId) {
 		System.out.println("AccountBookService getMyList 확인");
 		List<AccountBookVo> aList = accountBookDao.getMyList(memberId);
+		
+		for (AccountBookVo accountBookVo : aList) {
+			System.out.println(accountBookVo.getMemberId()); // getMemberId 값 출력;
+			System.out.println(accountBookVo.getMeetNo()); // getMemberId 값 출력;
+			
+			accountBookVo.setMemberName(accountBookDao.setMemberName(accountBookVo.getMemberId()));
+			accountBookVo.setMeetName(accountBookDao.setMeetName(accountBookVo.getMeetNo()));
+		}
+		
 		return aList;
 	}
 }

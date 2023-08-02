@@ -7,6 +7,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>${club.clubName}가계부</title>
+
+<!-- 스크립트와 스타일시트 추가 -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
@@ -23,13 +25,13 @@
 </head>
 
 <body>
-	<!-- top Navigation -->
+	<!-- 상단 네비게이션 -->
 	<%@ include file="../include/nav.jsp"%>
 
 	<div class="wrap">
 		<div class="diary-area">
 			<div class="diary-topbar">
-				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
+				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
 			<!--/diary-subbar-->
@@ -41,7 +43,7 @@
 							<input type="date" id="startDate" name="startDate"><span style="margin-top: 10px;margin-right: 5px;">~</span><input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요." style="width: 160px;">
 							<button class="searchbnt" type="submit">검색</button>
 						</form>
-
+						<!-- 수입 지출 총액 출력 -->
 						<div>
 							<input type="text" id="calculatorIncome"  readonly >
 							<input type="text" id="calculatorExpense"  readonly >
@@ -54,8 +56,9 @@
 						</c:choose>
 
 					</div>
-					<!--/content-bnt-->
+					<!-- 가계부 내역을 표시하는 테이블 -->
 					<div class="table">
+						<!-- 테이블 헤더 부분 -->
 						<div class="table-header">
 							<div class="header_item">
 								<a id="memberId" class="filter_link filter_link-number" href="#">결제자</a>
@@ -80,11 +83,12 @@
 							</div>
 						</div>
 						<div class="table-content-wrapper">
-							<!-- 검색 결과를 표시할 영역 -->
+							<!-- 가계부 내역을 표시하는 부분 -->
 							<div class="table-content" id="target">
 								<c:forEach var="account" items="${accountList}" varStatus="status">
+									<!-- 가계부 각 항목을 표시하는 부분 -->
 									<div class="table-row">
-										<div class="table-data">${account.memberId}</div>
+										<div class="table-data">${account.memberName}</div>
 										<div class="table-data">${account.datetime}</div>
 										<div class="table-data">${account.purpose}</div>
 										<div class="table-data incomeExpense">${account.incomeExpense}</div>
@@ -93,22 +97,22 @@
 											<fmt:formatNumber type="number" maxFractionDigits="3" value="${account.amount}" />
 											원
 										</div>
-										<div class="table-data">${account.meetNo}</div>
+										<div class="table-data">${account.meetName}</div>
 										<c:choose>
 											<c:when test="${!empty account.receipt}">
+												<!-- 영수증 이미지를 표시하는 부분 -->
 												<div class="content-img" style="display: none">
 													<a class="example-image-link" href="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" data-lightbox="example-set"> <img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
 													</a>
 												</div>
 											</c:when>
 										</c:choose>
-
 									</div>
 								</c:forEach>
 							</div>
 						</div>
 					</div>
-					<!--/table-->
+					<!-- JavaScript 파일을 로드하는 부분 -->
 					<script src="${pageContext.request.contextPath}/assets/js/accountbook.js"></script>
 				</div>
 				<!--/content-left-->
@@ -116,6 +120,7 @@
 			<!--/content-area-->
 		</div>
 		<!--/diary-area-->
+		<!-- 사이드 네비게이션 바를 include하는 부분 -->
 		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 		<!--/wrap-->
 </body>
@@ -199,7 +204,7 @@
           for (var i = 0; i < searchResult.length; i++) {
             var account = searchResult[i];
             html += '<div class="table-row">';
-            html += '<div class="table-data">' + account.memberId + "</div>";
+            html += '<div class="table-data">' + account.memberName + "</div>";
             html += '<div class="table-data">' + account.datetime + "</div>";
             html += '<div class="table-data">' + account.purpose + "</div>";
             html +=
@@ -209,7 +214,7 @@
             html += '<div class="table-data">' + account.category + "</div>";
             html +=
               '<div class="table-data account">' + account.amount + "원</div>";
-            html += '<div class="table-data">' + account.meetNo + "</div>";
+            html += '<div class="table-data">' + account.meetName + "</div>";
             if(account.receipt !== null){
                 html += '<div class="content-img" style="display: none">';
                 html +=
@@ -270,6 +275,7 @@
       else if (incomeExpenseText === "수입") {
         incomeTotal += amountValue;
       }
+      //수입-지출
       total =incomeTotal-expenseTotal;
       console.log("총액 : "+ total);
 	});

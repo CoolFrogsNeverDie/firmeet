@@ -20,9 +20,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 <style type="text/css">
 	.content-area {
-	    /* border: 1px solid black; */
 	    width: 1070px;
 	    height: 619px;
 	    margin-left: 35px;
@@ -38,16 +38,14 @@
 	}
 </style>
 </head>
-
-
 <body>
-	<!-- top Navigation -->
+	<!-- 상단 네비게이션 -->
 	<%@ include file="../include/nav.jsp"%>
 
 	<div class="wrap">
 		<div class="diary-area">
 			<div class="diary-topbar">
-				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
+				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
 			<!--/diary-subbar-->

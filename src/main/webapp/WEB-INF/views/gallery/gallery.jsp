@@ -109,346 +109,348 @@ dd {
 </body>
 <script type="text/javascript" src=""></script>
 <script>
-   // 갤러리 목록 조회
-    $('#meetList').on('click','dt.viewAll',function() {
-                        var clubId = ${club.clubId};
-                        console.log(clubId);
-
-                        $("dd").removeClass('selected');
-                        $("#addButton").addClass("hidden");
-                        
-                        $.ajax({
-                             url : "${pageContext.request.contextPath}/gallery/getGalleryListAll",
-                             method : "GET",
-                             data : {
-                                 clubId : clubId
-                             },
-                             success : function(jsonResult) {
-                                 var list = jsonResult.data;
-                                 console.log(list);
-
-                                 var galleryHTML = '';
-                                 for (var i = 0; i < list.length; i++) {
-                                     var imgSave = list[i].imgSave;
-                                     var memberId = list[i].memberId;
-                                     var imgNo = list[i].imgNo;
-                                     var likeCnt = list[i].likeCnt;
-                                     console.log(i + " imgSave : "+ imgSave);
-                                     console.log(i + " memberId : "+ memberId);
-                                     console.log(i + " imgNo : "+ imgNo);
-                                     console.log(i + " likeCnt : "+ likeCnt);
-                                     galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
-                                     galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                                     galleryHTML += '</a>';
-                                 }
-
-                                 $('.gallery-area div').html(galleryHTML);
-                             },
-                             error : function() {
-                                 console.error("AJAX 요청 실패");
-                             }
-                        });
-                    });
-
-    // 상위 요소인 <dl> 태그에 이벤트 리스너를 등록하여 <dd> 태그를 클릭했을 때 이벤트를 처리합니다.
-    $('dl').on('click','dd',function() {
-                        var meetNo = $(this).data('meetno');
-                        console.log(meetNo);
-
-                        $.ajax({
-                                    url : "${pageContext.request.contextPath}/gallery/getGalleryList",
-                                    method : "GET",
-                                    data : {
-                                        meetNo : meetNo
-                                    },
-                                    success : function(jsonResult) {
-                                        var list = jsonResult.data;
-                                        console.log(list);
-
-                                        var galleryHTML = '';
-                                        for (var i = 0; i < list.length; i++) {
-                                            var imgSave = list[i].imgSave;
-                                            var memberId = list[i].memberId;
-                                            var imgNo = list[i].imgNo;
-                                            var likeCnt = list[i].likeCnt;
-                                            console.log(i + " imgSave : "+ imgSave);
-                                            console.log(i + " memberId : "+ memberId);
-                                            console.log(i + " imgNo : "+ imgNo);
-                                            console.log(i + " likeCnt : "+ likeCnt);
-                                            galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
-                                            galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                                            galleryHTML += '</a>';
-                                        }
-
-                                        $('.gallery-area div').html(galleryHTML);
-                                    },
-                                    error : function() {
-                                        console.error("AJAX 요청 실패");
-                                    }
-                                });
-                    });
-
-    // 페이지가 로드되면, 각 dt에 대해 AJAX를 통해 dd를 가져와서 출력
-    $("#meetList dt.list").each(function() {
-                        var $dt = $(this);
-                        var text = $dt.text().trim();
-                        var year = text.substring(0, 4);
-                        var month = text.substring(5, 7);
-                        console.log(year);
-                        console.log(month);
-
-                        $.ajax({
-                                    url : "${pageContext.request.contextPath}/gallery/getMeetName",
-                                    method : "GET",
-                                    data : {
-                                        year : year,
-                                        month : month
-                                    },
-                                    success : function(jsonResult) {
-                                        var list = jsonResult.data;
-                                        console.log(list);
-                                        for (var i = 0; i < list.length; i++) {
-                                            var name = list[i].meetName;
-                                            var meetNo = list[i].meetNo;
-                                            $dt.after("<dd data-meetNo=" + meetNo + ">"+ name + "</dd>");
-                                        }
-                                    },
-                                    error : function() {
-                                        console.error("AJAX 요청 실패");
-                                    }
-                                });
-                    });
-
+//갤러리 목록 조회
+$('#meetList').on('click', 'dt.viewAll', function () {
     var clubId = ${club.clubId};
     console.log(clubId);
 
+    $("dd").removeClass('selected');
+    $("#addButton").addClass("hidden");
+
     $.ajax({
-                url : "${pageContext.request.contextPath}/gallery/getGalleryListAll",
-                method : "GET",
-                data : {
-                    clubId : clubId
-                },
-                success : function(jsonResult) {
-                    var list = jsonResult.data;
-                    console.log(list);
+        url: "${pageContext.request.contextPath}/gallery/getGalleryListAll",
+        method: "GET",
+        data: {
+            clubId: clubId
+        },
+        success: function (jsonResult) {
+            var list = jsonResult.data;
+            console.log(list);
 
-                    var galleryHTML = '';
-                    for (var i = 0; i < list.length; i++) {
-                        var imgSave = list[i].imgSave;
-                        var memberId = list[i].memberId;
-                        var imgNo = list[i].imgNo;
-                        var likeCnt = list[i].likeCnt;
-                        console.log(i + " imgSave : " + imgSave);
-                        console.log(i + " memberId : " + memberId);
-                        console.log(i + " imgNo : " + imgNo);
-                        console.log(i + " likeCnt : " + likeCnt);
-                        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
-                        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                        galleryHTML += '</a>';
-                    }
+            var galleryHTML = '';
+            for (var i = 0; i < list.length; i++) {
+                var imgSave = list[i].imgSave;
+                var memberId = list[i].memberId;
+                var imgNo = list[i].imgNo;
+                var likeCnt = list[i].likeCnt;
+                console.log(i + " imgSave : " + imgSave);
+                console.log(i + " memberId : " + memberId);
+                console.log(i + " imgNo : " + imgNo);
+                console.log(i + " likeCnt : " + likeCnt);
+                galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
+                galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                galleryHTML += '</a>';
+            }
 
-                    $('.gallery-area div').html(galleryHTML);
-                },
-                error : function() {
-                    console.error("AJAX 요청 실패");
-                }
-            });
-
-    var $target = $("dt"), isClass = null;
-
-    $target.on("click", function() {
-        var _$self = $(this), isActive = _$self.hasClass("active");
-
-        _$self.toggleClass("active");
-        _$self.nextUntil("dt").slideToggle(!isActive);
+            $('.gallery-area div').html(galleryHTML);
+        },
+        error: function () {
+            console.error("AJAX 요청 실패");
+        }
     });
+});
 
-    $(document).ready(function () {
-        var selectedDD = null; // 선택된 dd 요소를 저장할 변수
+// 상위 요소인 <dl> 태그에 이벤트 리스너를 등록하여 <dd> 태그를 클릭했을 때 이벤트를 처리합니다.
+$('dl').on('click', 'dd', function () {
+    var meetNo = $(this).data('meetno');
+    console.log(meetNo);
 
-        // 특정 <dd> 요소를 클릭하면 "사진올리기" 버튼을 보여줍니다.
-        $('dl').on('click', 'dd', function () {
-          var meetNo = $(this).data('meetno');
-          console.log(meetNo);
+    $.ajax({
+        url: "${pageContext.request.contextPath}/gallery/getGalleryList",
+        method: "GET",
+        data: {
+            meetNo: meetNo
+        },
+        success: function (jsonResult) {
+            var list = jsonResult.data;
+            console.log(list);
 
-          // 기존에 선택된 dd 요소가 있으면 클래스를 제거합니다.
-          if (selectedDD !== null) {
+            var galleryHTML = '';
+            for (var i = 0; i < list.length; i++) {
+                var imgSave = list[i].imgSave;
+                var memberId = list[i].memberId;
+                var imgNo = list[i].imgNo;
+                var likeCnt = list[i].likeCnt;
+                console.log(i + " imgSave : " + imgSave);
+                console.log(i + " memberId : " + memberId);
+                console.log(i + " imgNo : " + imgNo);
+                console.log(i + " likeCnt : " + likeCnt);
+                galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
+                galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                galleryHTML += '</a>';
+            }
+
+            $('.gallery-area div').html(galleryHTML);
+        },
+        error: function () {
+            console.error("AJAX 요청 실패");
+        }
+    });
+});
+
+// 페이지가 로드되면, 각 dt에 대해 AJAX를 통해 dd를 가져와서 출력
+$("#meetList dt.list").each(function () {
+    var $dt = $(this);
+    var text = $dt.text().trim();
+    var year = text.substring(0, 4);
+    var month = text.substring(5, 7);
+    console.log(year);
+    console.log(month);
+
+    $.ajax({
+        url: "${pageContext.request.contextPath}/gallery/getMeetName",
+        method: "GET",
+        data: {
+            year: year,
+            month: month
+        },
+        success: function (jsonResult) {
+            var list = jsonResult.data;
+            console.log(list);
+            for (var i = 0; i < list.length; i++) {
+                var name = list[i].meetName;
+                var meetNo = list[i].meetNo;
+                $dt.after("<dd data-meetNo=" + meetNo + ">" + name + "</dd>");
+            }
+        },
+        error: function () {
+            console.error("AJAX 요청 실패");
+        }
+    });
+});
+
+var clubId = ${club.clubId};
+console.log(clubId);
+
+$.ajax({
+    url: "${pageContext.request.contextPath}/gallery/getGalleryListAll",
+    method: "GET",
+    data: {
+        clubId: clubId
+    },
+    success: function (jsonResult) {
+        var list = jsonResult.data;
+        console.log(list);
+
+        var galleryHTML = '';
+        for (var i = 0; i < list.length; i++) {
+            var imgSave = list[i].imgSave;
+            var memberId = list[i].memberId;
+            var imgNo = list[i].imgNo;
+            var likeCnt = list[i].likeCnt;
+            console.log(i + " imgSave : " + imgSave);
+            console.log(i + " memberId : " + memberId);
+            console.log(i + " imgNo : " + imgNo);
+            console.log(i + " likeCnt : " + likeCnt);
+            galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+            galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+            galleryHTML += '</a>';
+        }
+
+        $('.gallery-area div').html(galleryHTML);
+    },
+    error: function () {
+        console.error("AJAX 요청 실패");
+    }
+});
+
+var $target = $("dt"),
+    isClass = null;
+
+$target.on("click", function () {
+    var _$self = $(this),
+        isActive = _$self.hasClass("active");
+
+    _$self.toggleClass("active");
+    _$self.nextUntil("dt").slideToggle(!isActive);
+});
+
+$(document).ready(function () {
+    var selectedDD = null; // 선택된 dd 요소를 저장할 변수
+
+    // 특정 <dd> 요소를 클릭하면 "사진올리기" 버튼을 보여줍니다.
+    $('dl').on('click', 'dd', function () {
+        var meetNo = $(this).data('meetno');
+        console.log(meetNo);
+
+        // 기존에 선택된 dd 요소가 있으면 클래스를 제거합니다.
+        if (selectedDD !== null) {
             selectedDD.removeClass('selected');
-          }
+        }
 
-          // 선택된 dd 요소에 클래스를 추가하고 변수에 저장합니다.
-          selectedDD = $(this);
-          selectedDD.addClass('selected');
-          
-          console.log(selectedDD);
-          // "사진올리기" 버튼을 보여줍니다.
-          $("#addButton").removeClass("hidden");
+        // 선택된 dd 요소에 클래스를 추가하고 변수에 저장합니다.
+        selectedDD = $(this);
+        selectedDD.addClass('selected');
 
-          // #addButton을 클릭할 때 meetNo 값을 URL에 추가하여 이동합니다.
-          $("#addButton").click(function () {
+        console.log(selectedDD);
+        // "사진올리기" 버튼을 보여줍니다.
+        $("#addButton").removeClass("hidden");
+
+        // #addButton을 클릭할 때 meetNo 값을 URL에 추가하여 이동합니다.
+        $("#addButton").click(function () {
             var path = window.location.pathname;
             var clubId = path.match(/\d+/)[0];
             window.location.href = "${pageContext.request.contextPath}/gallery/uploadForm/" + clubId + "?meetNo=" + meetNo;
-          });
         });
-      });
-
+    });
+});
 </script>
 <script>
-  var imgSrc;
-  var likeCnt;
-  var memberId;
-  var imgno;
+//변수 선언
+var imgSrc;
+var likeCnt;
+var memberId;
+var imgno;
+var uid;
 
-  // 이미지 클릭 시 모달창 열기
-  $(".gallery-area").on("click", ".example-image-link", function (e) {
-    e.preventDefault(); // 이벤트 전파 차단
-    var $imageLink = $(this);
-    imgSrc = $imageLink.attr("href");
-    likeCnt = $imageLink.data("likecnt");
-    memberId = $imageLink.data("title");
-    imgno = $imageLink.data("imgno");
+// 이미지 클릭 시 모달창 열기
+$(".gallery-area").on("click", ".example-image-link", function (e) {
+  e.preventDefault(); // 이벤트 전파 차단
+  var $imageLink = $(this);
+  imgSrc = $imageLink.attr("href");
+  likeCnt = $imageLink.data("likecnt");
+  memberId = $imageLink.data("title");
+  imgno = $imageLink.data("imgno");
+  uid = '${member.memberId}';
+  
+  // 이미지 작성자와 현재 로그인된 사용자의 아이디를 비교하여 삭제 버튼 보이기/숨기기 처리
+  if (memberId != uid) {
+    $(".deleteImg").addClass("hidden");
+  }
 
-    console.log(" imgSrc : " + imgSrc);
-    console.log(" memberId : " + memberId);
-    console.log(" imgNo : " + imgno);
-    console.log(" likeCnt : " + likeCnt);
-    // 모달창에 이미지와 좋아요 정보를 채웁니다.
-    $("#modalImage").attr("src", imgSrc);
-    $("#likeCount").text("좋아요 (" + likeCnt + ")");
-    $(".deleteImg").data("imgno",imgno);
-    
-    //이미지 작성자 표시
-    $.ajax({
-        url: "${pageContext.request.contextPath}/gallery/checkmemberId",
-        method: "POST",
-        data: {
-            memberId: memberId,
-        },
-        success: function (jsonResult) {
-          var member = jsonResult.data;
-          console.log(member);
-          
-      	 // 멤버 이름과 아이디 값을 변수에 저장
-          var memberName = member.memberName;
-          var memberId = member.memberId;
+  // 모달창에 이미지와 좋아요 정보를 채웁니다.
+  $("#modalImage").attr("src", imgSrc);
+  $("#likeCount").text("좋아요 (" + likeCnt + ")");
+  $(".deleteImg").data("imgno", imgno);
 
-          // 모달 헤더의 타이틀에 값을 설정
-          $("#memberName").text(memberName);
-          $("#memberId").text("@" + memberId);
-        },
-        error: function () {
-          console.error("AJAX 요청 실패");
-        },
-      });
-    
-    //좋아요 여부확인
-    $.ajax({
-      url: "${pageContext.request.contextPath}/gallery/checkLike",
-      method: "POST",
-      data: {
-        imgno: imgno,
-      },
-      success: function (jsonResult) {
-        var result = jsonResult.data;
-        console.log(result);
+  // 이미지 작성자 정보를 서버에서 가져와 모달에 표시
+  $.ajax({
+    url: "${pageContext.request.contextPath}/gallery/checkmemberId",
+    method: "POST",
+    data: {
+      memberId: memberId,
+    },
+    success: function (jsonResult) {
+      var member = jsonResult.data;
+      var memberName = member.memberName;
+      var memberId = member.memberId;
 
-        if (result) {
-          $("#likeButton")
-            .addClass("success")
-            .removeClass("primary")
-            .text("♥");
-        } else {
-          $("#likeButton")
-            .addClass("primary")
-            .removeClass("success")
-            .text("♡");
-        }
-
-        // 모달창 열기
-        $("#imageModal").modal("show");
-      },
-      error: function () {
-        console.error("AJAX 요청 실패");
-      },
-    });
+      // 모달 헤더의 타이틀에 작성자 정보 설정
+      $("#memberName").text(memberName);
+      $("#memberId").text("@" + memberId);
+    },
+    error: function () {
+      console.error("AJAX 요청 실패");
+    },
   });
 
-  // 좋아요 버튼 클릭 시 이벤트 처리
-  $(document).on("click", ".primary", function () {
-    // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
-    console.log(".btn-primary 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
-    console.log(" imgNo : " + imgno);
-    console.log(" likeCnt : " + likeCnt);
-    $.ajax({
-      url: "${pageContext.request.contextPath}/gallery/updateLike",
-      method: "POST",
-      data: {
-        imgno: imgno,
-        likeCnt: likeCnt,
-      },
-      success: function (jsonResult) {
-        // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
-        console.log("jsonResult" + jsonResult.data);
-        likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
-        console.log("새로운" + likeCnt);
-        $("#likeCount").text("좋아요 (" + likeCnt + ")");
+  // 좋아요 여부 확인하여 모달 열기
+  $.ajax({
+    url: "${pageContext.request.contextPath}/gallery/checkLike",
+    method: "POST",
+    data: {
+      imgno: imgno,
+    },
+    success: function (jsonResult) {
+      var result = jsonResult.data;
+      console.log(result);
+
+      // 좋아요 여부에 따라 버튼 스타일 변경
+      if (result) {
         $("#likeButton")
           .addClass("success")
           .removeClass("primary")
           .text("♥");
-      },
-      error: function () {
-        console.error("AJAX 요청 실패");
-      },
-    });
-  });
-
-  // 좋아요취소 버튼 클릭 시 이벤트 처리
-  $(document).on("click", ".success", function () {
-    // 좋아요취소 기능 요청을 서버에 보냅니다. (AJAX 요청)
-    console.log(".btn-success 클릭"); // jsonResult 객체를 문자열로 변환하여 출력
-    console.log(" imgNo : " + imgno);
-    console.log(" likeCnt : " + likeCnt);
-    $.ajax({
-      url: "${pageContext.request.contextPath}/gallery/deleteLike",
-      method: "POST",
-      data: {
-        imgno: imgno,
-        likeCnt: likeCnt,
-      },
-      success: function (jsonResult) {
-        // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
-        console.log("jsonResult" + jsonResult.data);
-        likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
-        console.log("새로운" + likeCnt);
-        $("#likeCount").text("좋아요 (" + likeCnt + ")");
+      } else {
         $("#likeButton")
           .addClass("primary")
           .removeClass("success")
           .text("♡");
-      },
-      error: function () {
-        console.error("AJAX 요청 실패");
-      },
-    });
+      }
+
+      // 모달창 열기
+      $("#imageModal").modal("show");
+    },
+    error: function () {
+      console.error("AJAX 요청 실패");
+    },
   });
-  
-//삭제 버튼을 클릭했을 때 실행되는 함수
-  $("#imageModal").on("click", "input[name='deleteImg']", function () {
-    // data-img-number 속성의 값을 가져옴
-    var imageNumber = $(this).data("imgno");
-    
-    // 이미지 번호를 사용하여 원하는 로직을 수행
-    console.log("이미지 번호: " + imageNumber);
-    // 예: 이미지 삭제 함수 호출 등
-    
-      var path = window.location.pathname;
-      var clubId = path.match(/\d+/)[0];
-      window.location.href = "${pageContext.request.contextPath}/gallery/deleteImg/" + clubId + "?imgno=" + imageNumber;
+});
+
+// 좋아요 버튼 클릭 시 이벤트 처리
+$(document).on("click", ".primary", function () {
+  // 좋아요 기능 요청을 서버에 보냅니다. (AJAX 요청)
+  console.log(".btn-primary 클릭");
+  console.log(" imgNo : " + imgno);
+  console.log(" likeCnt : " + likeCnt);
+  $.ajax({
+    url: "${pageContext.request.contextPath}/gallery/updateLike",
+    method: "POST",
+    data: {
+      imgno: imgno,
+      likeCnt: likeCnt,
+    },
+    success: function (jsonResult) {
+      // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+      console.log("jsonResult" + jsonResult.data);
+      likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+      console.log("새로운" + likeCnt);
+      $("#likeCount").text("좋아요 (" + likeCnt + ")");
+      $("#likeButton")
+        .addClass("success")
+        .removeClass("primary")
+        .text("♥");
+    },
+    error: function () {
+      console.error("AJAX 요청 실패");
+    },
   });
-  
-  
+});
+
+// 좋아요 취소 버튼 클릭 시 이벤트 처리
+$(document).on("click", ".success", function () {
+  // 좋아요 취소 기능 요청을 서버에 보냅니다. (AJAX 요청)
+  console.log(".btn-success 클릭");
+  console.log(" imgNo : " + imgno);
+  console.log(" likeCnt : " + likeCnt);
+  $.ajax({
+    url: "${pageContext.request.contextPath}/gallery/deleteLike",
+    method: "POST",
+    data: {
+      imgno: imgno,
+      likeCnt: likeCnt,
+    },
+    success: function (jsonResult) {
+      // 서버에서 좋아요 처리 성공 시, 좋아요 수를 업데이트합니다.
+      console.log("jsonResult" + jsonResult.data);
+      likeCnt = jsonResult.data; // 서버에서 업데이트된 좋아요 수를 받아옵니다.
+      console.log("새로운" + likeCnt);
+      $("#likeCount").text("좋아요 (" + likeCnt + ")");
+      $("#likeButton")
+        .addClass("primary")
+        .removeClass("success")
+        .text("♡");
+    },
+    error: function () {
+      console.error("AJAX 요청 실패");
+    },
+  });
+});
+
+// 삭제 버튼을 클릭했을 때 실행되는 함수
+$("#imageModal").on("click", "input[name='deleteImg']", function () {
+  // data-img-number 속성의 값을 가져옴
+  var imageNumber = $(this).data("imgno");
+
+  // 이미지 번호를 사용하여 원하는 로직을 수행
+  console.log("이미지 번호: " + imageNumber);
+  // 예: 이미지 삭제 함수 호출 등
+
+  var path = window.location.pathname;
+  var clubId = path.match(/\d+/)[0];
+  window.location.href = "${pageContext.request.contextPath}/gallery/deleteImg/" + clubId + "?imgno=" + imageNumber;
+});
+
 </script>
 
 

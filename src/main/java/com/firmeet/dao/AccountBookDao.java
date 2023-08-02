@@ -94,4 +94,22 @@ public class AccountBookDao {
 	    
 	    return aList;
 	}
+
+	//맴버이름 설정
+	public String setMemberName(String memberId) {
+	    System.out.println("맴버이름 설정");
+		String meetName =session.selectOne("accountbook.setMemberName", memberId);
+	    System.out.println(meetName);
+	    
+		return meetName;
+	}
+
+	//모임이름 설정
+	public String setMeetName(int meetNo) {
+	    System.out.println("모임이름 설정");
+		String meetName =session.selectOne("accountbook.setMeetName", meetNo);
+	    System.out.println(meetName);
+	    
+		return meetName;
+	}
 }

@@ -110,4 +110,24 @@
 			WHERE MEMBERID = #{MEMBERID}
 		]]>
 	</select>
+	
+		<!-- 각주 추가: 맴버이름 설정 -->
+	<select id="setMemberName" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT
+				membername
+			FROM member
+			WHERE memberId = #{memberId}
+		]]>
+	</select>
+	
+			<!-- 모임이름 설정 -->
+	<select id="setMeetName" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT
+				MEETNAME
+			FROM meet_name
+			WHERE meetNo = #{meetNo}
+		]]>
+	</select>
 </mapper>
