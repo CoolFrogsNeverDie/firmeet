@@ -16,6 +16,7 @@
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/board_last.css" rel="stylesheet" type="text/css" />
     <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
     <!--모달-->
 </head>
@@ -52,61 +53,13 @@
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
+						<div class= "board-area club-board-area">
+						
+						</div>
 						
 						
-						
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						
-						
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						
-						
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						
-						
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
-						ssss<br>
+
+						<div id = "board-get"></div><!-- 무한 스크롤 감시용 div -->
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 					</div>
 				
@@ -522,6 +475,9 @@
 		
 		
      boardList.forEach(function(board) {
+    	  
+    	 console.log('찍힐 board들' + board);
+    	 
          var add = '';
          add += '<div class="board">';
          add += '<div class="board-header">';
@@ -589,7 +545,7 @@
          add += '<div class="new-content"><input type ="text" class= "comment-content"></input><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
          add += '</div></div></div></div>';
          
-         $('.board-area2').append(add);
+         $('.board-area').append(add);
      });
      
 	   }
