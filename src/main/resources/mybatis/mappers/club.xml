@@ -155,6 +155,7 @@
                 a.clubid,
                 clubname,
                 cre_date,
+                preNum,
                 max,
                 img1,
                 img2,

@@ -163,6 +163,7 @@ public class ClubController {
 			System.out.println(clubId);
 			System.out.println(memberId);
 			ClubVo memberLv = clubService.checkMemLevel(memberId, clubId);
+			
 			model.addAttribute("memberLv" , memberLv);
 			System.out.println(memberLv);
 			
