@@ -50,6 +50,9 @@ public class NoticeBoardVO {
 	private int likeNo;
 	private String likeDate;
 	private List<AreplyVO> replyList;
+	
+	private int id;
+	private int galleryNo;
 
 
 	public NoticeBoardVO() {
@@ -493,6 +496,22 @@ public class NoticeBoardVO {
 		this.payresultNo = payresultNo;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getGalleryNo() {
+		return galleryNo;
+	}
+
+	public void setGalleryNo(int galleryNo) {
+		this.galleryNo = galleryNo;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -507,7 +526,7 @@ public class NoticeBoardVO {
 				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
 				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", payresultNo=" + payresultNo
 				+ ", paycount=" + paycount + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyList="
-				+ replyList + "]";
+				+ replyList + ", id=" + id + ", galleryNo=" + galleryNo + "]";
 	}
 
 }

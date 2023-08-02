@@ -35,10 +35,11 @@ public class NoticeBoardService {
 	}
 	
 	public int editwrite(NoticeBoardVO vo) {
-		dao.editwrite(vo);
+		dao.editwrite(vo); //
 		System.out.println("service editinsert 확인"+vo);
 		System.out.println("service editinsert getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service editinsert getMemberId 확인"+vo.getMemberId());
+		
 		
 		int aboardNo = vo.getAboardNo();
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
@@ -64,6 +65,12 @@ public class NoticeBoardService {
 	}
 	
 	public int editgroupwrite(NoticeBoardVO vo) {
+		System.out.println("service editgroupwrite getAboardNo 확인");
+		
+		dao.editgroupwrite(vo);
+		
+		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getMeetNo());
+		
 		dao.editwrite(vo);
 		System.out.println("service editgroupwrite 확인"+vo);
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
@@ -71,7 +78,7 @@ public class NoticeBoardService {
 		int aboardNo = vo.getAboardNo();
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
 
-		dao.editgroupwrite(vo);
+	
 		System.out.println("service editgroupwrite 확인"+vo);
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service editgroupwrite getMeetNo 확인"+vo.getMeetNo());
@@ -107,19 +114,28 @@ public class NoticeBoardService {
 	}
 	
 	public int editgroupwriteG(NoticeBoardVO vo) {
-		dao.editwrite(vo);
-		System.out.println("service editgroupwrite 확인"+vo);
-		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
+		System.out.println("------service editgroupwrite 확인"+vo);
+		dao.editgroupwrite(vo); //meet_name insert
 		
-		int aboardNo = vo.getAboardNo();
+		System.out.println("갤러리확인");
+		dao.galleryinsert(vo); //갤러리 넣기
+		System.out.println("갤러리확인"+vo);
+		
+		System.out.println("service editgroupwrite 확인"+vo);
+		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getMeetNo());
+		
+		int meetNo = vo.getMeetNo(); //meetno 확인
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
+		
+		dao.editwrite(vo); //aboard
 
-		dao.editgroupwrite(vo);
+		dao.aupdate(vo); //
+		
 		System.out.println("service editgroupwrite 확인"+vo);
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service editgroupwrite getMeetNo 확인"+vo.getMeetNo());
 		
-		return aboardNo;		
+		return meetNo;		
 	}
 
 	public NoticeBoardVO editlistgroupG(NoticeBoardVO vo) {
@@ -128,24 +144,20 @@ public class NoticeBoardService {
 		//
 		NoticeBoardVO vo1 = dao.editlistgroup(vo);
 		//댓글 리스트
-		List<AreplyVO> vo11 = dao.getBoardComment(vo);
-		vo1.setReplyList(vo11);
-		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
+		//List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		if(dao.getBoardComment(vo) != null) {
+			System.out.println("널확인");
+			//vo1.setReplyList(vo11);
+		}
+		
+		System.out.println("vo1확인"+vo1);
 		
 		
-		PayresultVO pvo = pdao.paycnt(vo1);
-		System.out.println(pvo);
+//		PayresultVO pvo = pdao.paycnt(vo1);
+//		System.out.println(pvo);
 		
-		vo1.setPaycount(pvo.getPaycount());
-		vo1.setPayresultNo(pvo.getPayresultNo());
-		//PayresultVO paycnt = pdao.paylist(vo);
-		//vo1.setPaycount(paycnt.getPaycount());
-
-		//PayresultVO vo111 = dao.payresult(vo);
-		//vo1.setPayresultNo(vo111.getPayresultNo());
-		//vo1.setPaycount(vo111.getPaycount());
-		//System.out.println("확화고하닝런이ㅏ러밍널;ㅣㅏ머리ㅓㅇㅁㄴ"+paycnt);
-		System.out.println("확화고하닝런이ㅏ러밍널;ㅣㅏ머리ㅓㅇㅁㄴ"+vo11);
+		//vo1.setPaycount(pvo.getPaycount());
+		//vo1.setPayresultNo(pvo.getPayresultNo());
 		return vo1;
 	}
 	

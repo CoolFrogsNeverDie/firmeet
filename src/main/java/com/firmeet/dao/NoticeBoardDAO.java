@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.AreplyVO;
+import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.VoteResultVO;
 
@@ -98,6 +99,20 @@ public class NoticeBoardDAO {
 	public NoticeBoardVO getLike(NoticeBoardVO vo) {
 		System.out.println("라이크셀렉트");
 		return sql.selectOne("noticeboard.getLike", vo);
+	}
+	
+	public void galleryinsert(NoticeBoardVO vo) {
+		System.out.println("dao galleryinsert"+vo);
+		
+		sql.insert("noticeboard.galleryinsert", vo);
+		System.out.println("dao galleryinsert 넘어오는 값 확인 : " + vo);
+		System.out.println("dao galleryinsert 넘어오는 값 확인 : " + vo.getMeetNo());
+		System.out.println("dao galleryinsert 넘어오는 값 확인 : " + vo.getMemberId());
+		System.out.println("dao galleryinsert 넘어오는 값 확인 : " + vo.getGalleryNo()+vo.getId());
+	}
+
+	public void aupdate(NoticeBoardVO vo) {
+		sql.update("noticeboard.aupdate",vo);
 	}
 
 
