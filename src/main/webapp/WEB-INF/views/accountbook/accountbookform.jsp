@@ -9,8 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath}/assets/css/accountbookform.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/assets/css/accountbookform.css" rel="stylesheet" type="text/css" />
 <!--모달-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -20,7 +20,25 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<style type="text/css">
+	.content-area {
+	    /* border: 1px solid black; */
+	    width: 1070px;
+	    height: 619px;
+	    margin-left: 35px;
+	    margin-bottom: 19px;
+	    margin-top: 10px;
+	}
+
+	#preview{
+	    max-width: 100%;
+	    max-height: 90%;
+	    margin: 0 auto;
+	    border-radius: 10px;
+	}
+</style>
 </head>
+
 
 <body>
 	<!-- top Navigation -->
@@ -32,14 +50,10 @@
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
-			<!--/diary-topbar-img-->
-			<div class="diary-subbar">
-				<h4>&#128221 &nbsp;&nbsp; 가계부 업로드</h4>
-			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
-					<img id="preview" src="${pageContext.request.contextPath}/assets/images/accountimg/Previewimg.jpg" alt="미리보기 이미지" style="max-width: 100%; max-height: 90%; margin: 0 auto;">
+					<img id="preview" src="${pageContext.request.contextPath}/assets/images/accountimg/Previewimg.jpg" alt="미리보기 이미지">
 				</div>
 				<!--/content-left-->
 				<div class="content-right">

@@ -13,42 +13,33 @@
 <link href="${pageContext.request.contextPath}/assets/css/galleryUploadForm.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!--드래그 앤 드롭-->
-
 <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
-.drag-over {
-	background-color: #ff0;
-}
-
-.thumb {
-	position: relative;
-	width: 200px;
-	padding: 5px;
-	float: left;
-}
-
-.thumb>img {
-	width: 100%;
-}
-
-.thumb>.close {
-	position: absolute;
-	top: 5px;
-	background-color: red;
-	cursor: pointer;
-}
-
 #btnSubmit {
-	width: 150px;
-	height: 50px;
-	background-color: black;
-	color: white;
-	margin-top: 20px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+    width: 90px;
+    height: 45px;
+    background-color: #1eafcc;
+    color: white;
+    margin-top: 20px;
+    position: absolute;
+    border-radius: 10px;
+    right: 0;
+}
+
+#drop{
+	border: 1.5px solid #c7c8c9;
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.hidden{
+	display: none;
 }
 </style>
 </head>
@@ -65,10 +56,6 @@
 				<img class="diary-topbar-img" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="프로필사진" />
 				<h1>${club.clubName}</h1>
 			</div>
-			<!--/diary-topbar-img-->
-			<div class="diary-subbar">
-				<h4>&#128248 &nbsp;&nbsp; 갤러리 업로드</h4>
-			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
@@ -80,8 +67,8 @@
 				</div>
 				<div class="content-right">
 					<form action="${pageContext.request.contextPath}/gallery/upload/${meet.clubId}" method="POST" enctype="multipart/form-data" class="gallery-area">
-						<div id="drop" style="border: 1px solid black; width: 100%; height: 300px; padding: 3px; margin-top: 10px; overflow: auto;" class="">
-							여기로 drag & drop
+						<div id="drop" class="">
+							<span style="text-align: center;margin: auto;">사진을 드래그하여 올려주세요 ^^</span>
 							<div id="thumbnails"></div>
 						</div>
 						<input type="hidden" name="clubId" value="${meet.clubId}">
@@ -102,6 +89,7 @@
   var $drop = $("#drop");
   $drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄
       $(this).addClass('drag-over');
+      $("#drop span").addClass('hidden');
   }).on("dragleave", function(e) { //드래그 요소가 나갔을때
       $(this).removeClass('drag-over');
   }).on("dragover", function(e) {

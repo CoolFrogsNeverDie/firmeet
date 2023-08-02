@@ -38,16 +38,18 @@
 					<div class="content-bnt">
 						<!-- 날짜와 용도 검색 폼 -->
 						<form id="searchForm">
-							<input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요.">
+							<input type="date" id="startDate" name="startDate"><span style="margin-top: 10px;margin-right: 5px;">~</span><input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요." style="width: 160px;">
 							<button class="searchbnt" type="submit">검색</button>
 						</form>
 
-						<div style="width: 400px; height: 55px; display: flex; position: absolute; left: 570px; top: 50%; transform: translateY(-50%);">
-							<input type="text" id="calculator" style="width: 160px; margin-left: 110px;" readonly >
+						<div>
+							<input type="text" id="calculatorIncome"  readonly >
+							<input type="text" id="calculatorExpense"  readonly >
+							<input type="text" id="calculator"  readonly >
 						</div>
 						<c:choose>
 							<c:when test="${club.memlevel eq 0}">
-								<button id="addButton" style="background-color: black; color: white; width: 100px; height: 50px; float: right;">+</button>
+								<button id="addButton">+</button>
 							</c:when>
 						</c:choose>
 
@@ -92,11 +94,15 @@
 											원
 										</div>
 										<div class="table-data">${account.meetNo}</div>
-										<div class="content-img" style="display: none">
-											<a class="example-image-link" href="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" data-lightbox="example-set"> 
-												<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
-											</a>
-										</div>
+										<c:choose>
+											<c:when test="${!empty account.receipt}">
+												<div class="content-img" style="display: none">
+													<a class="example-image-link" href="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" data-lightbox="example-set"> <img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
+													</a>
+												</div>
+											</c:when>
+										</c:choose>
+
 									</div>
 								</c:forEach>
 							</div>
@@ -133,6 +139,7 @@
       // 각각의 수입과 지출에 해당하는 데이터를 따로 저장
       var incomeTotal = 0;
       var expenseTotal = 0;
+      var total =0;
 
       // accountList의 amount 값들을 더함
       $(".table-row").each(function () {
@@ -151,12 +158,17 @@
 	      else if (incomeExpenseText === "수입") {
 	        incomeTotal += amountValue;
 	      }
+	      total =incomeTotal-expenseTotal;
+	      console.log("총액 : "+ total);
       });
 
       // 계산 결과를 #calculator에 출력
       var formattedIncomeTotal = new Intl.NumberFormat("ko-KR").format(incomeTotal);
       var formattedExpenseTotal = new Intl.NumberFormat("ko-KR").format(expenseTotal);
-      $("#calculator").val("수입: " + formattedIncomeTotal + "원, 지출: " + formattedExpenseTotal + "원");
+	  var formattedTotal = new Intl.NumberFormat("ko-KR").format(total);
+	      $("#calculatorIncome").val("수입: " + formattedIncomeTotal + "원");
+	      $("#calculatorExpense").val("지출: " + formattedExpenseTotal + "원");
+	      $("#calculator").val("총액: " + formattedTotal + "원");
     }
 
     // 검색 폼 제출 시 AJAX 요청 처리
@@ -198,18 +210,20 @@
             html +=
               '<div class="table-data account">' + account.amount + "원</div>";
             html += '<div class="table-data">' + account.meetNo + "</div>";
-            html += '<div class="content-img" style="display: none">';
-            html +=
-              '<a class="example-image-link" href="' +
-              "${pageContext.request.contextPath}/assets/images/galleryImg/" +
-              account.receipt +
-              '" data-lightbox="example-set" >';
-            html +=
-              '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' +
-              account.receipt +
-              '" alt="가계부사진" style="max-height: 500px;" />';
-            html += "</a>";
-            html += "</div>";
+            if(account.receipt !== null){
+                html += '<div class="content-img" style="display: none">';
+                html +=
+                    '<a class="example-image-link" href="' +
+                    "${pageContext.request.contextPath}/assets/images/galleryImg/" +
+                    account.receipt +
+                    '" data-lightbox="example-set" >';
+                  html +=
+                    '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' +
+                    account.receipt +
+                    '" alt="가계부사진" style="max-height: 500px;" />';
+                  html += "</a>";
+                  html += "</div>";
+            }
             html += "</div>";
           }
 
@@ -238,7 +252,7 @@
       // 각각의 수입과 지출에 해당하는 데이터를 따로 저장
       var incomeTotal = 0;
       var expenseTotal = 0;
-
+      var total =0;
     // accountList의 amount 값들을 더함
     $(".table-row").each(function () {
       var incomeExpenseText = $(this).find(".incomeExpense").text().trim();
@@ -256,12 +270,17 @@
       else if (incomeExpenseText === "수입") {
         incomeTotal += amountValue;
       }
+      total =incomeTotal-expenseTotal;
+      console.log("총액 : "+ total);
 	});
 	
 	// 계산 결과를 #calculator에 출력
 	var formattedIncomeTotal = new Intl.NumberFormat("ko-KR").format(incomeTotal);
 	var formattedExpenseTotal = new Intl.NumberFormat("ko-KR").format(expenseTotal);
-	$("#calculator").val("수입: " + formattedIncomeTotal + "원, 지출: " + formattedExpenseTotal + "원");
+	var formattedTotal = new Intl.NumberFormat("ko-KR").format(total);
+	      $("#calculatorIncome").val("수입: " + formattedIncomeTotal + "원");
+	      $("#calculatorExpense").val("지출: " + formattedExpenseTotal + "원");
+	      $("#calculator").val("총액: " + formattedTotal + "원");
   });
   $(document).ready(function () {
     $("#addButton").click(function () {

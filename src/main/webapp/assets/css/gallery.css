@@ -1,10 +1,11 @@
 /* 왼쪽 */
 .content-left {
   width: 25%;
-    height: 566px;
-    display: inline-block;
-    margin-bottom: 10px;
-    overflow: auto;
+  height: 566px;
+  display: inline-block;
+  margin-bottom: 10px;
+  overflow: auto;
+  margin-top: 10px;
 }
 
 .content-left::-webkit-scrollbar {
@@ -30,8 +31,9 @@ dt, dd {
 }
 
 dt {
-  border: 1px solid #000000;
   margin-bottom: 5px;
+  	border: 1px solid #9b9b9b;
+    border-radius: 10px;
 }
 
 dt span {
@@ -47,6 +49,12 @@ dd {
   background-color: #eeeeee;;
   margin-bottom: 5px;
   display: none;
+  border-radius: 25px;
+}
+
+.selected{
+  background-color: black;
+  color:white;
 }
 
 dd:hover{
@@ -74,14 +82,15 @@ dd:hover{
 }
 
 .content-bnt button {
-  width: 100px;
-  height: 50px;
+  width: 90px;
+  height: 45px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 10px;
-  background-color: black;
+  background-color: #1eafcc;
   color: white;
+  border-radius:10px
 }
 
 .gallery-area{
@@ -117,5 +126,27 @@ dd:hover{
   background-color: #000000;
 }
 
+.deleteImg{
+	width: 90px;
+    height: 45px;
+    background-color: #ff6969;
+    border-radius: 10px;
+    float: right;
+    margin-top: 10px;
+}
 
+#likeButton{
+	color: red;
+    font-size: 27px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.content-area {
+    width: 1070px;
+    height: 619px;
+    margin-left: 35px;
+    margin-bottom: 19px;
+    display: flex;
+}
 

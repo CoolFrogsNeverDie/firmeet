@@ -201,3 +201,10 @@ td, tr {
     position: relative;
     left: 351px;
     }
+#calendar2 .fc .fc-toolbar.fc-header-toolbar{
+	margin-bottom: 0.5em;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0.5em;
+}

@@ -1,3 +1,12 @@
+.content-area {
+    /* border: 1px solid black; */
+    width: 1070px;
+    height: 619px;
+    margin-left: 35px;
+    margin-bottom: 19px;
+    display: flex;
+}
+
 /* 왼쪽 */
 .content-left {
 	width: 25%;
@@ -5,6 +14,7 @@
 	display: inline-block;
 	margin-bottom: 10px;
 	overflow: auto;
+	margin-top:10px;
 }
 
 .content-left::-webkit-scrollbar {
@@ -30,8 +40,9 @@ dt, dd {
 }
 
 dt {
-	border: 1px solid #000000;
-	margin-bottom: 5px;
+  margin-bottom: 5px;
+  	border: 1px solid #9b9b9b;
+    border-radius: 10px;
 }
 
 dt span {
@@ -41,17 +52,6 @@ dt span {
 	background-color: black;
 	vertical-align: middle;
 	margin-right: 10px;
-}
-
-dd {
-	background-color: #eeeeee;;
-	margin-bottom: 5px;
-	display: none;
-}
-
-dd:hover {
-	background-color: black;
-	color: white;
 }
 
 /* 오른쪽 */
@@ -86,7 +86,7 @@ dd:hover {
 
 .gallery-area {
 	width: 100%;
-	height: 468px;
+	height: 100%;
 	position: absolute;
 	left: 0;
 	overflow: auto;
@@ -116,7 +116,25 @@ dd:hover {
 	background-color: #000000;
 }
 
-.selected {
-	background-color: black;
-	color: white;
+.drag-over {
+	background-color: #ff0;
 }
+
+.thumb {
+	position: relative;
+	width: 200px;
+	padding: 5px;
+	float: left;
+}
+
+.thumb>img {
+	width: 100%;
+}
+
+.thumb>.close {
+	position: absolute;
+	top: 5px;
+	background-color: red;
+	cursor: pointer;
+}
+

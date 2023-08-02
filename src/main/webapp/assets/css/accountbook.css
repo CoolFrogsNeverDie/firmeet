@@ -39,9 +39,8 @@ input {
 
 .content-bnt form {
 	display: flex;
-	justify-content: flex-end;
 	padding: 10px 0;
-	width: 666px;
+	width: 580px;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -49,27 +48,30 @@ input {
 
 .content-bnt input {
 	margin-right: 10px;
-    width: auto;
+	width: auto;
+	border-radius: 25px;
 }
 
 .content-bnt #addButton {
-	width: 100px;
-	height: 50px;
+	width: 90px;
+	height: 45px;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	right: 10px;
-	background-color: black;
+	background-color: #1eafcc;
 	font-size:30px;
 	color: white;
+	border-radius:10px
 }
 
 .content-bnt .searchbnt {
-	width: 200px;
-	height: 50px;
-	background-color: black;
+	width: 90px;
+	height: 45px;
+	background-color: #1eafcc;
 	color: white;
 	margin-left: 10px;
+	border-radius: 10px;
 }
 
 /* 사이드바 스타일 */
@@ -204,11 +206,9 @@ input {
 
 /* 테이블 내용 스크롤바 스타일 */
 .table-content-wrapper {
-	height: 400px; /* Set the desired height for the scrollable area */
+	height: 500px;
 	overflow-y: auto;
-	/* Add vertical scroll when content exceeds the height */
 }
-
 .table-content-wrapper::-webkit-scrollbar {
 	width: 15px;
 }
@@ -224,4 +224,28 @@ input {
 	border-left: 0;
 	border-right: 0;
 	background-color: #000000;
+}
+
+#calculatorIncome{
+	position: absolute;
+	right: 295px;
+	top: 15px;
+	height: 30px;
+	width: 170px;
+}
+
+#calculatorExpense{
+	position: absolute;
+	right: 295px;
+	bottom: 15px;
+	height: 30px;
+	width: 170px;
+}
+
+#calculator{
+	position: absolute;
+    right: 100px;
+    top: 50%;
+    width: 180px;
+    transform: translateY(-50%);
 }

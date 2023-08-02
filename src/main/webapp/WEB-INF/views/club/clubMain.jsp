@@ -12,9 +12,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
 <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-<!-- 
-<link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet" type="text/css" />
- -->
 <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
   <!--풀 캘린더 CSS-->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
@@ -35,7 +32,7 @@
 }
 
 .content-area {
-	width: 100%;
+	width: 94%;
 	height: 82%;
 	display: flex;
 	flex-direction: row;
