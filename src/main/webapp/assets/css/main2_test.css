@@ -244,7 +244,10 @@ footer {
 
 .navbar-brand {
     position: fixed;
-    left: 332px;
+    left:0px;
+}
+.navbar-brand img {
+	height: 30px;
 }
 .side-bar2 li{
 	text-decoration :none;

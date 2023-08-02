@@ -46,7 +46,7 @@
     <div class="wrap">
         <div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
             <div class="diary-topbar">
-                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
+                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}"
                     alt="프로필사진" />
                 <h1>${club.clubName}</h1>
                 <div class= "board-edit">
