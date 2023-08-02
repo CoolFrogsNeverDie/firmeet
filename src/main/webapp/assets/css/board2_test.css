@@ -215,7 +215,11 @@ dd:hover{
 .board .board-info .board-group{
 	font-size: 20px;
 }
-
+.board-info .board-group b {
+    font-size: 15px;
+    color: gray;
+    margin-left: 5px;
+}
 .diary-subbar{
 	        display: flex; /* Flexbox 사용 */
             justify-content: center; /* 수평 가운데 정렬 */

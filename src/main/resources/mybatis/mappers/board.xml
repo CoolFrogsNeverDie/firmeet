@@ -26,6 +26,7 @@
 		<![CDATA[
 		  	select
        			 aa as boardNo
+       			,memberName
        			,clubId
        			,memberId
        			,clubName
@@ -37,6 +38,7 @@
   				select
         			rownum as rw
     			   ,boardNo as aa
+    			   ,memberName
    			       ,clubId
     			   ,memberId
    			       ,clubName
@@ -45,16 +47,18 @@
        	       from(
 					select
         				a.boardNo as boardNo
+        				,c.memberName as memberName
         				,a.clubId as clubId
         				,a.memberId as memberId
      			   		,b.clubname as clubName
      			   		,a.boardContent as content
       			  		,a.boardDate as boardDate
         			from board a join club b on a.clubId = b.clubId
+        			join member c on a.memberId = c.memberId
         			where 1 = 1
 		]]>
 				<if test="memberId !=null">
-        			and memberId = #{memberId}
+        			and a.memberId = #{memberId}
 				</if>
 				<if test="keyword !=''">
   					and boardContent like '%' || #{keyword} || '%'

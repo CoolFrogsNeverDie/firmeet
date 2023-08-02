@@ -326,7 +326,7 @@
     		  }
     });
 	
-
+	/* 검색 버튼 이벤트 */
 	$('.board-search-btn').on("click",function(){
 		
  	 	var clubId = $('.diary-area').data('clubid');
@@ -348,7 +348,7 @@
  	 	var memberId = $('.diary-area').data('memid');
 
  	 	
- 	 	console.log(keyword + "키춰드");
+ 	 	console.log(keyword + "키워드");
 
  	 	
  	 	var BoardVO = {
@@ -467,7 +467,7 @@
          add += '<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
          add += '</div>';
          add += '<div class="board-info" data-boardno ="' + board.boardNo +  '">';
-         add += '<span class="board-group"><strong>' + board.clubName + '</strong></span><br>';
+         add += '<span class="board-group"><strong>' + board.memberName + '</strong> <b>@'+ board.memberId  +'</b></span><br>';
          add += '<span>작성일 : ' + board.boardDate + ' </span>';
          add += '</div></div>';
          add += '<div class="board-content">';

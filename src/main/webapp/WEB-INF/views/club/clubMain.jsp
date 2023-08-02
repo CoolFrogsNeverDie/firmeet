@@ -10,7 +10,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath}/assets/css/main2.css" rel="stylesheet" type="text/css" />
+
+<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+<!-- 
+<link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet" type="text/css" />
+ -->
 <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
   <!--풀 캘린더 CSS-->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
@@ -57,9 +61,6 @@
 				<h1>${club.clubName}</h1>
 			</div>
 			<!--/diary-topbar-img-->
-			<div class="diary-subbar">
-				<h4>&#127968 &nbsp;&nbsp; 다이어리 메인</h4>
-			</div>
 			<!--/diary-subbar-->
 			<div class="content-area">
 				<div class="content-left">
@@ -100,7 +101,7 @@
 			<!--/content-area-->
 		</div>
 		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 		<!--/wrap-->
 </body>
 <footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
