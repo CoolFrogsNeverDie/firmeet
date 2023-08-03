@@ -159,7 +159,7 @@
 			
 			rreply += '<div class="write-comment2" >';
 			rreply += '    <span ></span><div class="new-content2" >';
-			rreply += '        <input type ="text" class= "comment-content" ></input><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+			rreply += '        <input type ="text" class= "comment-content" placeholder=" 댓글을 40자 이내로 작성해주세요." ></input><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
 			rreply += '    </div>'
 	 		rreply += '</div>'
 	
@@ -490,7 +490,7 @@
          add += '</div>';
          add += '<div class="board-info" data-boardno ="' + board.boardNo +  '">';
          add += '<span class="board-group"><strong>' + board.memberName + '</strong> <b>@'+ board.memberId  +'</b></span><br>';
-         add += '<span>작성일 : ' + board.boardDate + ' </span>';
+         add += '<span class= "board-date">작성일 : ' + board.boardDate + ' </span>';
          add += '</div></div>';
          add += '<div class="board-content">';
          add += '<p>' + board.content + '</p>';
@@ -508,7 +508,7 @@
              }
          add += '</div><div class="board-comment-list">';
          add += '<div class="board-comment" >';
-         add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
+         add += '<h5>댓글</h5><span><button class="write-comment-btn ct-color">댓글 쓰기</button></span>';
          add +='<div class="comment-list" id = "r' + board.boardNo + '">'
          
          board.replyList.forEach(function(reply) {
@@ -516,8 +516,8 @@
              
 
              if (reply.deep > 1) {
-                 add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' 
-             add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+                 add += '<span><b><span class="re">↳</span> ' 
+             add += '<img class="reply-img rreply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
                  add += reply.memberName + '님  </b></span><br>';
              if(memberId == reply.memberId	& reply.stat == 1){
              add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
@@ -546,7 +546,7 @@
          });
          add += '</div>'
          add += '<div class="write-comment">';
-         add += '<div class="new-content"><input type ="text" class= "comment-content"></input><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
+         add += '<div class="new-content"><input type ="text" class= "comment-content" placeholder= " 댓글을 40자 이내로 작성해주세요."></input><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
          add += '</div></div></div></div>';
          
          $('.board-area').append(add);
