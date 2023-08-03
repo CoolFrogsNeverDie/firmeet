@@ -1,6 +1,4 @@
-.diary-area .diary-body .board-area{
-	border:1px solid black;
-}
+
 /* .board-area{
     width: 100%;
     height: 619px;
@@ -9,6 +7,11 @@
     left: 0;
     overflow: auto;
 } */
+/*-이미지 튀어나가지 않게-*/
+.board img {
+    width: 100%;
+}
+
 .club-board-area .club-category {
     padding-left: 10px;
     display: none;
@@ -22,8 +25,8 @@
     margin-right: 50px;
     border: 1.5px solid #c7c8c9;
     border-radius: 10px;
-    padding: 20px;
-    margin: 15px 40px 30px 20px;
+    padding: 10px 10px 0px 14px;
+    margin: 20px 30px 30px 20px;
     
 }
 
@@ -33,7 +36,7 @@
 .club-board-area .board .edit-board-spans{
 	float: right;
     position: relative;
-    top: 5px;
+    top: 12px;
 }
 .club-board-area .board .edit-board-a{
 	margin-right : 10px;
@@ -47,8 +50,119 @@
 	border-radius: 50px;
 }
 .club-board-area .board .board-info{
-    position: relative;
-    top: 5px;
+	position: relative;
+    top: 7px;
     width: 400px;
     left: 15px;
+}
+.club-board-area .board .board-info .board-group strong {
+	font-size: 19px;
+}
+.club-board-area .board .board-info .board-group b {
+	color: gray;
+}
+.club-board-area .board .board-info .board-date {
+	font-size: 15px;
+}
+
+.club-board-area .board-content{
+	padding: 10px 25px 10px 75px;
+}
+.club-board-area .board-content .likecolor{
+    color: red;
+    font-size: 25px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+.club-board-area .board-content .likecolor span{
+    color: red;
+    font-size: 23px;
+    margin-right: 7px;
+}
+
+.club-board-area .board-comment-list{
+	border-top: 1px solid gray;
+	padding: 12px 27px 0px 35px;
+    margin-top: 2px;
+}
+.club-board-area .board-comment-list .write-comment-btn {
+	position: relative;
+    bottom: 31px;
+    left: 867px;
+    background-color: white;
+}
+.club-board-area .board-comment-list .write-comment-btn {
+	position: relative;
+    bottom: 31px;
+    left: 867px;
+    background-color: white;
+}
+.club-board-area .board-comment-list .new-content {
+	margin-left:33px;
+    margin-top: 15px;
+}
+.club-board-area .board-comment-list .comment-content {
+	border: 1px solid gray;
+    width: 832px;
+    height: 28px;
+    border-radius: 5px;
+}
+.club-board-area .board-comment-list .add-reply , .board-comment-list .reply-area .add-reply2{
+    background-color: #1eafcc;
+    border: 1px solid #1a97b0;
+    width: 60px;
+    height: 27px;
+    color: white;
+    border-radius: 5px;
+}
+.club-board-area .board-comment-list .write-comment{
+    width: 100%;
+    height: 45px;
+    margin-top: -10px;
+}
+.club-board-area .board-comment-list .comment-list{
+	margin-bottom: 20px;
+}
+.club-board-area .board-comment-list .reply-area {
+	margin-top: 10px;
+}
+.club-board-area .board-comment-list .reply-area img{
+	
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+.club-board-area .board-comment-list .reply-area span{
+	padding-left:10px;	
+}
+.club-board-area .board-comment-list .reply-area .reply-delete{
+	float:right;
+	color:#ff6969;
+}
+.club-board-area .board-comment-list .reply-area .reply-edit{
+	float:right;
+	font-size: 14px;
+    color: gray;
+}
+.club-board-area .board-comment-list .reply-area .rreply-btn{
+	background-color:#1eafcc;
+	color: white;
+	width: 37px;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 5px;
+}
+.club-board-area .board-comment-list .reply-area .rreply-img{
+	margin-left: 20px;
+}
+.club-board-area .board-comment-list .reply-area .re {
+	color:gray;
+}
+.club-board-area .board-comment-list .reply-area .rereply-content{
+	margin-left : 30px;
+}
+.club-board-area .board-comment-list .reply-area .new-content2{
+	margin: 0px 0px 20px 32px;
 }
