@@ -1,56 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>개인 게시판</title>
-    <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
-    <!--모달-->
+    <title>공지 에디터</title>
+    <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
 </head>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();">
 
-<body>
-	<!-- 상단 내비게이션 바 -->
-	<div class="ly-head-container">
-		<header>
-			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-		</header>
-	</div>
-    <!-- // 상단 내비게이션 바 -->
-    
-    <!-- 중간 콘텐츠 -->
-    <div class="ly-body-container ">
-		<div class="main">
-			<div class="main-content">
-				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-				
-					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
-						<h2>${club.clubName}</h2>
-  						
-						<div class= "search-board"> 
-							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						</div>						
-						
-					</div>		
-					<!-- //diary-topbar -->
-					
-					
-					<div class="diary-body">					
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-						
+<!----------------------------------------- top Navigation ----------------------------------------->
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+
+<div class="wrap">
+      <div class="diary-area">
+         <div class="diary-topbar">
+            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+            <h1>${club.clubName}</h1>
+         </div>
+        <!--/diary-topbar-img-->
+        <!--/diary-subbar-->
+        <div class="content-area">
+          <div class="content-left">
+
+            <!-- 여기부터 작성 -->
+           
             <div class="noticeform">
               <div>
                   <div class="noticebtn">
@@ -219,22 +196,18 @@
           </div>
       </div>
 	</div>
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-					</div>
-				
-				</div>
-				<!--/diary-area-->	
-			</div>
-			<!-- //main-content -->
-			
-			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-			</div>
-		</div>
-		<!-- container -->
+          <!-- 여기까지 -->
+      <!-- -------------------------------------------------일반투표-------------------------------------------------------->
+  </div>
+   <!--/content-left-->
+</div>
+ <!--/content-area-->
 	</div>
-    <!-- //중간 콘텐츠 -->
-    
+      <!--/diary-area-->
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+      <!--/menu-bar-->
+    </div>
+    <!--/wrap-->
   </body>
 <script>
   
@@ -551,42 +524,42 @@ $('.noticereply').on("click",'.likecolor', function(){
 					            
 	    });//ajax end
 	
-	});//좋아요 이벤트 end
+});//좋아요 이벤트 end
 
 });
-	/*리댓글 html 그리는 거*/
-	function addReply(element,reply, type){
-	
-	var add ="";
-	
-	add += '<div  class="reply-area group' + reply.replyGroup  + '"id = "c'+reply.replyNo + '" >';
-	if (reply.deep > 1) {
-	    add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
-	} else if (reply.deep === 1) {
-	    add += '<span><b>' + reply.memberName + '님 : </b></span>';
-	}
-	add += '<span>' + reply.replyContent + '</span>';
-	if (reply.deep === 1) {
-	    add += '<span><button class= "rreply-btn" data-aboardno ="' + reply.aboardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
-	}
-	add += '<div class="reply-edit">';
-	add += '<span>' + reply.replyDate + '</span>';
-	add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
-	add += '</div></div>';
-	
-	if(type == 're'){
-			element.append(add);
-	}else{
-		   	var last = $('.group' + reply.replyGroup).last();
-		 	last.after(add);
-	}
-	
-	}//리댓글 그리는 function end
-	
+/*리댓글 html 그리는 거*/
+function addReply(element,reply, type){
+
+var add ="";
+
+add += '<div  class="reply-area group' + reply.replyGroup  + '"id = "c'+reply.replyNo + '" >';
+if (reply.deep > 1) {
+    add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
+} else if (reply.deep === 1) {
+    add += '<span><b>' + reply.memberName + '님 : </b></span>';
+}
+add += '<span>' + reply.replyContent + '</span>';
+if (reply.deep === 1) {
+    add += '<span><button class= "rreply-btn" data-aboardno ="' + reply.aboardNo +  '"   data-replyno ="' + reply.replyNo + '">답글</button></span>';
+}
+add += '<div class="reply-edit">';
+add += '<span>' + reply.replyDate + '</span>';
+add += '<span class="reply-delete" data-deletere ="'+ reply.replyNo +'"  data-deep = "'+reply.deep+'">&nbsp;삭제</span>';
+add += '</div></div>';
+
+if(type == 're'){
+		element.append(add);
+}else{
+	   	var last = $('.group' + reply.replyGroup).last();
+	 	last.after(add);
+}
+
+}//리댓글 그리는 function end
+
+window.history.forward();
+function noBack(){
 	window.history.forward();
-	function noBack(){
-		window.history.forward();
-	}
+}
 
   </script>
 </html>
