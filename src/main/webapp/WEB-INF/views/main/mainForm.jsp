@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Firmeet List</title>
+    <title>Firmeet List11111</title>
 
     <style>
         *{
@@ -38,7 +38,6 @@
 
         min-width: 750px;
         display: block;
-        
         margin: 50px auto;
         
     }
@@ -239,7 +238,6 @@
 
     #meet {
         display: flex;
-
         width: 90%;
         margin: 20px auto;
        justify-content: space-between;
