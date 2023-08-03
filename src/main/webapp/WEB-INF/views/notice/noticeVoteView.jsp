@@ -115,12 +115,21 @@
 					                             <span id="meetNo" hidden="hidden">${vo.meetNo}</span>
 					                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
 					                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
-					                             <c:if test="${vo.paycount >= vo.minPerson }">
-					                             	<button id="groupautoupload">일정등록</button>
-					                             </c:if>
 					                             <c:if test="${vo.paycount < vo.minPerson }">
-					                             	<button id="paybtn" onclick="kakaopay()">결제하기</button>
-					                             </c:if>
+							                          <button id="paybtn" onclick="kakaopay()">결제하기</button>
+							                     </c:if>
+					                             	<form action="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR" method="get">
+								                        <input type="hidden" name="clubId" value="${clubId}">
+								                        <input type="hidden" name="voteNo" value="${vo.voteNo}">
+								                        <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+								                        <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
+								                        <input type="hidden" name="title" id="title" value="${vo.title}">[자동등록]${vo.title}
+					                             	
+							                             <c:if test="${vo.paycount >= vo.minPerson }">
+							                             	<button type="submit" id="groupautoupload">일정등록</button>
+							                             </c:if>
+							                             
+					                             	</form>
 					                          </td>
 						                 </tr>
 						               </tbody>

@@ -1,7 +1,5 @@
 package com.firmeet.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
-import com.firmeet.service.GalleryService;
 import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
@@ -32,8 +28,6 @@ public class NoticeBoardController {
 	
 	@Autowired
 	private ClubService clubService;
-	@Autowired
-	private GalleryService galleryService;
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
