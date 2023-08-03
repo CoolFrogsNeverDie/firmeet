@@ -4,88 +4,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName}갤러리</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/assets/css/gallery.css" rel="stylesheet" type="text/css" />
-<!--모달-->
-<style>
-.gallery-img img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.gallery-area .example-image {
-	width: 185px;
-	height: 185px;
-	margin: 5px;
-}
-
-/* 숨길 버튼을 hidden 클래스로 숨깁니다 */
-.hidden {
-	display: none;
-}
-
-dd {
-	cursor: pointer;
-}
-
-#modalImage {
-	width: 100%;
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개인 게시판</title>
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/gallery.css" rel="stylesheet" type="text/css" />
+    <!--모달-->
+    
 </head>
 
 <body>
-	<!-- top Navigation -->
-	<%@ include file="../include/nav.jsp"%>
-
-	<!-- 페이지 콘텐츠 -->
-	<div class="wrap">
-		<div class="diary-area">
-			<div class="diary-topbar">
-				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
-				<h1>${club.clubName}</h1>
-			</div>
-			<!--/diary-subbar-->
-			<div class="content-area">
-				<div class="content-left">
-					<dl id="meetList">
-						<dt class="viewAll" style="cursor: pointer;">
-							<span></span>전체보기
-						</dt>
-						<c:forEach var="meet" items="${meetList}">
-							<dt class="list" style="cursor: pointer;">
-								<span></span>${meet.meetYear}년 ${meet.meetMon}월
-							</dt>
-						</c:forEach>
-					</dl>
-				</div>
-				<!--/content-left-->
-				<div class="content-right">
-					<div class="content-bnt">
-						<button id="addButton" class="hidden">사진올리기</button>
+	<!-- 상단 내비게이션 바 -->
+	<div class="ly-head-container">
+		<header>
+			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+		</header>
+	</div>
+    <!-- // 상단 내비게이션 바 -->
+    
+    <!-- 중간 콘텐츠 -->
+    <div class="ly-body-container ">
+		<div class="main">
+			<div class="main-content">
+				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+				
+				
+					<div class="diary-topbar">
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<h2>${club.clubName}</h2>
+  						
+  						
+						<div class= "search-board" style="display: none;"> 
+							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
+							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
+						</div>						
+						
+					</div>		
+					<!-- //diary-topbar -->
+					
+					<div class="diary-body">
+						<div class="content-gallery">					
+							<div class = "content-left">
+								<dl id = "meetList">
+									<dt class="viewAll">
+										<span></span>전체보기
+									</dt>
+									<!-- //viewAll -->
+									<c:forEach var="meet" items="${meetList}">
+										<dt class="list">
+											<span></span>${meet.meetYear}년 ${meet.meetMon}월
+										</dt>
+									</c:forEach>
+									<!-- //c:forEach -->
+								</dl>
+								<!-- //meetList -->
+							</div>
+							<!-- //content-left -->
+							<div class="content-right">
+								<div class="content-bnt">
+									<button id="addButton" class="hidden">사진올리기</button>
+								</div>
+								<!-- //content-bnt -->
+								<div class="gallery-area">
+									<div></div>
+								</div>
+								<!-- //gallery-area -->
+							</div>
+							<!-- //content-right -->
+						</div>
+						<!-- //content-gallery-->
 					</div>
-					<div class="gallery-area">
-						<div></div>
-					</div>
-					<!--gallery-area-->
+					<!-- //diary-body -->
 				</div>
-				<!--/content-right-->
+				<!--//diary-area-->	
 			</div>
-			<!--/content-area-->
+			<!-- //main-content -->
+			
+			<div class="side-menu">
+				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+			</div>
 		</div>
-		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-		<!--/wrap-->
-		<!-- 모달창 추가 -->
+		<!-- container -->
 		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document" style="max-width: 900px;">
+			<div class="modal-dialog" role="document" style="max-width: 900px;transform: translate(-50%, -50%);">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="imageModalLabel">
@@ -93,7 +103,9 @@ dd {
 							<!-- 멤버 이름과 아이디를 보여주는 부분 -->
 							<span id="memberName"></span> <span id="memberId"></span>
 						</h5>
+						<!-- //modal-header -->
 					</div>
+					<!-- //modal-header -->
 					<div class="modal-body">
 						<!-- 이미지가 표시될 곳 -->
 						<img id="modalImage" class="example-image" src="" alt="" />
@@ -103,11 +115,17 @@ dd {
 						<!-- 삭제버튼 -->
 						<input type="button" value="삭제" name="deleteImg" class="deleteImg">
 					</div>
+					<!-- //modal-body -->
 				</div>
+				<!-- //modal-content -->
 			</div>
+			<!-- //modal-dialog -->
 		</div>
+		<!-- //modal -->
+	</div>
+    <!-- //중간 콘텐츠 -->
 </body>
-<script type="text/javascript" src=""></script>
+
 <script>
 //갤러리 목록 조회
 $('#meetList').on('click', 'dt.viewAll', function () {
@@ -295,6 +313,8 @@ $(document).ready(function () {
     });
 });
 </script>
+
+<!-- 모달창 -->
 <script>
 //변수 선언
 var imgSrc;
@@ -452,6 +472,5 @@ $("#imageModal").on("click", "input[name='deleteImg']", function () {
 });
 
 </script>
-
 
 </html>

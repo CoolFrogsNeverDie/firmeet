@@ -1,23 +1,28 @@
+.main .main-content .diary-area .diary-body::-webkit-scrollbar {
+   display:none;
+}
 /* 콘텐츠 안에 들어갈 것*/
-
+.main-content2{
+	display: flex;
+}
 /* 왼쪽 */
 .content-left {
-    width: 59%;
-    height: 90%;
+    width: 58%;
+    height: 566px;
     display: flex;
     margin-top: 10px;
     background-color: #333333;
     flex-direction: row;
     align-items: center;
     overflow: hidden;
+    margin-right: 10px;
 }
 
 
 /* 오른쪽 */
 .content-right {
     width: 40%;
-    height: 90%;
-    display: flex;
+    height: 566px;
     margin-top: 10px;
     box-sizing: border-box;
     flex-direction: column;
@@ -58,4 +63,12 @@
     height: 71%;
     margin-top: 49px;
     background-color: white;
+}
+
+.carousel-inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
 }

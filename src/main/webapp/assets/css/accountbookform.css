@@ -1,3 +1,7 @@
+.main .main-content .diary-area .diary-body::-webkit-scrollbar {
+   display:none;
+}
+
 .content-left {
   width: 50%;
   height: 100%;

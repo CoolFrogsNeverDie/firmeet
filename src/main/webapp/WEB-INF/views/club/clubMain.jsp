@@ -3,104 +3,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${club.clubName}메인</title>
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-
-<link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
-  <!--풀 캘린더 CSS-->
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
-  <!--풀 캘린더 JS-->
-  <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
-<style>
-.side-nav li>a {
-	color: black;
-	text-decoration: none;
-}
-
-.side-nav li:hover {
-	background-color: #000000;
-}
-
-.side-nav li:hover>a {
-	color: white;
-}
-
-.content-area {
-	width: 94%;
-	height: 82%;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.carousel-inner {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-	display: flex;
-	align-items: center;}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개인 게시판</title>
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
+    <!--풀 캘린더 CSS-->
+  	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
+  	<!--풀 캘린더 JS-->
+  	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
 </head>
 
 <body>
-	<!-- top Navigation -->
-	<%@ include file="../include/nav.jsp"%>
-	<div class="wrap">
-		<div class="diary-area">
-			<div class="diary-topbar">
-				<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg" alt="프로필사진" />
-				<h1>${club.clubName}</h1>
-			</div>
-			<!--/diary-topbar-img-->
-			<!--/diary-subbar-->
-			<div class="content-area">
-				<div class="content-left">
-					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
-						<div class="carousel-inner">
-							<c:forEach var="img" items="${gImgVos}" varStatus="status">
-								<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-									<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
+	<!-- 상단 내비게이션 바 -->
+	<div class="ly-head-container">
+		<header>
+			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+		</header>
+	</div>
+    <!-- // 상단 내비게이션 바 -->
+    
+    <!-- 중간 콘텐츠 -->
+    <div class="ly-body-container ">
+		<div class="main">
+			<div class="main-content">
+				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+					<div class="diary-topbar">
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<h2>${club.clubName}</h2>
+  						
+  						
+						<div class= "search-board" style="display: none;"> 
+							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
+							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
+						</div>						
+						
+					</div>		
+					<!-- //diary-topbar -->
+					
+					
+					<div class="diary-body">					
+						<div class="main-content2">
+							<div class="content-left">
+								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+									<div class="carousel-inner">
+										<c:forEach var="img" items="${gImgVos}" varStatus="status">
+											<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+												<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
+											</div>
+										</c:forEach>
+										<!-- c:forEach -->
+									</div>
+									<!-- carousel-inner -->
+									<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+										<span class="visually-hidden">Previous</span>
+									</button>
+									<!-- carousel-control-prev 이전 -->
+									<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+										<span class="visually-hidden">Next</span>
+									</button>
+									<!-- carousel-control-next 이후 -->
 								</div>
-							</c:forEach>
+								<!-- carouselExampleControls -->
+							</div>
+							<!-- content-left -->	
+							<div class="content-right">
+								<div class="announcement">
+									<!-- 공지테이블-->
+									<table>
+										<c:forEach var="notice" items="${noticeList}" varStatus="status">
+											<tr>
+												<td class="title">${notice.title}</td>
+												<td>${notice.aboardDate}</td>
+											</tr>
+										</c:forEach>
+										<!-- forEach -->
+									</table>
+									<!-- 공지테이블-->
+								</div>
+								<!-- announcement -->
+								<div class="calendar">
+									<div id='calendar2'></div>
+								</div>
+								<!-- calendar -->	
+							</div>
+							<!-- content-right -->
 						</div>
-						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
-						</button>
+						<!-- main-content -->	
 					</div>
+					<!-- diary-body -->				
 				</div>
-				<!--/content-left-->
-				<div class="content-right">
-					<div class="announcement">
-						<table>
-							<c:forEach var="notice" items="${noticeList}" varStatus="status">
-								<tr>
-									<td class="title">${notice.title}</td>
-									<td>${notice.aboardDate}</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-					<div class="calendar">
-						<div id='calendar2'></div>
-					</div>
-				</div>
-				<!--/content-right-->
+				<!--/diary-area-->	
 			</div>
-			<!--/content-area-->
+			<!-- //main-content -->
+			
+			<div class="side-menu">
+				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+			</div>
 		</div>
-		<!--/diary-area-->
-		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-		
-		<!--/wrap-->
+		<!-- container -->
+	</div>
+    <!-- //중간 콘텐츠 -->
 </body>
 <style>
 #calendar2 .fc-daygrid-day-number{font-size: 11px;}
