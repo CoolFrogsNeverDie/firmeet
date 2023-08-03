@@ -45,12 +45,6 @@
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   						
-  						
-						<div class= "search-board"> 
-							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						</div>						
-						
 					</div>		
 					<!-- //diary-topbar -->
 					
@@ -69,7 +63,7 @@
              					<input type ="hidden" value = "${board.boardNo}" name ="boardNo">
 								<div class= "clear"></div>
 								<div class= "summernote-area">
-									<textarea id="summernote" name="content">${board.content}</textarea>
+									<textarea id="summernote-edit" name="content"></textarea>
 								</div>
 						</div>
 						<!-- //write-board-area-->						
@@ -95,7 +89,7 @@
 <script>
 $(document).ready(function() {
 	//여기 아래 부분
-	$('#summernote').summernote({
+	$('#summernote-edit').summernote({
 		 toolbar: [
 			    // [groupName, [list of button]]
 			    ['fontname', ['fontname']],
@@ -136,7 +130,7 @@ function uploadSummernoteImageFile(file, editor){
 	
 	//ajax통신  -> 요청은 같은 기술 , 응답 이 데이터만 온다
 	$.ajax({
-		url : "${pageContext.request.contextPath }/"+${requestScope.clubId}+"/notice/upload",		
+		url : "${pageContext.request.contextPath }/"+${requestScope.club.clubId}+"/notice/upload",		
 		type : "post",
 		/* contentType : "application/json", */
 		data : data, 
@@ -147,10 +141,10 @@ function uploadSummernoteImageFile(file, editor){
 		success : function(jsonResult){
 			/* 성공시 처리해야될 코드 작성 */
 			if(jsonResult.data != null){
-			     var imageUrl = '${pageContext.request.contextPath }/upload/' + jsonResult.data ;
-			     var style = 'width: 25%';
+			     var imageUrl = '${pageContext.request.contextPath}/upload/' + jsonResult.data ;
+			     var style = 'width: 50%';
 			     
-			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")
+			     $img = $('<img>').attr({ src: imageUrl }).css("width", "50%")
                  $(editor).summernote('insertNode', $img[0]);
 			}
 		},

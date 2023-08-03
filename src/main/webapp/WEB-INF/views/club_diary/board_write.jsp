@@ -44,19 +44,14 @@
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-  						
-  						
-						<div class= "search-board"> 
-							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						</div>						
+				
 						
 					</div>		
 					<!-- //diary-topbar -->
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
-					<form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST"> 
+					<form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST" id = "insert-board"> 
 						<div class= "edit-area">
 							<div class= "edit-btn-area">
 								<button type ="submit" class= "ct-color">등록</button>
@@ -64,8 +59,8 @@
 							</div>
 						</div>
 						<div class= "write-board-area">
-							    <input type ="hidden" value = "${member.memberId}" name ="memberId">
-             					<input type ="hidden" value = "${club.clubId}" name ="clubId">
+							    <input type ="hidden" value = "${member.memberId}" name ="memberId" id = "id-check">
+             					<input type ="hidden" value = "${club.clubId}" name ="clubId" id ="club-check">
 								<div class= "clear"></div>
 								<div class= "summernote-area">
 									<textarea id="summernote" name="content"></textarea>
@@ -92,6 +87,27 @@
     
 </body>
 <script>
+
+$('#insert-board').on("submit", function(){
+	
+	var content = $('#summernote').val();
+	var memberid = $('#id-check').val();
+	var clubid = $('#club-check').val();
+	
+	if(content.length > 5){
+		alert('다섯글자 이상 입력해주세요.');
+		return false;
+	}else if(memberid == null){
+		alert('로그인 후 이용 가능합니다.')
+		return false;
+	}else if(clubId == null){
+		alert('비정상적인 접근입니다.')
+		return false;
+	}
+	
+});
+
+
 $(document).ready(function() {
 	//여기 아래 부분
 	$('#summernote').summernote({
@@ -135,7 +151,7 @@ function uploadSummernoteImageFile(file, editor){
 	
 	//ajax통신  -> 요청은 같은 기술 , 응답 이 데이터만 온다
 	$.ajax({
-		url : "${pageContext.request.contextPath }/"+${requestScope.clubId}+"/notice/upload",		
+		url : "${pageContext.request.contextPath }/"+${requestScope.club.clubId}+"/notice/upload",		
 		type : "post",
 		/* contentType : "application/json", */
 		data : data, 
@@ -147,9 +163,9 @@ function uploadSummernoteImageFile(file, editor){
 			/* 성공시 처리해야될 코드 작성 */
 			if(jsonResult.data != null){
 			     var imageUrl = '${pageContext.request.contextPath }/upload/' + jsonResult.data ;
-			     var style = 'width: 25%';
+			     var style = 'width: 50%';
 			     
-			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")
+			     $img = $('<img>').attr({ src: imageUrl }).css("width", "50%")
                  $(editor).summernote('insertNode', $img[0]);
 			}
 		},

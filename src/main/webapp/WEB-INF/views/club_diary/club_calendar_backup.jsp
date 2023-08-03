@@ -9,76 +9,74 @@
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/board_last.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
-	<!--풀 캘린더 CSS-->
+    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
+  	<!--풀 캘린더 CSS-->
   	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
   	<!--풀 캘린더 JS-->
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
+<style>
+
+    .fc .fc-daygrid-day-top {
+      display: block;
+    }
+</style>
 </head>
 
+
 <body>
-	<!-- 상단 내비게이션 바 -->
-	<div class="ly-head-container">
-		<header>
-			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-		</header>
-	</div>
+
     <!-- // 상단 내비게이션 바 -->
-    
-    <!-- 중간 콘텐츠 -->
-    <div class="ly-body-container ">
-		<div class="main">
-			<div class="main-content">
-				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-				
-				
-					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
-						<h2>${club.clubName}</h2>
-  						
-					</div>		
-					<!-- //diary-topbar -->
-					
-					<div class="calendar-body">					
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-						  <div class="diary-subbar memcal-subbar">
-							<input type ="hidden" value ="${member.memberId}" id ="memId">
-							<div class="clubcalendar-array">
-								<select id = "select-array" class= "select-sche-option2">
-									<option value ="-99">전체</option>
-									<option value = "2">결제공지</option>
-									<option value ="3">일정</option>
-								</select>
-							</div>
-						</div>
-						<div class="forCalendar">
-            				<div id='mem-calendar'></div>
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+    <!-- 페이지 콘텐츠 -->
+    <div class="wrap">
+        <div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+            <div class="diary-topbar">
+                <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}"
+                    alt="프로필사진" />
+                <h1>${club.clubName}</h1>
+                <div class= "board-edit">
+             
+             </div>
+            </div>
+            <!--/diary-topbar-img-->
+          <form action = "${pageContext.request.contextPath}/board/club/upload" method = "POST"> 
+                <input type ="hidden" value = "${member.memberId}" name ="memberId">
+             	<input type ="hidden" value = "${club.clubId}" name ="clubId">
+            <div class="diary-subbar">
+		         <div class="calendar-array">
+		          <select id = "select-array">
+		            <option value ="-99">전체</option>
+		            <option value = "2">결제공지</option>
+		            <option value ="3">일정</option>
+		          </select>
+		        </div>
+             </div>
+            <!--/diary-subbar-->
+            <div class="content-area">
+
+                <div class="content-right calendar-right">
+                    <div class="calendar-area">
+                    	<div class="forCalendar">
+            				<div id='club-calendar'></div>
           				</div>
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-					</div>
-				
-				</div>
-				<!--/diary-area-->	
-			</div>
-			<!-- //main-content -->
-			
-			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
-			</div>
-		</div>
-		<!-- container -->
-	</div>
-    <!-- //중간 콘텐츠 -->
-<c:import url="/WEB-INF/views/include/mem_calendar_popup.jsp"></c:import>
+                    </div>
+                    <!--board-area-->
+                </div>
+                <!--/content-right-->
+            </div>
+            <!--/content-area-->
+          </form>
+        </div>
+        <!--/diary-area-->
+<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+    <!--/wrap-->
 </body>
 <script>
 
@@ -116,7 +114,7 @@ $('.forCalendar').on("click",'button', function(){
 
 	//캘린더 그리는 메서드
 	function render(){
-	    calendarEl = $('#mem-calendar')[0];
+	    calendarEl = $('#club-calendar')[0];
 	    calendar = new FullCalendar.Calendar(calendarEl, {
 	    	 headerToolbar: {
 	             left: '',

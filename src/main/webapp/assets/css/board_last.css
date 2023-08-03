@@ -205,7 +205,7 @@
 	margin: 0px 0px 20px 32px;
 }
 
-/*게시글 등록*/
+/*게시글 등록 수정 페이지*/
 .write-board-area{
 	width: 100%;
 	height: 100%;
@@ -219,6 +219,249 @@
     margin-left: 25px;
     margin-right: 30px;
 }
-.write-board-area .clear {
+.write-board-area .clear, .calendar-body .clear {
 	height:20px;
+}
+
+/*유저 다이어리 게시글 페이지*/
+.member-board {
+	height: 640px;
+	margin: 20px 0px 20px 0px
+}
+.member-board .left-content{
+	width: 270px;
+    height: 100%;
+    float: left;
+    overflow-y: auto;
+}
+.member-board .left-content::-webkit-scrollbar {
+   width: 10px;
+}
+.member-board .left-content::-webkit-scrollbar-track {
+   background-color: #e4e4e4;
+   border-radius: 100px;
+}
+.member-board .left-content::-webkit-scrollbar-thumb {
+   border-radius: 100px;
+   border: 6px solid rgba(0, 0, 0, 0.18);
+   border-left: 0;
+   border-right: 0;
+   background-color: #000000;
+}
+.member-board .left-content .menu-list dt{
+	width: 95%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #c7c8c9;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.member-board .left-content .menu-list dd{
+	width: 95%;
+    padding: 10px;
+    background-color: #eeeeee;
+    margin-bottom: 5px;
+    display: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.member-board .left-content .menu-list span{
+	display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.member-board .right-content{
+	width: 810px;
+    height: 100%;
+    float: left;
+}
+.member-board .right-content .category{
+	height: 65px;
+	padding: 10px 10px 0 20px;
+}
+.member-board .right-content .board-area{
+	width: 810px;
+	height: 575px;
+	overflow-y: scroll;
+} 
+.member-board .right-content .board-area::-webkit-scrollbar {
+   width: 15px;
+}
+.member-board .right-content .board-area::-webkit-scrollbar-track {
+   background-color: #e4e4e4;
+   border-radius: 100px;
+}
+.member-board .right-content .board-area::-webkit-scrollbar-thumb {
+   border-radius: 100px;
+   border: 6px solid rgba(0, 0, 0, 0.18);
+   border-left: 0;
+   border-right: 0;
+   background-color: #000000;
+}
+
+.member-board .club-category {
+    padding-left: 10px;
+    display: none;
+}
+
+.member-board .board {
+    /* margin-right: 10px; */
+    margin-top: 0px;
+    /* border: 1px solid red; */
+    margin-left: 45px;
+    margin-right: 50px;
+    border: 1.5px solid #c7c8c9;
+    border-radius: 10px;
+    padding: 10px 10px 0px 14px;
+	margin: 35px 30px 10px 20px;
+}
+
+.member-board .board .edit-board-spans{
+	float:right;
+}
+.member-board .board .edit-board-spans{
+	float: right;
+    position: relative;
+    top: 12px;
+}
+.member-board .board .edit-board-a{
+	margin-right : 10px;
+	
+}
+.member-board .board .profile-pic{
+	float:left;
+}
+.member-board .board .profile-pic img{
+	width:60px;
+	border-radius: 50px;
+}
+.member-board .board .board-info{
+	position: relative;
+    top: 7px;
+    width: 400px;
+    left: 15px;
+}
+.member-board .board .board-info .board-group strong {
+	font-size: 19px;
+}
+.member-board .board .board-info .board-group b {
+	color: gray;
+}
+.member-board .board .board-info .board-date {
+	font-size: 15px;
+}
+
+.member-board .board-content{
+	padding: 10px 25px 10px 75px;
+}
+.member-board .board-content .likecolor{
+    color: red;
+    font-size: 25px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+.member-board .board-content .likecolor span{
+    color: red;
+    font-size: 23px;
+    margin-right: 7px;
+}
+
+.member-board .board-comment-list{
+	border-top: 1px solid gray;
+	padding: 12px 27px 0px 35px;
+    margin-top: 2px;
+}
+.member-board .board-comment-list .write-comment-btn {
+	position: relative;
+    bottom: 31px;
+    left: 867px;
+    background-color: white;
+}
+.member-board .board-comment-list .write-comment-btn {
+	position: relative;
+    bottom: 31px;
+	left: 601px;
+    background-color: white;
+}
+.member-board .board-comment-list .new-content {
+	margin-left:33px;
+    margin-top: 15px;
+}
+.member-board .board-comment-list .comment-content {
+	border: 1px solid gray;
+    width: 563px;
+    height: 28px;
+    border-radius: 5px;
+}
+.member-board .board-comment-list .add-reply , .board-comment-list .reply-area .add-reply2{
+    background-color: #1eafcc;
+    border: 1px solid #1a97b0;
+    width: 60px;
+    height: 27px;
+    color: white;
+    border-radius: 5px;
+}
+.member-board .board-comment-list .write-comment{
+    width: 100%;
+    height: 45px;
+    margin-top: -10px;
+}
+.member-board .board-comment-list .comment-list{
+	margin-bottom: 20px;
+}
+.member-board .board-comment-list .reply-area {
+	margin-bottom: 10px;
+}
+.member-board .board-comment-list .reply-area img{
+	
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+.member-board .board-comment-list .reply-area span{
+	padding-left:10px;	
+}
+.member-board .board-comment-list .reply-area .reply-delete{
+	float:right;
+	color:#ff6969;
+}
+.member-board .board-comment-list .reply-area .reply-edit{
+	float:right;
+	font-size: 14px;
+    color: gray;
+}
+.member-board .board-comment-list .reply-area .rreply-btn{
+	background-color:#1eafcc;
+	color: white;
+	width: 37px;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 5px;
+}
+.member-board .board-comment-list .reply-area .rreply-img{
+	margin-left: 20px;
+}
+.member-board .board-comment-list .reply-area .re {
+	color:gray;
+}
+.member-board .board-comment-list .reply-area .rereply-content{
+	margin-left : 30px;
+}
+.member-board .board-comment-list .reply-area .new-content2{
+	margin: 0px 0px 20px 32px;
+}
+.reply-delete {
+	cursor: pointer;
+}
+
+
+/*--다이어리--*/
+.calendar-body {
+	height: 640px;
+	margin: 20px 0px 20px 0px
 }

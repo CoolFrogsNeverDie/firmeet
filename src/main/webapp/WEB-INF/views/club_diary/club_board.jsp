@@ -274,8 +274,8 @@
 		var add ="";
 	    add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
 	    if (reply.deep > 1) {
-            add += '<span><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span> ' 
-                add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
+            add += '<span><b><span class="re">↳</span> ' 
+                add += '<img class="reply-img rreply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';
                     add += reply.memberName + '님  </b></span><br>';
 	    } else if (reply.deep === 1) {
                 add += '<img class="reply-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />';

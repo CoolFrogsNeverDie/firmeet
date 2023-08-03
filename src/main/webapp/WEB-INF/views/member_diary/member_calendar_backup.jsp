@@ -1,94 +1,315 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>개인 게시판</title>
-    <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
-	<!--풀 캘린더 CSS-->
-  	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
-  	<!--풀 캘린더 JS-->
-  	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
-  	<!-- 카카오 map  -->
-  	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6f59970276341196f41538265d29af72&libraries=services"></script>
-  	
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>개인 달력</title>
+  <!--제이쿼리-->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!--부트스트랩-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+  <!--CSS-->
+  <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
+      <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" />
+  <!--풀 캘린더 CSS-->
+ 	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
+  <!--풀 캘린더 JS-->
+  <script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
+  <!-- 카카오 map  -->
+  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6f59970276341196f41538265d29af72&libraries=services"></script>
+
+  <style>
+    .fc .fc-daygrid-day-top {
+      display: block;
+    }
+	
+	
+
+  </style>
 </head>
 
 <body>
-	<!-- 상단 내비게이션 바 -->
-	<div class="ly-head-container">
-		<header>
-			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-		</header>
+
+  <!----------------------------------------- top Navigation ----------------------------------------->
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+  <!----------------------------------------- // 상단 내비게이션 바 //----------------------------------------->
+  <!-- 페이지 콘텐츠 -->
+
+  <div class="wrap">
+    <div class="diary-area">
+      <div class="diary-topbar">
+        <img class="diary-topbar-img" src="./asset/pro.jpg" alt="프로필사진" />
+        <h1>${member.memberId}님의 다이어리</h1>
+      </div>
+      <!--/diary-topbar-img-->
+      <div class="diary-subbar memcal-subbar">
+          <input type ="hidden" value ="${member.memberId}" id ="memId">
+        <div class="memcalendar-array">
+			<select  id ="select-club"   class ="select-sche-option">
+				<option value="-99">전체</option>
+				<option value ="-88">나의 일정</option>
+				<c:forEach items ="${joinClubList}" var ="club">
+					<option value ="${club.clubId}">${club.clubName}</option>
+				</c:forEach>
+       		</select>
+          <select id = "select-array" class= "select-sche-option2">
+            <option value ="-99">전체</option>
+            <option value = "2">결제공지</option>
+            <option value ="3">일정</option>
+          </select>
+        </div>
+      </div>
+      <!--/diary-subbar-->
+      <div class="content-area">
+        <div class="content-right calendar-right">
+       <div class="calendar-area">
+          <div class="forCalendar">
+            <div id='mem-calendar'></div>
+          </div>
 	</div>
-    <!-- // 상단 내비게이션 바 -->
-    
-    <!-- 중간 콘텐츠 -->
-    <div class="ly-body-container ">
-		<div class="main">
-			<div class="main-content">
-				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-				
-				
-					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
-						<h2>${member.memberId}의 다이어리</h2>
-  						
-					</div>		
-					<!-- //diary-topbar -->
-					
-					<div class="calendar-body">					
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-						  <div class="diary-subbar memcal-subbar">
-							<input type ="hidden" value ="${member.memberId}" id ="memId">
-							<div class="memcalendar-array">
-								<select  id ="select-club"   class ="select-sche-option">
-									<option value="-99">전체</option>
-									<option value ="-88">나의 일정</option>
-								<c:forEach items ="${joinClubList}" var ="club">
-									<option value ="${club.clubId}">${club.clubName}</option>
-								</c:forEach>
-								</select>
-								<select id = "select-array" class= "select-sche-option2">
-									<option value ="-99">전체</option>
-									<option value = "2">결제공지</option>
-									<option value ="3">일정</option>
-								</select>
-							</div>
-						</div>
-						<div class="forCalendar">
-            				<div id='mem-calendar'></div>
-          				</div>
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-					</div>
-				
-				</div>
-				<!--/diary-area-->	
-			</div>
-			<!-- //main-content -->
+          <!--/calendar-area-->
+        </div>
+        <!--/content-right-->
+      </div>
+      <!--/content-area-->
+    </div>
+        <!--/diary-area-->
+	<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
+    <!--/wrap-->
+  
+  <!-- 일정 등록모달창-->
+<div class="container1" >
+  <div class="popup-wrap" id="popup">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+          <div class="body-titlebox">
+            <h4><strong>일정등록</strong></h4>
+            
+          </div>
+       <form action="${pageContext.request.contextPath}/calendar/member/add-persche" method = "GET" class= "add-persche">
+            <input type="hidden" id = "address1" name = "address1" value = "-1">
+            <input type="hidden" id = "address2" name = "address2" value ="-1">
+            <input type="hidden" name = "memberId" value = "${member.memberId}" id = "memId">
+            <input type="hidden" id = "marker_place">
+          <div class="body-contentbox">
+            <table id = "schedule-table">
+              <tr>
+                <th>일정</th>
+                <td><input type="text" placeholder="일정명을 입력하세요." id = "title" name = "title"> </td>
+              </tr>
+              <tr>
+                <th rowspan="2">일정</th>
+                <td rowspan="2"><input type="date" id = "startD" name = "startDate">&nbsp; ~&nbsp; 
+                <input type="date" id = "endD" name ="endDate" ></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <th>장소등록</th>
+                <td>
+				<span class= "checkbox-loca"><input type ="checkbox" id = "loca-insert-select" > &nbsp;장소 등록 </span>
+				  <div class= "loca-btn-area">
+                <input type = "text" class= "search-place" id  = "place"  readonly><button type= "button" class="map-search-btn">위치검색</button></div>
+				<span><input type = "text" readonly name = "place" id = "place-result" value =" "></span>
+              </td>                
+                
+              </tr>
+              <tr class="content-area">
+                <th>내용</th>
+                <td><textarea name = "content" id = "content"></textarea></td>
+              </tr>
+            </table>
+            
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">등록</button>
+            <button type ="button">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--모달창-->
+
+
+<!-- 지도 위치 검색 모달창-->
+<div class="container2" >
+
+  <div class="popup-wrap2" id="popup">
+    <div class="popup" id = "2th-popup">
+      <div class="popup-head">
+        <div class="popup-close-btn2">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+       <form action="http://localhost:8000/link/search/" method = "get">
+          <div class="body-titlebox">
+            <h4><strong>지도 선택</strong></h4>
+
+          </div>
+          <div class="body-contentbox">
+            <div id="map" style="width:500px;height:400px; display:block; "></div>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--지도 팝업창-->
+
+<!--개인 일정 확인 팝업창-->
+<div class= "container4">
+<div class="per-pop">
+  <div class="per-pop-header">
+    <div class="per-pop-close-btn">X</div>
+  </div>
+  <div class="per-pop-body">
+    <div class="per-pop-content">
+      <div class="body-titlebox"><h4><strong>나의 일정</strong></h4></div>
+      <table id = "schedule-table">
+        <tr>
+          <th>일정</th>
+          <td class="de-title"></td>
+        </tr>
+        <tr>
+          <th rowspan="2">일정</th>
+          <td rowspan="2"><input type="date" name = "startDate" class="de-start" readonly>&nbsp; ~&nbsp; 
+          <input type="date" id = "endD" name ="endDate" class="de-end" readonly ></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <th>장소</th>
+          <td><span class="de-place"></span> &nbsp;&nbsp;<button type ="button" class="see-place" id = "see-map">길찾기</button></td>
+        </tr>
+        <tr class="content-area">
+          <th>내용</th>
+          <td><textarea name = "content" class="de-content" readOnly></textarea>
+          <div id="map2" ></div></td>
+        </tr>
+      </table>
+
+        <div class="per-sche-edit">
+          <button type = "button" class="edite-btn" >수정</button>
+          <button type = "button" class= "delete-per" id = "delete-per">삭제</button>
+        </div>
+    </div><!--per-pop-content-->
+
+  </div><!--popup body-->
+</div> <!--popup end-->
+</div>
+
+
+  
+<!--//개인 일정 확인 팝업창//-->  
+ 
+<!---             일정 수정 팝업             --->
+ 
+ <div class="container5" >
+  <div class="popup-wrap">
+    <div class="popup">
+      <div class="popup-head">
+        <div class="popup-close-btn3">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+          <div class="body-titlebox">
+            <h4><strong>일정수정</strong></h4>
+            
+          </div>
+       <form action="${pageContext.request.contextPath}/calendar/member/edit-persche" method = "GET" class= "edit-persche">
+            <input type="hidden" id = "edit-address1" name = "address1" value = "-1">
+            <input type="hidden" id = "edit-address2" name = "address2" value ="-1">
+            <input type="hidden" name = "memberId" value = "${member.memberId}" id = "edit-memId">
+            <input type="hidden" name = "perScheNo" id = "edit-perScheNo">
+          <div class="body-contentbox">
+            <table id = "schedule-table">
+              <tr>
+                <th>일정</th>
+                <td><input type="text" placeholder="일정명을 입력하세요." id = "edit-title" name = "title"> </td>
+              </tr>
+              <tr>
+                <th rowspan="2">일정</th>
+                <td rowspan="2"><input type="date" id = "edit-startD" name = "startDate">&nbsp; ~&nbsp; 
+                <input type="date" id = "edit-endD" name ="endDate" ></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <th>장소등록</th>
+                <td>
+				<span class= "checkbox-loca"><input type ="checkbox" id = "edit-place-checked" > &nbsp;장소 변경 </span>
+				<span><input type = "text" readonly name = "place" id = "edit-place-result" value =" "></span>
+                <input type = "text" class= "search-place" id  = "edit-place"  readonly><button type= "button" class="map-search-btn2" disabled>위치검색</button></td>
+              </tr>
+              <tr class="content-area">
+                <th>내용</th>
+                <td><textarea name = "content" id = "edit-content"></textarea></td>
+              </tr>
+            </table>
+            
+          </div>
+          <div class="sche-submit-btn">
+            <button type ="submit">수정</button>
+            <button type ="button" class = "popup-close-btn3">취소</button>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--//             일정 수정 팝업              //-->
+
+
+<!-- 지도 위치 검색 모달창-->
+<div class="container6" >
+
+  <div class="popup-wrap" id="popup">
+    <div class="popup" id = "2th-popup">
+      <div class="popup-head">
+        <div class="popup-close-btn4">X</div>
+      </div>
+      <div class="popup-body">
+        <div class="body-content">
+       <form action="http://localhost:8000/link/search/" method = "get">
+          <div class="body-titlebox">
+            <h4><strong>지도 선택</strong></h4>
 			
-			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
-			</div>
-		</div>
-		<!-- container -->
-	</div>
-    <!-- //중간 콘텐츠 -->
-<c:import url="/WEB-INF/views/include/mem_calendar_popup.jsp"></c:import>
+          </div>
+          <div class="body-contentbox">
+            <div id="map3" style="width:500px;height:400px; display:block; "></div>
+          </div>
+       </form>
+          
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<!--지도 팝업창-->
+
+
 </body>
+
 <script>
 
 $('.edit-persche').on("submit", function(){
@@ -174,7 +395,7 @@ function displayMarker3(place) {
     	
       	$('#edit-address1').val(lat);
     	$('#edit-address2').val(lng);
-   		$('#edit-place-result').val(place_name);
+   		$('#edit-place').val(place_name);
         infowindow.open(map3, marker3);
     });
 }
@@ -243,7 +464,42 @@ function relayout3() {
 
 
 <!-- 지도 JS 영역 -->
-
+<style>
+<!--지도-->
+.marker-place{
+padding:5px;font-size:14px; text-align:center; height: 100px;
+}
+.loca-insert-btn, .loca-edit-btn{
+	margin-bottom : 4px; background-color: black; color: white; text-align: center; font-size:12px; display:inline-block;
+	width:70px; height: 30px; margin-top:7px;
+	position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+}
+.loca-insert-btn:hover{
+	background-color:white;
+	color: black; border: 0.5px solid black;
+}
+.popup-wrap input {
+height:30px;
+}
+.map-search-btn {
+ background-color: black; 
+ color: white;
+font-size: 15px;
+    width: 70px;
+    height: 30px;
+} 
+.map-search-btn2{
+ background-color: rgb(238, 238, 238); 
+ color: white;
+font-size: 15px;
+    width: 70px;
+    height: 30px;
+}
+.checkbox-loca{
+  display: flex;
+  align-items: center;
+font-size : 13px;}
+</style>
 <script>
 
 $('.edite-btn').on("click", function(){
@@ -808,5 +1064,6 @@ function render(){
 
 	
 </script>
+
 
 </html>

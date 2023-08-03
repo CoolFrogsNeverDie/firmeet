@@ -14,11 +14,5 @@
 			</ul>
       </div>
         <!-- menu-bar -->
-        <c:choose>
-    <c:when test="${club.memlevel eq 0}">
-        <button id="addButton" style="background-color: rgba(0,0,0,0); width: 80px;height: 50px;position: relative;right: 15px;top: 7px;font-size: xx-large;color: gray;"><i class="fa fa-cog" aria-hidden="true"></i></button>
-    </c:when>
-	</c:choose>
-    </div>
     <!--/wrap-->
 
