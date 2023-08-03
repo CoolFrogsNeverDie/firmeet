@@ -17,9 +17,11 @@ import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
 import com.firmeet.service.ManagerService;
 import com.firmeet.service.MemberService;
+import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.QnaVO;
+import com.firmeet.vo.TagVo;
 
 @RequestMapping("/management")
 @Controller
@@ -123,7 +125,47 @@ public class ManagerController {
 	}
 	
 	
-	
+	@RequestMapping("/club/edit/{clubId}")
+	public String editClub(@PathVariable("clubId") int clubId
+ 			  ,HttpSession session
+ 			  ,Model model) {
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        
+        if (member != null) {
+            memberId = member.getMemberId();
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+            
+            //회장일 시 해당 페이지 접근함
+            if(club.getMemlevel() == 0) {
+            	
+            	//필요한 태그 리스트 가져옴
+        		List<TagVo> tagList = memberService.tagList();
+        		List<CategoryVo> cateList = memberService.cateList();
+        		model.addAttribute("tagList", tagList);
+        		model.addAttribute("cateList", cateList);
+        		//나머지 club의 detail한 정보 가져옴
+        		ClubVo clubVO = managerService.clubDeInfo(club); 
+        		model.addAttribute("deInfo", clubVO);
+        		
+            	return "club_management/edit_club";
+            }
+            //호스트가 아닐 시 동호회 메인 페이지로 이동
+            return "redirect:/club/main/"+club.getClubId();
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
+		
+		
+		
+	}
 	
 	
 	
@@ -212,6 +254,8 @@ public class ManagerController {
 		
 		return jsonResult;
 	}
+	
+	
 	
 	
 }

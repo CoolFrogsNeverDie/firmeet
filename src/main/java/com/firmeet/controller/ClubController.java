@@ -158,8 +158,8 @@ public class ClubController {
 			
 			 Map<String,Object> qMap = clubService.qnaList2(crtPage,clubId);
 			 model.addAttribute("qMap",qMap);
-			
-			
+			System.out.println(qMap);
+			System.out.println("==========================================================");
 			System.out.println(clubId);
 			System.out.println(memberId);
 			ClubVo memberLv = clubService.checkMemLevel(memberId, clubId);
@@ -239,7 +239,7 @@ public class ClubController {
 		clubQnaVo.setMemberId(member.getMemberId());
 		System.out.println(clubQnaVo);
 		
-		clubService.qnaList2(crtPage, clubId);
+		clubService.clubQ(clubQnaVo);
 		
 		return "redirect:/club/joinForm/{clubId}";
 		

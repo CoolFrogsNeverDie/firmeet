@@ -379,12 +379,13 @@ int clubId = (int) session.getAttribute("clubId");
 	//에디터 모임 등록 후 나오는 페이지
 	@RequestMapping("/editgroupwriteG")
 	public String editgroupwriteG(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
-		
 		System.out.println("notice editgroupwriteGG 확인 ");
 		System.out.println("controller vo"+vo);
 		
 		noticeBoardService.editgroupwriteG(vo);
+		model.addAttribute("meetNo", vo.getMeetNo());
 		model.addAttribute("aboardNo", vo.getAboardNo());
+		model.addAttribute("memberId", vo.getMemberId());
 		System.out.println("번호확인"+vo.getMeetNo());
 		
 		return "redirect:/"+vo.getClubId()+"/notice/editlistgroupG";

@@ -220,7 +220,7 @@ public class ClubService {
 
 	
 
-	public void clubQ(int crtPage, ClubQnaVo clubQnaVo) {
+	public void clubQ( ClubQnaVo clubQnaVo) {
 		System.out.println("ClubService.clubQ()");
 		System.out.println(clubQnaVo);
 

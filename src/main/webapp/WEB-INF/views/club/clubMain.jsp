@@ -99,6 +99,7 @@
 		</div>
 		<!--/diary-area-->
 		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+		
 		<!--/wrap-->
 </body>
 <style>

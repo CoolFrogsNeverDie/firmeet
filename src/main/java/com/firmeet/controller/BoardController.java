@@ -21,9 +21,7 @@ import com.firmeet.service.ClubService;
 import com.firmeet.service.MemberService;
 import com.firmeet.vo.BoardVO;
 import com.firmeet.vo.ClubVo;
-import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.MemberVo;
-import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.ReplyVO;
 
 @RequestMapping("/board")
@@ -242,4 +240,32 @@ public class BoardController {
 		return jsonResult;
 	}
 	
+	
+	@RequestMapping(value ="/club2/{clubId}")
+	public String clubBoard2(@PathVariable ("clubId") int clubId
+							,@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword
+							,Model model
+							,HttpSession session) {
+		
+        MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            model.addAttribute("club", club);
+		    model.addAttribute("keyword", keyword);
+
+	        return "club_diary/club_board_bak";
+
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
+	}
 }

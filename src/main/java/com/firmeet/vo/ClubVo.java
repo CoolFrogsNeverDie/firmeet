@@ -24,6 +24,7 @@ public class ClubVo {
 	private String detailW;
 	private int[] tagNo; /* form=>컨트롤러 */
 	private List<TagVo> clubTagList;
+	
 	private CategoryVo cateVO;
 	private TagVo tagVo;
 	private int memlevel;

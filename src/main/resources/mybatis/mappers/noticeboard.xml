@@ -20,8 +20,8 @@
  		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
 			select seq_aboardNo.nextval from dual
 		</selectKey>
-		insert into aboard(aboardNo, clubId, memberId, aboardVal, title, aboardDate, boardContent )
-		values(#{aboardNo}, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
+		insert into aboard(aboardNo, clubId, memberId, meetNo, aboardVal, title, aboardDate, boardContent )
+		values(#{aboardNo}, #{clubId}, #{memberId}, #{meetNo}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
 
 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
@@ -64,6 +64,17 @@
 		where voteNo = #{voteNo}
 	</select>
 	
+	
+	<!-- 갤러리 인서트 -->
+	<insert id="galleryinsert" parameterType="noticeboard">
+		 <selectKey resultType="int" keyProperty="galleryNo" order="BEFORE">
+			select SEQ_GALLERYNO.nextval from dual
+		</selectKey>
+		insert into GALLERY(GALLERYNO, ID, MEETNO, MEMBERID)
+		values(#{galleryNo}, #{clubId}, #{meetNo}, #{memberId}) 
+	</insert>
+	
+	
 	<insert id="editgroupwrite" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
 			select seq_meetNo.nextval from dual
@@ -81,6 +92,10 @@
 	
 	<update id="hits" parameterType="int">
 		update aboard set aboardHit = aboardHit +1 where aboardNo = #{aboardNo}
+	</update>
+	
+	<update id="aupdate" parameterType="noticeboard">
+		update meet_name set aboardNo = #{aboardNo} where meetNo = #{meetNo}
 	</update>
 	
  	<select id = "getComment" parameterType ="noticeboard" resultType ="areply">

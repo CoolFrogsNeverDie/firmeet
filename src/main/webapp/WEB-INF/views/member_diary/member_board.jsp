@@ -68,7 +68,21 @@
 <c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
 </body>
 <script>
+	
 
+	$('.board-area').on('keyup','.comment-content', function(){
+		var textLength = $(this).val();
+		console.log('바뀌는 댓글 정보' + textLength);
+		console.log('바뀌는 댓글 정보' + textLength.length);
+		if(textLength.length >40){
+			alert('댓글은 40자 이내로 작성해주세요.');
+			textLength = textLength.slice(0,50);
+	        $(this).val(textLength);
+		}
+	});
+
+	
+	
 	$('.all-category').on("click", function(){
 		window.location("${pageContext.request.contextPath}/board/member/${member.memberId}/-99");
 	})
