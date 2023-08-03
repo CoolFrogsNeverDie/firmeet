@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
 import com.firmeet.service.GalleryService;
+import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
 import com.firmeet.vo.GalleryLikeVo;
@@ -301,24 +302,34 @@ public class GalleryController {
 	/*-------------------------------------마이겔러리---------------------------- */
 	// 갤러리 목록 조회
 	@RequestMapping(value = "/member/list/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myGalleryList(@PathVariable("memberId") String memberId, Model model) {
+	public String myGalleryList(@PathVariable("memberId") String memberId, Model model, HttpSession session) {
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
 		System.out.println("myGalleryList 확인");
-		System.out.println("memberId : " + memberId);
+		MemberVo member = (MemberVo) session.getAttribute("member");
 
-		List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
-		List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
+		if (member != null) {
+			System.out.println("myGalleryList 확인");
+			System.out.println("memberId : " + memberId);
 
-		model.addAttribute("meetList", mList);
-		model.addAttribute("galleryList", gList);
+			List<MeetVo> mList = galleryService.getMyGalleryList(memberId);
+			List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
 
-		List<ClubVo> clubVos = clubService.getMemClub(memberId);
+			model.addAttribute("meetList", mList);
+			model.addAttribute("galleryList", gList);
 
-		String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
-				.collect(Collectors.joining(","));
-		System.out.println(clubIdsString);
-		model.addAttribute("clubIdsString", clubIdsString);
+			List<ClubVo> clubVos = clubService.getMemClub(memberId);
 
-		return "/member_diary/member_gallery";
+			String clubIdsString = clubVos.stream().map(clubVo -> String.valueOf(clubVo.getClubId()))
+					.collect(Collectors.joining(","));
+			System.out.println(clubIdsString);
+			model.addAttribute("clubIdsString", clubIdsString);
+
+			return "/member_diary/member_gallery";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
 	
 	

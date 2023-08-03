@@ -23,6 +23,7 @@ import com.firmeet.service.NoticeBoardService;
 import com.firmeet.vo.CategoryVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.GalleryImgVo;
+import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.TagVo;
 
@@ -88,9 +89,12 @@ public class MainController {
 	/*마이 다이어리*/
 	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
 	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String MyMain(@PathVariable("memberId") String memberId, Model model) {
-		System.out.println("MyMain 확인");
+	public String MyMain(@PathVariable("memberId") String memberId, Model model,HttpSession session) {
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
 		
+		System.out.println("MyMain 확인");
+		if (member != null) {
         List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
         
         model.addAttribute("galleryList", gList);
@@ -101,6 +105,11 @@ public class MainController {
         model.addAttribute("noticeList", nList);
         
 		return "/member_diary/member_main";
+		
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
 	}
 	
 	@RequestMapping(value="/search" , method= {RequestMethod.GET , RequestMethod.POST})
