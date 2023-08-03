@@ -8,6 +8,7 @@
     <title>개인 게시판</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
     
@@ -86,7 +87,7 @@
 				              </div>
 					          <div id="content_body">
 
-					            <div class="subcontent1">
+					            <div class="subcontent">
 					                <table id="dataTableV" style="width: 40%; float: left;">
 										<thead>
 										<tr>
@@ -98,16 +99,30 @@
 						               <tbody>
 						                   <tr>
 					                       	  <td class="ngname">
-												 <p><span>만남일 : </span>${vo.startDate} ~ <span>종료일 : </span>${vo.endDate}</p>
-												 <p><span>만남시간 : </span>${vo.meetTime}</p>
+					                             <p><span id="startDate1">만남일 : </span>${vo.startDate} ~ <span id="endDate1">종료일 : </span>${vo.endDate}</p>
+					                             <p><span>만남시간 : </span>${vo.meetTime}</p>
 					                             <p><span>만남장소 : </span>${vo.meetPlace}</p>
+					                             <p class="price">회비 :<span id="price">${vo.price}</span></p>
 					                             <p><span>투표종료일 : </span>${vo.voteEnd}</p>
+					                             <p><span>최소인원 : </span>${vo.minPerson}</p>
+					                             <p><span>최대인원 : </span>${vo.maxPerson}</p>
 					                             <p hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
 					                             <p hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
 					                             <p hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
-					                             <span id="memberId" hidden="hidden">${member.memberId}</span><span id="aboardNo" hidden="hidden">${vo.aboardNo}</span>
+					                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
+					                             <span id="memberId" hidden="hidden">${member.memberId}</span>
+					                             <span id="aboardNo" hidden="hidden">${vo.aboardNo}</span>
+					                             <span id="meetNo" hidden="hidden">${vo.meetNo}</span>
+					                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
+					                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
+					                             <c:if test="${vo.paycount >= vo.minPerson }">
+					                             	<button id="autoupload" onclick="groupautoupload()">일정등록</button>
+					                             </c:if>
+					                             <c:if test="${vo.paycount < vo.minPerson }">
+					                             	<button id="paybtn" onclick="kakaopay()">결제하기</button>
+					                             </c:if>
 					                          </td>
-						                 	</tr>
+						                 </tr>
 						               </tbody>
 					               </table>
 					           	   <div class="mapview">
@@ -653,7 +668,9 @@ $(document).ready(function () {
         	return false;
         }
 		$("#paybtn").submit();
+		location.reload();//새로고침	
 	});
+	
  }
 </script>
 </html>

@@ -9,7 +9,6 @@
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
-    
  <script>
  
  	/*메뉴바 스크립트용 JS*/
@@ -76,7 +75,7 @@
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div>
-        					<button type="button" class="nextbtn" id="noticewrite">글쓰기</button>
+        					<button type="button" id="noticewrite">글쓰기</button>
         				</div>	
 						<div id="list_body">
 							<table class="list_table" border="1">

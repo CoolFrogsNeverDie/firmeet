@@ -6,18 +6,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>개인 게시판</title>
-    <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
-    <!--모달-->
+    <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
+    
+ <script>
+ 
+ 	/*메뉴바 스크립트용 JS*/
+    // 클릭 이벤트 처리
+    $(document).on('click', '#navbarDropdown', function () {
+    	 $('#clubList').empty();
+    	
+        // AJAX 요청 보내기
+        var memberId = '${member.memberId}';
+        console.log('memberId:', memberId);
+
+        $.ajax({
+            type: 'POST', // 또는 'GET'에 맞게 설정
+            url: '${pageContext.request.contextPath}/main/clubList', // 서버 측의 엔드포인트 주소
+            data: {
+                memberId: memberId, // 클라이언트에서 서버로 넘길 변수
+            },
+            success: function (jsonResult) {
+                var list = jsonResult.data; // 변경: clubList -> list
+                console.log(list);
+                for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
+                    var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
+                    var clubId = list[i].clubId; 
+                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); 
+                }
+            },
+            error: function (error) {
+                // AJAX 에러 시 실행되는 코드
+                console.error('Error:', error)
+            }
+        });
+    });
+</script>
+
 </head>
 
 <body>
@@ -34,208 +60,171 @@
 		<div class="main">
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-				
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-  						
-						<div class= "search-board"> 
-							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						</div>						
-						
+			            <button type="button" class="listbtn" id="nlist">목록</button>
+			            <button type="button" class="nextbtn">다음글</button>
 					</div>		
 					<!-- //diary-topbar -->
 					
-					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
-						
-            <div class="noticeform">
-              <div>
-                  <div class="noticebtn">
-                    <button type="button" class="listbtn" id="nlist">목록</button>
-                    <button type="button" class="nextbtn">다음글</button>
-                  </div>
-              </div>
-              <div class="noticeprofil">
-                  <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
-                  <span class="username">${vo.memberId }</span>
-                  <span class="userlevel">매니저</span><br>
-                  <div class="userp">
-                      <span class="userdate">작성일 : </span>
-                      <span class="usertext">${vo.aboardDate}</span>
-                      <span class="usercount">조회수 : </span>
-                      <span class="usertext">${vo.aboardHit}</span>
-                  </div>
-              </div>
-          <div id="content_body">
-              <div>
-                  <p class="noticecontent"> ${vo.boardContent}</p>
-              </div>
-              
-                <table id="dataTable" data-bs-toggle="modal" data-bs-target="#vote">
-					<thead>
-					<tr>
-	                     <th class="noticegrouplist">
-	                         <p class="noticegroupname"><span>투표 제목 : </span>${vo.voteTitle}</p>
-	                     </th>
-	                   </tr>
-	               </thead>
-	               <tbody>
-	                   <tr>
-	                     <td class="noticegrouplist1">
-	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}</p>
-	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}</p>
-	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}</p>
-	                         <p class="noticegroupname"><span>투표4 : </span>${vo.vote4}</p>
-	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}</p>
-	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
-	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
-	                         <input type="hidden" name="clubId" value="${clubId}">
-                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
-                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
-	                     </td>
-	                 </tr>
-	               </tbody>
-               </table>
-               
-               <table id="dataTable1" style="display: none;">
-					<thead>
-					<tr>
-	                     <th class="noticegrouplist">
-	                         <p class="noticegroupname"><span>투표 제목 : </span>${vo.voteTitle}</p>
-	                     </th>
-	                   </tr>
-	               </thead>
-	               <tbody>
-	                   <tr>
-	                     <td class="noticegrouplist1">
-	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}<span id="Count">${vo.vote1Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}<span id="Count">${vo.vote2Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}<span id="Count">${vo.vote3Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표4 : </span>${vo.vote4}<span id="Count">${vo.vote4Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}<span id="Count">${vo.vote5Cnt }</span></p>
-	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
-	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
-	                         <p>${vo.clubId}${vo.aboardNo}${member.memberId}${vo.aboardNo}</p>
-	                     </td>
-	                 </tr>
-	               </tbody>
-               </table>
-               
-               <!-- 댓글 -->
-                  <div class="noticereply">
-        			<div class="board-area2" >
-		    			<div class="board">
-						    <div class="board-header">
-		
-						    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
-							    </div>
-							    <div class="board-content" style="margin-left: 10px;">
-							    <c:if test="${vo.likeNo == 0 }">
-								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
-								</c:if>
-								<c:if test="${vo.likeNo > 0 }">
-								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
-							    </c:if>
-							    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
-							    </div>
-							    <div class="board-comment-list" style="margin-top: 40px; margin-left:30px; width: 900px;">
-								    <div class="board-comment" >
-								   
-								    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
-								    
-								    <c:forEach items="${vo.replyList}" var = "reply">
-								    
-										<div class="comment-list" id = "r${vo.aboardNo}" style="height: 50p; margin-bottom: 10px;">
-										
-										    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
-										    	<c:if test="${reply.deep > 1 }">
-										            <span style="padding-left:80px;"><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>
-										            <img class="diary-topbar-img1111" src="${pageContext.request.contextPath }/assets/images/testimg/img.jpg" alt="프로필사진" />
-										            ${reply.memberName}님 : </b></span>
-										        </c:if>
-										        <c:if test="${reply.deep == 1 }">
-										        	<img class="diary-topbar-img111" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
-										            <span><b>${reply.memberName}님 :</b></span>
-										        </c:if>
-										        
-										        <span>${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
-										        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
-										           <span><button class= "rreply-btn" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
-										        </c:if>
-										        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
-											        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: -16%; color:#ff6969;">&nbsp;삭제</span>
-											    </c:if>
+													
+			            <div class="noticeform">
+			              <div class="noticeprofil">
+			                  <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
+			                  <span class="username">${vo.memberId }</span>
+			                  <span class="userlevel">매니저</span><br>
+			                  <div class="userp">
+			                      <span>작성일 : </span>
+			                      <span>${vo.aboardDate}</span>
+			                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수 : </span>
+			                      <span>${vo.aboardHit}</span>
+			                  </div>
+			              </div>
+				          <div id="content_body">
+				              <div>
+				                  <p class="noticecontent">${vo.boardContent}</p>
+				              </div>
+				              
+				                <table id="dataTableV" data-bs-toggle="modal" data-bs-target="#vote">
+									<thead>
+										<tr>
+						                   <th class="nglist">
+						                       <p><span>투표 제목 : </span>${vo.voteTitle}</p>
+						                   </th>
+						                </tr>
+					               </thead>
+					               <tbody>
+					                   <tr>
+					                     <td class="ngname">
+					                         <p><span>투표1 : </span>${vo.vote1}</p>
+					                         <p><span>투표2 : </span>${vo.vote2}</p>
+					                         <p><span>투표3 : </span>${vo.vote3}</p>
+					                         <p><span>투표4 : </span>${vo.vote4}</p>
+					                         <p><span>투표5 : </span>${vo.vote5}</p>
+					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
+					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
+					                         <input type="hidden" name="clubId" value="${clubId}">
+				                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+				                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
+					                     </td>
+					                 </tr>
+					               </tbody>
+				               </table>
+				               
+			               <!-- 댓글 -->
+			                  <div class="noticereply">
+			        			<div class="board-area2" >
+					    			<div class="board">
+									    <div class="board-header">
+					
+									    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
 										    </div>
-										</div>
-										
-								    </c:forEach>
-			
-									<div class="write-comment">
-										<div class="new-content">
-											<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
-							            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
-							            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
-				            			</div>
+										    <div class="board-content" style="margin-top: 40px;">
+										    <c:if test="${vo.likeNo == 0 }">
+											    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
+											</c:if>
+											<c:if test="${vo.likeNo > 0 }">
+											    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
+										    </c:if>
+										    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
+										    </div>
+										    <div class="board-comment-list" style="margin-top: 40px; width: 900px;">
+											    <div class="board-comment" >
+											   
+											    <h4>댓글</h4><span><button class="write-comment-btn">댓글 쓰기</button></span>
+											    
+											    <c:forEach items="${vo.replyList}" var = "reply">
+											    
+													<div class="comment-list" id = "r${vo.aboardNo}" style="height: 50p; margin-bottom: 10px;">
+													
+													    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
+													    	<c:if test="${reply.deep > 1 }">
+													            <span style="padding-left:80px;"><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>
+													            <img class="diary-topbar-img1111" src="${pageContext.request.contextPath }/assets/images/testimg/img.jpg" alt="프로필사진" />
+													            ${reply.memberName}님 : </b></span>
+													        </c:if>
+													        <c:if test="${reply.deep == 1 }">
+													        	<img class="diary-topbar-img111" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
+													            <span><b>${reply.memberName}님 :</b></span>
+													        </c:if>
+													        
+													        <span>${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
+													        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
+													           <span><button class= "rreply-btn" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+													        </c:if>
+													        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+														        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: -16%; color:#ff6969;">&nbsp;삭제</span>
+														    </c:if>
+													    </div>
+													</div>
+													
+											    </c:forEach>
+						
+												<div class="write-comment">
+													<div class="new-content">
+														<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
+										            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
+										            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+							            			</div>
+											    </div>
+										    </div>
+									    </div>
 								    </div>
-							    </div>
-						    </div>
-					    </div>
-			        </div>
-			   </div>
+						        </div>
+						   </div>
+			               
+			              <!-- 댓글 끝 --> 
                
-              <!-- 댓글 끝 --> 
-               
-      	</div>
+      				</div>
               
-        <div class="modal" id="vote">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                  	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote?aboardNo=${vo.aboardNo}" method="get">
-						<div class="modalvotetitle">${vo.voteTitle}</div>
-                        <div class="voteleft">
-                        	<input type="hidden" name="clubId" value="${clubId}">
-                        	<input type="hidden" name="voteNo" value="${vo.voteNo}">
-                        	<input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
-                        	<input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
-	                        <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
-	                        <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
-	                        <input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
-	                        <input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
-	                        <input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
-                        </div>
-                        <div style="text-align: center; font-weight: bold;">
-                			<button type="submit" class="modelbtnS" id="lastvote">투표완료</button>
-                        </div>
-                    </form>
-                   </div>
-              </div>
-          </div>
-      </div>
-	</div>
-						<!-- 개인별코딩 ---------------------------------------------------------------->
-					</div>
-				
-				</div>
-				<!--/diary-area-->	
+			        <div class="modal" id="vote">
+			          <div class="modal-dialog">
+			              <div class="modal-content">
+			                  <div class="modal-header">
+			                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			                  </div>
+			                  <div class="modal-body">
+			                  	<form action="${pageContext.request.contextPath }/${clubId }/notice/vote?aboardNo=${vo.aboardNo}" method="get">
+									<div class="modalvotetitle">${vo.voteTitle}</div>
+			                        <div class="voteleft">
+			                        	<input type="hidden" name="clubId" value="${clubId}">
+			                        	<input type="hidden" name="voteNo" value="${vo.voteNo}">
+			                        	<input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+			                        	<input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
+				                        <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
+				                        <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
+				                        <input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
+				                        <input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
+				                        <input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
+			                        </div>
+			                        <div style="text-align: center; font-weight: bold;">
+			                			<button type="submit" class="modelbtnS" id="lastvote">투표완료</button>
+			                        </div>
+			                    </form>
+			                   </div>
+			              </div>
+			          </div>
+		      	</div>
 			</div>
-			<!-- //main-content -->
-			
-			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-			</div>
+<!-- 개인별코딩 ---------------------------------------------------------------->
 		</div>
-		<!-- container -->
 	</div>
+	<!--/diary-area-->	
+</div>
+<!-- //main-content -->
+
+<div class="side-menu">
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+	</div>
+</div>
+		<!-- container -->
+</div>
     <!-- //중간 콘텐츠 -->
     
-  </body>
+</body>
 <script>
   
 $(document).ready(function () {
@@ -474,8 +463,8 @@ console.log(tag);
 if(tag == null){
 	var	rreply = '';	
 	
-	rreply += '<div style ="width:1030px; height:50px; margin-top:6px; " class="write-comment2" >';
-	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left; margin-left:40px;">';
+	rreply += '<div style ="width:1000px; height:50px; margin-top:6px; " class="write-comment2" >';
+	rreply += '    <span ></span><div class="new-content2" style ="width: 900px; height:50px; float: left; margin-left:40px;">';
 	rreply += '        <img src="${pageContext.request.contextPath }/assets/images/icon/re.png" style ="width:20px; height:20px; margin-left:20px;"><textarea class= "comment-content" style ="width:800px; height:100%; border: 1px solid black; padding:10px; margin-left:10px;margin-bottom: -20px;"></textarea><button class="add-reply2" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">OK</button></div>'
 	rreply += '    </div>'
 	rreply += '</div>'

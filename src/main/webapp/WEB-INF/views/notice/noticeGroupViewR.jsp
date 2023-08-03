@@ -1,163 +1,202 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>공지 에디터</title>
+    <title>개인 게시판</title>
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
-    <link href="${pageContext.request.contextPath}/assets/css/main2_test.css" rel="stylesheet" type="text/css" />
-	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-
-<!----------------------------------------- top Navigation ----------------------------------------->
-<%@ include file="../include/nav.jsp" %>->
-
-<div class="wrap">
-      <div class="diary-area">
-         <div class="diary-topbar">
-            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
-            <h1>${club.clubName}</h1>
-         </div>
-        <!--/diary-topbar-img-->
-        <!--/diary-subbar-->
-        <div class="content-area">
-          <div class="content-left">
-
-            <!-- 여기부터 작성 -->
-           
-            <div class="noticeform">
-              <div>
-                  <div class="noticebtn">
-                    <button type="button" class="listbtn" id="nlist">목록</button>
-                    <button type="button" class="nextbtn">다음글</button>
-                  </div>
-              </div>
-              <div class="noticeprofil">
-                  <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
-                  <span class="username">${vo.memberId }</span>
-                  <span class="userlevel">매니저</span><br>
-                  <div class="userp">
-                      <span class="userdate">작성일 : </span>
-                      <span class="usertext">${vo.aboardDate}</span>
-                      <span class="usercount">조회수 : </span>
-                      <span class="usertext"></span>
-                  </div>
-              </div>
-              <div id="content_body">
-              <div>
-                  <p class="noticecontent"> ${vo.boardContent}</p>
-              </div>
-                <table id="dataTable" data-bs-toggle="modal" data-bs-target="#vote">
-					<thead>
-					<tr>
-	                     <th class="noticegrouplist">
-	                         <p class="noticegroupname"><span>투표 제목 : </span>${vo.voteTitle}</p>
-	                     </th>
-	                   </tr>
-	               </thead>
-	               <tbody>
-	                   <tr>
-	                     <td class="noticegrouplist1">
-	                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
-                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
-                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}">${memberId}<br>
-	                         <p class="noticegroupname"><span>투표1 : </span>${vo.vote1}<span id="Count">${vo.vote1Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표2 : </span>${vo.vote2}<span id="Count">${vo.vote2Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표3 : </span>${vo.vote3}<span id="Count">${vo.vote3Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표4 : </span>${vo.vote4}<span id="Count">${vo.vote4Cnt }</span></p>
-	                         <p class="noticegroupname"><span>투표5 : </span>${vo.vote5}<span id="Count">${vo.vote5Cnt }</span></p>
-	                         <p class="noticegroupname"><span>최소인원 : </span>${vo.totalNum}</p>
-	                         <p class="noticegroupname"><span>투표종료일 : </span>${vo.finDate}</p>
-	                     </td>
-	                 </tr>
-	               </tbody>
-               </table>
-               
-              <!-- 댓글 -->
-                  <div class="noticereply">
-        			<div class="board-area2" >
-		    			<div class="board">
-						    <div class="board-header">
-		
-						    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
-							    </div>
-							    <div class="board-content" style="margin-left: 10px;">
-							    <c:if test="${vo.likeNo == 0 }">
-								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
-								</c:if>
-								<c:if test="${vo.likeNo > 0 }">
-								    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
-							    </c:if>
-							    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
-							    </div>
-							    <div class="board-comment-list" style="margin-top: 40px; margin-left:30px; width: 900px;">
-								    <div class="board-comment" >
-								   
-								    <h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>
-								    
-								    <c:forEach items="${vo.replyList}" var = "reply">
-								    
-										<div class="comment-list" id = "r${vo.aboardNo}" style="height: 50p; margin-bottom: 10px;">
-										
-										    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
-										    	<c:if test="${reply.deep > 1 }">
-										            <span style="padding-left:80px;"><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>
-										            <img class="diary-topbar-img1111" src="${pageContext.request.contextPath }/assets/images/testimg/img.jpg" alt="프로필사진" />
-										            ${reply.memberName}님 : </b></span>
-										        </c:if>
-										        <c:if test="${reply.deep == 1 }">
-										        	<img class="diary-topbar-img111" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
-										            <span><b>${reply.memberName}님 :</b></span>
-										        </c:if>
-										        
-										        <span>${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
-										        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
-										           <span><button class= "rreply-btn" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
-										        </c:if>
-										        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
-											        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: -16%; color:#ff6969;">&nbsp;삭제</span>
-											    </c:if>
-										    </div>
-										</div>
-										
-								    </c:forEach>
-			
-									<div class="write-comment">
-										<div class="new-content">
-											<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
-							            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
-							            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
-				            			</div>
-								    </div>
-							    </div>
-						    </div>
-					    </div>
-			        </div>
-			   </div>
-               
-              <!-- 댓글 끝 --> 
-          </div>   
-
-      </div>  
-      
-          <!-- 여기까지 -->
-      <!-- -------------------------------------------------일반투표-------------------------------------------------------->
-  </div>
-          <!--/content-left-->
-</div>
-        <!--/content-area-->
+    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
+    
+ <script>
  
+ 	/*메뉴바 스크립트용 JS*/
+    // 클릭 이벤트 처리
+    $(document).on('click', '#navbarDropdown', function () {
+    	 $('#clubList').empty();
+    	
+        // AJAX 요청 보내기
+        var memberId = '${member.memberId}';
+        console.log('memberId:', memberId);
 
+        $.ajax({
+            type: 'POST', // 또는 'GET'에 맞게 설정
+            url: '${pageContext.request.contextPath}/main/clubList', // 서버 측의 엔드포인트 주소
+            data: {
+                memberId: memberId, // 클라이언트에서 서버로 넘길 변수
+            },
+            success: function (jsonResult) {
+                var list = jsonResult.data; // 변경: clubList -> list
+                console.log(list);
+                for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
+                    var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
+                    var clubId = list[i].clubId; 
+                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); 
+                }
+            },
+            error: function (error) {
+                // AJAX 에러 시 실행되는 코드
+                console.error('Error:', error)
+            }
+        });
+    });
+</script>
+
+</head>
+
+<body>
+	<!-- 상단 내비게이션 바 -->
+	<div class="ly-head-container">
+		<header>
+			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+		</header>
 	</div>
-      <!--/diary-area-->
+    <!-- // 상단 내비게이션 바 -->
+    
+    <!-- 중간 콘텐츠 -->
+    <div class="ly-body-container ">
+		<div class="main">
+			<div class="main-content">
+				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+					<div class="diary-topbar">
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<h2>${club.clubName}</h2>
+			            <button type="button" class="listbtn" id="nlist">목록</button>
+			            <button type="button" class="nextbtn">다음글</button>
+					</div>		
+					<!-- //diary-topbar -->
+					
+					<div class="diary-body">					
+						<!-- 개인별코딩 ---------------------------------------------------------------->
+													
+			            <div class="noticeform">
+			              <div class="noticeprofil">
+			                  <img class="profileimg" src="${pageContext.request.contextPath }/assets/images/testimg/dog1.jpg" alt="">
+			                  <span class="username">${vo.memberId }</span>
+			                  <span class="userlevel">매니저</span><br>
+			                  <div class="userp">
+			                      <span>작성일 : </span>
+			                      <span>${vo.aboardDate}</span>
+			                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수 : </span>
+			                      <span>${vo.aboardHit}</span>
+			                  </div>
+			              </div>
+				          <div id="content_body">
+				              <div>
+				                  <p class="noticecontent">${vo.boardContent}</p>
+				              </div>
+				              
+				                <table id="dataTableV" data-bs-toggle="modal" data-bs-target="#vote">
+									<thead>
+									<tr>
+					                     <th class="nglist">
+					                         <p><span>투표 제목 : </span>${vo.voteTitle}</p>
+					                     </th>
+					                   </tr>
+					               </thead>
+					               <tbody>
+					                   <tr>
+					                     <td class="ngname">
+					                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
+				                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
+				                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}">${memberId}<br>
+					                         <p><span>투표1 : </span>${vo.vote1}<span id="Count">투표 수 (&nbsp;${vo.vote1Cnt }&nbsp;)</span></p>
+					                         <p><span>투표2 : </span>${vo.vote2}<span id="Count">투표 수 (&nbsp;${vo.vote2Cnt }&nbsp;)</span></p>
+					                         <p><span>투표3 : </span>${vo.vote3}<span id="Count">투표 수 (&nbsp;${vo.vote3Cnt }&nbsp;)</span></p>
+					                         <p><span>투표4 : </span>${vo.vote4}<span id="Count">투표 수 (&nbsp;${vo.vote4Cnt }&nbsp;)</span></p>
+					                         <p><span>투표5 : </span>${vo.vote5}<span id="Count">투표 수 (&nbsp;${vo.vote5Cnt }&nbsp;)</span></p>
+					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
+					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
+					                     </td>
+					                 </tr>
+					               </tbody>
+				               </table>
+				               
+			               <!-- 댓글 -->
+			                  <div class="noticereply">
+			        			<div class="board-area2" >
+					    			<div class="board">
+									    <div class="board-header">
+					
+									    	<div class="board-info" data-aboardno = "${vo.aboardNo}" ></div>
+										    </div>
+										    <div class="board-content" style="margin-top: 30px;">
+										    <c:if test="${vo.likeNo == 0 }">
+											    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }" >♡</span>
+											</c:if>
+											<c:if test="${vo.likeNo > 0 }">
+											    <span class="likecolor" data-bno = "${vo.aboardNo }"   data-likeno = "${vo.likeNo }">♥</span>
+										    </c:if>
+										    <span>좋아요 (<span class= "likeCnt">${vo.likeCnt}</span>)</span>
+										    </div>
+										    <div class="board-comment-list" style="margin-top: 50px; width: 900px;">
+											    <div class="board-comment" >
+											   
+											    <h4>댓글</h4><span><button class="write-comment-btn">댓글 쓰기</button></span>
+											    
+											    <c:forEach items="${vo.replyList}" var = "reply">
+											    
+													<div class="comment-list" id = "r${vo.aboardNo}" style="height: 50p; margin-bottom: 10px;">
+													
+													    <div class="reply-area group${reply.replyGroup}" id = "c${reply.replyNo}">
+													    	<c:if test="${reply.deep > 1 }">
+													            <span style="padding-left:80px;"><b>&nbsp;&nbsp;&nbsp; <span class="re">↳</span>
+													            <img class="diary-topbar-img1111" src="${pageContext.request.contextPath }/assets/images/testimg/img.jpg" alt="프로필사진" />
+													            ${reply.memberName}님 : </b></span>
+													        </c:if>
+													        <c:if test="${reply.deep == 1 }">
+													        	<img class="diary-topbar-img111" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
+													            <span><b>${reply.memberName}님 :</b></span>
+													        </c:if>
+													        
+													        <span>${reply.replyContent}</span><span style="float: right;">${reply.replyDate}</span>
+													        <c:if test="${reply.deep == 1 && reply.stat == 1 }">
+													           <span><button class= "rreply-btn" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "${vo.aboardNo}"  data-replyno = "${reply.replyNo}">답글</button></span>
+													        </c:if>
+													        <c:if test="${member.memberId == reply.memberId && reply.stat == 1 }">
+														        	<span class="reply-delete" data-deletere = "${reply.replyNo}" data-deep = "${reply.deep}" style="float: right; margin-right: -16%; color:#ff6969;">&nbsp;삭제</span>
+														    </c:if>
+													    </div>
+													</div>
+													
+											    </c:forEach>
+						
+												<div class="write-comment">
+													<div class="new-content">
+														<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
+										            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
+										            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+							            			</div>
+											    </div>
+										    </div>
+									    </div>
+								    </div>
+						        </div>
+						   </div>
+			               
+			              <!-- 댓글 끝 --> 
+               
+      				</div>
+              
+			</div>
+<!-- 개인별코딩 ---------------------------------------------------------------->
+		</div>
+	</div>
+	<!--/diary-area-->	
+</div>
+<!-- //main-content -->
+
+<div class="side-menu">
 	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-      <!--/menu-bar-->
-    </div>
-    <!--/wrap-->
-  </body>
+	</div>
+</div>
+		<!-- container -->
+</div>
+    <!-- //중간 콘텐츠 -->
+    
+</body>
 <script>
   
 $(document).ready(function () {
@@ -172,7 +211,6 @@ $(document).ready(function () {
        $("#dataTable").toggle();
        $("#dataTable1").toggle();
    });
-  
 
 $('.noticereply').on("click",'.add-reply', function(){
 	
@@ -397,8 +435,8 @@ console.log(tag);
 if(tag == null){
 	var	rreply = '';	
 	
-	rreply += '<div style ="width:1030px; height:50px; margin-top:6px; " class="write-comment2" >';
-	rreply += '    <span ></span><div class="new-content2" style ="width: 1000px; height:50px; float: left; margin-left:40px;">';
+	rreply += '<div style ="width:1000px; height:50px; margin-top:6px; " class="write-comment2" >';
+	rreply += '    <span ></span><div class="new-content2" style ="width: 900px; height:50px; float: left; margin-left:40px;">';
 	rreply += '        <img src="${pageContext.request.contextPath }/assets/images/icon/re.png" style ="width:20px; height:20px; margin-left:20px;"><textarea class= "comment-content" style ="width:800px; height:100%; border: 1px solid black; padding:10px; margin-left:10px;margin-bottom: -20px;"></textarea><button class="add-reply2" style="margin-left:2%; width:30px; border-radius: 5px; background-color: #1eafcc; color: #fff; font-weight: bold;" data-aboardno = "' + aboardNo +'"  data-groupno ="' + groupNo +  '">OK</button></div>'
 	rreply += '    </div>'
 	rreply += '</div>'
@@ -477,11 +515,12 @@ $('.noticereply').on("click",'.likecolor', function(){
 	});//좋아요 이벤트 end
 
 });
-/*리댓글 html 그리는 거*/
+	/*리댓글 html 그리는 거*/
 	function addReply(element,reply, type){
 	
 	var add ="";
-	add += '<div  class="reply-area group' + reply.replyGroup  + '" id = "c'+reply.replyNo + '">';
+	
+	add += '<div  class="reply-area group' + reply.replyGroup  + '"id = "c'+reply.replyNo + '" >';
 	if (reply.deep > 1) {
 	    add += '<span><b>&nbsp;&nbsp;&nbsp;<span class="re">↳</span> ' + reply.memberName + '님 : </b></span>';
 	} else if (reply.deep === 1) {
@@ -510,5 +549,5 @@ $('.noticereply').on("click",'.likecolor', function(){
 		window.history.forward();
 	}
 
-</script>
+  </script>
 </html>

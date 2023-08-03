@@ -156,20 +156,27 @@ public class NoticeBoardService {
 		//
 		NoticeBoardVO vo1 = dao.editlistgroup(vo);
 		//댓글 리스트
-		//List<AreplyVO> vo11 = dao.getBoardComment(vo);
-		if(dao.getBoardComment(vo) != null) {
-			System.out.println("널확인");
-			//vo1.setReplyList(vo11);
-		}
+		List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		vo1.setReplyList(vo11);
+		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
 		
 		System.out.println("vo1확인"+vo1);
 		
+		return vo1;
+	}
+	
+	public NoticeBoardVO editlistgroupR(NoticeBoardVO vo) {
+		System.out.println("notice editlistgroup 확인");
+		dao.hits(vo);
+		//
+		NoticeBoardVO vo1 = dao.editlistgroup(vo);
+		//댓글 리스트
+		List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		vo1.setReplyList(vo11);
+		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
 		
-//		PayresultVO pvo = pdao.paycnt(vo1);
-//		System.out.println(pvo);
+		System.out.println("vo1확인"+vo1);
 		
-		//vo1.setPaycount(pvo.getPaycount());
-		//vo1.setPayresultNo(pvo.getPayresultNo());
 		return vo1;
 	}
 	

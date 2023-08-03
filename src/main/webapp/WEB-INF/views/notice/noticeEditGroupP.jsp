@@ -77,9 +77,7 @@
 					<div class="diary-body">
                 		<form action="${pageContext.request.contextPath}/${clubId}/notice/editgroupwrite" class="formleft" method="get">
 		                    <div class="edittop">
-		                        <select name="" id="" class="selectbox">
-		                            <option value="notice">공지게시판</option>
-		                        </select>
+		                        <span class="editname">공지게시판</span>
 		                        
 		                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반&nbsp;
 		                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;" checked>모임(결제)&nbsp;
@@ -164,7 +162,7 @@
 													      <div id="menu_wrap" class="bg_white">
 													        <div class="option">
 													            <div>
-													               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
+													               <p><em>만날 위치를 클릭해주세요!</em></p>
 													                <input type="text" id="keyword" size="15">
 													              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
 													            </div>
@@ -174,6 +172,7 @@
 													        <div id="pagination"></div>
 													    </div>
 													</div>
+													
 				                           			<br>
 				                                     <span class="groupvotetitle">&nbsp;&nbsp;회&nbsp;&nbsp;&nbsp;비&nbsp;&nbsp;&nbsp;</span>
 				                                     <input class="groupvotemeet" type="text" id="price" name="price"> 원(인당)<br>
