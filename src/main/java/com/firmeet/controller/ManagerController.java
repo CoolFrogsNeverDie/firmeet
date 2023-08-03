@@ -34,6 +34,9 @@ public class ManagerController {
 	@Autowired
 	ManagerService managerService;
 	
+	
+	/*동호회 관리 메인 페이지(가입 요청 승인)*/
+	
 	@RequestMapping("/club/{clubId}")
 	public String memberManagement(@PathVariable("clubId") int clubId
 								   ,HttpSession session
@@ -65,6 +68,7 @@ public class ManagerController {
 	}
 	
 	
+	/* 회원 등급 수정*/
 	@RequestMapping("/club/editgrade/{clubId}")
 	public String editClubmember(@PathVariable("clubId") int clubId
 								   ,HttpSession session
@@ -95,6 +99,9 @@ public class ManagerController {
         }
 	}
 	
+	
+	
+	/*문의사항 페이지 이동*/
 	@RequestMapping("/club/qna/{clubId}")
 	public String qnaPage(@PathVariable("clubId") int clubId
 			   			  ,HttpSession session
@@ -125,6 +132,7 @@ public class ManagerController {
 	}
 	
 	
+	/*동호회 수정 페이지*/
 	@RequestMapping("/club/edit/{clubId}")
 	public String editClub(@PathVariable("clubId") int clubId
  			  ,HttpSession session
@@ -161,16 +169,10 @@ public class ManagerController {
             // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
             return "member/memberForm";
         }
-		
-		
-		
-		
 	}
 	
 	
-	
-	
-	
+	/*가입 요청 list 불러옴*/
 	@ResponseBody
 	@RequestMapping(value = "/club/requestlist", method = RequestMethod.POST)
 	public JsonResult getMemList(@ModelAttribute MemberVo memberVO) {
@@ -184,7 +186,8 @@ public class ManagerController {
 		
 		return jsonResult;
 	}
-	
+
+	/*가입승인 처리*/
 	@ResponseBody
 	@RequestMapping(value = "/club/joinrequest", method= RequestMethod.POST)
 	public JsonResult joinRequest(@ModelAttribute ClubVo vo) {
@@ -198,6 +201,8 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	
+	/*클럽 가입된 회원 리스트*/
 	@ResponseBody
 	@RequestMapping(value ="/club/memberlist", method = RequestMethod.POST)
 	public JsonResult clubMemList(@ModelAttribute MemberVo memberVO) {
@@ -210,6 +215,7 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	/*등급 변경*/
 	@ResponseBody
 	@RequestMapping(value = "/club/changegrade", method = RequestMethod.POST)
 	public JsonResult changeGrade(@ModelAttribute MemberVo memberVO) {
@@ -221,6 +227,7 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	/*회원 강퇴*/
 	@ResponseBody
 	@RequestMapping(value = "/club/kickout" , method = RequestMethod.POST)
 	public JsonResult kickoutMem(@ModelAttribute ClubVo clubVO) {
@@ -231,6 +238,7 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	/*클럽 QNA 중 답변이 등록되지 않은 QNA 리스트*/
 	@ResponseBody
 	@RequestMapping(value ="/club/qnalist", method=RequestMethod.POST)
 	public JsonResult getQnaList(@ModelAttribute MemberVo memberVO) {
@@ -242,6 +250,7 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	/*클럽 QNA 답변 등록*/
 	@ResponseBody
 	@RequestMapping(value = "/club/qnaanswer", method = RequestMethod.POST)
 	public JsonResult addQnaAnswer(@ModelAttribute QnaVO qnaVO) {
@@ -254,8 +263,5 @@ public class ManagerController {
 		
 		return jsonResult;
 	}
-	
-	
-	
 	
 }

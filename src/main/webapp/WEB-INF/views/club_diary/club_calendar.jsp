@@ -72,7 +72,7 @@
 			<!-- //main-content -->
 			
 			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
+				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 			</div>
 		</div>
 		<!-- container -->

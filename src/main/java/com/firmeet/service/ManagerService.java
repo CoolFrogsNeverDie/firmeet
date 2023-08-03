@@ -26,19 +26,15 @@ public class ManagerService {
 		
 		System.out.println("넘어온 값의 memLevel 확인(승인 거절 여부)  " + memLevel);
 		
-		//현재 클럽 인원 재확인하는 로직 필요함
-		
-		if ( clubDAO.checkPrenum(clubVO) ==1 ) {
-		 switch(memLevel) {
-		 
-		 case 2: memberDAO.updateMemLevel(clubVO);
-		 		 result = 1;
-		 		 break;
-		 case -99:memberDAO.deleteClubMem(clubVO);
-		 		 result = 0;
-		 		 break;
-		
-		 	}
+		//만약 회원가입 가능한 상태면? 
+		if ( clubDAO.checkPrenum(clubVO) ==1 && memLevel ==2 ) {
+			memberDAO.updateMemLevel(clubVO); //memlevel update로 정식회원 등급으로 업데이트
+			//해당 클럽의 prenum +1 업데이트
+			memberDAO.plusClubPreNum(clubVO);
+			result = 1;
+		}else if(memLevel == -99) {
+			memberDAO.deleteClubMem(clubVO); //대기 상태에서도 쫓아내기
+			result = 0;
 		}
 		return result;
 	}
@@ -66,6 +62,7 @@ public class ManagerService {
 	public boolean kickoutMem(ClubVo clubVO) {
 		boolean result = false;
 		result = memberDAO.deleteClubMem(clubVO) >0? true: false;
+		memberDAO.minusClubPreNum(clubVO);
 		
 		return result;
 	}

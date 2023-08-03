@@ -169,4 +169,20 @@
 				where clubMemNo = #{clubmemNo}
 		]]>
 	</update>
+	
+	<update id = "plusClubPreNum" parameterType ="club">
+		<![CDATA[
+			update club set 
+				preNum = preNum+1
+			where clubId = #{clubId}
+		]]>
+	</update>
+	
+	<update id = "minusClubPreNum" parameterType = "club">
+		<![CDATA[
+			update club set 
+				preNum = preNum-1
+			where clubId = #{clubId}
+		]]>
+	</update>	
 </mapper>

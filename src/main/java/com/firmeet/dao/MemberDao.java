@@ -94,4 +94,16 @@ public class MemberDao {
 		return row;
 	}
 
+	public int plusClubPreNum(ClubVo clubVO) {
+		int row =  sqlsession.update("member.plusClubPreNum", clubVO);
+		System.out.println("가입여부 확인");
+		return row;
+	}
+
+	public int  minusClubPreNum(ClubVo clubVO) {
+		int rwo = sqlsession.update("member.minusClubPreNum", clubVO);
+		System.out.println("강퇴 여부 확인");
+		return rwo;
+	}
+
 }
