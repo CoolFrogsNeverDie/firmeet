@@ -92,6 +92,25 @@ public class ClubController {
 		return "/club/makingForm";
 	}
 
+	/* 샘플용 */
+	@RequestMapping(value = "/makingForm2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String clubMakingForm2(Model model) {
+		System.out.println("ClubController.clubMakingForm()");
+		List<TagVo> tagList = memberService.tagList();
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("cateList", cateList);
+
+		return "/club/makingForm2";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	/* 클럽 만들기 */
 
 	@RequestMapping(value = "/making", method = { RequestMethod.GET, RequestMethod.POST })
