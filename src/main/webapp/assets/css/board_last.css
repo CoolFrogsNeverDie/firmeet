@@ -7,11 +7,50 @@
     left: 0;
     overflow: auto;
 } */
+/*----------공통 요소-----------*/
+
 /*-이미지 튀어나가지 않게-*/
 .board img {
     width: 100%;
 }
+#board-get{
+	height: 20px;
+}
+.diary-body .edit-area{
+    margin: -20px 30px 10px 20px;
+    width: 1015px;
+    height: 50px;
+    position: fixed;
+    background-color: white;
+    z-index: 999;
+}
+.diary-body .edit-area a, .diary-body .edit-area button{
+	display: inline-block;
+    text-align: center;
+    width: 90px;
+    height: 35px;
+    right: -421px;
+    font-size: 18px;
+    background-color: #1eafcc;
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 3px;
+    z-index: 999; 
+}
+.diary-body .edit-area .cancle-btn{
+	background-color: white;
+	border: 1px solid #1eafcc;
+	color: #1eafcc !important;
+}
 
+.diary-body .edit-area .edit-btn-area{
+	float: right;
+}
+
+
+
+/* 동호회 게시판 CSS*/
 .club-board-area .club-category {
     padding-left: 10px;
     display: none;
@@ -26,8 +65,7 @@
     border: 1.5px solid #c7c8c9;
     border-radius: 10px;
     padding: 10px 10px 0px 14px;
-    margin: 20px 30px 30px 20px;
-    
+	margin: 35px 30px 10px 20px;
 }
 
 .club-board-area .board .edit-board-spans{
@@ -124,7 +162,7 @@
 	margin-bottom: 20px;
 }
 .club-board-area .board-comment-list .reply-area {
-	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .club-board-area .board-comment-list .reply-area img{
 	
@@ -165,4 +203,22 @@
 }
 .club-board-area .board-comment-list .reply-area .new-content2{
 	margin: 0px 0px 20px 32px;
+}
+
+/*게시글 등록*/
+.write-board-area{
+	width: 100%;
+	height: 100%;
+}
+.write-board-area .buttons-area{
+	width:100%;
+	height:85px;
+}
+.write-board-area .summernote-area {
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 30px;
+}
+.write-board-area .clear {
+	height:20px;
 }

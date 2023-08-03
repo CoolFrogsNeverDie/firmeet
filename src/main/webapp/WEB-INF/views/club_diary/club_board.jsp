@@ -53,6 +53,9 @@
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
+						<div class= "edit-area">
+							<div class= "edit-btn-area"><a class= "write-btn" href= "${pageContext.request.contextPath}/board/club/editpage/${club.clubId}">글쓰기</a></div>
+						</div>
 						<div class= "board-area club-board-area"><!-- AJAX로 게시글 그릴 공간 -->
 						
 											
