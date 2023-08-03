@@ -171,8 +171,8 @@ public class NoticeBoardService {
 		//
 		NoticeBoardVO vo1 = dao.editlistgroup(vo);
 		//댓글 리스트
-		List<AreplyVO> vo11 = dao.getBoardComment(vo);
-		vo1.setReplyList(vo11);
+		//List<AreplyVO> vo11 = dao.getBoardComment(vo);
+		//vo1.setReplyList(vo11);
 		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
 		
 		System.out.println("vo1확인"+vo1);

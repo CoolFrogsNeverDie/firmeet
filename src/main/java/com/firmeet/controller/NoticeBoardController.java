@@ -233,7 +233,7 @@ public class NoticeBoardController {
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));
 		
-int clubId = (int) session.getAttribute("clubId");
+		int clubId = (int) session.getAttribute("clubId");
 		
 		System.out.println("controller clubId"+clubId);
 		model.addAttribute("clubId", clubId);
