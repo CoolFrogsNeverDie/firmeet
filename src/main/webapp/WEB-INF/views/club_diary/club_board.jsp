@@ -53,12 +53,16 @@
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
-						<div class= "board-area club-board-area">
+						<div class= "board-area club-board-area"><!-- AJAX로 게시글 그릴 공간 -->
 						
+											
 						</div>
-						
+						<!-- //board-area club-board-area-->						
 						
 
+						
+						
+						
 						<div id = "board-get"></div><!-- 무한 스크롤 감시용 div -->
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 					</div>
