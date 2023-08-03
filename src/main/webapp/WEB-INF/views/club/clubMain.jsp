@@ -101,7 +101,6 @@
 		<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
 		<!--/wrap-->
 </body>
-<footer> Copyright (C) 2023 어리쥬 all rights reserved. </footer>
 <style>
 #calendar2 .fc-daygrid-day-number{font-size: 11px;}
 #calendar2 #fc-dom-1{font-size : 15px;}
