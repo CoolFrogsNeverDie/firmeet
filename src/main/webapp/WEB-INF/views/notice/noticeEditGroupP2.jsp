@@ -1,222 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>개인 게시판</title>
+    <title>공지 에디터</title>
+    
+    <!-- css, js 링크 -->
     <c:import url="/WEB-INF/views/include/topnav.jsp"></c:import>
+    <!-- //css, js 링크 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ba049cf132b7471f4a76ebf9ace329c&libraries=services,clusterer,drawing"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
-    
- <script>
- 
- 	/*메뉴바 스크립트용 JS*/
-    // 클릭 이벤트 처리
-    $(document).on('click', '#navbarDropdown', function () {
-    	 $('#clubList').empty();
-    	
-        // AJAX 요청 보내기
-        var memberId = '${member.memberId}';
-        console.log('memberId:', memberId);
-
-        $.ajax({
-            type: 'POST', // 또는 'GET'에 맞게 설정
-            url: '${pageContext.request.contextPath}/main/clubList', // 서버 측의 엔드포인트 주소
-            data: {
-                memberId: memberId, // 클라이언트에서 서버로 넘길 변수
-            },
-            success: function (jsonResult) {
-                var list = jsonResult.data; // 변경: clubList -> list
-                console.log(list);
-                for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
-                    var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
-                    var clubId = list[i].clubId; 
-                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); 
-                }
-            },
-            error: function (error) {
-                // AJAX 에러 시 실행되는 코드
-                console.error('Error:', error)
-            }
-        });
-    });
-</script>
-
+	<link href="${pageContext.request.contextPath}/assets/css/main2_test_bak.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath }/assets/css/noticestyle.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-	<!-- 상단 내비게이션 바 -->
-	<div class="ly-head-container">
-		<header>
-			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
-		</header>
-	</div>
-    <!-- // 상단 내비게이션 바 -->
-    
-    <!-- 중간 콘텐츠 -->
-    <div class="ly-body-container ">
-		<div class="main">
-			<div class="main-content">
-				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
-					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
-						<h2>${club.clubName}</h2>
-						
-						<form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
-						  	<div class= "search-board"> 
-								<input name="keyword" id="search-keyword" value="${map.keyword }" placeholder="검색어를 입력하세요">
-								<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						  	</div>
-		  				</form>
-					</div>		
-					<!-- //diary-topbar -->
-					
-					<div class="diary-body">
-                		<form action="${pageContext.request.contextPath}/${clubId}/notice/editgroupwriteG" class="formleft" method="get">
-		                    <div class="edittop">
-		                        <select name="" id="" class="selectbox">
-		                            <option value="notice">공지게시판</option>
-		                        </select>
-		                        
-		                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반&nbsp;
-		                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임(결제)&nbsp;
-		                        <input type="radio" name="aboardVal" value="3" id="aboardVal" style="margin-left: 20px;" checked>모임(일정)
-		                              
-		                       <select name="meetYear" id="meetYear" class="meetYear">
-		                            <option value="2023">2023년</option>
-		                            <option value="2024">2024년</option>
-		                            <option value="2025">2025년</option>
-		                            <option value="2026">2026년</option>
-		                            <option value="2027">2027년</option>
-		                            <option value="2028">2028년</option>
-		                            <option value="2029">2029년</option>
-		                            <option value="2030">2030년</option>
-		                            <option value="2031">2031년</option>
-		                            <option value="2032">2032년</option>
-		                            <option value="2033">2033년</option>
-		                            <option value="2034">2034년</option>
-		                        </select>
-		                            
-		                        <select name="meetMon" id="meetMon" class="meetMon">
-		                            <option value="1">1월</option>
-		                            <option value="2">2월</option>
-		                            <option value="3">3월</option>
-		                            <option value="4">4월</option>
-		                            <option value="5">5월</option>
-		                            <option value="6">6월</option>
-		                            <option value="7">7월</option>
-		                            <option value="8">8월</option>
-		                            <option value="9">9월</option>
-		                            <option value="10">10월</option>
-		                            <option value="11">11월</option>
-		                            <option value="12">12월</option>
-		                        </select>
-		
-		                        <select id="meetName" name="meetName" class="meetName">
-		                            <option value="정기모임">정기모임</option>
-		                            <option value="깜짝모임">깜짝모임</option>
-		                            <option value="번개모임">번개모임</option>
-		                            <option value="일반모임">일반모임</option>
-		                        </select>
-		                        
-		                        <input type="hidden" name="memberId" value="${member.memberId}">${memberId}
-		                        <button type="submit" class="btnbox">등록</button>
-		                     </div>
-		                     <div class="content-left">
-		
-			                    <div>
-			                        <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
-			                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
-			                    </div>
-			
-			                    <div class="ababab">
-			                        <textarea id="summernote" name="boardContent"></textarea>
-			                        <div class="contentleftbox"></div>
-			                    </div>
-	                
-	                    
-				                 <div class="modal" id="group">
-				                    <div class="modal-dialog">
-				                        <div class="modal-content">
-				                            <div class="modal-header">
-				                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				                            </div>
-				                            <div class="modal-body">
-				                                 <div class="grouptitle" id="result"></div>
-				                                  <div class="payvotebody">
-				                                     <span class="groupvotetitle">만남일</span>
-				                                     <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
-				                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
-				                                     <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
-				                                     <span class="groupvotetitle">&nbsp;장 소&nbsp;</span>
-				                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="">
-				                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button>
-				                                  	 <input type="hidden" name="address1" value="x" id="address1"> 
-													 <input type="hidden" name="address2" value="y" id="address2">
-				                                     
-				 									<div class="map_wrap">
-													   <div id="map" style="width:100%;height:100%;display: block;"></div>
-													      <div id="menu_wrap" class="bg_white">
-													        <div class="option">
-													            <div>
-													               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
-													                <input type="text" id="keyword" size="15">
-													              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
-													            </div>
-													        </div>
-													        <hr>
-													        <ul id="placesList"></ul>
-													        <div id="pagination"></div>
-													    </div>
-													</div>
-				                           			<br>
-				                                 </div>
-				                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-				                                 	 <button type="button" id="reset" class="modelbtnR">등록취소</button>
-				                                     <button type="button" class="modelbtnS" id="saveButton2" style="margin-left: 10px;">등록하기</button>
-				                                 </div>
-				                            </div>
-				                        </div>
-				                    </div>
-				                </div>
-				           </div>
-			         </form>
-			            <!--/content-left-->
-			            <div class="content-right">
-			                <table id="dataTable" style="display: none;">
-			                    <thead>
-			                        <tr>
-			                            <th class="nglist">
-			                                <p id="result1"></p>
-			                            </th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
-			                        <tr>
-			                            <td class="ngname">
-			                                <span id="startDate1"></span> ~ <span id="endDate1"></span>
-			                                <p id="meetTime1"></p>
-			                                <p id="meetPlace1"></p>
-			                            </td>
-			                        </tr>
-			                    </tbody>
-			                </table>
-			                <div id="map2" style="width:100%;height:150px;"></div>
-         				</div>
-	        		</div>
-	        <!--/content-area-->
-<!-- 개인별코딩 ---------------------------------------------------------------->
-				</div>
-			</div>
-		<div class="side-menu">
-			<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
-		</div>
-		</div>
-	</div>
-    
+
+<!-- nav -->
+<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+<!-- //nav -->
+
+<div class="wrap">
+    <div class="diary-area">
+        <div class="diary-topbar">
+            <img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/testimg/dog1.jpg"
+                alt="프로필사진" />
+            <h1>${club.clubName}</h1>
+        </div>
+        <!--/diary-topbar-img-->
+
+        <div class="diary-subbar">
+            <h4>공지 게시판</h4>
+        </div>
+        <!--/diary-subbar-->
+
+        <div class="content-area">
+            <div class="content-left">
+
+                <!-- 여기부터 작성 -->
+                <form action="${pageContext.request.contextPath}/${clubId}/notice/editgroupwrite" class="formleft" method="get">
+                    <div>
+                        <select name="" id="" class="selectbox">
+                            <option value="notice">공지게시판</option>
+                        </select>
+                        
+                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반&nbsp;
+                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;" checked>모임(결제)&nbsp;
+                        <input type="radio" name="aboardVal" value="3" id="aboardVal" style="margin-left: 20px;">모임(일정)
+                        
+                       <select name="meetYear" id="meetYear" class="meetYear">
+                            <option value="2023">2023년</option>
+                            <option value="2024">2024년</option>
+                            <option value="2025">2025년</option>
+                            <option value="2026">2026년</option>
+                            <option value="2027">2027년</option>
+                            <option value="2028">2028년</option>
+                            <option value="2029">2029년</option>
+                            <option value="2030">2030년</option>
+                            <option value="2031">2031년</option>
+                            <option value="2032">2032년</option>
+                            <option value="2033">2033년</option>
+                            <option value="2034">2034년</option>
+                        </select>
+                            
+                        <select name="meetMon" id="meetMon" class="meetMon">
+                            <option value="1">1월</option>
+                            <option value="2">2월</option>
+                            <option value="3">3월</option>
+                            <option value="4">4월</option>
+                            <option value="5">5월</option>
+                            <option value="6">6월</option>
+                            <option value="7">7월</option>
+                            <option value="8">8월</option>
+                            <option value="9">9월</option>
+                            <option value="10">10월</option>
+                            <option value="11">11월</option>
+                            <option value="12">12월</option>
+                        </select>
+
+                        <select id="meetName" name="meetName" class="meetName">
+                            <option value="정기모임">정기모임</option>
+                            <option value="깜짝모임">깜짝모임</option>
+                            <option value="번개모임">번개모임</option>
+                            <option value="일반모임">일반모임</option>
+                        </select>
+						<input type="hidden" name="memberId" value="${member.memberId}">${memberId}
+                        <button type="submit" class="btnbox">등록</button>
+                    </div>
+
+                    <div>
+                        <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
+                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
+                    </div>
+
+                    <div class="ababab">
+                        <textarea id="summernote" name="boardContent"></textarea>
+                        <div class="contentleftbox"></div>
+                    </div>
+                
+         <!-- -------------------------------------------------결제투표-------------------------------------------------------->
+                    
+                 <div class="modal" id="group">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                 <div class="grouptitle" id="result"></div>
+                                  <div class="payvotebody">
+                                     <span class="groupvotetitle">만남일 </span>
+                                     <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
+                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
+                                     <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
+                                     <span class="groupvotetitle1">장 소 </span>
+                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="">
+                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button>
+                                  	 <input type="hidden" name="address1" value="x" id="address1"> 
+									 <input type="hidden" name="address2" value="y" id="address2">
+                                     
+ 									<div class="map_wrap">
+									   <div id="map" style="width:100%;height:100%;display: block;"></div>
+									      <div id="menu_wrap" class="bg_white">
+									        <div class="option">
+									            <div>
+									               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
+									                <input type="text" id="keyword" size="15">
+									              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
+									            </div>
+									        </div>
+									        <hr>
+									        <ul id="placesList"></ul>
+									        <div id="pagination"></div>
+									    </div>
+									</div>
+                           			<br>
+                                     <span class="groupvotetitle1">회 비 </span>
+                                     <input class="groupvotemeet" type="text" id="price" name="price"> 원(인당)<br>
+                                     <span class="groupvotetitle2">투표종료 </span>
+                                     <input class="groupvotedate" type="date" id="voteEnd" name="voteEnd"><br>
+                                     <div class="groupminmax">
+                                         <span class="groupvotetitle3">최소인원</span>
+                                         <input class="votemin" type="text" id="minPerson" name="minPerson">명
+                                         / <span class="groupvotetitle3">최대인원</span>
+                                         <input class="votemin" type="text" id="maxPerson" name="maxPerson">명
+                                     </div>
+                                 </div>
+                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
+                                 	 <button type="button" id="reset" class="modelbtnR">등록취소</button>
+                                     <button type="button" class="modelbtnS" id="saveButton2" style="margin-left: 10px;">등록하기</button>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+         </form>
+         </div>
+            <!--/content-left-->
+            <div class="content-right">
+                <table id="dataTable2" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th class="noticegrouplist">
+                                <p class="noticegroupname" id="result1"></p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="noticegrouplist1">
+                                <span class="noticegroupname" id="startDate1"></span> ~ <span class="noticegroupname" id="endDate1"></span>
+                                <p class="noticegroupname" id="meetTime1"></p>
+                                <p class="noticegroupname" id="meetPlace1"></p>
+                                <p class="noticegroupname" id="price1"></p>
+                                <p class="noticegroupname" id="voteEnd1"></p>
+                                <p class="noticegroupname" id="minPerson1"></p>
+                                <p class="noticegroupname" id="maxPerson1"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="map2" style="width:100%;height:150px;"></div>
+         <!-- ----------------------------------------------------------------------------------------------- -->       
+         
+            </div>
+        </div>
+        <!--/content-area-->
+    </div>
+    <!--/diary-area-->
+	<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+    <!--/menu-bar-->
+</div>
+<!--/wrap-->
+                                     
+                                       
 </body>
 <script>
  
@@ -289,14 +267,18 @@ $(document).ready(function() {
        var meetNameValue = $('#meetName').val();
        var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
        var result = $("#result").val();
-       var startDate = $("#startDate").val();
-       var endDate = $("#endDate").val();
-       var meetTime = $("#meetTime").val();
-       var meetPlace = $("#meetPlace").val();
-       var x = $("#address1").val();
-       var y = $("#address2").val();
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var meetTime = $("#meetTime").val();
+        var meetPlace = $("#meetPlace").val();
+        var price = $("#price").val();
+        var voteEnd = $("#voteEnd").val();
+        var minPerson = $("#minPerson").val();
+        var maxPerson = $("#maxPerson").val();
+        var x = $("#address1").val();
+        var y = $("#address2").val();
         
-        $("#dataTable").css("display", "block");
+        $("#dataTable2").css("display", "block");
         $("#map2").css("display", "block");
         $("#group").modal("hide");
 
@@ -305,6 +287,10 @@ $(document).ready(function() {
         $("#endDate1").text("종료일 : " + endDate);
         $("#meetTime1").text("시간 : " + meetTime+" 시");
         $("#meetPlace1").text("장소 : " + meetPlace);
+        $("#price1").text("price회비 : " + price);
+        $("#voteEnd1").text("투표종료일 : " + voteEnd);
+        $("#minPerson1").text("최소인원 : " + minPerson);
+        $("#maxPerson1").text("최대인원 : " + maxPerson);
         
 /* map2 */        
    	var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
@@ -335,15 +321,16 @@ $(document).ready(function() {
     });
     
 });
-	 
+    
 	 $('#group').on("click", function() {
-		   var meetYearValue = $('#meetYear').val();
-		   var meetMonValue = $('#meetMon').val();
-		   var meetNameValue = $('#meetName').val();
-		   var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
-		
-		$('#result').text(combinedValue);
+	   var meetYearValue = $('#meetYear').val();
+	   var meetMonValue = $('#meetMon').val();
+	   var meetNameValue = $('#meetName').val();
+	   var combinedValue = meetYearValue + '년 ' + meetMonValue+ '월 ' + meetNameValue;
+	
+	   $('#result').text(combinedValue);
 	});
+	 
 });
 
 
@@ -354,10 +341,10 @@ $(document).ready(function() {
         placeholder: '내용을 입력하세요',
         tabsize: 2,
         lang: 'ko-KR', // default: 'en-US'
-        height: 500, // set editor height
+        height: 390, // set editor height
         width: 620,
-        minHeight: 500, // set minimum height of editor
-        maxHeight: 500, // set maximum height of editor
+        minHeight: 390, // set minimum height of editor
+        maxHeight: 390, // set maximum height of editor
         focus: true, // set focus to editable area after initializing summernote
         toolbar: [
             ['fontname', ['fontname']],
@@ -679,6 +666,5 @@ $('#searchButton').click(function(event) {
        map.relayout();
    } */
 });
-
 </script>
 </html>

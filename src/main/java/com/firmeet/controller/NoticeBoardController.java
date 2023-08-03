@@ -33,8 +33,8 @@ public class NoticeBoardController {
 	
 	@Autowired
 	private ClubService clubService;
-	@Autowired
-	private MemberService memberService;
+//	@Autowired
+//	private MemberService memberService;
 	@Autowired
 	private GalleryService galleryService;
 	@Autowired

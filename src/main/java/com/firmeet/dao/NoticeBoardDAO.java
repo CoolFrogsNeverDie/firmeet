@@ -114,6 +114,14 @@ public class NoticeBoardDAO {
 	public void aupdate(NoticeBoardVO vo) {
 		sql.update("noticeboard.aupdate",vo);
 	}
+	
+	public int meetNoinsert(NoticeBoardVO vo) {
+		System.out.println("notice meetNoinsert dao 확인");
+		int meetNo = sql.insert("noticeboard.meetNoinsert", vo);
+		System.out.println("dao meetNoinsert 넘어오는 값 확인 : " + vo);
+		System.out.println("dao meetNoinsert 넘어오는 no 확인 : " + vo.getMeetNo());
+		return meetNo;
+	}
 
 
 }

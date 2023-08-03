@@ -35,6 +35,11 @@ public class NoticeBoardService {
 	}
 	
 	public int editwrite(NoticeBoardVO vo) {
+		
+		//dao.meetNoinsert(vo); //meetNo insert
+		
+		System.out.println("getmeetNo"+vo.getMeetNo());
+		
 		dao.editwrite(vo); //
 		System.out.println("service editinsert 확인"+vo);
 		System.out.println("service editinsert getAboardNo 확인"+vo.getAboardNo());
@@ -67,23 +72,28 @@ public class NoticeBoardService {
 	public int editgroupwrite(NoticeBoardVO vo) {
 		System.out.println("service editgroupwrite getAboardNo 확인");
 		
+		//dao.meetNoinsert(vo); //meetNo insert
+		
 		dao.editgroupwrite(vo);
 		
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getMeetNo());
 		
-		dao.editwrite(vo);
+		dao.galleryinsert(vo); //갤러리 넣기
 		System.out.println("service editgroupwrite 확인"+vo);
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
 		
-		int aboardNo = vo.getAboardNo();
+		int meetNo = vo.getMeetNo(); //meetno 확인
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
+		
+		dao.editwrite(vo); //aboard
 
+		dao.aupdate(vo); //
 	
 		System.out.println("service editgroupwrite 확인"+vo);
 		System.out.println("service editgroupwrite getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service editgroupwrite getMeetNo 확인"+vo.getMeetNo());
 		
-		return aboardNo;		
+		return meetNo;		
 	}
 
 	public NoticeBoardVO editlistgroup(NoticeBoardVO vo) {
@@ -115,6 +125,8 @@ public class NoticeBoardService {
 	
 	public int editgroupwriteG(NoticeBoardVO vo) {
 		System.out.println("------service editgroupwrite 확인"+vo);
+		
+		//dao.meetNoinsert(vo); //meetNo insert
 		dao.editgroupwrite(vo); //meet_name insert
 		
 		System.out.println("갤러리확인");
