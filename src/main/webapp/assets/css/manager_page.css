@@ -131,14 +131,15 @@
 .mem-info .tag-list {
     color: #1eafcc;
     font-size: 14px;
+	width: 240px;
 }
 .clubMem-info{
-	    height: 164px;
-	    background-color: white;
+	height: 164px;
+	background-color: white;
 }
 .editPage-btns{
-    	margin-left: 47px !important;
-    	margin-top: 107px !important;
+   	margin-left: 47px !important;
+   	margin-top: 107px !important;
 } 
 
 .mem-info .mem-join-date {
@@ -205,7 +206,7 @@
 	height: 40px;
 }
 #edit-grade-modal .edit-modal-btn-area{
-	 display: flex; 
+	display: flex; 
     justify-content: center; 
     align-items: center;
     margin-top: 9px;
@@ -226,8 +227,6 @@
 .mem-level-name b{
     margin-left: 25px;
 }
-
-
 .qna-info{
     width: 975px;
     height: 190px;
@@ -270,7 +269,7 @@
     z-index: 9999;
 }
 #qna-modal textarea{
-	border:1px solid gray;
+	border:none;
     width: 725px;
     height: 100px;
    	margin-bottom: 10px;

@@ -40,12 +40,7 @@
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-  						
-  						
-						<div class= "search-board"> 
-							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
-							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
-						</div>						
+  										
 						
 					</div>		
 					<!-- //diary-topbar -->
@@ -179,6 +174,16 @@
 	})
 	
 	
+		function checkList(){
+		
+		 var hasClass = $(".list-area .mem-info").length > 0;
+		
+		 if(!hasClass){
+			 noData();
+		 }
+		 
+	}
+	
 	
 	//QNA 에 답변 등록
 	function addAnswer(QnaVO){
@@ -247,6 +252,26 @@
 		       }
 						            
 		    });//ajax end
+	}
+	
+	
+	function noData(){
+		
+		var add = '';
+		add += '<div class= "error-page">'
+		add += '	<div>'
+		add += '		<img class="error-icon" src ="${pageContext.request.contextPath}/assets/images/icon/error.png">'
+		add += '	</div>'
+		add += '	<div class= "clear-div">'
+		add += '	</div>'
+		add += '	<div>'
+		add += '		<span>'
+		add += '		 	<b>등록된 문의사항이 없습니다!</b>'
+		add += '		</span>'
+		add += '	</div>'
+		add += '</div>'
+		
+		$('.list-area').append(add);
 	}
 	
 	
