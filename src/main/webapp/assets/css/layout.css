@@ -89,6 +89,11 @@ header #navbarSupportedContent ul>li>a {
 }
 
 
+.main .main-content-full {
+	height: 100%;
+    width: 100%;
+}
+
 /* diary-area */
 .main .main-content .diary-area {
 	height: 810px;

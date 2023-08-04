@@ -66,6 +66,30 @@ public class MainController {
 		return "/main/mainForm";
 	}
 
+	
+	@RequestMapping(value = "/mainForm2", method = { RequestMethod.GET, RequestMethod.POST })
+	public String mainList2(
+			@ModelAttribute ClubVo clubVo ,
+			@RequestParam(value="crtPage", required=false,defaultValue="1")int crtPage,
+						   @RequestParam(value="keyword", required=false,defaultValue="") String keyword,
+						   Model model, HttpSession session) {
+		List<TagVo> tagList = memberService.tagList();
+		model.addAttribute("tagList", tagList);
+
+		List<CategoryVo> cateList = memberService.cateList();
+		model.addAttribute("cateList", cateList);
+
+		
+		System.out.println("MainController.mainList()");
+		Map<String, Object> pMap = clubService.clubList2(crtPage,keyword,clubVo);
+		model.addAttribute("pMap",pMap);
+		
+		System.out.println(pMap);
+		return "/main/mainForm2";
+	}
+
+	
+	
 
 	@ResponseBody
 	@RequestMapping(value = "/clubList", method = { RequestMethod.GET, RequestMethod.POST })

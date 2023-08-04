@@ -16,35 +16,39 @@
         crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/makingForm2.css" rel="stylesheet" type="text/css" />
     <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
     <!--모달-->
-    <style>
+ <!--    <style>
     	
     	* {
     		list-style:none
     	}
 		
-		input[type=text],textarea,select{
+		input[type=text],select{
+			height: 40px;
 			border: 1px solid gray;
+			padding-left:10px;
+		}
+		
+		
+		textarea {
+			border: 1px solid gray;
+			padding-left:10px;
 		}
     	
-    	.club .c_container {
-            width: 1000px;
-    	 	
-            margin:  0 140px;
-           
-    	}
+    
     
         .club .c_container .club_making {
             
             width: 80%;
-            margin: 80px auto;
+            margin: 40px auto;
             text-align: center;
         }
      
         .form_line {
             height: 3px;
-            width: 800px;
+          
             margin: 0 auto;
             background-color: black;
             border: none;
@@ -59,7 +63,7 @@
         }
 
         #clubMakingForm .making_forms p {
-            width: 180px;
+            width: 200px;
             font-size: 15px;
         }
         #clubMakingForm .making_forms #clubName {
@@ -70,22 +74,33 @@
         #clubMakingForm .making_forms #categorys {
             
             width: 610px;
+            height: 60px;
             display: flex;
             justify-content:space-between;
             flex-wrap: wrap;
-            gap: 20px;
-
-            
+            gap: 10px;
             padding-left: 0px;
         }
-        #clubMakingForm .making_forms #categorys #cate {
+        #clubMakingForm .making_forms #categorys .cate {
+            height:20px;
             font-size: 10px;
             width: 100px;
             display: flex;
+            accent-color:#5f0080;
              
         }
-        #clubMakingForm .making_forms #categorys #cate>p {
-           transform: translate(5px, 5px);
+        
+        #clubMakingForm .making_forms #categorys .cate input[type=radio]{
+        	transform: translateY(7px);
+      
+        }
+        
+        
+        #clubMakingForm .making_forms #categorys .cate>label {
+            font-size:14px;
+           	width:150px;
+           	height:20px;
+           	transform: translate(5px, 5px);
         }
 
         /* 정원 */
@@ -140,42 +155,47 @@
         #clubMakingForm #clubTag #clubTags .tag_label {
             width: 95px;
             height: 30px;
-            border-radius: 10px;
-            border:1px solid black;
+            border-radius: 5px;
+           	background:#a864d8;
+	     	color:#eee;
+           	text-align:center;
+           	padding-top:5px;
+           	cursor :pointer;
           
         }
-        #clubMakingForm #clubTag #clubTags .tag_label>p {
+/*         #clubMakingForm #clubTag #clubTags .tag_label>p {
             display: block;
             width: 100%;
             transform: translateY(4px);
             font-size: 12px;
             text-align: center;
-        }
+        } */
         
-        .tag .tags:checked+.tagLabel{
-        	background-color:white;
-        	color:#1eafcc;
+        #clubMakingForm #clubTag #clubTags .club_tag:checked+.tag_label {
+        	background:#eee;
+        	color:#a864d8;
         
         }
         #clubMakingForm #selTag {
-            height: 80px;
+            height: 40px;
         }
 
         #clubMakingForm #selTag #selectedTag {
            
             width: 600px;
-            height: 80px;
+            height: 40px;
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            overflow-y: scroll;
             padding-left: 0px;
         }
         #clubMakingForm #selTag #selectedTag .tag {
-            border:1px solid black;
+        
+        	background-color:#5f0080;
+        	color:#fff;
             width: 95px;
             height: 30px;
-            border-radius: 10px;
+            border-radius: 5px;
 
         }
 
@@ -256,17 +276,18 @@
         }
 
         #clubMakingForm #imgBox .making_forms  label{
-            background-color: #1eafcc;
-            border-radius: 10px;
+            background-color: #5f0080;
+            color: #fff;
+            border-radius: 5px;
             width: 150px;
             height: 40px;
 			padding: 10px 0px 0px 30px;
+			cursor:pointer;
         }
 
         #clubMakingForm #imgBox #clubMainImg #mainImg {
             width: 200px;
             height: 200px;
-            transform: translateY(40px);
          }
 
          #clubMakingForm #imgBox #clubMainImg div {
@@ -276,7 +297,7 @@
          }
 
          #clubMakingForm #imgBox #clubMainImg label {
-            transform: translate(80px,120px);
+            transform: translate(80px,80px);
            
          }
         
@@ -295,6 +316,7 @@
 
          #clubMakingForm #imgBox #clubBackImg label {
             transform: translate(282px,15px);
+            
          }
 
         .file-input{
@@ -323,19 +345,36 @@
         #clubMakingForm>#submitBox button {
             width: 200px;
             height: 55px;
-            border-radius: 10px;
-            border: 1px solid lightcoral;
-            transform: translate(390px,10px);
-            
-        
+            display:block;
+            margin: 0 auto;
+            background : #5f0080;
+            color : #fff; 
+            cursor :pointer;
         }
-
+        
+        #clubMakingForm>#submitBox button:hover {
+        	background : #fff;
+        	color : #5f0080;
+        }
+		
+		 footer {
+	    	boxsizing:border-box;
+	    	width:100%;
+	    	height:80px;
+	    	background:#777;
+	    	color:#eee;
+	    	padding-top:30px;
+	    	transform:translateY(7px);
+	    	border:none;
+	      	text-align:center;
+	      	transform:translateY(30px);
+	    }
 
     
    
     
     </style>
-    
+     -->
     
 </head>
 
@@ -351,9 +390,9 @@
     <!-- 중간 콘텐츠 -->
     <div class="ly-body-container ">
 		<div class="main">
-			<div class="main-content">
+			<div class="main-content-full ">
 				<div class="club">
-					<div class="c_container">
+					<div class="c_container main-content-full">
 						<div class="club_making">
                             <h2>동호회 등록</h2>
                         </div>
@@ -368,9 +407,9 @@
                                 		<p>모임 분류</p>
                                     	<ul id="categorys">
                                     		<c:forEach  items="${cateList}" var="cate" >
-                                    			<li id="cate">
-                                            		<input type="radio" name="cateNo"  value="${cate.cateNo}">
-                                            		<p>${cate.category}</p>
+                                    			<li class="cate">
+                                            		<input type="radio" name="cateNo"  id="${cate.category}" value="${cate.cateNo}">
+                                            		<label for ="${cate.category}">${cate.category}</label>
                                         		</li>
                                         	</c:forEach>
                                     	</ul>
@@ -386,7 +425,7 @@
                                     		<c:forEach items="${tagList}" var="tag">
 	                                    		<li>
 	                                            	<input type="checkbox" class="club_tag" name="tagNo" value="${tag.tagNo}" id="${tag.tagNo}" data-tagname="${tag.tagName}">
-	                                            	<label for="${tag.tagNo}" class="tag_label"><p>${tag.tagName}</p></label>
+	                                            	<label for="${tag.tagNo}" class="tag_label">${tag.tagName}</label>
 	                                        	</li>
 	                                        </c:forEach>
                                     	</ul>
@@ -443,18 +482,18 @@
                                      		<p>메인 이미지</p>
                                         	<!-- <img id="mainImg" class="imgPre" src=""> -->
                                         	<div>
-                                        	<img id="mainImg" class="imgPre" src="">
+                                        		<img id="mainImg" src="" class="imgPre" >
                                             	<label for="img2" class="imgFile">이미지올리기</label>
-                                            	<input id="img2" type="file" name="file" value="" class="file-input">
+                                            	<input id="img2" type="file" name="img2" value="" class="file-input">
                                         	</div>
                                      	</div>
                                      	<div class="making_forms" id="clubBackImg" >
 	                                        <p>배경 이미지</p>
 	                                        <div>
-	                                            <img id="backImg" class="imgPre" src="">
+	                                            <img id="backImg" src="" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile">이미지올리기</label>
-	                                                <input id="img1" type="file" name="file" value="" class="file-input">
+	                                                <input id="img1" type="file" name="img1" value="" class="file-input">
 	                                            </div>
 	                                        </div>
 	                                    </div>
@@ -477,6 +516,9 @@
 	</div>
     <!-- //중간 콘텐츠 -->
 </body>
+<footer>
+    &copy; 2023 by 어리쥬. All Page content is property of 어리쥬
+</footer>
 <script>
 	$('#clubMakingForm').on("submit", function(){
 		let val = $('#intro2').val();
@@ -590,8 +632,14 @@
 			
 			 
 		});
-	
-		$("#img1").on("change", function(event) {
+
+		
+		
+		
+		
+		
+		
+		/* $("#img1").on("change", function(event) {
 		
 		    var file = event.target.files[0];
 		    var reader = new FileReader(); 
@@ -602,8 +650,8 @@
 		
 		    reader.readAsDataURL(file);
 		});
-	
-	
+
+
 		$("#img2").on("change", function(event) {
 		
 		    var file = event.target.files[0];
@@ -615,9 +663,33 @@
 		
 		    reader.readAsDataURL(file);
 		});
-
+ */
+			 
 		 
 	});
+	
+	$('input[name="img1"]').change(function(){
+		
+		
+	    setImageFromFile(this, '#backImg');
+	});
+	
+	$('input[name="img2"]').change(function(){
+	    setImageFromFile(this, '#mainImg');
+	});
+	
+
+	function setImageFromFile(input, expression) {
+	    if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function (e) {
+	    $(expression).attr('src', e.target.result);
+	  }
+	  reader.readAsDataURL(input.files[0]);
+	  }
+	}
+	
+	
 	
 </script>
 

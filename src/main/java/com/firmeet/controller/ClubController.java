@@ -192,7 +192,67 @@ public class ClubController {
 			
 		}
 	}
-
+	
+	
+	
+	@RequestMapping(value = "/joinForm2/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String clubForm2(@PathVariable int clubId, 
+			@RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,	
+			Model model,HttpSession session,
+			HttpServletResponse response) {
+		System.out.println("ClubController.clubForm()");
+		System.out.println(clubId);
+		MemberVo member = (MemberVo)session.getAttribute("member");
+		System.out.println(member);
+		
+		if(member == null) {
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>alert('로그인이 필요한 서비스입니다.');</script>");
+	            out.flush(); 
+	           
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 	List<TagVo> tagList = memberService.tagList();
+	    		List<CategoryVo> cateList = memberService.cateList();
+	    		model.addAttribute("tagList", tagList);
+	    		model.addAttribute("cateList", cateList);
+			return "/member/memberForm";
+		}else {
+			String memberId = member.getMemberId();
+			System.out.println(memberId);
+			ClubVo clubVo = clubService.clubInfo(clubId);
+			model.addAttribute("clubVo" , clubVo);
+			
+			/*
+			 * Map<String, Object> pMap= clubService.qnaList2(crtPage, clubId );
+			 * model.addAttribute("pMap", pMap );
+			 */
+			
+			 Map<String,Object> qMap = clubService.qnaList2(crtPage,clubId);
+			 model.addAttribute("qMap",qMap);
+			System.out.println(qMap);
+			System.out.println("==========================================================");
+			System.out.println(clubId);
+			System.out.println(memberId);
+			ClubVo memberLv = clubService.checkMemLevel(memberId, clubId);
+			System.out.println(memberLv);
+			model.addAttribute("memberLv" , memberLv);
+			System.out.println(memberLv);
+			
+		 return "/club/clubJoin2";
+			
+			
+			
+		}
+	}
+	
+	
+	
 	/* 클럽 가입 하기 */
 
 	@RequestMapping(value = "/clubJoin/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })

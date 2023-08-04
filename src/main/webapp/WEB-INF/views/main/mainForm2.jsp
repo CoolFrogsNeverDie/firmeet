@@ -34,13 +34,17 @@
         
         
         #KeywordSearch{
-        	width:1245px;
-        	margin: 0 auto;
-        	height:50px;
+        	height:40px;
         	display:flex;
         	flex-wrap: wrap;
-        	justify-content: space-evenly;
+        	margin:0 auto;
         
+        }
+        
+        p {  
+        	diplay:block;
+        	width:200px;
+        	height:40px;
         }
         
         #KeywordSearch p {
@@ -49,13 +53,12 @@
         	display:block;
         	width:200px;
         	height:40px;
-        	transform:translateX(22px);
         }
         
         
         #KeywordSearch #main_search {
         	height:40px;
-        	min-width:750px;
+        	min-width:700px;
         }
         
         
@@ -72,9 +75,9 @@
         }
         
         h2 {
-        	margin:20px 0px ;
+        	margin:30px 0px 20px 0px;
         	text-align: center;
-        	font-size: 60px;
+        	font-size: 35px;
         	font-weight: 900;
         }
         
@@ -82,7 +85,7 @@
         #hobby_form {
        		
        		width : 1245px;
-       		height: 650px;
+       		height: 550px;
        		margin : 0 auto;
         
         } 
@@ -94,13 +97,22 @@
         	height:40px;
         }
         
+        #backgroundBox {
+        	height:500px;
+        	background: #eee;
+        	padding:20px;
+        	z-index:-20;
+        	
+        }
+        
+        #controlBox {
+        	paddiong-left:20px;
+        }
+        
         
         #searchBox {
-        	padding-top:20px;
-        	width:1245px;
-        	height:600px;
+        	padding:20px;
         	border: 1px solid #ccc;
-        	margin: 0 auto;
         
         }
         
@@ -108,9 +120,7 @@
       		
         	display: flex;
         	gap: 50px;  
-        	width: 1000px;
-        	height: 30px;
-        	margin: auto;
+        	height: 40px;
     	}
     	
     	#select_box p {
@@ -121,55 +131,44 @@
 	        height:30px;
 	    }
         
-        
-        #select_field{
-	        
-	        width: 1000px;
-	        margin: auto;
-	    }
-	    
-	    
+  
 	    #select_field {
+	    
+	    	height:65px;
 	    	display: flex;
+	    	gap:10px;
 	    }
 	    
 	    #select_field>p{
 	    	
-        	width:150px;
+        	width:200px;
 	        height:30px;
         	font-size: 17px;
         	font-weight: 600;
+        	
     	}
     	
     	#select_field ul{
-    		
-	        margin: 20px;
-	        width:1000px;
+    		transform:translateX(60px);
 	        display: flex;
 	        flex-wrap: wrap;
-	        accent-color: #1eafcc;
+	        accent-color: #5f0080;
+	        gap:10px;
+	        padding:0px;
 	    }
         #select_field li{
-	        font-size: 12px;
+        	
+	        font-size: 15px;
 	        width:150px;
-	        height:30px;
+	        height:24px;
 	        display: flex;
-	        gap:10px;
+	        gap:5px;
 	    }
 	    
-	    #select_field li>p{
-     		transform: translateY(7px);
-     	} 
-     	
-     	#keyword {
-	        
-	        width: 1000px;
-	        margin:  20px auto;
-	    }
+	 
 
 		#keyword p {
-	       
-	       width:150px;
+	       padding:0;
 	       height:30px;
 	       font-size: 17px;
 	       font-weight: 600;
@@ -184,14 +183,17 @@
 	    }
 	    
 	    #select_tag{
-	    	
-            margin:-24px 0px 0px 143px;
+            margin: -45px 0px 0px 200px;
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            width: 800px;
-            height: 250px;
+            gap: 10px;
+            height: 120px;
+            padding:0px;
             position:relative;
+       }
+       
+       #select_tag li {
+       		height:35px;
        }
 	   #select_tag .tags{
 	        position:absolute;
@@ -199,55 +201,90 @@
 	        height: 1px;
 	        padding:0;
 	        margin: -1px;
-	        font-size: 10px;
+	        font-size: 17px;
 	        overflow:hidden;
 	        border:none;
-	        background: transparent;     
+	        background: transparent; 
+	        opacity:0;    
 	    }
 	    .tagLabel{
         	display:block;
         	text-align:center;
-        	width:110px;
-        	height:25px;
-        	font-size:13px;
+        	width:80px;
+        	height:35px;
+        	font-size:12px;
         	font-weight:200;
-        	border-radius:5px;
-        	padding:2px;
-        	background-color:#1eafcc;
+        	border-radius:10px;
+        	padding:7px;
+        	background-color:#fff;
+        	color:#000;
+        	border: 1px solid #222;
         }
         
         #selTag {
+        	transform:translateY(15px);
         	display:flex;
-         	margin-top:15px;
          
         }
 	        
 	    #selectedTag{
 	    		
-	        	margin-left:-7px;
 	            display: flex;
 	            flex-wrap: wrap;
-	            gap: 15px;
+	            gap: 10px;
 	            width: 800px;
 	            height: 50px;
 	            position:relative;
+	            padding:0px;
+	            
 	     }
 	     
+	     #selectedTag .tagLabel, .tags:checked +.tagLabel{
+	     	background:#a864d8;
+	     	color:#eee;
+	      }
+	      
+	      div#KeywordSearch, div#select_box, div#select_field {
+	      	margin-bottom:20px;
+	      
+	      }
+	      
+	      #select_tag {
+	     	margin-bottom:30px; 
+	      	
+	      }
+	     
 	     #search_btn {
-	        font-size: 15px;
+	     	display:block;
+	        font-size: 20px;
+	        font-weight:700;
 	        width: 200px;
-	        border-radius: 10px;
+	        /* border-radius: px; */
+	        margin: 0 auto;
 	        height: 50px;
-	        position: absolute;
 	        border: none;
-	        right: 875px;
-	        bottom: 75px;
-	        
+	        background-color:#5f0080;
+        	color:#fff;
+	    }
+	    
+	    #btnBox{
+	    	transform:translate(800px,-5px);
+	    
 	    }
 
 	    #search_btn:hover {
 	        color: #fff;
-	        background: #1eafcc;
+	        background: #5f0080;
+	    }
+	    
+	    #detail_btn {
+	    	color:#eee;
+	    	background:#777;
+	    	border-radius:20px;
+	    	width:30px;
+	    	height:30px;
+	    	transform:translateX(50px);
+	    	
 	    }
 			
 	    #meet {
@@ -270,11 +307,11 @@
 	    	display:block;
 	    	width: 150px;
 	        height: 40px;
-	        border-radius: 10px;
+	        /* border-radius: 10px; */
 	        border: none;
-	        background: #1eafcc;
-	        color: white;
-	        transform: translateX(1000px)
+	        background: #5f0080;
+	        color: #fff;
+	        transform: translate(1035px,-28px);
 	    }
 	
 	  
@@ -291,7 +328,7 @@
 	    	width: 1245px;
 	        display: flex;
 	        flex-wrap: wrap;
-	        gap: 35px; 
+	        gap: 20px; 
 	        justify-content: space-between;
 	        padding:0px;
 	    }
@@ -301,28 +338,45 @@
 	    }
 	    
 	    #meetList>li {
-	        border: 1px solid black;
+	        
 	        display: block;
-	        width: 200px;
-	        height: 300px;
+	        width: 230px;
+	        height: 350px;
 	    }
 	
 	    #meetList .meetPhoto {
 	        display: block;
-	        width: 200px;
-	        height: 200px;
-	        border: 1px solid black;
+	        width: 230px;
+	        height: 230px;
+	       
 	    }
 	    
+	 	.meetTitle {
+	 		height:20px;
+	 		font:13px;
+	 		font-weight:400;
+	 		text-align:center;
+	 		padding-top:5px;
+	 	} 
+	 	
+	 	.meetContent {
+	 		height:50px;
+	 		font:13px;
+	 		font-weight:200;
+	 		
+	 	}
+	 	
+	 	  	    
 	    #paging ul{
-	    	width: 300px;
+	    	width: 150px;
 	    	margin:auto;
-	    	height:20px;
+	    	height:30px;
 	    	display:flex;
 	    }
 	    #paging ul li{
-	    	width:20px;
-	    	height:20px;
+	    	width:30px;
+	    	height:30px;
+	    	
 	    }
 
 	    footer {
@@ -357,60 +411,72 @@
       
     <form id="hobby_form" action="${pageContext.request.contextPath }/main/mainForm">
         
-        <div id="KeywordSearch">
+        <!-- <div id="KeywordSearch">
         	<p>동호회 검색</p>
         	<input id="main_search" type="search"  name="keyword" value="">
-        </div>
-         
-        <div id="searchBox">
-	        <div id="select_box">  
-	            <p>원하는 지역</p>
-	            <select id="addressSi" name="address1"> </select>
-	            <select id="addressSiGunGu" name="address2"> </select>
+        </div> -->
+	        <div id="searchBox">
+		        <div id="backgroundBox">
+		        	
+			        <div id="KeywordSearch">
+			        	<p>동호회 검색</p>
+			        	<input id="main_search" type="search"  name="keyword" value="">
+			        </div>
+		        	
+		        	<div id="controlBox">
+				        <div id="select_box">  
+				            <p>원하는 지역</p>
+				            <select id="addressSi" name="address1"> </select>
+				            <select id="addressSiGunGu" name="address2"> </select>
+				        </div>
+				        
+				        <div id="select_field">
+				            <p><label for="cate">원하는 분야</label></p>
+				            <ul>
+				                 <c:forEach  items="${cateList}" var="cate" >
+				                 	<li><input type="radio" name="cateNo"  value="${cate.cateNo}" ><p>${cate.category}</p></li>
+				                 </c:forEach>
+				            </ul>
+				        </div>
+				        <div id="keyword">
+				            <p>원하는 키워드</p>
+				            
+				            <ul id="select_tag">
+				                  <c:forEach items="${tagList}" var="tag">
+								 	<li>
+								 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
+								 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
+								 	</li>
+								 </c:forEach>
+				            </ul>
+				
+				           <!--  <input type="search"> -->
+				
+				
+				            <div id="selTag">
+					               <p>선택된 태그</p>
+					              	<ul id="selectedTag">
+					              	
+					              	</ul>
+				            	</div>
+				        </div>
+			        </div> 
+			        	<button type="submit" id="search_btn">검색하기</button>
+			        	<!-- <button type="button" id="detail_btn">...</button> -->
+			       
+			        
+		        </div>
 	        </div>
-	        
-	        <div id="select_field">
-	            <p><label for="cate">원하는 분야</label></p>
-	            <ul>
-	                 <c:forEach  items="${cateList}" var="cate" >
-	                 	<li><input type="radio" name="cateNo"  value="${cate.cateNo}" ><p>${cate.category}</p></li>
-	                 </c:forEach>
-	            </ul>
-	        </div>
-	        <div id="keyword">
-	            <p>원하는 키워드</p>
-	            
-	            <ul id="select_tag">
-	                  <c:forEach items="${tagList}" var="tag">
-					 	<li>
-					 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
-					 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
-					 	</li>
-					 </c:forEach>
-	            </ul>
-	
-	           <!--  <input type="search"> -->
-	
-	
-	            <div id="selTag">
-		               <p>선택된 태그</p>
-		              	<ul id="selectedTag">
-		              	
-		              	</ul>
-	            	</div>
-	        </div> 
-	        <button type="submit" id="search_btn">검색하기</button>
-        </div>
     </form>
     <div id="meetArea">
         <div id="meet">
            
-            <a href="http://localhost:8000/firmeet/club/makingForm">나의 모임 만들기</a>
+            <a href="${pageContext.request.contextPath}/club/makingForm">나의 모임 만들기</a>
         </div>
         <ul id="meetList">
         <c:forEach items="${requestScope.pMap.clubList}" var="clubs" >
             <li>
-                <a href="http://localhost:8000/firmeet/club/joinForm/${clubs.clubId}">
+                <a href="${pageContext.request.contextPath}/club/joinForm/${clubs.clubId}">
                     <img src="../assets/images/clubimg/${clubs.img2}" alt="사진 1" class="meetPhoto">
                     <p class="meetTitle">${clubs.clubName} 모임제목</p>
                     <p class="meetContent">${clubs.intro1} 모임 내용</p>
@@ -536,7 +602,14 @@ $(".tags").on("click", function(){
 
 
 </script>
+<!-- <script>
+$("#detail_btn").on("click", function(){
+	$("#controlBox").css("display" , "block");
+	
+});
 
 
+</script>
+ -->
 
 </html>
