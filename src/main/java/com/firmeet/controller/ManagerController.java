@@ -197,6 +197,7 @@ public class ManagerController {
 		int result = managerService.joinRequest(vo);
 		
 		jsonResult.success(result);
+		System.out.println("넘어가는 데이터값*(앞에서 비교할 숫자)" + result);
 		
 		return jsonResult;
 	}

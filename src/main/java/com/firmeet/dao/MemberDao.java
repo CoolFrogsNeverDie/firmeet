@@ -102,7 +102,7 @@ public class MemberDao {
 
 	public int  minusClubPreNum(ClubVo clubVO) {
 		int rwo = sqlsession.update("member.minusClubPreNum", clubVO);
-		System.out.println("강퇴 여부 확인");
+		System.out.println("넘어오는 값" + clubVO);
 		return rwo;
 	}
 

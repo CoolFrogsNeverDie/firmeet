@@ -182,7 +182,7 @@
 		<![CDATA[
 			update club set 
 				preNum = preNum-1
-			where clubId = #{clubId}
+			where clubId = #{clubId} and preNum > 0
 		]]>
 	</update>	
 </mapper>

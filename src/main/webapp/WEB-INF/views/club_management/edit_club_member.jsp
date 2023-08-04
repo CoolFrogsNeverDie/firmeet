@@ -217,6 +217,7 @@
 	//회원 강퇴 버튼 클릭 이벤트
 	$('.list-area').on("click",'.no-mem-btn', function(){
 		var clubMemNo = $(this).data('clubmemno');
+		var clubId = $('.diary-area').data('clubid');
 		
 			if(!confirm("정말 강퇴시키겠습니까?")){
 				return false;
@@ -224,7 +225,8 @@
 		
 		
 			var ClubVO = {
-				 clubMemNo : clubMemNo
+				 clubMemNo : clubMemNo,
+				 clubId : clubId
 			 }
 		
 		 $.ajax({

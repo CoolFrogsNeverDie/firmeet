@@ -25,6 +25,8 @@ public class ManagerService {
 		int memLevel =  clubVO.getMemlevel();
 		
 		System.out.println("넘어온 값의 memLevel 확인(승인 거절 여부)  " + memLevel);
+		System.out.println("체크  : " + clubDAO.checkPrenum(clubVO) +"레벨은?" +  memLevel);
+		
 		
 		//만약 회원가입 가능한 상태면? 
 		if ( clubDAO.checkPrenum(clubVO) ==1 && memLevel ==2 ) {
@@ -62,8 +64,8 @@ public class ManagerService {
 	public boolean kickoutMem(ClubVo clubVO) {
 		boolean result = false;
 		result = memberDAO.deleteClubMem(clubVO) >0? true: false;
-		memberDAO.minusClubPreNum(clubVO);
-		
+		System.out.println("마이너스 되고 있나요? " +  memberDAO.minusClubPreNum(clubVO));
+		System.out.println("마이너스 되고 있나요? " +  result);
 		return result;
 	}
 

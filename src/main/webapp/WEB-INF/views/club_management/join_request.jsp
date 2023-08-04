@@ -172,17 +172,20 @@
 		       dataType : "json",
 		       success : function(jsonResult){
 		    	   var data = jsonResult.data;
+		    		   console.log(data);
 		    	   
 		    	   //1은 승인, 0은 거절, -99는 남은 인원 수 없음
 		    	   switch(data){
-		    		   
 		    	   	case 1: alert('가입승인이 완료되었습니다.');
 		    	   			$('#c' +ClubVO.clubMemNo).remove();
+    	   					console.log('c'+ ClubVO.clubMemNo + '가 삭제 되어야 함')
 		    	   			checkList();
 		    	   			break;
 		    	   	case 0:	alert('거절이 완료되었습니다.');
     	   					$('#c' +ClubVO.clubMemNo).remove();
+    	   					console.log('c'+ ClubVO.clubMemNo + '가 삭제 되어야 함')
     	   					checkList();
+    	   					
 		    	   			break;
 		    	   	case -99: alert('승인 가능 인원을 초과하였습니다.');
 		    	   }
