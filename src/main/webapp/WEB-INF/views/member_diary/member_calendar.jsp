@@ -229,7 +229,7 @@ function relayout3() {
 	$('#edit-place-checked').on('change', function() {
 		  if ($(this).is(':checked')) {
 			  $('.map-search-btn2').prop('disabled', false);
-			  $('.map-search-btn2').css('background-color', 'black');
+			  $('.map-search-btn2').css('background-color', '#1eafcc');
 			  $('.map-search-btn2').css('color', 'white');
 		  } else {
 			  $('.map-search-btn2').prop('disabled', true);

@@ -47,13 +47,13 @@
     background-color: #ffffff;
     border-radius: 10px;
     overflow: hidden;
-    background-color: #1ba6c2;
+    background-color: white;
     box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
 }
 .container1 .popup-head{
 	width: 100%;
     height: 34px;
-    color: white;
+    color: gray;
     font-size: 21px;
 }
 .container1 .popup-close-btn, .container2 .popup-close-btn2, .container6 .popup-close-btn3{
@@ -153,9 +153,9 @@
   border-radius: 5px;
 }
 .container1 .sche-submit-btn button:nth-child(2){
-  background-color: white;
-  border: 1px solid black;
+  background-color: #ff6969;
   border-radius: 5px;
+  color: white;
 }
 .container1 #place-result {
 	
@@ -174,7 +174,7 @@ border: none;
   min-height: 500px;
   border-radius:10px;
   overflow:hidden;
-  background-color: #1ba6c2;
+  background-color: white;
   position: fixed;
   left: 50%;
   box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
@@ -201,7 +201,7 @@ border: none;
 .container2 .popup-head, .container6 .popup-head{
   width:100%;
   height:30px;
-  color: white;
+  color: gray;
   font-size: 21px;
 }
 .container2 .popup-body , .container6 .popup-body {
@@ -212,6 +212,7 @@ border: none;
   width:100%;
   height: 500px;
   padding:30px;
+  border-top: 1px solid gray;
 }
 
 
@@ -229,7 +230,7 @@ border: none;
     height: 540px;
   }
 .per-pop  .per-pop-header{
-	background-color: #1eafcc;
+	background-color: white;
 	border-radius: 9px 9px 0 0;
     height: 34px;
     width:100%;
@@ -239,13 +240,14 @@ border: none;
     text-align: center;
     margin-right: 5px;
     width: 30px;
-    color:white;
+    color:	gray;   
     font-size: 20px;
   }
 .per-pop .per-pop-content{
-  width: 100%;
+  	width: 100%;
     height: 530px;
     padding: 30px;
+    border-top: 1px solid gray;
   }
 .per-pop .body-titlebox{
     width: 100%;
@@ -329,11 +331,11 @@ border: none;
       font-size: 16px;
 }
 .per-pop .per-sche-edit button:nth-child(2){
-  background-color: white;
-  border: 1px solid black;
+  background-color: #ff6969;
   border-radius: 5px;
-  color: black;
-      font-size: 16px;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 
@@ -419,14 +421,15 @@ border: none;
 
 .container5 #edit-place{
 	border:1px solid gray;
+    border-radius: 5px;
 }
 .container5 .popup-head{
   width:100%;
   height:34px;
-  color: white;
+  color: gray;
   font-size: 21px;
-  background-color: #1eafcc;
-}
+  background-color: white;
+  }
 .container5 .popup-close-btn, .container2 .popup-close-btn2, .popup-close-btn4{
   float: right;
   text-align: center;
@@ -448,6 +451,7 @@ border: none;
   width:100%;
   height: 570px;
   padding:30px;
+  border-top: 1px solid gray;
 }
 .container5 .map-search-btn2{
 	border-radius:5px;
@@ -516,9 +520,9 @@ border: none;
     transform: translateX(-50%);
 }
 .container5 .sche-submit-btn button{
-  margin-top: 23px;
-  height: 30px;
-  width: 70px;
+  	margin-top: 23px;
+  	height: 30px;
+  	width: 70px;
 }
 .container5 .sche-submit-btn button:nth-child(1){
     background-color: #1eafcc;
@@ -552,7 +556,7 @@ border: none;
   min-height: 500px;
   border-radius:10px;
   overflow:hidden;
-  background-color: #1eafcc;
+  background-color: white;
   position: fixed;
   left: 50%;
   top: 40px;
@@ -567,8 +571,8 @@ border: none;
 	height: 100px;
 }
 .loca-insert-btn, .loca-edit-btn{
-	margin-bottom : 4px; background-color: black; color: white; text-align: center; font-size:12px; display:inline-block;
-	width:70px; height: 30px; margin-top:7px;
+	margin-bottom : 4px; background-color: #1eafcc; color: white; text-align: center; font-size:12px; display:inline-block;
+	width:70px; height: 30px; margin-top:7px; border-radius: 5px;
 	position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
 }
 .loca-insert-btn:hover{

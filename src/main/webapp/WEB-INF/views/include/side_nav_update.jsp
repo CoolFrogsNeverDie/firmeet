@@ -5,12 +5,12 @@
 
 	<div class= "menu-bar2" >
 		<ul class= "side-bar2">
-			<li><a href="${pageContext.request.contextPath}/${club.clubId}/notice/noticelist">공지사항</a></li>
-			<li><a href="${pageContext.request.contextPath }/gallery/list/${club.clubId}">갤러리</a></li>
-			<li><a href="${pageContext.request.contextPath }/calendar/club/${club.clubId}">달력</a></li>
-			<li><a href="${pageContext.request.contextPath }/board/club/${club.clubId}">자유 게시판</a></li>
-			<li>멤버</li>
-			<li><a href="${pageContext.request.contextPath }/accountBook/main/${club.clubId}">가계부</a></li>
+			<li id = "club-notice"><a href="${pageContext.request.contextPath}/${club.clubId}/notice/noticelist">공지사항</a></li>
+			<li id = "club-gallery"><a href="${pageContext.request.contextPath }/gallery/list/${club.clubId}">갤러리</a></li>
+			<li id = "club-calendar"><a href="${pageContext.request.contextPath }/calendar/club/${club.clubId}">달력</a></li>
+			<li id = "club-board"><a href="${pageContext.request.contextPath }/board/club/${club.clubId}">자유 게시판</a></li>
+			<li id = "club-member">멤버</li>
+			<li id = "club-account"><a href="${pageContext.request.contextPath }/accountBook/main/${club.clubId}">가계부</a></li>
 		</ul>
 	</div>
     <!-- menu-bar2 -->
