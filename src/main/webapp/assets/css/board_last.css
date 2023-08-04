@@ -469,6 +469,6 @@
 #club-board, #per-board {
     box-shadow: 6px 5px 6px 0px #c6c7c8;
     border-left: 0px;
-    background-color: white;
+    background-color: white !important;
     color: black;
 }
