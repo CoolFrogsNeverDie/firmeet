@@ -14,6 +14,7 @@
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/popup.css" type="text/css" />
@@ -90,6 +91,9 @@
 <c:import url="/WEB-INF/views/include/mem_calendar_popup.jsp"></c:import>
 </body>
 <script>
+
+
+
 
 $('.edit-persche').on("submit", function(){
 	
@@ -499,6 +503,11 @@ let calendar;
 $(document).ready(function() {
 	render();
 	getData();
+	$('#per-calendar').css('box-shadow', '6px 3px 6px 0px #c6c7c8');
+	$('#per-calendar').css('border-left', '0px');
+	$('#per-calendar').css('color', 'gray');
+	$('#per-calendar').css('background-color', 'white');
+	$('#per-calendar').css('border-left', '10px solid white');
 
 });
   
@@ -670,8 +679,8 @@ function render(){
 		 							start: club[i].startDate,
 		 							end: club[i].endDate + ' 24:00',
 		 							url: 'http://www.naver.com',
-		 							backgroundColor: '#FF6A00',
-		 							borderColor:  '#FF6A00'
+		 							backgroundColor: '#DE8685',
+		 							borderColor:  '#DE8685'
 		 						});//addEvent end
 		 					}else{
 		 						calendar.addEvent({
@@ -679,8 +688,8 @@ function render(){
 		 							start: club[i].startDate,
 		 							end: club[i].endDate + ' 24:00',
 		 							url: 'http://www.naver.com',
-		 							backgroundColor: '#66008c',
-		 							borderColor:  '#66008c'
+		 							backgroundColor: '#85ADDE',
+		 							borderColor:  '#85ADDE'
 		 						});//addEvent end
 		 					}//if end
 		 				}//for end
@@ -694,8 +703,8 @@ function render(){
 	 							end: per[i].endDate + ' 24:00',
 	 							id : per[i].perScheNo,
 	 					        className : 'per-event',
-	 							backgroundColor: '#0C70F2',
-	 							borderColor:  '#0C70F2',
+	 							backgroundColor: '#CE9FF4',
+	 							borderColor:  '#CE9FF4',
 	 						}
 	        			 );//addEvent end
 	        		 }//for end

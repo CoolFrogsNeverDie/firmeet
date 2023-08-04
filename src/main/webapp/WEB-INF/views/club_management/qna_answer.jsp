@@ -133,6 +133,7 @@
         if (!lastEntry.isIntersecting) return;
 
         getData();
+        checkList();
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
@@ -161,6 +162,7 @@
 				answerContent : content
 		}
 		addAnswer(QnaVO);
+		checkList();
 	});
 	
 	//답변 일정 길이 넘어가면~~
@@ -176,7 +178,7 @@
 	
 		function checkList(){
 		
-		 var hasClass = $(".list-area .mem-info").length > 0;
+		 var hasClass = $(".list-area .qna-info").length > 0;
 		
 		 if(!hasClass){
 			 noData();
@@ -205,6 +207,7 @@
 		    		   $('#qna-modal').modal('hide');
 		    		   $('.qna-answer').val("");
 		    		   $('#c' + QnaVO.qnaNo).remove();
+		    		   checkList();
 		    	   }
 					
 		       }, //success end

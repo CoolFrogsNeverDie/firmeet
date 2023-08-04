@@ -414,6 +414,9 @@
                                         	</c:forEach>
                                     	</ul>
                                 	</div>
+                                	
+                                	
+                                	
                                 	 <div class="making_forms" id="clubMax">
                                     	<p>정원</p>
                                     	<input type="text" id="max" name="max" value="" required>

@@ -84,11 +84,16 @@
 let calendarEl;
 let calendar;
 
+
 //document ready
 $(document).ready(function() {
 	render();
 	getData();
-	
+	$('#club-calendar').css('box-shadow', '6px 3px 6px 0px #c6c7c8');
+	$('#club-calendar').css('border-left', '0px');
+	$('#club-calendar').css('color', 'gray');
+	$('#club-calendar').css('background-color', 'white');
+	$('#club-calendar').css('border-left', '10px solid white');
   });
   
 //정렬 선택 했을때
@@ -172,8 +177,8 @@ $('.forCalendar').on("click",'button', function(){
 							start: data[i].startDate,
 							end:data[i].endDate + ' 24:00',
 							url:'https://www.naver.com',
-							backgroundColor : '#FF6A00',
- 							borderColor:  '#FF6A00'
+ 							backgroundColor: '#DE8685',
+ 							borderColor:  '#DE8685'
 						}); //eddEvent end
 					}else{
 					    calendar.addEvent({
@@ -181,8 +186,8 @@ $('.forCalendar').on("click",'button', function(){
 							start: data[i].startDate,
 							end:data[i].endDate + ' 24:00',
 							url:'https://www.naver.com',
-							backgroundColor : '#66008c',
- 							borderColor:  '#66008c'
+ 							backgroundColor: '#85ADDE',
+ 							borderColor:  '#85ADDE'
 						}); //eddEvent end
 					}
 				}

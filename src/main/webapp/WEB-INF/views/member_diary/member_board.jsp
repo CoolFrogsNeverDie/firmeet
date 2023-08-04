@@ -86,6 +86,22 @@
 
 <script>
 
+$(document).ready(function() {
+	 $('.ly-body-container').css('background-color','#f8ecc9'); // 배경색 수정1
+	 $('body').css('background-color','#f8ecc9'); // 배경색 수정2
+	 $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+	 $('.ly-head-container').css('background-color','#f1bbba'); //탑바 컬러 지정
+	 $('.sd-color').css('background-color','#f1bbba'); //사이드바의 컬러 지정
+	 $('.sd-color').css('color','white'); //사이드바의 텍스트 컬러 지정
+	 $('.sd-color').css('border-left','10px solid #eb9f9f'); //사이드바의 그림자 컬러 지정
+	 $('.ct-border').css('color','#eb9f9f'); //사이드바쪽 관리자 메뉴가는 거
+	 $('.ct-color').css('background-color','#eb9f9f'); //버튼 컬러
+	 
+});
+
+
+
+
 
 $('.board-area').on('keyup','.comment-content', function(){
 	var textLength = $(this).val();
