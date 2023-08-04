@@ -9,7 +9,7 @@
 	          <li id = "per-calendar" class= "sd-color"><a href ="${pageContext.request.contextPath }/calendar/member/${member.memberId}">달력</a></li>
 	          <li id = "per-board" class= "sd-color"><a href ="${pageContext.request.contextPath }/board/member/${member.memberId}/-99">자유 게시판</a></li>
           	  <li id = "per-account" class= "sd-color"><a href ="${pageContext.request.contextPath }/accountBook/member/main/${member.memberId}">가계부</a></li>
-	          <li id = "per-club" class= "sd-color"><a href ="#">동호회 관리</a></li>
+	          <li id = "per-club" class= "sd-color"><a href ="${pageContext.request.contextPath }/management/member/clubManager/${member.memberId}">동호회 관리</a></li>
 	          <li id = "per-info" class= "sd-color"><a href ="#">정보수정</a></li>
 			</ul>
       </div>

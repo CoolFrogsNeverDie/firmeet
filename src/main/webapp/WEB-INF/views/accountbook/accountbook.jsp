@@ -37,12 +37,9 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 				
-				
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-  						
-  						
 						<div class= "search-board" style="display: none"> 
 							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
 							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
@@ -58,17 +55,17 @@
 								<!-- 날짜와 이름 검색폼 -->
 								<form id="searchForm">
 									<input type="date" id="startDate" name="startDate"><span style="margin-top: 10px; margin-right: 5px;">~</span><input type="date" id="endDate" name="endDate"> <input type="text" id="searchText" name="searchText" placeholder="검색어를 입력하세요." style="width: 160px;">
-									<button class="searchbnt" type="submit">검색</button>
+									<button class="searchbnt ct-color" type="submit">검색</button>
 								</form>
 								<!-- 수입 지출 총액 출력 -->
 								<div>
-									<input type="text" id="calculatorIncome" readonly> 
-									<input type="text" id="calculatorExpense" readonly> 
-									<input type="text" id="calculator" readonly>
+									<input type="text" id="calculatorIncome" disabled> 
+									<input type="text" id="calculatorExpense" disabled> 
+									<input type="text" id="calculator" disabled>
 								</div>
 								<c:choose>
 									<c:when test="${club.memlevel eq 0}">
-										<button id="addButton">+</button>
+										<button id="addButton" class="ct-color">+</button>
 									</c:when>
 								</c:choose>
 								<!-- c:choose -->

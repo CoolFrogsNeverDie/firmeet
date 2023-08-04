@@ -15,22 +15,6 @@
 <link href="${pageContext.request.contextPath}/assets/css/index.css" rel="stylesheet" type="text/css" />
 <!--모달-->
 
-<style>
-.Video_Container{
-  position: relative;
-  height: 0;
-  padding-bottom: 56.25%;
-  overflow: hidden;
-}
-
-.Video_Container iframe{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0%;
-  left: 0%;
-}
-</style>
 
 </head>
 
@@ -41,16 +25,20 @@
 			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		</header>
 	</div>
+
 	<!-- // 상단 내비게이션 바 -->
 	<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
 	
-		<iframe frameborder="0" height="100%" width="100%" 
-		src="https://www.youtube.com/embed/lYJ17n_oUkA?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen style="position: absolute; width:100%; height:100%;">
-		</iframe>
+      <video muted autoplay loop style="width: 100%;">
+        <source src="${pageContext.request.contextPath}/assets/video/indexback2.mp4" type="video/mp4">
+        <strong>Your browser does not support the video tag.</strong>
+      </video>
 	
 	</div>
+
 	<!-- 중간 콘텐츠 -->
 	<div class="ly-body-container ">
+	
 		<div class="main">
 			<div class="main-content">
 				<div class="diary-area" data-memid="${member.memberId}" data-clubid="${club.clubId}">
@@ -59,7 +47,7 @@
 							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="어떤 모임을 원하세요?">
 							<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
 						</div>	
-						<div class="index-comment">
+						<div class="index-comment" style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
 							<div style="height: 180px;">
 								<h1 class="h1-1">First </h1><span>Meet,</span>
 							</div>
@@ -68,7 +56,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!--/diary-area-->
 			</div>
@@ -78,5 +65,4 @@
 	</div>
 	<!-- //중간 콘텐츠 -->
 </body>
-
 </html>

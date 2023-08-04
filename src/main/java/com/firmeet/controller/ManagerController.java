@@ -17,7 +17,9 @@ import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
 import com.firmeet.service.ManagerService;
 import com.firmeet.service.MemberService;
+import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.QnaVO;
@@ -265,4 +267,35 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
+	/*-------------------------------------마이겔러리---------------------------- */
+	
+	/*가입한 클럽 화긴 탈퇴~*/
+	@RequestMapping(value = "/member/clubManager/{memberId}", method = { RequestMethod.GET,RequestMethod.POST})
+	public String clubManager(@PathVariable("memberId") String memberId,HttpSession session) {
+		System.out.println("가입한 클럽 화긴");
+		System.out.println("넘어오는 값 확인" + memberId);
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
+		
+		if (member != null) {
+			System.out.println(memberId); // memberId 값 출력;
+
+			return "/member_diary/member_club_management";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
+	}
+	
+	/*동아리 탈퇴*/
+	@ResponseBody
+	@RequestMapping(value = "/club/myClubDel" , method = RequestMethod.POST)
+	public JsonResult myClubDel(@ModelAttribute ClubMemVo clubVO) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("ㄷㄷㄷㄷ 동아리 탈퇴를 위해 넘어오는 정보 확인 " + clubVO);
+		boolean result = managerService.myClubDel(clubVO);
+		jsonResult.success(result);
+		return jsonResult;
+	}
 }

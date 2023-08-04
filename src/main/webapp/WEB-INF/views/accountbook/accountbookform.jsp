@@ -137,7 +137,7 @@
 										<input id="file" type="file" name="uploadPicture" value="" onchange="previewImage(event)">
 									</div>
 									<!--/이미지선택 -->
-									<button type="submit" class="btn btn-primary">저장</button>
+									<button type="submit" class="ct-color">저장</button>
 								</form>
 								<!--/form-->	
 							</div>

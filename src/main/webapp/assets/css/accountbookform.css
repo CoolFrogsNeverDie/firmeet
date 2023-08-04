@@ -1,3 +1,12 @@
+#per-account, #club-account{
+	box-shadow: 6px 3px 6px 0px #c6c7c8;
+    border-left: 0px;
+    color: #55555b;
+    background-color: white !important;
+    border-left: 10px solid white !important;
+    color: #6d6d6d;
+}
+
 .main .main-content .diary-area .diary-body::-webkit-scrollbar {
    display:none;
 }
@@ -37,9 +46,9 @@
 .content-right button[type="submit"] {
   width: 90px;
   height: 45px;
-  background-color: #1eafcc;
   color: white;
   border-radius:10px;
+  background-color: #6d6d6d;
 }
 
 

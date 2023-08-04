@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
@@ -104,6 +105,13 @@ public class MemberDao {
 		int rwo = sqlsession.update("member.minusClubPreNum", clubVO);
 		System.out.println("넘어오는 값" + clubVO);
 		return rwo;
+	}
+
+	public int myClubDel(ClubMemVo clubVO) {
+		int row =sqlsession.delete("member.myClubDel",clubVO);
+		System.out.println("넘어오는 값" + row);
+		
+		return row;
 	}
 
 }

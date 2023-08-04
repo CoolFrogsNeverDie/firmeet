@@ -21,13 +21,14 @@
     <style>
 #btnSubmit {
 	width: 90px;
-	height: 45px;
-	background-color: #1eafcc;
-	color: white;
-	margin-top: 20px;
-	position: absolute;
-	border-radius: 10px;
-	right: 0;
+    height: 45px;
+    background-color: #6d6d6d;
+    color: white;
+    margin-top: 20px;
+    position: absolute;
+    border-radius: 10px;
+    right: 0;
+}
 }
 
 #drop {
@@ -107,7 +108,7 @@
 									</div>
 									<input type="hidden" name="clubId" value="${meet.clubId}">
 									<input type="hidden" id="memberId" value="${member.memberId}">
-									<input type="button" id="btnSubmit" value="업로드" />
+									<input type="button" id="btnSubmit" class="ct-color" value="업로드" />
 									<!-- drop -->
 								</form>
 								<!-- form -->

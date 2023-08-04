@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.firmeet.dao.ClubDao;
 import com.firmeet.dao.MemberDao;
+import com.firmeet.vo.ClubMemVo;
 import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.QnaVO;
@@ -91,5 +92,13 @@ public class ManagerService {
 		System.out.println("넘어오는 최종 디테일 정보 확인 " + clubVO);
 		
 		return clubVO;
+	}
+	//클럽강퇴
+	public boolean myClubDel(ClubMemVo clubVO) {
+		boolean result = false;
+		result = memberDAO.myClubDel(clubVO) >0? true: false;
+		System.out.println("마이너스 되고 있나요? " +  result);
+		
+		return result;
 	}
 }

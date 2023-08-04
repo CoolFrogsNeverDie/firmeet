@@ -134,7 +134,7 @@ public class AccountBookController {
 	/**
 	 * 마이겔러리 - 회계장부 메인 페이지 조회
 	 */
-	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET,RequestMethod.POST})
 	public String myAccountbookMain(@PathVariable("memberId") String memberId, Model model,HttpSession session) {
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
 		MemberVo member = (MemberVo) session.getAttribute("member");

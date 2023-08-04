@@ -71,7 +71,7 @@
 							<!-- //content-left -->
 							<div class="content-right">
 								<div class="content-bnt">
-									<button id="addButton" class="hidden">사진올리기</button>
+									<button id="addButton" class="hidden ct-color">사진올리기</button>
 								</div>
 								<!-- //content-bnt -->
 								<div class="gallery-area">

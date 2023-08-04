@@ -185,4 +185,13 @@
 			where clubId = #{clubId} and preNum > 0
 		]]>
 	</update>	
+	
+	<!-- 마이다이어리 : 동아리 탈퇴 -->
+		<delete id = "myClubDel" parameterType = "com.firmeet.vo.ClubMemVo">
+		<![CDATA[
+			delete club_member
+				where clubId = #{clubId}
+				and memberId = #{memberId}
+		]]>
+	</delete>
 </mapper>

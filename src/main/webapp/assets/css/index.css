@@ -204,9 +204,22 @@ header #navbarSupportedContent ul>li>a {
 	line-height: 60px;
 }
 
+@keyframes colorChange {
+  0% {
+    opacity:0.2;
+  }
+  50% {
+    opacity:1.0;
+  }
+  100% {
+    opacity:0.2;
+  }
+}
+
 .index-comment{
 	width: 100%;
-	font-size: 200px;
+  	color: #fff;
+  	animation: colorChange 5s infinite;
 }
 
 h1{
@@ -224,6 +237,7 @@ h1{
 }
 
 span{
+	font-size: 200px;
 	font-weight: lighter;
 	line-height: 100%;
 	font-family: 'Noto Sans KR', sans-serif;

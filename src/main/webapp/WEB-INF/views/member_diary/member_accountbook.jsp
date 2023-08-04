@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${member.memberId}가계부</title>
+    <title>${member.memberName}의 가계부</title>
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
@@ -39,7 +39,7 @@
 				
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="/firmeet/assets/images/icon/profile.png" alt="프로필사진" />
-						<h2>${member.memberId}</h2>
+						<h2>${member.memberName} 의 다이어리</h2>
   						
   						
 						<div class= "search-board" style="display: none"> 
@@ -61,9 +61,9 @@
 								</form>
 								<!-- 수입 지출 총액 출력 -->
 								<div>
-									<input type="text" id="calculatorIncome" readonly> 
-									<input type="text" id="calculatorExpense" readonly> 
-									<input type="text" id="calculator" readonly>
+									<input type="text" id="calculatorIncome" disabled> 
+									<input type="text" id="calculatorExpense" disabled> 
+									<input type="text" id="calculator" disabled>
 								</div>
 								<c:choose>
 									<c:when test="${club.memlevel eq 0}">
@@ -158,7 +158,7 @@
 			<!-- //main-content -->
 	
 			<div class="side-menu">
-				<c:import url="/WEB-INF/views/include/side_nav_update.jsp"></c:import>
+				<c:import url="/WEB-INF/views/include/side_nav_per_update.jsp"></c:import>
 			</div>
 		</div>
 		<!-- container -->

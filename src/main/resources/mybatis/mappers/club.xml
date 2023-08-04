@@ -8,7 +8,8 @@
         <![CDATA[
             SELECT
                 a.clubName,
-                a.clubId
+                a.clubId,
+                a.INTRO1
             FROM
                 club a
                 JOIN club_member b ON a.clubId = b.clubId
