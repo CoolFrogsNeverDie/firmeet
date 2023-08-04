@@ -228,7 +228,11 @@ header #navbarSupportedContent ul>li>a {
 
 /* 푸터 */
 
-
-
+/*a 링크 범위 확장용*/
+.main .side-menu .menu-bar2 .side-bar2 li a {
+    display: inline-block;
+    width: 96px;
+    height: 59px;
+}
 
  
