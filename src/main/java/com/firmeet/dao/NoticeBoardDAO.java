@@ -162,5 +162,14 @@ public class NoticeBoardDAO {
 	public void votedelete(NoticeBoardVO vo) {
 		sql.delete("noticeboard.votedelete", vo);
 	}
+	
+	public void aboarddelete(NoticeBoardVO vo) {
+		sql.delete("noticeboard.aboarddelete", vo);
+	}
+
+	public void pmodify(NoticeBoardVO vo) {
+		System.out.println("notice pmodify dao 확인"+vo);
+		sql.update("noticeboard.pmodify", vo);
+	}
 
 }

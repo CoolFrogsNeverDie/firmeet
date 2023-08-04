@@ -612,6 +612,35 @@ public class NoticeBoardController {
 		
 	}
 	
+	@RequestMapping(value="/pmodify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String pmodify(@ModelAttribute NoticeBoardVO vo, Model model, @RequestParam("aboardNo") int aboardNo, HttpSession session) {
+		int clubId = (int) session.getAttribute("clubId");
+		model.addAttribute("clubId", clubId);
+		model.addAttribute("meetNo", vo.getMeetNo());
+		
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+            
+            noticeBoardService.pmodify(vo);
+
+            return "redirect:/"+vo.getClubId()+"/notice/noticelist";
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
+	}
+	
 	@RequestMapping(value="/gdelete", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gdelete(@ModelAttribute NoticeBoardVO vo, @RequestParam("aboardNo") int aboardNo, Model model) {
 		model.addAttribute("aboardNo", vo.getAboardNo());

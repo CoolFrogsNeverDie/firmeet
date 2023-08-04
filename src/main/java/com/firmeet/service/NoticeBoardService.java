@@ -352,6 +352,14 @@ public class NoticeBoardService {
 	public void eldelete(NoticeBoardVO vo) {
 		dao.voteresultdelete(vo);
 		dao.votedelete(vo);
+		dao.aboarddelete(vo);
+	}
+
+	public void pmodify(NoticeBoardVO vo) {
+		System.out.println("service gmodify확인"+vo);
+		dao.pmodify(vo);
+		dao.amodify(vo);
+		
 	}
 
 }

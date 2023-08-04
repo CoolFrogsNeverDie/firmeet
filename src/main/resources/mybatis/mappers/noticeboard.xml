@@ -210,6 +210,13 @@
 		where voteNo = #{voteNo}
 	</update>
 	
+	<update id="pmodify" parameterType="noticeboard">
+		update meet_name set meetYear = #{meetYear}, meetMon = #{meetMon}, meetName = #{meetName}, startDate = #{startDate}
+		, endDate = #{endDate}, meetTime = #{meetTime}, meetPlace = #{meetPlace}, voteEnd = #{voteEnd}, minPerson = #{minPerson}, maxPerson = #{maxPerson}
+		, price = #{price}, address1 = #{address1}, address2 = #{address2}
+		where meetNo = #{meetNo}
+	</update>
+	
 	<delete id="gdelete" parameterType="noticeboard">
 		delete from aboard
 		where aboardNo = #{aboardNo}
@@ -222,7 +229,12 @@
 	
 	<delete id="votedelete" parameterType="noticeboard">
 		delete from avote
-        where aboardNo = #{aboardNo} and voteNo = #{voteNo}
+        where voteNo = #{voteNo}
+	</delete>
+	
+	<delete id="aboarddelete" parameterType="noticeboard">
+		delete from aboard
+		where aboardNo = #{aboardNo}
 	</delete>
 	
 </mapper>
