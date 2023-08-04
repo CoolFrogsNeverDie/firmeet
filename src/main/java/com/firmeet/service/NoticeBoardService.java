@@ -37,8 +37,10 @@ public class NoticeBoardService {
 	public int editwrite(NoticeBoardVO vo) {
 		
 		System.out.println("getmeetNo"+vo.getMeetNo());
+		System.out.println("---------------------------1");
 		
 		dao.editwrite(vo); //
+		System.out.println("---------------------------2");
 		System.out.println("service editinsert 확인"+vo);
 		System.out.println("service editinsert getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service editinsert getMemberId 확인"+vo.getMemberId());
@@ -46,8 +48,9 @@ public class NoticeBoardService {
 		
 		int aboardNo = vo.getAboardNo();
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
-		
+		System.out.println("---------------------------3");
 		dao.editwritevote(vo);
+		System.out.println("---------------------------4");
 		System.out.println("service voteinsert 확인"+vo);
 		System.out.println("service voteinsert getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service voteinsert getVoteNo 확인"+vo.getVoteNo());
@@ -58,11 +61,13 @@ public class NoticeBoardService {
 	public NoticeBoardVO editlist(NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		dao.hits(vo);
-		
+		System.out.println("---------------------------5");
 		NoticeBoardVO vo1 = dao.editlist(vo);
 		//댓글 리스트
+		System.out.println("---------------------------6");
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
+		System.out.println("---------------------------7");
 		System.out.println(vo1);
 		return vo1;
 	}
@@ -342,6 +347,11 @@ public class NoticeBoardService {
 
 	public void gdelete(int aboardNo) {
 		dao.gdelete(aboardNo);
+	}
+
+	public void eldelete(NoticeBoardVO vo) {
+		dao.voteresultdelete(vo);
+		dao.votedelete(vo);
 	}
 
 }

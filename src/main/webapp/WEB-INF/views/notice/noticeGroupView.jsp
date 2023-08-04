@@ -108,19 +108,21 @@
 					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
 					                         <input type="hidden" name="clubId" value="${clubId}">
 				                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
+				                        	 <input type="text" name="voteNo" id="voteNo" value="${vo.voteNo}">
 				                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
 					                     </td>
 					                 </tr>
 					               </tbody>
 				               </table>
-				               	  <form action="${pageContext.request.contextPath }/${clubId }/notice/elmodifyform">
+				               	<form action="${pageContext.request.contextPath }/${clubId }/notice/elmodifyform">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
 					                  <button type="submit" id="modify">수정</button>
-				                  </form>
-				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
+				                </form>
+				                <form action="${pageContext.request.contextPath }/${clubId }/notice/eldelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
+					                  <input type="hidden" name="voteNo" value="${vo.voteNo }">
 					                  <button type="submit" id="delete">삭제</button>
-				                  </form>
+				                </form>
 			               <!-- 댓글 -->
 			                  <div class="noticereply">
 			        			<div class="board-area2" >

@@ -68,7 +68,7 @@
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
-						<form action="${pageContext.request.contextPath}/${clubId }/notice/editwrite" class="formleft" method="get">
+						<form action="${pageContext.request.contextPath}/${club.clubId }/notice/editwrite" class="formleft" method="get">
 							<div class="edittop">
 		                        <select name="" id="" class="selectbox">
 		                            <option value="notice">공지게시판</option>
@@ -255,7 +255,7 @@ $(document).ready(function() {
         if (i <= 5) {
             $('.voteplus').append(
                 '<span class="votespan">' + i + '.</span>\
-                  <input class="votetitle" type="date" id="vote' + i + '" name="vote' + i + '" min=' + today + '><br>'
+                  <input class="votetitle" type="date" id="vote' + i + '" name="vote' + i + '"><br>'
             );
             i++;
         } else {

@@ -156,20 +156,23 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
-	public String editwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, Model model) {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
-		session.getAttribute("aboardNo");
+		
+		
 		noticeBoardService.editwrite(vo);
-		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("getAboardNo"+vo.getAboardNo());
+		
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		
 		
 		return "redirect:/"+vo.getClubId()+"/notice/editlist";
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist")
-	public String editlist(Model model, HttpSession session, NoticeBoardVO vo) {
+	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
@@ -609,11 +612,20 @@ public class NoticeBoardController {
 		
 	}
 	
-	@RequestMapping(value="gdelete", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/gdelete", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gdelete(@ModelAttribute NoticeBoardVO vo, @RequestParam("aboardNo") int aboardNo, Model model) {
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		model.addAttribute("memberId", vo.getMemberId());
 		noticeBoardService.gdelete(aboardNo);
+		return "redirect:/"+vo.getClubId()+"/notice/noticelist";
+	}
+	
+	@RequestMapping(value="/eldelete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String eldelete(@ModelAttribute NoticeBoardVO vo, Model model) {
+		model.addAttribute("aboardNo", vo.getAboardNo());
+		model.addAttribute("voteNo", vo.getVoteNo());
+		model.addAttribute("memberId", vo.getMemberId());
+		noticeBoardService.eldelete(vo);
 		return "redirect:/"+vo.getClubId()+"/notice/noticelist";
 	}
 	

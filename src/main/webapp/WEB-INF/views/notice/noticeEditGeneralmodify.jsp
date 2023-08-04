@@ -78,6 +78,7 @@
 		                        <input type="radio" name="aboardVal" value="${vo.aboardVal}" id="aboardVal" style="margin-left: 20px;">모임(결제)&nbsp;
 		                        <input type="radio" name="aboardVal" value="${vo.aboardVal}" id="aboardVal" style="margin-left: 20px;">모임(일정)
 		                        <input type="hidden" name="meetNo" value="${vo.meetNo }">
+		                        <input type="text" name="voteNo" id="voteNo" value="${vo.voteNo}">
 		                        <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
 		                       
 		                       <select name="meetYear" id="meetYear" class="meetYear">

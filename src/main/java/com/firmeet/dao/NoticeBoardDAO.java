@@ -155,4 +155,12 @@ public class NoticeBoardDAO {
 		sql.delete("noticeboard.gdelete", aboardNo);
 	}
 
+	public void voteresultdelete(NoticeBoardVO vo) {
+		sql.delete("noticeboard.voteresultdelete", vo);
+	}
+
+	public void votedelete(NoticeBoardVO vo) {
+		sql.delete("noticeboard.votedelete", vo);
+	}
+
 }

@@ -170,7 +170,7 @@
 		]]>
 	</select>
 	
-	<select id="gmodifyform" parameterType="noticeboard" resultType="noticeboard">
+ 	<select id="gmodifyform" parameterType="noticeboard" resultType="noticeboard">
 		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
 		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
 		from aboard a, club c, member m, meet_name mn
@@ -203,16 +203,26 @@
 		from aboard a, club c, member m, avote v
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
-<!--	
+
 	<update id="elmodify" parameterType="noticeboard">
 		update aVote set voteTitle = #{voteTitle}, vote1 = #{vote1}, vote2 = #{vote2}, vote3 = #{vote3}
 		, vote4 = #{vote4}, vote5 = #{vote5}, totalNum = #{totalNum}, finDate = #{finDate}
 		where voteNo = #{voteNo}
-	</update> -->
+	</update>
 	
 	<delete id="gdelete" parameterType="noticeboard">
 		delete from aboard
 		where aboardNo = #{aboardNo}
+	</delete>
+	
+	<delete id="voteresultdelete" parameterType="noticeboard">
+		delete from voteresult
+		where voteNo = #{voteNo}
+	</delete>
+	
+	<delete id="votedelete" parameterType="noticeboard">
+		delete from avote
+        where aboardNo = #{aboardNo} and voteNo = #{voteNo}
 	</delete>
 	
 </mapper>
