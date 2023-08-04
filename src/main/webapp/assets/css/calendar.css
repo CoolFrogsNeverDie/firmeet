@@ -236,6 +236,7 @@ td, tr {
 #per-calendar, #club-calendar{
 	box-shadow: 6px 3px 6px 0px #c6c7c8;
     border-left: 0px;
-    background-color: white;
+    background-color: white !important;
     color: black;
 }
+

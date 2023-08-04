@@ -86,6 +86,10 @@
 
 <script>
 
+$(document).ready(function() {
+
+	 $('')
+  });
 
 $('.board-area').on('keyup','.comment-content', function(){
 	var textLength = $(this).val();
