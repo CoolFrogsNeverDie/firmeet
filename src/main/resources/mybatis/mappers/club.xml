@@ -9,7 +9,8 @@
             SELECT
                 a.clubName,
                 a.clubId,
-                a.INTRO1
+                a.INTRO1,
+                a.img2
             FROM
                 club a
                 JOIN club_member b ON a.clubId = b.clubId

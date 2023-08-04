@@ -19,6 +19,35 @@
     <link href="${pageContext.request.contextPath}/assets/css/manager_page.css" rel="stylesheet" type="text/css" />
     <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
     <!--모달-->
+    <style type="text/css">
+	    #per-club{
+			box-shadow: 6px 3px 6px 0px #c6c7c8;
+		    border-left: 0px;
+		    color: #55555b;
+		    background-color: white !important;
+		    border-left: 10px solid white !important;
+		    color: #6d6d6d;
+		}
+    
+    	.no-club-ara{
+    		width: 100%;
+    		position: relative;
+    		margin-top: 120px;
+    	}
+    
+    	.no-club-btn{
+    		background-color: #ff6969;
+    		text-align: center;
+    		width: 75px;
+    		height: 31px;
+    		color: white;
+    		border-radius: 10px;
+    		position: absolute;
+    		top: 50%;
+    		left: 50%;
+    		transform: translateX(-50%);
+    	}
+    </style>
 </head>
 
 <body>
@@ -55,7 +84,7 @@
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div class= "topbar">
 							<div class= "menu-btn-area">
-								<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">클럽관리</a>
+								<a href = "">클럽관리</a>
 							</div>
 						</div>
 						
@@ -133,20 +162,20 @@
                     var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
                     var clubId = list[i].clubId;
                     var intro1 = list[i].intro1;
+                    var img2 = list[i].img2;
 					var add = '';
 					add +=  '<div class= "mem-info clubMem-info" id = "c' + clubId  + '" + >'
 					add += 	'	<div class= "mem-pic">'
-					add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />'
+					add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/clubimg/' + img2  + '" alt="프로필사진" />'
 					add +=     '</div>';
 					add += '    		<div class= "mem-deinfo">';
 					add += '				<span><b>'+  name  +'</b></span><br>';
 					add += '				<span>'+ intro1+'</span><br>';	
 					add += '    		</div>'
-					add += '    <div class= "info-btns-area editPage-btns edit-page">';
-					add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + clubId  + '"style="background-color: #ff6969;">클럽탈퇴</button>';
-					
-					add += '	</div>'
-					add += '</div>'
+					add += '    		<div class="no-club-ara">'
+					add += '   				<button type ="button" class= "no-club-btn" data-clubmemno= "' + clubId  + '"style="">클럽탈퇴</button>';
+					add += '    		</div>'
+					add += '</div>';
 
 					$('.list-area').append(add);
                 }

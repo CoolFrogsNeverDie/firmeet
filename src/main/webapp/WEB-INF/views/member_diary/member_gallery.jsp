@@ -19,7 +19,12 @@
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/gallery.css" rel="stylesheet" type="text/css" />
     <!--모달-->
-    
+    <style type="text/css">
+	    .error{
+	        background: #f1f1f1;
+	        border-radius: 10px;
+	    }
+    </style>
 </head>
 
 <body>
@@ -131,6 +136,7 @@
 $('#meetList').on('click', 'dt.viewAll', function() {
     var clubIds = "${clubIdsString}".split(",");
     console.log(clubIds);
+    $('.gallery-area div').empty();
 
     for (var i = 0; i < clubIds.length; i++) {
         var clubId = clubIds[i];
@@ -148,21 +154,42 @@ $('#meetList').on('click', 'dt.viewAll', function() {
                 console.log(list);
 
                 var galleryHTML = '';
-                for (var i = 0; i < list.length; i++) {
-                    var imgSave = list[i].imgSave;
-                    var memberId = list[i].memberId;
-                    var imgNo = list[i].imgNo;
-                    var likeCnt = list[i].likeCnt;
-                    console.log(i + " imgSave : " + imgSave);
-                    console.log(i + " memberId : " + memberId);
-                    console.log(i + " imgNo : " + imgNo);
-                    console.log(i + " likeCnt : " + likeCnt);
-                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
-                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                    galleryHTML += '</a>';
+                if (list.length === 0) {
+                    galleryHTML += '<div class= "error-page">';
+                    galleryHTML += '	<div>';
+                    galleryHTML += '		<img class="error-icon" src ="${pageContext.request.contextPath}/assets/images/icon/error.png">';
+                    galleryHTML += '	</div>';
+                    galleryHTML += '	<div class= "clear-div">';
+                    galleryHTML += '	</div>';
+                    galleryHTML += '	<div>';
+                    galleryHTML += '		<span>';
+                    galleryHTML += '		 	<b>존재하는 이미지가 없습니다!!!</b>';
+                    galleryHTML += '		</span>';
+                    galleryHTML += '	</div>';
+                    galleryHTML += '</div>';
+        			
+                    $(".gallery-area").addClass('error');
+                 	
+        			$('.gallery-area div').append(galleryHTML);
+                } else {
+                    for (var i = 0; i < list.length; i++) {
+                        $(".gallery-area").removeClass('error');
+                        
+                        var imgSave = list[i].imgSave;
+                        var memberId = list[i].memberId;
+                        var imgNo = list[i].imgNo;
+                        var likeCnt = list[i].likeCnt;
+                        console.log(i + " imgSave : " + imgSave);
+                        console.log(i + " memberId : " + memberId);
+                        console.log(i + " imgNo : " + imgNo);
+                        console.log(i + " likeCnt : " + likeCnt);
+                        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                        galleryHTML += '</a>';
+                    }
+
+                    $('.gallery-area div').html(galleryHTML);
                 }
-                
-                $('.gallery-area div').html(galleryHTML);
             },
             error: function() {
                 console.error("AJAX 요청 실패");
@@ -175,7 +202,8 @@ $('#meetList').on('click', 'dt.viewAll', function() {
 $('dl').on('click', 'dd', function() {
     var meetNo = $(this).data('meetno');
     console.log(meetNo);
-
+    $('.gallery-area div').empty();
+    
     $.ajax({
         url: "${pageContext.request.contextPath}/gallery/getGalleryList",
         method: "GET",
@@ -188,21 +216,42 @@ $('dl').on('click', 'dd', function() {
             console.log(list);
 
             var galleryHTML = '';
-            for (var i = 0; i < list.length; i++) {
-                var imgSave = list[i].imgSave;
-                var memberId = list[i].memberId;
-                var imgNo = list[i].imgNo;
-                var likeCnt = list[i].likeCnt;
-                console.log(i + " imgSave : " + imgSave);
-                console.log(i + " memberId : " + memberId);
-                console.log(i + " imgNo : " + imgNo);
-                console.log(i + " likeCnt : " + likeCnt);
-                galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgNo="' + imgNo + '">';
-                galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                galleryHTML += '</a>';
-            }
+            if (list.length === 0) {
+                galleryHTML += '<div class= "error-page">';
+                galleryHTML += '	<div>';
+                galleryHTML += '		<img class="error-icon" src ="${pageContext.request.contextPath}/assets/images/icon/error.png">';
+                galleryHTML += '	</div>';
+                galleryHTML += '	<div class= "clear-div">';
+                galleryHTML += '	</div>';
+                galleryHTML += '	<div>';
+                galleryHTML += '		<span>';
+                galleryHTML += '		 	<b>존재하는 이미지가 없습니다!!!</b>';
+                galleryHTML += '		</span>';
+                galleryHTML += '	</div>';
+                galleryHTML += '</div>';
+    			
+                $(".gallery-area").addClass('error');
+             	
+    			$('.gallery-area div').append(galleryHTML);
+            } else {
+                for (var i = 0; i < list.length; i++) {
+                    $(".gallery-area").removeClass('error');
+                    
+                    var imgSave = list[i].imgSave;
+                    var memberId = list[i].memberId;
+                    var imgNo = list[i].imgNo;
+                    var likeCnt = list[i].likeCnt;
+                    console.log(i + " imgSave : " + imgSave);
+                    console.log(i + " memberId : " + memberId);
+                    console.log(i + " imgNo : " + imgNo);
+                    console.log(i + " likeCnt : " + likeCnt);
+                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                    galleryHTML += '</a>';
+                }
 
-            $('.gallery-area div').html(galleryHTML);
+                $('.gallery-area div').html(galleryHTML);
+            }
         },
         error: function() {
             console.error("AJAX 요청 실패");
@@ -244,8 +293,9 @@ $(document).ready(function() {
     });
 
     var clubIds = "${clubIdsString}".split(",");
-    console.log('전체보기');
     console.log(clubIds);
+    var list;
+    $('.gallery-area div').empty();
 
     for (var i = 0; i < clubIds.length; i++) {
         var clubId = clubIds[i];
@@ -259,25 +309,31 @@ $(document).ready(function() {
             },
             success: function(jsonResult) {
                 // 성공적으로 데이터를 가져온 경우
-                var list = jsonResult.data;
+                list = jsonResult.data;
                 console.log(list);
 
                 var galleryHTML = '';
-                for (var i = 0; i < list.length; i++) {
-                    var imgSave = list[i].imgSave;
-                    var memberId = list[i].memberId;
-                    var imgNo = list[i].imgNo;
-                    var likeCnt = list[i].likeCnt;
-                    console.log(i + " imgSave : " + imgSave);
-                    console.log(i + " memberId : " + memberId);
-                    console.log(i + " imgNo : " + imgNo);
-                    console.log(i + " likeCnt : " + likeCnt);
-                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
-                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
-                    galleryHTML += '</a>';
+                if (list.length === 0) {
+                   
+                } else {
+                    for (var i = 0; i < list.length; i++) {
+                        $(".gallery-area").removeClass('error');
+                        
+                        var imgSave = list[i].imgSave;
+                        var memberId = list[i].memberId;
+                        var imgNo = list[i].imgNo;
+                        var likeCnt = list[i].likeCnt;
+                        console.log(i + " imgSave : " + imgSave);
+                        console.log(i + " memberId : " + memberId);
+                        console.log(i + " imgNo : " + imgNo);
+                        console.log(i + " likeCnt : " + likeCnt);
+                        galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                        galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                        galleryHTML += '</a>';
+                    }
+
+                    $('.gallery-area div').html(galleryHTML);
                 }
-                
-                $('.gallery-area div').html(galleryHTML);
             },
             error: function() {
                 console.error("AJAX 요청 실패");
