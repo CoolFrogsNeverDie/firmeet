@@ -39,7 +39,7 @@
 				
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
-						<h2>${club.clubName}</h2>
+						<h2>${member.memberName}의 다이어리</h2>
   								
 						
 					</div>		
@@ -86,10 +86,6 @@
 
 <script>
 
-$(document).ready(function() {
-
-	 $('')
-  });
 
 $('.board-area').on('keyup','.comment-content', function(){
 	var textLength = $(this).val();

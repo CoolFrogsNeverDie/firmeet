@@ -55,10 +55,10 @@
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div class= "topbar">
 							<div class= "menu-btn-area">
-								<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
-								<a href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
-								<a href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
-								<a href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
+								<a class="ct-color" href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
 							</div>
 						</div>
 						
@@ -264,7 +264,7 @@
 			add += '				<textarea class= "qna-content" readOnly>'+ qna.qnaContent+'</textarea><br>';		
 			add	+= '    		</div>'
 			add += '    <div class= "qna-btns-area">';
-			add += '			<button type ="button" class= "answer-insert-btn" data-qnano = "'+ qna.qnaNo +'">답변등록</button>';
+			add += '			<button type ="button" class= "answer-insert-btn ct-color" data-qnano = "'+ qna.qnaNo +'">답변등록</button>';
 			add += '	</div>'
 			add += '</div>'
 			

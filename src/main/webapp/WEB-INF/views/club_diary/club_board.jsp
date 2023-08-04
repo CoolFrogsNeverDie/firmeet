@@ -8,13 +8,10 @@
     <title>개인 게시판</title>
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/board_last.css" rel="stylesheet" type="text/css" />
     <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
@@ -54,7 +51,7 @@
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div class= "edit-area">
-							<div class= "edit-btn-area"><a class= "write-btn" href= "${pageContext.request.contextPath}/board/club/editpage/${club.clubId}">글쓰기</a></div>
+							<div class= "edit-btn-area"><a class= "write-btn ct-color" href= "${pageContext.request.contextPath}/board/club/editpage/${club.clubId}">글쓰기</a></div>
 						</div>
 						<div class= "board-area club-board-area"><!-- AJAX로 게시글 그릴 공간 -->
 						
@@ -86,7 +83,16 @@
 </body>
 
 <script>
-	
+$(document).ready(function() {
+	 $('.ly-body-container').css('background-color','red'); // 배경색 수정1
+	 $('body').css('background-color','red'); // 배경색 수정2
+	 $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+	 $('.ly-head-container').css('background-color','pink'); //사이드바 컬러 지정
+	 $('.sd-color').css('background-color','pink'); //사이드바의 그림자 컬러 지정
+	 $('.sd-color').css('color','red'); //사이드바의 텍스트 컬러 지정
+	 $('.sd-color').css('border-left','10px solid orange'); //사이드바의 그림자 컬러 지정
+});
+ 
 	$('.board-area').on('keyup','.comment-content', function(){
 		var textLength = $(this).val();
 		console.log('바뀌는 댓글 정보' + textLength);
@@ -162,7 +168,7 @@
 			
 			rreply += '<div class="write-comment2" >';
 			rreply += '    <span ></span><div class="new-content2" >';
-			rreply += '        <input type ="text" class= "comment-content" placeholder=" 댓글을 40자 이내로 작성해주세요." ></input><button class="add-reply2" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
+			rreply += '        <input type ="text" class= "comment-content" placeholder=" 댓글을 40자 이내로 작성해주세요." ></input><button class="add-reply2 ct-color" data-boardno = "' + boardNo +'"  data-groupno ="' + groupNo +  '">등록</button></div>'
 			rreply += '    </div>'
 	 		rreply += '</div>'
 	
@@ -541,7 +547,7 @@
 
 
              if (reply.deep === 1 & reply.stat == 1) {
-                 add += '<span><button class= "rreply-btn" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
+                 add += '<span><button class= "rreply-btn ct-color" data-boardno ="' + board.boardNo +  '"  data-replyno ="' + reply.replyNo + '">답글</button></span>';
              }
              add += '<div class="reply-edit">';
              add += '<span>' + reply.replyDate + '</span>';
@@ -549,7 +555,7 @@
          });
          add += '</div>'
          add += '<div class="write-comment">';
-         add += '<div class="new-content"><input type ="text" class= "comment-content" placeholder= " 댓글을 40자 이내로 작성해주세요."></input><button class="add-reply"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
+         add += '<div class="new-content"><input type ="text" class= "comment-content" placeholder= " 댓글을 40자 이내로 작성해주세요."></input><button class="add-reply ct-color"  data-boardno ="' + board.boardNo +  '">등록</button></div>';
          add += '</div></div></div></div>';
          
          $('.board-area').append(add);

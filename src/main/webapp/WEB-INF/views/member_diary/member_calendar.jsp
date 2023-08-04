@@ -45,7 +45,7 @@
 				
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/icon/profile.png" alt="프로필사진" />
-						<h2>${member.memberId}의 다이어리</h2>
+						<h2>${member.memberName}의 다이어리</h2>
   						
 					</div>		
 					<!-- //diary-topbar -->
@@ -116,6 +116,9 @@ $('.edit-persche').on("submit", function(){
 	
 	
 });
+
+
+
 
 
  /*세번째 지도*/
@@ -229,7 +232,7 @@ function relayout3() {
 	$('#edit-place-checked').on('change', function() {
 		  if ($(this).is(':checked')) {
 			  $('.map-search-btn2').prop('disabled', false);
-			  $('.map-search-btn2').css('background-color', '#1eafcc');
+			  $('.map-search-btn2').css('background-color', '#6d6d6d');
 			  $('.map-search-btn2').css('color', 'white');
 		  } else {
 			  $('.map-search-btn2').prop('disabled', true);

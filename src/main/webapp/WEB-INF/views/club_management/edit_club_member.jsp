@@ -55,10 +55,10 @@
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div class= "topbar">
 							<div class= "menu-btn-area">
-								<a href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
-								<a href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
-								<a href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
-								<a href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
+								<a class="ct-color" href = "${pageContext.request.contextPath}/management/club/${club.clubId}">가입승인</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/editgrade/${club.clubId}">권한설정</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/qna/${club.clubId}">문의답변</a>
+								<a class="ct-color"  href = "${pageContext.request.contextPath}/management/club/edit/${club.clubId}">정보수정</a>
 							</div>
 						</div>
 						
@@ -110,7 +110,7 @@
 			  </div>
 	          <!-- 수정 , 취소 버튼-->
 	          <div class= "edit-modal-btn-area">
-	          <button id="grade-edit-btn" class="btn btn-primary">수정</button>
+	          <button id="grade-edit-btn" class="btn btn-primary ct-color">수정</button>
 	          <button id="cancel-btn" class="btn btn-danger">취소</button>
 	          </div>
 	          <span id="likeCount"></span>
@@ -333,7 +333,7 @@
 			add += '    		</div>'
 			add += '    <div class= "info-btns-area editPage-btns edit-page">';
 			if(member.memLevel != 0){
-			add += '			<button type ="button" class= "edit-mem-btn" data-clubmemno= "' + member.clubmemNo  + '" data-memberid = "'+member.memberId +'" data-membername = "'+ member.memberName+'" data-memlevel= "'+member.memLevel+'">등급변경</button>';
+			add += '			<button type ="button" class= "edit-mem-btn ct-color" data-clubmemno= "' + member.clubmemNo  + '" data-memberid = "'+member.memberId +'" data-membername = "'+ member.memberName+'" data-memlevel= "'+member.memLevel+'">등급변경</button>';
 			add += '   			<button type ="button" class= "no-mem-btn" data-clubmemno= "' + member.clubmemNo  + '">회원강퇴</button>';
 			}
 			add += '	</div>'

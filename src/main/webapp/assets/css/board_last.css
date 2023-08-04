@@ -20,7 +20,7 @@
     margin: -20px 30px 10px 20px;
     width: 1015px;
     height: 50px;
-    position: fixed;
+    position: absolute;
     background-color: white;
     z-index: 999;
 }
@@ -31,7 +31,7 @@
     height: 35px;
     right: -421px;
     font-size: 18px;
-    background-color: #1eafcc;
+    background-color:	#6d6d6d;
     color: white;
     border-radius: 10px;
     margin-top: 10px;
@@ -40,8 +40,8 @@
 }
 .diary-body .edit-area .cancle-btn{
 	background-color: white;
-	border: 1px solid #1eafcc;
-	color: #1eafcc !important;
+	border: 1px solid #6d6d6d;
+	color:#6d6d6d !important;
 }
 
 .diary-body .edit-area .edit-btn-area{
@@ -146,8 +146,8 @@
     border-radius: 5px;
 }
 .club-board-area .board-comment-list .add-reply , .board-comment-list .reply-area .add-reply2{
-    background-color: #1eafcc;
-    border: 1px solid #1a97b0;
+    background-color: #6d6d6d;
+    border: 1px solid #6d6d6d;
     width: 60px;
     height: 27px;
     color: white;
@@ -184,7 +184,7 @@
     color: gray;
 }
 .club-board-area .board-comment-list .reply-area .rreply-btn{
-	background-color:#1eafcc;
+	background-color:#6d6d6d;
 	color: white;
 	width: 37px;
     height: 20px;
@@ -397,8 +397,8 @@
     border-radius: 5px;
 }
 .member-board .board-comment-list .add-reply , .board-comment-list .reply-area .add-reply2{
-    background-color: #1eafcc;
-    border: 1px solid #1a97b0;
+    background-color: #6d6d6d;
+    border: 1px solid #6d6d6d;
     width: 60px;
     height: 27px;
     color: white;
@@ -435,7 +435,7 @@
     color: gray;
 }
 .member-board .board-comment-list .reply-area .rreply-btn{
-	background-color:#1eafcc;
+	background-color : #6d6d6d;
 	color: white;
 	width: 37px;
     height: 20px;
@@ -467,8 +467,9 @@
 }
 
 #club-board, #per-board {
-    box-shadow: 6px 5px 6px 0px #c6c7c8;
+	box-shadow: 6px 3px 6px 0px #c6c7c8;
     border-left: 0px;
     background-color: white !important;
-    color: black;
+    border-left: 10px solid white !important;
+	color: gray;
 }

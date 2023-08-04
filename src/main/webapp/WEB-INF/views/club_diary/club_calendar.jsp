@@ -46,7 +46,7 @@
 					</div>		
 					<!-- //diary-topbar -->
 					
-					<div class="calendar-body">					
+					<div class="calendar-body club-c-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						  <div class="diary-subbar memcal-subbar">
 							<input type ="hidden" value ="${member.memberId}" id ="memId">

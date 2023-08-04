@@ -148,7 +148,7 @@
   width: 77px;
 }
 .container1 .sche-submit-btn button:nth-child(1){
-  background-color: #1ba6c2;
+  background-color: #6d6d6d;
   color: white;
   border-radius: 5px;
 }
@@ -283,7 +283,7 @@ border: none;
 .per-pop  #schedule-table .see-place{
   height: 24px;
   width: 50px;
-  background-color: #1eafcc;
+  background-color: #6d6d6d;
   border-radius:5px;
   color: white;
   font-size: 13px;
@@ -325,7 +325,7 @@ border: none;
 
 }
 .per-pop .per-sche-edit button:nth-child(1){
-    background-color: #1eafcc;
+    background-color: #6d6d6d;
     border-radius: 5px;
   color: white;
       font-size: 16px;
@@ -525,7 +525,7 @@ border: none;
   	width: 70px;
 }
 .container5 .sche-submit-btn button:nth-child(1){
-    background-color: #1eafcc;
+    background-color: #6d6d6d;
     border-radius: 5px;
     color: white;
 }
@@ -571,7 +571,7 @@ border: none;
 	height: 100px;
 }
 .loca-insert-btn, .loca-edit-btn{
-	margin-bottom : 4px; background-color: #1eafcc; color: white; text-align: center; font-size:12px; display:inline-block;
+	margin-bottom : 4px; background-color:#6d6d6d; color: white; text-align: center; font-size:12px; display:inline-block;
 	width:70px; height: 30px; margin-top:7px; border-radius: 5px;
 	position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
 }
@@ -583,7 +583,7 @@ border: none;
 	height:30px;
 }
 .map-search-btn {
-    background-color: #1ba6c2;
+    background-color: #6d6d6d;
     border-radius: 5px;
     color: white;
     font-size: 15px;
