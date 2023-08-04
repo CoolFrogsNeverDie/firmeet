@@ -6,7 +6,8 @@
 <mapper namespace="noticeboard">
 
 	<!-- 쿼리문 작성 -->
-	<select id="noticelist" resultType="noticeboard">
+	
+<!-- 	<select id="noticelist" resultType="noticeboard">
 		select aboardNo, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate , 
 		aboardVal, likeCnt, aboardHit
 		from aboard 
@@ -14,16 +15,20 @@
 	       	OR boardContent LIKE '%' || #{keyword} || '%'
 	       	OR title LIKE '%' || #{keyword} || '%'
 		order by aboardNo desc
+	</select> -->
+	
+	<select id="noticelist" resultType="noticeboard">
+	<![CDATA[
+		select aboardNo, meetno, (select count(*)from payresult where meetNo = a.meetNo) as paycount, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,  
+		aboardVal, likeCnt, aboardHit
+		from aboard a
+		WHERE   memberId LIKE '%' || #{keyword} || '%' 
+		       	OR boardContent LIKE '%' || #{keyword} || '%'
+		       	OR title LIKE '%' || #{keyword} || '%'
+		order by aboardNo desc
+	]]>
 	</select>
 	
-<!-- 	<insert id="meetNoinsert" parameterType="noticeboard">
-	 	<selectKey resultType="int" keyProperty="meetNo" order="BEFORE">
-			select seq_meetNo.nextval from dual
-		</selectKey>
-		insert into meet_name(meetNo, aboardNo, clubId, startDate, endDate)
-		values(#{meetNo}, #{aboardNo}, #{clubId}, SYSDATE, SYSDATE) 
-	</insert> -->
-
 	<insert id="editwrite" parameterType="noticeboard">
  		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
 			select seq_aboardNo.nextval from dual
@@ -103,6 +108,10 @@
 	</update>
 	
 	<update id="aupdate" parameterType="noticeboard">
+		update aboard set meetNo = #{meetNo} where aboardNo = #{aboardNo}
+	</update>
+	
+	<update id="mupdate" parameterType="noticeboard">
 		update meet_name set aboardNo = #{aboardNo} where meetNo = #{meetNo}
 	</update>
 	
@@ -160,4 +169,50 @@
 			where likeNo = #{likeNo}				
 		]]>
 	</select>
+	
+	<select id="gmodifyform" parameterType="noticeboard" resultType="noticeboard">
+		select a.aboardNo, c.clubId, m.memberId, a.aboardVal, a.title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, a.boardContent, aboardHit,
+		mn.aboardNo, mn.meetNo, mn.clubId, mn.meetYear, mn.meetMon, mn.meetName, TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate, mn.meetTime, mn.meetPlace, mn.voteEnd, mn.minPerson, mn.maxPerson, mn.price, mn.address1, mn.address2
+		from aboard a, club c, member m, meet_name mn
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = mn.aboardNo and mn.meetNo = #{meetNo}
+	</select>
+	
+	<update id="gmodify" parameterType="noticeboard">
+		update meet_name set meetYear = #{meetYear}, meetMon = #{meetMon}, meetName = #{meetName}, startDate = #{startDate}
+		, endDate = #{endDate}, meetTime = #{meetTime}, meetPlace = #{meetPlace}, address1 = #{address1}, address2 = #{address2}
+		where meetNo = #{meetNo}
+	</update>
+	
+	<update id="amodify" parameterType="noticeboard">
+		update aboard set title = #{title}, boardContent = #{boardContent}
+		where aboardNo = #{aboardNo}
+	</update>
+	
+ 	<select id="elmodifyform" parameterType="noticeboard" resultType="noticeboard">
+		select 
+			a.aboardNo
+			, c.clubId
+			, m.memberId
+			, a.aboardVal
+			, a.title
+			, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate, 
+			a.boardContent
+			, aboardHit
+			,v.aboardNo
+			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+		from aboard a, club c, member m, avote v
+		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
+	</select>
+<!--	
+	<update id="elmodify" parameterType="noticeboard">
+		update aVote set voteTitle = #{voteTitle}, vote1 = #{vote1}, vote2 = #{vote2}, vote3 = #{vote3}
+		, vote4 = #{vote4}, vote5 = #{vote5}, totalNum = #{totalNum}, finDate = #{finDate}
+		where voteNo = #{voteNo}
+	</update> -->
+	
+	<delete id="gdelete" parameterType="noticeboard">
+		delete from aboard
+		where aboardNo = #{aboardNo}
+	</delete>
+	
 </mapper>

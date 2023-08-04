@@ -113,7 +113,14 @@
 					                 </tr>
 					               </tbody>
 				               </table>
-				               
+				               	  <form action="${pageContext.request.contextPath }/${clubId }/notice/elmodifyform">
+					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
+					                  <button type="submit" id="modify">수정</button>
+				                  </form>
+				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
+					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
+					                  <button type="submit" id="delete">삭제</button>
+				                  </form>
 			               <!-- 댓글 -->
 			                  <div class="noticereply">
 			        			<div class="board-area2" >

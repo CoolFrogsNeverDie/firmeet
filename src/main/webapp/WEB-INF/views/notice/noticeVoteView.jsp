@@ -141,6 +141,14 @@
 				               <!-- 내용 및 지도 끝 -->
 			               	  <div>
 				                  <p class="noticecontent">${vo.boardContent}</p>
+				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gmodifyform">
+					                  <input type="hidden" name="meetNo" value="${vo.meetNo }">
+					                  <button type="submit" id="modify">수정</button>
+				                  </form>
+				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
+					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
+					                  <button type="submit" id="delete">삭제</button>
+				                  </form>
 				              </div>
 			                 <!-- 댓글 -->
 			                  <div class="noticereply">

@@ -66,7 +66,7 @@
 						<form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
 						  	<div class= "search-board"> 
 								<input name="keyword" id="search-keyword" value="${map.keyword }" placeholder="검색어를 입력하세요">
-								<button type ="button" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
+								<button type ="submit" class="board-search-btn"><img src = "${pageContext.request.contextPath}/assets/images/icon/search.png"></button>
 						  	</div>
 		  				</form>
 					</div>		
@@ -89,7 +89,9 @@
 								<c:forEach var="row" items="${nlist }">
 									<c:if test="${sessionScope.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
-											<td>${row.aboardNo }</td>
+											<td>${row.aboardNo }
+											<span id="paycount">/${row.paycount }</span>
+											</td>
 											<td>${row.memberId }</td>
 											<c:choose>
 												<c:when test="${row.aboardVal == 1 }">
@@ -129,6 +131,7 @@
 <script>
 
 $(document).ready(function() {
+	
 	$('#noticewrite').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticeEditGeneral'	
 	});
@@ -147,6 +150,8 @@ function loadMoreItems() {
     $("#list-container").append('</tr>');
   }
 }
+
+
 </script>
 
 </html>

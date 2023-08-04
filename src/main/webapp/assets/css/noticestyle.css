@@ -16,6 +16,14 @@
 	margin-right: 10px;
 	border: 3px solid #d3d2d2;
 }
+#club-notice{
+   box-shadow: 6px 3px 6px 0px #c6c7c8;
+    border-left: 0px;
+    color: gray;
+    background-color: white !important;
+    border-left: 10px solid white !important;
+    color: black;
+}
 #groupautoupload{
 	width: 70px;
     height: 40px;
@@ -205,6 +213,31 @@
 	font-weight: bold;
 	font-size: 15px;
 	margin-right: 20px;
+}
+
+#modify{
+	float: right;
+	width: 80px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: #1eafcc;
+	color: #fff;
+	font-weight: bold;
+	font-size: 15px;
+	margin-right: 20px;
+}
+
+#delete{
+	float: right;
+	width: 80px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: #fff;
+	border: 1px solid #1eafcc;
+	color: #1eafcc;
+	font-weight: bold;
+	font-size: 15px;
+	margin-right: 10px;
 }
 
 /* 버튼 끝 */

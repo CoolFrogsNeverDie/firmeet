@@ -62,22 +62,23 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진"/>
 						<h2>${club.clubName}</h2>
 					</div>		
 					<!-- //diary-topbar -->
 					
 					<div class="diary-body">
-                		<form action="${pageContext.request.contextPath}/${clubId}/notice/editgroupwriteG" class="formleft" method="get">
+                		<form action="${pageContext.request.contextPath}/${clubId}/notice/gmodify" class="formleft" method="get">
 		                    <div class="edittop">
 		                        <select name="" id="" class="selectbox">
 		                            <option value="notice">공지게시판</option>
 		                        </select>
 		                        
-		                        <input type="radio" name="aboardVal" value="1" id="aboardVal">일반&nbsp;
-		                        <input type="radio" name="aboardVal" value="2" id="aboardVal" style="margin-left: 20px;">모임(결제)&nbsp;
-		                        <input type="radio" name="aboardVal" value="3" id="aboardVal" style="margin-left: 20px;" checked>모임(일정)
-		                              
+		                        <input type="radio" name="aboardVal" value="${vo.aboardVal}" id="aboardVal">일반&nbsp;
+		                        <input type="radio" name="aboardVal" value="${vo.aboardVal}" id="aboardVal" style="margin-left: 20px;">모임(결제)&nbsp;
+		                        <input type="radio" name="aboardVal" value="${vo.aboardVal}" id="aboardVal" style="margin-left: 20px;" checked>모임(일정)
+		                        <input type="hidden" name="meetNo" value="${vo.meetNo }">
+		                        <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
 		                       <select name="meetYear" id="meetYear" class="meetYear">
 		                            <option value="2023">2023년</option>
 		                            <option value="2024">2024년</option>
@@ -122,11 +123,11 @@
 		
 			                    <div>
 			                        <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
-			                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
+			                        <input class="noticetitle1" type="text" id="title" name="title" value="${vo.title}">
 			                    </div>
 			
 			                    <div class="ababab">
-			                        <textarea id="summernote" name="boardContent"></textarea>
+			                        <textarea id="summernote" name="boardContent">${vo.boardContent}</textarea>
 			                        <div class="contentleftbox"></div>
 			                    </div>
 	                
@@ -141,14 +142,14 @@
 				                                 <div class="grouptitle" id="result"></div>
 				                                  <div class="payvotebody">
 				                                     <span class="groupvotetitle">만남일</span>
-				                                     <input class="groupvotedate" type="date" id="startDate" name="startDate"> ~
-				                                     <input class="groupvotedate" type="date" id="endDate" name="endDate">
-				                                     <input class="votemin" type="text" id="meetTime" name="meetTime">시<br>
+				                                     <input class="groupvotedate" type="date" id="startDate" name="startDate" value="${vo.startDate}"> ~
+				                                     <input class="groupvotedate" type="date" id="endDate" name="endDate" value="${vo.endDate}">
+				                                     <input class="votemin" type="text" id="meetTime" name="meetTime" value="${vo.meetTime}">시<br>
 				                                     <span class="groupvotetitle">&nbsp;장 소&nbsp;</span>
-				                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="">
+				                                     <input class="groupvotemeet" type="text" id="meetPlace" name="meetPlace" value="${vo.meetPlace}">
 				                                     <button type="button" class="btn btn-secondary" id="openmap">지도등록</button>
-				                                  	 <input type="hidden" name="address1" value="x" id="address1"> 
-													 <input type="hidden" name="address2" value="y" id="address2">
+				                                  	 <input type="text" name="address1" value="x" id="address1" value="${vo.address1}"> 
+													 <input type="text" name="address2" value="y" id="address2" value="${vo.address2}">
 				                                     
 				 									<div class="map_wrap">
 													   <div id="map" style="width:100%;height:100%;display: block;"></div>
@@ -261,13 +262,6 @@ $(document).ready(function() {
         // 페이지 전환을 위해 선택된 라디오 버튼의 값을 GET 파라미터로 넘깁니다.
         window.location.href = "noticeEditGeneral";
     });
-	
- 	 $('input[name="groupschedule"]').on('click', function() {
-	      var selectedModal = $('input[name="groupschedule"]:checked').val();
-	      // 선택한 모달 창 보여주기
-	      $('.modal').hide();
-	      $('#' + selectedModal).show();
-	    });
 	
 	$("#openmap").on("click", function() {
 		var location = $("#meetPlace").val();

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.firmeet.vo.AreplyVO;
-import com.firmeet.vo.GalleryVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.VoteResultVO;
 
@@ -115,6 +114,10 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.aupdate",vo);
 	}
 	
+	public void mupdate(NoticeBoardVO vo) {
+		sql.update("noticeboard.mupdate",vo);
+	}
+	
 	public int meetNoinsert(NoticeBoardVO vo) {
 		System.out.println("notice meetNoinsert dao 확인");
 		int meetNo = sql.insert("noticeboard.meetNoinsert", vo);
@@ -123,5 +126,33 @@ public class NoticeBoardDAO {
 		return meetNo;
 	}
 
+	public NoticeBoardVO gmodifyform(int meetNo) {
+		System.out.println("notice gmodifyform dao 확인"+meetNo);
+		return sql.selectOne("noticeboard.gmodifyform", meetNo);
+	}
+	
+	public void gmodify(NoticeBoardVO vo) {
+		System.out.println("notice gmodify dao 확인"+vo);
+		sql.update("noticeboard.gmodify", vo);
+	}
+	
+	public void amodify(NoticeBoardVO vo) {
+		System.out.println("notice amodify dao 확인"+vo);
+		sql.update("noticeboard.amodify", vo);
+	}
+	
+	public NoticeBoardVO elmodifyform(int aboardNo) {
+		System.out.println("notice elmodifyform dao 확인"+aboardNo);
+		return sql.selectOne("noticeboard.elmodifyform", aboardNo);
+	}
+	
+	public void elmodify(NoticeBoardVO vo) {
+		System.out.println("notice elmodify dao 확인"+vo);
+		sql.update("noticeboard.elmodify", vo);
+	}
+
+	public void gdelete(int aboardNo) {
+		sql.delete("noticeboard.gdelete", aboardNo);
+	}
 
 }
