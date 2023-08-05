@@ -71,7 +71,7 @@
 										<form id="clubMakingForm" action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
 											<div class="making_forms" id="clubNameForm">
 		                                    	<p>모임명</p>
-		                                    	<input type="text" maxlength="5" name="clubName" id="clubName" placeholder="   5글자 내로 입력해 주세요" value="" required>
+		                                    	<input type="text" maxlength="5" name="clubName" id="clubName" placeholder="   5글자 내로 입력해 주세요" value=" ${club.clubName}" readonly>
 		                                	</div>
 		                                	<div class="making_forms" id="clubCategory">
 		                                		<p>모임 분류</p>
@@ -88,8 +88,8 @@
 		                                	
 									     	<div class="making_forms" id="clubMax">
                                     			<p>정원</p>
-                                    			<input type="text" id="max" name="max" value="" required>
-                                    			<span>명</span>
+                                    			<input type="text" id="max" name="max" value="${club.max}" required > 
+                                    			<span>명   (${club.preNum}/${club.max}) <span> *현재 가입된 정원보다 낮은 수로는 변경 불가합니다.</span></span>
                                 			</div>
 
                                 	<div class="making_forms" id="clubTag">
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="making_forms" id="clubSum">
                                     	<p>한줄소개</p>
-                                    	<input type="text" name="intro1" id="summary" placeholder="  100자 이내로 작성해 주세요" value="" required>
+                                    	<input type="text" name="intro1" id="summary" placeholder="  100자 이내로 작성해 주세요" value="${deInfo.intro1}" required>
                                     	<span id="counter" >(0/100)</span>
                                 	</div>
 
@@ -123,7 +123,7 @@
                                 	</div>      
                                 	<div class="making_forms" id="clubIntro">
 	                                	<p>모임 소개</p>
-	                                    <textarea name="intro2" id="intro2" cols="30" rows="10"></textarea>
+	                                    <textarea name="intro2" id="intro2" cols="30" rows="10">${deInfo.intro2}</textarea>
                                 	</div>
 
 
@@ -135,23 +135,23 @@
                                     	<ul id="details">
 	                                    		<li>
 	                                                <img src="${pageContext.request.contextPath }/assets/images/icon/clock.png" class="cInfoImg">
-	                                                <input type="text" class="c_Info" placeholder=" 시간" name="detailT" value="" required>
+	                                                <input type="text" class="c_Info" placeholder=" 시간" name="detailT" value="${deInfo.detailT}" required>
 	                                            </li>
 	                                            <li>
 	                                                <img src="${pageContext.request.contextPath }/assets/images/icon/place.png" class="cInfoImg">
-	                                                <input type="text" class="c_Info" placeholder=" 위치" name="detailL" value="" required>
+	                                                <input type="text" class="c_Info" placeholder=" 위치" name="detailL" value="${deInfo.detailL}" required>
 	                                            </li>
 	                                            <li>
 	                                                <img src="${pageContext.request.contextPath }/assets/images/icon/message.png" class="cInfoImg">
-	                                                <input type="text" class="c_Info" placeholder=" 연락처" name="detailP" value="" required>
+	                                                <input type="text" class="c_Info" placeholder=" 연락처" name="detailP" value="${deInfo.detailP}" required>
 	                                            </li>
 	                                            <li>
 	                                                <img src="${pageContext.request.contextPath }/assets/images/icon/vodka.png" class="cInfoImg">
-	                                                <input type="text" class="c_Info" placeholder=" 회식" name="detailE" value="" required>
+	                                                <input type="text" class="c_Info" placeholder=" 회식" name="detailE" value="${deInfo.detailE}" required>
 	                                            </li>
 	                                            <li>
 	                                                <img src="${pageContext.request.contextPath }/assets/images/icon/cloud.png" class="cInfoImg">
-	                                                <input type="text" class="c_Info" placeholder=" 날씨" name="detailW" value="" required>
+	                                                <input type="text" class="c_Info" placeholder=" 날씨" name="detailW" value="${deInfo.detailW}" required>
 	                                            </li>
 	                                    	</ul>
                                     	</div>
@@ -162,7 +162,7 @@
 										<div class= "making_forms" id = "clubMainImg">
 										<p>메인 이미지</p>
 										<div>
-                                       		<img id="mainImg" src="" class="imgPre" >
+                                       		<img id="mainImg" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" class="imgPre" >
                                             	<label for="img2" class="imgFile ct-color">이미지올리기</label>
                                             <input type ="file" id = "img2" name ="img2" class= "file-btn ct-color">
                                         </div>
@@ -170,7 +170,7 @@
 										<div class="making_forms" id="clubBackImg" >
 	                                        <p>배경 이미지</p>
 	                                        <div>
-	                                            <img id="backImg" src="" class="imgPre" >
+	                                            <img id="backImg" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img1}" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile ct-color">이미지올리기</label>
 	                                                <input id="img1" type="file" name="img1" value="" class="file-btn ct-color">
@@ -261,6 +261,17 @@
 
 
 <script>
+
+	$(document).ready(function(){
+		var intro2 = "${deInfo.intro2}";
+		var messageWithNewLines = intro2.replace(/<br>/g, "\n");
+		$('#intro2').val(messageWithNewLines);
+		console.log(messageWithNewLines);
+
+		
+	});
+
+
 	$('#clubMakingForm').on("submit", function(){
 		let val = $('#intro2').val();
 		$('#intro2').val(val.replace(/\n/g, "<BR>"));
