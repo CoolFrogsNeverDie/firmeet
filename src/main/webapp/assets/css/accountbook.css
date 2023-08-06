@@ -245,6 +245,7 @@ input {
 	top: 15px;
 	height: 30px;
 	width: 170px;
+	border: none;
 }
 
 #calculatorExpense{
@@ -253,6 +254,7 @@ input {
 	bottom: 15px;
 	height: 30px;
 	width: 170px;
+	border: none;
 }
 
 #calculator{
@@ -261,4 +263,5 @@ input {
     top: 50%;
     width: 180px;
     transform: translateY(-50%);
+    border: none;
 }

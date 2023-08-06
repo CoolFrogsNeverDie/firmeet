@@ -26,7 +26,7 @@
 
 							</ul>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/main/member/main/${member.memberId}" style="color: black;">마이다이어리</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/calendar/member/${member.memberId}" style="color: black;">마이다이어리</a></li>
 						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;"> ${member.memberId}</a>
 							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 								<li><a class="dropdown-item" href="#">알람확인</a></li>

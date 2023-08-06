@@ -12,7 +12,8 @@
         		,a.clubId as clubId
         		, case 
                		when aboardval = 2 then '[결제]'
-               		when aboardval = 3 then '[일정]'
+               		when aboardval = 3 then '[모임]'
+               		when aboardval = 4 then '[모임]'
 			        end as frontTitle
         		,b.title as title
         		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
@@ -47,6 +48,7 @@
         		,b.title as title
         		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate
         		,TO_CHAR(endDate, 'YYYY-MM-DD') AS endDate
+        		,b.clubId
 			from meet_name a join aboard b on a.meetNo = b.meetNo
 			where a.clubID = #{clubId}
 		]]>
@@ -66,6 +68,7 @@
         		, case 
                		when aboardval = 2 then '(결제)'
                		when aboardval = 3 then '(모임)'
+               		when aboardval = 4 then '(모임)'
 			        end as frontTitle
         		,b.title as title
         		,TO_CHAR(startDate, 'YYYY-MM-DD') AS startDate

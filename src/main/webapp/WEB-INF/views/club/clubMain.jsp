@@ -83,7 +83,7 @@
 								<div class="announcement">
 									<!-- 공지테이블-->
 									<table>
-										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4">
+										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4" >
 											<tr>
 												<td class="title">${notice.title}</td>
 												<td>${notice.aboardDate}</td>
@@ -209,7 +209,7 @@ let calendar;
 								title: data.title,
 								start: data.startDate,
 								end:data.endDate + ' 24:00',
-								url:'https://www.naver.com',
+								url:'${pageContext.request.contextPath}/'+data.clubId + '/notice/editlistgroup?aboardNo=' + data.boardNo,
 								backgroundColor : 'F7D060',
 	 							borderColor:  'F7D060'
 							}); //eddEvent end

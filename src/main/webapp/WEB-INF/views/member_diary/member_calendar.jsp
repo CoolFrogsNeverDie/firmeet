@@ -674,12 +674,12 @@ function render(){
 	        	 
 	        	 if(club != null ){
 		 				for(var i = 0; i<club.length; i++){
-		 					if(club[i].meetCate =="3"){
+		 					if(club[i].meetCate =="2"){
 		 						calendar.addEvent({
 		 							title: '[' + club[i].clubName + ']' + club[i].title + club[i].frontTitle,
 		 							start: club[i].startDate,
 		 							end: club[i].endDate + ' 24:00',
-		 							url: 'http://www.naver.com',
+									url:'${pageContext.request.contextPath}/'+club[i].clubId + '/notice/editlistgroup?aboardNo=' + club[i].boardNo,
 		 							backgroundColor: '#DE8685',
 		 							borderColor:  '#DE8685'
 		 						});//addEvent end
@@ -688,7 +688,7 @@ function render(){
 		 							title: '[' + club[i].clubName + ']' + club[i].title + club[i].frontTitle,
 		 							start: club[i].startDate,
 		 							end: club[i].endDate + ' 24:00',
-		 							url: 'http://www.naver.com',
+									url:'${pageContext.request.contextPath}/'+club[i].clubId + '/notice/editlistgroup?aboardNo=' + club[i].boardNo,
 		 							backgroundColor: '#85ADDE',
 		 							borderColor:  '#85ADDE'
 		 						});//addEvent end
