@@ -1,9 +1,13 @@
 package com.firmeet.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.ClubDao;
 import com.firmeet.dao.MemberDao;
@@ -101,4 +105,52 @@ public class ManagerService {
 		
 		return result;
 	}
+	
+	public void updateClubInfo(ClubVo clubVO, MultipartFile[] files) {
+		
+		System.out.println(files.length);
+		System.out.println(files[0].getOriginalFilename()=="");
+		System.out.println(files[0].getName());
+		System.out.println(files[0].getClass());
+		System.out.println(files[1].getOriginalFilename() =="");
+		System.out.println(files[1].getName());
+		System.out.println(files[1].getClass());
+		
+		if(files[0].getOriginalFilename()!="") {
+			clubVO.setImg1(uploadPic(files[0]));
+		}
+		if(files[1].getOriginalFilename() != "") {
+			clubVO.setImg2(uploadPic(files[1]));
+		}
+		
+		System.out.println("업데이트 전 객체 확인" + clubVO);	
+		clubDAO.updateClubInfo(clubVO);
+		
+		
+		
+		
+	}
+	
+	
+	
+	private String uploadPic(MultipartFile file) {
+		
+		
+		String saveDir ="C:\\firmeet\\upload\\club";
+		
+		String orgName = file.getOriginalFilename();		// 원파일 이름
+		String exName = orgName.substring(orgName.lastIndexOf("."));		// 확장자
+		String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;// 저장파일 이름
+		String filePath = saveDir + "\\" + saveName;// 파일 패스
+		Long fileSize = file.getSize();// 파일 사이즈
+		
+		try {
+			file.transferTo(new File(filePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return saveName;
+	}
+	
 }

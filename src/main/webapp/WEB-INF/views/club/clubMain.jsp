@@ -82,7 +82,7 @@
 								<div class="announcement">
 									<!-- 공지테이블-->
 									<table>
-										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin="0" end="4">
+										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4">
 											<tr>
 												<td class="title">${notice.title}</td>
 												<td>${notice.aboardDate}</td>
@@ -213,8 +213,5 @@ let calendar;
 	     });//ajax end
 	}//getData() end
 
-</script>
-<script type="text/javascript">
- 
 </script>
 </html>

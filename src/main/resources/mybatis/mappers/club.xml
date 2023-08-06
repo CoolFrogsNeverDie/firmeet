@@ -457,10 +457,36 @@
     <select id = "getClubTag" parameterType = "club" resultType ="tag">
     	<![CDATA[
     		select
-    			tagNo
-    		from club_tag
+    			a.tagNo as tagNo
+    			,tagName
+    		from club_tag a join tag b
+    		on a.tagNo = b.tagNo
     		where clubId = #{clubId}
     	]]>
     </select>
+
+    <update id  ="updateClubInfo" parameterType ="club">
+    	<![CDATA[
+    		update club
+    		set
+    			max = #{max}
+    			,intro1 = #{intro1}
+    			,intro2 = #{intro2}
+    			,address1 = #{address1}
+    			,address2 = #{address2}
+    			,detailT = #{detailT}
+    			,detailL = #{detailL}
+    			,detailP = #{detailP}
+    			,detailE = #{detailE}
+    			,detailW = #{detailW}
+    	]]>
+		<if test = "img1 !=null">
+				,img1 = #{img1}
+		</if>
+		<if test = "img2 !=null">
+				,img2 = #{img2}
+		</if>
+				where clubId = #{clubId}
+    </update>
     
 </mapper>

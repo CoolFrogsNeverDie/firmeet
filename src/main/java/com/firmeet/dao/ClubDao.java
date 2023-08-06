@@ -250,4 +250,11 @@ public class ClubDao {
 	}
 	
 	
+	public int updateClubInfo(ClubVo clubVO) {
+		
+		int row = session.update("club.updateClubInfo", clubVO);
+		
+		return row;
+	}
+	
 }

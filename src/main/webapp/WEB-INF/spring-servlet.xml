@@ -54,12 +54,12 @@
 
 <!-- url매핑-->
 <mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/" />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/account" />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/gallery " />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/board" />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/aboard" />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/club" />
-<mvc:resources mapping="/upload/**" location="file:C:/firmeet/upload/member" />
+<mvc:resources mapping="/upload/account/**" location="file:C:/firmeet/upload/account" />
+<mvc:resources mapping="/upload/gallery/**" location="file:C:/firmeet/upload/gallery " />
+<mvc:resources mapping="/upload/board/**" location="file:C:/firmeet/upload/board" />
+<mvc:resources mapping="/upload/aboard/**" location="file:C:/firmeet/upload/aboard" />
+<mvc:resources mapping="/upload/club/**" location="file:C:/firmeet/upload/club" />
+<mvc:resources mapping="/upload/member/**" location="file:C:/firmeet/upload/member" />
 
 <!-- 기본 뷰 리졸버 설정--> 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
