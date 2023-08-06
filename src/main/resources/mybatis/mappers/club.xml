@@ -161,10 +161,16 @@
                 max,
                 img1,
                 img2,
-                memlevel
+                memlevel,
+                color1,
+                color2,
+                color3,
+                color4
             FROM
                 club a
                 JOIN club_member b ON a.clubid = b.clubid
+                join club_color c  on a.clubId = c.clubId
+                join color d on c.color_No = d.color_No
             WHERE
                 a.clubid = #{clubId}
                 AND b.memberid = #{memberId}
@@ -488,5 +494,21 @@
 		</if>
 				where clubId = #{clubId}
     </update>
+    
+    <update id = "updateClubCate" parameterType ="club">
+    	<![CDATA[
+            update club_category
+			set
+               cateNo = #{cateNo}
+			where clubId = #{clubId}
+    	]]>
+    </update>
+    
+    <delete id ="deleteClubTag" parameterType ="club">
+    	<![CDATA[
+    		delete club_tag
+            where clubId = #{clubId}
+    	]]>
+    </delete>
     
 </mapper>

@@ -2,7 +2,9 @@ package com.firmeet.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,9 +127,20 @@ public class ManagerService {
 		
 		System.out.println("업데이트 전 객체 확인" + clubVO);	
 		clubDAO.updateClubInfo(clubVO);
+		clubDAO.updateCateNo(clubVO);
+		clubDAO.resetClubTag(clubVO); //클럽 태그 삭제함
 		
 		
+		int[] tagList = clubVO.getTagNo();
+		TagVo tag = new TagVo();
 		
+		if(tagList != null) {
+			tag.setClubId(clubVO.getClubId());
+			for(int tagNo : tagList) {
+				tag.setTagNo(tagNo);
+				clubDAO.insertClubTag(tag);
+			}
+		}
 		
 	}
 	

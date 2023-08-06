@@ -70,6 +70,12 @@
 									<div>
 										<form id="clubMakingForm" action="${pageContext.request.contextPath }/management/club/editClubInfo" method="post" enctype="multipart/form-data">
 											<input type ="hidden"  name = "clubId" value ="${club.clubId}">
+											
+											<div class= "making_forms" id ="clubColorForm">
+											 <p> 컬러</p>
+											 <div> 컬러컬러</div>
+											</div>
+											
 											<div class="making_forms" id="clubNameForm">
 		                                    	<p>모임명</p>
 		                                    	<input type="text" maxlength="5" id="clubName" placeholder="   5글자 내로 입력해 주세요" value=" ${club.clubName}" readonly>
@@ -284,11 +290,34 @@
 		var jj = "${deInfo.cateNo}";
 		console.log(jj);
 		setDeInfo();
+		colorSet();
 		
-
+		
 		
 	});
 
+	
+	function colorSet(){
+		var color1 = "${club.color1}"	
+		var color2 = "${club.color2}"	
+		var color3 = "${club.color3}"	
+		var color4 = "${club.color4}"	
+		
+		console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
+
+			 $('.ly-body-container').css('background-color',color1); // 배경색 수정1
+			 $('body').css('background-color',color1); // 배경색 수정2
+			 $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+			 $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
+			 $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
+			 $('.sd-color').css('color',color4); //사이드바의 텍스트 컬러 지정
+			 $('.sd-color').css('border-left','10px solid ' + color3); //사이드바의 그림자 컬러 지정
+			 $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
+			 $('.ct-color').css('background-color',color3); //버튼 컬러
+			 $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
+			 $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
+
+	}
 
 	
 	

@@ -256,5 +256,26 @@ public class ClubDao {
 		
 		return row;
 	}
+
+	public int updateCateNo(ClubVo clubVO) {
+		
+		int row = session.update("club.updateClubCate", clubVO);
+		
+		return row;
+		
+	}
+
+	public void resetClubTag(ClubVo clubVO) {
+		
+		int row = session.delete("club.deleteClubTag", clubVO);
+	
+	}
+
+	public void updateClubTag(Map<String, Object> tag) {
+			
+		System.out.println("태그 추가 위해 가져온 거 " + tag);
+		
+	}
+
 	
 }
