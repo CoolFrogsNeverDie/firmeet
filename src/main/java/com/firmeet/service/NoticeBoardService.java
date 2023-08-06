@@ -63,7 +63,21 @@ public class NoticeBoardService {
 		dao.hits(vo);
 		System.out.println("---------------------------5");
 		NoticeBoardVO vo1 = dao.editlist(vo);
-		//댓글 리스트
+		
+//		List<VoteResultVO> rvo = dao.getresult(vo);
+//		vo1.setResultList(rvo);
+/*		if(vo.getVoteResult() != 0) {
+		VoteResultVO voteResultvo = dao.voteresult(vo);
+		System.out.println("확인확인"+voteResultvo);
+		System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
+		
+		vo1.setVote1Cnt(voteResultvo.getVote1Cnt());
+		vo1.setVote2Cnt(voteResultvo.getVote2Cnt());
+		vo1.setVote3Cnt(voteResultvo.getVote3Cnt());
+		vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
+		vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
+		}
+*/		//댓글 리스트
 		System.out.println("---------------------------6");
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
@@ -164,12 +178,17 @@ public class NoticeBoardService {
 	public NoticeBoardVO editlistgroupR(NoticeBoardVO vo) {
 		System.out.println("notice editlistgroup 확인");
 		dao.hits(vo);
+		
+		dao.valup(vo);
+		
+		dao.auto(vo);
 		//
 		NoticeBoardVO vo1 = dao.editlistgroup(vo);
 		//댓글 리스트
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
 		System.out.println("jsdflsadfjsdfjlskdfjsdkfsdflksd"+vo1);
+		
 		
 		System.out.println("vo1확인"+vo1);
 		
@@ -210,7 +229,7 @@ public class NoticeBoardService {
 	
 		System.out.println("noticeBoardService.imgup()");
 
-		String saveDir = "C:\\firmeet\\upload";
+		String saveDir = "C:\\firmeet\\upload\\aboard";
 
 		//원파일 이름
 		String poriginname = file.getOriginalFilename();

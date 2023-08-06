@@ -75,7 +75,7 @@
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div>
-        					<button type="button" id="noticewrite">글쓰기</button>
+        					<button type="button" id="noticewrite" class="ct-color">글쓰기</button>
         				</div>	
 						<div id="list_body">
 							<table class="list_table" border="1">
@@ -90,7 +90,6 @@
 									<c:if test="${sessionScope.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
 											<td>${row.aboardNo }
-											<span id="paycount">/${row.paycount }</span>
 											</td>
 											<td>${row.memberId }</td>
 											<c:choose>
@@ -98,10 +97,20 @@
 													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}">${row.title }</a></td>
 												</c:when>
 												<c:when test="${row.aboardVal == 2 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">${row.title }</a></td>
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">
+														<c:if test="${row.paycount == row.maxPerson }">
+															[자동등록]${row.title }
+														</c:if>
+														<c:if test="${row.paycount < row.maxPerson }">
+															${row.title }
+														</c:if>
+													</a></td>
 												</c:when>
 												<c:when test="${row.aboardVal == 3 }">
 													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroupG?aboardNo=${row.aboardNo}">${row.title }</a></td>
+												</c:when>
+												<c:when test="${row.aboardVal == 4 }">
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR?aboardNo=${row.aboardNo}">[자동등록]${row.title }</a></td>
 												</c:when>
 											</c:choose>
 											<td>${row.aboardDate }</td>

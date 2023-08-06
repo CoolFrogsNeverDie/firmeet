@@ -20,7 +20,8 @@
 	<select id="noticelist" resultType="noticeboard">
 	<![CDATA[
 		select aboardNo, meetno, (select count(*)from payresult where meetNo = a.meetNo) as paycount, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,  
-		aboardVal, likeCnt, aboardHit
+		aboardVal, likeCnt, aboardHit, (select maxPerson from meet_name where meetNo = a.meetNo) as maxPerson
+		, (select minPerson from meet_name where meetNo = a.meetNo) as minPerson
 		from aboard a
 		WHERE   memberId LIKE '%' || #{keyword} || '%' 
 		       	OR boardContent LIKE '%' || #{keyword} || '%'
@@ -132,6 +133,12 @@
 		]]>
 	</select>
 	
+	 <select id = "getresult" parameterType ="noticeboard" resultType ="com.firmeet.vo.VoteResultVO">
+		<![CDATA[
+			select a.voteNo, a.aboardNo, a.voteTitle, r.voteresult, r.voteNo, r.memberId, r.choice, r.voteDate from voteResult r, avote a where a.voteNo = r.voteNo and a.voteNo = {voteNo}
+		]]>
+	</select>
+	
 	
 	<delete id = "deletelike" parameterType = "noticeboard">
 		<![CDATA[
@@ -236,5 +243,21 @@
 		delete from aboard
 		where aboardNo = #{aboardNo}
 	</delete>
+        
+<!--     <update id="auto" parameterType="noticeboard">
+		UPDATE aboard a
+    	SET a.title = '[자동등록]' || a.title
+    	WHERE EXISTS (
+	        SELECT * 
+	        FROM payresult p, meet_name r
+	        WHERE p.meetNo = r.meetNo
+	        AND p.paycount >= r.minPerson
+	        AND a.meetNo = r.meetNo
+	    )
+	</update> -->
+	
+	<update id="valup" parameterType="noticeboard">
+		update aboard set aboardVal = 4 where aboardNo = #{aboardNo}
+	</update>
 	
 </mapper>

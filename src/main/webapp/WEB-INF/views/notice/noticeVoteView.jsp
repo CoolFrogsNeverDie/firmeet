@@ -65,8 +65,8 @@
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-			            <button type="button" class="listbtn" id="nlist">목록</button>
-			            <button type="button" class="nextbtn">다음글</button>
+			            <button type="button" class="ct-color listbtn" id="nlist">목록</button>
+			            <button type="button" class="ct-color nextbtn">다음글</button>
 					</div>		
 					<!-- //diary-topbar -->
 					
@@ -120,15 +120,12 @@
 							                     </c:if>
 					                             	<form action="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR" method="get">
 								                        <input type="hidden" name="clubId" value="${clubId}">
-								                        <input type="hidden" name="voteNo" value="${vo.voteNo}">
+								                        <input type="hidden" name="meetNo" value="${vo.meetNo}">
 								                        <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
 								                        <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
-								                        <input type="hidden" name="title" id="title" value="${vo.title}">[자동등록]${vo.title}
-					                             	
 							                             <c:if test="${vo.paycount >= vo.minPerson }">
 							                             	<button type="submit" id="groupautoupload">일정등록</button>
 							                             </c:if>
-							                             
 					                             	</form>
 					                          </td>
 						                 </tr>
@@ -143,11 +140,11 @@
 				                  <p class="noticecontent">${vo.boardContent}</p>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gmodifyform">
 					                  <input type="hidden" name="meetNo" value="${vo.meetNo }">
-					                  <button type="submit" id="modify">수정</button>
+					                  <button type="submit" id="modify" class="ct-color">수정</button>
 				                  </form>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
-					                  <button type="submit" id="delete">삭제</button>
+					                  <button type="submit" id="delete" class="ct-color">삭제</button>
 				                  </form>
 				              </div>
 			                 <!-- 댓글 -->
@@ -203,7 +200,7 @@
 													<div class="new-content">
 														<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
 										            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
-										            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+										            	<button class="ct-color add-reply" data-boardno ="${vo.aboardNo}">등록</button>
 							            			</div>
 											    </div>
 										    </div>

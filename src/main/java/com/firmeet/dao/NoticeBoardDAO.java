@@ -172,4 +172,18 @@ public class NoticeBoardDAO {
 		sql.update("noticeboard.pmodify", vo);
 	}
 
+	public void auto(NoticeBoardVO vo) {
+		System.out.println("notice auto dao 확인"+vo);
+		sql.update("noticeboard.auto", vo);
+	}
+
+	public void valup(NoticeBoardVO vo) {
+		System.out.println("notice valup dao 확인"+vo);
+		sql.update("noticeboard.valup", vo);
+	}
+
+	public List<VoteResultVO> getresult(NoticeBoardVO vo) {
+		return sql.selectList("noticeboard.getresult",vo);
+	}
+
 }

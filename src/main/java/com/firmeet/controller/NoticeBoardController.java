@@ -172,19 +172,23 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist")
-	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo, ClubVo clubvo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
 		int clubId = (int) session.getAttribute("clubId");
+		
+		model.addAttribute("clubId", clubvo.getClubId());
+		session.getAttribute("aboardNo");
+		session.getAttribute("memberId");
+		model.addAttribute("aboradNo", vo.getAboardNo());
+		//model.addAttribute("vo", noticeBoardService.voteResult(vo));
 
-		model.addAttribute("aboardNo", vo.getAboardNo());
-		System.out.println("aboardNo"+ vo.getAboardNo());
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
 		model.addAttribute("vo", noticeBoardService.editlist(vo));
-		
+
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         if (member != null) {
@@ -203,7 +207,6 @@ public class NoticeBoardController {
             // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
             return "member/memberForm";
         }
-
 	}
 	
 	@RequestMapping("/vote")

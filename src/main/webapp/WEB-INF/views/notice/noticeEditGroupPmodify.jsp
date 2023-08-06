@@ -114,7 +114,7 @@
 		                        </select>
 		                        
 		                        <input type="hidden" name="memberId" value="${member.memberId}">${memberId}
-		                        <button type="submit" class="btnbox">등록</button>
+		                        <button type="submit" class="ct-color btnbox">등록</button>
 		                     </div>
 		                     <div class="content-left">
 		
@@ -179,8 +179,8 @@
 				                                     </div>
 				                                 </div>
 				                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-				                                 	 <button type="button" id="reset" class="modelbtnR">등록취소</button>
-				                                     <button type="button" class="modelbtnS" id="saveButton2">등록하기</button>
+				                                 	 <button type="button" id="reset" class="ct-color modelbtnR">등록취소</button>
+				                                     <button type="button" class="ct-color modelbtnS" id="saveButton2">등록하기</button>
 				                                 </div>
 				                            </div>
 				                        </div>
@@ -237,6 +237,7 @@ $(document).ready(function() {
 	  const today = new Date().toISOString().split('T')[0];
 	  $('#startDate').attr('min', today);
 	  $('#endDate').attr('min', today);
+	  $('#voteEnd').attr('min', today);
 	
     // 라디오 버튼 변경 시 페이지를 바꿔주는 jQuery 이벤트 처리
     $('input[name="aboardVal"]').on('change', function() {

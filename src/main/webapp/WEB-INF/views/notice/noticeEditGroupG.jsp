@@ -116,7 +116,7 @@
 		                        </select>
 		                        
 		                        <input type="hidden" name="memberId" value="${member.memberId}">${memberId}
-		                        <button type="submit" class="btnbox">등록</button>
+		                        <button type="submit" class="ct-color btnbox">등록</button>
 		                     </div>
 		                     <div class="content-left">
 		
@@ -168,8 +168,8 @@
 				                           			<br>
 				                                 </div>
 				                                 <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-				                                 	 <button type="button" id="reset" class="modelbtnR">등록취소</button>
-				                                     <button type="button" class="modelbtnS" id="saveButton2" style="margin-left: 10px;">등록하기</button>
+				                                 	 <button type="button" id="reset" class="ct-color modelbtnR">등록취소</button>
+				                                     <button type="button" class="ct-color modelbtnS" id="saveButton2" style="margin-left: 10px;">등록하기</button>
 				                                 </div>
 				                            </div>
 				                        </div>

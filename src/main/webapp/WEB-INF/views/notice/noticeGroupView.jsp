@@ -63,8 +63,8 @@
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-			            <button type="button" class="listbtn" id="nlist">목록</button>
-			            <button type="button" class="nextbtn">다음글</button>
+			            <button type="button" class="ct-color listbtn" id="nlist">목록</button>
+			            <button type="button" class="ct-color nextbtn">다음글</button>
 					</div>		
 					<!-- //diary-topbar -->
 					
@@ -87,7 +87,7 @@
 				              <div>
 				                  <p class="noticecontent">${vo.boardContent}</p>
 				              </div>
-				              
+							 <c:if test="${vo.voteResult == 0 }">
 				                <table id="dataTableV" data-bs-toggle="modal" data-bs-target="#vote">
 									<thead>
 										<tr>
@@ -108,21 +108,53 @@
 					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
 					                         <input type="hidden" name="clubId" value="${clubId}">
 				                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
-				                        	 <input type="text" name="voteNo" id="voteNo" value="${vo.voteNo}">
+				                        	 <input type="hidden" name="voteNo" id="voteNo" value="${vo.voteNo}">
 				                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
 					                     </td>
 					                 </tr>
 					               </tbody>
 				               </table>
+				               
 				               	<form action="${pageContext.request.contextPath }/${clubId }/notice/elmodifyform">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
-					                  <button type="submit" id="modify">수정</button>
+					                  <button type="submit" id="modify" class="ct-color">수정</button>
 				                </form>
 				                <form action="${pageContext.request.contextPath }/${clubId }/notice/eldelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
 					                  <input type="hidden" name="voteNo" value="${vo.voteNo }">
-					                  <button type="submit" id="delete">삭제</button>
+					                  <button type="submit" id="delete" class="ct-color">삭제</button>
 				                </form>
+				                </c:if>
+				                
+<%-- 				                <c:if test="${vo.voteResult != 0 }">
+				                <table id="dataTableV" data-bs-toggle="modal" data-bs-target="#vote">
+									<thead>
+									<tr>
+					                     <th class="nglist">
+					                         <p><span>투표 제목 : </span>${vo.voteTitle}</p>
+					                     </th>
+					                   </tr>
+					               </thead>
+					               <tbody>
+					                   <tr>
+					                     <td class="ngname">
+					                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
+				                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
+				                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}">${memberId}<br>
+					                         <p><span>투표1 : </span>${vo.vote1}<span id="Count">투표 수 (&nbsp;${vo.vote1Cnt }&nbsp;)</span></p>
+					                         <p><span>투표2 : </span>${vo.vote2}<span id="Count">투표 수 (&nbsp;${vo.vote2Cnt }&nbsp;)</span></p>
+					                         <p><span>투표3 : </span>${vo.vote3}<span id="Count">투표 수 (&nbsp;${vo.vote3Cnt }&nbsp;)</span></p>
+					                         <p><span>투표4 : </span>${vo.vote4}<span id="Count">투표 수 (&nbsp;${vo.vote4Cnt }&nbsp;)</span></p>
+					                         <p><span>투표5 : </span>${vo.vote5}<span id="Count">투표 수 (&nbsp;${vo.vote5Cnt }&nbsp;)</span></p>
+					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
+					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
+					                     </td>
+					                 </tr>
+					               </tbody>
+				               </table>
+							   </c:if> --%>
+							   
+							   
 			               <!-- 댓글 -->
 			                  <div class="noticereply">
 			        			<div class="board-area2" >
@@ -176,7 +208,7 @@
 													<div class="new-content">
 														<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
 										            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
-										            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+										            	<button class="ct-color add-reply" data-boardno ="${vo.aboardNo}">등록</button>
 							            			</div>
 											    </div>
 										    </div>
