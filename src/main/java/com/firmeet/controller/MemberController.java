@@ -70,7 +70,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("member");
 		session.invalidate();
-		return"member/memberForm";
+		return"redirect:/main/mainForm";
 	}
 	
 	/* 회원가입 */
