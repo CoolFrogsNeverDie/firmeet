@@ -92,35 +92,20 @@
 										<thead>
 										<tr>
 						                     <th class="nglist">
-						                         <p><span>투표 제목 : </span>${vo.meetYear}<span>년&nbsp;</span>${vo.meetMon}<span>월&nbsp;</span>${vo.meetName}</p>
+						                         <p>${vo.meetYear}<span>년&nbsp;</span>${vo.meetMon}<span>월&nbsp;</span>${vo.meetName}</p>
 						                     </th>
 						                   </tr>
 						               </thead>
 						               <tbody>
 						                   <tr>
 					                       	  <td class="ngname">
+					                       	  	 <p style="font-weight: blod; font-size: 20px; color: blue;">▶▶&nbsp;&nbsp;${vo.startDate}일 ${vo.meetTime}시에 만나요~!</p>
 					                             <p><span id="startDate1">만남일 : </span>${vo.startDate} ~ <span id="endDate1">종료일 : </span>${vo.endDate}</p>
-					                             <p><span>만남시간 : </span>${vo.meetTime}</p>
+					                             <p><span>만남시간 : </span>${vo.meetTime}시</p>
 					                             <p><span>만남장소 : </span>${vo.meetPlace}</p>
-					                             <p class="price">회비 :<span id="price">${vo.price}</span></p>
-					                             <p><span>투표종료일 : </span>${vo.voteEnd}</p>
-					                             <p><span>최소인원 : </span>${vo.minPerson}</p>
-					                             <p><span>최대인원 : </span>${vo.maxPerson}</p>
+					                             <p style="color:#ff6969; ">※자세한 위치는 지도를 확인해주세요</p>
 					                             <p hidden="hidden">address1 : <span id="address1">${vo.address1}</span></p>
 					                             <p hidden="hidden">address2 : <span id="address2">${vo.address2}</span></p>
-					                             <p hidden="hidden">aboardNo : <span id="aboardNo">${vo.aboardNo}</span></p>
-					                             <p class="paycount">현재인원 : <span id="paycount">${vo.paycount}</span> / <span>최대인원 : </span>${vo.maxPerson}</p>
-					                             <span id="memberId" hidden="hidden">${member.memberId}</span>
-					                             <span id="aboardNo" hidden="hidden">${vo.aboardNo}</span>
-					                             <span id="meetNo" hidden="hidden">${vo.meetNo}</span>
-					                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
-					                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
-					                             <c:if test="${vo.paycount >= vo.minPerson }">
-					                             	<button id="autoupload" onclick="groupautoupload()">일정등록</button>
-					                             </c:if>
-					                             <c:if test="${vo.paycount < vo.minPerson }">
-					                             	<button id="paybtn" onclick="kakaopay()">결제하기</button>
-					                             </c:if>
 					                          </td>
 						                 </tr>
 						               </tbody>
@@ -672,5 +657,28 @@ $(document).ready(function () {
 	});
 	
  }
+  
+  function colorSet(){
+	    
+	    var color1 = "${club.color1}"   
+	    var color2 = "${club.color2}"   
+	    var color3 = "${club.color3}"   
+	    var color4 = "${club.color4}"   
+	    
+	    
+	    console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
+	        $('.ly-body-container').css('background-color',color1); // 배경색 수정1
+	        $('body').css('background-color',color1); // 배경색 수정2
+	        $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+	        $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
+	        $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
+	        $('.sd-color').css('color',color4); //사이드바의 텍스트 컬러 지정
+	        $('.sd-color').css('border-left','10px solid ' + color3); //사이드바의 그림자 컬러 지정
+	        $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
+	        $('.ct-color').css('background-color',color3); //버튼 컬러
+	        $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
+	        $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
+
+	  }
 </script>
 </html>

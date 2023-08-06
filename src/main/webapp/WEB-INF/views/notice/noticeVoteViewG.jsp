@@ -64,8 +64,8 @@
 					<div class="diary-topbar">
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
-			            <button type="button" class="listbtn" id="nlist">목록</button>
-			            <button type="button" class="nextbtn">다음글</button>
+			            <button type="button" class="ct-color listbtn" id="nlist">목록</button>
+			            <button type="button" class="ct-color nextbtn">다음글</button>
 					</div>		
 					<!-- //diary-topbar -->
 					
@@ -119,11 +119,11 @@
 				                  <p class="noticecontent">${vo.boardContent}</p>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gmodifyform">
 					                  <input type="hidden" name="meetNo" value="${vo.meetNo }">
-					                  <button type="submit" id="modify">수정</button>
+					                  <button type="submit" id="modify" class="ct-color">수정</button>
 				                  </form>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
-					                  <button type="submit" id="delete">삭제</button>
+					                  <button type="submit" id="delete" class="ct-color">삭제</button>
 				                  </form>
 				              </div>
 			                 <!-- 댓글 -->
@@ -179,7 +179,7 @@
 													<div class="new-content">
 														<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/testimg/img.jpg" alt="프로필사진" />
 										            	<textarea class= "comment-content" id="replyContent" name="replyContent" style="border: 1px solid #000; width: 750px; margin-top: 10px; "></textarea>
-										            	<button class="add-reply" data-boardno ="${vo.aboardNo}">등록</button>
+										            	<button class="ct-color add-reply" data-boardno ="${vo.aboardNo}">등록</button>
 							            			</div>
 											    </div>
 										    </div>
@@ -667,5 +667,28 @@ $(document).ready(function () {
 		$("#paybtn").submit();
 	});
  }
+  
+  function colorSet(){
+	    
+	    var color1 = "${club.color1}"   
+	    var color2 = "${club.color2}"   
+	    var color3 = "${club.color3}"   
+	    var color4 = "${club.color4}"   
+	    
+	    
+	    console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
+	        $('.ly-body-container').css('background-color',color1); // 배경색 수정1
+	        $('body').css('background-color',color1); // 배경색 수정2
+	        $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+	        $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
+	        $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
+	        $('.sd-color').css('color',color4); //사이드바의 텍스트 컬러 지정
+	        $('.sd-color').css('border-left','10px solid ' + color3); //사이드바의 그림자 컬러 지정
+	        $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
+	        $('.ct-color').css('background-color',color3); //버튼 컬러
+	        $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
+	        $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
+
+	  }
 </script>
 </html>

@@ -30,6 +30,8 @@ public class NoticeBoardVO {
 	private String vote5 = "";
 	private int vote5Cnt;
 	
+	private List<VoteResultVO> resultList;
+	
 	private int totalNum;
 	private String finDate;
 	private int voteResult;
@@ -53,6 +55,8 @@ public class NoticeBoardVO {
 	
 	private int id;
 	private int galleryNo;
+	
+	private int voteYV;
 
 
 	public NoticeBoardVO() {
@@ -512,6 +516,22 @@ public class NoticeBoardVO {
 		this.galleryNo = galleryNo;
 	}
 
+	public List<VoteResultVO> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<VoteResultVO> resultList) {
+		this.resultList = resultList;
+	}
+
+	public int getVoteYV() {
+		return voteYV;
+	}
+
+	public void setVoteYV(int voteYV) {
+		this.voteYV = voteYV;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -520,13 +540,14 @@ public class NoticeBoardVO {
 				+ ", maxPerson=" + maxPerson + ", price=" + price + ", voteNo=" + voteNo + ", voteTitle=" + voteTitle
 				+ ", vote1=" + vote1 + ", vote1Cnt=" + vote1Cnt + ", vote2=" + vote2 + ", vote2Cnt=" + vote2Cnt
 				+ ", vote3=" + vote3 + ", vote3Cnt=" + vote3Cnt + ", vote4=" + vote4 + ", vote4Cnt=" + vote4Cnt
-				+ ", vote5=" + vote5 + ", vote5Cnt=" + vote5Cnt + ", totalNum=" + totalNum + ", finDate=" + finDate
-				+ ", voteResult=" + voteResult + ", choice=" + choice + ", voteDate=" + voteDate + ", meetYear="
-				+ meetYear + ", meetMon=" + meetMon + ", meetName=" + meetName + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", meetTime=" + meetTime + ", meetPlace=" + meetPlace + ", address1="
-				+ address1 + ", address2=" + address2 + ", aboardHit=" + aboardHit + ", payresultNo=" + payresultNo
-				+ ", paycount=" + paycount + ", likeNo=" + likeNo + ", likeDate=" + likeDate + ", replyList="
-				+ replyList + ", id=" + id + ", galleryNo=" + galleryNo + "]";
+				+ ", vote5=" + vote5 + ", vote5Cnt=" + vote5Cnt + ", resultList=" + resultList + ", totalNum="
+				+ totalNum + ", finDate=" + finDate + ", voteResult=" + voteResult + ", choice=" + choice
+				+ ", voteDate=" + voteDate + ", meetYear=" + meetYear + ", meetMon=" + meetMon + ", meetName="
+				+ meetName + ", startDate=" + startDate + ", endDate=" + endDate + ", meetTime=" + meetTime
+				+ ", meetPlace=" + meetPlace + ", address1=" + address1 + ", address2=" + address2 + ", aboardHit="
+				+ aboardHit + ", payresultNo=" + payresultNo + ", paycount=" + paycount + ", likeNo=" + likeNo
+				+ ", likeDate=" + likeDate + ", replyList=" + replyList + ", id=" + id + ", galleryNo=" + galleryNo
+				+ ", voteYV=" + voteYV + "]";
 	}
 
 }

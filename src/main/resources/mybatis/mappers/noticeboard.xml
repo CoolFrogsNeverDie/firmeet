@@ -20,7 +20,8 @@
 	<select id="noticelist" resultType="noticeboard">
 	<![CDATA[
 		select aboardNo, meetno, (select count(*)from payresult where meetNo = a.meetNo) as paycount, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,  
-		aboardVal, likeCnt, aboardHit
+		aboardVal, likeCnt, aboardHit, (select maxPerson from meet_name where meetNo = a.meetNo) as maxPerson
+		, (select minPerson from meet_name where meetNo = a.meetNo) as minPerson
 		from aboard a
 		WHERE   memberId LIKE '%' || #{keyword} || '%' 
 		       	OR boardContent LIKE '%' || #{keyword} || '%'
@@ -37,7 +38,7 @@
 		values(#{aboardNo}, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
 
-	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
+<!-- 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
 		select 
 			a.aboardNo
 			, c.clubId
@@ -49,8 +50,48 @@
 			, aboardHit
 			,v.aboardNo
 			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+			,(select count(memberId) from voteResult where memberId = #{memberId} and voteNo = v.voteNo) as voteYV
 		from aboard a, club c, member m, avote v
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
+	</select> -->
+	
+	
+	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
+                      
+         select            
+			a.aboardNo
+			, c.clubId
+			, m.memberId
+			, a.aboardVal
+			, a.title
+			, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate 
+            ,a.boardContent
+			, aboardHit
+			,v.aboardNo
+			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+            ,(select count(memberId) from voteResult where memberId = 'test13' and voteNo = v.voteNo) as voteYV
+            ,vote1cnt
+            ,vote2cnt
+            ,vote3cnt
+            ,vote4cnt
+            ,vote5cnt
+            
+		from aboard a, club c, member m, avote v
+        left outer join (
+        SELECT
+		    voteNo,
+		    SUM(CASE WHEN choice = 1 THEN 1 ELSE 0 END) AS vote1cnt,
+		    SUM(CASE WHEN choice = 2 THEN 1 ELSE 0 END) AS vote2cnt,
+		    SUM(CASE WHEN choice = 3 THEN 1 ELSE 0 END) AS vote3cnt,
+		    SUM(CASE WHEN choice = 4 THEN 1 ELSE 0 END) AS vote4cnt,
+		    SUM(CASE WHEN choice = 5 THEN 1 ELSE 0 END) AS vote5cnt
+		FROM
+		    voteResult
+		WHERE
+		    voteNo = #{voteNo}
+		GROUP BY voteNo) b
+		on v.voteNo = b.voteNo
+			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
 	
 	<insert id="editwritevote" parameterType="noticeboard">
@@ -129,6 +170,12 @@
    			from areply a join member b on a.memberId = b.memberId
     		where aboardNo = #{aboardNo}
    			order by replygroup , deep , replyNo
+		]]>
+	</select>
+	
+	 <select id = "getresult" parameterType ="noticeboard" resultType ="com.firmeet.vo.VoteResultVO">
+		<![CDATA[
+			select a.voteNo, a.aboardNo, a.voteTitle, r.voteresult, r.voteNo, r.memberId, r.choice, r.voteDate from voteResult r, avote a where a.voteNo = r.voteNo and a.voteNo = {voteNo}
 		]]>
 	</select>
 	
@@ -236,5 +283,21 @@
 		delete from aboard
 		where aboardNo = #{aboardNo}
 	</delete>
+        
+<!--     <update id="auto" parameterType="noticeboard">
+		UPDATE aboard a
+    	SET a.title = '[자동등록]' || a.title
+    	WHERE EXISTS (
+	        SELECT * 
+	        FROM payresult p, meet_name r
+	        WHERE p.meetNo = r.meetNo
+	        AND p.paycount >= r.minPerson
+	        AND a.meetNo = r.meetNo
+	    )
+	</update> -->
+	
+	<update id="valup" parameterType="noticeboard">
+		update aboard set aboardVal = 4 where aboardNo = #{aboardNo}
+	</update>
 	
 </mapper>

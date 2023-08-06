@@ -36,10 +36,10 @@ public class NoticeBoardController {
 		System.out.println("noticelist 확인");
 		
 		session.setAttribute("clubId", clubId);
+		MemberVo member = (MemberVo) session.getAttribute("member");
 		
 		model.addAttribute("nlist",noticeBoardService.noticeList(keyword));
 		
-        MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
 
         if (member != null) {
@@ -71,10 +71,13 @@ public class NoticeBoardController {
 		System.out.println("controller clubId"+clubId);
 		System.out.println(vo);
 		
+		String memberId = (String) session.getAttribute("memberId");
+		
 		model.addAttribute("clubId", clubId);
+		model.addAttribute("memberId", memberId);
 		
         MemberVo member = (MemberVo) session.getAttribute("member");
-        String memberId = null;
+        //String memberId = null;
         if (member != null) {
             memberId = member.getMemberId();
 
@@ -156,36 +159,39 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
-	public String editwrite(@ModelAttribute NoticeBoardVO vo, Model model) {
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
-		
 		
 		noticeBoardService.editwrite(vo);
 		System.out.println("getAboardNo"+vo.getAboardNo());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		
-		
 		return "redirect:/"+vo.getClubId()+"/notice/editlist";
 	}
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist")
-	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo, ClubVo clubvo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
 		int clubId = (int) session.getAttribute("clubId");
+		
+		model.addAttribute("clubId", clubvo.getClubId());
+		session.getAttribute("aboardNo");
 
-		model.addAttribute("aboardNo", vo.getAboardNo());
-		System.out.println("aboardNo"+ vo.getAboardNo());
+		model.addAttribute("aboradNo", vo.getAboardNo());
+		model.addAttribute("memberId", vo.getMemberId());
+
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
 		model.addAttribute("vo", noticeBoardService.editlist(vo));
-		
+
 		MemberVo member = (MemberVo) session.getAttribute("member");
+		
         String memberId = null;
         if (member != null) {
             memberId = member.getMemberId();
@@ -203,16 +209,16 @@ public class NoticeBoardController {
             // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
             return "member/memberForm";
         }
-
 	}
 	
 	@RequestMapping("/vote")
 	public String vote(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
-		session.getAttribute("voteNo");
-		session.getAttribute("aboradNo");
 		System.out.println("controller vo"+vo);
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
+		
+		model.addAttribute("memberId", vo.getMemberId());		
+		
 		System.out.println("voteNo"+ vo.getVoteNo());
 		System.out.println("getAboardNo"+ vo.getAboardNo());
 		
@@ -226,7 +232,7 @@ public class NoticeBoardController {
 	@RequestMapping("/voteResult/{aboardNo}")
 	public String voteResult(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		model.addAttribute("clubId", clubvo.getClubId());
-		session.getAttribute("aboardNo");
+		
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));
 		
@@ -247,7 +253,7 @@ public class NoticeBoardController {
 	            // club이 null이면 쫒아내기!!!
 	            model.addAttribute("club", club);
 
-	            return "notice/noticeGroupViewR";
+	            return "notice/noticeGroupView";
 	        } else {
 	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
 	            return "member/memberForm";

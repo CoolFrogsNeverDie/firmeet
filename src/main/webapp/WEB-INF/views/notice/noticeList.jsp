@@ -75,7 +75,7 @@
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div>
-        					<button type="button" id="noticewrite">글쓰기</button>
+        					<button type="button" id="noticewrite" class="ct-color">글쓰기</button>
         				</div>	
 						<div id="list_body">
 							<table class="list_table" border="1">
@@ -90,18 +90,27 @@
 									<c:if test="${sessionScope.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
 											<td>${row.aboardNo }
-											<span id="paycount">/${row.paycount }</span>
 											</td>
 											<td>${row.memberId }</td>
 											<c:choose>
 												<c:when test="${row.aboardVal == 1 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}">${row.title }</a></td>
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td>
 												</c:when>
 												<c:when test="${row.aboardVal == 2 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">${row.title }</a></td>
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">
+														<c:if test="${row.paycount == row.maxPerson }">
+															[자동등록]${row.title }
+														</c:if>
+														<c:if test="${row.paycount < row.maxPerson }">
+															${row.title }
+														</c:if>
+													</a></td>
 												</c:when>
 												<c:when test="${row.aboardVal == 3 }">
 													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroupG?aboardNo=${row.aboardNo}">${row.title }</a></td>
+												</c:when>
+												<c:when test="${row.aboardVal == 4 }">
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR?aboardNo=${row.aboardNo}">[자동등록]${row.title }</a></td>
 												</c:when>
 											</c:choose>
 											<td>${row.aboardDate }</td>
@@ -150,6 +159,29 @@ function loadMoreItems() {
     $("#list-container").append('</tr>');
   }
 }
+
+function colorSet(){
+    
+    var color1 = "${club.color1}"   
+    var color2 = "${club.color2}"   
+    var color3 = "${club.color3}"   
+    var color4 = "${club.color4}"   
+    
+    
+    console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
+        $('.ly-body-container').css('background-color',color1); // 배경색 수정1
+        $('body').css('background-color',color1); // 배경색 수정2
+        $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+        $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
+        $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
+        $('.sd-color').css('color',color4); //사이드바의 텍스트 컬러 지정
+        $('.sd-color').css('border-left','10px solid ' + color3); //사이드바의 그림자 컬러 지정
+        $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
+        $('.ct-color').css('background-color',color3); //버튼 컬러
+        $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
+        $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
+
+  }
 
 
 </script>
