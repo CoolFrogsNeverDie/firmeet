@@ -114,4 +114,5 @@ public class MemberDao {
 		return row;
 	}
 
+
 }

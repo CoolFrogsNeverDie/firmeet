@@ -34,7 +34,7 @@
     <div class="ly-body-container ">
 		<div class="main">
 			<div class="main-content">
-				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
+				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}" data-tagpick ="${deInfo.clubTagList}">
 				
 				
 					<div class="diary-topbar">
@@ -68,19 +68,28 @@
 								<!-- edit form -->
 								<div class="form_line"></div>
 									<div>
-										<form id="clubMakingForm" action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
+										<form id="clubMakingForm" action="${pageContext.request.contextPath }/management/club/editClubInfo" method="post" enctype="multipart/form-data">
+											<input type ="hidden"  name = "clubId" value ="${club.clubId}">
 											<div class="making_forms" id="clubNameForm">
 		                                    	<p>모임명</p>
-		                                    	<input type="text" maxlength="5" name="clubName" id="clubName" placeholder="   5글자 내로 입력해 주세요" value=" ${club.clubName}" readonly>
+		                                    	<input type="text" maxlength="5" id="clubName" placeholder="   5글자 내로 입력해 주세요" value=" ${club.clubName}" readonly>
 		                                	</div>
 		                                	<div class="making_forms" id="clubCategory">
 		                                		<p>모임 분류</p>
 		                                    	<ul id="categorys">
 		                                    		<c:forEach  items="${cateList}" var="cate" >
-		                                    			<li class="cate">
-		                                            		<input type="radio" name="cateNo"  id="${cate.category}" value="${cate.cateNo}">
-		                                            		<label for ="${cate.category}">${cate.category}</label>
-		                                        		</li>
+		                                    			<c:if test = "${deInfo.cateNo == cate.cateNo}">
+			                                    			<li class="cate">
+			                                            		<input type="radio" name="cateNo"  id="${cate.category}" value="${cate.cateNo}" checked>
+			                                            		<label for ="${cate.category}">${cate.category}</label>
+			                                        		</li>
+		                                    			</c:if>
+			                                    		<c:if test = "${deInfo.cateNo != cate.cateNo}">
+			                                    			<li class="cate">
+			                                            		<input type="radio" name="cateNo"  id="${cate.category}" value="${cate.cateNo}">
+			                                            		<label for ="${cate.category}">${cate.category}</label>
+			                                        		</li>
+			                                    		</c:if>
 		                                        	</c:forEach>
 		                                    	</ul>
 		                                	</div>	
@@ -162,18 +171,18 @@
 										<div class= "making_forms" id = "clubMainImg">
 										<p>메인 이미지</p>
 										<div>
-                                       		<img id="mainImg" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" class="imgPre" >
+                                       		<img id="mainImg" src="${pageContext.request.contextPath}/upload/${club.img2}" class="imgPre" >
                                             	<label for="img2" class="imgFile ct-color">이미지올리기</label>
-                                            <input type ="file" id = "img2" name ="img2" class= "file-btn ct-color">
+                                            <input type ="file" id = "img2" name ="file" class= "file-btn ct-color">
                                         </div>
 										</div>
 										<div class="making_forms" id="clubBackImg" >
 	                                        <p>배경 이미지</p>
 	                                        <div>
-	                                            <img id="backImg" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img1}" class="imgPre" >
+	                                            <img id="backImg" src="${pageContext.request.contextPath}/upload/club/${club.img1}" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile ct-color">이미지올리기</label>
-	                                                <input id="img1" type="file" name="img1" value="" class="file-btn ct-color">
+	                                                <input id="img1" type="file" name="file" value="" class="file-btn ct-color">
 	                                            </div>
 	                                        </div>
 	                                    </div>
@@ -261,16 +270,28 @@
 
 
 <script>
-
+		//해야하는 거
+		//1. checked 처리
+		//2. action 주소 바꾸기
+		//3. submit 잡아서 엔터를 <br>로 바꾸기
+		//4. 변경 인원수에 숫자만 입력하고 submit 시 기존 가입되어 있는 회원보다 높은 숫자로 잡았는지 확인하기
+	var area;
+		
 	$(document).ready(function(){
 		var intro2 = "${deInfo.intro2}";
 		var messageWithNewLines = intro2.replace(/<br>/g, "\n");
 		$('#intro2').val(messageWithNewLines);
-		console.log(messageWithNewLines);
+		var jj = "${deInfo.cateNo}";
+		console.log(jj);
+		setDeInfo();
+		
 
 		
 	});
 
+
+	
+	
 
 	$('#clubMakingForm').on("submit", function(){
 		let val = $('#intro2').val();
@@ -304,7 +325,7 @@
         }
  
 
-    var area = {
+    area = {
         "서울특별시" : ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"],
         "경기도1" : ["수원시장안구", "수원시권선구", "수원시팔달구", "수원시영통구", "성남시수정구", "성남시중원구", "성남시분당구", "의정부시", "안양시만안구", "안양시동안구", "부천시", "광명시", "평택시", "동두천시", "안산시상록구", "안산시단원구", "고양시덕양구", "고양시일산동구", "고양시일산서구"], 
         "경기도2" : ["과천시", "구리시", "남양주시", "오산시", "시흥시", "군포시", "의왕시", "하남시", "용인시처인구", "용인시기흥구", "용인시수지구", "파주시", "이천시", "안성시","김포시", "화성시", "광주시", "양주시", "포천시", "여주시", "연천군", "가평군","양평군"],
@@ -360,6 +381,22 @@
 
 <script>
 
+ 	function checktag(){
+		
+ 		
+ 		$('input[name="tagNo"]:checked').each(function(i){
+			 tagList.push($(this).data("tagname")); 
+			
+			 let tagName = $(this).data("tagname")
+			 
+			 let str = "<li class='tag'><p>"+tagName+"</p></li>" 			
+			 $("#selectedTag").append(str);
+			
+			 
+		});
+ 		
+ 	}
+
 	//태그를 클릭했을때 아래쪽 그린다
 	$(".club_tag").on("click", function(){
 		var tagList= [];
@@ -379,13 +416,13 @@
 		 
 	});
 	
-	$('input[name="img1"]').change(function(){
+	$('#img1').change(function(){
 		
 		
 	    setImageFromFile(this, '#backImg');
 	});
 	
-	$('input[name="img2"]').change(function(){
+	$('#img2').change(function(){
 	    setImageFromFile(this, '#mainImg');
 	});
 	
@@ -400,6 +437,59 @@
 	  }
 	}
 	
+	
+	function setDeInfo(){
+		
+		var clubId = "${club.clubId}";
+		
+		
+		clubVO = {
+				clubId : clubId
+		}
+		
+		
+		$.ajax({
+		       
+		       //요청 세팅
+		       url : "${pageContext.request.contextPath}/management/club/getclubDeInfo",
+		       type : "post",
+		       data : clubVO,
+		       
+		       //응답 세팅
+		       dataType : "json",
+		       success : function(jsonResult){
+		    	   
+		    	   var data = jsonResult.data;
+		    	   var tagList = data.clubTagList;
+				   var address1 = data.address1;
+				   var address2 = data.address2;
+				   
+		    	   console.log(tagList);
+					console.log(data);
+		  					
+		    	   tagList.forEach(function(tag){
+						$('#'+ tag.tagNo).prop("checked" ,"true");		 
+						 let str = "<li class='tag'><p>"+tag.tagName+"</p></li>" 			
+						 $("#selectedTag").append(str);
+		    	   });
+					
+					$('#addressSi').val(address1);
+					areaSelectMarker();
+		            var keys = Object.keys(area[address1]);
+		            keys.forEach(function(siGunGo){
+		                $('#addressSiGunGu').append("<option value="+area[address1][siGunGo]+">"+area[address1][siGunGo]+"</option>");
+		            });
+		            $('#addressSiGunGu').val(address2);
+		       }, //success end
+		       error : function(XHR, status, error) {
+		       console.error(status + " : " + error);
+		       }
+						            
+		    });//ajax end
+	}//deinfo end
+
+	
+
 	
 	
 </script>

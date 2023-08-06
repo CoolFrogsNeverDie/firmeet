@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.ajax.JsonResult;
 import com.firmeet.service.ClubService;
@@ -173,6 +175,23 @@ public class ManagerController {
         }
 	}
 	
+
+	@RequestMapping(value = "/club/editClubInfo", method = RequestMethod.POST)
+	public String editClubInfo(@ModelAttribute ClubVo clubVO
+							,@RequestParam("file") MultipartFile[] files) {
+		
+		System.out.println("넘어온 정보" + clubVO);
+		if(files != null) {
+			System.out.println(files[0].getOriginalFilename());
+			System.out.println(files[1].getOriginalFilename());
+		}
+		
+		managerService.updateClubInfo(clubVO, files);
+		
+		
+		return "";
+	}
+	
 	
 	/*가입 요청 list 불러옴*/
 	@ResponseBody
@@ -298,4 +317,18 @@ public class ManagerController {
 		jsonResult.success(result);
 		return jsonResult;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/club/getclubDeInfo" , method = RequestMethod.POST)
+	public JsonResult getclubDeInfo(@ModelAttribute ClubVo clubVO) {
+		JsonResult jsonResult = new JsonResult();
+		System.out.println("디테일 정보 따기 위해 넘어온 객체"+ clubVO);
+		ClubVo vo = managerService.clubDeInfo(clubVO);
+		System.out.println("넘어갈 정보 확인" + vo);
+		jsonResult.success(vo);
+		
+		
+		return jsonResult;
+	}
+	
 }

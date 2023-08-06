@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.firmeet.dao.MemberDao;
 import com.firmeet.vo.CategoryVo;
+import com.firmeet.vo.ClubVo;
 import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.TagVo;
 
@@ -87,6 +89,10 @@ public class MemberService {
 			
 		return list;
 	}
-	
+
+	public void updateClubInfo(ClubVo clubVO, MultipartFile[] files) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

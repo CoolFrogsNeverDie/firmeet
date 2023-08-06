@@ -506,17 +506,19 @@ ul{
         
         }
         #clubMakingForm #selTag {
-            height: 40px;
+            height: 50px;
+            margin-bottom:50px;
         }
 
         #clubMakingForm #selTag #selectedTag {
            
             width: 600px;
-            height: 40px;
+            height: 92px;
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             padding-left: 0px;
+            overflow: scroll;
         }
         #clubMakingForm #selTag #selectedTag .tag {
         
@@ -705,7 +707,9 @@ ul{
 		    background-color: #ff6969;
 		    color: white;
         }
-    
    
+  
+	
+
      
 

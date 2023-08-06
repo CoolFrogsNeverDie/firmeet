@@ -18,4 +18,13 @@ public class UploadDao {
 	public void insertImg(ClubVo clubVo) {
 		 session.insert ("club.insertImg",clubVo);
 	}
+	
+	public int updateClubInfo(ClubVo clubVO) {
+		
+		int row = session.update("club.updateClubInfo", clubVO);
+		
+		return row;
+	}
+
+	
 }
