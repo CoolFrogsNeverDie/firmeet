@@ -186,4 +186,9 @@ public class NoticeBoardDAO {
 		return sql.selectList("noticeboard.getresult",vo);
 	}
 
+	public void voteupdate(NoticeBoardVO vo) {
+		System.out.println("dao확인 voteno 업데이트 할거ㅑㅇ!!");
+		sql.update("noticeboard.mupdate",vo);
+	}
+
 }

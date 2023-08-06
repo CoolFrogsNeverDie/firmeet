@@ -22,6 +22,8 @@
 		select aboardNo, meetno, (select count(*)from payresult where meetNo = a.meetNo) as paycount, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,  
 		aboardVal, likeCnt, aboardHit, (select maxPerson from meet_name where meetNo = a.meetNo) as maxPerson
 		, (select minPerson from meet_name where meetNo = a.meetNo) as minPerson
+		, (select voteNo from avote where voteNo = a.voteNo) as voteNo
+		,(select count(memberId) from voteResult where memberId = #{memberId} and voteNo = a.voteNo) as voteYV
 		from aboard a
 		WHERE   memberId LIKE '%' || #{keyword} || '%' 
 		       	OR boardContent LIKE '%' || #{keyword} || '%'
@@ -38,7 +40,7 @@
 		values(#{aboardNo}, #{clubId}, #{memberId}, #{aboardVal}, #{title}, SYSDATE, #{boardContent})
 	</insert>
 
-<!-- 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
+<!--  	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
 		select 
 			a.aboardNo
 			, c.clubId
@@ -54,8 +56,8 @@
 		from aboard a, club c, member m, avote v
 		where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select> -->
-	
-	
+
+
 	<select id="editlist" parameterType="noticeboard" resultType="noticeboard">
                       
          select            
@@ -69,22 +71,22 @@
 			, aboardHit
 			,v.aboardNo
 			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
-            ,(select count(memberId) from voteResult where memberId = 'test13' and voteNo = v.voteNo) as voteYV
-            ,vote1cnt
-            ,vote2cnt
-            ,vote3cnt
-            ,vote4cnt
-            ,vote5cnt
+            ,(select count(memberId) from voteResult where memberId = #{memberId} and voteNo = v.voteNo) as voteYV
+            ,vote1Cnt
+            ,vote2Cnt
+            ,vote3Cnt
+            ,vote4Cnt
+            ,vote5Cnt
             
 		from aboard a, club c, member m, avote v
         left outer join (
         SELECT
 		    voteNo,
-		    SUM(CASE WHEN choice = 1 THEN 1 ELSE 0 END) AS vote1cnt,
-		    SUM(CASE WHEN choice = 2 THEN 1 ELSE 0 END) AS vote2cnt,
-		    SUM(CASE WHEN choice = 3 THEN 1 ELSE 0 END) AS vote3cnt,
-		    SUM(CASE WHEN choice = 4 THEN 1 ELSE 0 END) AS vote4cnt,
-		    SUM(CASE WHEN choice = 5 THEN 1 ELSE 0 END) AS vote5cnt
+		    SUM(CASE WHEN choice = 1 THEN 1 ELSE 0 END) AS vote1Cnt,
+		    SUM(CASE WHEN choice = 2 THEN 1 ELSE 0 END) AS vote2Cnt,
+		    SUM(CASE WHEN choice = 3 THEN 1 ELSE 0 END) AS vote3Cnt,
+		    SUM(CASE WHEN choice = 4 THEN 1 ELSE 0 END) AS vote4Cnt,
+		    SUM(CASE WHEN choice = 5 THEN 1 ELSE 0 END) AS vote5Cnt
 		FROM
 		    voteResult
 		WHERE
@@ -93,8 +95,9 @@
 		on v.voteNo = b.voteNo
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 	</select>
-	
-	<insert id="editwritevote" parameterType="noticeboard">
+	 
+ 
+ 	<insert id="editwritevote" parameterType="noticeboard">
 	 	<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
 			select seq_voteNo.nextval from dual
 		</selectKey>
@@ -109,11 +112,11 @@
 	
 	<select id="voteresult" resultType="com.firmeet.vo.VoteResultVO" parameterType="com.firmeet.vo.VoteResultVO">
 		select
-			 sum(case when choice = 1 then 1 else 0 end) as vote1cnt
-			,sum(case when choice = 2 then 1 else 0 end) as vote2cnt
-			,sum(case when choice = 3 then 1 else 0 end) as vote3cnt
-			,sum(case when choice = 4 then 1 else 0 end) as vote4cnt
-			,sum(case when choice = 5 then 1 else 0 end) as vote5cnt
+			 sum(case when choice = 1 then 1 else 0 end) as vote1Cnt
+			,sum(case when choice = 2 then 1 else 0 end) as vote2Cnt
+			,sum(case when choice = 3 then 1 else 0 end) as vote3Cnt
+			,sum(case when choice = 4 then 1 else 0 end) as vote4Cnt
+			,sum(case when choice = 5 then 1 else 0 end) as vote5Cnt
 		from voteResult
 		where voteNo = #{voteNo}
 	</select>
@@ -298,6 +301,10 @@
 	
 	<update id="valup" parameterType="noticeboard">
 		update aboard set aboardVal = 4 where aboardNo = #{aboardNo}
+	</update>
+	
+	<update id="voteupdate" parameterType="noticeboard">
+		update aboard set voteNo = #{voteNo} where aboardNo = #{aboardNo}
 	</update>
 	
 </mapper>

@@ -47,10 +47,14 @@ public class NoticeBoardService {
 		
 		
 		int aboardNo = vo.getAboardNo();
+		System.out.println(vo.getVoteNo());
 		System.out.println("111service getAboardNo 확인"+vo.getAboardNo());
-		System.out.println("---------------------------3");
+		System.out.println("-------------나와나와나와나완와--------------3");
 		dao.editwritevote(vo);
 		System.out.println("---------------------------4");
+		
+		dao.voteupdate(vo); //
+		
 		System.out.println("service voteinsert 확인"+vo);
 		System.out.println("service voteinsert getAboardNo 확인"+vo.getAboardNo());
 		System.out.println("service voteinsert getVoteNo 확인"+vo.getVoteNo());
@@ -65,7 +69,7 @@ public class NoticeBoardService {
 		System.out.println("service editlist getMemberId 확인"+vo.getMemberId());
 		System.out.println("---------------------------5");
 		NoticeBoardVO vo1 = dao.editlist(vo);
-		
+		/*
 		if(vo.getVoteResult() != 0) {
 			VoteResultVO voteResultvo = dao.voteresult(vo);
 			System.out.println("확인확인"+voteResultvo);
@@ -77,7 +81,7 @@ public class NoticeBoardService {
 			vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
 			vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
 		}
-		
+		*/
 		System.out.println("ddddddddd"+vo1.getMemberId());
 		//댓글 리스트
 		System.out.println("---------------------------6");
@@ -200,6 +204,7 @@ public class NoticeBoardService {
 	public void voteinsert(NoticeBoardVO vo) {
 		System.out.println("notice voteinsert 확인");
 		dao.voteinsert(vo);
+		dao.voteupdate(vo); //
 	}
 
 	public NoticeBoardVO voteResult(NoticeBoardVO vo) {

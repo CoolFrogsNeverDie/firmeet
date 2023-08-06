@@ -167,6 +167,7 @@ public class NoticeBoardController {
 		System.out.println("getAboardNo"+vo.getAboardNo());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
+		model.addAttribute("memberId", vo.getMemberId());
 		
 		return "redirect:/"+vo.getClubId()+"/notice/editlist";
 	}
@@ -232,7 +233,7 @@ public class NoticeBoardController {
 	@RequestMapping("/voteResult/{aboardNo}")
 	public String voteResult(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		model.addAttribute("clubId", clubvo.getClubId());
-		
+		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));
 		
