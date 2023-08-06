@@ -63,7 +63,7 @@ public class MainController {
 		model.addAttribute("pMap",pMap);
 		
 		System.out.println(pMap);
-		return "/main/mainForm";
+		return "/main/mainForm2";
 	}
 
 	
@@ -156,7 +156,7 @@ public class MainController {
 		 * model.addAttribute("pMap",pMap);
 		 */
 		 
-		return "/main/mainForm";
+		return "/main/mainForm2";
 	}
 	
 }

@@ -361,16 +361,22 @@
     				   ort.clubId,
     				   ort.memberId,
     				   ort.qnaCotent,
-    				   ort.answerContent	
+    				   ort.qnaDate,
+    				   ort.answerContent,
+    				   ort.answerDate
 		    	from(select rownum rn,
 		    				ot.clubId,
 		    				ot.memberId,
 		    				ot.qnaCotent,
-		    				ot.answerContent
+		    				ot.qnaDate,
+		    				ot.answerContent,
+		    				ot.answerDate
 			    	 from(select clubId,
 			    				 memberId,
 			    				 qnaCotent,
-			    				 answerContent
+			    				 qnaDate,
+			    				 answerContent,
+			    				 answerDate
 			    		  from club_qna
 			    		  where clubId = #{clubId}
 			    		  ) ot) ort

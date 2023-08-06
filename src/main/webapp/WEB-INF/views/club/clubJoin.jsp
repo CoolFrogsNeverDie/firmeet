@@ -39,31 +39,31 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+   display: block;
 }
 ol, ul {
-	list-style: none;
+   list-style: none;
 }
 blockquote, q {
-	quotes: none;
+   quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+   content: '';
+   content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 a{text-decoration: none; color: #212121;}
 
@@ -222,14 +222,14 @@ a{text-decoration: none; color: #212121;}
         }
         
        .btn-subscript{
-       		background-color:#444;
+             background-color:#444;
        
        }
        .btn-close{
-       		background-color:#000;
+             background-color:#000;
        }
        .btn-main{
-       		background-color:#1eafcc;
+             background-color:#1eafcc;
        }
         
     </style>
@@ -249,10 +249,10 @@ a{text-decoration: none; color: #212121;}
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
             <div class="club-tag">#성인수영 #새벽수영 #갓생 #친목 #운동러버 #초보환영</div>
             <div class="join-btn-area">
-            	<button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
-            	<button type="button" class= "join-btn btn-close">마감</button>
-            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join">회원가입</button></a>
-            	<a href ="${pageContext.request.contextPath }/club/main/${clubVo.clubId}"><button type="button" class= "join-btn btn-main">모임 메인으로 가기</button></a>
+               <button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
+               <button type="button" class= "join-btn btn-close">마감</button>
+               <a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join">회원가입</button></a>
+               <a href ="${pageContext.request.contextPath }/club/main/${clubVo.clubId}"><button type="button" class= "join-btn btn-main">모임 메인으로 가기</button></a>
             </div>
         </div>
         <!--메인라인 종료-->
@@ -290,14 +290,14 @@ a{text-decoration: none; color: #212121;}
                     <td class="info-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></td>
                     <td class="info">
                         <p>연 2회 회식
-                        	${clubVo.detailE}</p>
+                           ${clubVo.detailE}</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="info-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                     <td class="info">
                         <p>성수동 근처
-                        	${clubVo.detailL}</p>
+                           ${clubVo.detailL}</p>
                     </td>
                     <td class="info-icon"><i class="fa fa-cloud" aria-hidden="true"></i></td>
                     <td class="info">
@@ -353,42 +353,42 @@ a{text-decoration: none; color: #212121;}
             </form>
             
     
-			 <c:forEach items="${requestScope.qMap.qnaList}" var ="qna">
+          <c:forEach items="${requestScope.qMap.qnaList}" var ="qna">
             <!--반복될 QNA 영역-->
-	            <div class="qna-content-area">
-	                <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
-	                <div class="qna-content content">${qna.qnaCotent}</div>
-	            </div>
-		         <c:if test="${qna.answerContent !=null}">
-		            <div class="qna-answer-area">
-		                <div class="answer-content content"><p>${qna.answerContent}</p></div>
-		            </div>
-		         </c:if>
+               <div class="qna-content-area">
+                   <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
+                   <div class="qna-content content">${qna.qnaCotent}</div>
+               </div>
+               <c:if test="${qna.answerContent !=null}">
+                  <div class="qna-answer-area">
+                      <div class="answer-content content"><p>${qna.answerContent}</p></div>
+                  </div>
+               </c:if>
             </c:forEach>
             <!--반복될 QNA 영역 end-->
             
             <div id="paging">
-				<ul>
-					<c:if test="${qMap.prev == true}">
-						<li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${qMap.startPageBtnNo-1}">◀</a></li>
-					</c:if>
-								
-					<c:forEach begin="${qMap.startPageBtnNo}" end="${qMap.endPageBtnNo}"  step="1"  var="page">
-						<li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${page}">${page}</a></li>
-					</c:forEach>
-								
-					<c:if test="${qMap.next == true}">
-						<li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${qMap.endPageBtnNo+1}}">▶</a></li>
-					</c:if>
-				</ul>
-				<div class="clear"></div>
-			</div> 
+            <ul>
+               <c:if test="${qMap.prev == true}">
+                  <li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${qMap.startPageBtnNo-1}">◀</a></li>
+               </c:if>
+                        
+               <c:forEach begin="${qMap.startPageBtnNo}" end="${qMap.endPageBtnNo}"  step="1"  var="page">
+                  <li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${page}">${page}</a></li>
+               </c:forEach>
+                        
+               <c:if test="${qMap.next == true}">
+                  <li><a href="${pageContext.request.contextPath}/club/joinForm/${clubId}?crtPage=${qMap.endPageBtnNo+1}}">▶</a></li>
+               </c:if>
+            </ul>
+            <div class="clear"></div>
+         </div> 
         
         </div>
 
         <!--답답해 보이지 않게 스크롤 늘여주는 div-->
         <div class="clear"></div>
-			${clubVo.clubId}
+         ${clubVo.clubId}
        
     </div>
 </body>
@@ -441,7 +441,7 @@ a{text-decoration: none; color: #212121;}
     
     .ans-btn{
     
-    	right:10px;
+       right:10px;
         float: right;
         width: 100px;
         height: 30px;
@@ -580,64 +580,64 @@ a{text-decoration: none; color: #212121;}
 <!--차트 관련 js-->
 <script>
 
-	
-	$(document).ready(function() {
-		//render();
-		getTagData(); 
-	  });
-	
-	function getTagData(){
-		
-		var clubId = ${clubVo.clubId};
-		console.log(clubId)	
-		
-		var ClubVO = {
-			clubId : clubId
-		}
-		
-		console.log(ClubVO);
-		 $.ajax({
-		        
-		        //요청 세팅
-		        url : "${pageContext.request.contextPath}/club/tagrank",      
-		        type : "post",
-		        data : ClubVO,
-		        
-		        //응답 세팅
-		        dataType : "json",
-		        success : function(jsonResult){
-		        
-		        	var data = jsonResult.data;
-		        	console.log(jsonResult.data)
-		        	render(data);
-		        	
-		        }, //success end
-		        error : function(XHR, status, error) {
-		        console.error(status + " : " + error);
-		        }
-						            
-		     });//ajax end
-		
-	}
-	
-	
-	
-	function render(data2) {
-	
+   
+   $(document).ready(function() {
+      //render();
+      getTagData(); 
+     });
+   
+   function getTagData(){
+      
+      var clubId = ${clubVo.clubId};
+      console.log(clubId)   
+      
+      var ClubVO = {
+         clubId : clubId
+      }
+      
+      console.log(ClubVO);
+       $.ajax({
+              
+              //요청 세팅
+              url : "${pageContext.request.contextPath}/club/tagrank",      
+              type : "post",
+              data : ClubVO,
+              
+              //응답 세팅
+              dataType : "json",
+              success : function(jsonResult){
+              
+                 var data = jsonResult.data;
+                 console.log(jsonResult.data)
+                 render(data);
+                 
+              }, //success end
+              error : function(XHR, status, error) {
+              console.error(status + " : " + error);
+              }
+                              
+           });//ajax end
+      
+   }
+   
+   
+   
+   function render(data2) {
+   
 
         // Create root element
         // https://www.amcharts.com/docs/v5/getting-started/#Root_element
         var root = am5.Root.new("chartdiv");
 
 
-		 var data = {
+       var data = {
             value: 0,
             children: []
         }
 
-       	data2.forEach(function(round) {
-       		data.children.push({ name: round.tagName + ' (' +round.tagCnt + ')'  , value: (100/parseFloat(round.totalCnt))*round.tagCnt });
-			console.log((100/parseFloat(round.totalCnt))*round.tagCnt );
+          data2.forEach(function(round) {
+             data.children.push({ name: round.tagName + ' (' +round.tagCnt + ')'  , value: (100/parseFloat(round.totalCnt))*round.tagCnt });
+         console.log((100/parseFloat(round.totalCnt))*round.tagCnt );
         });
         
         /*원형차트 데이터 넣기*/
@@ -751,60 +751,60 @@ $('.ans-btn').on("click", function(){
 }); //문의하기 버튼 눌리면
 
 
-	
+   
 
 
 </script>
 
 <script>
-	
+   
 
-	<c:if test="${memberLv.memlevel == null}">
-		$(".btn-close").css("display","none");
-		$(".btn-join").css("display","block");
-		$(".btn-main").css("display","none");
-		$(".btn-subscript").css("display","none");	
-	</c:if>
-	
-	
-	
-	<c:if test="${memberLv.memlevel == -10}">
-		$(".btn-close").css("display","none");
-		$(".btn-join").css("display","none");
-		$(".btn-main").css("display","none");
-		$(".btn-subscript").css("display","block");	
-	</c:if>
-	
-	<c:if test="${memberLv.memlevel == 0}">
-		$(".btn-close").css("display","none");
-		$(".btn-main").css("display","block");
-		$(".btn-join").css("display","none");
-		$(".btn-subscript").css("display","none");
-	</c:if>
-	
-	<c:if test="${memberLv.memlevel == 1}">
-		$(".btn-close").css("display","none");
-		$(".btn-main").css("display","block");
-		$(".btn-join").css("display","none");
-		$(".btn-subscript").css("display","none");
-	</c:if>
-	
-	<c:if test="${memberLv.memlevel == 2}">
-		$(".btn-close").css("display","none");
-		$(".btn-main").css("display","block");
-		$(".btn-join").css("display","none");
-		$(".btn-subscript").css("display","none");
-	</c:if>
+   <c:if test="${memberLv.memlevel == null}">
+      $(".btn-close").css("display","none");
+      $(".btn-join").css("display","block");
+      $(".btn-main").css("display","none");
+      $(".btn-subscript").css("display","none");   
+   </c:if>
+   
+   
+   
+   <c:if test="${memberLv.memlevel == -10}">
+      $(".btn-close").css("display","none");
+      $(".btn-join").css("display","none");
+      $(".btn-main").css("display","none");
+      $(".btn-subscript").css("display","block");   
+   </c:if>
+   
+   <c:if test="${memberLv.memlevel == 0}">
+      $(".btn-close").css("display","none");
+      $(".btn-main").css("display","block");
+      $(".btn-join").css("display","none");
+      $(".btn-subscript").css("display","none");
+   </c:if>
+   
+   <c:if test="${memberLv.memlevel == 1}">
+      $(".btn-close").css("display","none");
+      $(".btn-main").css("display","block");
+      $(".btn-join").css("display","none");
+      $(".btn-subscript").css("display","none");
+   </c:if>
+   
+   <c:if test="${memberLv.memlevel == 2}">
+      $(".btn-close").css("display","none");
+      $(".btn-main").css("display","block");
+      $(".btn-join").css("display","none");
+      $(".btn-subscript").css("display","none");
+   </c:if>
 
-	<c:if test="{memberLv.preNum >= memberLv.max}">
-	
-		$(".btn-close").css("display","block");
-		$(".btn-join").css("display","none");
-		$(".btn-main").css("display","none");
-		$(".btn-subscript").css("display","none");	
-	</c:if>
+   <c:if test="{memberLv.preNum >= memberLv.max}">
+   
+      $(".btn-close").css("display","block");
+      $(".btn-join").css("display","none");
+      $(".btn-main").css("display","none");
+      $(".btn-subscript").css("display","none");   
+   </c:if>
 
-	
+   
 </script>
 
 

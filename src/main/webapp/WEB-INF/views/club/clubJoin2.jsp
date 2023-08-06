@@ -5,21 +5,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>모임 상세페이지</title>
-    <!-- 제이쿼리 -->
+    <title>모임 상세보기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css" rel="stylesheet">
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/hierarchy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-   	<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/lightbox.min.css"> --%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+   	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
-    <!--모달-->
+
     <style>
 @font-face {
     font-family: 'Pretendard-Regular';
@@ -30,90 +31,234 @@
 
         * {
             font-family: 'Pretendard-Regular';
-            margin:0;
-            padding:0;
-            list-style:none;
         }
-		
-		.wrap {
-			width: 1245px;
-			margin:0 auto;
-			border: 1px solid black;
-		}
-		
-		.back-img>img {
-			width:100%;
-			height:350px;
-			border:1px solid blue;
-			background-size : cover;
-		}
-		
-		.main-img{
-			width:230px;
-			height:230px;
-			margin: 0 auto;
-		}
-		.main-img>img {
-			width:230px;
-			height:230px;
-			margin: 0 auto;
-			background-size : cover;
-			border :1px solid red;
-			transform:translateY(-136px);
-		}
-		
-		.club-title {
-			width:350px;
-			height:40px;
-			border: 1px solid black;
-			margin: 0 auto;
-			transform:translateY(-116px);
-		}
 
-		.club-memeber-cnt {
-			width:80px;
-			height:20px;
-			border: 1px solid orange;
-			text-align:center;
-			margin: 0 auto;
-			transform:translateY(-121px);
-		}
-		
-		.club-intro {
-			width:60%;
-			height:30px;
-			border: 1px solid green;
-			text-align:center;
-			margin: 0 auto;
-			transform:translateY(-101px);
-		
-		}
-		
-		.club-tag {
-			width:50%;
-			height:40px;
-			border: 1px solid grey;
-			margin: 0 auto;
-			transform:translateY(-81px);
-			text-align:center;
-		}
-		
-		.join-btn-area button {
-			width:200px;
-			height:40px;
-			border : 1px solid red;
-			border-radius : 5px;
-			
-		
-		
-		
-		
-		}
+        html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{text-decoration: none; color: #212121;}
 
+        .wrap {
+           	width:1245px;
+           	margin:0 auto;
+           
+        }
 
+        .back-img {
+        	
+            width: 100%;
+            height: 400px;
+           
+           
+        }
+        .back-img>img{
+        width:100%;
+        height: 400px;
+        background-size:cover;
+        }
+        
 
+        .color-box {
+            width: 100%;
+            height: 400px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+           
+        }
 
-		footer {
+        .main-img {
+           
+            width: 200px;
+            height: 200px;
+            border-radius: 400px;
+            margin-bottom: 430px;
+            background-color: white;
+            position: absolute;
+        }
+
+        .main-img-file {
+            border-radius: 400px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .club-title >h4{
+
+            font-size: 40px;
+            font-weight:900;
+            margin-top: 130px;
+            
+        }
+
+        .club-memeber-cnt {
+            margin-top: -20px;
+            
+        }
+
+        .club-intro {
+        	
+            margin-top: 20px;
+            font-size: 130%;
+        }
+
+        .club-tag {
+        	
+            margin-top: 20px;
+            font-size: 90%;
+            color: #3498db;
+        }
+
+        .join-btn-area {
+            margin: 50px;
+        }
+
+        .join-btn {
+            width: 200px;
+            height: 50px;
+            background-color: #e74c3c;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 17px;
+        }
+
+        .intro-detail {
+        	background:#eee;
+            padding: 30px 30px;
+        }
+        
+        .intro-detail>h4 {
+        	font-size:25px;
+        	font-weight:800;
+        
+        }
+
+        .detail-text {
+        	text-align:center;
+        	font-size:18px;
+         
+        }
+
+        .detail-info {
+        	
+        	padding:30px 30px;
+        }
+
+        .detail-title>h4 {
+            font-size:25px;
+            font-weight:800;
+        }
+
+        .detail-info-table {
+        	
+            width:80%;
+            height:20px;
+            margin: 0 auto;
+        }
+
+        .detail-info-table tr {
+        	
+            height: 30px;
+        }
+
+        .info-icon {
+        	margin-top:5px;
+            width: 10%;
+        }
+
+        .info {
+            width: 40%;
+        }
+
+        .info p {
+        	margin-top:18px;
+        }
+
+        .info-icon {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .tag-info {
+   			
+            margin: 50px auto;
+            height: 450px;
+            background-color: #e0e0e0;
+            position: relative;
+        }
+
+        #chartdiv {
+            width: 100%;
+            height: 100%;
+        }
+        
+       .btn-subscript{
+       		background-color:#444;
+       
+       }
+       .btn-close{
+       		background-color:#000;
+       }
+       .btn-main{
+       		background-color:#1eafcc;
+       }
+       
+       #paging ul{
+	    	width: 150px;
+	    	margin:auto;
+	    	height:30px;
+	    	display:flex;
+	    	margin-top:30px;
+	    }
+	    #paging ul li{
+	    	width:30px;
+	    	height:30px;
+	    	
+	    }
+       
+       
+        
+       footer {
 	    	boxsizing:border-box;
 	    	width:100%;
 	    	height:80px;
@@ -125,31 +270,27 @@
 	      	text-align:center;
 	      	transform:translateY(30px);
 	    }
-
+        
         
     </style>
 </head>
 
 <body>
-
-
-	 
-	<div class="ly-head-container">
+    <div class="ly-head-container">
 		<header>
 			<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		</header>
 	</div>
-      
 
 
     <div class="wrap">
-        <!--메인라인-->
-        <div class="back-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img1}" ></div>
+        <!--메인라인-->        
+        <div class="back-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img1}" >배경 이미지</div>
         <div class="color-box">
             <div class="main-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
-                <h1>어푸어푸 ${clubVo.clubName}</h1>
+                <h4>어푸어푸 ${clubVo.clubName}</h4>
             </div><br>
             <div class="club-memeber-cnt">(${clubVo.preNum}/${clubVo.max})</div>
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
@@ -166,6 +307,7 @@
 
         <!--상세 설명 -->
         <div class="intro-detail">
+        	<h4>모임을 소개 합니다.</h4>
             <div class="detail-text">안녕하세요.
                 <br>지구 면적 71%를 차지하고 있는 물과 함께 하는 수영 동호회 어푸어푸의 호스트 김수영입니다.
                 <br>어푸어푸에서는 매주 화 목 토 새벽에 모여 약간의 친목이 섞인 수영 모임을 진행하고 있어요.
@@ -236,7 +378,8 @@
 
         <div class="club-qna-area">
             <div class="qna-title">
-                <h4>문의사항(2건)</h4><button type="button" class="qna-btn">문의하기</button>
+                <h4>QNA</h4>
+				<button type="button" class="qna-btn">문의하기</button>
             </div>
 
             <!--문의사항 입력 영역(문의하기 버튼 눌러야 보임)-->
@@ -262,12 +405,31 @@
 			 <c:forEach items="${requestScope.qMap.qnaList}" var ="qna">
             <!--반복될 QNA 영역-->
 	            <div class="qna-content-area">
-	                <div class="qna-icon"><img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" ></div>
-	                <div class="qna-content content">${qna.qnaCotent}</div>
+	                <div class="qna-icon">
+	                	<img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" >
+						                      
+	                </div>
+	                
+	                <div class="qna-content content">
+	                	<p>${qna.qnaCotent}</p>
+	                </div>
+	                <ul>
+						<li>${qna.memberId}</li>
+						<li>${qna.qnaDate}</li>
+					</ul>	 
 	            </div>
 		         <c:if test="${qna.answerContent !=null}">
 		            <div class="qna-answer-area">
-		                <div class="answer-content content"><p>${qna.answerContent}</p></div>
+		             	<div class="answer-icon">
+		         			<img src="https://qai.org.au/wp-content/uploads/2021/03/grey-person-icon-300x298.png" >	     
+		         		</div>
+		                <div class="answer-content content">
+		                	<p>${qna.answerContent}</p> 	
+		                </div>
+		                <ul>
+		                	<li>관리자</li>
+		                	<li>${qna.answerDate}</li>
+		            	</ul>   
 		            </div>
 		         </c:if>
             </c:forEach>
@@ -298,60 +460,60 @@
        
     </div>
 </body>
-
 <footer>
     &copy; 2023 by 어리쥬. All Page content is property of 어리쥬
 </footer>
 <style>
     /*주요 태그 영역*/
-    .tag-info-title {
-        font-size: 1.3vw;
-        padding: 10px;
+    .tag-info-title>h4 {
+        font-size: 25px;
+        font-weight:800;
+        padding: 30px;
         height: 20%;
     }
     
     /*버블 차트 영역*/
     .chart-area {
 
-        width: 90%;
+       
         margin: 0 auto;
         margin-top: -35px;
         height: 83%;
     }
 
     
-    /*문의 영역*/
-    .club-qna-area {
-        width: 60vw;
+   .club-qna-area {
+   		border-bottom: 1px solid black;
+       	padding:0 30px;
         margin: 0 auto;
         margin-top: 30px;
     }
     .qna-title {
-        font-size: 1.3vw;
-        padding: 20px;
+        height: 40px;
         border-bottom: 1px solid black;
-        padding-bottom: 20px;
-        height: 2vw;
     }
     .qna-title h4 {
         float:left;
-        font-size: 1.3vw;
+        font-size: 25px;
+        font-weight:800;
     }
     .qna-btn{
-        float: right;
-        width: 100px;
-        height: 30px;
+    	float:right;
+        width: 200px;
+        height: 40px;
         background-color: #3498db;
         border: none;
         border-radius: 5px;
         color: white;
         font-size: 15px; 
         margin-top: 11px;
+        
+        transform:translate(30px,-36px);
     }
     
     .ans-btn{
     
-    	right:10px;
+       right:10px;
         float: right;
         width: 100px;
         height: 30px;
@@ -364,10 +526,9 @@
     }
 
     .qna-write-area{
-        width: 60vw;
-        height: 180px;
-        border: #e0e0e0;
-        display: none;
+    	background: #e0e0e0;
+        height: 150px; 
+       /*  display: none; */
     }
     
      .ans-write-area{
@@ -377,29 +538,25 @@
         display: none;
     }
     .qna-write{
-        float: right;
-        margin-right: 2.5%;
-        margin-top: 2%;
-        width: 50vw;
-        height: 130px;
+    	padding:10px 96px;
+    	width:100%;
+		display:flex;
+        height: 150px;
+        
     }
      .ans-write{
-        float: right;
-        margin-right: 2.5%;
-        margin-top: 2%;
+     	display:block;
         width: 50vw;
-        height: 130px;
     }
     
     
     .qna-write-btn{
         border: none;
-        height: 30px;
+        width: 70px;
+        height:110px;
+        transform:translateX(66px);
         background-color: #3498db;
         color: white;
-        margin: 1%;
-        margin-top:105px;
-        position:absolute;
         border-radius: 5px;
     }
     
@@ -414,8 +571,9 @@
         border-radius: 5px;
     }
     .qna-write > textarea{
-        width:85%;
-        height: 100%;
+    	padding: 15px; 
+        width:810px; 
+        height: 80%;
     }
     
     .ans-write > textarea{
@@ -423,55 +581,82 @@
         height: 100%;
     }
     .qna-content-area {
+    	
         width: 58vw;
-        height: 130px;
-        margin: 0 auto;
+        height: 80px;
+        transform:translateX(80px);
         margin-top: 20px;
+    }
+    
+    .qna-content-area ul {
+    	transform: translate(10px,15px);
     }
     
     .ans-content-area {
         width: 58vw;
-        height: 130px;
+        height: 100px;
         margin: 0 auto;
-        margin-top: 20px;
+        margin-top: 5px;
     }
     .qna-icon {
         float: left;
-    
-        height: 5.5vw;
-        width: 12%;
+        width:60px;
+        height:60px;
+        padding:15px;
     }
     .qna-icon > img {
-        width: 60%;
-        height: 60%;
-        padding: 5%;
-        padding-bottom: 25%;
+        width: 30px;
+        height: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .qna-content {
+    	padding: 15px;
         float: left;
-        border: 1px solid black;
-        width: 87.4%;
-        height: 100%;
+        width: 800px;
+        height: 80px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
         
     }
+  
+    
     /*문의 답변 영역*/
     .qna-answer-area {
-
+		display:flex;
         width: 58vw;
-        margin: 0 auto;
-        height: 150px;
+       	transform:translateX(70px);
+        padding:10px;
+        margin-top: 10px;
     }
+    .qna-answer-area ul {
+    	transform: translate(10px,15px);
+    
+    }
+    
     .answer-content {
-        margin: 1.5%;
-        width: 85%;
-        height: 80%;
-        float: right;
+       	width: 800px;
+        height: 80px;
         background-color: #fafafa;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     }
+    
+    .answer-icon {
+        display:flex;
+        width:60px;
+        height:60px;
+        padding:15px;
+    }
+    .answer-icon > img {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    
     .content p {
         padding: 10px;
     }

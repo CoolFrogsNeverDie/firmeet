@@ -89,7 +89,7 @@ public class ClubController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("cateList", cateList);
 
-		return "/club/makingForm";
+		return "/club/makingForm2";
 	}
 
 	/* 샘플용 */
@@ -134,7 +134,7 @@ public class ClubController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("cateList", cateList);
 
-		return "redirect:/main/mainForm";
+		return "redirect:/main/mainForm2";
 	}
 
 	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
@@ -186,7 +186,7 @@ public class ClubController {
 			model.addAttribute("memberLv" , memberLv);
 			System.out.println(memberLv);
 			
-		 return "/club/clubJoin";
+		 return "/club/clubJoin2";
 			
 			
 			
@@ -271,7 +271,7 @@ public class ClubController {
 		
 		clubService.clubJoin(clubMemVo);
 		
-		return "redirect:/main/mainForm";
+		return "redirect:/main/mainForm2";
 
 	}
 
@@ -320,7 +320,7 @@ public class ClubController {
 		
 		clubService.clubQ(clubQnaVo);
 		
-		return "redirect:/club/joinForm/{clubId}";
+		return "redirect:/club/joinForm2/{clubId}";
 		
 	}
 	
