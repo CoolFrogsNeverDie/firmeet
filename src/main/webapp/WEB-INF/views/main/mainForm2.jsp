@@ -476,8 +476,8 @@
         <ul id="meetList">
         <c:forEach items="${requestScope.pMap.clubList}" var="clubs" >
             <li>
-                <a href="${pageContext.request.contextPath}/club/joinForm/${clubs.clubId}">
-                    <img src="../assets/images/clubimg/${clubs.img2}" alt="사진 1" class="meetPhoto">
+                <a href="${pageContext.request.contextPath}/club/joinForm2/${clubs.clubId}">
+                    <img src="${pageContext.request.contextPath}/upload/clubimg/${clubs.img2}" alt="사진 1" class="meetPhoto">
                     <p class="meetTitle">${clubs.clubName} 모임제목</p>
                     <p class="meetContent">${clubs.intro1} 모임 내용</p>
                 </a>

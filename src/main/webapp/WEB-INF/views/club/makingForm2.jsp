@@ -43,7 +43,7 @@
                         </div>
 						<div class="form_line"></div>
 							<div>
-								<form id="clubMakingForm" action="${pageContext.request.contextPath }/club/making" method="post" enctype="multipart/form-data">
+								<form id="clubMakingForm" action="${pageContext.request.contextPath}/club/making"  method="post" enctype="multipart/form-data">
 									<div class="making_forms" id="clubNameForm">
                                     	<p>모임명</p>
                                     	<input type="text" maxlength="5" name="clubName" id="clubName" placeholder="   5글자 내로 입력해 주세요" value="" required>
@@ -125,14 +125,14 @@
 	                                    	</ul>
                                     	</div>
                                     </div>
-                                    <div id="imgBox">
+                                     <div id="imgBox">
                                      	<div class="making_forms" id="clubMainImg">
                                      		<p>메인 이미지</p>
-                                        	<!-- <img id="mainImg" class="imgPre" src=""> -->
+                                        	<img id="mainImg" class="imgPre" src="">
                                         	<div>
-                                        		<img id="mainImg" src="" class="imgPre" >
+                                        		
                                             	<label for="img2" class="imgFile">이미지올리기</label>
-                                            	<input id="img2" type="file" name="img2" value="" class="file-input">
+                                            	<input id="img2" type="file" name="file" value="" class="file-input">
                                         	</div>
                                      	</div>
                                      	<div class="making_forms" id="clubBackImg" >
@@ -141,11 +141,11 @@
 	                                            <img id="backImg" src="" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile">이미지올리기</label>
-	                                                <input id="img1" type="file" name="img1" value="" class="file-input">
+	                                                <input id="img1" type="file" name="file" value="" class="file-input">
 	                                            </div>
 	                                        </div>
 	                                    </div>
-                                    </div>
+                                    </div> 
                                     <div class="form_line"></div>
                                 	<div id="submitBox">
                                     	<button type="submit">동호회 등록</button>
@@ -316,13 +316,13 @@
 		 
 	});
 	
-	$('input[name="img1"]').change(function(){
+	$('input#img1').change(function(){
 		
 		
 	    setImageFromFile(this, '#backImg');
 	});
 	
-	$('input[name="img2"]').change(function(){
+	$('input#img2').change(function(){
 	    setImageFromFile(this, '#mainImg');
 	});
 	

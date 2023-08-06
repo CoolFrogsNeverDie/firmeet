@@ -113,32 +113,34 @@ public class ClubController {
 	
 	/* 클럽 만들기 */
 
-	@RequestMapping(value = "/making", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/making", method =RequestMethod.POST)
 	public String clubMake(@ModelAttribute ClubVo clubVo, 
-						   @RequestParam("file") MultipartFile[] files,
+			@RequestParam("file") MultipartFile[] files,
 						   HttpSession session, 
-						   Model model
+						   Model model 
 							){
 		System.out.println("ClubController.clubMaking()");
-		System.out.println("넘어온 VO  확인" + clubVo);
-		System.out.println("넘어온 VO  확인" + files[0].getOriginalFilename() );
-		System.out.println("넘어온 VO  확인" + files[1].getOriginalFilename() );
-
-		MemberVo authVo= (MemberVo)session.getAttribute("member");
-		System.out.println(authVo);
-
-		clubService.make(clubVo, authVo , files);
-
-		List<TagVo> tagList = memberService.tagList();
-		List<CategoryVo> cateList = memberService.cateList();
-		model.addAttribute("tagList", tagList);
-		model.addAttribute("cateList", cateList);
-
+		
+		
+		  System.out.println("넘어온 VO  확인" + clubVo); System.out.println("넘어온 VO  확인" +
+		  files[0].getOriginalFilename() ); System.out.println("넘어온 VO  확인" +
+		  files[1].getOriginalFilename() );
+		  
+		  MemberVo authVo= (MemberVo)session.getAttribute("member");
+		  System.out.println(authVo);
+		  
+		  clubService.make(clubVo, authVo , files); for(int i=0;i<files.length;i++) {
+		  clubService.clubImgUpload(files[i]); } List<TagVo> tagList =
+		  memberService.tagList(); List<CategoryVo> cateList =
+		  memberService.cateList(); model.addAttribute("tagList", tagList);
+		  model.addAttribute("cateList", cateList);
+		 
 		return "redirect:/main/mainForm2";
 	}
 
-	@RequestMapping(value = "/joinForm/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/joinForm/{clubId}", method = {RequestMethod.POST })
 	public String clubForm(@PathVariable int clubId, 
+			@ModelAttribute ClubVo club,
 			@RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,	
 			Model model,HttpSession session,
 			HttpServletResponse response) {
@@ -174,7 +176,8 @@ public class ClubController {
 			 * Map<String, Object> pMap= clubService.qnaList2(crtPage, clubId );
 			 * model.addAttribute("pMap", pMap );
 			 */
-			
+			List<TagVo> tagList = clubService.getTagList(club);
+			model.addAttribute("tagList", tagList);
 			 Map<String,Object> qMap = clubService.qnaList2(crtPage,clubId);
 			 model.addAttribute("qMap",qMap);
 			System.out.println(qMap);
@@ -197,6 +200,7 @@ public class ClubController {
 	
 	@RequestMapping(value = "/joinForm2/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String clubForm2(@PathVariable int clubId, 
+			@ModelAttribute ClubVo club,
 			@RequestParam(value="crtPage", required = false, defaultValue = "1" ) int crtPage,	
 			Model model,HttpSession session,
 			HttpServletResponse response) {
@@ -204,7 +208,7 @@ public class ClubController {
 		System.out.println(clubId);
 		MemberVo member = (MemberVo)session.getAttribute("member");
 		System.out.println(member);
-		
+
 		if(member == null) {
 			response.setContentType("text/html; charset=UTF-8");
             PrintWriter out;
@@ -217,12 +221,14 @@ public class ClubController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			 	List<TagVo> tagList = memberService.tagList();
 	    		List<CategoryVo> cateList = memberService.cateList();
-	    		model.addAttribute("tagList", tagList);
 	    		model.addAttribute("cateList", cateList);
+	    		List<TagVo> tagList = memberService.tagList();
+	    		model.addAttribute("tagList", tagList);
 			return "/member/memberForm";
 		}else {
+			List<TagVo> tagList = clubService.getTagList(club);
+			model.addAttribute("tagList", tagList);
 			String memberId = member.getMemberId();
 			System.out.println(memberId);
 			ClubVo clubVo = clubService.clubInfo(clubId);
@@ -265,7 +271,6 @@ public class ClubController {
 		clubMemVo.setClubId(clubId);
 		MemberVo member = (MemberVo)session.getAttribute("member");
 		clubMemVo.setMemberId(member.getMemberId());
-		
 		
 		System.out.println(clubMemVo);
 		

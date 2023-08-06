@@ -168,7 +168,9 @@ public class ClubService {
 
 	// 클럽 이미지 업로드 메서드
 	public String clubImgUpload(MultipartFile file) {
-		String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images";
+		
+		System.out.println("UploadService.clubImgUpload()");
+		String saveDir = "C:\\firmeet\\upload\\clubimg";
 
 		System.out.println("UploadService.clubImgUpload()");
 
@@ -185,7 +187,7 @@ public class ClubService {
 		System.out.println("saveName: " + saveName);
 
 		// 파일패스
-		String filePath = saveDir + "\\clubImg\\" + saveName;
+		String filePath = saveDir + saveName;
 		System.out.println("filePath: " + filePath);
 
 		// 파일 사이즈
@@ -216,6 +218,10 @@ public class ClubService {
 
 		return clubDao.getClubTagRank(clubVO);
 
+	}
+	
+	public List<TagVo> getTagList(ClubVo club){
+		return clubDao.getTagList(club);
 	}
 
 	

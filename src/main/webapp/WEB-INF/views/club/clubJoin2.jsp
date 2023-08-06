@@ -147,6 +147,10 @@ a{text-decoration: none; color: #212121;}
             font-size: 90%;
             color: #3498db;
         }
+        .club-tag ul {
+        	display:flex;
+        	gap:10px;
+        }
 
         .join-btn-area {
             margin: 50px;
@@ -285,16 +289,22 @@ a{text-decoration: none; color: #212121;}
 
     <div class="wrap">
         <!--메인라인-->        
-        <div class="back-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img1}" >배경 이미지</div>
+        <div class="back-img"><img src="${pageContext.request.contextPath}/upload/clubimg/${clubVo.img1}" >배경 이미지</div>
         <div class="color-box">
-            <div class="main-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img2}"
+            <div class="main-img"><img src="${pageContext.request.contextPath}/upload/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
                 <h4>어푸어푸 ${clubVo.clubName}</h4>
             </div><br>
             <div class="club-memeber-cnt">(${clubVo.preNum}/${clubVo.max})</div>
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
-            <div class="club-tag">#성인수영 #새벽수영 #갓생 #친목 #운동러버 #초보환영</div>
+            <div class="club-tag">
+	            <ul>
+	            	<c:forEach items="${tagList}" var="tag">
+						<li><span>#</span>${tag.tagName}</li>
+					</c:forEach>
+	            </ul>
+            </div>
             <div class="join-btn-area">
             	<button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
             	<button type="button" class= "join-btn btn-close">마감</button>
