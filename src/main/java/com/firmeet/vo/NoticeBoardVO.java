@@ -55,6 +55,8 @@ public class NoticeBoardVO {
 	
 	private int id;
 	private int galleryNo;
+	
+	private int voteYV;
 
 
 	public NoticeBoardVO() {
@@ -522,6 +524,14 @@ public class NoticeBoardVO {
 		this.resultList = resultList;
 	}
 
+	public int getVoteYV() {
+		return voteYV;
+	}
+
+	public void setVoteYV(int voteYV) {
+		this.voteYV = voteYV;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [aboardNo=" + aboardNo + ", clubId=" + clubId + ", memberId=" + memberId + ", meetNo="
@@ -537,7 +547,7 @@ public class NoticeBoardVO {
 				+ ", meetPlace=" + meetPlace + ", address1=" + address1 + ", address2=" + address2 + ", aboardHit="
 				+ aboardHit + ", payresultNo=" + payresultNo + ", paycount=" + paycount + ", likeNo=" + likeNo
 				+ ", likeDate=" + likeDate + ", replyList=" + replyList + ", id=" + id + ", galleryNo=" + galleryNo
-				+ "]";
+				+ ", voteYV=" + voteYV + "]";
 	}
 
 }

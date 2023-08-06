@@ -61,23 +61,25 @@ public class NoticeBoardService {
 	public NoticeBoardVO editlist(NoticeBoardVO vo) {
 		System.out.println("notice editlist 확인");
 		dao.hits(vo);
+		vo.getMemberId();
+		System.out.println("service editlist getMemberId 확인"+vo.getMemberId());
 		System.out.println("---------------------------5");
 		NoticeBoardVO vo1 = dao.editlist(vo);
 		
-//		List<VoteResultVO> rvo = dao.getresult(vo);
-//		vo1.setResultList(rvo);
-/*		if(vo.getVoteResult() != 0) {
-		VoteResultVO voteResultvo = dao.voteresult(vo);
-		System.out.println("확인확인"+voteResultvo);
-		System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
-		
-		vo1.setVote1Cnt(voteResultvo.getVote1Cnt());
-		vo1.setVote2Cnt(voteResultvo.getVote2Cnt());
-		vo1.setVote3Cnt(voteResultvo.getVote3Cnt());
-		vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
-		vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
+		if(vo.getVoteResult() != 0) {
+			VoteResultVO voteResultvo = dao.voteresult(vo);
+			System.out.println("확인확인"+voteResultvo);
+			System.out.println("vo.getVote1Cnt()"+voteResultvo.getVote1Cnt());
+			
+			vo1.setVote1Cnt(voteResultvo.getVote1Cnt());
+			vo1.setVote2Cnt(voteResultvo.getVote2Cnt());
+			vo1.setVote3Cnt(voteResultvo.getVote3Cnt());
+			vo1.setVote4Cnt(voteResultvo.getVote4Cnt());
+			vo1.setVote5Cnt(voteResultvo.getVote5Cnt());
 		}
-*/		//댓글 리스트
+		
+		System.out.println("ddddddddd"+vo1.getMemberId());
+		//댓글 리스트
 		System.out.println("---------------------------6");
 		List<AreplyVO> vo11 = dao.getBoardComment(vo);
 		vo1.setReplyList(vo11);
