@@ -110,13 +110,6 @@ public class ManagerService {
 	
 	public void updateClubInfo(ClubVo clubVO, MultipartFile[] files) {
 		
-		System.out.println(files.length);
-		System.out.println(files[0].getOriginalFilename()=="");
-		System.out.println(files[0].getName());
-		System.out.println(files[0].getClass());
-		System.out.println(files[1].getOriginalFilename() =="");
-		System.out.println(files[1].getName());
-		System.out.println(files[1].getClass());
 		
 		if(files[0].getOriginalFilename()!="") {
 			clubVO.setImg1(uploadPic(files[0]));
@@ -129,8 +122,8 @@ public class ManagerService {
 		clubDAO.updateClubInfo(clubVO);
 		clubDAO.updateCateNo(clubVO);
 		clubDAO.resetClubTag(clubVO); //클럽 태그 삭제함
-		
-		
+		clubDAO.resetClubColor(clubVO);
+		clubDAO.insertClubColor(clubVO);
 		int[] tagList = clubVO.getTagNo();
 		TagVo tag = new TagVo();
 		

@@ -271,10 +271,16 @@ public class ClubDao {
 	
 	}
 
-	public void updateClubTag(Map<String, Object> tag) {
-			
-		System.out.println("태그 추가 위해 가져온 거 " + tag);
+	public int resetClubColor(ClubVo clubVO) {
 		
+		int row = session.delete("club.deleteClubColor", clubVO);
+		
+		return row;
+	}
+
+	public int insertClubColor(ClubVo clubVO) {
+		
+		return session.insert("club.insertClubColor", clubVO);
 	}
 
 	

@@ -1,0 +1,35 @@
+@charset "EUC-KR";
+
+.ly-body-container{
+	/*배경색1*/
+	background-color : white; 
+}
+.body{
+	/*배경색1*/
+	background-color : white;
+	min-height :100vh;
+}
+.ly-head-container {
+	/*top-nav 색상2*/
+	background-color : #6d6d6d;
+}
+.sd-color {
+	/*사이드바 컬러 지정 2*/
+	background-color : #6d6d6d;
+	/*사이드바 텍스트 컬러 지정4*/
+	color: white;
+	/*사이드바 그림자 컬러 지정3*/
+	border-left : 10px solid #55555b;
+}
+.ct-border {
+	/*사이드바 관리자 메뉴 가는 거 3*/
+	color : #55555b;
+}
+.ct-color{
+	/*버튼 색 3*/
+	background-color : #55555b;
+	/*버튼 텍스트 4*/
+	color: white;
+	/*버튼의 텍스트 컬러4*/
+	border : 1px solid white;
+}

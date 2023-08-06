@@ -5,11 +5,11 @@
 
 	<div class= "menu-bar2" >
 		<ul class= "side-bar2">
+			<li id = "club-main" class= "sd-color"><a href="${pageContext.request.contextPath}/club/main/${club.clubId}">메인</a></li>
 			<li id = "club-notice" class= "sd-color"><a href="${pageContext.request.contextPath}/${club.clubId}/notice/noticelist">공지사항</a></li>
 			<li id = "club-gallery" class= "sd-color"><a href="${pageContext.request.contextPath }/gallery/list/${club.clubId}">갤러리</a></li>
 			<li id = "club-calendar" class= "sd-color"><a href="${pageContext.request.contextPath }/calendar/club/${club.clubId}">달력</a></li>
 			<li id = "club-board" class= "sd-color"><a href="${pageContext.request.contextPath }/board/club/${club.clubId}">자유 게시판</a></li>
-			<li id = "club-member" class= "sd-color">멤버</li>
 			<li id = "club-account" class= "sd-color"><a href="${pageContext.request.contextPath }/accountBook/main/${club.clubId}">가계부</a></li>
 		</ul>
 	</div>

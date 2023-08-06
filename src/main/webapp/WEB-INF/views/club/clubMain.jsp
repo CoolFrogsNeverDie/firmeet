@@ -19,6 +19,7 @@
     <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
     <!--풀 캘린더 CSS-->
   	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
+  	<link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" />
   	<!--풀 캘린더 JS-->
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
 </head>
@@ -129,6 +130,17 @@
 #calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
 </style>
 <script>
+
+$(document).ready(function(){
+	
+	$('#club-main').css('background-color','white');
+	$('#club-main').css('color','gray');
+	$('#club-main').css('border-left','white');
+	$('#club-main').css('box-shadow', '6px 3px 6px 0px #48484847');
+});
+
+
+
 //calendar용 전역변수 설정
 let calendarEl;
 let calendar;

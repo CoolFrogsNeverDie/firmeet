@@ -501,8 +501,8 @@ ul{
         } */
         
         #clubMakingForm #clubTag #clubTags .club_tag:checked+.tag_label {
-        	background:#eee;
-        	color:#a864d8;
+        	background:#eee !important;
+        	color:#a864d8 !important;
         
         }
         #clubMakingForm #selTag {
@@ -611,7 +611,7 @@ ul{
             color: #fff;
             border-radius: 5px;
             width: 150px;
-            height: 40px;
+            height: 45px;
 			padding: 10px 0px 0px 30px;
 			cursor:pointer;
         }
@@ -646,7 +646,7 @@ ul{
          }
 
          #clubMakingForm #imgBox #clubBackImg label {
-            transform: translate(282px,15px);
+            transform: translate(124px,15px);
             
          }
 
@@ -709,7 +709,124 @@ ul{
         }
    
   
-	
+	.color-list {
+	display: flex;
+}
 
-     
+.color {
+	width: 55px;
+	height: 55px;
+	border-radius: 150px;
+	position: relative;
+    border: 1px solid #ffffff;
+	margin-right: 5px
+} 
 
+.sub-color {
+	width: 100%;
+	height: 50%;
+	border-radius: 0px 0px 150px 150PX;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/*블랙모드*/
+.vintage-beige-pink {
+	background-color: #343434;
+}
+.vintage-beige-pink .sub-color {
+	background-color: #ffffff;
+}
+
+/*베이직*/
+.basic{
+	background-color: white;
+}
+.basic .sub-color {
+	background-color: #55555b;
+}
+/*화이트 블랙*/
+.white-black {
+	background-color: white;
+}
+.white-black .sub-color {
+	background-color: #343434;
+}
+/*빈티지 베이지 핑크*/
+.vintage-beige-pink {
+	background-color: #f8ecc9;
+}
+.vintage-beige-pink .sub-color {
+	background-color: #f1bbba;
+}
+/*초록*/
+.green {
+	background-color: #f3f6f6;
+}
+.green .sub-color {
+	background-color: #a9cecf;
+}
+
+/*핫핑크 블랙*/
+.hot-pink-black {
+	background-color: #08172a;
+}
+.hot-pink-black .sub-color {
+	background-color: #ed265f;
+}
+
+/*무난 핑크와 블랙*/
+.pink-and-black {
+	background-color: #191919;
+}
+.pink-and-black .sub-color {
+	background-color: #fdc8c8;
+}
+
+/*약간 그린끼 도는 엘로우 + 오렌지*/
+.greenish-yellow-orange {
+	background-color: #ece476;
+}
+.greenish-yellow-orange .sub-color {
+	background-color: #fb903c;
+}
+
+/*라일락*/
+.purple-white {
+	background-color: #fafafa;
+}
+.purple-white .sub-color {
+	background-color: #d52b9b;
+}
+
+/*사이버펑크*/
+.cyberpunk {
+	background-color: #1c2966;
+}
+.cyberpunk .sub-color {
+	background-color: #FF0075;
+}
+
+.hot-pink-navy{
+	background-color :#08172a;
+}     
+.hot-pink-navy .sub-color {
+	background-color: #ed265f;
+}
+
+.color-list input{
+	height: 1px;
+}
+.color:hover{
+	cursor: pointer;
+}
+
+#clubName {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}

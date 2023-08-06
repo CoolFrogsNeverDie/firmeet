@@ -17,7 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/manager_page.css" rel="stylesheet" type="text/css" />
-    <%-- <link href="${pageContext.request.contextPath}/assets/css/board2_test.css" rel="stylesheet"  type="text/css" /> --%>
+    <link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" />
     <!--모달-->
 </head>
 
@@ -73,7 +73,61 @@
 											
 											<div class= "making_forms" id ="clubColorForm">
 											 <p> 컬러</p>
-											 <div> 컬러컬러</div>
+											 <div>
+													
+												<!-- AJAX로 게시글 그릴 공간 -->
+													<div class="color-list" data-main="#f8ecc9" data-sub="#f1bbba" data-bnt="#eb9f9f">
+													<!-- //베이직 -->
+													<input type ="radio" name = "colorType" value ="1" id ="color-1">
+													<label for="color-1" class="color basic" data-main="white" data-sub="#6d6d6d" data-bnt="#55555b">
+														<div class="sub-color"></div>
+													</label>
+													<!-- //보라색에 회색끼 살짝 도는 흰색 -->
+													<input type ="radio" name = "colorType" value ="2" id ="color-2">
+													<label for = "color-2" class="color purple-white" data-main="#fafafa" data-sub="#ae6dce" data-bnt="#68578f">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 블랙 앤 화이트 -->
+													<input type ="radio" name = "colorType" value ="3" id ="color-3">
+													<label for = "color-3"  class="color white-black" data-main="white" data-sub="#343434" data-bnt="#343434">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 빈티지 핑크 -->
+													<input type ="radio" name = "colorType" value ="4" id ="color-4">
+													<label for = "color-4"  class="color vintage-beige-pink" data-main="#f8ecc9" data-sub="#f1bbba" data-bnt="#eb9f9f">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 질척 그린 -->
+													<input type ="radio" name = "colorType" value ="5" id ="color-5">
+													<label for = "color-5" class="color green" data-main="#f3f6f6" data-sub="#a9cecf" data-bnt="#78a7a8">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 네이비 핑크 -->
+													<input type ="radio" name = "colorType" value ="6" id ="color-6">
+													<label for = "color-6"  class="color hot-pink-navy" data-main="#08172a" data-sub="#ed265f" data-bnt="#ac1a44">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 레인보우 샤벳 -->
+													<input type ="radio" name = "colorType" value ="7" id ="color-7">
+													<label for = "color-7" class="color greenish-yellow-orange" data-main="#ece476" data-sub="#fb903c" data-bnt="#ed265f">
+														<div class="sub-color"></div>
+													</label>
+													<!-- 사이버 펑크 -->
+													<input type ="radio" name = "colorType" value ="8" id ="color-8">
+													<label for = "color-8" class="color cyberpunk" data-main="#1c2966" data-sub="#FF0075" data-bnt="#77D970">
+														<div class="sub-color"></div>
+													</label>
+													<!-- //사이버펑크 -->
+												</div>
+												<!-- //color-list -->
+
+											 
+											 
+											 
+											 
+											 
+											 
+											 </div>
 											</div>
 											
 											<div class="making_forms" id="clubNameForm">
@@ -113,7 +167,7 @@
                                     		<c:forEach items="${tagList}" var="tag">
 	                                    		<li>
 	                                            	<input type="checkbox" class="club_tag" name="tagNo" value="${tag.tagNo}" id="${tag.tagNo}" data-tagname="${tag.tagName}">
-	                                            	<label for="${tag.tagNo}" class="tag_label">${tag.tagName}</label>
+	                                            	<label for="${tag.tagNo}" class="tag_label ct-color">${tag.tagName}</label>
 	                                        	</li>
 	                                        </c:forEach>
                                     	</ul>
@@ -276,6 +330,42 @@
 
 
 <script>
+
+	
+$('input[name="colorType"]').on("change", function() {
+	  if ($(this).is(':checked')) {
+	    var ele = $("label[for='" + $(this).attr("id") + "']");
+	    ele.css('border', '5px solid gray');
+	  } 
+
+	  // 체크되지 않은 체크박스들의 테두리 변경
+	  $('input[name="colorType"]:not(:checked)').each(function() {
+	    var ele = $("label[for='" + $(this).attr("id") + "']");
+	    ele.css('border', '1px solid white');
+	  });
+	});
+	
+	$('.color').on("click", function(){
+		
+		var color1	= $(this).data('main');
+		var color2	= $(this).data('sub');
+		var color3	= $(this).data('btn');
+		
+        
+        $('.ly-body-container').css('background-color',color1); // 배경색 수정1
+        $('body').css('background-color',color1); // 배경색 수정2
+        $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
+        $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
+        $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
+        $('.sd-color').css('color','white'); //사이드바의 텍스트 컬러 지정
+        $('.sd-color').css('border-left', '10px solid ' + color3); //사이드바의 그림자 컬러 지정
+        $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
+        $('.ct-color').css('background-color',color3); //버튼 컬러
+		
+	});
+	
+	
+
 		//해야하는 거
 		//1. checked 처리
 		//2. action 주소 바꾸기
@@ -285,43 +375,18 @@
 		
 	$(document).ready(function(){
 		var intro2 = "${deInfo.intro2}";
-		var messageWithNewLines = intro2.replace(/<br>/g, "\n");
+		var color = "${deInfo.colorType}"
+		var messageWithNewLines = intro2.replace(/<br>/ig, "\n");
 		$('#intro2').val(messageWithNewLines);
-		var jj = "${deInfo.cateNo}";
-		console.log(jj);
-		setDeInfo();
-		colorSet();
+		$('input[name="colorType"][value="' + color + '"]').prop('checked', true);
+		$('input[name="colorType"][value="' + color + '"]').next('label').css('border', '5px solid gray');
 		
+		setDeInfo(); //디테일 인포 AJAX로 가져옴
 		
 		
 	});
 
 	
-	function colorSet(){
-		if(${club.color1} != null){
-			
-		var color1 = "${club.color1}"	
-		var color2 = "${club.color2}"	
-		var color3 = "${club.color3}"	
-		var color4 = "${club.color4}"	
-		
-		
-		console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
-/* 
-			 $('.ly-body-container').css('background-color',color1); // 배경색 수정1
-			 $('body').css('background-color',color1); // 배경색 수정2
-			 $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
-			 $('.ly-head-container').css('background-color',color2); //탑바 컬러 지정
-			 $('.sd-color').css('background-color',color2); //사이드바의 컬러 지정
-			 $('.sd-color').css('color',color4); //사이드바의 텍스트 컬러 지정
-			 $('.sd-color').css('border-left','10px solid ' + color3); //사이드바의 그림자 컬러 지정
-			 $('.ct-border').css('color',color3); //사이드바쪽 관리자 메뉴가는 거
-			 $('.ct-color').css('background-color',color3); //버튼 컬러
-			 $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
-			 $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
-		}
-
- */	}
 
 	
 	
@@ -521,7 +586,6 @@
 		    });//ajax end
 	}//deinfo end
 
-	
 
 	
 	

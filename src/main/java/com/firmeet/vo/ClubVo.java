@@ -33,7 +33,7 @@ public class ClubVo {
 	private String color2;
 	private String color3;
 	private String color4;
-	
+	private int colorType;
 	
 	
 	/* public List<TagVo> tagList; */ /* DB=>화면 */
@@ -305,6 +305,15 @@ public class ClubVo {
 		this.color4 = color4;
 	}
 
+	
+	public int getColorType() {
+		return colorType;
+	}
+
+	public void setColorType(int colorType) {
+		this.colorType = colorType;
+	}
+
 	@Override
 	public String toString() {
 		return "ClubVo [clubId=" + clubId + ", clubName=" + clubName + ", cre_date=" + cre_date + ", max=" + max
@@ -313,8 +322,11 @@ public class ClubVo {
 				+ detailL + ", detailP=" + detailP + ", detailE=" + detailE + ", detailW=" + detailW + ", tagNo="
 				+ Arrays.toString(tagNo) + ", clubTagList=" + clubTagList + ", cateVO=" + cateVO + ", tagVo=" + tagVo
 				+ ", memlevel=" + memlevel + ", clubMemNo=" + clubMemNo + ", color1=" + color1 + ", color2=" + color2
-				+ ", color3=" + color3 + ", color4=" + color4 + ", cateNo=" + cateNo + ", category=" + category + "]";
+				+ ", color3=" + color3 + ", color4=" + color4 + ", colorType=" + colorType + ", cateNo=" + cateNo
+				+ ", category=" + category + "]";
 	}
+
+	
 
 	
 }

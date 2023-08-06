@@ -25,6 +25,7 @@
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
   	<!-- 카카오 map  -->
   	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6f59970276341196f41538265d29af72&libraries=services"></script>
+ 	<link href="${pageContext.request.contextPath}/assets/css/color_code/color1.css" rel="stylesheet" type="text/css" />
   	
 </head>
 

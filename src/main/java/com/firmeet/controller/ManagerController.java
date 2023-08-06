@@ -190,7 +190,7 @@ public class ManagerController {
 		managerService.updateClubInfo(clubVO, files);
 		
 		
-		return "";
+		return "redirect:/management/club/edit/" + clubVO.getClubId();
 	}
 	
 	

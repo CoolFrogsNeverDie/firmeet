@@ -21,6 +21,7 @@
   	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
   	<!--풀 캘린더 JS-->
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
+  	<link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -89,7 +90,7 @@ let calendar;
 $(document).ready(function() {
 	render();
 	getData();
-	$('#club-calendar').css('box-shadow', '6px 3px 6px 0px #c6c7c8');
+	$('#club-calendar').css('box-shadow', '6px 3px 6px 0px #48484847');
 	$('#club-calendar').css('border-left', '0px');
 	$('#club-calendar').css('color', 'gray');
 	$('#club-calendar').css('background-color', 'white');

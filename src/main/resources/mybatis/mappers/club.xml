@@ -153,7 +153,7 @@
     <!-- 클럽 멤버 레벨 확인 쿼리 -->
     <select id="checkMemLevel" parameterType="map" resultType="com.firmeet.vo.ClubVo">
         <![CDATA[
-            SELECT
+        	SELECT
                 a.clubid,
                 clubname,
                 cre_date,
@@ -162,15 +162,20 @@
                 img1,
                 img2,
                 memlevel,
-                nvl((select color1 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), 'white')  as color1,
-                nvl((select color2 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), '#6d6d6d')  as color2,
-                nvl((select color3 from color c join club_color d on c.color_no = d.color_no where d.clubId =#{clubId}), '#55555b')  as color3,
-                nvl((select color4 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), 'white')  as color4
+                nvl(colorNo,1) as colorType
             FROM
                 club a
                 JOIN club_member b ON a.clubid = b.clubid
+                left outer join (
+                select
+                    color_no as colorNo
+                from
+                club_color
+                where clubId = #{clubId}
+                ) b
+                on b.clubId = a.clubId
             WHERE
-                a.clubid = #{clubId}
+                a.clubId = #{clubId}
                 AND b.memberid = #{memberId}
         ]]>
     </select>
@@ -445,7 +450,7 @@
     
     <select id = "getClubDeInfo" parameterType ="club" resultType ="club">
     	<![CDATA[
-    		 select
+        	select
                 distinct
                 intro1
                 ,intro2
@@ -459,8 +464,11 @@
                 ,detailP
                 ,detailE
                 ,detailW
-                from club a join club_category b on a.clubId = b.clubId
-                join club_member c on a.clubId = c.clubId where a.clubId = #{clubId}
+                ,color_No as colorType
+            from club a join club_category b on a.clubId = b.clubId
+            join club_member c on a.clubId = c.clubId 
+            join club_color d on d.clubId = a.clubId
+            where a.clubId = #{clubId}
     	]]>
     </select>
     
@@ -514,5 +522,27 @@
             where clubId = #{clubId}
     	]]>
     </delete>
+    
+    <delete id ="deleteClubColor" parameterType ="club">
+    	<![CDATA[
+			delete club_color where clubId = #{clubId}
+    	]]>
+    </delete>
+    
+    <insert id ="insertClubColor" parameterType ="club">
+    	<![CDATA[
+    		insert into club_color
+    			(
+    			CLUB_COLOR_NO
+    			,CLUBID
+    			,COLOR_NO
+    			)
+            values(
+            	seq_CLUB_COLOR_NO.nextval
+            	,#{clubId}
+            	,#{colorType}
+            	)
+    	]]>
+    </insert>
     
 </mapper>
