@@ -332,5 +332,37 @@ public class GalleryController {
 		}
 	}
 	
-	
+	//컬러 선택창
+	@RequestMapping(value = "/color/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
+	public String colorselet(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
+		System.out.println("나는 칼라 확인");
+		System.out.println("clubId : " + clubId);
+
+		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
+		MemberVo member = (MemberVo) session.getAttribute("member");
+
+		String memberId = null;
+
+		if (member != null) {
+			memberId = member.getMemberId();
+
+			System.out.println(memberId); // memberId 값 출력;
+			
+			// 클럽과 회원의 관계 정보를 가져옵니다.
+			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			// club이 null이면 쫒아내기!!!
+			model.addAttribute("club", club);
+
+			List<MeetVo> gMeetVos = galleryService.getMeetMon(clubId);
+			List<GalleryImgVo> galleryImgVos = galleryService.getGalleryListAll(clubId);
+			model.addAttribute("galleryList", galleryImgVos);
+			model.addAttribute("meetList", gMeetVos);
+
+			return "club_management/edit_color";
+
+		} else {
+			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+			return "member/memberForm";
+		}
+	}
 }

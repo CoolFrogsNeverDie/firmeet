@@ -29,7 +29,6 @@
     border-radius: 10px;
     right: 0;
 }
-}
 
 #drop {
 	border: 1.5px solid #c7c8c9;

@@ -32,7 +32,7 @@ public class GalleryService {
 	@Autowired
 	private GalleryDao galleryDao;
 
-	private String saveDir = "C:\\firmeet\\firmeet\\src\\main\\webapp\\assets\\images\\galleryImg";
+	private String saveDir = "C:\\firmeet\\upload\\gallery";
 
 	// 갤러리 업로드 폼 모임 리스트
 	public MeetVo getMeetA(int meetNo) {

@@ -172,7 +172,6 @@ $('#meetList').on('click', 'dt.viewAll', function () {
             } else {
                 for (var i = 0; i < list.length; i++) {
                     $(".gallery-area").removeClass('error');
-                    
                     var imgSave = list[i].imgSave;
                     var memberId = list[i].memberId;
                     var imgNo = list[i].imgNo;
@@ -181,8 +180,8 @@ $('#meetList').on('click', 'dt.viewAll', function () {
                     console.log(i + " memberId : " + memberId);
                     console.log(i + " imgNo : " + imgNo);
                     console.log(i + " likeCnt : " + likeCnt);
-                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
-                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" alt="" />';
                     galleryHTML += '</a>';
                 }
 
@@ -242,8 +241,8 @@ $('dl').on('click', 'dd', function () {
                     console.log(i + " memberId : " + memberId);
                     console.log(i + " imgNo : " + imgNo);
                     console.log(i + " likeCnt : " + likeCnt);
-                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
-                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                    galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                    galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" alt="" />';
                     galleryHTML += '</a>';
                 }
 
@@ -331,8 +330,8 @@ $.ajax({
                 console.log(i + " memberId : " + memberId);
                 console.log(i + " imgNo : " + imgNo);
                 console.log(i + " likeCnt : " + likeCnt);
-                galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
-                galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/assets/images/galleryImg/' + imgSave + '" alt="" />';
+                galleryHTML += '<a class="example-image-link" href="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" data-lightbox="example-set" data-likeCnt="' + likeCnt + '" data-title="' + memberId + '" data-imgno="' + imgNo + '">';
+                galleryHTML += '<img class="example-image" src="' + '${pageContext.request.contextPath}/upload/galleryImg/' + imgSave + '" alt="" />';
                 galleryHTML += '</a>';
             }
 
