@@ -298,13 +298,16 @@
 
 	
 	function colorSet(){
+		if(${club.color1} != null){
+			
 		var color1 = "${club.color1}"	
 		var color2 = "${club.color2}"	
 		var color3 = "${club.color3}"	
 		var color4 = "${club.color4}"	
 		
+		
 		console.log(color1+ " " +color2 + " " + color3  + " " + color4 + " ");
-
+/* 
 			 $('.ly-body-container').css('background-color',color1); // 배경색 수정1
 			 $('body').css('background-color',color1); // 배경색 수정2
 			 $('body').css('min-height','100vh'); //길이 수정(틀어짐 없게)
@@ -316,8 +319,9 @@
 			 $('.ct-color').css('background-color',color3); //버튼 컬러
 			 $('.ct-color').css('color',color4); //버튼의 텍스트 컬러
 			 $('.ct-color').css('border','1px solid ' +color4); //버튼의 텍스트 컬러
+		}
 
-	}
+ */	}
 
 	
 	

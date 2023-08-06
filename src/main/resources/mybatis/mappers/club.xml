@@ -162,15 +162,13 @@
                 img1,
                 img2,
                 memlevel,
-                color1,
-                color2,
-                color3,
-                color4
+                nvl((select color1 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), 'white')  as color1,
+                nvl((select color2 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), '#6d6d6d')  as color2,
+                nvl((select color3 from color c join club_color d on c.color_no = d.color_no where d.clubId =#{clubId}), '#55555b')  as color3,
+                nvl((select color4 from color c join club_color d on c.color_no = d.color_no where d.clubId = #{clubId}), 'white')  as color4
             FROM
                 club a
                 JOIN club_member b ON a.clubid = b.clubid
-                join club_color c  on a.clubId = c.clubId
-                join color d on c.color_No = d.color_No
             WHERE
                 a.clubid = #{clubId}
                 AND b.memberid = #{memberId}

@@ -150,6 +150,7 @@ public class ManagerController {
 
             // 클럽과 회원의 관계 정보를 가져옵니다.
             ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            System.out.println("가져온 클럽 정보 : " + club);
             model.addAttribute("club", club);
             
             //회장일 시 해당 페이지 접근함
