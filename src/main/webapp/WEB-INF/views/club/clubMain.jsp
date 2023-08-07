@@ -85,8 +85,12 @@
 									<table>
 										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4" >
 											<tr>
-												<td class="title">${notice.title}</td>
-												<td>${notice.aboardDate}</td>
+												<td class="title">
+													<a href="${pageContext.request.contextPath }/${club.clubId}/notice/editlist?aboardNo=${notice.aboardNo}">${notice.title}</a>
+												</td>
+												<td class="clickable" data-url="${pageContext.request.contextPath }/${club.clubId}/notice/editlist?aboardNo=${notice.aboardNo}">
+													${notice.aboardDate}	
+												</td>
 											</tr>
 										</c:forEach>
 										<!-- forEach -->
@@ -138,6 +142,16 @@ $(document).ready(function(){
 	$('#club-main').css('border-left','white');
 	$('#club-main').css('box-shadow', '6px 3px 6px 0px #48484847');
 });
+
+$(document).ready(function() {
+    // 클릭 가능한 요소를 선택하여 클릭 이벤트 처리
+    $(".clickable").on("click", function() {
+      // 데이터 속성에 저장된 URL 가져오기
+      var url = $(this).data("url");
+      // 가져온 URL로 페이지 이동
+      window.location.href = url;
+    });
+ });
 
 
 

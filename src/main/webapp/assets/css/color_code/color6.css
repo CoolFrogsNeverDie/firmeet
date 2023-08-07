@@ -2,34 +2,34 @@
 
 .ly-body-container{
 	/*배경색1*/
-	background-color : #08172a; 
+	background-color : #08172a !important; 
 }
 .body{
 	/*배경색1*/
-	background-color : #08172a;
+	background-color : #08172a !important;
 	min-height :100vh;
 }
 .ly-head-container {
 	/*top-nav 색상2*/
-	background-color :#ed265f;
+	background-color :#ed265f !important;
 }
 .sd-color {
 	/*사이드바 컬러 지정 2*/
-	background-color : #ed265f;
+	background-color : #ed265f !important;
 	/*사이드바 텍스트 컬러 지정4*/
-	color: white;
+	color: white !important;
 	/*사이드바 그림자 컬러 지정3*/
-	border-left : 10px solid #ac1a44;
+	border-left : 10px solid #ac1a44 !important;
 }
 .ct-border {
 	/*사이드바 관리자 메뉴 가는 거 3*/
-	color :#ac1a44;
+	color :#ac1a44 !important;
 }
 .ct-color{
 	/*버튼 색 3*/
-	background-color : #ac1a44;
+	background-color : #ac1a44 !important;
 	/*버튼 텍스트 4*/
-	color: white;
+	color: white !important;
 	/*버튼의 텍스트 컬러4*/
-	border : 1px solid white;
+	border : 1px solid white !important;
 }

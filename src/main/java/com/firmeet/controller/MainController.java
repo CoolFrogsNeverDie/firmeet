@@ -119,16 +119,16 @@ public class MainController {
 		
 		System.out.println("MyMain 확인");
 		if (member != null) {
-        List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
-        
-        model.addAttribute("galleryList", gList);
-        
-        List<NoticeBoardVO> nList= noticeBoardService.noticeList(memberId);
-		System.out.println(nList);
-        
-        model.addAttribute("noticeList", nList);
-        
-		return "/member_diary/member_main";
+	        List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
+	        
+	        model.addAttribute("galleryList", gList);
+	        
+	        List<NoticeBoardVO> nList= noticeBoardService.noticeList(memberId);
+			System.out.println(nList);
+	        
+	        model.addAttribute("noticeList", nList);
+	        
+			return "/member_diary/member_main";
 		
 		} else {
 			// 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.

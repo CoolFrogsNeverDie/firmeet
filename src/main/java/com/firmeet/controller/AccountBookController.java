@@ -31,9 +31,7 @@ public class AccountBookController {
 	@Autowired
 	private ClubService clubService;
 
-	/**
-	 * 회계장부 메인 페이지 조회
-	 */
+	//회계장부 메인 페이지 조회
 	@RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String accountbookMain(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
@@ -47,6 +45,10 @@ public class AccountBookController {
 
 			// 클럽과 회원의 관계 정보를 가져옵니다.
 			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			//클럽이 null이면 쫒아내기
+			if(club == null) {
+				return "/member/main/"+memberId;
+			}
 			model.addAttribute("club", club);
 
 			List<AccountBookVo> aList = accountBookService.getList(clubId);
@@ -61,9 +63,7 @@ public class AccountBookController {
 		}
 	}
 
-	/**
-	 * 회계장부 업로드 폼 페이지 조회
-	 */
+	//회계장부 업로드 폼 페이지 조회
 	@RequestMapping(value = "/uploadform/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public String accountbookUploadform(@PathVariable("clubId") int clubId, Model model, HttpSession session) {
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
@@ -77,6 +77,10 @@ public class AccountBookController {
 
 			// 클럽과 회원의 관계 정보를 가져옵니다.
 			ClubVo club = clubService.checkMemLevel(memberId, clubId);
+			//클럽이 null이면 쫒아내기
+			if(club == null) {
+				return "/member/main/"+memberId;
+			}
 			model.addAttribute("club", club);
 
 			List<ScheduleVO> sList = accountBookService.getMeet(clubId);
@@ -90,9 +94,7 @@ public class AccountBookController {
 		}
 	}
 
-	/**
-	 * 회계 데이터 업로드
-	 */
+	//회계 데이터 업로드
 	@RequestMapping(value = "/upload", method = { RequestMethod.GET, RequestMethod.POST })
 	public String accountbookUpload(@RequestParam("clubId") int clubId,
 			@RequestParam(name = "incomeExpense") String incomeExpense, @RequestParam("meet") int meet,
@@ -107,8 +109,7 @@ public class AccountBookController {
 		System.out.println("category : " + category);
 		System.out.println("amount : " + amount);
 
-		AccountBookVo aBookVo = new AccountBookVo(0, clubId, meet, memberId, amount, "", category, purpose,
-				incomeExpense, "", 0);
+		AccountBookVo aBookVo = new AccountBookVo(0, clubId, meet, memberId, amount, "", category, purpose, incomeExpense, "", 0);
 
 		System.out.println(aBookVo);
 
@@ -117,9 +118,7 @@ public class AccountBookController {
 		return "redirect:/accountBook/main/" + clubId;
 	}
 
-	/**
-	 * 회계 데이터 검색
-	 */
+	//회계 데이터 업로드
 	@ResponseBody
 	@RequestMapping(value = "/search/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
 	public List<AccountBookVo> searchAccountBook(@RequestParam("startDate") String startDate,
@@ -131,9 +130,7 @@ public class AccountBookController {
 
 	/*-------------------------------------마이겔러리---------------------------- */
 
-	/**
-	 * 마이겔러리 - 회계장부 메인 페이지 조회
-	 */
+	//마이겔러리 - 회계장부 메인 페이지 조회
 	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET,RequestMethod.POST})
 	public String myAccountbookMain(@PathVariable("memberId") String memberId, Model model,HttpSession session) {
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.

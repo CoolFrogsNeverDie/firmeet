@@ -358,7 +358,7 @@ $target.on("click", function () {
 
 $(document).ready(function () {
     var selectedDD = null; // 선택된 dd 요소를 저장할 변수
-
+       
     // 특정 <dd> 요소를 클릭하면 "사진올리기" 버튼을 보여줍니다.
     $('dl').on('click', 'dd', function () {
         var meetNo = $(this).data('meetno');
@@ -543,6 +543,8 @@ $("#imageModal").on("click", "input[name='deleteImg']", function () {
   var clubId = path.match(/\d+/)[0];
   window.location.href = "${pageContext.request.contextPath}/gallery/deleteImg/" + clubId + "?imgno=" + imageNumber;
 });
+
+
 
 </script>
 
