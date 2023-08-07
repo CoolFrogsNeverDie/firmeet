@@ -765,7 +765,6 @@ function render(){
 	 		  	load_map2(sche.address1,sche.address2);
 	 		   if(sche.address1 != -1){ //address가 있는 일정일 경우 길찾기 버튼 활성화 + 컬러 black으로 변경 
 	 			  $('.see-place').prop('disabled', false);
-	 			  $('.see-place').css("background-color","#1eafcc");
 		 		  $('#see-map').data('x', sche.address1);
 		 		  $('#see-map').data('y', sche.address2);
 	 		   }else{ //address 정보 없는 일정일 경우 길찾기 버튼 비활성화 + 컬러 gray로 변경

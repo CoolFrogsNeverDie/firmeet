@@ -43,10 +43,10 @@ public class CalendarService {
 		
 		if(calendarVO.getViewOption2() != -88) {
 			List<ScheduleVO> clubSche = scheduleDAO.getMemClubSche(calendarVO);
+			System.out.println("들어가는 객체 정보 확인 " + calendarVO);
 			scheList.put("clubSche", clubSche);
 		//전체보기나 나의 일정보기면 개인 일정 가져오기
 		}if(calendarVO.getViewOption2() == -99 || calendarVO.getViewOption2() == -88) {
-			System.out.println("개인 일정 받아올 거임!");
 			List<ScheduleVO> perSche = scheduleDAO.getMemPerSche(calendarVO);
 			scheList.put("perSche", perSche);
 		}

@@ -5,7 +5,7 @@
      <!-- 일정 등록모달창-->
 <div class="container1" >
   <div class="popup-wrap" id="popup">
-    <div class="popup ct-color" >
+    <div class="popup" >
       <div class="popup-head">
         <div class="popup-close-btn">X</div>
       </div>
@@ -68,7 +68,7 @@
 <div class="container2" >
 
   <div class="popup-wrap2" id="popup">
-    <div class="popup" id = "2th-popup" class= "ct-color">
+    <div class="popup" id = "2th-popup" class= "">
       <div class="popup-head">
         <div class="popup-close-btn2">X</div>
       </div>
@@ -94,7 +94,7 @@
 <!--개인 일정 확인 팝업창-->
 <div class= "container4">
 <div class="per-pop">
-  <div class="per-pop-header ct-color" >
+  <div class="per-pop-header" >
     <div class="per-pop-close-btn">X</div>
   </div>
   <div class="per-pop-body">
@@ -142,7 +142,7 @@
  <div class="container5" >
   <div class="popup-wrap">
     <div class="popup">
-      <div class="popup-head ct-color">
+      <div class="popup-head">
         <div class="popup-close-btn3">X</div>
       </div>
       <div class="popup-body">
@@ -201,7 +201,7 @@
 <div class="container6" >
 
   <div class="popup-wrap" id="popup">
-    <div class="popup" id = "2th-popup" class= "ct-color">
+    <div class="popup" id = "2th-popup" class= "">
       <div class="popup-head ">
         <div class="popup-close-btn4">X</div>
       </div>

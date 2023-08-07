@@ -32,10 +32,10 @@
 			and b.aboardVal = 2
 		</if>
 		<if test="viewOption1 ==-99">
-			and b.aboardVal in (2,3)
+			and b.aboardVal in (2,3,4)
 		</if>
 		<if test="viewOption1 ==3">
-			and b.aboardVal = 3
+			and b.aboardVal in (3,4)
 		</if>
 	</select>
 
@@ -87,10 +87,10 @@
 			and b.aboardVal = 2
 		</if>
 		<if test="viewOption1 ==-99">
-			and b.aboardVal in (2,3)
+			and b.aboardVal in (2,3,4)
 		</if>
 		<if test="viewOption1 ==3">
-			and b.aboardVal = 3
+			and b.aboardVal in (3,4)
 		</if>
 		<if test="viewOption2 !=-99">
 			and c.clubId = #{viewOption2}

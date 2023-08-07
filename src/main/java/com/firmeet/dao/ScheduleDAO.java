@@ -17,62 +17,39 @@ public class ScheduleDAO {
 	
 	public List<ScheduleVO> getClubSche(CalendarVO calendarVO){
 		
-		System.out.println("getClubSche in dao : " + calendarVO );
-		List<ScheduleVO> list = session.selectList("schedule.getClubSchedule",calendarVO);
-		System.out.println("넘어온 스케줄 리스트 확인 : " + list);
-		
-		return list;
+		return session.selectList("schedule.getClubSchedule",calendarVO);
 	}
 	
 	public List<ScheduleVO> getMemClubSche(CalendarVO calendarVO){
-		System.out.println("DAO까지 오는지 확인 club  : " + calendarVO);
-		List<ScheduleVO> clubScheList = session.selectList("schedule.getMemClubSche", calendarVO);
-		System.out.println("불러온 club Sche " + clubScheList);
-		return clubScheList;
+		return session.selectList("schedule.getMemClubSche", calendarVO);
 	}
 
 	public List<ScheduleVO> getMemPerSche(CalendarVO calendarVO){
-		System.out.println("DAO까지 오는지 확인 per : " + calendarVO);
-		List<ScheduleVO> perScheList = session.selectList("schedule.getMemPerSche", calendarVO);
-		System.out.println("불러온 per sche" + perScheList);
-		return perScheList;
+		return session.selectList("schedule.getMemPerSche", calendarVO);
 	}
 	
 	public void insertPerSche(ScheduleVO scheduleVO) {
-		
-		System.out.println("개인일정 추가 DAO까찌 오는지 확인  : " + scheduleVO);
 		session.insert("schedule.insertPerSche", scheduleVO);
 	}
 	
 	public ScheduleVO getPerScheDetail(ScheduleVO scheduleVO) {
 		
-		System.out.println("DAO까찌 넘어오는거1!!!" + scheduleVO);
-		ScheduleVO schedule = session.selectOne("schedule.getPerScheDetail",scheduleVO);
-		
-		return schedule;
+		return session.selectOne("schedule.getPerScheDetail",scheduleVO);
 	}
 	
 	public int deletePerSche(ScheduleVO scheduleVO) {
-		int row = 0;
 		
-		System.out.println("삭제 위해 넘어오는 정보 확인" + scheduleVO);
-		row = session.delete("schedule.deletePerSche", scheduleVO);
-		
-		
-		return row;
+		return session.delete("schedule.deletePerSche", scheduleVO);
 	}
 
-	public void updateSche(ScheduleVO scheduleVO) {
+	public int updateSche(ScheduleVO scheduleVO) {
 		
-		System.out.println("수정하려고 넘어오는 정보 확인 : " +  scheduleVO);
-		int row = session.update("schedule.updatePerSche", scheduleVO);
+		return session.update("schedule.updatePerSche", scheduleVO);
 	}
 
 	public List<ScheduleVO> getClubSche2(CalendarVO calendarVO) {
 		
-		List<ScheduleVO> list = session.selectList("schedule.getClubSchedule2", calendarVO);
-		
-		return list;
+		return session.selectList("schedule.getClubSchedule2", calendarVO);
 	}
 	
 }

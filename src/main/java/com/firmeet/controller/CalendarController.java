@@ -38,7 +38,7 @@ public class CalendarController {
 	public String clubCalendar(@PathVariable("clubId") int clubId
 								,HttpSession session
 								,Model model ) {
-		
+		System.out.println("Club Calendar()");
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         
@@ -64,33 +64,33 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value = "/club/getschedule", method= RequestMethod.POST)
 	public JsonResult getSchedule(@ModelAttribute CalendarVO calendarVO) {
+		System.out.println("getClubSchedule()");
 		JsonResult jsonResult = new JsonResult();
 		List<ScheduleVO> list = calendarService.getClubSche(calendarVO);
-		System.out.println("오는 건가? > "+ calendarVO);
 		jsonResult.success(list);
 		
 		return jsonResult;
 	}
 	
+	/*메인 페이지 클럽 스케줄*/
 	@ResponseBody
 	@RequestMapping(value = "/club/getschedule2", method =RequestMethod.POST)
 	public JsonResult getSchedule2(@ModelAttribute CalendarVO calendarVO) {
+		System.out.println("getCulubSchedule2()");
 		
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("객체 정보 넘어오는지 체크" + calendarVO);
 		jsonResult.success(calendarService.getClubSche2(calendarVO));
-		System.out.println("보내기 전에 다시 확인" + calendarService.getClubSche2(calendarVO));
 		
 		
 		return jsonResult;
 	}
 	
 	
-	
+	/*개인 캘린더*/
 	@RequestMapping(value ="/member/{memberId}")
 	public String memCalendar(@PathVariable String memberId
 							,Model model) {
-		
+		System.out.println("member Calendar()");
 		
 		MemberVo memberVO = new MemberVo();
 		memberVO.setMemberId(memberId);
@@ -102,25 +102,23 @@ public class CalendarController {
 		return "member_diary/member_calendar";
 	}
 
+	/*개인 스케줄 받아오기*/
 	@ResponseBody
 	@RequestMapping(value ="/member/getSchedule", method= RequestMethod.POST)
 	public JsonResult getMemSchedule(@ModelAttribute CalendarVO calendarVO) {
-		System.out.println("getMemSchedule");
-		
+		System.out.println("getMemSchedule()");
 		
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("AJAX로 넘어온 정보 " + calendarVO);
 		Map<String, Object> list = calendarService.getMemSche(calendarVO);
-		
 		jsonResult.success(list);
-		System.out.println("넘어갈 정보 확인 " + list);
 		return jsonResult;
 	}
 	
+	/*개인 스케줄 추가*/
 	@RequestMapping(value = "/member/add-persche", method = RequestMethod.GET)
 	public String addPerSche(@ModelAttribute ScheduleVO scheduleVO) {
-		
-		System.out.println("넘어온 개인 일정 정보" + scheduleVO);
+		System.out.println("addPerSchedule()");
+
 		calendarService.addPerSche(scheduleVO);
 		
 		return "redirect:/calendar/member/" + scheduleVO.getMemberId();
@@ -130,21 +128,22 @@ public class CalendarController {
 	@ResponseBody
 	@RequestMapping(value ="/member/gerScheDetail", method =RequestMethod.POST)
 	public JsonResult getPerScheDetail(@ModelAttribute ScheduleVO scheduleVO) {
+		System.out.println("getPerScheDetail()");
 	
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("AJAX로 넘어온 정보 getPerScheDetail" +scheduleVO);
 		ScheduleVO sche = calendarService.getPerScheDatail(scheduleVO);
 		jsonResult.success(sche);
 		
 		return jsonResult;
 	}
 	
+	/*개인 스케줄 삭제*/
 	@ResponseBody
 	@RequestMapping(value="/member/deletePerSche", method  = RequestMethod.POST)
 	public JsonResult deletePerSche(@ModelAttribute ScheduleVO scheduleVO) {
+		System.out.println("deletePerSchedule()");
 		
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("delete하기 위한 정보 "+ scheduleVO);
 		boolean result =  calendarService.deletePerSche(scheduleVO);
 		jsonResult.success(result);
 		
@@ -152,16 +151,15 @@ public class CalendarController {
 		return jsonResult;
 	}
 	
+	/*개인 스케줄 수정*/
 	@RequestMapping(value = "/member/edit-persche")
 	public String editSche(@ModelAttribute ScheduleVO scheduleVO) {
-		
-		System.out.println("수정을 위해 넘어온 정보" + scheduleVO);
+		System.out.println("edit-perSchedule()");
+
 		calendarService.editSche(scheduleVO);
-		
 		
 		return "redirect:/calendar/member/" + scheduleVO.getMemberId();
 	}
-	
 	
 	
 }	

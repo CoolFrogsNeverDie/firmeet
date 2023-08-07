@@ -14,15 +14,12 @@ public class ReplyDAO {
 	
 	public int insertReply(ReplyVO replyVO) {
 	
-		System.out.println("DAO까지 오는지 확인" + replyVO);
-		session.insert("reply.insertReply", replyVO);
-		
-		return 0;
+		return session.insert("reply.insertReply", replyVO);
 	}
 
 	
 	public ReplyVO getReply(ReplyVO replyVO) {
-		System.out.println("DAO로 넘어오는 객체 댓글 가져오기용"  + replyVO);
+
 		return session.selectOne("reply.getReply",replyVO);
 	}
 	

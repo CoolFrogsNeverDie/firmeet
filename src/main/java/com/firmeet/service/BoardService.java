@@ -24,11 +24,11 @@ public class BoardService {
 	@Autowired
 	ReplyDAO replyDAO; 
 	
+	/*동호회 게시물 가져오기*/
 	public List<BoardVO> getClubBoard(BoardVO boardVO){
-		//받아온 정보로 boardList 가져올 거임
+		System.out.println("getClubBoard()");
 		
 		List<BoardVO> boardList = boardDAO.getBoardList(boardVO);
-		System.out.println(boardList + "clubBoard 넘어오는가요?!!!");
 		for(int i = 0; i<boardList.size(); i++) {
 			boardList.get(i).setReplyList(boardDAO.getBoardComment(boardList.get(i).getBoardNo()));
 		}
@@ -37,14 +37,13 @@ public class BoardService {
 	}
 
 	
-	//board 정보를 불러오는 메서드
-	//필요한 정보 : 내가 가입한 동호회 목록, 내가 선택한 동호회의 이름
+	/*마이다이어리 유저 boardInfo 받아오는 게시글*/
 	public Map<String, Object> getPerBoardInfo(BoardVO boardVO){
+		System.out.println("getPerBoardInfo()");
 		Map<String, Object> boardInfoList = new HashMap<>();
 		
 		//동호회 목록
 		List<ClubVo> joinList = clubDAO.getMemClub(boardVO.getMemberId());
-		System.out.println("받아온 club 가입 리스트" + joinList);
 		
 		//내가 선택한 동호회 이름(카테고리명)
 		String category = (boardVO.getClubId() == -99 )? "전체보기" : clubDAO.getClubName(boardVO);
@@ -56,8 +55,9 @@ public class BoardService {
 		return boardInfoList;
 	}
 	
+	/*개인 게시판 게시물 받아오기*/
 	public List<BoardVO> getPerBoard(BoardVO boardVO){
-		//받아온 정보로 boardList 가져올 거임
+		System.out.println("getPerBoard()");
 		
 		List<BoardVO> boardList = boardDAO.getBoardList(boardVO);
 		for(int i = 0; i<boardList.size(); i++) {
@@ -67,20 +67,21 @@ public class BoardService {
 		return boardList;
 	}
 	
-	
+	/*댓글 달기*/
 	public ReplyVO addReply(ReplyVO replyVO) {
+		System.out.println("addReply()");
+		
 		
 		replyDAO.insertReply(replyVO);
-		System.out.println("insert 후 정보 확인 " + replyVO);
-		
 		ReplyVO returnVO = replyDAO.getReply(replyVO);
 		
-		System.out.println("넘어온 댓글 객체 확인 : " + returnVO);
 		
 		return returnVO;
 	}
 	
+	/*리댓글 달기*/
 	public ReplyVO addReply2(ReplyVO replyVo) {
+		System.out.println("addReply2()");
 		
 		replyDAO.insertReply(replyVo);
 		ReplyVO returnVO = replyDAO.getReply(replyVo);
@@ -89,56 +90,51 @@ public class BoardService {
 	
 	/*댓글 삭제*/
 	public boolean deleteReply(ReplyVO replyVO) {
+		System.out.println("deleteReply()");
+		
 		boolean result = false;
 		
 		/* cnt 0 이면 지울수 있다 */ /* cnt 0이 아니면 지울수 없다 */ 
 		int checkCnt = (replyVO.getDeep() == 1)?replyDAO.checkReply(replyVO):0;
-		System.out.println(checkCnt  +"deep 확인 결과는");
 		//딸린 자식들이 있다는 뜻
 		
 		if(checkCnt>0) {
-			System.out.println("삭제X");
 			replyDAO.updateReplyStat(replyVO);
 		}else {
 			replyDAO.deleteReply(replyVO);
 			result =true;
-			System.out.println("딸린 자식 없는 아이 삭제");
 		}
-			
 		return result;
 	}
 
-	/*----------------------클럽 일반 게시판 글 작성------------------*/
+	/*게시글 작성*/
 	public void boardwrite(BoardVO boardVO) {
-		
+		System.out.println("boardwrite()");
 		boardDAO.insertBoard(boardVO);
-		
 	}
 
-	
+	/*board 정보 가져오기*/
 	public BoardVO getBoard(BoardVO boardVO) {
-		
+		System.out.println("getBoard()");
 		return boardDAO.getBoard(boardVO);
-		
 	}
 
-
+	/*게시물 수정*/
 	public int editBoard(BoardVO boardVO) {
-
+		System.out.println("editBoard()");
 		return boardDAO.updateBoard(boardVO);
-		
 	}
 
-
+	/*게시물 삭제*/
 	public int deleteBoard(BoardVO boardVO) {
-		
+		System.out.println("deleteBoard()");
 		return boardDAO.deleteBoard(boardVO);
 	}
-
-	//like 되어 있는 게시물인지 확인 후 되어 있으면 insert 기록 없으면 delete 하기
-	//likeNo 가 0 이면 좋아요 안 된 게시물이고, 0 이상이면 좋아요 된 게시물이다.
-	//boardNo, memberId, LikeNo
+	
+	/*게시물 좋아요 누르기*/
 	public BoardVO likeCnt(BoardVO boardVO) {
+		System.out.println("likeCnt()");
+		
 		BoardVO result = null;
 		var like = boardVO.getLikeNo();
 		if(like == 0) {

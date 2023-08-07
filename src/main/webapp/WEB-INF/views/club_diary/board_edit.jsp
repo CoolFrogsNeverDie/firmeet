@@ -64,7 +64,7 @@
              					<input type ="hidden" value = "${board.boardNo}" name ="boardNo">
 								<div class= "clear"></div>
 								<div class= "summernote-area">
-									<textarea id="summernote-edit" name="content"></textarea>
+									<textarea id="summernote-edit" name="content">${board.content}</textarea>
 								</div>
 						</div>
 						<!-- //write-board-area-->						

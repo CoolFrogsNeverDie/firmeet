@@ -27,13 +27,10 @@ public class ManagerService {
 		@Autowired
 		ClubDao clubDAO; 
 	
+	/*가입 승인 처리*/
 	public int joinRequest(ClubVo clubVO) {
 		int result = -99;
 		int memLevel =  clubVO.getMemlevel();
-		
-		System.out.println("넘어온 값의 memLevel 확인(승인 거절 여부)  " + memLevel);
-		System.out.println("체크  : " + clubDAO.checkPrenum(clubVO) +"레벨은?" +  memLevel);
-		
 		
 		//만약 회원가입 가능한 상태면? 
 		if ( clubDAO.checkPrenum(clubVO) ==1 && memLevel ==2 ) {
@@ -47,9 +44,10 @@ public class ManagerService {
 		}
 		return result;
 	}
-
+	
+	/*가입요청한 멤버 리스트*/
 	public List<MemberVo> getMemList(MemberVo memberVO) {
-		
+		System.out.println("getMemList()");
 		
 		List<MemberVo> memList = memberDAO.getClubMemList(memberVO);
 		for(int i =0; i< memList.size(); i++) {
@@ -61,27 +59,37 @@ public class ManagerService {
 		return memList; 
 	}
 
+	
+	/*회원 등급 수정*/
 	public boolean changeGrade(MemberVo memberVO) {
+		System.out.println("changeGrade()");
+		
 		boolean result = false;
 		result = memberDAO.updateMemGrade(memberVO) >0? true: false;
 		
 		return result;
 	}
-
+	
+	
+	/* 회원 강퇴*/
 	public boolean kickoutMem(ClubVo clubVO) {
+		System.out.println("kickoutMem()");
 		boolean result = false;
 		result = memberDAO.deleteClubMem(clubVO) >0? true: false;
-		System.out.println("마이너스 되고 있나요? " +  memberDAO.minusClubPreNum(clubVO));
-		System.out.println("마이너스 되고 있나요? " +  result);
+		memberDAO.minusClubPreNum(clubVO);
 		return result;
 	}
-
+	
+	/*동호회 QNA 리스트*/
 	public List<QnaVO> getClubQna(MemberVo memberVO) {
+		System.out.println("getClubQna()");
 		List<QnaVO> qnaList = clubDAO.getClubQnaList(memberVO);
 		return qnaList;
 	}
 
+	/*동호회 QNA 답변 등록 */
 	public boolean addQnaAnswer(QnaVO qnaVO) {
+		System.out.println("addQnaAnswer()");
 		boolean result = false;
 		
 		result = clubDAO.updateQnaAnswer(qnaVO)>0?true:false;
@@ -89,27 +97,29 @@ public class ManagerService {
 		return result;
 	}
 	
-	//클럽 수정창을 만들기 위한 클럽 디테일한 정보 가져오는 메서드
+	/*클럽 수정창을 만들기 위한 클럽 디테일한 정보 가져오는 메서드*/
 	public ClubVo clubDeInfo(ClubVo club) {
+		System.out.println("clubDeInfo()");
+
 		ClubVo clubVO = new ClubVo();
 		
 		clubVO = clubDAO.getClubDetailInfo(club);
 		clubVO.setClubTagList(clubDAO.getTagList(club));
-		System.out.println("넘어오는 최종 디테일 정보 확인 " + clubVO);
 		
 		return clubVO;
 	}
-	//클럽강퇴
+	/*클럽 강퇴*/
 	public boolean myClubDel(ClubMemVo clubVO) {
+		System.out.println("myClubDel()");
 		boolean result = false;
 		result = memberDAO.myClubDel(clubVO) >0? true: false;
-		System.out.println("마이너스 되고 있나요? " +  result);
 		
 		return result;
 	}
 	
+	/*클럽 정보 업데이트*/
 	public void updateClubInfo(ClubVo clubVO, MultipartFile[] files) {
-		
+		System.out.println("updateClubInfo()");
 		
 		if(files[0].getOriginalFilename()!="") {
 			clubVO.setImg1(uploadPic(files[0]));
@@ -118,7 +128,6 @@ public class ManagerService {
 			clubVO.setImg2(uploadPic(files[1]));
 		}
 		
-		System.out.println("업데이트 전 객체 확인" + clubVO);	
 		clubDAO.updateClubInfo(clubVO);
 		clubDAO.updateCateNo(clubVO);
 		clubDAO.resetClubTag(clubVO); //클럽 태그 삭제함

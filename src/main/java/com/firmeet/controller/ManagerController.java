@@ -40,13 +40,12 @@ public class ManagerController {
 	
 	
 	/*동호회 관리 메인 페이지(가입 요청 승인)*/
-	
 	@RequestMapping("/club/{clubId}")
 	public String memberManagement(@PathVariable("clubId") int clubId
 								   ,HttpSession session
 								   ,Model model) {
+		System.out.println("clubManagementPage()");
 		
-		System.out.println("넘어오는 정보값 확인" + clubId);
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         
@@ -77,8 +76,8 @@ public class ManagerController {
 	public String editClubmember(@PathVariable("clubId") int clubId
 								   ,HttpSession session
 								   ,Model model) {
+		System.out.println("editMemGrade()");
 		
-		System.out.println("넘어오는 정보값 확인" + clubId);
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         
@@ -110,7 +109,8 @@ public class ManagerController {
 	public String qnaPage(@PathVariable("clubId") int clubId
 			   			  ,HttpSession session
 			   			  ,Model model) {
-		System.out.println("넘어오는 정보값 확인" + clubId);
+		System.out.println("clubQnAList()");
+		
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         
@@ -141,6 +141,7 @@ public class ManagerController {
 	public String editClub(@PathVariable("clubId") int clubId
  			  ,HttpSession session
  			  ,Model model) {
+		System.out.println("clubEditForm()");
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         
@@ -150,7 +151,6 @@ public class ManagerController {
 
             // 클럽과 회원의 관계 정보를 가져옵니다.
             ClubVo club = clubService.checkMemLevel(memberId, clubId);
-            System.out.println("가져온 클럽 정보 : " + club);
             model.addAttribute("club", club);
             
             //회장일 시 해당 페이지 접근함
@@ -176,12 +176,12 @@ public class ManagerController {
         }
 	}
 	
-
+	/*동호회 정보 수정*/
 	@RequestMapping(value = "/club/editClubInfo", method = RequestMethod.POST)
 	public String editClubInfo(@ModelAttribute ClubVo clubVO
 							,@RequestParam("file") MultipartFile[] files) {
-		
-		System.out.println("넘어온 정보" + clubVO);
+		System.out.println("editClubInfo()");
+
 		if(files != null) {
 			System.out.println(files[0].getOriginalFilename());
 			System.out.println(files[1].getOriginalFilename());
@@ -198,13 +198,11 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/club/requestlist", method = RequestMethod.POST)
 	public JsonResult getMemList(@ModelAttribute MemberVo memberVO) {
+		System.out.println("requestList()");
 		JsonResult jsonResult = new JsonResult();
-		
-		System.out.println("에이잭스로 넘어오는 값 확인 : " + memberVO);
 		
 		List<MemberVo> memberList = memberService.requestMemList(memberVO);
 		jsonResult.success(memberList);
-		
 		
 		return jsonResult;
 	}
@@ -214,12 +212,10 @@ public class ManagerController {
 	@RequestMapping(value = "/club/joinrequest", method= RequestMethod.POST)
 	public JsonResult joinRequest(@ModelAttribute ClubVo vo) {
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("회원 관리를 위해 AJAX로 넘어온 정보" + vo);
+		System.out.println("joinRequest()");
 		
 		int result = managerService.joinRequest(vo);
-		
 		jsonResult.success(result);
-		System.out.println("넘어가는 데이터값*(앞에서 비교할 숫자)" + result);
 		
 		return jsonResult;
 	}
@@ -229,9 +225,9 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value ="/club/memberlist", method = RequestMethod.POST)
 	public JsonResult clubMemList(@ModelAttribute MemberVo memberVO) {
+		System.out.println("clubMemberList()");
 	
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("넘어온 값 체크" + memberVO);
 		List<MemberVo> memberList = managerService.getMemList(memberVO);
 		jsonResult.success(memberList);
 		
@@ -242,8 +238,9 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/club/changegrade", method = RequestMethod.POST)
 	public JsonResult changeGrade(@ModelAttribute MemberVo memberVO) {
+		System.out.println("changeGrade()");
+
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("등급변경 위해서 넘어오는 정보 확인" + memberVO);
 		boolean result = managerService.changeGrade(memberVO);
 		jsonResult.success(result);
 		
@@ -254,8 +251,8 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/club/kickout" , method = RequestMethod.POST)
 	public JsonResult kickoutMem(@ModelAttribute ClubVo clubVO) {
+		System.out.println("kickoutMember()");
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("ㄷㄷㄷㄷ 삭제 위해 넘어오는 정보 확인 " + clubVO);
 		boolean result = managerService.kickoutMem(clubVO);
 		jsonResult.success(result);
 		return jsonResult;
@@ -265,11 +262,11 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value ="/club/qnalist", method=RequestMethod.POST)
 	public JsonResult getQnaList(@ModelAttribute MemberVo memberVO) {
+		System.out.println("QNAList()");
+
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("QNA 등록을 위해 넘어온 정보들" + memberVO);
 		List<QnaVO> qnaList = managerService.getClubQna(memberVO);
 		jsonResult.success(qnaList);
-		System.out.println("QNA등록 위해 넘어온 정보들 " + qnaList);
 		return jsonResult;
 	}
 	
@@ -277,9 +274,9 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/club/qnaanswer", method = RequestMethod.POST)
 	public JsonResult addQnaAnswer(@ModelAttribute QnaVO qnaVO) {
+		System.out.println("answerQnA()");
 		
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("넘어오는 값 확인" + qnaVO);
 		boolean result = managerService.addQnaAnswer(qnaVO);
 		
 		jsonResult.success(result);
@@ -287,13 +284,13 @@ public class ManagerController {
 		return jsonResult;
 	}
 	
-	/*-------------------------------------마이겔러리---------------------------- */
+	/*-------------------------------------마이다이어리---------------------------- */
 	
-	/*가입한 클럽 화긴 탈퇴~*/
+	/*가입한 클럽 탈퇴~*/
 	@RequestMapping(value = "/member/clubManager/{memberId}", method = { RequestMethod.GET,RequestMethod.POST})
 	public String clubManager(@PathVariable("memberId") String memberId,HttpSession session) {
-		System.out.println("가입한 클럽 화긴");
-		System.out.println("넘어오는 값 확인" + memberId);
+		System.out.println("myClubList()");
+		
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
 		MemberVo member = (MemberVo) session.getAttribute("member");
 		
@@ -312,20 +309,21 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/club/myClubDel" , method = RequestMethod.POST)
 	public JsonResult myClubDel(@ModelAttribute ClubMemVo clubVO) {
+		System.out.println("clubWithdrawal()");
+
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("ㄷㄷㄷㄷ 동아리 탈퇴를 위해 넘어오는 정보 확인 " + clubVO);
 		boolean result = managerService.myClubDel(clubVO);
 		jsonResult.success(result);
 		return jsonResult;
 	}
 	
+	/*가입한 동호회 정보 가져옴*/
 	@ResponseBody
 	@RequestMapping(value = "/club/getclubDeInfo" , method = RequestMethod.POST)
 	public JsonResult getclubDeInfo(@ModelAttribute ClubVo clubVO) {
+		System.out.println("getClubDeInfo()");
 		JsonResult jsonResult = new JsonResult();
-		System.out.println("디테일 정보 따기 위해 넘어온 객체"+ clubVO);
 		ClubVo vo = managerService.clubDeInfo(clubVO);
-		System.out.println("넘어갈 정보 확인" + vo);
 		jsonResult.success(vo);
 		
 		
