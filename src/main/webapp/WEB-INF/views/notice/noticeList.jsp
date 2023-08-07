@@ -90,13 +90,18 @@
 								<c:forEach var="row" items="${nlist }">
 									<c:if test="${sessionScope.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
-											<td>${row.aboardNo }/${row.voteYV}/${row.voteNo}
-											</td>
+											<td>${row.aboardNo }</td>
 											<td>${row.memberId }</td>
 											<c:choose>
 												<c:when test="${row.aboardVal == 1 }">
+													<c:if test="${row.voteYV == 0 }">
+														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td>
+													</c:if>
+													<c:if test="${row.voteYV >= 1 }">
+														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/voteResult/${row.aboardNo}?voteNo=${row.voteNo}&aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td>
+													</c:if>
 													<%-- <td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td> --%>
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/voteResult/${row.aboardNo}?voteNo=${row.voteNo}&aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td>
+													<%-- <td><a href="${pageContext.request.contextPath }/${clubId }/notice/voteResult/${row.aboardNo}?voteNo=${row.voteNo}&aboardNo=${row.aboardNo}&memberId=${member.memberId}">${row.title }</a></td> --%>
 												</c:when>
 												<c:when test="${row.aboardVal == 2 }">
 													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${row.aboardNo}">

@@ -18,6 +18,7 @@
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
     <!--풀 캘린더 CSS-->
+  	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
   	<link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" />
   	<!--풀 캘린더 JS-->
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
@@ -83,13 +84,38 @@
 									<!-- 공지테이블-->
 									<table>
 										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4" >
-											<tr>
-												<td class="title">
-													<a href="${pageContext.request.contextPath }/${club.clubId}/notice/editlist?aboardNo=${notice.aboardNo}">${notice.title}</a>
-												</td>
-												<td class="clickable" data-url="${pageContext.request.contextPath }/${club.clubId}/notice/editlist?aboardNo=${notice.aboardNo}">
-													${notice.aboardDate}	
-												</td>
+										<tr>
+											<c:choose>
+												<c:when test="${notice.aboardVal == 1 }">
+													<c:if test="${notice.voteYV == 0 }">
+														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${notice.aboardNo}&memberId=${member.memberId}">${notice.title }</a></td>
+														<td>${notice.aboardDate}</td>
+													</c:if>
+													<c:if test="${notice.voteYV >= 1 }">
+														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/voteResult/${notice.aboardNo}?voteNo=${notice.voteNo}&aboardNo=${notice.aboardNo}&memberId=${member.memberId}">${notice.title }</a></td>
+														<td>${notice.aboardDate}</td>
+													</c:if>
+												</c:when>
+												<c:when test="${notice.aboardVal == 2 }">
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${notice.aboardNo}">
+														<c:if test="${notice.paycount == notice.maxPerson }">
+															[자동등록]${notice.title }
+														</c:if>
+														<c:if test="${notice.paycount < notice.maxPerson }">
+															${notice.title }
+														</c:if>
+													</a></td>
+													<td>${notice.aboardDate}</td>
+												</c:when>
+												<c:when test="${notice.aboardVal == 3 }">
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroupG?aboardNo=${notice.aboardNo}">${notice.title }</a></td>
+													<td>${notice.aboardDate}</td>
+												</c:when>
+												<c:when test="${notice.aboardVal == 4 }">
+													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR?aboardNo=${notice.aboardNo}">[자동등록]${notice.title }</a></td>
+													<td>${notice.aboardDate}</td>
+												</c:when>
+											</c:choose>
 											</tr>
 										</c:forEach>
 										<!-- forEach -->
@@ -120,6 +146,18 @@
 	</div>
     <!-- //중간 콘텐츠 -->
 </body>
+<style>
+#calendar2 .fc-daygrid-day-number{font-size: 11px;}
+#calendar2 #fc-dom-1{font-size : 15px;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 15px;}
+#calendar2 .fc .fc-daygrid-day-number {padding: 2px;position: relative;z-index: 1;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 14px;}
+#calendar2 .fc .fc-daygrid-day-number { padding: 2px; position: relative; bottom: 3px; right: -1px; z-index: 4;}
+#calendar2 .fc-col-header-cell-cushion{font-size: 14px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-end{    margin-right: 0; margin-top: -8px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-start {margin-left: 0;}
+#calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
+</style>
 <script>
 
 $(document).ready(function(){
