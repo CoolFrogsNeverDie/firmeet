@@ -39,7 +39,7 @@
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/club/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
 						<div class= "search-board" style="display: none"> 
 							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
@@ -132,8 +132,8 @@
 													<c:when test="${!empty account.receipt}">
 														<!-- 영수증 이미지를 표시하는 부분 -->
 														<div class="content-img" style="display: none">
-															<a class="example-image-link"  href="${pageContext.request.contextPath}/upload/accountimg/${account.receipt}" data-lightbox="example-set">
-																<img class="example-image" src="${pageContext.request.contextPath}/upload/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
+															<a class="example-image-link"  href="${pageContext.request.contextPath}/upload/account/${account.receipt}" data-lightbox="example-set">
+																<img class="example-image" src="${pageContext.request.contextPath}/upload/account/${account.receipt}" alt="..." style="max-height: 500px;" />
 															</a>
 														</div>
 													</c:when>
@@ -261,11 +261,11 @@
                 html += '<div class="content-img" style="display: none">';
                 html +=
                     '<a class="example-image-link" href="' +
-                    "${pageContext.request.contextPath}/upload/accountimg/" +
+                    "${pageContext.request.contextPath}/upload/account/" +
                     	account.receipt +
                     '" data-lightbox="example-set" >';
                   html +=
-                    '<img class="example-image" src="${pageContext.request.contextPath}/upload/accountimg/' +
+                    '<img class="example-image" src="${pageContext.request.contextPath}/upload/account/' +
                     	account.receipt +
                     '" alt="가계부사진" style="max-height: 500px;" />';
                   html += "</a>";

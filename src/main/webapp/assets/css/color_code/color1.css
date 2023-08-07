@@ -2,11 +2,11 @@
 
 .ly-body-container{
 	/*배경색1*/
-	background-color : white; 
+	background-color : white !important; 
 }
 .body{
 	/*배경색1*/
-	background-color : white;
+	background-color : white !important;
 	min-height :100vh;
 }
 .ly-head-container {

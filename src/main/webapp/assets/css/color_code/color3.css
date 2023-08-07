@@ -17,7 +17,7 @@
 	/*사이드바 컬러 지정 2*/
 	background-color : #343434 !important;
 	/*사이드바 텍스트 컬러 지정4*/
-	color: white !important;
+	color: white ;
 	/*사이드바 그림자 컬러 지정3*/
 	border-left : 10px solid #343434 !important;
 }
