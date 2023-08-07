@@ -149,10 +149,6 @@
     left: 661px;
 }
 
-.signup{
-	overflow-y: scroll;
-    overflow-x: hidden;
-}
 
 .form form {
     padding:0 40px;
