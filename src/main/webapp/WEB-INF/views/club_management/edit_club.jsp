@@ -38,7 +38,7 @@
 				
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/club/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   										
 						
@@ -231,7 +231,7 @@
 										<div class= "making_forms" id = "clubMainImg">
 										<p>메인 이미지</p>
 										<div>
-                                       		<img id="mainImg" src="${pageContext.request.contextPath}/upload/club/${club.img2}" class="imgPre" >
+                                       		<img id="mainImg" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" class="imgPre" >
                                             	<label for="img2" class="imgFile ct-color">이미지올리기</label>
                                             <input type ="file" id = "img2" name ="file" class= "file-btn ct-color">
                                         </div>
@@ -239,7 +239,7 @@
 										<div class="making_forms" id="clubBackImg" >
 	                                        <p>배경 이미지</p>
 	                                        <div>
-	                                            <img id="backImg" src="${pageContext.request.contextPath}/upload/club/${club.img1}" class="imgPre" >
+	                                            <img id="backImg" src="${pageContext.request.contextPath}/upload/clubimg/${club.img1}" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile ct-color">이미지올리기</label>
 	                                                <input id="img1" type="file" name="file" value="" class="file-btn ct-color">
@@ -265,36 +265,6 @@
 		                              </div> 	
 		                                	<!---------------// 끝부분 //------------------>
 
-  <%--                               			
-                                    <div id="imgBox">
-                                     	<div class="making_forms" id="clubMainImg">
-                                     		<p>메인 이미지</p>
-                                        	<!-- <img id="mainImg" class="imgPre" src=""> -->
-                                        	<div>
-                                        		<img id="mainImg" src="" class="imgPre" >
-                                            	<label for="img2" class="imgFile">이미지올리기</label>
-                                            	<input id="img2" type="file" name="img2" value="" class="file-input">
-                                        	</div>
-                                     	</div>
-                                     	<div class="making_forms" id="clubBackImg" >
-	                                        <p>배경 이미지</p>
-	                                        <div>
-	                                            <img id="backImg" src="" class="imgPre" >
-	                                            <div>
-	                                                <label for="img1" class="imgFile">이미지올리기</label>
-	                                                <input id="img1" type="file" name="img1" value="" class="file-input">
-	                                            </div>
-	                                        </div>
-	                                    </div>
-                                    </div>
-                                    <div class="form_line"></div>
-                                	<div id="submitBox">
-                                    	<button type="submit">동호회 등록</button>
-                                	</div> 
-		 --%>
-			
-									
-									
 									
 								
 								<!--// edit form //-->
@@ -344,6 +314,15 @@ $('input[name="colorType"]').on("change", function() {
 	    ele.css('border', '1px solid white');
 	  });
 	});
+	
+//form 제출 이벤트 --> content 영역의 텍스트<br>로 변환
+$('#clubMakingForm').on("submit", function(){
+	var intro2 = "${deInfo.intro2}";
+	var intro2WithBr = intro2.replace(/\n/g, "<br>");
+	$('#intro2').val(intro2WithBr);
+});
+
+	
 	
 	$('.color').on("click", function(){
 		

@@ -129,11 +129,17 @@ public class ClubController {
 		  MemberVo authVo= (MemberVo)session.getAttribute("member");
 		  System.out.println(authVo);
 		  
-		  clubService.make(clubVo, authVo , files); for(int i=0;i<files.length;i++) {
+
+			  
+		  
+		  clubService.make(clubVo, authVo , files); 
+		  
+		  for(int i=0;i<files.length;i++) {
 		  clubService.clubImgUpload(files[i]); } List<TagVo> tagList =
 		  memberService.tagList(); List<CategoryVo> cateList =
 		  memberService.cateList(); model.addAttribute("tagList", tagList);
 		  model.addAttribute("cateList", cateList);
+
 		 
 		return "redirect:/main/mainForm2";
 	}

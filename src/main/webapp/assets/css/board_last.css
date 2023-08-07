@@ -13,6 +13,9 @@
 .board img {
     width: 100%;
 }
+.write-comment{
+	display:none;
+}
 #board-get{
 	height: 20px;
 }

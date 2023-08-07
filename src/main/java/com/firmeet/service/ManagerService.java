@@ -104,6 +104,7 @@ public class ManagerService {
 		ClubVo clubVO = new ClubVo();
 		
 		clubVO = clubDAO.getClubDetailInfo(club);
+		System.out.println("club" + clubVO);
 		clubVO.setClubTagList(clubDAO.getTagList(club));
 		
 		return clubVO;
@@ -127,7 +128,7 @@ public class ManagerService {
 		if(files[1].getOriginalFilename() != "") {
 			clubVO.setImg2(uploadPic(files[1]));
 		}
-		
+		System.out.println("변경할 정보 확인 + clubVO" + clubVO);
 		clubDAO.updateClubInfo(clubVO);
 		clubDAO.updateCateNo(clubVO);
 		clubDAO.resetClubTag(clubVO); //클럽 태그 삭제함

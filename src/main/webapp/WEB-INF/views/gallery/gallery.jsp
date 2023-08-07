@@ -46,7 +46,7 @@
 				
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/club/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   						
   						
@@ -163,7 +163,7 @@
 	                galleryHTML += '	</div>';
 	                galleryHTML += '	<div>';
 	                galleryHTML += '		<span>';
-	                galleryHTML += '		 	<b>존재하는 가입 요청이 없습니다!</b>';
+	                galleryHTML += '		 	<b>존재하는 사진이 없습니다!</b>';
 	                galleryHTML += '		</span>';
 	                galleryHTML += '	</div>';
 	                galleryHTML += '</div>';
@@ -312,7 +312,7 @@
 	            galleryHTML += '	</div>';
 	            galleryHTML += '	<div>';
 	            galleryHTML += '		<span>';
-	            galleryHTML += '		 	<b>존재하는 가입 요청이 없습니다!</b>';
+	            galleryHTML += '		 	<b>존재하는 사진이 없습니다!</b>';
 	            galleryHTML += '		</span>';
 	            galleryHTML += '	</div>';
 	            galleryHTML += '</div>';

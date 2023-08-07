@@ -464,10 +464,9 @@
                 ,detailP
                 ,detailE
                 ,detailW
-                ,color_No as colorType
+                ,NVL((select color_no from club_color where clubId = #{clubId}), 1) as colorType
             from club a join club_category b on a.clubId = b.clubId
             join club_member c on a.clubId = c.clubId 
-            join club_color d on d.clubId = a.clubId
             where a.clubId = #{clubId}
     	]]>
     </select>

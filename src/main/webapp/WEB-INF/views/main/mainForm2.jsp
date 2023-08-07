@@ -44,7 +44,7 @@
         
         p {  
         	diplay:block;
-        	width:200px;
+        	width:230px;
         	height:40px;
         }
         
@@ -352,9 +352,9 @@
 	    }
 	    
 	 	.meetTitle {
-	 		height:20px;
-	 		font:13px;
-	 		font-weight:400;
+	 		height:23px;
+	 		font-size:22px;
+			font-weight: 600;
 	 		text-align:center;
 	 		padding-top:5px;
 	 	} 

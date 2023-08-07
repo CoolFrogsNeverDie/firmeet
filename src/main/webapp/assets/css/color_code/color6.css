@@ -2,16 +2,16 @@
 
 .ly-body-container{
 	/*배경색1*/
-	background-color : #08172a !important; 
+	background-color : #08172a ; 
 }
 .body{
 	/*배경색1*/
-	background-color : #08172a !important;
+	background-color : #08172a ;
 	min-height :100vh;
 }
 .ly-head-container {
 	/*top-nav 색상2*/
-	background-color :#ed265f !important;
+	background-color :#ed265f ;
 }
 .sd-color {
 	/*사이드바 컬러 지정 2*/
@@ -27,9 +27,9 @@
 }
 .ct-color{
 	/*버튼 색 3*/
-	background-color : #ac1a44 !important;
+	background-color : #ac1a44 ;
 	/*버튼 텍스트 4*/
 	color: white !important;
 	/*버튼의 텍스트 컬러4*/
-	border : 1px solid white !important;
+	border : 1px solid white ;
 }

@@ -510,7 +510,7 @@
              }
          add += '</div><div class="board-comment-list">';
          add += '<div class="board-comment" >';
-         add += '<h5>댓글</h5><span><button class="write-comment-btn ct-color">댓글 쓰기</button></span>';
+         add += '<h5>댓글</h5><span><button class="write-comment-btn">댓글 쓰기</button></span>';
          add +='<div class="comment-list" id = "r' + board.boardNo + '">'
          
          board.replyList.forEach(function(reply) {
