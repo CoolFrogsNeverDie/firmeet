@@ -18,7 +18,6 @@
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/clubMain.css" rel="stylesheet" type="text/css" />
     <!--풀 캘린더 CSS-->
-  	<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/calendar.css" type="text/css" />
   	<link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" />
   	<!--풀 캘린더 JS-->
   	<script src="${pageContext.request.contextPath }/assets/js/index.global.js"></script>
@@ -121,18 +120,6 @@
 	</div>
     <!-- //중간 콘텐츠 -->
 </body>
-<style>
-#calendar2 .fc-daygrid-day-number{font-size: 11px;}
-#calendar2 #fc-dom-1{font-size : 15px;}
-#calendar2 .fc-col-header-cell-cushion {font-size: 15px;}
-#calendar2 .fc .fc-daygrid-day-number {padding: 2px;position: relative;z-index: 1;}
-#calendar2 .fc-col-header-cell-cushion {font-size: 14px;}
-#calendar2 .fc .fc-daygrid-day-number { padding: 2px; position: relative; bottom: 3px; right: -1px; z-index: 4;}
-#calendar2 .fc-col-header-cell-cushion{font-size: 14px;}
-#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-end{    margin-right: 0; margin-top: -8px;}
-#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-start {margin-left: 0;}
-#calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
-</style>
 <script>
 
 $(document).ready(function(){

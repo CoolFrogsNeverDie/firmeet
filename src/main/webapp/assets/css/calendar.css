@@ -238,4 +238,7 @@ td, tr {
 	padding-top: 20px;
 }
 
-
+#club-calendar{
+	border-left: 10px solid white !important;
+	background-color: white !important;
+}

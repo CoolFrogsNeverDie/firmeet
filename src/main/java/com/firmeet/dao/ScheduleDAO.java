@@ -16,7 +16,7 @@ public class ScheduleDAO {
 	SqlSession session;
 	
 	public List<ScheduleVO> getClubSche(CalendarVO calendarVO){
-		
+		System.out.println("값을 받아오기 위해 전달된 정보" + calendarVO);
 		return session.selectList("schedule.getClubSchedule",calendarVO);
 	}
 	

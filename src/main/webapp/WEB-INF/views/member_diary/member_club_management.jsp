@@ -166,7 +166,7 @@
 					var add = '';
 					add +=  '<div class= "mem-info clubMem-info" id = "c' + clubId  + '" + >'
 					add += 	'	<div class= "mem-pic">'
-					add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/assets/images/clubimg/' + img2  + '" alt="프로필사진" />'
+					add +=			'<img class="diary-topbar-img11" src="${pageContext.request.contextPath}/upload/club/' + img2  + '" alt="프로필사진" />'
 					add +=     '</div>';
 					add += '    		<div class= "mem-deinfo">';
 					add += '				<span><b>'+  name  +'</b></span><br>';

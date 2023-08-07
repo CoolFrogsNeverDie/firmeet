@@ -110,6 +110,7 @@ public class CalendarController {
 		
 		JsonResult jsonResult = new JsonResult();
 		Map<String, Object> list = calendarService.getMemSche(calendarVO);
+		System.out.println("뿌리기 전 최종 정보" + list);
 		jsonResult.success(list);
 		return jsonResult;
 	}

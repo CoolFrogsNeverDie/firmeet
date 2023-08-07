@@ -15,11 +15,11 @@
 }
 .sd-color {
 	/*사이드바 컬러 지정 2*/
-	background-color : #fb903c !important;
+	background-color : #fb903c;
 	/*사이드바 텍스트 컬러 지정4*/
 	color: white ;
 	/*사이드바 그림자 컬러 지정3*/
-	border-left : 10px solid #ed265f !important;
+	border-left : 10px solid #ed265f;
 }
 .ct-border {
 	/*사이드바 관리자 메뉴 가는 거 3*/

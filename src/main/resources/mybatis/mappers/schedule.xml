@@ -23,19 +23,19 @@
 		]]>
 		<if test = "years !=null">
 			and (TO_CHAR(startDate, 'YYYY') = #{years}
-        	and TO_CHAR(startDate, 'MM') = #{month})
-            or
-			(TO_CHAR(endDate, 'YYYY') = #{years}
+        	and (TO_CHAR(startDate, 'MM') = #{month})
+            or 
+			(TO_CHAR(endDate, 'YYYY') = #{years} )
         	and TO_CHAR(endDate, 'MM') = #{month})
 		</if>
 		<if test="viewOption1 ==2">
 			and b.aboardVal = 2
 		</if>
+		<if test="viewOption1 ==3">
+			and (b.aboardVal = 3 or b.aboardVal = 4)
+		</if>
 		<if test="viewOption1 ==-99">
 			and b.aboardVal in (2,3,4)
-		</if>
-		<if test="viewOption1 ==3">
-			and b.aboardVal in (3,4)
 		</if>
 	</select>
 
@@ -78,9 +78,9 @@
                 join club_member d on c.clubId = d.clubId 
                 where d.memberId = #{memberId} 
 				and (TO_CHAR(startDate, 'YYYY') = #{years}
-        		and TO_CHAR(startDate, 'MM') = #{month})
-            	or
-				(TO_CHAR(endDate, 'YYYY') = #{years}
+        		and (TO_CHAR(startDate, 'MM') = #{month})
+            	or 
+				(TO_CHAR(endDate, 'YYYY') = #{years} )
         		and TO_CHAR(endDate, 'MM') = #{month})
 		]]>
 		<if test="viewOption1 ==2">
@@ -90,7 +90,7 @@
 			and b.aboardVal in (2,3,4)
 		</if>
 		<if test="viewOption1 ==3">
-			and b.aboardVal in (3,4)
+			and (b.aboardVal = 3 or b.aboardVal = 4)
 		</if>
 		<if test="viewOption2 !=-99">
 			and c.clubId = #{viewOption2}

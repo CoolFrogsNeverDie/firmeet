@@ -100,3 +100,255 @@
 	width: 430px !important;
     height: 328px !important;
 }
+
+
+td, tr {
+    border: 1px solid #969696;
+}
+.fc-daygrid-day-top{
+  display: block;
+}
+.fc-daygrid-day-top a {
+  text-decoration: none;
+  color: black;
+  text-align: left;
+  display: block;
+}
+.fc-scrollgrid-sync-inner a {
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
+.fc-event-title-container{
+	height:1vw;
+}
+.fc-event-title{
+	font-size: 80%;
+}
+.fc-daygrid-event, .fc-daygrid-dot-event, .fc-daygrid-block-event{
+	cursor:pointer;
+}
+:root {
+	--fc-small-font-size: .85em;
+	--fc-page-bg-color: #fff;
+	--fc-neutral-bg-color: rgba(208, 208, 208, 0.3);
+	--fc-neutral-text-color: #808080;
+	--fc-border-color: #ddd;
+
+
+	/*버튼 컬러 지정*/			
+	--fc-button-text-color: #808080;
+	--fc-button-bg-color: none;
+	--fc-button-border-color: none;
+	--fc-button-hover-bg-color: none;
+	--fc-button-hover-border-color: none;
+	--fc-button-active-bg-color: none;
+	--fc-button-active-border-color: none;
+	
+	/*이벤트 추가 기본 디자인 세팅*/
+	--fc-event-bg-color: #f5a7a7;
+	--fc-event-border-color: #f5a7a7;
+	--fc-event-text-color: #fff;
+	--fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+	
+	--fc-more-link-bg-color: #d0d0d0;
+	--fc-more-link-text-color: inherit;
+	
+	--fc-event-resizer-thickness: 8px;
+	--fc-event-resizer-dot-total-width: 8px;
+	--fc-event-resizer-dot-border-width: 1px;
+	
+	--fc-non-business-color: rgba(215, 215, 215, 0.3);
+	--fc-bg-event-color: rgb(143, 223, 130);
+	--fc-bg-event-opacity: 0.3;
+	--fc-highlight-color: #f8f7fc;
+	--fc-today-bg-color: #f8f7fc;
+	--fc-now-indicator-color: red;
+}
+.calendar-area{
+	width: 100%;
+    margin-top: 18px;
+    height: 605px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    overflow: auto;
+}
+.calendar-area .club-calendar{
+	height : 603px;
+}
+.forCalendar{
+	background-color: #fff;
+    /* width: 100%; */
+    height: 599px;
+    padding: 0%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+/*캘린더 큰 레이아웃*/
+.forCalendar #club-calendar {
+    width: 100%;
+    height: 100%;
+	border-radius: 5px;
+    top: 90px;
+    margin-right: 24px;
+}
+.forCalendar #mem-calendar {
+	width: 1038px;
+    height: 600px;
+    border-radius: 5px;
+    top: 90px;
+    margin-right: 24px;
+}
+#calendar2{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    top: 90px;
+    margin-right: 24px;
+}
+.fc-daygrid-day-frame {
+    padding: 1px;
+}
+
+.fc .fc-daygrid-day-frame {
+    height: 50px;
+}
+
+
+/*정렬 옵션 선택자*/
+.calendar-array{
+    margin-left: auto;
+
+}
+/*이벤트에 시간 기재되는 부분 삭제*/
+.fc-h-event .fc-event-time {
+    display:none;
+}
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    margin-right: 3px;
+    display: none;
+}
+.calendar-array select{
+
+    width:100px;
+    text-align:center;
+    background-color:	#f8f8f8;
+    border-radius: 5%;
+    height:2vw;
+    width:8vw;
+    font-size:1.2em;
+}
+
+/*요일*/
+.fc-col-header-cell-cushion {
+	text-decoration: none;
+	color: #000;
+}
+.fc-col-header-cell-cushion:hover {
+	text-decoration: none;
+	color:#000;
+}
+/*일자*/
+.fc-daygrid-day-number,
+.fc-daygrid-day-number:hover {
+	color: #000;
+	font-size:1em;
+	text-decoration: none;
+}
+/* 일요일 날짜색 */
+.fc-day-sun a,
+.fc-day-sun a:hover {
+	color: #e74c3c;
+	text-decoration: none;
+}
+
+/* 토요일 날짜색 */
+.fc-day-sat a,
+.fc-day-sat a:hover {
+	color: #3498db;
+	text-decoration: none;
+}
+
+.fc-daygrid-day-frame {
+	padding: 3px;
+}
+
+/* 이전, 다음 버튼 */
+.fc-button {
+	border: 0px !important;
+	box-shadow: none !important;
+}
+
+.fc .fc-toolbar-title{
+	margin-left:92px;
+}
+#club-calendar .fc-toolbar-title{
+    position: relative;
+    top: -6px;
+}
+
+
+/*캘린더 세부 디자인 조정*/
+.calendar-body #mem-calendar .fc-toolbar-title{
+    position: relative;
+    top: -20px;
+    font-size: 30px !important;
+	font-weight: bold !important;
+	margin-left: 92px !important;
+}
+.calendar-body .memcalendar-array select , .calendar-body .clubcalendar-array select {
+    width: 182px;
+    height: 40px;
+    border: 1px solid #6d6d6d;
+    border-radius: 10px;
+    padding-left: 9px;
+    font-size: 20px;
+    text-align: center;
+}
+.calendar-body .memcalendar-array {
+    left: 691px;
+    float: right;
+    bottom: 10px;
+    width: 370px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+    
+.calendar-body .clubcalendar-array {
+	position: relative;
+    left: 876px;
+    bottom: 10px;
+    width: 184px;
+    }
+#calendar2 .fc .fc-toolbar.fc-header-toolbar{
+	margin-bottom: 0.5em;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0.5em;
+}
+#mem-calendar .fc-scrollgrid-sync-table{
+    width: 1037px;
+    height: 522px;
+}
+#mem-calendar .fc-col-header {
+	width: 1035px;
+}
+
+
+.club-c-body {
+	padding-top: 20px;
+}
+
+#calendar2 .fc-daygrid-day-number{font-size: 11px;}
+#calendar2 #fc-dom-1{font-size : 15px;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 15px;}
+#calendar2 .fc .fc-daygrid-day-number {padding: 2px;position: relative;z-index: 1;}
+#calendar2 .fc-col-header-cell-cushion {font-size: 14px;}
+#calendar2 .fc .fc-daygrid-day-number { padding: 2px; position: relative; bottom: 3px; right: -1px; z-index: 4;}
+#calendar2 .fc-col-header-cell-cushion{font-size: 14px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-end{    margin-right: 0; margin-top: -8px;}
+#calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-start {margin-left: 0;}
+#calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
