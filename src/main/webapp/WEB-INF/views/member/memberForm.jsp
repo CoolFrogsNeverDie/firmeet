@@ -207,10 +207,10 @@
     <!-- //중간 콘텐츠 -->
     
 </body>
-<footer>
+<!-- <footer>
     &copy; 2023 by 어리쥬. All Page content is property of 어리쥬
 </footer>
-
+ -->
 
 	<script type="text/javascript">
 	

@@ -14,6 +14,7 @@
 
 
  #KeywordSearch {
+	transform:translateX(20px);
  	height: 40px;
  	display: flex;
  	flex-wrap: wrap;
@@ -151,7 +152,10 @@
  	display: flex;
  	gap: 5px;
  }
-
+#select_field p{
+	font-size: 17px;
+ 	font-weight: 600;
+}
 
 
  #keyword p {

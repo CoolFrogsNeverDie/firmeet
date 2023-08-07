@@ -60,7 +60,7 @@
 				        </div>
 				        
 				        <div id="select_field">
-				            <p><label for="cate">원하는 분야</label></p>
+				            <p>원하는 분야</p>
 				            <ul>
 				                 <c:forEach  items="${cateList}" var="cate" >
 				                 	<li>
