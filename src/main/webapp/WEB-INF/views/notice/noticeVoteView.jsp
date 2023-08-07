@@ -123,7 +123,7 @@
 								                        <input type="hidden" name="meetNo" value="${vo.meetNo}">
 								                        <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
 								                        <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">${memberId}
-							                             <c:if test="${vo.paycount >= vo.minPerson && member.memberId == vo.memberId}">
+							                             <c:if test="${vo.paycount >= vo.minPerson}">
 							                             	<button type="submit" id="groupautoupload">일정등록</button>
 							                             </c:if>
 					                             	</form>
@@ -138,7 +138,7 @@
 				               <!-- 내용 및 지도 끝 -->
 			               	  <div>
 				                  <p class="noticecontent">${vo.boardContent}</p>
-				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gmodifyform">
+				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/pmodifyform">
 					                  <input type="hidden" name="meetNo" value="${vo.meetNo }">
 					                  <button type="submit" id="modify" class="ct-color">수정</button>
 				                  </form>

@@ -1,5 +1,7 @@
 package com.firmeet.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +24,30 @@ import com.firmeet.vo.MemberVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
 
+
 @Controller
 @RequestMapping("/{clubId}/notice")
 public class NoticeBoardController {
 	
 	@Autowired
 	private ClubService clubService;
+	
 	@Autowired
 	private NoticeBoardService noticeBoardService;
 	
-	@RequestMapping("/noticelist")
+	@RequestMapping(value = "/noticelist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String noticelist(@PathVariable int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
 		System.out.println("noticelist 확인");
 		
 		session.setAttribute("clubId", clubId);
-		MemberVo member = (MemberVo) session.getAttribute("member");
 		
-		model.addAttribute("nlist",noticeBoardService.noticeList(keyword));
+		System.out.println(session.getAttribute("clubId"));
 		
-        String memberId = null;
+		//model.addAttribute("nlist", noticeBoardList);
+		System.out.println("bbb");
+		
+        MemberVo member = (MemberVo) session.getAttribute("member");
+       String memberId = null;
 
         if (member != null) {
             memberId = member.getMemberId();
@@ -51,15 +58,19 @@ public class NoticeBoardController {
             ClubVo club = clubService.checkMemLevel(memberId, clubId);
             // club이 null이면 쫒아내기!!!
             model.addAttribute("club", club);
-
-	        return "notice/noticeList";
-
+            
+            List<NoticeBoardVO> noticeBoardList = noticeBoardService.noticeList(keyword,memberId);
+            model.addAttribute("nlist", noticeBoardList);
+            System.out.println("ccc"+memberId);
+            
+            return "notice/noticeList";
         } else {
             // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
             return "member/memberForm";
         }
-		
+        
 	}
+
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
@@ -235,30 +246,31 @@ public class NoticeBoardController {
 		model.addAttribute("clubId", clubvo.getClubId());
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
-		model.addAttribute("vo", noticeBoardService.voteResult(vo));
+		model.addAttribute("vo", noticeBoardService.voteResult(vo));  
 		
 		int clubId = (int) session.getAttribute("clubId");
 		
 		System.out.println("controller clubId"+clubId);
 		model.addAttribute("clubId", clubId);
 		
-		 MemberVo member = (MemberVo) session.getAttribute("member");
-	        String memberId = null;
-	        if (member != null) {
-	            memberId = member.getMemberId();
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        
+		String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
 
-	            System.out.println(memberId); // memberId 값 출력;
-	            
-	            // 클럽과 회원의 관계 정보를 가져옵니다.
-	            ClubVo club = clubService.checkMemLevel(memberId, clubId);
-	            // club이 null이면 쫒아내기!!!
-	            model.addAttribute("club", club);
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
 
-	            return "notice/noticeGroupView";
-	        } else {
-	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
-	            return "member/memberForm";
-	        }
+            return "notice/noticeGroupView";
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
 	}
 	
 	//에디터 모임 등록 후 나오는 페이지
@@ -611,6 +623,35 @@ public class NoticeBoardController {
             noticeBoardService.elmodify(vo);
 
             return "redirect:/"+vo.getClubId()+"/notice/noticelist";
+            
+        } else {
+            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
+            return "member/memberForm";
+        }
+		
+	}
+	
+	@RequestMapping(value="/pmodifyform", method = {RequestMethod.GET, RequestMethod.POST})
+	public String pmodifyform(@ModelAttribute NoticeBoardVO vo, Model model, @RequestParam("meetNo") int meetNo, HttpSession session) {
+		int clubId = (int) session.getAttribute("clubId");
+		model.addAttribute("clubId", clubId);
+		model.addAttribute("meetNo", vo.getMeetNo());
+		model.addAttribute("memberId", vo.getMemberId());
+		model.addAttribute("vo", noticeBoardService.gmodifyform(meetNo));
+		
+		MemberVo member = (MemberVo) session.getAttribute("member");
+        String memberId = null;
+        if (member != null) {
+            memberId = member.getMemberId();
+
+            System.out.println(memberId); // memberId 값 출력;
+            
+            // 클럽과 회원의 관계 정보를 가져옵니다.
+            ClubVo club = clubService.checkMemLevel(memberId, clubId);
+            // club이 null이면 쫒아내기!!!
+            model.addAttribute("club", club);
+
+            return "notice/noticeEditGroupPmodify";
             
         } else {
             // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.

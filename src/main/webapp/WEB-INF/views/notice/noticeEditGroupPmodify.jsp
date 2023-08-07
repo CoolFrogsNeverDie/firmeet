@@ -75,7 +75,9 @@
 		                        <input type="radio" name="aboardVal" value="1" id="aboardVal" value="${vo.aboardVal}">일반&nbsp;
 		                        <input type="radio" name="aboardVal" value="2" id="aboardVal" value="${vo.aboardVal}" style="margin-left: 20px;" checked>모임(결제)&nbsp;
 		                        <input type="radio" name="aboardVal" value="3" id="aboardVal" value="${vo.aboardVal}" style="margin-left: 20px;">모임(일정)
-		                              
+		                        <input type="hidden" name="meetNo" value="${vo.meetNo }">
+		                        <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
+		                        
 		                       <select name="meetYear" id="meetYear" class="meetYear">
 		                            <option value="2023">2023년</option>
 		                            <option value="2024">2024년</option>
@@ -120,7 +122,7 @@
 		
 			                    <div>
 			                        <label for="firstName" style="font-weight: bold; font-size: 15px; margin-right: 5px;">제목</label>
-			                        <input class="noticetitle1" type="text" id="title" name="title" placeholder="제목을 입력해주세요">
+			                        <input class="noticetitle1" type="text" id="title" name="title" value="${vo.title}">
 			                    </div>
 			
 			                    <div class="ababab">

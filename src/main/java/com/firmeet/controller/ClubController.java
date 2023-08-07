@@ -48,7 +48,7 @@ public class ClubController {
 
     // 클럽 메인 페이지 조회
     @RequestMapping(value = "/main/{clubId}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String clubMain(@PathVariable int clubId, Model model, HttpSession session) {
+    public String clubMain(@PathVariable int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
         // 현재 로그인한 회원 정보를 세션에서 가져옵니다.
         MemberVo member = (MemberVo) session.getAttribute("member");
 
@@ -69,7 +69,7 @@ public class ClubController {
             model.addAttribute("gImgVos", gImgVos);
 
             // 공지사항 목록을 가져옵니다.
-            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId);
+            List<NoticeBoardVO> nList = noticeBoardService.noticeList(memberId, keyword);
             System.out.println(nList);
             model.addAttribute("noticeList", nList);
 

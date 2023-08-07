@@ -17,18 +17,43 @@
 		order by aboardNo desc
 	</select> -->
 	
-	<select id="noticelist" resultType="noticeboard">
+	<select id="noticelist" resultType="noticeboard" parameterType="map">
 	<![CDATA[
-		select aboardNo, meetno, (select count(*)from payresult where meetNo = a.meetNo) as paycount, clubId, memberId, boardContent, title, TO_CHAR(aboardDate, 'YYYY-MM-DD') aboardDate ,  
-		aboardVal, likeCnt, aboardHit, (select maxPerson from meet_name where meetNo = a.meetNo) as maxPerson
-		, (select minPerson from meet_name where meetNo = a.meetNo) as minPerson
-		, (select voteNo from avote where voteNo = a.voteNo) as voteNo
-		,(select count(memberId) from voteResult where memberId = #{memberId} and voteNo = a.voteNo) as voteYV
-		from aboard a
-		WHERE   memberId LIKE '%' || #{keyword} || '%' 
-		       	OR boardContent LIKE '%' || #{keyword} || '%'
-		       	OR title LIKE '%' || #{keyword} || '%'
-		order by aboardNo desc
+		select a.aboardNo, 
+               a.meetno, 
+               a.clubId, 
+               a.memberId, 
+               a.boardContent, 
+               a.title, 
+               TO_CHAR(a.aboardDate, 'YYYY-MM-DD') aboardDate ,  
+		       a.aboardVal, 
+               a.likeCnt, 
+               a.aboardHit, 
+               mn.maxPerson,
+               mn.minPerson,
+		       av.voteNo,
+               nvl(vt.voteYV, 0) voteYV,
+               nvl(pc.paycount, 0) paycount
+               
+        from aboard a, aVote av, meet_name mn, 
+             (select count(*) voteYV , voteNo 
+              from voteResult 
+              where memberId = #{memberId}
+              group by voteNo 
+              ) vt,                                  
+             (select count(*) paycount, meetNo
+              from payresult 
+              where memberId = #{memberId}
+              group by meetNo
+              ) pc                                   
+        WHERE   a.aboardNo = av.aboardNo(+)   
+        and     a.meetNo = mn.meetNo(+)
+        and     av.voteNo = vt.voteNo(+)
+        and     mn.meetNo = pc.meetNo(+)
+        and     (a.memberId LIKE '%' || #{keyword} || '%' 
+		       	OR a.boardContent LIKE '%' || #{keyword} || '%'
+		       	OR a.title LIKE '%' || #{keyword} || '%')
+        order by aboardNo desc
 	]]>
 	</select>
 	

@@ -3,18 +3,18 @@ package com.firmeet.vo;
 import java.util.List;
 
 public class NoticeBoardVO {
-	
+
 	private int aboardNo;
 	private int clubId;
 	private String memberId;
-	private int	meetNo;
-	private int	aboardVal;
+	private int meetNo;
+	private int aboardVal;
 	private String title;
 	private String aboardDate;
-	private int	likeCnt;
+	private int likeCnt;
 	private String boardContent;
 	private String voteEnd;
-	private int	minPerson;
+	private int minPerson;
 	private int maxPerson;
 	private int price;
 	private int voteNo;
@@ -29,9 +29,9 @@ public class NoticeBoardVO {
 	private int vote4Cnt;
 	private String vote5 = "";
 	private int vote5Cnt;
-	
+
 	private List<VoteResultVO> resultList;
-	
+
 	private int totalNum;
 	private String finDate;
 	private int voteResult;
@@ -52,82 +52,56 @@ public class NoticeBoardVO {
 	private int likeNo;
 	private String likeDate;
 	private List<AreplyVO> replyList;
-	
+
 	private int id;
 	private int galleryNo;
-	
+
 	private int voteYV;
 
-
 	public NoticeBoardVO() {
-		
+		super();
 	}
-	
-	public NoticeBoardVO(int aboardNo, int clubId, String memberId, int aboardVal, String title, String aboardDate,
-			String boardContent) {
+
+	public NoticeBoardVO(int aboardNo, int clubId, String memberId, int meetNo, int aboardVal, String title,
+			String aboardDate, int likeCnt, String boardContent, String voteEnd, int minPerson, int maxPerson,
+			int price, int voteNo, String voteTitle, String vote1, int vote1Cnt, String vote2, int vote2Cnt,
+			String vote3, int vote3Cnt, String vote4, int vote4Cnt, String vote5, int vote5Cnt,
+			List<VoteResultVO> resultList, int totalNum, String finDate, int voteResult, String choice, String voteDate,
+			int meetYear, int meetMon, String meetName, String startDate, String endDate, String meetTime,
+			String meetPlace, double address1, double address2, int aboardHit, int payresultNo, int paycount,
+			int likeNo, String likeDate, List<AreplyVO> replyList, int id, int galleryNo, int voteYV) {
 		super();
 		this.aboardNo = aboardNo;
 		this.clubId = clubId;
 		this.memberId = memberId;
+		this.meetNo = meetNo;
 		this.aboardVal = aboardVal;
 		this.title = title;
 		this.aboardDate = aboardDate;
+		this.likeCnt = likeCnt;
 		this.boardContent = boardContent;
-	}
-
-	public NoticeBoardVO(int aboardNo, String title, String aboardDate, String boardContent, int voteNo,
-			String voteTitle, String vote1, String vote2, String vote3, String vote4, String vote5, int totalNum,
-			String finDate) {
-		super();
-		this.aboardNo = aboardNo;
-		this.title = title;
-		this.aboardDate = aboardDate;
-		this.boardContent = boardContent;
-		this.voteNo = voteNo;
-		this.voteTitle = voteTitle;
-		this.vote1 = vote1;
-		this.vote2 = vote2;
-		this.vote3 = vote3;
-		this.vote4 = vote4;
-		this.vote5 = vote5;
-		this.totalNum = totalNum;
-		this.finDate = finDate;
-	}
-	
-	public NoticeBoardVO(int voteNo, int aboardNo,
-			String voteTitle, String vote1, String vote2, String vote3, String vote4, String vote5, int totalNum,
-			String finDate) {
-		super();
-		this.voteNo = voteNo;
-		this.aboardNo = aboardNo;
-		this.voteTitle = voteTitle;
-		this.vote1 = vote1;
-		this.vote2 = vote2;
-		this.vote3 = vote3;
-		this.vote4 = vote4;
-		this.vote5 = vote5;
-		this.totalNum = totalNum;
-		this.finDate = finDate;
-	}
-	
-	public NoticeBoardVO(String memberId, int voteNo, int voteResult, String choice, String voteDate) {
-		super();
-		this.memberId = memberId;
-		this.voteNo = voteNo;
-		this.voteResult = voteResult;
-		this.choice = choice;
-		this.voteDate = voteDate;
-	}
-
-	public NoticeBoardVO(int clubId, int meetNo, int minPerson, int maxPerson, int price, int meetYear, int meetMon,
-			String meetName, String startDate, String endDate, String meetTime, String meetPlace, double address1,
-			double address2, String voteEnd) {
-		super();
-		this.clubId = clubId;
-		this.meetNo = meetNo;
+		this.voteEnd = voteEnd;
 		this.minPerson = minPerson;
 		this.maxPerson = maxPerson;
 		this.price = price;
+		this.voteNo = voteNo;
+		this.voteTitle = voteTitle;
+		this.vote1 = vote1;
+		this.vote1Cnt = vote1Cnt;
+		this.vote2 = vote2;
+		this.vote2Cnt = vote2Cnt;
+		this.vote3 = vote3;
+		this.vote3Cnt = vote3Cnt;
+		this.vote4 = vote4;
+		this.vote4Cnt = vote4Cnt;
+		this.vote5 = vote5;
+		this.vote5Cnt = vote5Cnt;
+		this.resultList = resultList;
+		this.totalNum = totalNum;
+		this.finDate = finDate;
+		this.voteResult = voteResult;
+		this.choice = choice;
+		this.voteDate = voteDate;
 		this.meetYear = meetYear;
 		this.meetMon = meetMon;
 		this.meetName = meetName;
@@ -137,7 +111,15 @@ public class NoticeBoardVO {
 		this.meetPlace = meetPlace;
 		this.address1 = address1;
 		this.address2 = address2;
-		this.voteEnd = voteEnd;
+		this.aboardHit = aboardHit;
+		this.payresultNo = payresultNo;
+		this.paycount = paycount;
+		this.likeNo = likeNo;
+		this.likeDate = likeDate;
+		this.replyList = replyList;
+		this.id = id;
+		this.galleryNo = galleryNo;
+		this.voteYV = voteYV;
 	}
 
 	public int getAboardNo() {
@@ -340,6 +322,14 @@ public class NoticeBoardVO {
 		this.vote5Cnt = vote5Cnt;
 	}
 
+	public List<VoteResultVO> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<VoteResultVO> resultList) {
+		this.resultList = resultList;
+	}
+
 	public int getTotalNum() {
 		return totalNum;
 	}
@@ -460,6 +450,14 @@ public class NoticeBoardVO {
 		this.aboardHit = aboardHit;
 	}
 
+	public int getPayresultNo() {
+		return payresultNo;
+	}
+
+	public void setPayresultNo(int payresultNo) {
+		this.payresultNo = payresultNo;
+	}
+
 	public int getPaycount() {
 		return paycount;
 	}
@@ -492,14 +490,6 @@ public class NoticeBoardVO {
 		this.replyList = replyList;
 	}
 
-	public int getPayresultNo() {
-		return payresultNo;
-	}
-
-	public void setPayresultNo(int payresultNo) {
-		this.payresultNo = payresultNo;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -514,14 +504,6 @@ public class NoticeBoardVO {
 
 	public void setGalleryNo(int galleryNo) {
 		this.galleryNo = galleryNo;
-	}
-
-	public List<VoteResultVO> getResultList() {
-		return resultList;
-	}
-
-	public void setResultList(List<VoteResultVO> resultList) {
-		this.resultList = resultList;
 	}
 
 	public int getVoteYV() {

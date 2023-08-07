@@ -29,9 +29,10 @@ public class NoticeBoardService {
 	@Autowired
 	private PayDAO pdao;
 	
-	public List<NoticeBoardVO> noticeList(String keyword) {
+	public List<NoticeBoardVO> noticeList(String keyword, String memberId) {
 		System.out.println("notice noticeList 확인");
-		return dao.noticelist(keyword);
+		List<NoticeBoardVO> noticeBoardList = dao.noticelist(keyword, memberId);
+		return noticeBoardList;
 	}
 	
 	public int editwrite(NoticeBoardVO vo) {
@@ -187,7 +188,6 @@ public class NoticeBoardService {
 		
 		dao.valup(vo);
 		
-		dao.auto(vo);
 		//
 		NoticeBoardVO vo1 = dao.editlistgroup(vo);
 		//댓글 리스트
@@ -355,8 +355,8 @@ public class NoticeBoardService {
 
 	public void gmodify(NoticeBoardVO vo) {
 		System.out.println("service gmodify확인"+vo);
-		dao.gmodify(vo);
 		dao.amodify(vo);
+		dao.gmodify(vo);
 	}
 	
 	public NoticeBoardVO elmodifyform(int aboardNo) {

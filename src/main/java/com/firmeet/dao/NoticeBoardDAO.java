@@ -1,6 +1,8 @@
 package com.firmeet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,16 @@ public class NoticeBoardDAO {
 	@Autowired
 	private SqlSession sql;
 
-	public List<NoticeBoardVO> noticelist(String keyword) {
+	public List<NoticeBoardVO> noticelist(String keyword, String memberId) {
 		System.out.println("notice noticelist dao  확인");
-		return sql.selectList("noticeboard.noticelist", keyword);
+		
+		 Map<String, Object> map = new HashMap<>();
+		 map.put("keyword", keyword);
+		 map.put("memberId", memberId);
+		 
+		 List<NoticeBoardVO> noticevo = sql.selectList("noticeboard.noticelist", map);
+		
+		return noticevo;
 	}
 	
 //-----------------------------------------------------------------------------	
@@ -170,11 +179,6 @@ public class NoticeBoardDAO {
 	public void pmodify(NoticeBoardVO vo) {
 		System.out.println("notice pmodify dao 확인"+vo);
 		sql.update("noticeboard.pmodify", vo);
-	}
-
-	public void auto(NoticeBoardVO vo) {
-		System.out.println("notice auto dao 확인"+vo);
-		sql.update("noticeboard.auto", vo);
 	}
 
 	public void valup(NoticeBoardVO vo) {
