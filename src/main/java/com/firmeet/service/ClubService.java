@@ -170,7 +170,7 @@ public class ClubService {
 	public String clubImgUpload(MultipartFile file) {
 		
 		System.out.println("UploadService.clubImgUpload()");
-		String saveDir = "C:\\firmeet\\upload\\clubimg";
+		String saveDir = "C:\\firmeet\\upload\\clubimg\\";
 
 		System.out.println("UploadService.clubImgUpload()");
 
