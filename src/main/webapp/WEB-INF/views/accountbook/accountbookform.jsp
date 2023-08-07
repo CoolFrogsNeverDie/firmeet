@@ -55,7 +55,7 @@
 				
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   						
   						

@@ -39,7 +39,7 @@
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
 						<div class= "search-board" style="display: none"> 
 							<input type = "text" id = "search-keyword" value = "${keyword}" placeholder ="검색어를 입력하세요.">
@@ -251,7 +251,7 @@
             html += '<div class="table-data">' + account.purpose + "</div>";
             html +=
               '<div class="table-data incomeExpense">' +
-              account.incomeExpense +
+              	account.incomeExpense +
               "</div>";
             html += '<div class="table-data">' + account.category + "</div>";
             html +=
@@ -262,11 +262,11 @@
                 html +=
                     '<a class="example-image-link" href="' +
                     "${pageContext.request.contextPath}/upload/accountimg/" +
-                    account.receipt +
+                    	account.receipt +
                     '" data-lightbox="example-set" >';
                   html +=
                     '<img class="example-image" src="${pageContext.request.contextPath}/upload/accountimg/' +
-                    account.receipt +
+                    	account.receipt +
                     '" alt="가계부사진" style="max-height: 500px;" />';
                   html += "</a>";
                   html += "</div>";

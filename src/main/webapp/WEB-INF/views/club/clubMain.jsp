@@ -39,7 +39,7 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   						
   						
@@ -59,7 +59,7 @@
 									<div class="carousel-inner">
 										<c:forEach var="img" items="${gImgVos}" varStatus="status">
 											<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-												<img class="d-block w-100" src="${pageContext.request.contextPath}/assets/images/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
+												<img class="d-block w-100" src="${pageContext.request.contextPath}/upload/galleryImg/${img.imgSave}" alt="Slide ${status.index + 1}">
 											</div>
 										</c:forEach>
 										<!-- c:forEach -->
@@ -136,7 +136,6 @@
 <script>
 
 $(document).ready(function(){
-	
 	$('#club-main').css('background-color','white');
 	$('#club-main').css('color','gray');
 	$('#club-main').css('border-left','white');

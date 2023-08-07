@@ -1,6 +1,16 @@
 .main .main-content .diary-area .diary-body::-webkit-scrollbar {
    display:none;
 }
+
+#club-main, #club-main{
+	box-shadow: 6px 3px 6px 0px #48484847;
+    border-left: 0px;
+    color: #55555b;
+    background-color: white !important;
+    border-left: 10px solid white !important;
+    color: #6d6d6d;
+}
+
 /* 콘텐츠 안에 들어갈 것*/
 .main-content2{
 	display: flex;
@@ -43,9 +53,16 @@
 
 .announcement td {
   border: 1px solid black;
+  cursor : pointer;
+  
+}
+
+.announcement td a{
+	display: block; 
 }
 .announcement td:hover {
   border: 1px solid #ffffff;
+  cursor : pointer;
 }
 
 .announcement tr:hover {
