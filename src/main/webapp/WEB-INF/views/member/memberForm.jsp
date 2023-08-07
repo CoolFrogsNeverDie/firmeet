@@ -18,6 +18,24 @@
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/memberForm.css" rel="stylesheet"  type="text/css" />
     <!--모달-->
+    
+  	<style>
+  		
+  		
+  		
+  		footer {
+	    	box-sizing:border-box;
+	    	width:100%;
+	    	height:80px;
+	    	background:#777;
+	    	color:#eee;
+	    	padding-top:30px;
+	    	transform:translateY(7px);
+	    	border:none;
+	      	text-align:center;
+	      	transform:translateY(30px);
+	    }
+  	</style>
 </head>
 
 <body>
@@ -56,12 +74,12 @@
 						
 		                    <div class="login form-peice ">
 		                        <form action="/firmeet/member/login" method="POST">
-		                            <div class="form-group">
+		                            <div class="form-group paddingG">
 		                                <label>Id</label>
 		                                <input type="text" name="memberId" required>
 		                            </div>
 		
-		                            <div class="form-group"> 
+		                            <div class="form-group paddingG"> 
 		                                <label>비밀번호</label>
 		                                <input type="password" name="memberPw" required>
 		                            </div>
@@ -73,7 +91,7 @@
 		                    </div>
 		                    <!-- 로그인폼 -->
 	
-		                    <div class="signup form-peice switched">
+		                     <div class="signup form-peice switched">
 		                        <form class="signup-form" method="post" action="/firmeet/member/join" style= "top: 55%;">
 		                            <div class="form-group idForm">
 		                                <label>Id</label>
@@ -84,27 +102,27 @@
 		                            </div>
 		                            <!-- idForm -->
 		
-		                            <div class="form-group">
+		                            <div class="form-group paddingG">
 		                                <label>이름</label>
 		                                <input type="text" name="memberName" class="name" maxlength="20" >
 		                                <span class="error"></span>
 		                            </div>
 									<!-- 이름 -->
 									
-		                            <div class="form-group">
+		                            <div class="form-group paddingG">
 		                                <label>핸드폰 번호</label>
 		                                <input type="text" name="memberPhone" pattern="(010)-\d{4}-\d{4}" >
 		                            </div>
 									<!-- 핸드폰 번호 -->
 									
-		                            <div class="form-group">
+		                            <div class="form-group paddingG">
 		                                <label>비밀번호</label>
 		                                <input type="password" name="memberPw" class="pass">
 		                                <span class="error"></span>
 		                            </div>
 									<!-- 비밀번호 -->
 		
-		                            <div class="form-group">
+		                            <div class="form-group paddingG">
 		                                <label>비밀번호 확인</label>
 		                                <input type="password" name="memberPwCon" class="passConfirm">
 		                                <span class="error"></span>
@@ -114,8 +132,8 @@
 		                            <div class="form-group interP" >
 		                                <label>관심사 공개</label>
 		                                <ul class="inter">
-		                                    <li><input type="radio" name="memberPri" value="0"><p>공개</p></li>
-		                                    <li><input type="radio" name="memberPri" value="99"><p>비공개</p></li>
+		                                    <li><input type="radio" name="memberPri" value="0" id="agree"><label for="agree">공개</label></li>
+		                                    <li><input type="radio" name="memberPri" value="99" id="disagree"><label for="disagree">비공개</label></li>
 		                                </ul>
 		                            </div>
 		                            <!-- 관심사 공개 -->
@@ -125,8 +143,8 @@
 		                                <ul class="category">
 		                                  <c:forEach  items="${cateList}" var="cate" >
 		                                   	<li>
-		                                   		<input type="radio" name="cateNo" value="${cate.cateNo}" >
-		                                   		<p>${cate.category}</p>
+		                                   		<input type="radio" name="cateNo" value="${cate.cateNo}"  id="${cate.category}">
+		                                   		<label for ="${cate.category}">${cate.category}</label>
 		                                   	</li>
 		                                   </c:forEach>
 		                                   <!-- c:forEach.category -->
@@ -141,7 +159,7 @@
 										 <c:forEach items="${tagList}" var="tag">
 										 	<li>
 										 		<input type="checkbox"class="tags" value="${tag.tagNo}" id="${tag.tagNo}" name="tagNo" data-tagname="${tag.tagName}">
-										 		<p for="${tag.tagNo}" class="tagLabel">${tag.tagName}</p>
+										 		<label for="${tag.tagNo}" class="tagLabel">${tag.tagName}</label>
 										 	</li>
 										 </c:forEach>
 										 <!-- forEach.tag -->
@@ -189,8 +207,11 @@
     <!-- //중간 콘텐츠 -->
     
 </body>
+<footer>
+    &copy; 2023 by 어리쥬. All Page content is property of 어리쥬
+</footer>
 
-</html>
+
 	<script type="text/javascript">
 	
 		//아이디 체크 버튼 클릭했을때
@@ -282,8 +303,8 @@
             passwordError = true,
             passConfirm = true;
 
-            $('input[type="text"], input[type="password"]').on( "click",function(){
-                $(this).siblings('label').addClass('active');
+          $('input').on( "click",function(){
+                $(this).siblings('label:not(.tagLabel)').addClass('active');
                 $(".tagLabel").removeClass('active');
     			
             });
@@ -292,7 +313,7 @@
                 $(".tagLabel").removeClass('active');
     			
             });
-     			
+     			 
 
             $('input').blur(function(){
 
@@ -335,7 +356,7 @@
             });
 
 
-            // 폼 스위치 
+         // 폼 스위치 
             $('a.switch').click(function(e){
                 $(this).toggleClass('active');
                 e.preventDefault();
@@ -366,8 +387,10 @@
 
             $('a.profile').on('click',function(){
                 location.reload(true);
-            });
+            }); 
 
     });
 
 </script>
+
+</html>
