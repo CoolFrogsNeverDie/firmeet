@@ -168,6 +168,9 @@
 }
 
 
+
+
+
 .form form .idForm{
     transform: translateY(-20px);
     display: flex;
@@ -182,6 +185,11 @@
     width: 50%;
     gap: 10px;
 }
+.form form .idForm .error{
+	transform: translate(-72px,20px);
+	
+}
+
 
 .form form .form-group #btnIdCheck{
     width: 80px;
@@ -199,8 +207,12 @@
     height: 50px;
 }
 
-.form form .interP label{
+.form form .interP> label{
     transform: translateY(10px);
+}
+.form form .interP li label{
+	 transform: translateY(0px);
+	 cursor: pointer;
 }
 
 
@@ -219,7 +231,7 @@
     height: 15px;
 }
 
-.form form .form-group .inter li p{
+.form form .form-group .inter li label{
     display: flex;
     width: 80px;
 }
@@ -229,7 +241,7 @@
 }
 
 .form form .cateForm label{
-    transform: translateY(18px);
+    transform: translateY(5px);
 }
 
 .form form .form-group .category{
@@ -244,17 +256,14 @@
     width: 80px;
     height: 30px;
 }
-.form form .form-group .category p{
+.form form .form-group .category label{
    width: 80px;
    text-align: center;
    font-size: 12px;
-   
+   cursor: pointer;
 }
 .form form .tagForm{
     transform: translateY(-50px);
-}
-.form form .tagForm label{
-    /* transform: translateY(18px); */
 }
 
 .form form .form-group .tag{
@@ -355,10 +364,10 @@
     z-index: -1;
 }
 
-.form form label.active {
+/*.form form label.active:not(.tagLabel) {
     transform: translateY(10px);
     font-size: 10px;
-}     
+}     */
 
 .form form label.fontSwitch {
     font-family: "Raleway", sans-serif !important;
@@ -377,9 +386,22 @@
     font-size: 15px;
     z-index: 1;
 }
+
+.form form .paddingG input{
+	padding-left: 80px;
+	
+}
+
+
+
 .form form input:not([type=submit]).hasError {
     border-color: #000;
     
+}
+
+.login .paddingG input {
+	padding-left: 50px;
+	
 }
 
 .form form span.error{
@@ -426,6 +448,8 @@
 .form form .CTA a.switch:hover {
     color: #444;
 }
+
+
 
 
 
@@ -488,3 +512,5 @@
         font-size: 50px !important;
     }
  }
+ 
+ 

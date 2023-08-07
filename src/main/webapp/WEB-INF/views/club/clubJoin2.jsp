@@ -16,267 +16,12 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/clubJoin.css" rel="stylesheet" type="text/css" />
    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous" />
 
-    <style>
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 100,200,300,400,500,600,700,800,900;
-    font-style: normal;
-}
-
-        * {
-            font-family: 'Pretendard-Regular';
-        }
-
-        html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-a{text-decoration: none; color: #212121;}
-
-        .wrap {
-           	width:1245px;
-           	margin:0 auto;
-           
-        }
-
-        .back-img {
-        	
-            width: 100%;
-            height: 400px;
-           
-           
-        }
-        .back-img>img{
-        width:100%;
-        height: 400px;
-        background-size:cover;
-        }
-        
-
-        .color-box {
-            width: 100%;
-            height: 400px;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-           
-        }
-
-        .main-img {
-           
-            width: 200px;
-            height: 200px;
-            border-radius: 400px;
-            margin-bottom: 430px;
-            background-color: white;
-            position: absolute;
-        }
-
-        .main-img-file {
-            border-radius: 400px;
-            width: 200px;
-            height: 200px;
-        }
-
-        .club-title >h4{
-
-            font-size: 40px;
-            font-weight:900;
-            margin-top: 130px;
-            
-        }
-
-        .club-memeber-cnt {
-            margin-top: -20px;
-            
-        }
-
-        .club-intro {
-        	
-            margin-top: 20px;
-            font-size: 130%;
-        }
-
-        .club-tag {
-        	
-            margin-top: 20px;
-            font-size: 90%;
-            color: #3498db;
-        }
-        .club-tag ul {
-        	display:flex;
-        	gap:10px;
-        }
-
-        .join-btn-area {
-            margin: 50px;
-        }
-
-        .join-btn {
-            width: 200px;
-            height: 50px;
-            background-color: #e74c3c;
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 17px;
-        }
-
-        .intro-detail {
-        	background:#eee;
-            padding: 30px 30px;
-        }
-        
-        .intro-detail>h4 {
-        	font-size:25px;
-        	font-weight:800;
-        
-        }
-
-        .detail-text {
-        	text-align:center;
-        	font-size:18px;
-         
-        }
-
-        .detail-info {
-        	
-        	padding:30px 30px;
-        }
-
-        .detail-title>h4 {
-            font-size:25px;
-            font-weight:800;
-        }
-
-        .detail-info-table {
-        	
-            width:80%;
-            height:20px;
-            margin: 0 auto;
-        }
-
-        .detail-info-table tr {
-        	
-            height: 30px;
-        }
-
-        .info-icon {
-        	margin-top:5px;
-            width: 10%;
-        }
-
-        .info {
-            width: 40%;
-        }
-
-        .info p {
-        	margin-top:18px;
-        }
-
-        .info-icon {
-            text-align: center;
-            font-size: 20px;
-        }
-
-        .tag-info {
-   			
-            margin: 50px auto;
-            height: 450px;
-            background-color: #e0e0e0;
-            position: relative;
-        }
-
-        #chartdiv {
-            width: 100%;
-            height: 100%;
-        }
-        
-       .btn-subscript{
-       		background-color:#444;
-       
-       }
-       .btn-close{
-       		background-color:#000;
-       }
-       .btn-main{
-       		background-color:#1eafcc;
-       }
-       
-       #paging ul{
-	    	width: 150px;
-	    	margin:auto;
-	    	height:30px;
-	    	display:flex;
-	    	margin-top:30px;
-	    }
-	    #paging ul li{
-	    	width:30px;
-	    	height:30px;
-	    	
-	    }
-       
-       
-        
-       footer {
-	    	boxsizing:border-box;
-	    	width:100%;
-	    	height:80px;
-	    	background:#777;
-	    	color:#eee;
-	    	padding-top:30px;
-	    	transform:translateY(7px);
-	    	border:none;
-	      	text-align:center;
-	      	transform:translateY(30px);
-	    }
-        
-        
-    </style>
 </head>
 
 <body>
@@ -294,10 +39,10 @@ a{text-decoration: none; color: #212121;}
             <div class="main-img"><img src="${pageContext.request.contextPath}/upload/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
-                <h4>어푸어푸 ${clubVo.clubName}</h4>
+                <h4>${clubVo.clubName}</h4>
             </div><br>
             <div class="club-memeber-cnt">(${clubVo.preNum}/${clubVo.max})</div>
-            <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
+            <div class="club-intro">${clubVo.intro1}</div>
             <div class="club-tag">
 	            <ul>
 	            	<c:forEach items="${tagList}" var="tag">
@@ -318,16 +63,7 @@ a{text-decoration: none; color: #212121;}
         <!--상세 설명 -->
         <div class="intro-detail">
         	<h4>모임을 소개 합니다.</h4>
-            <div class="detail-text">안녕하세요.
-                <br>지구 면적 71%를 차지하고 있는 물과 함께 하는 수영 동호회 어푸어푸의 호스트 김수영입니다.
-                <br>어푸어푸에서는 매주 화 목 토 새벽에 모여 약간의 친목이 섞인 수영 모임을 진행하고 있어요.
-                <br>친목은 자유! 끝나고 식사 참여도 자유! 평등하고 편안한 분위기를 지향하고 있습니다.
-                <br>소규모 그룹이라 한 명 한 명 모두가 편하게 지내고 있어요.
-                <br>저희 같이 재밌게 운동해봐요!<br>
-                <br>8/1 한강 수영대회 대비 집중 운동기간입니다.
-                <br>대회 준비하시는 분들 들어오셔서 함께 준비해요!
-                <br>궁금하신 점은 문의 게시판으로 편하게 문의 주세요-!
-                <br><br>
+            <div class="detail-text">
                 ${clubVo.intro2}
             </div>
         </div>
@@ -342,32 +78,27 @@ a{text-decoration: none; color: #212121;}
                 <tr>
                     <td class="info-icon"><i class="fa fa-clock-o " aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>매주화목금 아침 7시
-                        ${clubVo.detailT}</p>
+                        <p>${clubVo.detailT}</p>
                     </td>
                     <td class="info-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>연 2회 회식
-                        	${clubVo.detailE}</p>
+                        <p>${clubVo.detailE}</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="info-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>성수동 근처
-                        	${clubVo.detailL}</p>
+                        <p>${clubVo.detailL}</p>
                     </td>
                     <td class="info-icon"><i class="fa fa-cloud" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>날씨 상관 없음!
-                        ${clubVo.detailW}</p>
+                        <p>${clubVo.detailW}</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="info-icon"><i class="fa fa-commenting-o" aria-hidden="true"></i></td>
                     <td class="info">
-                        <p>단톡방 있음
-                        ${clubVo.detailP}</p>
+                        <p>${clubVo.detailP}</p>
                     </td>
                 </tr>
             </table>
@@ -466,221 +197,12 @@ a{text-decoration: none; color: #212121;}
 
         <!--답답해 보이지 않게 스크롤 늘여주는 div-->
         <div class="clear"></div>
-			${clubVo.clubId}
        
     </div>
 </body>
 <footer>
     &copy; 2023 by 어리쥬. All Page content is property of 어리쥬
 </footer>
-<style>
-    /*주요 태그 영역*/
-    .tag-info-title>h4 {
-        font-size: 25px;
-        font-weight:800;
-        padding: 30px;
-        height: 20%;
-    }
-    
-    /*버블 차트 영역*/
-    .chart-area {
-
-       
-        margin: 0 auto;
-        margin-top: -35px;
-        height: 83%;
-    }
-
-    
-   .club-qna-area {
-   		border-bottom: 1px solid black;
-       	padding:0 30px;
-        margin: 0 auto;
-        margin-top: 30px;
-    }
-    .qna-title {
-        height: 40px;
-        border-bottom: 1px solid black;
-    }
-    .qna-title h4 {
-        float:left;
-        font-size: 25px;
-        font-weight:800;
-    }
-    .qna-btn{
-    	float:right;
-        width: 200px;
-        height: 40px;
-        background-color: #3498db;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 15px; 
-        margin-top: 11px;
-        
-        transform:translate(30px,-36px);
-    }
-    
-    .ans-btn{
-    
-       right:10px;
-        float: right;
-        width: 100px;
-        height: 30px;
-        background-color: #3498db;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 15px; 
-        margin-top: 11px;
-    }
-
-    .qna-write-area{
-    	background: #e0e0e0;
-        height: 150px; 
-       /*  display: none; */
-    }
-    
-     .ans-write-area{
-        width: 60vw;
-        height: 180px;
-        border: #e0e0e0;
-        display: none;
-    }
-    .qna-write{
-    	padding:10px 96px;
-    	width:100%;
-		display:flex;
-        height: 150px;
-        
-    }
-     .ans-write{
-     	display:block;
-        width: 50vw;
-    }
-    
-    
-    .qna-write-btn{
-        border: none;
-        width: 70px;
-        height:110px;
-        transform:translateX(66px);
-        background-color: #3498db;
-        color: white;
-        border-radius: 5px;
-    }
-    
-    .ans-write-btn{
-        border: none;
-        height: 30px;
-        background-color: #3498db;
-        color: white;
-        margin: 1%;
-        margin-top:105px;
-        position:absolute;
-        border-radius: 5px;
-    }
-    .qna-write > textarea{
-    	padding: 15px; 
-        width:810px; 
-        height: 80%;
-    }
-    
-    .ans-write > textarea{
-        width:85%;
-        height: 100%;
-    }
-    .qna-content-area {
-    	
-        width: 58vw;
-        height: 80px;
-        transform:translateX(80px);
-        margin-top: 20px;
-    }
-    
-    .qna-content-area ul {
-    	transform: translate(10px,15px);
-    }
-    
-    .ans-content-area {
-        width: 58vw;
-        height: 100px;
-        margin: 0 auto;
-        margin-top: 5px;
-    }
-    .qna-icon {
-        float: left;
-        width:60px;
-        height:60px;
-        padding:15px;
-    }
-    .qna-icon > img {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .qna-content {
-    	padding: 15px;
-        float: left;
-        width: 800px;
-        height: 80px;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        
-    }
-  
-    
-    /*문의 답변 영역*/
-    .qna-answer-area {
-		display:flex;
-        width: 58vw;
-       	transform:translateX(70px);
-        padding:10px;
-        margin-top: 10px;
-    }
-    .qna-answer-area ul {
-    	transform: translate(10px,15px);
-    
-    }
-    
-    .answer-content {
-       	width: 800px;
-        height: 80px;
-        background-color: #fafafa;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    }
-    
-    .answer-icon {
-        display:flex;
-        width:60px;
-        height:60px;
-        padding:15px;
-    }
-    .answer-icon > img {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    
-    
-    .content p {
-        padding: 10px;
-    }
-    .clear{
-        height: 130px;
-    }
-    .join-btn-last{
-        margin: 0 auto;
-        text-align: center;
-        width: 50vw;
-        height: 150px;
-    }
-</style>
-
 
 <!--차트 관련 js-->
 <script>

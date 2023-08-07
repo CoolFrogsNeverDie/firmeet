@@ -243,7 +243,7 @@ a{text-decoration: none; color: #212121;}
             <div class="main-img"><img src="${pageContext.request.contextPath }/assets/images/clubimg/${clubVo.img2}"
                     class="main-img-file"></div>
             <div class="club-title">
-                <h1>어푸어푸 ${clubVo.clubName}</h1>
+                <h1>${clubVo.clubName}</h1>
             </div><br>
             <div class="club-memeber-cnt">(${clubVo.preNum}/${clubVo.max})</div>
             <div class="club-intro">물을 보면 심장이 뛴다? 그럼 당신은 어푸어푸 회원!${clubVo.intro1}</div>
