@@ -74,7 +74,7 @@
 		                    <!-- 로그인폼 -->
 	
 		                    <div class="signup form-peice switched">
-		                        <form class="signup-form" method="post" action="/firmeet/member/join" style= "top: 55%;">
+		                        <form class="signup-form" method="post" action="/firmeet/member/join" style= "top: 52%;">
 		                            <div class="form-group idForm">
 		                                <label>Id</label>
 		                                <input type="text" name="memberId" class="id">
@@ -165,7 +165,7 @@
 		                            
 		                            <div class="CTA">
 	                                    <input type="submit" value="JOIN">
-	                                    <a class="switch">LOGIN</a>
+	                                    <a class="switch" style="cursor: pointer;">LOGIN</a>
 		                            </div>
 	                                <!-- 버튼 -->				                            
 
