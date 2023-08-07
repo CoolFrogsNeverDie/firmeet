@@ -541,3 +541,4 @@ padding-right: 100px;
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+#club-notice{	border-left: 10px solid white !important; background-color: white !important; color: gray;    box-shadow: 6px 3px 6px 0px #48484847;}

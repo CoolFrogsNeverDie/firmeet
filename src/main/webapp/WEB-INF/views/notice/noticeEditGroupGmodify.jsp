@@ -62,7 +62,7 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진"/>
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진"/>
 						<h2>${club.clubName}</h2>
 					</div>		
 					<!-- //diary-topbar -->

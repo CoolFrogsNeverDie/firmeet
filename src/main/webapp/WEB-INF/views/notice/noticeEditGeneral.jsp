@@ -61,14 +61,14 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
 					</div>		
 					<!-- //diary-topbar -->
 					
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
-						<form action="${pageContext.request.contextPath}/${club.clubId }/notice/editwrite" class="formleft" method="get">
+						<form action="${pageContext.request.contextPath}/${club.clubId}/notice/editwrite" class="formleft" method="get">
 							<div class="edittop">
 		                        <select name="" id="" class="selectbox">
 		                            <option value="notice">공지게시판</option>

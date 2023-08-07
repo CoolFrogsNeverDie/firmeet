@@ -231,7 +231,7 @@
 										<div class= "making_forms" id = "clubMainImg">
 										<p>메인 이미지</p>
 										<div>
-                                       		<img id="mainImg" src="${pageContext.request.contextPath}/upload/${club.img2}" class="imgPre" >
+                                       		<img id="mainImg" src="${pageContext.request.contextPath}/upload/club/${club.img2}" class="imgPre" >
                                             	<label for="img2" class="imgFile ct-color">이미지올리기</label>
                                             <input type ="file" id = "img2" name ="file" class= "file-btn ct-color">
                                         </div>

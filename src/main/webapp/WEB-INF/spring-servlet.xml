@@ -58,7 +58,7 @@
 <mvc:resources mapping="/upload/gallery/**" location="file:C:/firmeet/upload/gallery " />
 <mvc:resources mapping="/upload/board/**" location="file:C:/firmeet/upload/board" />
 <mvc:resources mapping="/upload/aboard/**" location="file:C:/firmeet/upload/aboard" />
-<mvc:resources mapping="/upload/club/**" location="file:C:/firmeet/upload/clubimg" />
+<mvc:resources mapping="/upload/clubimg/**" location="file:C:/firmeet/upload/clubimg" />
 <mvc:resources mapping="/upload/member/**" location="file:C:/firmeet/upload/member" />
 
 <!-- 기본 뷰 리졸버 설정--> 
