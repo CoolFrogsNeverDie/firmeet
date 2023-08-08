@@ -96,7 +96,7 @@
 			  </div>
 	          <!-- 수정 , 취소 버튼-->
 	          <div class= "edit-modal-btn-area">
-	          <button id="answer-insert-btn" class="btn">수정</button>
+	          <button id="answer-insert-btn" class="btn">답변</button>
 	          <button id="cancel-btn" class="btn">취소</button>
 	          </div>
 	          <span id="likeCount"></span>
