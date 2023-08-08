@@ -380,7 +380,7 @@
             <div class="col-sm-12" >
                 <label >메인 이미지</label>
                 <label for="img2" class="imgFile">업로드</label>
-                <img id="mainImg" src="" class="imgPre" width="150px" height="150px">
+                <img id="mainImg" src="${pageContext.request.contextPath }/assets/images/clubimg/preview2" class="imgPre" width="150px" height="150px">
                 <div class="box-file-input box9">
                 <input id="img2" type="file" name="file" value="" class="file-input">
                 <!-- <span class="filename">파일을 선택해주세요.</span> -->
@@ -389,7 +389,7 @@
             <div class="col-sm-12 ">
                 <label>배경 이미지</label>
                 <label for="img1" class="imgFile">업로드</label>
-                <img id="bgImg" src=""  class="imgPre" width="200px" height="150px">
+                <img id="bgImg" src="${pageContext.request.contextPath }/assets/images/clubimg/preview2"  class="imgPre" width="200px" height="150px">
                 <div class="box-file-input box9">
                 <input id="img1" type="file" name="file" value="" class="file-input">
                  <!-- <span class="filename">파일을 선택해주세요.</span> -->

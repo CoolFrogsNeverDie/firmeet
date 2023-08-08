@@ -328,8 +328,8 @@ $('#clubMakingForm').on("submit", function(){
 		
 		var color1	= $(this).data('main');
 		var color2	= $(this).data('sub');
-		var color3	= $(this).data('btn');
-		
+		var color3	= $(this).data('bnt');
+		console.log(color3);
         
         $('.ly-body-container').css('background-color',color1); // 배경색 수정1
         $('body').css('background-color',color1); // 배경색 수정2
@@ -546,7 +546,7 @@ $('#clubMakingForm').on("submit", function(){
 		  					
 		    	   tagList.forEach(function(tag){
 						$('#'+ tag.tagNo).prop("checked" ,"true");		 
-						 let str = "<li class='tag'><p>"+tag.tagName+"</p></li>" 			
+						 let str = "<li class='tag sd-color'><p>"+tag.tagName+"</p></li>" 			
 						 $("#selectedTag").append(str);
 		    	   });
 					

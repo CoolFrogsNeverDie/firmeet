@@ -128,7 +128,7 @@
                                      <div id="imgBox">
                                      	<div class="making_forms" id="clubMainImg">
                                      		<p>메인 이미지</p>
-                                        	<img id="mainImg" class="imgPre" src="">
+                                        	<img id="mainImg" class="imgPre" src="${pageContext.request.contextPath }/assets/images/clubimg/preview1.png">
                                         	<div>
                                         		
                                             	<label for="img2" class="imgFile">이미지올리기</label>
@@ -138,7 +138,7 @@
                                      	<div class="making_forms" id="clubBackImg" >
 	                                        <p>배경 이미지</p>
 	                                        <div>
-	                                            <img id="backImg" src="" class="imgPre" >
+	                                            <img id="backImg" src="${pageContext.request.contextPath }/assets/images/clubimg/preview2.png" class="imgPre" >
 	                                            <div>
 	                                                <label for="img1" class="imgFile">이미지올리기</label>
 	                                                <input id="img1" type="file" name="file" value="" class="file-input">

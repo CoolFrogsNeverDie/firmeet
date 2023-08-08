@@ -517,6 +517,7 @@ display: flex;
 #clubMakingForm #selTag #selectedTag .tag {
 
 	background-color:#5f0080;
+	border: none !important;
 	color:#fff;
     width: 95px;
     height: 30px;
@@ -823,4 +824,10 @@ opacity: 0;
   padding: 0;
   margin: 0;
   background-color: transparent;
+}
+
+#clubMax span span{
+	color: #ff6969;
+	font-size: 12px;
+	
 }

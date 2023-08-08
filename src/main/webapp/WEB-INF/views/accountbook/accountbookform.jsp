@@ -71,7 +71,7 @@
 					<div class="diary-body">					
 						<div class="account-content">
 							<div class="content-left">
-								<img id="preview" src="${pageContext.request.contextPath}/assets/images/accountimg/Previewimg.jpg" alt="미리보기 이미지">
+								<img id="preview" src="${pageContext.request.contextPath}/assets/images/accountimg/Previewimg.png" alt="미리보기 이미지">
 							</div>
 							<!--/content-left-->
 							<div class="content-right">

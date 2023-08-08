@@ -181,6 +181,7 @@ public class ManagerController {
 	public String editClubInfo(@ModelAttribute ClubVo clubVO
 							,@RequestParam("file") MultipartFile[] files) {
 		System.out.println("editClubInfo()");
+		System.out.println("수정하기 위해 넘어온 정보" + clubVO);
 
 		if(files != null) {
 			System.out.println(files[0].getOriginalFilename());

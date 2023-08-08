@@ -44,11 +44,14 @@
 }
 
 .content-right button[type="submit"] {
-  width: 90px;
-  height: 45px;
-  color: white;
-  border-radius:10px;
-  background-color: #6d6d6d;
+    width: 90px;
+    height: 45px;
+    color: white;
+    border-radius: 10px;
+    background-color: #6d6d6d;
+    position: relative;
+    left: 200px;
+    top: 15px;
 }
 
 

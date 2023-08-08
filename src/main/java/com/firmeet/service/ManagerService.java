@@ -152,7 +152,7 @@ public class ManagerService {
 	private String uploadPic(MultipartFile file) {
 		
 		
-		String saveDir ="C:\\firmeet\\upload\\club";
+		String saveDir ="C:\\firmeet\\upload\\clubimg";
 		
 		String orgName = file.getOriginalFilename();		// 원파일 이름
 		String exName = orgName.substring(orgName.lastIndexOf("."));		// 확장자
