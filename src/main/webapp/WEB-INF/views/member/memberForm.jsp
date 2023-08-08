@@ -83,7 +83,7 @@
 		                                <label>비밀번호</label>
 		                                <input type="password" name="memberPw" required>
 		                            </div>
-		                            <div class="CTA">
+		                            <div class="CTA ctaLogin">
 		                                <input type="submit" value="LOGIN">
 		                                <a href="#" class="switch">JOIN US</a>
 		                            </div>
@@ -102,27 +102,27 @@
 		                            </div>
 		                            <!-- idForm -->
 		
-		                            <div class="form-group paddingG">
+		                            <div class="form-group paddingG heightG">
 		                                <label>이름</label>
 		                                <input type="text" name="memberName" class="name" maxlength="20" >
 		                                <span class="error"></span>
 		                            </div>
 									<!-- 이름 -->
 									
-		                            <div class="form-group paddingG">
+		                            <div class="form-group paddingG heightG">
 		                                <label>핸드폰 번호</label>
 		                                <input type="text" name="memberPhone" pattern="(010)-\d{4}-\d{4}" >
 		                            </div>
 									<!-- 핸드폰 번호 -->
 									
-		                            <div class="form-group paddingG">
+		                            <div class="form-group paddingG heightG">
 		                                <label>비밀번호</label>
 		                                <input type="password" name="memberPw" class="pass">
 		                                <span class="error"></span>
 		                            </div>
 									<!-- 비밀번호 -->
 		
-		                            <div class="form-group paddingG">
+		                            <div class="form-group paddingG heightG">
 		                                <label>비밀번호 확인</label>
 		                                <input type="password" name="memberPwCon" class="passConfirm">
 		                                <span class="error"></span>
@@ -181,7 +181,7 @@
 		                            </div>
 		                            <!-- tagForm -->
 		                            
-		                            <div class="CTA">
+		                            <div class="CTA ctaJoin">
 	                                    <input type="submit" value="JOIN">
 	                                    <a class="switch">LOGIN</a>
 		                            </div>
