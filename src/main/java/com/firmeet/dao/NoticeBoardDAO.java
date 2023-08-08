@@ -30,6 +30,12 @@ public class NoticeBoardDAO {
 		return noticevo;
 	}
 	
+	public List<NoticeBoardVO> mainnoticeList(int clubId) {
+		System.out.println("notice mainnoticeList dao  확인");
+		List<NoticeBoardVO> noticevo = sql.selectList("noticeboard.mainnoticeList", clubId);
+		return noticevo;
+	}
+	
 //-----------------------------------------------------------------------------	
 
 	public int editwrite(NoticeBoardVO vo) {

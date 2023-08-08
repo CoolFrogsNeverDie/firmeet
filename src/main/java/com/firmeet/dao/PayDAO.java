@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
 
@@ -27,6 +28,11 @@ public class PayDAO {
 	public PayresultVO paycnt(NoticeBoardVO vo) {
 		System.out.println("DAO로 넘어오는 cnt 가져오기용"  + vo);
 		return sql.selectOne("pay.paycnt",vo);
+	}
+
+	public void accountMaker(AccountBookVo avo) {
+		System.out.println("결제했을때 가계부 작성"  + avo);
+		sql.insert("pay.accountMaker", avo);
 	}
 	
 }

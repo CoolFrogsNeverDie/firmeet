@@ -6,6 +6,7 @@ public class PayresultVO {
 	private String memberId;
 	private int paycount;
 	private String payvoteDate;
+	private int amount;
 	
 	public PayresultVO() {
 		super();
@@ -50,11 +51,20 @@ public class PayresultVO {
 	public void setPayvoteDate(String payvoteDate) {
 		this.payvoteDate = payvoteDate;
 	}
+	
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 
 	@Override
 	public String toString() {
-		return "PayresultVO [payresultNo=" + payresultNo + ", meetNo=" + meetNo + ", memberId=" + memberId + ", paycount="
-				+ paycount + ", payvoteDate=" + payvoteDate + "]";
+		return "PayresultVO [payresultNo=" + payresultNo + ", meetNo=" + meetNo + ", memberId=" + memberId
+				+ ", paycount=" + paycount + ", payvoteDate=" + payvoteDate + ", amount=" + amount + "]";
 	}
 
 }

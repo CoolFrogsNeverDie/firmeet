@@ -453,8 +453,11 @@ public class NoticeBoardController {
 		
 		System.out.println("넘어오는지 확인in" + vo);
 		JsonResult jsonResult = new JsonResult();
+	
+		MemberVo member = (MemberVo) session.getAttribute("member");
 		
-		jsonResult.success(noticeBoardService.pay(vo));
+		jsonResult.success(noticeBoardService.pay(vo, clubId));
+	
 		
 		System.out.println("getMemberId"+vo.getMemberId());
 		System.out.println("getMeetNo"+vo.getMeetNo());

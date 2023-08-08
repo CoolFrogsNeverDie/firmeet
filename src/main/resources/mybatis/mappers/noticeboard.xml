@@ -57,6 +57,17 @@
 	]]>
 	</select>
 	
+	<select id="mainnoticeList" resultType="noticeboard">
+	<![CDATA[
+        select 
+            clubId
+            ,aboardNo
+            ,title
+            ,aboardDate
+        from aboard where clubId = #{clubId}
+	]]>
+	</select>
+	
 	<insert id="editwrite" parameterType="noticeboard">
  		<selectKey resultType="int" keyProperty="aboardNo" order="BEFORE">
 			select seq_aboardNo.nextval from dual

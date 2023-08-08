@@ -113,17 +113,18 @@ public class MainController {
 	/*마이 다이어리*/
 	// 각주 추가: 클럽 Id 로 clubVo 가저오기 
 	@RequestMapping(value = "/member/main/{memberId}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String MyMain(@PathVariable("memberId") String memberId, Model model,HttpSession session, @RequestParam(defaultValue="") String keyword) {
+	public String MyMain(@PathVariable("memberId") String memberId, Model model,HttpSession session, @PathVariable("clubId") int clubId) {
 		// 현재 로그인한 회원 정보를 세션에서 가져옵니다.
 		MemberVo member = (MemberVo) session.getAttribute("member");
 		
 		System.out.println("MyMain 확인");
 		if (member != null) {
+			
 	        List<GalleryImgVo> gList = galleryService.getMyGalleryList2(memberId);
 	        
 	        model.addAttribute("galleryList", gList);
        
-	        List<NoticeBoardVO> nList= noticeBoardService.noticeList(memberId, keyword);
+	        List<NoticeBoardVO> nList= noticeBoardService.mainnoticeList(clubId);
 			System.out.println(nList);
 	        
 	        model.addAttribute("noticeList", nList);

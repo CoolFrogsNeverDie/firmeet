@@ -572,7 +572,8 @@ $(document).ready(function () {
 							memberId : memberId,
 							meetNo :  meetNo,
 							payresultNo : payresultNo,
-							paycount : paycount
+							paycount : paycount,
+							amount : amount
 					}
 					//통신  id////////////////////////////////////////////
 					$.ajax({

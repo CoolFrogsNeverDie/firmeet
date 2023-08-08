@@ -82,6 +82,7 @@
 					                             <span id="meetNo" hidden="hidden">${vo.meetNo}</span>
 					                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
 					                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
+					                             <input type="hidden" id="purpose" value="회비">
 					                             <c:if test="${vo.paycount <= vo.minPerson}">
 							                          <button id="paybtn" onclick="kakaopay()">결제하기</button>
 							                     </c:if>
@@ -583,6 +584,7 @@ $(document).ready(function () {
 		merchant_uid : 'merchant_' + new Date().getTime(),   //주문번호
 		name : 'firmeet',                                  //상품명
 		amount : $('#price').text(),//가격
+		
 		//customer_uid : buyer_name + new Date().getTime(),  //해당 파라미터값이 있어야 빌링 키 발급 시도
 		buyer_email : $('.sessionuserID').text(),             //구매자 이메일
 		buyer_name : 'buyer_name',                           //구매자 이름
@@ -592,24 +594,26 @@ $(document).ready(function () {
 		if(data.success){
 			console.log('빌링키 발급 성공', data)
 			alert("결제가 완료되었습니다.")
-			
 				  var memberId = $('#memberId').text();
 	  			  var meetNo = $('#meetNo').text();
 	  			  var paycount = $('#paycount').text();
 	  			  var payresultNo = $('#payresultNo').text();
+	  			  var price = $('#price').text()
 					console.log('ㅎㅎ',memberId);
 					console.log(meetNo);
 					console.log('ㅎㅎ',paycount);
 					console.log(payresultNo);
+					console.log(price);
 				var NoticeBoardVO ={
 							memberId : memberId,
 							meetNo :  meetNo,
 							payresultNo : payresultNo,
-							paycount : paycount
+							paycount : paycount,
+							amount : price
 					}
 					//통신  id////////////////////////////////////////////
 					$.ajax({
-			        url: '${pageContext.request.contextPath }/${clubId }/notice/pay', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
+			        url: '${pageContext.request.contextPath}/${clubId}/notice/pay', // 서버의 엔드포인트 URL을 적절하게 변경해야 합니다.
 			        method: 'POST',
 			        data: NoticeBoardVO,
 			        dataType: 'json',
@@ -625,6 +629,7 @@ $(document).ready(function () {
 			        			$("#paycount").text(data.paycount);
 			        			data.paycount++;
 			        			$("#payresultNo").text(data.payresultNo);
+			        			console.log(data.price);
 			        			console.log(data.memberId);
 			        			console.log(data.meetNo);
 			        			console.log(data.paycount);

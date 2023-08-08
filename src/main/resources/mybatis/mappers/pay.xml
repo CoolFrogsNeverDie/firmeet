@@ -23,4 +23,30 @@
 		update PAYRESULT set paycount = paycount +1 where payresultNo = #{payresultNo} and memberId = #{memberId}
 	</update>
 	
+	<insert id="accountMaker" parameterType="accountbook">
+		INSERT INTO Account_Book (ACCOUNTID
+			, clubId
+			, meetNo
+			, memberId
+			, amount
+			, datetime
+			,category
+			, purpose
+			, income_expense
+			, receipt
+			, payment)
+		VALUES (
+			SEQ_ACCOUNTID.NEXTVAL
+			, #{clubId}
+			, #{meetNo}
+			, #{memberId}
+			, #{amount}
+			, TO_DATE(SYSDATE,'YY/MM/DD')
+			, #{category}
+			, #{purpose}
+			, #{incomeExpense}
+			, #{receipt}
+			, #{payment})
+	</insert>
+	
 </mapper>

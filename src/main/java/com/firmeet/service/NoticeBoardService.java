@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.firmeet.dao.AreplyDAO;
 import com.firmeet.dao.NoticeBoardDAO;
 import com.firmeet.dao.PayDAO;
+import com.firmeet.vo.AccountBookVo;
 import com.firmeet.vo.AreplyVO;
 import com.firmeet.vo.NoticeBoardVO;
 import com.firmeet.vo.PayresultVO;
@@ -32,6 +33,12 @@ public class NoticeBoardService {
 	public List<NoticeBoardVO> noticeList(String keyword, String memberId) {
 		System.out.println("notice noticeList 확인");
 		List<NoticeBoardVO> noticeBoardList = dao.noticelist(keyword, memberId);
+		return noticeBoardList;
+	}
+	
+	public List<NoticeBoardVO> mainnoticeList(int clubId) {
+		System.out.println("notice mainnoticeList 확인");
+		List<NoticeBoardVO> noticeBoardList = dao.mainnoticeList(clubId);
 		return noticeBoardList;
 	}
 	
@@ -277,11 +284,14 @@ public class NoticeBoardService {
 	
 	}
 	
-	public PayresultVO pay(PayresultVO vo) {
+	public PayresultVO pay(PayresultVO vo, int clubId) {
 		System.out.println("notice payinsert 확인"+vo);
 		pdao.payinsert(vo);
+		String text = "회비";
+		AccountBookVo avo = new AccountBookVo(0,clubId,vo.getMeetNo(), vo.getMemberId(), vo.getAmount(), "", text, text, "지출", "", 0);
 		System.out.println("업데이트 확인 전"+vo);
 		pdao.payupdate(vo);
+		pdao.accountMaker(avo);
 		System.out.println("getPaycount"+vo.getPaycount());
 		System.out.println("업데이트 확인 후"+vo);
 		return vo;
