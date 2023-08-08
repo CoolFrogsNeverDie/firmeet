@@ -18,6 +18,19 @@
 	margin-right: 10px;
 	border: 3px solid #d3d2d2;
 }
+
+.likecolor{
+    color: red;
+    font-size: 25px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+.likecolor span{
+    color: red;
+    font-size: 23px;
+    margin-right: 7px;
+}
+
 #groupautoupload{
 	width: 70px;
     height: 40px;
