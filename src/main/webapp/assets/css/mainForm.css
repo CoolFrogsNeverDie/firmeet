@@ -324,8 +324,8 @@
  	width: 1245px;
  	display: flex;
  	flex-wrap: wrap;
- 	gap: 20px;
- 	justify-content: space-between;
+ 	gap: 23px;
+ 	
  	padding: 0px;
  }
 
