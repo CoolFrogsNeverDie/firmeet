@@ -134,7 +134,7 @@
 													<c:when test="${!empty account.receipt}">
 														<!-- 영수증 이미지를 표시하는 부분 -->
 														<div class="content-img" style="display: none">
-															<a class="example-image-link" href="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" data-lightbox="example-set"> <img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
+															<a class="example-image-link" href="${pageContext.request.contextPath}/upload/account/${account.receipt}" data-lightbox="example-set"> <img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/${account.receipt}" alt="..." style="max-height: 500px;" />
 															</a>
 														</div>
 													</c:when>
@@ -262,11 +262,11 @@
                 html += '<div class="content-img" style="display: none">';
                 html +=
                     '<a class="example-image-link" href="' +
-                    "${pageContext.request.contextPath}/assets/images/galleryImg/" +
+                    "${pageContext.request.contextPath}/upload/account/" +
                     account.receipt +
                     '" data-lightbox="example-set" >';
                   html +=
-                    '<img class="example-image" src="${pageContext.request.contextPath}/assets/images/accountimg/' +
+                    '<img class="example-image" src="${pageContext.request.contextPath}/upload/account/' +
                     account.receipt +
                     '" alt="가계부사진" style="max-height: 500px;" />';
                   html += "</a>";
