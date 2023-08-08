@@ -53,7 +53,7 @@
             <div class="join-btn-area">
             	<button type="button" class= "join-btn btn-subscript">가입 신청됨</button>
             	<button type="button" class= "join-btn btn-close">마감</button>
-            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join">회원가입</button></a>
+            	<a href ="${pageContext.request.contextPath }/club/clubJoin/${clubVo.clubId}"><button type="button" class= "join-btn btn-join" style = "display: inline-block;">회원가입</button></a>
             	<a href ="${pageContext.request.contextPath }/club/main/${clubVo.clubId}"><button type="button" class= "join-btn btn-main">모임 메인으로 가기</button></a>
             </div>
         </div>
@@ -388,7 +388,7 @@ $('.ans-btn').on("click", function(){
 
 	<c:if test="${memberLv.memlevel == null}">
 		$(".btn-close").css("display","none");
-		$(".btn-join").css("display","block");
+		//	$(".btn-join").css("display","block");
 		$(".btn-main").css("display","none");
 		$(".btn-subscript").css("display","none");	
 	</c:if>

@@ -134,8 +134,9 @@
         const lastEntry = entries[entries.length - 1];
         if (!lastEntry.isIntersecting) return;
 
+        console.log("데이터 가져오기");
         getData();
-        checkList();
+        
     });
 	//감시하는 객체
     lastBoardObserver.observe(lastBoard[0]);
@@ -179,9 +180,8 @@
 	
 	
 		function checkList(){
-		
-		 var hasClass = $(".list-area .qna-info").length > 0;
-		
+		console.log("checkList()");
+		 var hasClass = $(".list-area .mem-info").length > 0;
 		 if(!hasClass){
 			 noData();
 		 }
@@ -223,6 +223,7 @@
 	
 	//가입요청한 유저 목록 볼 수 있는 
 	function getData(){
+		console.log("getData()");
 		var clubId = $('.diary-area').data('clubid');
 	
 		var MemberVo = {
@@ -251,6 +252,9 @@
 						endNum += 10;
 					}
 					
+					//전체갯수를 파악
+					checkList();
+					
 		       }, //success end
 		       error : function(XHR, status, error) {
 		       console.error(status + " : " + error);
@@ -261,7 +265,7 @@
 	
 	
 	function noData(){
-		
+		console.log("noData()");
 		var add = '';
 		add += '<div class= "error-page">'
 		add += '	<div>'

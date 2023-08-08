@@ -139,7 +139,7 @@ $('.forCalendar').on("click",'button', function(){
 
 	//스케줄 정보를 받아와서 render()에 넘겨주는 function
 	function getData(){
-	
+
 	var title = $("#fc-dom-1").text();
 	var years = title.substring(0,4);
 	var month = title.substring(title.length-2,title.length-1);

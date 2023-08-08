@@ -341,7 +341,7 @@
 
                 //비밀번호 일치 여부
                 if($('.pass').val() != $('.passConfirm').val()){
-                    $('.passConfirm').siblings('.error').text('비밀번호가 일치하지 않습니다.').fadeIn().parent('.form-group').addClass('hasError');
+                   // $('.passConfirm').siblings('.error').text('비밀번호가 일치하지 않습니다.').fadeIn().parent('.form-group').addClass('hasError');
                     passConfirm = false;
                 } else {
                     $('.passConfirm').siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');

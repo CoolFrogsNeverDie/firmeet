@@ -46,9 +46,9 @@
 }
 .content-right{
 	width: 350px;
-	margin-left: 36%;
-	margin-top: 4%;
-	position: absolute;
+    margin-left: 64.5%;
+    margin-top: 4%;
+    position: relative;
 }
 .content-left {
 	width: 650px;
@@ -144,7 +144,7 @@
   width: 100%;
   border-bottom: 1px solid #ccc;
   padding-bottom: 50px;
-  height: 40px;
+  height: 60px;
 }
 .list_table{
 	width:99%;
@@ -563,3 +563,7 @@ padding-right: 100px;
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+#club-notice{	border-left: 10px solid white !important;
+	background-color: white !important; color: gray;
+    box-shadow: 6px 3px 6px 0px #48484847;
+	}

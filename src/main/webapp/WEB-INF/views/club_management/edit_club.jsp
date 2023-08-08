@@ -354,8 +354,9 @@ $('#clubMakingForm').on("submit", function(){
 		
 	$(document).ready(function(){
 		var intro2 = "${deInfo.intro2}";
-		var color = "${deInfo.colorType}"
+		var color = "${deInfo.colorType}";
 		var messageWithNewLines = intro2.replace(/<br>/ig, "\n");
+		console.log(messageWithNewLines);
 		$('#intro2').val(messageWithNewLines);
 		$('input[name="colorType"][value="' + color + '"]').prop('checked', true);
 		$('input[name="colorType"][value="' + color + '"]').next('label').css('border', '5px solid gray');
