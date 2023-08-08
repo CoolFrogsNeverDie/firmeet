@@ -11,39 +11,6 @@
     <link href="${pageContext.request.contextPath}/assets/css/layout.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/noticestyle.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/css/color_code/color${club.colorType}.css" rel="stylesheet" type="text/css" /> 
- <script>
- 
- 	/*메뉴바 스크립트용 JS*/
-    // 클릭 이벤트 처리
-    $(document).on('click', '#navbarDropdown', function () {
-    	 $('#clubList').empty();
-    	
-        // AJAX 요청 보내기
-        var memberId = '${member.memberId}';
-        console.log('memberId:', memberId);
-
-        $.ajax({
-            type: 'POST', // 또는 'GET'에 맞게 설정
-            url: '${pageContext.request.contextPath}/main/clubList', // 서버 측의 엔드포인트 주소
-            data: {
-                memberId: memberId, // 클라이언트에서 서버로 넘길 변수
-            },
-            success: function (jsonResult) {
-                var list = jsonResult.data; // 변경: clubList -> list
-                console.log(list);
-                for (var i = 0; i < list.length; i++) { // 변경: clubList -> list
-                    var name = list[i].clubName; // 변경: club.name -> list[i].clubName    
-                    var clubId = list[i].clubId; 
-                    $('#clubList').append('<li><a class="dropdown-item" href="${pageContext.request.contextPath}/club/main/'+clubId+'">' + name + '</a></li>'); 
-                }
-            },
-            error: function (error) {
-                // AJAX 에러 시 실행되는 코드
-                console.error('Error:', error)
-            }
-        });
-    });
-</script>
 
 </head>
 
