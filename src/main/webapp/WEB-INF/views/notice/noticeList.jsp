@@ -61,7 +61,7 @@
 			<div class="main-content">
 				<div class="diary-area" data-memid = "${member.memberId}" data-clubid ="${club.clubId}">
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/assets/images/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
 						
 						<form name="form1" method="post" action="${pageContext.request.contextPath }/${club.clubId }/notice/noticelist">
@@ -76,21 +76,22 @@
 					<div class="diary-body">					
 						<!-- 개인별코딩 ---------------------------------------------------------------->
 						<div>
-        					<button type="button" id="noticewrite" class="ct-color">글쓰기</button>
+        					<button type="button" class="ct-color noticewrite">글쓰기</button>
         				</div>	
 						<div id="list_body">
+						
 							<table class="list_table" border="1">
-								<tr>
-									<th>번호</th>
-									<th>작성자</th>
-									<th>제목</th>
-									<th>등록일</th>
-									<th>조회수</th>
+								<tr class="trborder">
+									<th style="width:10%; padding-left: 20px; padding-top: 10px; padding-bottom: 10px;">번호</th>
+									<th style="width:10%; padding-left: 5px;">작성자</th>
+									<th style="width:55%; padding-left: 20%;">제목</th>
+									<th style="width:15%; padding-left: 25px;">등록일</th>
+									<th style="width:10%;">조회수</th>
 								</tr>
 								<c:forEach var="row" items="${nlist }">
 									<c:if test="${sessionScope.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
-											<td>${row.aboardNo }</td>
+											<td style="padding-left: 20px;">${row.aboardNo }</td>
 											<td>${row.memberId }</td>
 											<c:choose>
 												<c:when test="${row.aboardVal == 1 }">
@@ -121,7 +122,7 @@
 												</c:when>
 											</c:choose>
 											<td>${row.aboardDate }</td>
-											<td>${row.aboardHit }</td>
+											<td style="padding-left: 10px;">${row.aboardHit }</td>
 										</tr>
 									</c:if>
 								</c:forEach>

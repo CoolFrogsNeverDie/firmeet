@@ -29,7 +29,7 @@
     margin-left: 41%;
     margin-bottom: 10px;
 }
-#noticewrite{
+.noticewrite{
 	float: right;
 	width: 90px;
 	height: 45px;
@@ -56,7 +56,6 @@
 	margin-left: 30px;
 }
 .modal-body input{
-	background-color: rgb(231, 231, 231);
 	border: 1px solid gray;
 }
 /* 모달창 */
@@ -135,13 +134,13 @@
 }
 /* 공지리스트 */
 .list-item {
-  padding: 10px;
   width: 100%;
   border-bottom: 1px solid #ccc;
+  padding-bottom: 50px;
+  height: 40px;
 }
 .list_table{
-	width:95%;
-	margin-left: 33px;
+	width:99%;
 }
 /* 공지리스트 끝 */
 
@@ -262,11 +261,10 @@ background-color: rgb(231, 231, 231);
 #noticewrite{
 	float: right;
 	width: 90px;
-	height: 35px;
+	height: 40px;
 	border-radius: 10px;
 	background-color: #1eafcc;
 	color: #fff;
-	margin-bottom: 10px;
 	font-weight: bold;
 	font-size: 15px;
 }
@@ -343,6 +341,13 @@ background-color: rgb(231, 231, 231);
     text-align: center;
     margin: 0 auto;
     border: 1px solid gray;
+}
+.trborder{
+	border-top: solid;
+	border-top-color: gray;
+	border-bottom: solid;
+	border-bottom-color: gray;
+	height: 30px;
 }
 .modal-body{
     background-color: rgb(231, 231, 231);
@@ -541,4 +546,3 @@ padding-right: 100px;
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-#club-notice{	border-left: 10px solid white !important; background-color: white !important; color: gray;    box-shadow: 6px 3px 6px 0px #48484847;}
