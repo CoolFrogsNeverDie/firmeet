@@ -440,7 +440,7 @@ function uploadSummernoteImageFile(file, editor){
 function CustomButton(context) {
     var ui = $.summernote.ui;
     var button = ui.button({
-        contents: 'vote',
+        contents: '[투표]',
         tooltip: 'vote Button',
         click: function() {
             // 버튼을 클릭했을 때 수행할 동작을 여기에 작성합니다.

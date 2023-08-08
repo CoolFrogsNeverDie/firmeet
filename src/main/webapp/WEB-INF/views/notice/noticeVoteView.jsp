@@ -140,11 +140,11 @@
 				                  <p class="noticecontent">${vo.boardContent}</p>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/pmodifyform">
 					                  <input type="hidden" name="meetNo" value="${vo.meetNo }">
-					                  <button type="submit" id="modify" class="ct-color">수정</button>
+					                  <button type="submit" class="modify ct-color">수정</button>
 				                  </form>
 				                  <form action="${pageContext.request.contextPath }/${clubId }/notice/gdelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
-					                  <button type="submit" id="delete" class="ct-color">삭제</button>
+					                  <button type="submit" class="delete ct-color">삭제</button>
 				                  </form>
 				              </div>
 			                 <!-- 댓글 -->

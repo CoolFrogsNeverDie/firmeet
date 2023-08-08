@@ -149,7 +149,7 @@
 
 $(document).ready(function() {
 	
-	$('#noticewrite').click(function() {
+	$('.noticewrite').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticeEditGeneral'	
 	});
 });

@@ -103,8 +103,8 @@
 					                         <p><span>투표1 : </span>${vo.vote1}</p>
 					                         <p><span>투표2 : </span>${vo.vote2}</p>
 					                         <p><span>투표3 : </span>${vo.vote3}</p>
-					                         <p><span>투표4 : </span>${vo.vote4}</p>
-					                         <p><span>투표5 : </span>${vo.vote5}</p>
+					                         <p id="vote4" style="display: none;"><span>투표4 : </span>${vo.vote4}</p>
+					                         <p id="vote5" style="display: none;"><span>투표5 : </span>${vo.vote5}</p>
 					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
 					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
 					                         <input type="hidden" name="clubId" value="${clubId}">
@@ -118,12 +118,12 @@
 				               
 				                <form action="${pageContext.request.contextPath }/${clubId }/notice/elmodifyform">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
-					                  <button type="submit" id="modify" class="ct-color">수정</button>
+					                  <button type="submit" class="modify ct-color">수정</button>
 				                </form>
 				                <form action="${pageContext.request.contextPath }/${clubId }/notice/eldelete">
 					                  <input type="hidden" name="aboardNo" value="${vo.aboardNo }">
 					                  <input type="hidden" name="voteNo" value="${vo.voteNo }">
-					                  <button type="submit" id="delete" class="ct-color">삭제</button>
+					                  <button type="submit" class="delete ct-color">삭제</button>
 				                </form>
 				                </c:if>
 				                
@@ -145,8 +145,8 @@
 					                         <p><span>투표1 : </span>${vo.vote1}<span id="Count">투표 수 (&nbsp;${vo.vote1Cnt }&nbsp;)</span></p>
 					                         <p><span>투표2 : </span>${vo.vote2}<span id="Count">투표 수 (&nbsp;${vo.vote2Cnt }&nbsp;)</span></p>
 					                         <p><span>투표3 : </span>${vo.vote3}<span id="Count">투표 수 (&nbsp;${vo.vote3Cnt }&nbsp;)</span></p>
-					                         <p><span>투표4 : </span>${vo.vote4}<span id="Count">투표 수 (&nbsp;${vo.vote4Cnt }&nbsp;)</span></p>
-					                         <p><span>투표5 : </span>${vo.vote5}<span id="Count">투표 수 (&nbsp;${vo.vote5Cnt }&nbsp;)</span></p>
+					                         <p id="vote4" style="display: none;"><span>투표4 : </span>${vo.vote4}<span id="Count">투표 수 (&nbsp;${vo.vote4Cnt }&nbsp;)</span></p>
+					                         <p id="vote5" style="display: none;"><span>투표5 : </span>${vo.vote5}<span id="Count">투표 수 (&nbsp;${vo.vote5Cnt }&nbsp;)</span></p>
 					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
 					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
 					                     </td>
@@ -239,11 +239,11 @@
 				                        <input type="radio" name="choice" id="1" value="1"><span class="votespan">${vo.vote1}</span><br>
 				                        <input type="radio" name="choice" id="2" value="2"><span class="votespan">${vo.vote2}</span><br>
 				                        <input type="radio" name="choice" id="3" value="3"><span class="votespan">${vo.vote3}</span><br>
-				                        <input type="radio" name="choice" id="4" value="4"><span class="votespan">${vo.vote4}</span><br>
-				                        <input type="radio" name="choice" id="5" value="5"><span class="votespan">${vo.vote5}</span><br>
+				                        <input type="radio" name="choice" id="4" value="4" style="display: none;"><span class="votespan">${vo.vote4}</span><br>
+				                        <input type="radio" name="choice" id="5" value="5" style="display: none;"><span class="votespan">${vo.vote5}</span><br>
 			                        </div>
 			                        <div style="text-align: center; font-weight: bold;">
-			                			<button type="submit" class="modelbtnS" id="lastvote">투표완료</button>
+			                			<button type="submit" class="modelbtnS ct-color" id="lastvote">투표완료</button>
 			                        </div>
 			                    </form>
 			                   </div>
@@ -276,11 +276,38 @@ $(document).ready(function () {
 	$('#nlist').click(function() {
 		  window.location.href = '${pageContext.request.contextPath }/${clubId }/notice/noticelist'	
 	});
+	
    $("#lastvote").click(function() {
        // 기존 내용과 대체 내용의 가시성(visibility)을 토글
        $("#dataTable").toggle();
        $("#dataTable1").toggle();
    });
+   
+	// vo.vote4 값이 비어있는지 확인
+   if (!($.trim('${vo.vote4}') === '')) {
+       $('#vote4').show();
+   } else {
+       $('#vote4').hide();
+   }
+   // vo.vote5 값이 비어있는지 확인
+   if (!($.trim('${vo.vote5}') === '')) {
+       $('#vote5').show();
+   } else {
+       $('#vote5').hide();
+   }
+   
+   if (!($.trim('${vo.vote4}') === '')) {
+       $('#4').show();
+   } else {
+       $('#4').hide();
+   }
+
+   // Check if vo.vote5 is empty
+   if (!($.trim('${vo.vote5}') === '')) {
+       $('#5').show();
+   } else {
+       $('#5').hide();
+   }
 
 $('.noticereply').on("click",'.add-reply', function(){
 	
