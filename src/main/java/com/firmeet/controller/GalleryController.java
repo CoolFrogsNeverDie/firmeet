@@ -79,17 +79,18 @@ public class GalleryController {
 	//모임 이름 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getMeetName", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult getMeetName(@RequestParam("year") int year, @RequestParam("month") int month) {
+	public JsonResult getMeetName(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("clubId")int clubId) {
 
 		JsonResult jsonResult = new JsonResult();
 
 		System.out.println("getMeetName 확인");
 		System.out.println(year);
 		System.out.println(month);
+		System.out.println(clubId);
 
 		try {
 			// galleryService.getMeetName()에서 성공적으로 데이터를 가져온 경우
-			List<MeetVo> gMeetVos = galleryService.getMeetName(year, month);
+			List<MeetVo> gMeetVos = galleryService.getMeetName(year, month, clubId);
 			jsonResult.success(gMeetVos); // "success"로 설정하고 데이터를 설정
 		} catch (Exception e) {
 			e.printStackTrace();

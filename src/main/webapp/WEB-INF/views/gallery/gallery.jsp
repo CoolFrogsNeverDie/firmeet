@@ -46,7 +46,7 @@
 				
 				
 					<div class="diary-topbar">
-						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
+						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/club/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
   						
   						
@@ -163,7 +163,7 @@
 	                galleryHTML += '	</div>';
 	                galleryHTML += '	<div>';
 	                galleryHTML += '		<span>';
-	                galleryHTML += '		 	<b>존재하는 사진이 없습니다!</b>';
+	                galleryHTML += '		 	<b>존재하는 가입 요청이 없습니다!</b>';
 	                galleryHTML += '		</span>';
 	                galleryHTML += '	</div>';
 	                galleryHTML += '</div>';
@@ -263,6 +263,7 @@
 	    var text = $dt.text().trim();
 	    var year = text.substring(0, 4);
 	    var month = text.substring(5, 7);
+	    var clubId = ${club.clubId};
 	    console.log(year);
 	    console.log(month);
 	
@@ -272,6 +273,7 @@
 	        data: {
 	            year: year,
 	            month: month
+	            clubId: clubId
 	        },
 	        success: function (jsonResult) {
 	            var list = jsonResult.data;
@@ -312,7 +314,7 @@
 	            galleryHTML += '	</div>';
 	            galleryHTML += '	<div>';
 	            galleryHTML += '		<span>';
-	            galleryHTML += '		 	<b>존재하는 사진이 없습니다!</b>';
+	            galleryHTML += '		 	<b>존재하는 가입 요청이 없습니다!</b>';
 	            galleryHTML += '		</span>';
 	            galleryHTML += '	</div>';
 	            galleryHTML += '</div>';

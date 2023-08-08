@@ -31,6 +31,7 @@
 			FROM meet_name
 			WHERE meetMon = #{month} 
 			AND meetYear = #{year}
+			AND clubId = #{clubId}
 		]]>
 	</select>
 

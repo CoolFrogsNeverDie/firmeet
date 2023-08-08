@@ -92,12 +92,13 @@ public class GalleryDao {
 	}
 
 	//모임 이름 가져오기
-	public List<MeetVo> getMeetName(int year, int month) {
+	public List<MeetVo> getMeetName(int year, int month, int clubId) {
 		System.out.println("GalleryDao getMeetName 확인");
 
 		Map<String, Integer> variableMap = new HashMap<>();
 		variableMap.put("year", year);
 		variableMap.put("month", month);
+		variableMap.put("clubId", clubId);
 
 		List<MeetVo> galleryVos = session.selectList("gallery.getMeetName", variableMap);
 		System.out.println(month + "GalleryDao getMeetName 확인: " + galleryVos);

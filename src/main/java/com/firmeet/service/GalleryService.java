@@ -123,9 +123,9 @@ public class GalleryService {
 	}
 
 	//모임 이름 가져오기
-	public List<MeetVo> getMeetName(int year, int month) {
+	public List<MeetVo> getMeetName(int year, int month, int clubId) {
 		System.out.println("GalleryService getMeetImg 확인");
-		List<MeetVo> gImgVos = galleryDao.getMeetName(year, month);
+		List<MeetVo> gImgVos = galleryDao.getMeetName(year, month, clubId);
 		return gImgVos;
 	}
 
