@@ -122,9 +122,9 @@
 													      <div id="menu_wrap" class="bg_white">
 													        <div class="option">
 													            <div>
-													               <p><em>지도 위에 위치를 클릭해주세요!</em></p>
-													                <input type="text" id="keyword" size="15">
-													              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: noen">확인</button>
+													               <p><em>만남 위치를 클릭해주세요!</em></p>
+													                <input type="hidden" id="keyword" size="15">
+													              	<button type="button" class="btn btn-success" id="searchButton" style="margin-left: 10px;display: none">확인</button>
 													            </div>
 													        </div>
 													        <hr>

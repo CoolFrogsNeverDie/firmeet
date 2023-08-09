@@ -56,7 +56,7 @@
 									<th style="width:10%;">조회수</th>
 								</tr>
 								<c:forEach var="row" items="${nlist }">
-									
+									<c:if test="${club.clubId == row.clubId }">
 										<tr id="scroll" class="list-item">
 											<td style="padding-left: 20px;">${row.aboardNo }</td>
 											<td>${row.memberId }</td>
@@ -91,7 +91,7 @@
 											<td>${row.aboardDate }</td>
 											<td style="padding-left: 10px;">${row.aboardHit }</td>
 										</tr>
-									
+									</c:if>
 								</c:forEach>
 							</table>
 						</div>

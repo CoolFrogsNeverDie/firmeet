@@ -192,6 +192,8 @@ public class NoticeBoardController {
 		
 		model.addAttribute("clubId", clubvo.getClubId());
 		session.getAttribute("aboardNo");
+		
+		session.getAttribute("memberId");
 
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("memberId", vo.getMemberId());
@@ -223,7 +225,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping("/vote")
-	public String vote(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+	public String vote(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("controller vo"+vo);
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
@@ -241,16 +243,12 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/voteResult/{aboardNo}")
-	public String voteResult(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
-		model.addAttribute("clubId", clubvo.getClubId());
+	public String voteResult(@PathVariable("clubId") int clubId, @PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));  
 		
-		int clubId = (int) session.getAttribute("clubId");
-		
 		System.out.println("controller clubId"+clubId);
-		model.addAttribute("clubId", clubId);
 		
 		MemberVo member = (MemberVo) session.getAttribute("member");
         
