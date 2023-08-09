@@ -468,6 +468,19 @@ a {
 	height: 150px;
 }
 
+#paging ul {
+	text-decoration: none;
+ 	width: 150px;
+ 	margin: auto;
+ 	height: 30px;
+ 	display: flex;
+ }
+
+ #paging ul li {
+ 	width: 30px;
+ 	height: 30px;
+}
+
 body::-webkit-scrollbar {
    width: 15px;
 }
