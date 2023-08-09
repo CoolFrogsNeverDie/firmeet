@@ -85,38 +85,13 @@
 									<!-- 공지테이블-->
 									<table>
 										<c:forEach var="notice" items="${noticeList}" varStatus="status" begin = "0" end ="4" >
-										<tr>
-											<c:choose>
-												<c:when test="${notice.aboardVal == 1 }">
-													<c:if test="${notice.voteYV == 0 }">
-														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlist?aboardNo=${notice.aboardNo}&memberId=${member.memberId}">${notice.title }</a></td>
-														<td>${notice.aboardDate}</td>
-													</c:if>
-													<c:if test="${notice.voteYV >= 1 }">
-														<td><a href="${pageContext.request.contextPath }/${clubId }/notice/voteResult/${notice.aboardNo}?voteNo=${notice.voteNo}&aboardNo=${notice.aboardNo}&memberId=${member.memberId}">${notice.title }</a></td>
-														<td>${notice.aboardDate}</td>
-													</c:if>
-												</c:when>
-												<c:when test="${notice.aboardVal == 2 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroup?aboardNo=${notice.aboardNo}">
-														<c:if test="${notice.paycount == notice.maxPerson }">
-															[자동등록]${notice.title }
-														</c:if>
-														<c:if test="${notice.paycount < notice.maxPerson }">
-															${notice.title }
-														</c:if>
-													</a></td>
-													<td>${notice.aboardDate}</td>
-												</c:when>
-												<c:when test="${notice.aboardVal == 3 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/editlistgroupG?aboardNo=${notice.aboardNo}">${notice.title }</a></td>
-													<td>${notice.aboardDate}</td>
-												</c:when>
-												<c:when test="${notice.aboardVal == 4 }">
-													<td><a href="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR?aboardNo=${notice.aboardNo}">[자동등록]${notice.title }</a></td>
-													<td>${notice.aboardDate}</td>
-												</c:when>
-											</c:choose>
+											<tr>
+												<td class= "main-aboard-title">
+													<a href="${pageContext.request.contextPath }/${notice.clubId}/notice/editlistgroupG?aboardNo=${notice.aboardNo}">${notice.title}</a>
+												</td>
+												<td class= "main-aboard-date">
+													${notice.aboardDate}
+												</td>
 											</tr>
 										</c:forEach>
 										<!-- forEach -->

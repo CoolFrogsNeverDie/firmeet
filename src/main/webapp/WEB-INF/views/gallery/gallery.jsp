@@ -272,7 +272,7 @@
 	        method: "GET",
 	        data: {
 	            year: year,
-	            month: month
+	            month: month,
 	            clubId: clubId
 	        },
 	        success: function (jsonResult) {

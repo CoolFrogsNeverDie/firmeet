@@ -52,10 +52,14 @@
 }
 
 .announcement td {
-  border: 1px solid black;
   cursor : pointer;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   
 }
+
 
 .announcement td a{
 	display: block; 
@@ -74,6 +78,14 @@
   width: 75%;
 }
 
+.announcement .main-abaord-title{
+	width:80%;
+	text-overflow: ellipsis;
+}
+.announcement .main-abaord-date{
+	width:20%;
+	text-overflow: ellipsis;
+}
 /*달력*/
 .calendar {
     width: 100%;
@@ -352,3 +364,4 @@ td, tr {
 #calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-end{    margin-right: 0; margin-top: -8px;}
 #calendar2 .fc-direction-ltr .fc-daygrid-event.fc-event-start {margin-left: 0;}
 #calendar2 .fc .fc-toolbar.fc-header-toolbar { margin-bottom: 1em; margin-top: 0.5em;}
+
