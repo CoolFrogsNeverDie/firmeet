@@ -70,7 +70,6 @@ public class NoticeBoardController {
         }
         
 	}
-
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")

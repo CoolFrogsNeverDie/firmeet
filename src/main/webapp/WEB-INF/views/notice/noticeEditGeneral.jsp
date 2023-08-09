@@ -151,23 +151,26 @@
 				                            <!-- Modal body -->
 				                            <div class="modal-body">
 				                                  <span class="votespan">제목 : </span>
-				                                  <input class="votetitle" type="text" id="voteTitle111" name="voteTitle111">
+				                                  <input class="votetitle" type="text" id="voteTitle" name="voteTitle">
+				                                  <button type="button" id="change1" style="background-color: rgb(231, 231, 231);">
+				                                  <img class="changeimg" src="${pageContext.request.contextPath }/assets/images/icon/change.svg" alt="change" />
+				                                  </button>
 				                                  <div class="voteleft">
 				                                      <span class="votespan">1.</span>
-				                                      <input class="votetitle" type="text" id="vote111" name="vote111"><br>
+				                                      <input class="votetitle" type="text" id="vote1" name="vote1"><br>
 				                                      <span class="votespan">2.</span>
-				                                      <input class="votetitle" type="text" id="vote222" name="vote222"><br>
+				                                      <input class="votetitle" type="text" id="vote2" name="vote2"><br>
 				                                      <span class="votespan">3.</span>
-				                                      <input class="votetitle" type="text" id="vote333" name="vote333"><br>
+				                                      <input class="votetitle" type="text" id="vote3" name="vote3"><br>
 				                                      <div class="voteplus1">
 				                                      </div>
 				                                      <button type="button" class="plusbtn1">+ 항목추가</button><br>
 				                                  </div>
 				                                  <div style="margin-bottom: 30px;">
 				                                      <span class="votespan">최소 인원 : </span>
-				                                      <input class="votemin" type="text" id="totalNum" name="totalNum"><br>
+				                                      <input class="votemin" type="text" id="totalnum" name="totalnum"><br>
 				                                      <span class="votespan">투표 종료 : </span>
-				                                      <input class="voteend" type="date" id="finDate" name="finDate">
+				                                      <input class="voteend" type="date" id="findate" name="findate">
 				                                  </div>
 				                                  <div style="text-align: center; font-weight: bold;">
 				                                      <button type="button" id="reset1" class="ct-color modelbtnR">작성 취소</button>
@@ -230,6 +233,11 @@ $(document).ready(function() {
 	       $("#general").hide();
 	       $("#generalW").show();
 	   });
+	   
+	   $("#change1").click(function() {
+	       $("#generalW").hide();
+	       $("#general").show();
+	   });
 	
 	  const today = new Date().toISOString().split('T')[0];
 	  $('#vote1').attr('min', today);
@@ -287,17 +295,6 @@ $(document).ready(function() {
         }
     });
     
-    $('.plusbtn1').on("click", function() {
-        if (i <= 5) {
-            $('.voteplus1').append(
-                '<span class="votespan">' + i + '.</span>\
-                  <input class="votetitle" type="text" id="vote' + i + '" name="vote' + i + '"><br>'
-            );
-            i++;
-        } else {
-            $(".plusbtn1").css("display", "none");
-        }
-    });
 
     $("#saveButton1").on("click", function() {
         var voteTitle = $("#voteTitle").val();
@@ -313,30 +310,6 @@ $(document).ready(function() {
         $("#contentR").css("display", "block");
         $("#general").modal("hide");
 
-        $("#voteTitle11").text("제목 : " + voteTitle);
-        $("#vote11").text("투표1 : " + vote1);
-        $("#vote22").text("투표2 : " + vote2);
-        $("#vote33").text("투표3 : " + vote3);
-        $("#vote44").text(vote4 ? "투표4 : " + vote4 : "");
-        $("#vote55").text(vote5 ? "투표5 : " + vote5 : "");
-        $("#totalNum11").text("최소인원 : " + totalNum);
-        $("#finDate11").text("투표종료일 : " + finDate);
-    });
-    
-    $("#saveButton2").on("click", function() {
-        var voteTitle = $("#voteTitle").val();
-        var vote1 = $("#vote1").val();
-        var vote2 = $("#vote2").val();
-        var vote3 = $("#vote3").val();
-        var vote4 = $("#vote4").val();
-        var vote5 = $("#vote5").val();
-        var totalNum = $("#totalNum").val();
-        var finDate = $("#finDate").val();
-        
-        $("#generalW").modal("hide");
-        $("#dataTable").css("display", "block");
-        $("#contentR").css("display", "block");
-        
         $("#voteTitle11").text("제목 : " + voteTitle);
         $("#vote11").text("투표1 : " + vote1);
         $("#vote22").text("투표2 : " + vote2);
