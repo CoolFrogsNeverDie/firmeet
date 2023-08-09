@@ -288,7 +288,7 @@ public class NoticeBoardService {
 		System.out.println("notice payinsert 확인"+vo);
 		pdao.payinsert(vo);
 		String text = "회비";
-		AccountBookVo avo = new AccountBookVo(0,clubId,vo.getMeetNo(), vo.getMemberId(), vo.getAmount(), "", text, text, "지출", "", 0);
+		AccountBookVo avo = new AccountBookVo(0,clubId,vo.getMeetNo(), vo.getMemberId(), vo.getAmount(), "", text, text, "수입", "", 0);
 		System.out.println("업데이트 확인 전"+vo);
 		pdao.payupdate(vo);
 		pdao.accountMaker(avo);
