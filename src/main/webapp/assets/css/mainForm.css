@@ -145,16 +145,25 @@
  }
 
  #select_field li {
-
  	font-size: 15px;
  	width: 150px;
  	height: 24px;
  	display: flex;
  	gap: 5px;
  }
-#select_field p{
+ 
+#select_field input[type=radio]{
+	cursor: pointer;
+}
+#select_field ul label {
+	
+	cursor: pointer;
+}
+
+#select_field > p{
 	font-size: 17px;
  	font-weight: 600;
+ 	
 }
 
 
