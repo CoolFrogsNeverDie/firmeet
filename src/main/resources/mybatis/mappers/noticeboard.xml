@@ -117,6 +117,7 @@
 			, aboardHit
 			,v.aboardNo
 			, v.voteNo, v.voteTitle, v.vote1, v.vote2, v.vote3, v.vote4, v.vote5, v.totalNum, v.finDate
+			,(select count(memberId) from voteResult where memberId = #{memberId} and voteNo = v.voteNo) as voteYV
 			from aboard a, club c, member m, avote v
 			where a.clubId = c.clubId and a.memberId = m.memberId and a.aboardNo = v.aboardNo and a.aboardNo = #{aboardNo}
 			

@@ -74,7 +74,6 @@
 					                         <p id="vote5" style="display: none;"><span>투표5 : </span>${vo.vote5}</p>
 					                         <p><span>최소인원 : </span>${vo.totalNum}</p>
 					                         <p><span>투표종료일 : </span>${vo.finDate}</p>
-					                         <input type="hidden" name="clubId" value="${clubId}">
 				                        	 <input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
 				                        	 <input type="hidden" name="voteNo" id="voteNo" value="${vo.voteNo}">
 				                        	 <input type="hidden" name="memberId" id="memberId" value="${member.memberId}">
@@ -106,7 +105,6 @@
 					               <tbody>
 					                   <tr>
 					                     <td class="ngname">
-					                     	<input type="hidden" name="clubId" value="${clubId}">
 				                        	<input type="hidden" name="aboardNo" id="aboardNo" value="${vo.aboardNo}">
 				                        	<input type="hidden" name="memberId" id="memberId" value="${member.memberId}"><br>
 					                         <p><span>투표1 : </span>${vo.vote1}<span id="Count">투표 수 (&nbsp;${vo.vote1Cnt }&nbsp;)</span></p>

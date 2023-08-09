@@ -156,7 +156,7 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
-	public String editwrite(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
 		
@@ -176,6 +176,8 @@ public class NoticeBoardController {
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
 		session.getAttribute("aboardNo");
+		
+		session.getAttribute("memberId");
 
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("voteNo", vo.getVoteNo());
@@ -205,7 +207,7 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping("/vote")
-	public String vote(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+	public String vote(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("controller vo"+vo);
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
@@ -223,16 +225,12 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/voteResult/{aboardNo}")
-	public String voteResult(@PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
-		model.addAttribute("clubId", clubvo.getClubId());
+	public String voteResult(@PathVariable("clubId") int clubId, @PathVariable("aboardNo") int aboardNo, ClubVo clubvo, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		model.addAttribute("voteNo", vo.getVoteNo());
 		model.addAttribute("aboradNo", vo.getAboardNo());
 		model.addAttribute("vo", noticeBoardService.voteResult(vo));  
 		
-		int clubId = (int) session.getAttribute("clubId");
-		
 		System.out.println("controller clubId"+clubId);
-		model.addAttribute("clubId", clubId);
 		
 		MemberVo member = (MemberVo) session.getAttribute("member");
         

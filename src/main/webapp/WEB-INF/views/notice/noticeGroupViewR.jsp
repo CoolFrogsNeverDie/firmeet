@@ -66,7 +66,6 @@
 					               <tbody>
 					                   <tr>
 					                     <td class="ngname">
-					                     	<input type="text" name="clubId" hidden="hidden" value="${clubId}">
 				                        	<input type="text" name="aboardNo" hidden="hidden" id="aboardNo" value="${vo.aboardNo}">
 				                        	<input type="text" name="memberId" hidden="hidden" id="memberId" value="${member.memberId}"><br>
 					                         <p><span>투표1 : </span>${vo.vote1}<span id="Count">투표 수 (&nbsp;${vo.vote1Cnt }&nbsp;)</span></p>
