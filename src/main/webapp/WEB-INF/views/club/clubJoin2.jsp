@@ -126,7 +126,7 @@
             <!--문의사항 입력 영역(문의하기 버튼 눌러야 보임)-->
             <form action = "${pageContext.request.contextPath }/club/clubQna/${clubVo.clubId}">
             <div class="qna-write-area">
-                <div  class= "qna-write"><textarea name="qnaCotent" >문의사항 입력창</textarea>
+                <div  class= "qna-write"><textarea name="qnaCotent" placeholder= "문의사항을 입력해주세요."></textarea>
                 <button type="submit" class="qna-write-btn" >문의 등록</button>
                 </div>
                 <div></div>

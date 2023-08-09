@@ -1,10 +1,12 @@
 @charset "EUC-KR";
 
+
+
 .ly-body-container{
 	/*배경색1*/
 	background-color : #fafafa ; 
 }
-.body{
+body{
 	/*배경색1*/
 	background-color : #fafafa ;
 	min-height :100vh;

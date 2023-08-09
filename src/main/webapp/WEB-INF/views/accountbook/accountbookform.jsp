@@ -96,7 +96,7 @@
 										<label for="meetSelect">사용 모임:</label> 
 										<select id="meetSelect" name="meet" class="form-select">
 											<c:forEach var="meet" items="${meetList}" varStatus="status">
-												<option value="${meet.meetNo}">${meet.meetName}</option>
+												<option value="${meet.meetNo}">${meet.meetYear}년 ${meet.meetMon}월 ${meet.meetName}</option>
 											</c:forEach>
 										</select>
 										<!--/meetSelect -->

@@ -195,4 +195,9 @@ public class GalleryDao {
 		System.out.println("memberVo"+memberVo);
 		return memberVo;
 	}
+
+	public List<GalleryImgVo> getGalleryList(Map<String, Object> map) {
+		
+		return session.selectList("gallery.getMyPhoto", map);
+	}
 }

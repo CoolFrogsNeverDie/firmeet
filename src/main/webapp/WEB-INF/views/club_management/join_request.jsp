@@ -164,7 +164,6 @@
 		var clubMemNo = $(this).data('clubmemno');
 		var memLevel = -99;
 		var clubId = ${club.clubId}
-		alert(clubMemNo);
 		
 		var ClubVO = {
 				clubMemNo : clubMemNo,

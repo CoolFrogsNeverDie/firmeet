@@ -281,7 +281,7 @@
 	            for (var i = 0; i < list.length; i++) {
 	                var name = list[i].meetName;
 	                var meetNo = list[i].meetNo;
-	                $dt.after("<dd data-meetNo=" + meetNo + ">" + name + "</dd>");
+	                $dt.after("<dd data-meetNo=" + meetNo + ">" + year + "년" + month + "월 " + name + "</dd>");
 	            }
 	        },
 	        error: function () {

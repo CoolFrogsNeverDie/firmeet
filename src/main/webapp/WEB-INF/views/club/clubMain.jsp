@@ -89,7 +89,7 @@
 												<td class= "main-aboard-title">
 													<a href="${pageContext.request.contextPath }/${notice.clubId}/notice/editlistgroupG?aboardNo=${notice.aboardNo}">${notice.title}</a>
 												</td>
-												<td class= "main-aboard-date">
+												<td class= "main-aboard-date ">
 													${notice.aboardDate}
 												</td>
 											</tr>

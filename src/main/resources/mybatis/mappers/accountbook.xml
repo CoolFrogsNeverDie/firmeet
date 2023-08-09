@@ -121,13 +121,13 @@
 		]]>
 	</select>
 	
-			<!-- 모임이름 설정 -->
-	<select id="setMeetName" parameterType="int" resultType="String">
-		<![CDATA[
-			SELECT
-				MEETNAME
-			FROM meet_name
-			WHERE meetNo = #{meetNo}
-		]]>
-	</select>
+	            <!-- 모임이름 설정 -->
+   <select id="setMeetName" parameterType="int" resultType="String">
+      <![CDATA[
+         SELECT MEETYEAR || '년 ' || MEETMON || '월 ' || MEETNAME
+         FROM meet_name
+         WHERE meetNo = #{meetNo}
+      ]]>
+   </select>
+	
 </mapper>

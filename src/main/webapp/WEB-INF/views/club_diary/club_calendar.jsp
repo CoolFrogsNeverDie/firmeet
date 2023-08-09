@@ -145,7 +145,7 @@ $('.forCalendar').on("click",'button', function(){
 	var month = title.substring(title.length-2,title.length-1);
 	var clubId =  ${club.clubId};
  	var viewOption1 =  $('#select-array').val(); 
-	
+	console.log(clubId);
 
 	CalendarVO = {
 			  clubId: clubId,

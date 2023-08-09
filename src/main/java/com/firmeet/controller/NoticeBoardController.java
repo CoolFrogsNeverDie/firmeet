@@ -36,10 +36,15 @@ public class NoticeBoardController {
 	private NoticeBoardService noticeBoardService;
 	
 	@RequestMapping(value = "/noticelist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String noticelist(@PathVariable("clubId") int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
+	public String noticelist(@PathVariable int clubId, Model model, HttpSession session, @RequestParam(defaultValue="") String keyword) {
 		System.out.println("noticelist 확인");
 		
+		session.setAttribute("clubId", clubId);
+		
 		System.out.println(session.getAttribute("clubId"));
+		
+		//model.addAttribute("nlist", noticeBoardList);
+		System.out.println("bbb");
 		
         MemberVo member = (MemberVo) session.getAttribute("member");
        String memberId = null;
@@ -68,8 +73,10 @@ public class NoticeBoardController {
 	
 	//에디터 일반 페이지
 	@RequestMapping("/noticeEditGeneral")
-	public String noticeEditGeneral(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String noticeEditGeneral(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("noticeEditGeneral확인");
+		
+		int clubId = (int) session.getAttribute("clubId");
 		
 		System.out.println("controller clubId"+clubId);
 		System.out.println(vo);
@@ -77,6 +84,7 @@ public class NoticeBoardController {
 		String memberId = (String) session.getAttribute("memberId");
 		
 		model.addAttribute("clubId", clubId);
+		model.addAttribute("memberId", memberId);
 		
         MemberVo member = (MemberVo) session.getAttribute("member");
         //String memberId = null;
@@ -101,8 +109,10 @@ public class NoticeBoardController {
 	
 	//에디터 결제 페이지
 	@RequestMapping("/noticeEditGroupP")
-	public String noticeEditGroupP(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String noticeEditGroupP(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("noticeEditGroup확인");
+		
+		int clubId = (int) session.getAttribute("clubId");
 		
 		System.out.println("controller clubId"+clubId);
 		model.addAttribute("clubId", clubId);
@@ -130,9 +140,11 @@ public class NoticeBoardController {
 	
 	//에디터 결제 페이지
 	@RequestMapping("/noticeEditGroupG")
-	public String noticeEditGroupG(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String noticeEditGroupG(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("noticeEditGroup확인");
+		int clubId = (int) session.getAttribute("clubId");
 		System.out.println("controller clubId"+clubId);
+		model.addAttribute("clubId", clubId);
 		
 		 MemberVo member = (MemberVo) session.getAttribute("member");
 	        String memberId = null;
@@ -152,11 +164,12 @@ public class NoticeBoardController {
 	            // 회원이 로그인하지 않은 상태라면 로그인 페이지로 이동합니다.
 	            return "member/memberForm";
 	        }
+		
 	}
 	
 	//에디터 일반페이지 등록 후 나오는 페이지
 	@RequestMapping("/editwrite")
-	public String editwrite(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
+	public String editwrite(@ModelAttribute NoticeBoardVO vo, Model model, HttpSession session) {
 		System.out.println("notice editwrite 확인 ");
 		System.out.println("controller vo"+vo);
 		
@@ -171,13 +184,18 @@ public class NoticeBoardController {
 	
 	//에디터 일반페이지 등록 후 리스트
 	@RequestMapping("/editlist")
-	public String editlist(@PathVariable("clubId") int clubId, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo, ClubVo clubvo) {
+	public String editlist(Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo, ClubVo clubvo) {
 		System.out.println("notice editlist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		
+		int clubId = (int) session.getAttribute("clubId");
+		
+		model.addAttribute("clubId", clubvo.getClubId());
 		session.getAttribute("aboardNo");
 
 		model.addAttribute("aboradNo", vo.getAboardNo());
+		model.addAttribute("memberId", vo.getMemberId());
+
 		model.addAttribute("voteNo", vo.getVoteNo());
 		System.out.println("controller voteNo 확인"+ vo.getVoteNo());
 		
@@ -256,7 +274,7 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 페이지
 	@RequestMapping("/editgroupwrite")
-	public String editgroupwrite(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String editgroupwrite(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		
 		System.out.println("notice editgroupwrite 확인 ");
 		System.out.println("controller vo"+vo);
@@ -270,10 +288,12 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/editlistgroup")
-	public String editlistgroup(@PathVariable("clubId") int clubId, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	public String editlistgroup(ClubVo clubvo, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		System.out.println("notice editgrouplist 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		System.out.println(vo);
+		
+		model.addAttribute("clubId", clubvo.getClubId());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("meetNo"+ vo.getMeetNo());
@@ -283,6 +303,8 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.editlistgroup(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		
+		int clubId = (int) session.getAttribute("clubId");
+
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         if (member != null) {
@@ -305,7 +327,7 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 페이지
 	@RequestMapping("/editgroupwriteG")
-	public String editgroupwriteG(@PathVariable("clubId") int clubId, @ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
+	public String editgroupwriteG(@ModelAttribute NoticeBoardVO vo, HttpSession session, Model model) {
 		System.out.println("notice editgroupwriteGG 확인 ");
 		System.out.println("controller vo"+vo);
 		
@@ -320,10 +342,12 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 리스트
 	@RequestMapping("/editlistgroupG")
-	public String editlistgroupG(@PathVariable("clubId") int clubId, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+	public String editlistgroupG(ClubVo clubvo, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 		System.out.println("notice editgrouplistGG 확인");
 		System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 		System.out.println(vo);
+		
+		model.addAttribute("clubId", clubvo.getClubId());
 		
 		model.addAttribute("aboardNo", vo.getAboardNo());
 		System.out.println("meetNo"+ vo.getMeetNo());
@@ -333,6 +357,8 @@ public class NoticeBoardController {
 		model.addAttribute("vo", noticeBoardService.editlistgroupG(vo));
 		System.out.println("controller meetno 확인"+vo.getMeetNo());
 		
+		int clubId = (int) session.getAttribute("clubId");
+
 		MemberVo member = (MemberVo) session.getAttribute("member");
         String memberId = null;
         if (member != null) {
@@ -356,10 +382,12 @@ public class NoticeBoardController {
 	
 	//에디터 모임 등록 후 나오는 리스트
 		@RequestMapping("/noticeVoteViewR")
-		public String noticeVoteViewR(@PathVariable("clubId") int clubId, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
+		public String noticeVoteViewR(ClubVo clubvo, Model model, HttpSession session, @ModelAttribute NoticeBoardVO vo) {
 			System.out.println("notice editgrouplistGG 확인");
 			System.out.println("controller aboardNo 확인"+vo.getAboardNo());
 			System.out.println(vo);
+			
+			model.addAttribute("clubId", clubvo.getClubId());
 			
 			model.addAttribute("aboardNo", vo.getAboardNo());
 			System.out.println("meetNo"+ vo.getMeetNo());
@@ -369,6 +397,8 @@ public class NoticeBoardController {
 			model.addAttribute("vo", noticeBoardService.editlistgroupR(vo));
 			System.out.println("controller meetno 확인"+vo.getMeetNo());
 			
+			int clubId = (int) session.getAttribute("clubId");
+
 			MemberVo member = (MemberVo) session.getAttribute("member");
 	        String memberId = null;
 	        if (member != null) {
