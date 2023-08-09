@@ -469,16 +469,21 @@ a {
 }
 
 #paging ul {
-	text-decoration: none;
+	padding-top: 10px;
  	width: 150px;
  	margin: auto;
  	height: 30px;
  	display: flex;
  }
 
- #paging ul li {
+#paging ul li {
  	width: 30px;
  	height: 30px;
+}
+
+#paging ul li a {
+	text-decoration: none;
+	color:#000;
 }
 
 body::-webkit-scrollbar {

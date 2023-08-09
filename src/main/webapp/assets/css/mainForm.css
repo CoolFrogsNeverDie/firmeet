@@ -372,14 +372,14 @@
  }
 
 
- #paging ul {
+#paging ul {
  	width: 150px;
  	margin: auto;
  	height: 30px;
  	display: flex;
  }
 
- #paging ul li {
+#paging ul li {
  	width: 30px;
  	height: 30px;
 
