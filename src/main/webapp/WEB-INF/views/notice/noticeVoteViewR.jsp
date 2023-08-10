@@ -33,7 +33,6 @@
 						<img class="diary-topbar-img" src="${pageContext.request.contextPath}/upload/clubimg/${club.img2}" alt="프로필사진" />
 						<h2>${club.clubName}</h2>
 			            <button type="button" class="listbtn" id="nlist">목록</button>
-			            <button type="button" class="nextbtn">다음글</button>
 					</div>		
 					<!-- //diary-topbar -->
 					
