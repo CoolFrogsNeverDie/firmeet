@@ -141,7 +141,7 @@
 										    <div class="board-comment-list" style="margin-top: 40px; width: 900px;">
 											    <div class="board-comment" >
 											   
-											    <h4>댓글</h4><span><button class="write-comment-btn">댓글 쓰기</button></span>
+											    <h4>댓글</h4><span><button class="write-comment-btn ct-color">댓글 쓰기</button></span>
 											    
 											    <c:forEach items="${vo.replyList}" var = "reply">
 											    

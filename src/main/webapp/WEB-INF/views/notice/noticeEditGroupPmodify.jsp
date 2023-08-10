@@ -392,7 +392,7 @@ function uploadSummernoteImageFile(file, editor){
 		success : function(jsonResult){
 			/* 성공시 처리해야될 코드 작성 */
 			if(jsonResult.data != null){
-			     var imageUrl = '${pageContext.request.contextPath }/upload/' + jsonResult.data ;
+				 var imageUrl = '${pageContext.request.contextPath }/upload/aboard/' + jsonResult.data ;
 			     var style = 'width: 25%';
 			     
 			     $img = $('<img>').attr({ src: imageUrl }).css("width", "25%")

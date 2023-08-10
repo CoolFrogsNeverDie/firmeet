@@ -229,7 +229,7 @@
 		                                <p id="Wvote44"></p>
 		                                <p id="Wvote55"></p>
 		                                <p id="WtotalNum11"></p>
-		                                <p id="WfinDate11"></p>
+		                                <p id="Wfindate11"></p>
 		                            </td>
 		                        </tr>
 		                    </tbody>
@@ -364,8 +364,8 @@ $(document).ready(function() {
         var vote3 = $("#Wvote3").val();
         var vote4 = $("#Wvote4").val();
         var vote5 = $("#Wvote5").val();
-        var totalNum = $("#WtotalNum").val();
-        var finDate = $("#WfinDate").val();
+        var totalNum = $("#Wtotalnum").val();
+        var finDate = $("#Wfindate").val();
 
         $("#dataTable1").css("display", "block");
         $("#contentR1").css("display", "block");
@@ -379,7 +379,7 @@ $(document).ready(function() {
         $("#Wvote44").text(vote4 ? "투표4 : " + vote4 : "");
         $("#Wvote55").text(vote5 ? "투표5 : " + vote5 : "");
         $("#WtotalNum11").text("최소인원 : " + totalNum);
-        $("#WfinDate11").text("투표종료일 : " + finDate);
+        $("#Wfindate11").text("투표종료일 : " + finDate);
     });
     
 });

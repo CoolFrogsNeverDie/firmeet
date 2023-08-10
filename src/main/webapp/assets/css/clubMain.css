@@ -78,6 +78,7 @@
 .announcement .main-aboard-title{
 	width: 60%;
 	border-right:  1px solid #969696;
+	padding-left: 10px;
 }
 .announcement .main-abaord-date{
 	width:20%;
