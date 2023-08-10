@@ -83,7 +83,7 @@
 					                             <span id="paycount" hidden="hidden">${vo.paycount}</span>
 					                             <span id="payresultNo" hidden="hidden">${vo.payresultNo}</span>
 					                             <input type="hidden" id="purpose" value="회비">
-					                             <c:if test="${vo.paycount <= vo.minPerson}">
+					                             <c:if test="${vo.paycount <= vo.minPerson && vo.paycount == 0}">
 							                          <button id="paybtn" onclick="kakaopay()">결제하기</button>
 							                     </c:if>
 					                             	<form action="${pageContext.request.contextPath }/${clubId }/notice/noticeVoteViewR" method="get">
