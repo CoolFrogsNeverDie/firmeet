@@ -53,13 +53,11 @@
 
 .announcement td {
   cursor : pointer;
-  display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   
 }
-
 
 .announcement td a{
 	display: block; 
@@ -77,10 +75,9 @@
 .announcement .title {
   width: 75%;
 }
-
-.announcement .main-abaord-title{
-	width:80%;
-	text-overflow: ellipsis;
+.announcement .main-aboard-title{
+	width: 60%;
+	border-right:  1px solid #969696;
 }
 .announcement .main-abaord-date{
 	width:20%;
@@ -113,8 +110,7 @@
     height: 328px !important;
 }
 
-
-td, tr {
+tr {
     border: 1px solid #969696;
 }
 .fc-daygrid-day-top{
