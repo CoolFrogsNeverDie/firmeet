@@ -1,26 +1,29 @@
 # firmeet
 
 ![소개 페이지](https://github.com/FIR-MEET/firmeet/assets/131581968/3b9b5000-d0b4-4bea-8d9b-0f3f03ae892c)
-다수의 오프라인 동호회 최적화 사이트입니다.
+
 
 
 ## 프로젝트 소개
 ##### 상세 포트폴리오 :  [notion 포트폴리오](https://www.notion.so/FIRMEET-2d9ffc42347e4297bfec7db65aec3ea2)
-다수의 스케줄 관리를 힘들하는 사람들을 위한 통합 스케줄 관리 솔루션 제공하는 동호회 사이트입니다.
-
-
+동호회,개인 스케줄 관리와 모임 정산을 쉽게 할 수 있는 동호회 사이트입니다. <br>
+ㄷㄷ
+<br>
 
 ## 개발 기간
 2023/06/16 - 2023/08/16
 
+<br>
 
-### 멤버 구성
+## 멤버 구성
 - 김세영 : 캘린더, 게시물, 동호회 관리자 페이지
 - 안지은 : 공지사항
 - 염승엽 : 회원가입/로그인, 동호회 찾기 페이지, 동호회 상세 페이지
 - 이은우 : 갤러리, 가계부
 
-### 개발 환경
+<br>
+
+## 개발 환경
 - 프레임워크
    
     Spring 4.3.3
@@ -41,7 +44,7 @@
   
     Daum Map API, KakaoPay API , SummerNote API , FullCalendar  API, Intersection Observer API
 
-
+<br>
 
 
 ## 주요 기능
