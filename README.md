@@ -1,6 +1,6 @@
 # firmeet
 ##### 상세 포트폴리오 :  https://www.notion.so/FIRMEET-2d9ffc42347e4297bfec7db65aec3ea2
-![인덱스](https://github.com/FIR-MEET/firmeet/assets/131581968/c305b316-0d38-4cac-8120-60ab2f75ff8a)
+![소개 페이지](https://github.com/FIR-MEET/firmeet/assets/131581968/3b9b5000-d0b4-4bea-8d9b-0f3f03ae892c)
 다수의 오프라인 동호회 최적화 사이트입니다.
 
 
